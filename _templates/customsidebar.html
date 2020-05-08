@@ -1,0 +1,12 @@
+<h3>Contents</h3>
+{% set toctree = toctree(maxdepth=3, collapse=False, includehidden=True) %}
+
+{{ toctree }}
+
+<h3>Source</h3>
+
+<a href="{{ sourcename | replace("notebooks/", "") }}">Download .ipynb file</a>
+
+<br>
+
+{{ globaltoc }}
