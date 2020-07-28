@@ -1,29 +1,36 @@
 # How-to: NumPy I/O
-- [Read a .csv or other text file with no missing values](#read-a-csv-or-other-text-file-with-no-missing-values)
-- [Read a .csv or other text file with missing values](#read-a-csv-or-other-text-file-with-missing-values)
-  * [Non-whitespace delimiters](#non-whitespace-delimiters)
-    + [Masked-array output](#masked-array-output)
-    + [Array output](#array-output)
-    + [Array output, specified fill-in value](#array-output-specified-fill-in-value)
-  * [Whitespace-delimited](#whitespace-delimited)
-- [Read a file in .npy or .npz format](#read-a-file-in-npy-or-npz-format)
-- [Write to a file to be read back by NumPy](#write-to-a-file-to-be-read-back-by-numpy)
-  * [Binary](#binary)
-  * [Human-readable](#human-readable)
-  * [Large arrays](#large-arrays)
-- [Read an arbitrarily formatted binary file ("binary blob")](#read-an-arbitrarily-formatted-binary-file-binary-blob)
-- [Write or read very large arrays](#write-or-read-very-large-arrays)
-- [Write files for reading by other (non-NumPy) tools](#write-files-for-reading-by-other-non-numpy-tools)
-- [Write or read a JSON file](#write-or-read-a-json-file)
-- [Save/restore using a pickle file](#saverestore-using-a-pickle-file)
-- [Convert from a pandas DataFrame to a NumPy array](#convert-from-a-pandas-dataframe-to-a-numpy-array)
-- [Save/restore using `numpy.tofile` and `numpy.fromfile`](#saverestore-using-numpytofile-and-numpyfromfile)
+- [1 Reading text files](#1-reading-text-files)
+  * [1.1 Read a CSV or other text file with no missing values](#11-read-a-csvhttpsenwikipediaorgwikicomma-separated_values-or-other-text-file-with-no-missing-values)
+  * [1.2 Read a CSV or other text file with missing values](#12-read-a-csvhttpsenwikipediaorgwikicomma-separated_values-or-other-text-file-with-missing-values)
+    + [1.2.1 Non-whitespace delimiters](#121-non-whitespace-delimiters)
+      - [1.2.1.1 Masked-array output](#1211-masked-array-output)
+      - [1.2.1.2 Array output](#1212-array-output)
+      - [1.2.1.3 Array output, specified fill-in value](#1213-array-output-specified-fill-in-value)
+    + [1.2.2 Whitespace-delimited](#122-whitespace-delimited)
+- [2 Read a file in .npy or .npz format](#2-read-a-file-in-npy-or-npz-format)
+- [3 Write to a file to be read back by NumPy](#3-write-to-a-file-to-be-read-back-by-numpy)
+  * [3.1 Binary](#31-binary)
+  * [3.2 Human-readable](#32-human-readable)
+  * [3.3 Large arrays](#33-large-arrays)
+- [4 Read an arbitrarily formatted binary file ("binary blob")](#4-read-an-arbitrarily-formatted-binary-file-binary-blob)
+- [5 Write or read large arrays](#5-write-or-read-large-arrays)
+- [6 Write files for reading by other (non-NumPy) tools](#6-write-files-for-reading-by-other-non-numpy-tools)
+- [7 Write or read a JSON file](#7-write-or-read-a-json-file)
+- [8 Save/restore using a pickle file](#8-saverestore-using-a-pickle-file)
+- [9 Convert from a pandas DataFrame to a NumPy array](#9-convert-from-a-pandas-dataframe-to-a-numpy-array)
+- [10 Save/restore using `numpy.tofile` and `numpy.fromfile`](#10-saverestore-using-numpytofile-and-numpyfromfile)
+- [11 See all NumPy's I/O routines](#11-see-all-numpys-io-routines)
 
-## Read a .csv or other text file with no missing values
+<a name="1-reading-text-files"></a>
+## 1 Reading text files
+
+<a name="11-read-a-csvhttpsenwikipediaorgwikicomma-separated_values-or-other-text-file-with-no-missing-values"></a>
+### 1.1 Read a [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) or other text file with no missing values
 
 Use [numpy.loadtxt](https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html).
 
-## Read a .csv or other text file with missing values
+<a name="12-read-a-csvhttpsenwikipediaorgwikicomma-separated_values-or-other-text-file-with-missing-values"></a>
+### 1.2 Read a [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) or other text file with missing values
 
 Use
 [numpy.genfromtxt](https://numpy.org/doc/stable/user/basics.io.genfromtxt.html).
@@ -34,7 +41,8 @@ masking out missing
 values (if ``usemask=True``) or will fill in the missing value with the value
 specified in ``filling_values`` (default is ``np.nan`` for float, -1 for int).
 
-### Non-whitespace delimiters
+<a name="121-non-whitespace-delimiters"></a>
+#### 1.2.1 Non-whitespace delimiters
 
 ```
 $ cat csv.txt
@@ -42,7 +50,8 @@ $ cat csv.txt
 4,, 6
 7, 8, 9
 ```
-#### Masked-array output
+<a name="1211-masked-array-output"></a>
+##### 1.2.1.1 Masked-array output
 ```
 >>> np.genfromtxt("csv.txt", delimiter=",", usemask=True)
 masked_array(
@@ -54,37 +63,40 @@ masked_array(
         [False, False, False]],
   fill_value=1e+20)
 ```
-#### Array output
+<a name="1212-array-output"></a>
+##### 1.2.1.2 Array output
 ```
 >>> np.genfromtxt("csv.txt", delimiter=",")
 array([[ 1.,  2.,  3.],
        [ 4., nan,  6.],
        [ 7.,  8.,  9.]])
 ```
-#### Array output, specified fill-in value
+<a name="1213-array-output-specified-fill-in-value"></a>
+##### 1.2.1.3 Array output, specified fill-in value
 ```
 >>> np.genfromtxt("csv.txt", delimiter=",", dtype=np.int8, filling_values=99)
 array([[ 1,  2,  3],
        [ 4, 99,  6],
        [ 7,  8,  9]], dtype=int8)
 ```
-### Whitespace-delimited
+<a name="122-whitespace-delimited"></a>
+#### 1.2.2 Whitespace-delimited
 
 ``numpy.genfromtxt`` can also parse whitespace-delimited data files
 that have missing values if
 
  * each field has a fixed width: use the width as the `delimiter` argument
 ```
-## File with width=4. The data does not have to be justified (for example, the
-## 2 in row 1), the last column can be less than width (for example, the 6 in
-## row 2), and no delimiting character is required (for instance 8888 and 9 in row 3)
+# File with width=4. The data does not have to be justified (for example, the
+# 2 in row 1), the last column can be less than width (for example, the 6 in
+# row 2), and no delimiting character is required (for instance 8888 and 9 in row 3)
 
 $cat fixedwidth.txt
 1   2      3
 44      6
 7   88889
 
-## Showing spaces as '^'
+# Showing spaces as '^'
 $ tr ' ' '^' < fixedwidth.txt
 1^^^2^^^^^^3
 44^^^^^^6
@@ -131,7 +143,7 @@ $ cat tabs.txt
 44    6
 7 888 9
 
-## Showing the tabs (^I) and spaces
+# Showing the tabs (^I) and spaces
 $ cat -T tabs.txt
 1^I2^I3
 44^I ^I6
@@ -143,29 +155,41 @@ array([[  1.,   2.,   3.],
        [  7., 888.,   9.]])
 ```
 
-## Read a file in .npy or .npz format
+<a name="2-read-a-file-in-npy-or-npz-format"></a>
+## 2 Read a file in .npy or .npz format
 
 Use [numpy.load](https://numpy.org/doc/stable/reference/generated/numpy.load.html).
+`load` can read files generated by any of
+[numpy.save](https://numpy.org/doc/stable/reference/generated/numpy.save.html),
+[numpy.savez](https://numpy.org/doc/stable/reference/generated/numpy.savez.html), or
+[numpy.savez_compressed](https://numpy.org/doc/stable/reference/generated/numpy.savez_compressed.html).
 
-## Write to a file to be read back by NumPy
-### Binary
+<a name="3-write-to-a-file-to-be-read-back-by-numpy"></a>
+##  3 Write to a file to be read back by NumPy
+<a name="31-binary"></a>
+### 3.1 Binary
 Use [numpy.save](https://numpy.org/doc/stable/reference/generated/numpy.save.html) to store a single array,
 [numpy.savez](https://numpy.org/doc/stable/reference/generated/numpy.savez.html) or
 [numpy.savez_compressed](https://numpy.org/doc/stable/reference/generated/numpy.savez_compressed.html#numpy.savez_compressed)
-to store multiple arrays. For [security and portability](#saverestore-using-a-pickle-file), set `allow_pickle=False`.
+to store multiple arrays.
+For [security and portability](#saverestore-using-a-pickle-file), set `allow_pickle=False` unless
+the dtype contains Python objects, which requires pickling.
 
 Masked arrays [can't currently be saved](https://numpy.org/devdocs/reference/generated/numpy.ma.MaskedArray.tofile.html),
 nor can other arbitrary array subclasses.
 
-### Human-readable
+<a name="32-human-readable"></a>
+### 3.2 Human-readable
 `save` and `savez` create binary files. To write a human-readable file, use
 [numpy.savetxt](https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html).
 The array can only be 1- or 2-dimensional, and there's no `savetxtz` for multiple files.
 
-### Large arrays
+<a name="33-large-arrays"></a>
+### 3.3 Large arrays
 See [Write or read large arrays](#large_arrays).
 
-## Read an arbitrarily formatted binary file ("binary blob")
+<a name="4-read-an-arbitrarily-formatted-binary-file-binary-blob"></a>
+## 4 Read an arbitrarily formatted binary file ("binary blob")
 
 Use a [structured array](https://numpy.org/doc/stable/user/basics.rec.html).
 
@@ -210,13 +234,14 @@ wav_header_dtype = np.dtype([
     # it does not have a fixed size
    ])
 
-data = np.load(f,dtype=wave_header_dtype)
+data = np.fromfile(f,dtype=wave_header_dtype)
 ```
 Credit: [Pauli Virtanen](http://scipy-lectures.org/advanced/advanced_numpy/index.html)
 
 <a name="large_arrays">
 
-## Write or read large arrays
+<a name="5-write-or-read-large-arrays"></a>
+## 5 Write or read large arrays
 
 Arrays too large to fit in memory can be treated like ordinary in-memory arrays using
 [numpy.mmap](https://numpy.org/doc/stable/reference/generated/numpy.memmap.html).
@@ -239,30 +264,41 @@ more details and describes tradeoffs among memmap, Zarr, and HDF5.
 * For **Zarr**, see [here](https://zarr.readthedocs.io/en/stable/tutorial.html#reading-and-writing-data).
 * For **NetCDF**, use [scipy.io.netcdf_file](https://docs.scipy.org/doc/scipy/reference/generated/scipy.io.netcdf_file.html).
 
-## Write files for reading by other (non-NumPy) tools
+<a name="6-write-files-for-reading-by-other-non-numpy-tools"></a>
+## 6 Write files for reading by other (non-NumPy) tools
 
 Formats for exchanging data with other tools include HDF5, Zarr, and NetCDF.
 
-## Write or read a JSON file
+<a name="7-write-or-read-a-json-file"></a>
+## 7 Write or read a JSON file
 
 NumPy arrays are not directly [JSON serializable](https://github.com/numpy/numpy/issues/12481).
 
-## Save/restore using a pickle file
+<a name="8-saverestore-using-a-pickle-file"></a>
+## 8 Save/restore using a pickle file
 
 Not recommended, due to lack of security and portability.
 
  * security: not secure against erroneous or maliciously constructed data
  * portability: may not be loadable on different Python installations
 
-Use `np.save` and `np.load`, setting ``allow_pickle=False``.
+Use `np.save` and `np.load`.  Set ``allow_pickle=False``, unless the array
+dtype includes Python objects, in which case pickling is required.
 
-## Convert from a pandas DataFrame to a NumPy array
+<a name="9-convert-from-a-pandas-dataframe-to-a-numpy-array"></a>
+## 9 Convert from a pandas DataFrame to a NumPy array
 `DataFrame.to_numpy()`
 
-## Save/restore using `numpy.tofile` and `numpy.fromfile`
+<a name="10-saverestore-using-numpytofile-and-numpyfromfile"></a>
+## 10 Save/restore using `numpy.tofile` and `numpy.fromfile`
 
 In general, prefer `numpy.save` and `numpy.load`.
 [numpy.tofile](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.tofile.html)
 and
 [numpy.fromfile](https://numpy.org/doc/stable/reference/generated/numpy.fromfile.html)
 lose information on endianness and precision and so are unsuitable for anything but scratch storage.
+
+<a name="11-see-all-numpys-io-routines"></a>
+## 11 See all NumPy's I/O routines
+
+Listed [here](https://numpy.org/doc/stable/reference/routines.io.html), with links to further documentation.
