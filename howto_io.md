@@ -250,6 +250,11 @@ import numpy as np
 array = np.memmap("mydata/myarray.arr", mode="r",
                   dtype=np.int16, shape=(1024, 1024))
 ```
+`memmap` is also an efficient way to read a file into an existing slice:
+```
+large_array[some_slice] = np.load('path/to/small_array', mmap_mode='r')
+```
+
 The simplicity also means it's possible to have access patterns that don't
 match `memmap`'s buffering and therefore access disk repeatedly.
 [Zarr](https://zarr.readthedocs.io/en/stable/) and the similar
@@ -287,7 +292,8 @@ dtype includes Python objects, in which case pickling is required.
 
 <a name="9-convert-from-a-pandas-dataframe-to-a-numpy-array"></a>
 ## 9 Convert from a pandas DataFrame to a NumPy array
-`DataFrame.to_numpy()`
+
+[DataFrame.to_numpy()](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_numpy.html)
 
 <a name="10-saverestore-using-numpytofile-and-numpyfromfile"></a>
 ## 10 Save/restore using `numpy.tofile` and `numpy.fromfile`
