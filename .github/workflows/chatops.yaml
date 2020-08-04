@@ -1,5 +1,5 @@
-#./github/workflows/chatops-binder.yaml
-name: Chatops Binder
+#./github/workflows/chatops.yaml
+name: Chatops
 on: [issue_comment] # issues and PRs are equivalent in terms of comments for the GitHub API
 
 jobs:

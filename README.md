@@ -1,6 +1,6 @@
 # NumPy tutorials
 
-[![Binder](http://mybinder.org/badge_logo.svg)](http://mybinder.org/v2/gh/numpy/numpy-tutorials/master)
+[![Binder](http://mybinder.org/badge_logo.svg)](http://mybinder.org/v2/gh/numpy/numpy-tutorials/master/content)
 
 This set of tutorials and educational materials is being developed,
 IT IS NOT INTEGRATED IN THE HTML DOCS AT https://www.numpy.org/devdocs/
