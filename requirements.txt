@@ -1,6 +1,0 @@
-sphinx==2.4.4
-jupyter
-# Executablebooks
-myst-nb
-# Theme
-sphinx-book-theme
