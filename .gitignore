@@ -22,6 +22,7 @@ pmip
 .vscode
 tags
 cscope.out
+.ipynb_checkpoints
 
 # Compiled source #
 ###################
