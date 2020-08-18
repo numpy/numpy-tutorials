@@ -1,0 +1,7 @@
+name: numpy-tutorials
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - scipy
+  - matplotlib
