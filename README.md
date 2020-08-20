@@ -71,7 +71,8 @@ This workflow lets you add your content using a cloud workspace, and is recommen
     - Adding a commit message to the text box
     - Click on the *plus* sign next to each file that was changed
     - Click the "Commit" checkmark.
-8. Submit your [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) and wait for review.
+8. Submit your [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) by clicking on the "Pull Request" button on the right of the Gitpod interface. There may be a message about your branch not existing yet - that's normal and you can continue with your pull request anyway.
+9. Wait for review!
 
 #### Using git locally
 1. Clone this repository.
