@@ -1,6 +1,7 @@
 # NumPy tutorials
 
 [![Binder](http://mybinder.org/badge_logo.svg)](http://mybinder.org/v2/gh/numpy/numpy-tutorials/master?urlpath=lab/tree/content)
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/numpy/numpy-tutorials)
 
 This set of tutorials and educational materials is being developed,
 IT IS NOT INTEGRATED IN THE HTML DOCS AT https://www.numpy.org/devdocs/
@@ -24,10 +25,7 @@ or navigate to any of the documents listed below and download it individually.
 
 We very much welcome contributions! If you have an idea or proposal for a new
 tutorial, please [open an issue](https://github.com/numpy/numpy-tutorials/issues)
-with an outline. After you have decided on a topic and approach, submit your
-notebook file via a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests).
-For more information about GitHub and its workflow, you can see
-[this document](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests).
+with an outline. 
 
 Don’t worry if English is not your first language, or if you can only come up
 with a rough draft. Open source is a community effort. Do your best – we’ll help
@@ -51,15 +49,39 @@ used in the main NumPy documentation has two reasons:
 ### Adding your own tutorials
 
 If you have your own tutorial in the form of a Jupyter notebook (a `.ipynb`
-file) and you'd like
-to try it out on the site:
+file) and you'd like to add it to the repository:
 
-1. Add your notebook to the `content/` directory
-2. Update the `environment.yml` file with the dependencies for your tutorial
+#### Create an issue
+
+Go to [https://github.com/numpy/numpy-tutorials/issues](https://github.com/numpy/numpy-tutorials/issues) and create a new issue with your proposal. Give as much detail as you can about what kind of content you would like to write (tutorial, how-to) and what you plan to cover. We will try to respond as quickly as possible with comments, if applicable.
+
+Next, after writing the document, you can add it to this repository by following **one of the following** guides.
+
+#### Using Gitpod
+
+This workflow lets you add your content using a cloud workspace, and is recommended if you have less experience with git.
+
+1. Click the **Gitpod** link in your issue, if it exists. If not, you can prepend `https://gitpod.io/#` to the issue URL. This will open a complete workspace in your browser, allowing you to do all tasks related to adding your content in the same place. Using this method also creates an automatic branch for your new content, which is preferrable so we can add it to the main branch after the Pull Request is reviewed and accepted.
+2. In the Gitpod menu, select the `content` directory by clicking on in. 
+3. In the top menu, go to **File -> Upload Files** and select your `.ipynb` file to upload.
+4. Once this is done, remember to update this `README.md` file to include your new entry in the **Content** section.
+5. Update the attribution section (below) to credit the original content author.
+6. Commit your changes by going to **File -> Save All** and clicking on the **Source control** icon on the left panel, adding a commit message to the text box and clicking the "Commit" checkmark.
+7. Submit your [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) and wait for review.
+
+#### Using git locally
+1. Clone this repository.
+2. In your terminal, create a new environment (we recommend using conda, and doing `conda env create -f environment.yml` from the root of the repository files. This will automatically install all necessary dependencies to run all notebooks in the repo.)
+3. Create a new branch and add your notebook to the `content/` directory in this new branch.
+4. Update the `environment.yml` file with the dependencies for your tutorial
 (only if you add new dependencies)
-3. Update this `README.md` to include your new entry
-4. Update the attribution section (below) to credit the original tutorial
+5. Update this `README.md` file to include your new entry in the **Content** section.
+6. Update the attribution section (below) to credit the original content
 author.
+7. Submit your [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) and wait for review.
+
+For more information about GitHub and its workflow, you can see
+[this document](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests).
 
 ### Attribution
 
@@ -85,4 +107,3 @@ The following links may be useful:
 Note that regular documentation issues for NumPy can be found in the [main NumPy
 repository](https://github.com/numpy/numpy/issues) (see the `Documentation`
 labels there). 
-
