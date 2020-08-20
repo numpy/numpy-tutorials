@@ -19,6 +19,7 @@ or navigate to any of the documents listed below and download it individually.
 
 1. [Tutorial: Linear algebra on n-dimensional arrays](content/tutorial-svd.ipynb)
 2. [Tutorial: CS231n Python Tutorial With Google Colab](content/cs231_tutorial.ipynb)
+3. [Tutorial: Masked Arrays](content/tutorial-ma.ipynb)
 
 ## Contributing
 
