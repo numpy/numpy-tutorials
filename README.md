@@ -66,8 +66,12 @@ This workflow lets you add your content using a cloud workspace, and is recommen
 3. In the top menu, go to **File -> Upload Files** and select your `.ipynb` file to upload.
 4. Once this is done, remember to update this `README.md` file to include your new entry in the **Content** section.
 5. Update the attribution section (below) to credit the original content author.
-6. Commit your changes by going to **File -> Save All** and clicking on the **Source control** icon on the left panel, adding a commit message to the text box and clicking the "Commit" checkmark.
-7. Submit your [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) and wait for review.
+6. Save your work by going to **File -> Save All**
+7. Commit your changes by clicking on the **Source control** icon on the left panel:
+    - Adding a commit message to the text box
+    - Click on the *plus* sign next to each file that was changed
+    - Click the "Commit" checkmark.
+8. Submit your [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests) and wait for review.
 
 #### Using git locally
 1. Clone this repository.
