@@ -5,3 +5,5 @@ dependencies:
   - numpy
   - scipy
   - matplotlib
+  - pytest
+  - nbval
