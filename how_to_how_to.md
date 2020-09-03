@@ -17,7 +17,7 @@ Add useful details ("Hayseed Road", even though it's the only turnoff at three m
 
   * Three miles, take a right at Hayseed Road, follow the signs.
 
-If the information is already in the docs, link to it -- don't repeat it. If the API doc is sufficiently clear, link directly to it after you've given the prefatory information ("Three miles, take a right").
+If the information is already in the docs, link to it -- don't repeat it. If the API doc is sufficiently clear, link directly to it after you've set the scene ("Three miles, take a right").
 
 ## If the question is broad, narrow and redirect it
 
