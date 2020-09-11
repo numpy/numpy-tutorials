@@ -24,10 +24,7 @@ or navigate to any of the documents listed below and download it individually.
 
 We very much welcome contributions! If you have an idea or proposal for a new
 tutorial, please [open an issue](https://github.com/numpy/numpy-tutorials/issues)
-with an outline. After you have decided on a topic and approach, submit your
-notebook file via a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests).
-For more information about GitHub and its workflow, you can see
-[this document](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests).
+with an outline. 
 
 Don’t worry if English is not your first language, or if you can only come up
 with a rough draft. Open source is a community effort. Do your best – we’ll help
@@ -51,15 +48,41 @@ used in the main NumPy documentation has two reasons:
 ### Adding your own tutorials
 
 If you have your own tutorial in the form of a Jupyter notebook (a `.ipynb`
-file) and you'd like
-to try it out on the site:
+file) and you'd like to try add it out to the repository:
 
-1. Add your notebook to the `content/` directory
-2. Update the `environment.yml` file with the dependencies for your tutorial
+#### Create an issue
+
+Go to [https://github.com/numpy/numpy-tutorials/issues](https://github.com/numpy/numpy-tutorials/issues) and create a new issue with your proposal. Give as much detail as you can about what kind of content you would like to write (tutorial, how-to) and what you plan to cover. We will try to respond as quickly as possible with comments, if applicable.
+
+#### Upload your content
+
+Remember to clear all outputs on your notebook before uploading it. 
+
+**1. Fork this repository** (if you haven't before)
+<img src="images/01-fork.gif" width=80% height=80%>
+
+**2. In your own fork, create a new branch for your content**
+<img src="images/02-create_new_branch.gif" width=80% height=80%>
+
+**3. Add your notebook to the `content/` directory**
+<img src="images/03-upload.gif" width=80% height=80%>
+
+**4. Update the `environment.yml` file with the dependencies for your tutorial**
 (only if you add new dependencies)
-3. Update this `README.md` to include your new entry
-4. Update the attribution section (below) to credit the original tutorial
-author.
+
+**5. Update this `README.md` to include your new entry**
+<img src="images/04-add_to_readme.gif" width=80% height=80%>
+
+**6. Update the attribution section (below) to credit the original tutorial
+author, if applicable.**
+
+**7. Create a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests)**
+<img src="images/05-create_PR.gif" width=80% height=80%>
+
+:tada: **Wait for review!**
+
+For more information about GitHub and its workflow, you can see
+[this document](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests).
 
 ### Attribution
 
