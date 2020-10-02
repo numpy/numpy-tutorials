@@ -58,26 +58,46 @@ Go to [https://github.com/numpy/numpy-tutorials/issues](https://github.com/numpy
 
 Remember to clear all outputs on your notebook before uploading it. 
 
-**1. Fork this repository** (if you haven't before)
-<img src="images/01-fork.gif" width=80% height=80%>
+<details>
+    <summary>
+        **1. Fork this repository** (if you haven't before)
+    </summary>
+    <img src="images/01-fork.gif" width=80% height=80%>
+</details>
+    
+<details>
+    <summary>
+        **2. In your own fork, create a new branch for your content**
+    </summary>
+    <img src="images/02-create_new_branch.gif" width=80% height=80%>
+</details>
 
-**2. In your own fork, create a new branch for your content**
-<img src="images/02-create_new_branch.gif" width=80% height=80%>
-
-**3. Add your notebook to the `content/` directory**
-<img src="images/03-upload.gif" width=80% height=80%>
+<details>
+    <summary>
+        **3. Add your notebook to the `content/` directory**
+    </summary>
+    <img src="images/03-upload.gif" width=80% height=80%>
+</details>
 
 **4. Update the `environment.yml` file with the dependencies for your tutorial**
 (only if you add new dependencies)
 
-**5. Update this `README.md` to include your new entry**
-<img src="images/04-add_to_readme.gif" width=80% height=80%>
+<details>
+    <summary>
+        **5. Update this `README.md` to include your new entry**
+    </summary>
+    <img src="images/04-add_to_readme.gif" width=80% height=80%>
+</details>
 
 **6. Update the attribution section (below) to credit the original tutorial
 author, if applicable.**
 
-**7. Create a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests)**
-<img src="images/05-create_PR.gif" width=80% height=80%>
+<details>
+    <summary>
+        **7. Create a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests)**
+    </summary>
+    <img src="images/05-create_PR.gif" width=80% height=80%>
+</details>
 
 :tada: **Wait for review!**
 
