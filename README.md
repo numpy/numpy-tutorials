@@ -58,48 +58,50 @@ Go to [https://github.com/numpy/numpy-tutorials/issues](https://github.com/numpy
 
 Remember to clear all outputs on your notebook before uploading it. 
 
+<ul>
 <details>
     <summary>
-        **1. Fork this repository** (if you haven't before)
+        <b>Fork this repository</b> (if you haven't before).
     </summary>
     <img src="images/01-fork.gif" width=80% height=80%>
 </details>
     
 <details>
     <summary>
-        **2. In your own fork, create a new branch for your content**
+        <b>In your own fork, create a new branch for your content.</b>
     </summary>
     <img src="images/02-create_new_branch.gif" width=80% height=80%>
 </details>
 
 <details>
     <summary>
-        **3. Add your notebook to the `content/` directory**
+        <b>Add your notebook to the <code>content/</code> directory.</b>
     </summary>
     <img src="images/03-upload.gif" width=80% height=80%>
 </details>
 
-**4. Update the `environment.yml` file with the dependencies for your tutorial**
-(only if you add new dependencies)
+<b>Update the <code>environment.yml</code> file with the dependencies for your tutorial</b>
+(only if you add new dependencies).
 
 <details>
     <summary>
-        **5. Update this `README.md` to include your new entry**
+        <b>Update this <code>README.md</code> to include your new entry.</b>
     </summary>
     <img src="images/04-add_to_readme.gif" width=80% height=80%>
 </details>
 
-**6. Update the attribution section (below) to credit the original tutorial
-author, if applicable.**
+<b>Update the attribution section (below) to credit the original tutorial
+author, if applicable.</b>
 
 <details>
     <summary>
-        **7. Create a [pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests)**
+        <b>Create a <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request.</a></b>
     </summary>
     <img src="images/05-create_PR.gif" width=80% height=80%>
 </details>
 
-:tada: **Wait for review!**
+:tada: <b>Wait for review!</b>
+</ul>
 
 For more information about GitHub and its workflow, you can see
 [this document](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests).
