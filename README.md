@@ -54,6 +54,10 @@ file) and you'd like to try add it out to the repository:
 
 Go to [https://github.com/numpy/numpy-tutorials/issues](https://github.com/numpy/numpy-tutorials/issues) and create a new issue with your proposal. Give as much detail as you can about what kind of content you would like to write (tutorial, how-to) and what you plan to cover. We will try to respond as quickly as possible with comments, if applicable.
 
+#### Check out our suggested template
+
+You can use our [Tutorial Style Guide](content/tutorial-style-guide.ipynb) to make your content consistent with our existing tutorials.
+
 #### Upload your content
 
 Remember to clear all outputs on your notebook before uploading it. 
