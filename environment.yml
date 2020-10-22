@@ -7,3 +7,4 @@ dependencies:
   - matplotlib
   - pytest
   - nbval
+  - statsmodels
