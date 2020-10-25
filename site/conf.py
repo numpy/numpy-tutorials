@@ -18,8 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'NumPy tutorials'
-copyright = '2020, NumPy community'
-author = 'NumPy community'
+copyright = '2020, the NumPy community'
+author = 'the NumPy community'
 
 
 # -- General configuration ---------------------------------------------------
@@ -28,7 +28,8 @@ author = 'NumPy community'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'myst_nb'
+    'myst_nb',
+    'sphinx_copybutton',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
