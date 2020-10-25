@@ -1,4 +1,4 @@
 sphinx
 myst-nb
-pydata-sphinx-theme
 jupytext
+sphinx-book-theme

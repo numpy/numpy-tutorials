@@ -45,7 +45,24 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'pydata_sphinx_theme'
+html_theme = 'sphinx_book_theme'
+html_title = 'NumPy Tutorials'
+html_logo = '_static/numpylogo.svg'
+html_favicon = '_static/favicon.png'
+html_theme_options = {
+    "github_url": "https://github.com/numpy/numpy-tutorials/",
+    "repository_url": "https://github.com/numpy/numpy-tutorials/",
+    "repository_branch": "master",
+    "use_repository_button": True,
+    "use_issues_button": True,
+    "use_edit_page_button": True,
+    "path_to_docs": "site/",
+    "launch_buttons": {
+        "binderhub_url": "https://mybinder.org",
+#        "jupyterhub_url": "Not a URL: dummy for theme demo.",
+    },
+}
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
