@@ -90,3 +90,4 @@ Thumbs.db
 
 # Things specific to this project #
 ###################################
+site/_build/*
