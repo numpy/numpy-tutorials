@@ -16,7 +16,7 @@ kernelspec:
 ![image](https://documentation.divio.com/_images/overview.png)
 <p style="text-align:right;font-style:italic;">Image credit: Daniele Procida's <a href="https://documentation.divio.com/">The documentation system</a></p>
 
-+++ {"colab_type": "text", "id": "WICNDncaP8k_"}
++++ 
 
 ## What you'll do
 
@@ -138,7 +138,7 @@ ZeroDivisionError: division by zero
 </code>
 </div>
 
-+++ {"colab_type": "text", "id": "WICNDncaP8k_"}
++++ 
 
 ***
 
