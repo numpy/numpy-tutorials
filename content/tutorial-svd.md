@@ -193,9 +193,7 @@ U.shape, s.shape, Vt.shape
 Note that `s` has a particular shape: it has only one dimension. This means that some linear algebra functions that expect 2d arrays might not work. For example, from the theory, one might expect `s` and `Vt` to be
 compatible for multiplication. However, this is not true as `s` does not have a second axis. Executing
 
-```{code-cell} ipython3
-:tags: [raises-exception]
-
+```python
 s @ Vt
 ```
 

@@ -11,12 +11,7 @@ kernelspec:
   name: python3
 ---
 
-+++ {"colab_type": "text", "id": "rKyNp_FWPuFL"}
-
 # Learn to write a NumPy tutorial
-***
-
-+++ {"colab_type": "text", "id": "8VpdPmoZkR7_"}
 
 ![image](https://documentation.divio.com/_images/overview.png)
 <p style="text-align:right;font-style:italic;">Image credit: Daniele Procida's <a href="https://documentation.divio.com/">The documentation system</a></p>
