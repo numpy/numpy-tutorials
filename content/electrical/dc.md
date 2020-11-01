@@ -535,7 +535,7 @@ Det = np.linalg.det(A)
 
 ### In practice...
 
-# The python code written in `Part 1b` can indeed be written without any
+The python code written in `Part 1b` can indeed be written without any
 `for-loops` (use `range` to set the value of $V$)
 
 ### Further reading
