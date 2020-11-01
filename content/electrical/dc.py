@@ -160,7 +160,6 @@ b1 = 0
 b2 = V1
 b3 = -V2
 
-# Insert buzzlight year, brackets everywhere meme
 A = np.array([[a11, a12, a13],
               [a21, a22, a23],
               [a31, a32, a33]])
@@ -172,7 +171,7 @@ x = Ainv@b
 x2 = np.linalg.solve(A, b)
 print(x2)
 
-## Part 4d: Mesh Analysis + Singular Matrix
+## -------- Part 3c: Mesh Analysis 3x3 witha  mistake
 R1 = 90
 R2 = 30
 R3 = 30
@@ -180,9 +179,9 @@ R4 = 5
 V1 = 25
 V2 = -65
 
-a11 = R2
-a12 = R3
-a13 = -R2 -R3
+a11 = -R2 - R3
+a12 = +R2
+a13 = +R3
 a21 = -R2
 a22 = R2+R4
 a23 = -R4
@@ -190,11 +189,10 @@ a31 = -R3
 a32 = -R4
 a33 = R3+R4
 
-b1 = V2-V1
+b1 = V1-V2
 b2 = V1
 b3 = -V2
 
-# Insert buzzlight year, brackets everywhere meme
 A = np.array([[a11, a12, a13],
               [a21, a22, a23],
               [a31, a32, a33]])
