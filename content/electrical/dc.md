@@ -1,9 +1,8 @@
 <!-- ***************** Introduction ***************** -->
 # Tutorial: Solve DC electric circuits using Numpy
 
-<p align="center">
-	<img src="https://cdn.bulbagarden.net/upload/thumb/1/17/025Pikachu-Original.png/240px-025Pikachu-Original.png"></a>
-</p>
+```{figure} imgs/pikachu_greeting.png
+```
 
 ```{contents}
 :depth: 3
