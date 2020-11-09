@@ -1,0 +1,5 @@
+sphinx
+myst-nb
+jupytext
+sphinx-book-theme
+sphinx-copybutton

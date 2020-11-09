@@ -1,0 +1,7 @@
+# For the tutorials
+numpy
+scipy
+matplotlib
+pytest
+nbval
+statsmodels
