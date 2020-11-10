@@ -1,4 +1,5 @@
 # For the tutorials
+jupyter-book
 numpy
 scipy
 matplotlib
