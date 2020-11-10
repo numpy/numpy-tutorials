@@ -1,7 +1,5 @@
 # NumPy tutorials
 
-[![Binder](http://mybinder.org/badge_logo.svg)](http://mybinder.org/v2/gh/numpy/numpy-tutorials/master?urlpath=lab/tree/content)
-
 This set of tutorials and educational materials is being developed,
 IT IS NOT INTEGRATED IN THE HTML DOCS AT https://www.numpy.org/devdocs/
 
@@ -10,15 +8,17 @@ NumPy project, both for self-learning and for teaching classes with. If you're
 interested in adding your own content, check the [Contributing](#contributing)
 section.
 
-To open a live version of the content, click the **launch Binder** button above.
 To download a local copy of the `.ipynb` files, you can either
 [clone this repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
 or navigate to any of the documents listed below and download it individually.
 
 ## Content
 
-1. [Tutorial: Linear algebra on n-dimensional arrays](content/tutorial-svd.ipynb)
-2. [Tutorial: CS231n Python Tutorial](content/cs231_tutorial.ipynb)
+0. [Learn to write a NumPy tutorial](content/tutorial-style-guide.md): our style guide for writing tutorials.
+1. [Tutorial: Linear algebra on n-dimensional arrays](content/tutorial-svd.md)
+2. [Tutorial: CS231n Python Tutorial](content/cs231_tutorial.md)
+3. [Tutorial: Determining Moore's Law with real data in NumPy](content/mooreslaw-tutorial.ipynb)
+4. [Tutorial: Saving and sharing your NumPy arrays](content/save-load-arrays.ipynb)
 
 ## Contributing
 
@@ -45,18 +45,29 @@ used in the main NumPy documentation has two reasons:
  * rST may present a barrier for some people who might otherwise be very
    interested in contributing tutorial material.
 
+#### Note
+
+You may notice that some of our content is in markdown format (`.md` files). 
+This is part of an ongoing restructuring of the repository workflow. However, 
+you can still submit your content as a Jupyter Notebook file.
+
 ### Adding your own tutorials
 
 If you have your own tutorial in the form of a Jupyter notebook (a `.ipynb`
-file) and you'd like to try add it out to the repository:
+file) and you'd like to add it to the repository:
 
 #### Create an issue
 
-Go to [https://github.com/numpy/numpy-tutorials/issues](https://github.com/numpy/numpy-tutorials/issues) and create a new issue with your proposal. Give as much detail as you can about what kind of content you would like to write (tutorial, how-to) and what you plan to cover. We will try to respond as quickly as possible with comments, if applicable.
+Go to [https://github.com/numpy/numpy-tutorials/issues](https://github.com/numpy/numpy-tutorials/issues)
+and create a new issue with your proposal. Give as much detail as you can about
+what kind of content you would like to write (tutorial, how-to) and what you
+plan to cover. We will try to respond as quickly as possible with comments, if
+applicable.
 
 #### Check out our suggested template
 
-You can use our [Tutorial Style Guide](content/tutorial-style-guide.ipynb) to make your content consistent with our existing tutorials.
+You can use our [Tutorial Style Guide](content/tutorial-style-guide.md) to make
+your content consistent with our existing tutorials.
 
 #### Upload your content
 
@@ -84,8 +95,8 @@ Remember to clear all outputs on your notebook before uploading it.
     <img src="site/_static/03-upload.gif" width=80% height=80%>
 </details>
 
-<b>Update the <code>environment.yml</code> file with the dependencies for your tutorial</b>
-(only if you add new dependencies).
+<b>Update the <code>environment.yml</code> file with the dependencies for your
+tutorial</b> (only if you add new dependencies).
 
 <details>
     <summary>
