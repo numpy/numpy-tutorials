@@ -28,6 +28,7 @@ maxdepth: 1
 
 content/cs231_tutorial
 content/tutorial-svd
+content/mooreslaw-tutorial
 ```
 
 ### Attribution
