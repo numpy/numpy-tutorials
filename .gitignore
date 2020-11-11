@@ -92,3 +92,4 @@ Thumbs.db
 ###################################
 site/_build/*
 site/notebooks/*
+content/_generated/*

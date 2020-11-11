@@ -449,7 +449,7 @@ print(notes)
 
 ```{code-cell} ipython3
 np.savez(
-    "mooreslaw_regression.npz",
+    "_generated/mooreslaw_regression.npz",
     notes=notes,
     year=year,
     transistor_count=transistor_count,
@@ -460,7 +460,7 @@ np.savez(
 ```
 
 ```{code-cell} ipython3
-results = np.load("mooreslaw_regression.npz")
+results = np.load("_generated/mooreslaw_regression.npz")
 ```
 
 ```{code-cell} ipython3
@@ -544,11 +544,11 @@ options to create the desired file format:
 * `header = head` : use the header `head` defined above
 
 ```{code-cell} ipython3
-np.savetxt("mooreslaw_regression.csv", X=output, delimiter=",", header=head)
+np.savetxt("_generated/mooreslaw_regression.csv", X=output, delimiter=",", header=head)
 ```
 
 ```{code-cell} ipython3
-! head mooreslaw_regression.csv
+! head _generated/mooreslaw_regression.csv
 ```
 
 ## Wrapping up
