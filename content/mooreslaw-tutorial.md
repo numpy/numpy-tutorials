@@ -134,12 +134,12 @@ print("This is x{:.2f} more transistors than 1971".format(ML_1973 / ML_1971))
 Now, make a prediction based upon the historical data for
 semiconductors per chip. The [Transistor Count
 \[4\]](https://en.wikipedia.org/wiki/Transistor_count#Microprocessors)
-each year is in the `transistor_data.csv` file. Before loading a \*.csv
+each year is in the `data/transistor_data.csv` file. Before loading a \*.csv
 file into a NumPy array, its a good idea to inspect the structure of the
 file first. Then, locate the columns of interest and save them to a
 variable. Save two columns of the file to the array, `data`.
 
-Here, print out the first 10 rows of `transistor_data.csv`. The columns are 
+Here, print out the first 10 rows of `data/transistor_data.csv`. The columns are 
 
 |Processor|MOS transistor count|Date of Introduction|Designer|MOSprocess|Area|
 |---|---|---|---|---|---|
@@ -147,7 +147,7 @@ Here, print out the first 10 rows of `transistor_data.csv`. The columns are
 |...|...|...|...|...|...|
 
 ```{code-cell} ipython3
-! head transistor_data.csv
+! head data/transistor_data.csv
 ```
 
 You don't need the columns that specify __Processor__, __Designer__,
@@ -163,7 +163,7 @@ The extra options below will put the data in the desired format:
 * `skiprows = 1`: do not use the first row, because its a header row
 
 ```{code-cell} ipython3
-data = np.loadtxt("transistor_data.csv", delimiter=",", usecols=[1, 2], skiprows=1)
+data = np.loadtxt("data/transistor_data.csv", delimiter=",", usecols=[1, 2], skiprows=1)
 ```
 
 You loaded the entire history of semiconducting into a NumPy array named
