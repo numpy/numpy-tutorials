@@ -12,7 +12,7 @@ kernelspec:
 ---
 
 # Determining Moore's Law with real data in NumPy
-![image.png](01-mooreslaw-tutorial-intro.png)
+![image.png](_generated/01-mooreslaw-tutorial-intro.png)
 
 _The number of transistors reported on a given chip plotted on a log scale in the y axis with the date of introduction on the linear scale x-axis. The blue data points are from a [transistor count table](https://en.wikipedia.org/wiki/Transistor_count#Microprocessors). The red line is an ordinary least squares prediction and the orange line is Moore's law._
 
@@ -333,19 +333,30 @@ https://fivethirtyeight.com elements. Change the matplotlib style with
 transistor_count_predicted = np.exp(B) * np.exp(A * year)
 transistor_Moores_law = Moores_law(year)
 plt.style.use("fivethirtyeight")
-plt.semilogy(year, transistor_count, "s", label = "MOS transistor count")
-plt.semilogy(year, transistor_count_predicted, label = "linear regression")
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.semilogy(year, transistor_count, "s", label = "MOS transistor count")
+ax.semilogy(year, transistor_count_predicted, label = "linear regression")
 
 
-plt.plot(year, transistor_Moores_law, label = "Moore's Law")
-plt.title(
+ax.plot(year, transistor_Moores_law, label = "Moore's Law")
+ax.set_title(
     "MOS transistor count per microprocessor\n"
     + "every two years \n"
     + "Transistor count was x{:.2f} higher".format(np.exp(A * 2))
 )
-plt.xlabel("year introduced")
-plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
-plt.ylabel("# of transistors\nper microprocessor")
+ax.set_xlabel("year introduced")
+ax.legend(loc="center left", bbox_to_anchor=(1, 0.5))
+ax.set_ylabel("# of transistors\nper microprocessor")
+```
+
+% NOTE: glue would work as well, but not supported in .ipynb
+```{code-cell} ipython3
+---
+tags: [remove-input]
+---
+# Save figure for inclusion in introduction of this tutorial
+fig.tight_layout()
+fig.savefig('_generated/01-mooreslaw-tutorial-intro.png')
 ```
 
 The linear regression captures the increase in the number of transistors
