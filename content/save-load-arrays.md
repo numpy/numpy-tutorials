@@ -91,15 +91,15 @@ You will use two options to label the arrays in the file,
 2. `y_axis = y`: this option is assigning the name `y_axis` to the variable `y`
 
 ```{code-cell} ipython3
-np.savez("x_y-squared.npz", x_axis=x, y_axis=y)
+np.savez("_generated/x_y-squared.npz", x_axis=x, y_axis=y)
 ```
 
 ## Remove the saved arrays and load them back with NumPy's [`load`](https://numpy.org/doc/stable/reference/generated/numpy.load.html#numpy.load)
 
 In your current working directory, you should have a new file with the
-name `x_y-squared.npz`. This file is a zipped binary of the two arrays,
+name `_generated/x_y-squared.npz`. This file is a zipped binary of the two arrays,
 `x` and `y`. Let's clear the workspace and load the values back in. This
-`x_y-squared.npz` file contains two [NPY
+`_generated/x_y-squared.npz` file contains two [NPY
 format](https://numpy.org/doc/stable/reference/generated/numpy.lib.format.html#module-numpy.lib.format)
 files. The NPY format is a [native binary
 format](https://en.wikipedia.org/wiki/Binary_file). You cannot read
@@ -121,7 +121,7 @@ del x, y
 ```
 
 ```{code-cell} ipython3
-load_xy = np.load("x_y-squared.npz")
+load_xy = np.load("_generated/x_y-squared.npz")
 
 print(load_xy.files)
 ```
@@ -177,15 +177,15 @@ print(array_out)
 
 You use `savetxt` with a three options to make your file easier to read:
 
-* `X = array_out`: this option tells `savetxt` to save your 2D array, `array_out`, to the file `x_y-squared.csv`
+* `X = array_out`: this option tells `savetxt` to save your 2D array, `array_out`, to the file `_generated/x_y-squared.csv`
 * `header = 'x, y'`: this option writes a header before any data that labels the columns of the csv
 * `delimiter = ','`: this option tells `savetxt` to place a comma between each column in the file
 
 ```{code-cell} ipython3
-np.savetxt("x_y-squared.csv", X=array_out, header="x, y", delimiter=",")
+np.savetxt("_generated/x_y-squared.csv", X=array_out, header="x, y", delimiter=",")
 ```
 
-Open the file, `x_y-squared.csv`, and you'll see the following:
+Open the file, `_generated/x_y-squared.csv`, and you'll see the following:
 
 ```
 # x, y
@@ -224,7 +224,7 @@ del x, y
 
 ```{code-cell} ipython3
 load_xy = np.loadtxt(
-    "x_y-squared.csv", 
+    "_generated/x_y-squared.csv", 
     delimiter=",")
 ```
 
