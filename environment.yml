@@ -8,3 +8,6 @@ dependencies:
   - pytest
   - nbval
   - statsmodels
+  - pip
+  - pip:
+    - jupyter-book
