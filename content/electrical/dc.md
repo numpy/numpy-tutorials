@@ -1,4 +1,13 @@
-<!-- ***************** Introduction ***************** -->
+---
+jupytext:
+ formats: md:myst
+ text_representation:
+   format_name: myst
+kernelspec:
+ display_name: Python 3
+ name: python3
+---
+
 # Tutorial: Solve DC electric circuits using Numpy
 
 ```{figure} imgs/pikachu_greeting.png
@@ -45,7 +54,7 @@ Figure 1: Simple Circuit
 Solving for $I$ in *Figure 1* is a pretty trivial matter, it can be done in a few lines of code
 
 
-```{code-block} ipython
+```{code-cell} ipython3
 R = 10 # Resistance
 V = 5 # Voltage
 I = V/R # Current
@@ -67,7 +76,7 @@ Before a plot of Ohm's Law can be made, you first need to generate the voltages
 and currents 
 
 
-```{code-block} ipython
+```{code-cell} ipython3
 R = 10
 V = [] # Declaring V to be an empty list
 
@@ -112,7 +121,7 @@ Check out the official numpy reference on the function
 to learn more
 ```
 
-```{code-block} ipython
+```{code-cell} ipython3
 R = 10
 V = np.linspace(-5, 5, 11)
 
@@ -137,7 +146,7 @@ Check out the
 tutorial on matplotlib's pyplot interface to learn more
 ```
 
-```{code-block} ipython
+```{code-cell} ipython3
 import matplotlib.pyplot as plt
 plt.plot(V, I)
 plt.show() # Run this command if the plot doesn't show
@@ -149,7 +158,7 @@ width: 400px
 ---
 ```
 
-```{code-block} ipython
+```{code-cell} ipython3
 plt.clf() # Clear the plot if there was anything on it
 plt.plot(V, I)
 plt.xlabel('Voltage (V)') # x-axis label
@@ -180,7 +189,7 @@ Electrical engineers claim that maximum power transfer will occur when Rload ==
 Rth. Write python code using NumPy arrays to test this.
 
 
-```{code-block} ipython
+```{code-cell} ipython3
 V = 8
 Rth = 5
 
@@ -216,7 +225,7 @@ transfer. But it is not 100% clear. Use numpy to find the exact value of `Rload`
 that makes `Pload` maximum
 
 
-```{code-block} ipython
+```{code-cell} ipython3
 Pmax = np.max(Pload) # Finding the maximum value of Pload
 print(f"Pmax = {Pmax}")
 Pmax = 3.1962872914011546
@@ -274,7 +283,7 @@ and [matrices](https://en.wikipedia.org/wiki/Matrix_(mathematics))
 if you would like to revise the concepts presented here
 ```
 
-```{code-block} ipython
+```{code-cell} ipython3
 R1 = 10
 R2 = 5
 R3 = 5
@@ -309,7 +318,7 @@ then multiply it by $b$.
 \begin{bmatrix} V1 \\ -V2  \end{bmatrix}
 ```
 
-```{code-block} ipython
+```{code-cell} ipython3
 Ainv = np.linalg.inv(A)
 print(Ainv)
 array([[0.08, 0.04],
@@ -348,7 +357,7 @@ Check out the numpy reference
 learn more about the linear algebra functions available
 ```
 
-```{code-block} ipython
+```{code-cell} ipython3
 x = np.linalg.solve(A, b)
 print(x)
 array([[1.],
@@ -382,7 +391,7 @@ I1 \\ I2 \\ I3
 \end{bmatrix}
 ```
 
-```{code-block} ipython
+```{code-cell} ipython3
 R1 = 90
 R2 = 30
 R3 = 30
@@ -441,7 +450,7 @@ V1-V2 \\ V1 \\ -V2
 \end{bmatrix}
 ```
 
-```{code-block} ipython
+```{code-cell} ipython3
 R1 = 90
 R2 = 30
 R3 = 30
@@ -476,7 +485,7 @@ When you run it, you will get this as an output:
 
 ```
 LinAlgError                               Traceback (most recent call last)
-<ipython-input-2-c441d734ff80> in <module>
+<ipython3-input-2-c441d734ff80> in <module>
      26 b = np.array([[b1], [b2], [b3]])
      27
 ---> 28 x = np.linalg.solve(A, b)
