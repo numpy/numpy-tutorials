@@ -1,21 +1,20 @@
 ---
-jupytext:
- formats: md:myst
- text_representation:
-   format_name: myst
-kernelspec:
- display_name: Python 3
- name: python3
+jupyter:
+  jupytext:
+    main_language: python
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.2'
+      jupytext_version: 1.6.0
+  kernelspec:
+    display_name: ''
+    name: ''
 ---
 
 # Tutorial: Solve DC electric circuits using Numpy
 
-```{figure} imgs/pikachu_greeting.png
-```
-
-```{contents}
-:depth: 3
-```
+<img src="imgs/pikachu_greeting.png"/>
 
 ## Overview
 
@@ -41,41 +40,37 @@ see xyz tutorial to review)
 * The Matplotlib package if you want to reproduce the plots (see xyz for how to install)
 
 ## Part 1: Plotting Ohm's Law
+
 ### Part 1a: Calculating Ohm's Law in pure python
 
-```{figure} imgs/circuit1.png
----
-width: 400px
-height: 200px
----
-Figure 1: Simple Circuit
-```
-
-Solving for $I$ in *Figure 1* is a pretty trivial matter, it can be done in a few lines of code
-
-
-```{code-cell} ipython3
+```python
 R = 10 # Resistance
 V = 5 # Voltage
 I = V/R # Current
 print(f"I = {I} A")
 ```
 
+<img src="imgs/circuit1.png" width="400" height="200"/>
+
+Solving for $I$ in *Figure 1* is a pretty trivial matter, it can be done in a few lines of code
+
+```python
+R = 10 # Resistance
+V = 5 # Voltage
+I = V/R # Current
+print(f"I = {I} A")
+```
+
+
 ### Part 1b: Generating voltages and currents in pure python
 
-```{figure} imgs/circuit2.png
----
-width: 400px
-height: 200px
----
-Figure 2: Ohm's Law
-```
+<img src="imgs/circuit2.png" width="400" height="200"/>
 
 Before a plot of Ohm's Law can be made, you first need to generate the voltages
 and currents 
 
 
-```{code-cell} ipython3
+```python
 import numpy as np
 R = 10
 V = [] # Declaring V to be an empty list
@@ -98,13 +93,10 @@ they make the code run slower. In this simple example it won't make much of a di
 but with larger and more complex code it well.
 2. It is **unpythonic**. The code above works but is not clear and maintainable.
 
-```{admonition} Challenge 1
-How would you make a list of voltages that have a decimal point (V = [-5, -4.9, -4.8 ...])
-```
+> Challenge 1: How would you make a list of voltages that have a decimal point 
+> (V = [-5, -4.9, -4.8 ...])
 
-```{admonition} Challenge 2
-Try to optimize the code further by removing one of the `for-loops`
-```
+> Challenge 2: Try to optimize the code further by removing one of the `for-loops`
 
 ### Part 1c: Generating voltages and currents using numpy
 
@@ -115,13 +107,11 @@ the method `np.linspace` to create a `numpy.ndarray` you can specify the:
 2. Ending value of the array
 3. The number of points between the starting and ending
 
-```{admonition} Note
-Check out the official numpy reference on the function
-[numpy.linspace](https://numpy.org/doc/stable/reference/generated/numpy.linspace.html)
-to learn more
-```
+> Note: Check out the official numpy reference on the function
+> [numpy.linspace](https://numpy.org/doc/stable/reference/generated/numpy.linspace.html)
+> to learn more
 
-```{code-cell} ipython3
+```python
 R = 10
 V = np.linspace(-5, 5, 11)
 
@@ -140,25 +130,16 @@ print(f"Type of I: {type(I)}")
 
 Use the library `matplotlib` to plot $V$ and $I$.
 
-```{admonition} Note
-Check out the 
-[introductory](https://matplotlib.org/3.1.1/tutorials/introductory/pyplot.html)
-tutorial on matplotlib's pyplot interface to learn more
-```
+> Note: Check out the 
+> [introductory](https://matplotlib.org/3.1.1/tutorials/introductory/pyplot.html)
+> tutorial on matplotlib's pyplot interface to learn more
 
-```{code-cell} ipython3
+```python
 import matplotlib.pyplot as plt
 plt.plot(V, I)
 plt.show() # Run this command if the plot doesn't show
 ```
-
-```{figure} imgs/plot1_basic.png
----
-width: 400px
----
-```
-
-```{code-cell} ipython3
+```python
 plt.clf() # Clear the plot if there was anything on it
 plt.plot(V, I)
 plt.xlabel('Voltage (V)') # x-axis label
@@ -167,29 +148,16 @@ plt.title('Ohms Law')
 plt.grid()
 ```
 
-```{figure} imgs/plot2_better.png
----
-width: 400px
----
-```
-
 ## Part 2: Finding the conditions for maximum power transfer
 
 ### Part 2a: Plotting maximum power transfer
 
-```{figure} imgs/circuit3.png
----
-width: 400px
-height: 200px
----
-Figure 3: Maximum Power Transfer Circuit
-```
+<img src="imgs/circuit3.png" width="400" height="200"/>
 
 Electrical engineers claim that maximum power transfer will occur when Rload ==
 Rth. Write python code using NumPy arrays to test this.
 
-
-```{code-cell} ipython3
+```python
 V = 8
 Rth = 5
 
@@ -201,22 +169,8 @@ Pload = Iload * Vload
 plt.plot(Rload, Pload)
 ```
 
-```{figure} imgs/plot2_better.png
----
-width: 400px
----
-```
-
-```{figure} imgs/plot3_power.png
----
-width: 400px
----
-```
-
-```{admonition} Challenge
-Try using voltage division to calculate `Pload` directly
-(ie without needing to calculate `Iload`)
-```
+> Challenge: Try using voltage division to calculate `Pload` directly
+> (ie without needing to calculate `Iload`)
 
 ### Part 2b: Using numpy to find Rload
 
@@ -225,7 +179,7 @@ transfer. But it is not 100% clear. Use numpy to find the exact value of `Rload`
 that makes `Pload` maximum
 
 
-```{code-cell} ipython3
+```python
 Pmax = np.max(Pload) # Finding the maximum value of Pload
 print(f"Pmax = {Pmax}")
 
@@ -236,51 +190,41 @@ Rload[Pmax_idx]
 print(f"Rload[Pmax_idx] = {Rload[Pmax_idx]}")
 ```
 
-```{admonition} Challenge
- Why is the value of `Rload` not exactly 5? How would you
-increase the accuracy?
-```
+> Challenge: Why is the value of `Rload` not exactly 5? How would you
+> increase the accuracy?
 
 ## Part 3: Solving circuits using mesh analysis
 
 ### Part 3a: 2x2 Mesh Matrix
 
-```{figure} imgs/circuit4.png
----
-width: 400px
-height: 200px
----
-Figure 4: Loop Circuit
-```
+<img src="imgs/circuit4.png" height="200" width="400"/>
 
 Doing a mesh analysis on *Figure 4* yields *two linear equations*:
 
 
-```{math}
-I1(R1+R2) + I2(-R2) = V1
-
-I1(-R2) + I2(R2+R3) = -V2
-```
+\begin{equation*}
+I_1 (R_1 + R_2) + I_2(-R_2) = V_1 \\
+I_1 (-R_2) + I_2(R_2 + R_3) = V_2
+\end{equation*}
 
 These two equations can be written in *matrix format* and inputted into NumPy:
 
-```{math}
+\begin{equation*}
 \begin{bmatrix} R1+R2 & -R2 \\ -R2 & R2+R3 \end{bmatrix} 
 * 
 \begin{bmatrix} I1 \\ I2  \end{bmatrix}
 =
 \begin{bmatrix} V1 \\ -V2  \end{bmatrix}
-```
+\end{equation*}
 
-```{admonition} Note
-Check out Wikipedia's articles on 
-[mesh analysis](https://www.electronics-tutorials.ws/dccircuits/dcp_5.html),
-[linear equations](https://en.wikipedia.org/wiki/System_of_linear_equations), 
-and [matrices](https://en.wikipedia.org/wiki/Matrix_(mathematics))
-if you would like to revise the concepts presented here
-```
+> Note: Check out Wikipedia's articles on 
+> [mesh analysis](https://www.electronics-tutorials.ws/dccircuits/dcp_5.html),
+> [linear equations](https://en.wikipedia.org/wiki/System_of_linear_equations), 
+> and [matrices](https://en.wikipedia.org/wiki/Matrix_(mathematics))
+> if you would like to revise the concepts presented here
 
-```{code-cell} ipython3
+
+```python
 R1 = 10
 R2 = 5
 R3 = 5
@@ -307,82 +251,68 @@ print(b)
 If solving the matrix using pencil and paper, you would first invert $A$ and
 then multiply it by $b$.
 
-```{math}
+\begin{equation*}
 \begin{bmatrix} I1 \\ I2  \end{bmatrix} 
 = 
 \begin{bmatrix} R1+R2 & -R2 \\ -R2 & R2+R3 \end{bmatrix}^{-1} 
 * 
 \begin{bmatrix} V1 \\ -V2  \end{bmatrix}
-```
+\end{equation*}
 
-```{code-cell} ipython3
+```python
 Ainv = np.linalg.inv(A)
 print(Ainv)
 
 x = Ainv @ b # The @ operator multiplies two matrices
 print(x)
 ```
-
-```{figure} imgs/pikachu_angry.jpg
----
-width: 500px
----
-
-```
+<img src="imgs/pikachu_angry.jpg"  width="500"/>
 
 **NEVER** invert your matrices if you are programming on a computer (except if
 you actually need the inverted matrix itself, which is rare). The process is
 very sensitive to scaling, propagates numerical errors and will make **Pikachu**
 angry! Instead use the `np.linalg.solve` function.
 
-```{admonition} Note 1
-If you want to learn more about the complications arising from matrix inversion,
-check out this
-(article)[https://www.johndcook.com/blog/2010/01/19/dont-invert-that-matrix/]
-talking about it's harms. And check out this
-(paper)[http://www.netlib.org/lapack/lawnspdf/lawn27.pdf] if you want a full
-mathematical explanation.
-```
+> Note 1: If you want to learn more about the complications arising from matrix inversion,
+> check out this
+> (article)[https://www.johndcook.com/blog/2010/01/19/dont-invert-that-matrix/]
+> talking about it's harms. And check out this
+> (paper)[http://www.netlib.org/lapack/lawnspdf/lawn27.pdf] if you want a full
+> mathematical explanation.
 
-```{admonition} Note 2
-Check out the numpy reference
-[np.linalg](https://numpy.org/doc/stable/reference/routines.linalg.html) to
-learn more about the linear algebra functions available
-```
 
-```{code-cell} ipython3
+> Note 2: Check out the numpy reference
+> [np.linalg](https://numpy.org/doc/stable/reference/routines.linalg.html) to
+> learn more about the linear algebra functions available
+
+```python
 x = np.linalg.solve(A, b)
 print(x)
 ```
 
 ### Part 3b: 3x3 Mesh Matrix
 
-```{figure} imgs/circuit5.png
----
-width: 500px
-height: 250px
----
-Figure 5: Three Loop Circuit
-```
+<img src="imgs/circuit5.png" width="500" height="250"/>
 
 Repeat the same process that was done before. The only difference is that this
 time you will end up with a `3x3` matrix
 
-```{math}
+
+\begin{equation*}
 \begin{bmatrix} 
 R1+R2+R3 & -R2 & -R3\\ -R2 & R2+R4 & -R4 \\ -R3 & -R4 & R3+R4 
 \end{bmatrix}
 *
 \begin{bmatrix} 
-I1 \\ I2 \\ I3  
+I1 \\ I2 \\ I3
 \end{bmatrix}
 =
 \begin{bmatrix} 
-0 \\ V1 \\ -V2  
+0 \\ V1 \\ -V2
 \end{bmatrix}
-```
+\end{equation*}
 
-```{code-cell} ipython3
+```python
 R1 = 90
 R2 = 30
 R3 = 30
@@ -415,33 +345,29 @@ print(x)
 ```
 
 ### Part 3c: 3x3 Mesh Matrix with a mistake
-```{figure} imgs/circuit6.png
----
-width: 500px
-height: 300px
----
-Figure 6: Three Loop Circuit neglecting a loop
-```
+
+<img src="imgs/circuit6.png" width="500" height="300"/>
 
 For this last circuit, let us purposely make a mistake. Instead of taking a loop
 through $R1$, let's take it through `Loop 1` instead. Thereby missing vital
 information.
 
-```{math}
+\begin{equation*}
 \begin{bmatrix} 
 -R2-R3 & +R2 & +R3\\ -R2 & R2+R4 & -R4 \\ -R3 & -R4 & R3+R4 
 \end{bmatrix}
 *
 \begin{bmatrix} 
-I1 \\ I2 \\ I3  
+I1 \\ I2 \\ I3
 \end{bmatrix}
 =
 \begin{bmatrix} 
-V1-V2 \\ V1 \\ -V2  
+V1-V2 \\ V1 \\ -V2
 \end{bmatrix}
-```
+\end{equation*}
 
-```{code-cell} ipython3
+
+```python
 R1 = 90
 R2 = 30
 R3 = 30
@@ -468,6 +394,9 @@ A = np.array([[a11, a12, a13],
               [a31, a32, a33]])
 
 b = np.array([[b1], [b2], [b3]])
+```
+
+```python
 # x = np.linalg.solve(A, b)
 # print(x)
 ```
@@ -502,25 +431,24 @@ lgerror_singular(err, flag)
 LinAlgError: Singular matrix
 ```
 
-```{figure} imgs/pikachu_surprised.jpg
----
-width: 400px
----
+<img src="imgs/pikachu_surprised.jpg" width="400"/>
+
 An error, how unexpected!
-```
 
 As a programmer you need to get used to reading error outputs. Looking at the
 last line it says that there is a `Singular Matrix` error.  This happened
 because the rows of the $A$ matrix are linearly dependent, $Row1 = Row2 + Row3$.
 
-```{math}
+
+\begin{equation*}
 A =
 \begin{bmatrix} 
 -R2-R3 & +R2 & +R3\\ -R2 & R2+R4 & -R4 \\ -R3 & -R4 & R3+R4 
 \end{bmatrix}
-```
+\end{equation*}
 
 This can be easily confirmed by taking the determinant of $A$:
+
 ```
 Det = np.linalg.det(A)
 ```
