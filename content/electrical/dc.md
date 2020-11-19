@@ -21,9 +21,9 @@ kernelspec:
 
 ### What you'll do
 
-* Plot *Ohm's Law*
+* Plot [Ohm's Law](https://en.wikipedia.org/wiki/Ohm%27s_law)
 * Find the value of resistance that ensures optimal power flow
-* Solve DC circuits using *mesh analysis*
+* Solve [DC circuits](https://en.wikipedia.org/wiki/Direct_current) using *mesh analysis*
 
 ### What you'll learn
 
@@ -36,9 +36,8 @@ kernelspec:
 * A "can-do" attitude
 * Basic electrical knowledge (Ohm's Law, KCL, KVL)
 * Basic linear algebra knowledge (Matrices, Inversion and Determinants)
-* Basic Python knowledge (know how to run code and import modules
-see xyz tutorial to review)
-* The Matplotlib package if you want to reproduce the plots (see xyz for how to install)
+* Basic Python knowledge (know how to run code and import modules - see the [Python Tutorial](https://docs.python.org/3/tutorial/) to review)
+* The [Matplotlib](https://matploblib.org) package if you want to reproduce the plots.
 
 ## Part 1: Plotting Ohm's Law
 ### Part 1a: Calculating Ohm's Law in pure python
@@ -51,13 +50,13 @@ height: 200px
 Figure 1: Simple Circuit
 ```
 
-Solving for $I$ in *Figure 1* is a pretty trivial matter, it can be done in a few lines of code
+Solving for $I$ in *Figure 1* is a pretty trivial matter, it can be done in a few lines of code. Using `R` to denote the resistance, `V` to denote the voltage and `I` to denote the current, we have the following:
 
 
 ```{code-cell} ipython3
-R = 10 # Resistance
-V = 5 # Voltage
-I = V/R # Current
+R = 10
+V = 5
+I = V/R
 print(f"I = {I} A")
 ```
 
@@ -70,27 +69,25 @@ height: 200px
 ---
 Figure 2: Ohm's Law
 ```
-
-Before a plot of Ohm's Law can be made, you first need to generate the voltages
-and currents 
-
+Now, we would like to plot the variation in the current `I` with respect to changes in the voltage `V`, given a fixed value of the resistance `R`.
+Before a plot of Ohm's Law can be made, you first need to generate a series of values 
+for the voltages and currents. Not using NumPy, and choosing `V` and `I` to denote 
+the lists containing those values, respectively, we would end up with the following 
+code:
 
 ```{code-cell} ipython3
-import numpy as np
 R = 10
-V = [] # Declaring V to be an empty list
+# V and I are initialized as empty lists
+V = [] 
+I = [] 
 
-for i in range(-5, 6): # Assigning V numbers from -5 to 5
-	V.append(i)
-
-I = [] # Declaring I to be an empty list
-
-for voltage in V: # Calculating I for all values of V
-	I.append(voltage/R)
+for i in range(-5, 6): 
+    V.append(i)
+for voltage in V: 
+    I.append(voltage/R)
 
 print(f"Voltages (V): {V}")
 print(f"Current (A): {I}")
-```
 
 There are a two issues with what was done above:
 1. It is **inefficient**. You want to avoid running *for loops* in Python because
@@ -108,18 +105,13 @@ Try to optimize the code further by removing one of the `for-loops`
 
 ### Part 1c: Generating voltages and currents using numpy
 
-Let's see how to repeat what was done in the previous section using numpy. Using
-the method `np.linspace` to create a `numpy.ndarray` you can specify the:
+Let's see how to repeat what was done in the previous section using `NumPy`. Using
+the method [`np.linspace`](https://numpy.org/doc/stable/reference/generated/numpy.linspace.html) to create a [`numpy.ndarray`](https://numpy.org/doc/stable/reference/arrays.ndarray.html) you can specify:
 
-1. Starting value of the array
-2. Ending value of the array
-3. The number of points between the starting and ending
+1. The starting value of the array;
+2. The ending value of the array;
+3. The number of points between the starting and ending.
 
-```{admonition} Note
-Check out the official numpy reference on the function
-[numpy.linspace](https://numpy.org/doc/stable/reference/generated/numpy.linspace.html)
-to learn more
-```
 
 ```{code-cell} ipython3
 R = 10
@@ -138,13 +130,7 @@ print(f"Type of I: {type(I)}")
 
 ### Part 1d: Plotting using matplotlib
 
-Use the library `matplotlib` to plot $V$ and $I$.
-
-```{admonition} Note
-Check out the 
-[introductory](https://matplotlib.org/3.1.1/tutorials/introductory/pyplot.html)
-tutorial on matplotlib's pyplot interface to learn more
-```
+You will use the `matplotlib` library to plot $V$ and $I$. You can check out the [introductory](https://matplotlib.org/3.1.1/tutorials/introductory/pyplot.html) tutorial on matplotlib's `pyplot` interface to learn more.
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
@@ -185,8 +171,7 @@ height: 200px
 Figure 3: Maximum Power Transfer Circuit
 ```
 
-Electrical engineers claim that maximum power transfer will occur when Rload ==
-Rth. Write python code using NumPy arrays to test this.
+[The maximum power transfer theorem](https://en.wikipedia.org/wiki/Maximum_power_transfer_theorem) states that maximum power transfer will occur when Rload == Rth. You will write some Python code using NumPy arrays to test this.
 
 
 ```{code-cell} ipython3
@@ -218,11 +203,11 @@ Try using voltage division to calculate `Pload` directly
 (ie without needing to calculate `Iload`)
 ```
 
-### Part 2b: Using numpy to find Rload
+### Part 2b: Using NumPy to find Rload
 
 Looking at the plot, it does seem that when `Rload = Rth` there is maximum power
-transfer. But it is not 100% clear. Use numpy to find the exact value of `Rload`
-that makes `Pload` maximum
+transfer. But it is not 100% clear. You can use numpy to find the exact value of `Rload`
+that makes `Pload` maximum.
 
 
 ```{code-cell} ipython3
@@ -345,9 +330,7 @@ mathematical explanation.
 ```
 
 ```{admonition} Note 2
-Check out the numpy reference
-[np.linalg](https://numpy.org/doc/stable/reference/routines.linalg.html) to
-learn more about the linear algebra functions available
+Check out the reference documentation for the [numpy.linalg](https://numpy.org/doc/stable/reference/routines.linalg.html) module to learn more about the linear algebra functions available in NumPy.
 ```
 
 ```{code-cell} ipython3
@@ -511,7 +494,7 @@ An error, how unexpected!
 
 As a programmer you need to get used to reading error outputs. Looking at the
 last line it says that there is a `Singular Matrix` error.  This happened
-because the rows of the $A$ matrix are linearly dependent, $Row1 = Row2 + Row3$.
+because the rows of the $A$ matrix are [linearly dependent](https://en.wikipedia.org/wiki/Linear_independence), $Row1 = Row2 + Row3$.
 
 ```{math}
 A =
@@ -534,10 +517,9 @@ Det = np.linalg.det(A)
 
 ### In practice...
 
-The python code written in `Part 1b` can indeed be written without any
-`for-loops` (use `range` to set the value of $V$)
+- The code written in `Part 1b` can indeed be written without any `for-loops` (use `range` to set the value of $V$).
+- There are many occasions in which the `scipy.linalg` module is preferrable over the `numpy.linalg` module. For more information on this, check the [scipy.linalg Reference](https://docs.scipy.org/doc/scipy/reference/tutorial/linalg.html).
 
 ### Further reading
 
 * https://numpy.org/doc/stable/user/
-
