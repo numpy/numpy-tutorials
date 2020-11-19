@@ -41,13 +41,6 @@ jupyter:
 
 ### Part 1a: Calculating Ohm's Law in pure python
 
-```python
-R = 10 # Resistance
-V = 5 # Voltage
-I = V/R # Current
-print(f"I = {I} A")
-```
-
 <img src="imgs/circuit1.png" width="400" height="200"/>
 
 
@@ -123,11 +116,18 @@ import matplotlib.pyplot as plt
 plt.plot(V, I)
 ```
 
+The code below will plot the exact same graph, but also add:
+
+1. An x-axis label;
+2. A y-axis label;
+3. A title;
+4. A grid.
+
 ```python
 plt.clf() # Clear the plot if there was anything on it
 plt.plot(V, I)
-plt.xlabel('Voltage (V)') # x-axis label
-plt.ylabel('Current (A)') # y-axis label
+plt.xlabel('Voltage (V)')
+plt.ylabel('Current (A)')
 plt.title('Ohms Law')
 plt.grid()
 ```
@@ -138,8 +138,13 @@ plt.grid()
 
 <img src="imgs/circuit3.png" width="400" height="200"/>
 
-Electrical engineers claim that maximum power transfer will occur when Rload ==
-Rth. Write python code using NumPy arrays to test this.
+
+[The maximum power transfer theorem](https://en.wikipedia.org/wiki/Maximum_power_transfer_theorem)
+states that maximum power transfer will occur when the resistance of the load (Rload)
+equals the resistance of the source (Rth). 
+You will write some Python code using NumPy arrays to test this. (The values for `V` 
+and `Rth` are arbitrary, as long as they are positive you can choose them to be whatever 
+value you wish). 
 
 ```python
 V = 8
@@ -153,15 +158,11 @@ Pload = Iload * Vload
 plt.plot(Rload, Pload)
 ```
 
-> Challenge: Try using voltage division to calculate `Pload` directly
-> (ie without needing to calculate `Iload`)
-
-### Part 2b: Using numpy to find Rload
+### Part 2b: Using NumPy to find Rload
 
 Looking at the plot, it does seem that when `Rload = Rth` there is maximum power
-transfer. But it is not 100% clear. Use numpy to find the exact value of `Rload`
-that makes `Pload` maximum
-
+transfer. But it is not 100% clear. You can use NumPy to find the exact value of `Rload`
+that makes `Pload` maximum.
 
 ```python
 Pmax = np.max(Pload) # Finding the maximum value of Pload
@@ -174,8 +175,9 @@ Rload[Pmax_idx]
 print(f"Rload[Pmax_idx] = {Rload[Pmax_idx]}")
 ```
 
-> Challenge: Why is the value of `Rload` not exactly 5? How would you
-> increase the accuracy?
+As can be seen, the value of `Rload` isn't exactly 5. This is because the 
+linear spacing that was used for `np.linspace` in *Part 2a* was too small. 
+If we were to increase the spacing, then `Rload` would be closer to 5.
 
 ## Part 3: Solving circuits using mesh analysis
 
@@ -183,7 +185,9 @@ print(f"Rload[Pmax_idx] = {Rload[Pmax_idx]}")
 
 <img src="imgs/circuit4.png" height="200" width="400"/>
 
-Doing a mesh analysis on *Figure 4* yields *two linear equations*:
+To solve the circuit on *Figure 4*, a 
+[mesh analysis](https://en.wikipedia.org/wiki/Mesh_analysis) can be preformed to
+yield *two [linear equations](https://en.wikipedia.org/wiki/System_of_linear_equations)*:
 
 
 \begin{equation*}
@@ -233,7 +237,10 @@ print(b)
 ```
 
 If solving the matrix using pencil and paper, you would first invert $A$ and
-then multiply it by $b$.
+then multiply it by $b$. Using NumPy, you can do this by using the 
+[`numpy.linalg.inv`](https://numpy.org/devdocs/reference/generated/numpy.linalg.inv.html)
+function and the `@` operator (equivalent to the 
+[`numpy.matmul`](https://numpy.org/devdocs/reference/generated/numpy.matmul.html) function).
 
 \begin{equation*}
 \begin{bmatrix} I1 \\ I2  \end{bmatrix} 
@@ -247,7 +254,7 @@ then multiply it by $b$.
 Ainv = np.linalg.inv(A)
 print(Ainv)
 
-x = Ainv @ b # The @ operator multiplies two matrices
+x = Ainv @ b
 print(x)
 ```
 <img src="imgs/pikachu_angry.jpg"  width="500"/>
@@ -443,6 +450,10 @@ Det = np.linalg.det(A)
 
 * Try doing a nodal analysis.
 * Try to catch a Pikachu, you can find him in Viridian Forest.
+
+* Section Part 2a
+> Challenge: Try using voltage division to calculate `Pload` directly
+> (ie without needing to calculate `Iload`)
 
 ### In practice...
 
