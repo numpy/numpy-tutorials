@@ -14,15 +14,13 @@ jupyter:
 
 # Tutorial: Solve DC electric circuits using Numpy
 
-<img src="imgs/pikachu_greeting.png"/>
-
 ## Overview
 
 ### What you'll do
 
-* Plot *Ohm's Law*
+* Plot [Ohm's Law](https://en.wikipedia.org/wiki/Ohm%27s_law)
 * Find the value of resistance that ensures optimal power flow
-* Solve DC circuits using *mesh analysis*
+* Solve [DC circuits](https://en.wikipedia.org/wiki/Direct_current) using *mesh analysis*
 
 ### What you'll learn
 
@@ -35,9 +33,9 @@ jupyter:
 * A "can-do" attitude
 * Basic electrical knowledge (Ohm's Law, KCL, KVL)
 * Basic linear algebra knowledge (Matrices, Inversion and Determinants)
-* Basic Python knowledge (know how to run code and import modules
-see xyz tutorial to review)
-* The Matplotlib package if you want to reproduce the plots (see xyz for how to install)
+* Basic Python knowledge (know how to run code and import modules - see the 
+[Python Tutorial](https://docs.python.org/3/tutorial/) to review)
+* The [Matplotlib](https://matploblib.org) package if you want to reproduce the plots.
 
 ## Part 1: Plotting Ohm's Law
 
@@ -52,12 +50,15 @@ print(f"I = {I} A")
 
 <img src="imgs/circuit1.png" width="400" height="200"/>
 
-Solving for $I$ in *Figure 1* is a pretty trivial matter, it can be done in a few lines of code
+
+Solving for $I$ in *Figure 1* is a pretty trivial matter, it can be done in a
+few lines of code. Using `R` to denote the resistance, `V` to denote the 
+voltage and `I` to denote the current, we have the following:
 
 ```python
-R = 10 # Resistance
-V = 5 # Voltage
-I = V/R # Current
+R = 10
+V = 5 
+I = V/R 
 print(f"I = {I} A")
 ```
 
@@ -66,79 +67,62 @@ print(f"I = {I} A")
 
 <img src="imgs/circuit2.png" width="400" height="200"/>
 
-Before a plot of Ohm's Law can be made, you first need to generate the voltages
-and currents 
+Now, we would like to plot the variation in the current `I` with respect to changes in the voltage `V`, given a fixed value of the resistance `R`.
+Before a plot of Ohm's Law can be made, you first need to generate a series of values 
+for the voltages and currents. Not using NumPy, and choosing `V` and `I` to denote 
+the lists containing those values, respectively, we would end up with the following 
+code:
 
 
 ```python
 import numpy as np
+# V and I are initialized as empty lists
 R = 10
-V = [] # Declaring V to be an empty list
+V = []
+I = []
 
-for i in range(-5, 6): # Assigning V numbers from -5 to 5
-	V.append(i)
-
-I = [] # Declaring I to be an empty list
-
-for voltage in V: # Calculating I for all values of V
-	I.append(voltage/R)
-
-print(f"Voltages (V): {V}")
-print(f"Current (A): {I}")
+for value in range(-5, 6): 
+    V.append(value)
+for voltage in V: 
+    I.append(voltage/R)
 ```
 
-There are a two issues with what was done above:
-1. It is **inefficient**. You want to avoid running *for loops* in Python because
+The code above is **inefficient**. You want to avoid running *for loops* in Python because
 they make the code run slower. In this simple example it won't make much of a difference
 but with larger and more complex code it well.
-2. It is **unpythonic**. The code above works but is not clear and maintainable.
-
-> Challenge 1: How would you make a list of voltages that have a decimal point 
-> (V = [-5, -4.9, -4.8 ...])
-
-> Challenge 2: Try to optimize the code further by removing one of the `for-loops`
 
 ### Part 1c: Generating voltages and currents using numpy
 
-Let's see how to repeat what was done in the previous section using numpy. Using
-the method `np.linspace` to create a `numpy.ndarray` you can specify the:
+Let's see how to repeat what was done in the previous section using `NumPy`. Using
+the method [`np.linspace`](https://numpy.org/doc/stable/reference/generated/numpy.linspace.html)
+to create a [`numpy.ndarray`](https://numpy.org/doc/stable/reference/arrays.ndarray.html)
+you can specify:
 
-1. Starting value of the array
-2. Ending value of the array
-3. The number of points between the starting and ending
-
-> Note: Check out the official numpy reference on the function
-> [numpy.linspace](https://numpy.org/doc/stable/reference/generated/numpy.linspace.html)
-> to learn more
+1. The starting value of the array;
+2. The ending value of the array;
+3. The number of points between the starting and ending.
 
 ```python
 R = 10
 V = np.linspace(-5, 5, 11)
 
-print(f"Voltage (V): {V}")
-print(f"Length of V: {V.shape}")
-print(f"Type of V: {type(V)}")
-
 I = V/R
-
-print(f"Current (A): {I}")
-print(f"Length of I: {I.shape}")
-print(f"Type of I: {type(I)}")
 ```
 
 ### Part 1d: Plotting using matplotlib
 
-Use the library `matplotlib` to plot $V$ and $I$.
+You will use the `matplotlib` library to plot $V$ and $I$. You can check out the 
+[introductory](https://matplotlib.org/3.1.1/tutorials/introductory/pyplot.html)
+tutorial on matplotlib's `pyplot` interface to learn more.
 
-> Note: Check out the 
-> [introductory](https://matplotlib.org/3.1.1/tutorials/introductory/pyplot.html)
-> tutorial on matplotlib's pyplot interface to learn more
+> If you are executing the commands below in the IPython shell,
+> it might be necessary to use the command `plt.show()` to show the image window.
 
 ```python
 import matplotlib.pyplot as plt
 plt.plot(V, I)
-plt.show() # Run this command if the plot doesn't show
 ```
+
 ```python
 plt.clf() # Clear the plot if there was anything on it
 plt.plot(V, I)
