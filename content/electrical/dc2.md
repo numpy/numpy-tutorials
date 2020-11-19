@@ -185,9 +185,10 @@ If we were to increase the spacing, then `Rload` would be closer to 5.
 
 <img src="imgs/circuit4.png" height="200" width="400"/>
 
-To solve the circuit on *Figure 4*, a 
-[mesh analysis](https://en.wikipedia.org/wiki/Mesh_analysis) can be preformed to
-yield *two [linear equations](https://en.wikipedia.org/wiki/System_of_linear_equations)*:
+The circuit in *Figure 4* can be solved via KVL and KCL, to speed up the 
+process a [mesh analysis](https://en.wikipedia.org/wiki/Mesh_analysis) can be
+preformed to yield 
+*two [linear equations](https://en.wikipedia.org/wiki/System_of_linear_equations)*:
 
 
 \begin{equation*}
@@ -204,12 +205,6 @@ These two equations can be written in *matrix format* and inputted into NumPy:
 =
 \begin{bmatrix} V1 \\ -V2  \end{bmatrix}
 \end{equation*}
-
-> Note: Check out Wikipedia's articles on 
-> [mesh analysis](https://www.electronics-tutorials.ws/dccircuits/dcp_5.html),
-> [linear equations](https://en.wikipedia.org/wiki/System_of_linear_equations), 
-> and [matrices](https://en.wikipedia.org/wiki/Matrix_(mathematics))
-> if you would like to revise the concepts presented here
 
 
 ```python
@@ -237,7 +232,7 @@ print(b)
 ```
 
 If solving the matrix using pencil and paper, you would first invert $A$ and
-then multiply it by $b$. Using NumPy, you can do this by using the 
+then multiply it by $b$ to get the current ($x$). Using NumPy, you can do this by using the 
 [`numpy.linalg.inv`](https://numpy.org/devdocs/reference/generated/numpy.linalg.inv.html)
 function and the `@` operator (equivalent to the 
 [`numpy.matmul`](https://numpy.org/devdocs/reference/generated/numpy.matmul.html) function).
@@ -255,14 +250,11 @@ Ainv = np.linalg.inv(A)
 print(Ainv)
 
 x = Ainv @ b
-print(x)
 ```
-<img src="imgs/pikachu_angry.jpg"  width="500"/>
 
 **NEVER** invert your matrices if you are programming on a computer (except if
-you actually need the inverted matrix itself, which is rare). The process is
-very sensitive to scaling, propagates numerical errors and will make **Pikachu**
-angry! Instead use the `np.linalg.solve` function.
+you actually need the inverted matrix itself, which is rare). Instead use the 
+`np.linalg.solve` function.
 
 > Note 1: If you want to learn more about the complications arising from matrix inversion,
 > check out this
@@ -271,10 +263,6 @@ angry! Instead use the `np.linalg.solve` function.
 > (paper)[http://www.netlib.org/lapack/lawnspdf/lawn27.pdf] if you want a full
 > mathematical explanation.
 
-
-> Note 2: Check out the numpy reference
-> [np.linalg](https://numpy.org/doc/stable/reference/routines.linalg.html) to
-> learn more about the linear algebra functions available
 
 ```python
 x = np.linalg.solve(A, b)
@@ -457,8 +445,12 @@ Det = np.linalg.det(A)
 
 ### In practice...
 
-The python code written in `Part 1b` can indeed be written without any
+- The python code written in `Part 1b` can indeed be written without any
 `for-loops` (use `range` to set the value of $V$)
+
+- There are many occasions in which the `scipy.linalg` module is preferrable 
+over the `numpy.linalg` module. For more information on this, check the 
+[scipy.linalg Reference](https://docs.scipy.org/doc/scipy/reference/tutorial/linalg.html).
 
 ### Further reading
 
