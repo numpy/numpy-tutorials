@@ -1,15 +1,15 @@
 ---
 jupyter:
   jupytext:
-    main_language: python
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.2'
       jupytext_version: 1.6.0
   kernelspec:
-    display_name: ''
-    name: ''
+    display_name: Python 3
+    language: python
+    name: python3
 ---
 
 # Tutorial: Solve DC electric circuits using Numpy
@@ -46,7 +46,6 @@ jupyter:
 Solving for $I$ in *Figure 1* is a pretty trivial matter, it can be done in a
 few lines of code. Using `R` to denote the resistance, `V` to denote the 
 voltage and `I` to denote the current, we have the following:
-
 ```python
 R = 10
 V = 5 
@@ -79,9 +78,9 @@ for voltage in V:
     I.append(voltage/R)
 ```
 
-The code above is **inefficient**. You want to avoid running *for loops* in Python because
-they make the code run slower. In this simple example it won't make much of a difference
-but with larger and more complex code it well.
+The code above is **inefficient**. You generally want to avoid running *for loops* in Python 
+since they are statically typed and interpreted. In this simple example it won't make much of a difference
+but with larger and more complex code it will noticably run worse. 
 
 ### Part 1c: Generating voltages and currents using numpy
 
@@ -409,8 +408,6 @@ lgerror_singular(err, flag)
 LinAlgError: Singular matrix
 ```
 
-<img src="imgs/pikachu_surprised.jpg" width="400"/>
-
 An error, how unexpected!
 
 As a programmer you need to get used to reading error outputs. Looking at the
@@ -436,11 +433,9 @@ Det = np.linalg.det(A)
 ### On your own
 
 * Try doing a nodal analysis.
-* Try to catch a Pikachu, you can find him in Viridian Forest.
 
-* Section Part 2a
-> Challenge: Try using voltage division to calculate `Pload` directly
-> (ie without needing to calculate `Iload`)
+* In Part 2a Try using voltage division to calculate `Pload` directly 
+(ie without needing to calculate `Iload`)
 
 ### In practice...
 
