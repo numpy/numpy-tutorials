@@ -19,11 +19,11 @@ Your deep learning model — one of the most basic artificial neural networks th
 
 Based on the image inputs and their labels ([supervised learning](https://en.wikipedia.org/wiki/Supervised_learning)), your neural network will be trained to learn their features using forward propagation and backpropagation ([reverse-mode](https://en.wikipedia.org/wiki/Automatic_differentiation#Reverse_accumulation) differentiation). The final output of the network is a vector of 10 scores — one for each handwritten digit image. You will also evaluate how good your model is at classifying the images on the test set.
 
-<center><img src="tutorial-deep-learning-on-mnist.png" width="700", hspace="20" vspace="20"></center>
+![image.png](tutorial-deep-learning-on-mnist.png)
 
 This tutorial was adapted from the work by [Andrew Trask](https://github.com/iamtrask/Grokking-Deep-Learning) (with the author's permission).
 
-### Prerequisites
+## Prerequisites
 
 The reader should have some knowledge of Python, NumPy array manipulation, and linear algebra. In addition, you should be familiar with main concepts of [deep learning](https://en.wikipedia.org/wiki/Deep_learning). 
 
@@ -42,7 +42,7 @@ In addition to NumPy, you will be utilizing the following Python standard module
 
 This tutorial can be run locally in an isolated environment, such as [Virtualenv](https://virtualenv.pypa.io/en/stable/) or [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html). You can use [Jupyter Notebook or JupyterLab](https://jupyter.org/install) to run each notebook cell. Don't forget to [set up NumPy](https://numpy.org/doc/stable/user/absolute_beginners.html#installing-numpy) and [Matplotlib](https://matplotlib.org/users/installing.html#installing-an-official-release).
 
-### Table of contents
+## Table of contents
 
 1. Load the MNIST dataset
 
@@ -58,7 +58,7 @@ This tutorial can be run locally in an isolated environment, such as [Virtualenv
 
 In this section, you will download the zipped MNIST dataset files originally stored in [Yann LeCun's website](http://yann.lecun.com/exdb/mnist/). Then, you will transform them into 4 files of NumPy array type using built-in Python modules. Finally, you will split the arrays into training and test sets.
 
-1. Define a variable to store the training/test image/label names of the MNIST dataset in a list:
+**1.** Define a variable to store the training/test image/label names of the MNIST dataset in a list:
 
 ```{code-cell} ipython3
 filename = [["training_images", "train-images-idx3-ubyte.gz"],   # 60,000 training images.
@@ -67,7 +67,7 @@ filename = [["training_images", "train-images-idx3-ubyte.gz"],   # 60,000 traini
             ["test_labels", "t10k-labels-idx1-ubyte.gz"]]        # 10,000 test labels.
 ```
 
-2. Download each of the 4 files in the list:
+**2.** Download each of the 4 files in the list:
 
 ```{code-cell} ipython3
 from urllib import request
@@ -79,7 +79,7 @@ for name in filename:
     request.urlretrieve(base_url + name[1], name[1])
 ```
 
-3. Decompress the 4 files and create 4 [`ndarrays`](https://numpy.org/doc/stable/reference/arrays.ndarray.html), saving them into a dictionary. Each original image is of size 28x28 and neural networks normally expect a 1D vector input; therefore, you also need to reshape the images by multiplying 28 by 28 (784).
+**3.** Decompress the 4 files and create 4 [`ndarrays`](https://numpy.org/doc/stable/reference/arrays.ndarray.html), saving them into a dictionary. Each original image is of size 28x28 and neural networks normally expect a 1D vector input; therefore, you also need to reshape the images by multiplying 28 by 28 (784).
 
 ```{code-cell} ipython3
 import gzip
@@ -97,7 +97,7 @@ for name in filename[-2:]:
         mnist_dataset[name[0]] = np.frombuffer(mnist_file.read(), np.uint8, offset=8)
 ```
 
-4. Split the data into training and test sets using the standard notation of `x` for data and `y` for labels, calling the training and test set images `x_train` and `x_test`, and the labels `y_train` and `y_test`:
+**4.** Split the data into training and test sets using the standard notation of `x` for data and `y` for labels, calling the training and test set images `x_train` and `x_test`, and the labels `y_train` and `y_test`:
 
 ```{code-cell} ipython3
 x_train, y_train, x_test, y_test = (mnist_dataset["training_images"],
@@ -106,14 +106,14 @@ x_train, y_train, x_test, y_test = (mnist_dataset["training_images"],
                                     mnist_dataset["test_labels"])
 ```
 
-5. You can confirm that the shape of the image arrays is `(60000, 784)` and `(10000, 784)` for training and test sets, respectively, and the labels — `(60000,)` and `(10000,)`:
+**5.** You can confirm that the shape of the image arrays is `(60000, 784)` and `(10000, 784)` for training and test sets, respectively, and the labels — `(60000,)` and `(10000,)`:
 
 ```{code-cell} ipython3
 print('The shape of training images: {} and training labels: {}'.format(x_train.shape, y_train.shape))
 print('The shape of test images: {} and test labels: {}'.format(x_test.shape, y_test.shape))
 ```
 
-6. And you can inspect some images using Matplotlib:
+**6.** And you can inspect some images using Matplotlib:
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
@@ -170,14 +170,14 @@ The images data contain 8-bit integers encoded in the [0, 255] interval with col
 
 You will normalize them into floating-point arrays in the [0, 1] interval by dividing them by 255.
 
-1. Check that the vectorized image data has type `uint8`:
+**1.** Check that the vectorized image data has type `uint8`:
 
 ```{code-cell} ipython3
 print('The data type of training images: {}'.format(x_train.dtype))
 print('The data type of test images: {}'.format(x_test.dtype))
 ```
 
-2. Normalize the arrays by dividing them by 255 (and thus promoting the data type from `uint8` to `float64`) and then assign the train and test image data variables — `x_train` and `x_test` — to `training_images` and `train_labels`, respectively. To make the neural network model train faster in this example, `training_images` contains only 1,000 samples out of 60,000. To learn from the entire sample size, change the `sample` variable to `60000`.
+**2.** Normalize the arrays by dividing them by 255 (and thus promoting the data type from `uint8` to `float64`) and then assign the train and test image data variables — `x_train` and `x_test` — to `training_images` and `train_labels`, respectively. To make the neural network model train faster in this example, `training_images` contains only 1,000 samples out of 60,000. To learn from the entire sample size, change the `sample` variable to `60000`.
 
 ```{code-cell} ipython3
 sample = 1000
@@ -185,7 +185,7 @@ training_images = x_train[0:sample] / 255
 test_images = x_test / 255
 ```
 
-3. Confirm that the image data has changed to the floating-point format:
+**3.** Confirm that the image data has changed to the floating-point format:
 
 ```{code-cell} ipython3
 print('The data type of training images: {}'.format(training_images.dtype))
@@ -197,8 +197,8 @@ print('The data type of test images: {}'.format(test_images.dtype))
 > ```
 > ...
 >        0.        , 0.        , 0.01176471, 0.07058824, 0.07058824,
-       0.07058824, 0.49411765, 0.53333333, 0.68627451, 0.10196078,
-       0.65098039, 1.        , 0.96862745, 0.49803922, 0.        ,
+>        0.07058824, 0.49411765, 0.53333333, 0.68627451, 0.10196078,
+>        0.65098039, 1.        , 0.96862745, 0.49803922, 0.        ,
 > ...
 > ```
 
@@ -212,14 +212,14 @@ Since there are 10 labels (from 0 to 9) in total, your arrays will look similar 
 array([0., 0., 0., 0., 0., 1., 0., 0., 0., 0.])
 ```
 
-1. Confirm that the image label data are integers with `dtype` `uint8`:
+**1.** Confirm that the image label data are integers with `dtype` `uint8`:
 
 ```{code-cell} ipython3
 print('The data type of training labels: {}'.format(y_train.dtype))
 print('The data type of test labels: {}'.format(y_test.dtype))
 ```
 
-2. Define a function that performs one-hot encoding on arrays:
+**2.** Define a function that performs one-hot encoding on arrays:
 
 ```{code-cell} ipython3
 def one_hot_encoding(labels, dimension=10):
@@ -230,21 +230,21 @@ def one_hot_encoding(labels, dimension=10):
     return one_hot_labels.astype(np.float64)
 ```
 
-3. Encode the labels and assign the values to new variables:
+**3.** Encode the labels and assign the values to new variables:
 
 ```{code-cell} ipython3
 training_labels = one_hot_encoding(y_train)
 test_labels = one_hot_encoding(y_test)
 ```
 
-4. Check that the data type has changed to floating point:
+**4.** Check that the data type has changed to floating point:
 
 ```{code-cell} ipython3
 print('The data type of training labels: {}'.format(training_labels.dtype))
 print('The data type of test labels: {}'.format(test_labels.dtype))
 ```
 
-5. Examine a few encoded labels:
+**5.** Examine a few encoded labels:
 
 ```{code-cell} ipython3
 print(training_labels[0])
@@ -300,7 +300,7 @@ Afterwards, you will construct the building blocks of a simple deep learning mod
 
 Here is a summary of the neural network model architecture and the training process:
 
-<center><img src="tutorial-deep-learning-on-mnist.png" width="700", hspace="20" vspace="20"></center>
+![image.png](tutorial-deep-learning-on-mnist.png)
 
 - _The input layer_: 
 
@@ -338,13 +338,13 @@ Here is a summary of the neural network model architecture and the training proc
 
 Having covered the main deep learning concepts and the neural network architecture, let's write the code.
 
-1. For reproducibility, initialize a random seed with `np.random.seed()`:
+**1.** For reproducibility, initialize a random seed with `np.random.seed()`:
 
 ```{code-cell} ipython3
 np.random.seed(1)
 ```
 
-2. For the hidden layer, define the ReLU activation function for forward propagation and ReLU's derivative that will be used during backpropagation:
+**2.** For the hidden layer, define the ReLU activation function for forward propagation and ReLU's derivative that will be used during backpropagation:
 
 ```{code-cell} ipython3
 # Define ReLU that returns the input if it's positive and 0 otherwise.
@@ -357,7 +357,7 @@ def relu2deriv(output):
     return output >= 0
 ```
 
-3. Set certain default values of [hyperparameters](https://en.wikipedia.org/wiki/Hyperparameter_(machine_learning)), such as:
+**3.** Set certain default values of [hyperparameters](https://en.wikipedia.org/wiki/Hyperparameter_(machine_learning)), such as:
 
     - [_Learning rate_](https://en.wikipedia.org/wiki/Learning_rate): `learning_rate` — helps limit the magnitude of weight updates to prevent them from overcorrecting.
     - _Epochs (iterations)_: `epochs` — the number of complete passes — forward and backward propagations — of the data through the network. This parameter can positively or negatively affect the results. The higher the iterations, the longer the learning process may take.
@@ -373,14 +373,14 @@ pixels_per_image = 784
 num_labels = 10
 ```
 
-4. Initialize the weight vectors that will be used in the hidden and output layers with `np.random.random()`:
+**4.** Initialize the weight vectors that will be used in the hidden and output layers with `np.random.random()`:
 
 ```{code-cell} ipython3
 weights_1 = 0.2 * np.random.random((pixels_per_image, hidden_size)) - 0.1
 weights_2 = 0.2 * np.random.random((hidden_size, num_labels)) - 0.1
 ```
 
-5. Set up the neural network's learning experiment with a training loop and start the training process:
+**5.** Set up the neural network's learning experiment with a training loop and start the training process:
 
 ```{code-cell} ipython3
 # To store training and test set losses and accurate predictions
