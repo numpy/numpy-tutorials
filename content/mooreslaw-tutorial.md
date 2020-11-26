@@ -40,13 +40,13 @@ the 53 years following his prediction. You will determine the best-fit constants
 
 ## What you'll need
 
-1. These packages:
+**1.** These packages:
 
-    * NumPy
-    * [Matplotlib](https://matplotlib.org/)
-    * [statsmodels](https://www.statsmodels.org) ordinary linear regression
+* NumPy
+* [Matplotlib](https://matplotlib.org/)
+* [statsmodels](https://www.statsmodels.org) ordinary linear regression
     
-    imported with the following commands
+imported with the following commands
 
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
@@ -54,7 +54,7 @@ import numpy as np
 import statsmodels.api as sm
 ```
 
-2. Since this is an exponential growth law you need a little background in doing math with [natural logs](https://en.wikipedia.org/wiki/Natural_logarithm) and [exponentials](https://en.wikipedia.org/wiki/Exponential_function). 
+**2.** Since this is an exponential growth law you need a little background in doing math with [natural logs](https://en.wikipedia.org/wiki/Natural_logarithm) and [exponentials](https://en.wikipedia.org/wiki/Exponential_function). 
 
 You'll use these NumPy, Matplotlib, and statsmodels functions:
 
@@ -80,7 +80,7 @@ You'll use these NumPy, Matplotlib, and statsmodels functions:
 Your empirical model assumes that the number of transistors per
 semiconductor follows an exponential growth,  
 
-$log(transistor~count)= f(year) = A\cdot year+B,$
+$\log(\text{transistor_count})= f(\text{year}) = A\cdot \text{year}+B,$
 
 where $A$ and $B$ are fitting constants. You use semiconductor
 manufacturers' data to find the fitting constants. 
@@ -90,17 +90,17 @@ rate for added transistors, 2, and giving an initial number of transistors for a
 
 You state Moore's law in an exponential form as follows, 
 
-$transistor~count= e^{A_M\cdot year +B_M}.$
+$\text{transistor_count}= e^{A_M\cdot \text{year} +B_M}.$
 
 Where $A_M$ and $B_M$ are constants that double the number of transistors every two years and start at 2250 transistors in 1971,
 
-1. $\frac{transistor\_count(year +2)}{transistor\_count(year)} = 2 = \frac{e^{B_M}e^{A_M year + 2A_M}}{e^{B_M}e^{A_M year}} = e^{2A_M} \rightarrow A_M = \log(2)/2$
+1. $\dfrac{\text{transistor_count}(\text{year} +2)}{\text{transistor_count}(\text{year})} = 2 = \dfrac{e^{B_M}e^{A_M \text{year} + 2A_M}}{e^{B_M}e^{A_M \text{year}}} = e^{2A_M} \rightarrow A_M = \frac{\log(2)}{2}$
 
-2. $\log(2250) = \log(2)/2\cdot 1971 + B_M \rightarrow B_M = \log(2250)-\log(2)/2\cdot 1971$
+2. $\log(2250) = \frac{\log(2)}{2}\cdot 1971 + B_M \rightarrow B_M = \log(2250)-\frac{\log(2)}{2}\cdot 1971$
 
 so Moore's law stated as an exponential function is
 
-$log(transistor~count)= A_M\cdot year+B_M,$
+$\log(\text{transistor_count})= A_M\cdot \text{year}+B_M,$
 
 where
 
@@ -110,7 +110,7 @@ $B_M=-675.4$
 
 Since the function represents Moore's law, define it as a Python
 function using
-[`lambda`](https://docs.python.org/3/library/ast.html?highlight=lambda#ast.Lambda) 
+[`lambda`](https://docs.python.org/3/library/ast.html?highlight=lambda#ast.Lambda)
 
 ```{code-cell} ipython3
 A_M = np.log(2) / 2
@@ -174,7 +174,7 @@ Next, make the data easier to read and manage by assigning the two
 columns to variables, `year` and `transistor_count`. Print out the first
 10 values by slicing the `year` and `transistor_count` arrays with
 `[:10]`. Print these values out to check that you have the saved the
-data to the correct variables. 
+data to the correct variables.
 
 ```{code-cell} ipython3
 year = data[:, 1]  # grab the second column and assign
@@ -193,9 +193,7 @@ $y_i = \log($ `transistor_count[i]` $),$
 
 resulting in a linear equation, 
 
-$y_i = A\cdot year +B.$
-
-
+$y_i = A\cdot \text{year} +B$.
 
 ```{code-cell} ipython3
 yi = np.log(transistor_count)
@@ -203,9 +201,9 @@ yi = np.log(transistor_count)
 
 ## Calculating the historical growth curve for transistors
 
-Your model assume that `yi` is a function of `year`. Now, find the best-fit model that minimizes the difference between $y_i$ and $A\cdot year +B, $ as such
+Your model assume that `yi` is a function of `year`. Now, find the best-fit model that minimizes the difference between $y_i$ and $A\cdot \text{year} +B, $ as such
 
-$\min \sum|y_i - (A\cdot year_i + B)|^2.$
+$\min \sum|y_i - (A\cdot \text{year}_i + B)|^2.$
 
 This [sum of squares
 error](https://en.wikipedia.org/wiki/Ordinary_least_squares) can be
@@ -214,8 +212,8 @@ succinctly represented as arrays as such
 $\sum|\mathbf{y}-\mathbf{Z} [A,~B]^T|^2,$
 
 where $\mathbf{y}$ are the observations of the log of the number of
-transistors in a 1D array and $\mathbf{Z}=[year_i^1,~year_i^0]$ are the
-polynomial terms for $year_i$ in the first and second columns. By
+transistors in a 1D array and $\mathbf{Z}=[\text{year}_i^1,~\text{year}_i^0]$ are the
+polynomial terms for $\text{year}_i$ in the first and second columns. By
 creating this set of regressors in the $\mathbf{Z}-$matrix you set
 up an ordinary least squares statistical model. Some clever
 NumPy array features will build $\mathbf{Z}$
@@ -239,7 +237,7 @@ model = sm.OLS(yi, Z)
 Now, you can view the fitting constants, $A$ and $B$, and their standard
 errors.  Run the
 [`fit`](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html) and print the
-[`summary`](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.summary.html) to view results as such, 
+[`summary`](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.summary.html) to view results as such,
 
 ```{code-cell} ipython3
 results = model.fit()
@@ -260,9 +258,9 @@ const       -666.3264     11.890
 ```
 where `x1` is slope, $A=0.3416$, `const` is the intercept,
 $B=-666.364$, and `std error` gives the precision of constants
-$A=0.342\pm 0.006~\frac{\log(transistors/chip)}{years}$ and $B=-666\pm
-12~\log(transistors/chip),$ where the units are in
-$\log(transistors/chip).$ You created an exponential growth model.
+$A=0.342\pm 0.006~\dfrac{\log(\text{transistors}/\text{chip})}{\text{years}}$ and $B=-666\pm
+12~\log(\text{transistors}/\text{chip}),$ where the units are in
+$\log(\text{transistors}/\text{chip})$. You created an exponential growth model.
 To get the constants, save them to an array `AB` with
 `results.params` and assign $A$ and $B$ to `x1` and `constant`.
 
@@ -275,8 +273,8 @@ B = AB[1]
 Did manufacturers double the transistor count every two years? You have
 the final formula,
 
-$\frac{transistor\_count(year +2)}{transistor\_count(year)} = xFactor =
-\frac{e^{B}e^{A( year + 2)}}{e^{B}e^{A year}} = e^{2A}$
+$\dfrac{\text{transistor_count}(\text{year} +2)}{\text{transistor_count}(\text{year})} = xFactor =
+\dfrac{e^{B}e^{A( \text{year} + 2)}}{e^{B}e^{A \text{year}}} = e^{2A}$
 
 where increase in number of transistors is $xFactor,$ number of years is
 2, and $A$ is the best fit slope on the semilog function. The error in
@@ -306,19 +304,19 @@ Here, use
 to plot the number of transistors on a log-scale and the year on a
 linear scale. You have defined a three arrays to get to a final model
 
-$y_i = \log(transistor\_count),$
+$y_i = \log(\text{transistor_count}),$
 
-$y_i = A \cdot year + B,$
+$y_i = A \cdot \text{year} + B,$
 
 and
 
-$log(transistor\_count) = A\cdot year + B,$
+$\log(\text{transistor_count}) = A\cdot \text{year} + B,$
 
 your variables, `transistor_count`, `year`, and `yi` all have the same
 dimensions, `(179,)`. NumPy arrays need the same dimensions to make a
 plot. The predicted number of transistors is now 
 
-$transistor\_count_{predicted} = e^Be^{A\cdot year}.$
+$\text{transistor_count}_{\text{predicted}} = e^Be^{A\cdot \text{year}}$.
 
 +++
 
@@ -327,7 +325,7 @@ In the next plot, use the
 style sheet. 
 The style sheet replicates
 https://fivethirtyeight.com elements. Change the matplotlib style with
-[`plt.style.use`](https://matplotlib.org/3.3.2/api/style_api.html#matplotlib.style.use). 
+[`plt.style.use`](https://matplotlib.org/3.3.2/api/style_api.html#matplotlib.style.use).
 
 ```{code-cell} ipython3
 transistor_count_predicted = np.exp(B) * np.exp(A * year)
@@ -365,7 +363,7 @@ comparator,
 Then, make a prediction for 2017 with `Moores_law` defined above
 and plugging in your best fit constants into your function
 
-$transistor~count = e^{B}e^{A\cdot year}.$
+$\text{transistor_count} = e^{B}e^{A\cdot \text{year}}$.
 
 A great way to compare these measurements is to compare your prediction
 and Moore's prediction to the average transistor count and look at the
@@ -376,7 +374,7 @@ option,
 to increase the transparency of the data. The more opaque the points
 appear, the more reported values lie on that measurement. The green $+$
 is the average reported transistor count for 2017. Plot your predictions
-for $\pm\frac{1}{2}~years. 
+for $\pm\frac{1}{2}~years.
 
 ```{code-cell} ipython3
 transistor_count2017 = transistor_count[year == 2017]
@@ -411,7 +409,7 @@ nearly double the number of transistors.
 
 The linear regression model is much better at predicting the
 average than extreme values because it satisfies the condition to
-minimize $\sum |y_i - Ayear[i]+B|^2$. 
+minimize $\sum |y_i - A\cdot \text{year}[i]+B|^2$.
 
 +++
 
@@ -431,7 +429,7 @@ function `np.load` will load the arrays back into the workspace as a
 dictionary. You'll save a five arrays so the next user will have the year,
 transistor count, predicted transistor count,  Gordon Moore's
 predicted count, and fitting constants. Add one more variable that other users can use to
-understand the model, `notes`. 
+understand the model, `notes`.
 
 ```{code-cell} ipython3
 notes = "the arrays in this file are the result of a linear regression model\n"
@@ -523,7 +521,7 @@ e.g.
 (179,)
 >>> year[:,np.newaxis].shape
 (179,1) 
-``` 
+```
 
 ```{code-cell} ipython3
 output = np.block(
@@ -567,7 +565,7 @@ You can share these results as a zipped NumPy array file,
 `mooreslaw_regression.csv`.  The amazing progress in semiconductor
 manufacturing has enabled new industries and computational power. This
 analysis should give you a small insight into how incredible this growth
-has been over the last half-century. 
+has been over the last half-century.
 
 +++
 
