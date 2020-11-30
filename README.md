@@ -19,6 +19,7 @@ or navigate to any of the documents listed below and download it individually.
 2. [Tutorial: CS231n Python Tutorial](content/cs231_tutorial.md)
 3. [Tutorial: Determining Moore's Law with real data in NumPy](content/mooreslaw-tutorial.ipynb)
 4. [Tutorial: Saving and sharing your NumPy arrays](content/save-load-arrays.ipynb)
+5. [Tutorial: X-ray image processing](content/tutorial-x-ray-image-processing.md)
 
 ## Contributing
 
