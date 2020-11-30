@@ -60,11 +60,14 @@ file) and you'd like to add it to the repository:
 
 #### Create or pair your [`myst`](https://jupytext.readthedocs.io/en/latest/formats.html#myst-markdown) notebook
 
-The NumPy tutorials are reviewed and executed as a
+The NumPy tutorials are reviewed and executed as
 [MyST-NB](https://myst-nb.readthedocs.io/) notebooks. The benefit is that
-content is easier to review in this markdown format. You can convert or
-pair your `.ipynb` to `myst` using
-[Jupytext](https://jupytext.readthedocs.io/en/latest/index.html).
+content is easier to review in this markdown format. You can use 
+[Jupytext](https://jupytext.readthedocs.io/en/latest/index.html) to convert 
+or pair your `.ipynb` file to 
+[MyST Markdown](https://github.com/mwouts/jupytext/blob/master/docs/formats.md#myst-markdown) 
+format.
+
 Install `jupytext` using:
 
 ```
@@ -76,20 +79,20 @@ conda install jupytext -c conda-forge
 ```
 
 Once installed, you can start your `jupyter lab` or `jupyter notebook`
-in the browser. When launching `jupyter lab` it will ask you to rebuild
+session in the browser. When launching `jupyter lab` it will ask you to rebuild
 to include the Jupytext extension. 
 
-##### Convert the `.ipynb` to `myst`
+##### Convert the `.ipynb` file to MyST markdown
 
-To convert your `notebook.ipynb` to MyST-NB, run the following command:
+To convert a file named `notebook.ipynb` to MyST markdown, run the following command:
 
 ```
 jupytext --to myst notebook.ipynb
 ```
 
-You will now have a `notebook.md` file that is in the MyST-NB format. 
+You will now have a `notebook.md` file that is in the MyST markdown format. 
 
-##### Pair the `.ipynb` to `myst`
+##### Pair the `.ipynb` to a MyST markdown file
 
 If you want to keep your `notebook.ipynb` synced to your `notebook.md`
 file, you can pair the two formats in the classic Jupyter, Jupyter Lab,
@@ -115,13 +118,13 @@ __3. Command line Jupytext pairing__
 ```
 jupytext --set-formats ipynb,myst notebook.ipynb
 ```
-update either the MyST-NB or notebook:
+update either the MyST markdown or notebook file:
 ```
 jupytext --sync notebook.ipynb
 ```
 
 > __Note:__ With Jupytext installed, the classic Jupyter interface will
-> automatically open MyST-NB files as notebooks. In Jupyter lab, you can
+> automatically open MyST files as notebooks. In JupyterLab, you can
 > right-click and choose "Open With -> Notebook" to open as a notebook.
 > The outputs of your code cells are only saved in the `.ipynb` file.
 
@@ -140,7 +143,7 @@ your content consistent with our existing tutorials.
 
 #### Upload your content
 
-Remember to convert your `.ipynb` to `.md` (MyST-NB) before uploading it. 
+Remember to convert your `.ipynb` to `.md` (MyST markdown) before uploading it. 
 
 <ul>
 <details>
@@ -214,4 +217,3 @@ The following links may be useful:
 Note that regular documentation issues for NumPy can be found in the [main NumPy
 repository](https://github.com/numpy/numpy/issues) (see the `Documentation`
 labels there). 
-
