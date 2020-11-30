@@ -35,6 +35,8 @@ Images and real-life data make text more engaging and powerful, but be sure what
 you use is appropriately licensed and available. Here again, even a rough idea
 for artwork can be polished by others.
 
+Pull requests are reviewed in markdown format. The 
+
 ### Why Jupyter Notebooks?
 
 The choice of Jupyter Notebook in this repo instead of the usual format 
@@ -57,6 +59,68 @@ you can still submit your content as a Jupyter Notebook file.
 If you have your own tutorial in the form of a Jupyter notebook (a `.ipynb`
 file) and you'd like to add it to the repository:
 
+#### Create or pair your [`myst`](https://jupytext.readthedocs.io/en/latest/formats.html#myst-markdown) notebook
+
+The NumPy tutorials are reviewed and executed as a
+[MyST-NB](https://myst-nb.readthedocs.io/) notebooks. The benefit is that
+content is easier to review in this markdown format. You can convert or
+pair your `.ipynb` to `myst` using
+[Jupytext](https://jupytext.readthedocs.io/en/latest/index.html).
+Install `jupytext` using:
+
+```
+pip install jupytext
+```
+or
+```
+conda install jupytext -c conda-forge
+```
+
+Once installed, you can start your `jupyter lab` or `jupyter notebook`
+in the browser. When launching `jupyter lab` it will ask you to rebuild
+to include the Jupytext extension. 
+
+##### Convert the `.ipynb` to `myst`
+
+To convert your `notebook.ipynb` to MyST-NB, run the following command:
+
+```
+jupytext --to myst notebook.ipynb
+```
+
+You will now have a `notebook.md` file that is in the MyST-NB format. 
+
+##### Pair the `.ipynb` to `myst`
+
+If you want to keep your `notebook.ipynb` synced to your `notebook.md`
+file, you can pair the two formats in the classic Jupyter, Jupyter Lab,
+or the command line:
+<ul>
+<details>
+    <summary>
+        <b>1. Classic Jupyter Jupytext pairing</b>.
+    </summary>
+    <img src="site/_static/01-classic.gif" width=80% height=80%>
+</details>
+    
+<details>
+    <summary>
+        <b>2. Jupyter Lab Jupytext pairing</b>
+    </summary>
+    <img src="site/_static/02-jupyterlab.gif" width=80% height=80%>
+</details>
+</ul>
+
+__3. Command line Jupytext pairing__
+
+```
+jupytext --set-formats ipynb,myst notebook.ipynb
+```
+update either the MyST-NB or notebook:
+```
+jupytext --sync notebook.ipynb
+```
+
 #### Create an issue
 
 Go to [https://github.com/numpy/numpy-tutorials/issues](https://github.com/numpy/numpy-tutorials/issues)
@@ -72,7 +136,7 @@ your content consistent with our existing tutorials.
 
 #### Upload your content
 
-Remember to clear all outputs on your notebook before uploading it. 
+Remember to convert your `.ipynb` to `.md` (MyST-NB) before uploading it. 
 
 <ul>
 <details>
