@@ -120,6 +120,11 @@ update either the MyST-NB or notebook:
 jupytext --sync notebook.ipynb
 ```
 
+> __Note:__ With Jupytext installed, the classic Jupyter interface will
+> automatically open MyST-NB files as notebooks. In Jupyter lab, you can
+> right-click and choose "Open With -> Notebook" to open as a notebook.
+> The outputs of your code cells are only saved in the `.ipynb` file.
+
 #### Create an issue
 
 Go to [https://github.com/numpy/numpy-tutorials/issues](https://github.com/numpy/numpy-tutorials/issues)
