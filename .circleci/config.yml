@@ -23,7 +23,7 @@ jobs:
           name: Build site
           command: |
             source venv/bin/activate
-            make -C site/ html
+            SPHINXOPTS="-W --keep-going" make -C site/ html
 
       - store_artifacts:
           path: site/_build/html
