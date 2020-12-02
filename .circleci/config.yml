@@ -58,7 +58,7 @@ jobs:
 
       - add_ssh_keys:
           fingerprints:
-            # TODO: ADD FINGERPRINT FROM DEPLOY KEY WITH PUSH ACCESS HERE
+            db:84:df:44:ad:77:d0:aa:2d:81:c9:73:30:9d:21:37
 
       - run:
           name: deploy to gh-pages
