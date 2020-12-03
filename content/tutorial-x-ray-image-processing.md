@@ -17,10 +17,14 @@ kernelspec:
 
 This tutorial demonstrates how to read and process X-ray images with NumPy,
 imageio, Matplotlib and SciPy. You will learn how to load medical images, focus
-on certain parts, and visually compare them using mask filters and the
-[Sobel](https://en.wikipedia.org/wiki/Sobel_operator) and
-[Canny](https://en.wikipedia.org/wiki/Canny_edge_detector) edge detectors. X-ray
-image analysis can be part of your data analysis and
+on certain parts, and visually compare them using the
+[Gaussian](https://en.wikipedia.org/wiki/Gaussian_filter),
+[Laplacian-Gaussian](https://en.wikipedia.org/wiki/Laplace_distribution),
+[Sobel](https://en.wikipedia.org/wiki/Sobel_operator), and
+[Canny](https://en.wikipedia.org/wiki/Canny_edge_detector) filters for edge
+detection. 
+
+X-ray image analysis can be part of your data analysis and
 [machine learning workflow](https://www.sciencedirect.com/science/article/pii/S235291481930214X)
 when, for example, you're building an algorithm that helps
 [detect pneumonia](https://www.kaggle.com/c/rsna-pneumonia-detection-challenge)
