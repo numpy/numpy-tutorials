@@ -233,14 +233,11 @@ Let's create a GIF file with `imageio.mimwrite()` and display the result in the
 notebook:
 
 ```{code-cell} ipython3
-from IPython.display import Image
-
 GIF_PATH = os.path.join(DIR, 'xray_image.gif')
 imageio.mimwrite(GIF_PATH, combined_xray_images_1, format= '.gif', fps = 1) 
-
-Image(filename=GIF_PATH, width=400, height=400)
 ```
-
+Which gives us:
+![health_progress](tutorial-x-ray-image-processing/xray_image.gif)
 ## Edge detection using the Laplacian-Gaussian, Gaussian gradient, Sobel, and Canny filters
 
 +++
