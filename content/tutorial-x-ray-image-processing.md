@@ -46,7 +46,7 @@ folder. (For more details, refer to the research
 published at CVPR (a computer vision conference) in 2017.)
 
 For your convenience, a small number of PNG images have been saved to this
-tutorial's repository under `/tutorial-x-ray-image-processing`, since
+tutorial's repository under `tutorial-x-ray-image-processing/`, since
 ChestX-ray8 contains gigabytes of data and you may find it challenging to
 download it in batches.
 
