@@ -35,7 +35,13 @@ Images and real-life data make text more engaging and powerful, but be sure what
 you use is appropriately licensed and available. Here again, even a rough idea
 for artwork can be polished by others.
 
-Pull requests are reviewed in markdown format. The 
+The NumPy tutorials are a curated collection of
+[MyST-NB](https://myst-nb.readthedocs.io/) notebooks. These notebooks are used
+to produce static websites and opened as notebooks in Jupyter using
+[Jupytext]((https://jupytext.readthedocs.io). 
+
+> __Note:__ You should use [common mark](https://commonmark.org) markdown
+> cells. Jupyter only renders common mark.   
 
 ### Why Jupyter Notebooks?
 
@@ -45,89 +51,24 @@ used in the main NumPy documentation has two reasons:
 
  * Jupyter notebooks are a common format for communicating scientific
    information.
+ * Jupyter notebooks can be launched in www.mybinder.org to interact
+   with tutorials
  * rST may present a barrier for some people who might otherwise be very
    interested in contributing tutorial material.
 
 #### Note
 
-You may notice that some of our content is in markdown format (`.md` files). 
-This is part of an ongoing restructuring of the repository workflow. However, 
-you can still submit your content as a Jupyter Notebook file.
+You may notice our content is in markdown format (`.md` files). We review and
+host notebooks in the [MyST-NB](https://myst-nb.readthedocs.io/) format. We
+accept both Jupyter notebooks (`.ipynb`) and MyST-NB notebooks (`.md`). If you want
+to sync your `.ipynb` to your `.md` file follow the [pairing
+tutorial](content/pairing.md).
 
 ### Adding your own tutorials
 
 If you have your own tutorial in the form of a Jupyter notebook (a `.ipynb`
 file) and you'd like to add it to the repository:
 
-#### Create or pair your [`myst`](https://jupytext.readthedocs.io/en/latest/formats.html#myst-markdown) notebook
-
-The NumPy tutorials are reviewed and executed as
-[MyST-NB](https://myst-nb.readthedocs.io/) notebooks. The benefit is that
-content is easier to review in this markdown format. You can use 
-[Jupytext](https://jupytext.readthedocs.io/en/latest/index.html) to convert 
-or pair your `.ipynb` file to 
-[MyST Markdown](https://github.com/mwouts/jupytext/blob/master/docs/formats.md#myst-markdown) 
-format.
-
-Install `jupytext` using:
-
-```
-pip install jupytext
-```
-or
-```
-conda install jupytext -c conda-forge
-```
-
-Once installed, you can start your `jupyter lab` or `jupyter notebook`
-session in the browser. When launching `jupyter lab` it will ask you to rebuild
-to include the Jupytext extension. 
-
-##### Convert the `.ipynb` file to MyST markdown
-
-To convert a file named `notebook.ipynb` to MyST markdown, run the following command:
-
-```
-jupytext --to myst notebook.ipynb
-```
-
-You will now have a `notebook.md` file that is in the MyST markdown format. 
-
-##### Pair the `.ipynb` to a MyST markdown file
-
-If you want to keep your `notebook.ipynb` synced to your `notebook.md`
-file, you can pair the two formats in the classic Jupyter, Jupyter Lab,
-or the command line:
-<ul>
-<details>
-    <summary>
-        <b>1. Classic Jupyter Jupytext pairing</b>.
-    </summary>
-    <img src="site/_static/01-classic.gif" width=80% height=80%>
-</details>
-    
-<details>
-    <summary>
-        <b>2. Jupyter Lab Jupytext pairing</b>
-    </summary>
-    <img src="site/_static/02-jupyterlab.gif" width=80% height=80%>
-</details>
-</ul>
-
-__3. Command line Jupytext pairing__
-
-```
-jupytext --set-formats ipynb,myst notebook.ipynb
-```
-update either the MyST markdown or notebook file:
-```
-jupytext --sync notebook.ipynb
-```
-
-> __Note:__ With Jupytext installed, the classic Jupyter interface will
-> automatically open MyST files as notebooks. In JupyterLab, you can
-> right-click and choose "Open With -> Notebook" to open as a notebook.
-> The outputs of your code cells are only saved in the `.ipynb` file.
 
 #### Create an issue
 
@@ -143,8 +84,6 @@ You can use our [Tutorial Style Guide](content/tutorial-style-guide.md) to make
 your content consistent with our existing tutorials.
 
 #### Upload your content
-
-Remember to convert your `.ipynb` to `.md` (MyST markdown) before uploading it. 
 
 <ul>
 <details>
