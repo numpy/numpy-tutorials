@@ -33,7 +33,7 @@ This guide will keep a Jupyter notebook synced _or paired_ between
 
 The [NumPy tutorials](https://github.com/numpy/numpy-tutorials) are
 reviewed and executed as [MyST-NB](https://myst-nb.readthedocs.io/)
-notebooks.  Content is easier to review in this markdown format. You can
+notebooks. Content is easier to review in this markdown format. You can
 keep your `.ipynb` in sync with the content on NumPy tutorials. The
 NumPy tutorials use
 [Jupytext](https://jupytext.readthedocs.io/en/latest/index.html) to
@@ -42,10 +42,9 @@ Markdown](https://github.com/mwouts/jupytext/blob/master/docs/formats.md#myst-ma
 format.
 
 Jupyter notebooks are stored on your disk in a
-[json](https://www.json.org/json-en.html) format. The json format is
+[json format](https://nbformat.readthedocs.io/en/latest/format_description.html). The json format is
 very powerful and allows you to store almost any input and output that
-Python libraries can create. The drawback is that json is difficult to
-read and compare files. 
+Python libraries can create. The drawback is that it is hard to see and compare changes made in the notebook file when reviewing pull requests, because this means the reviewers are looking only at the raw json files. 
 
 MyST-NB notebooks are stored on your disk in a 
 [markdown](https://en.wikipedia.org/wiki/Markdown) format. The markdown
@@ -183,7 +182,7 @@ The MyST-NB `.md` is much shorter, but it does not save the output `4`.
 
 ## Pair your notebook files `.ipynb` and `.md`
 
-When you submit a Jupyter notebook to NumPy tutorials, we will convert
+When you submit a Jupyter notebook to NumPy tutorials, we (the reviewers) will convert
 it to a MyST-NB format. You can also submit the MyST-NB `.md` in your
 pull request.
 To keep the `.ipynb` and `.md` in sync--_or paired_--you need

@@ -36,11 +36,11 @@ for artwork can be polished by others.
 
 The NumPy tutorials are a curated collection of
 [MyST-NB](https://myst-nb.readthedocs.io/) notebooks. These notebooks are used
-to produce static websites and opened as notebooks in Jupyter using
-[Jupytext]((https://jupytext.readthedocs.io). 
+to produce static websites and can be opened as notebooks in Jupyter using
+[Jupytext](https://jupytext.readthedocs.io). 
 
-> __Note:__ You should use [common mark](https://commonmark.org) markdown
-> cells. Jupyter only renders common mark.   
+> __Note:__ You should use [CommonMark](https://commonmark.org) markdown
+> cells. Jupyter only renders CommonMark.   
 
 ### Why Jupyter Notebooks?
 
@@ -50,7 +50,7 @@ used in the main NumPy documentation has two reasons:
 
  * Jupyter notebooks are a common format for communicating scientific
    information.
- * Jupyter notebooks can be launched in www.mybinder.org to interact
+ * Jupyter notebooks can be launched in [Binder](https://www.mybinder.org), so that users can interact
    with tutorials
  * rST may present a barrier for some people who might otherwise be very
    interested in contributing tutorial material.
