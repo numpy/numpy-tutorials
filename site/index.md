@@ -31,6 +31,7 @@ content/tutorial-svd
 content/mooreslaw-tutorial
 content/save-load-arrays
 content/tutorial-deep-learning-on-mnist
+content/tutorial-x-ray-image-processing
 ```
 
 ### Attribution
