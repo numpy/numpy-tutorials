@@ -343,10 +343,10 @@ NumPy's [`np.hypot()`](https://numpy.org/doc/stable/reference/generated/numpy.hy
 to obtain the magnitude. Finally, normalize the rescaled image for the pixel
 values to be between 0 and 255. 
 
-    [Image normalization](https://en.wikipedia.org/wiki/Normalization_%28image_processing%29)
-    follows the `output_channel = 255.0 * (input_channel - min_value) / (max_value - min_value)`
-    [formula](http://dev.ipol.im/~nmonzon/Normalization.pdf). Because you're
-    using a grayscale image, you need to normalize just one channel.
+[Image normalization](https://en.wikipedia.org/wiki/Normalization_%28image_processing%29)
+follows the `output_channel = 255.0 * (input_channel - min_value) / (max_value - min_value)`
+[formula](http://dev.ipol.im/~nmonzon/Normalization.pdf). Because you're
+using a grayscale image, you need to normalize just one channel.
 
 ```{code-cell} ipython3
 x_sobel = ndimage.sobel(xray_image, axis=0)
