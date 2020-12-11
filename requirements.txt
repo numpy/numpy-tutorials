@@ -6,4 +6,3 @@ matplotlib
 pytest
 nbval
 statsmodels
-imageio
