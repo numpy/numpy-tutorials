@@ -9,5 +9,6 @@ dependencies:
   - nbval
   - statsmodels
   - pip
+  - imageio
   - pip:
     - jupyter-book
