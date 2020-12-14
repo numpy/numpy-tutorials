@@ -360,14 +360,14 @@ def relu2deriv(output):
 **3.** Set certain default values of [hyperparameters](https://en.wikipedia.org/wiki/Hyperparameter_(machine_learning)), such as:
 
 - [_Learning rate_](https://en.wikipedia.org/wiki/Learning_rate): `learning_rate` — helps limit the magnitude of weight updates to prevent them from overcorrecting.
-- _Epochs (iterations)_: `epochs` — the number of complete passes — forward and backward propagations — of the data through the network. This parameter can positively or negatively affect the results. The higher the iterations, the longer the learning process may take.
+- _Epochs (iterations)_: `epochs` — the number of complete passes — forward and backward propagations — of the data through the network. This parameter can positively or negatively affect the results. The higher the iterations, the longer the learning process may take. Because this is a computationally intensive task, we have chosen a very low number of epochs (20). To get meaningful results, you should choose a much larger number.
 - _Size of the hidden (middle) layer in a network_: `hidden_size` — different sizes of the hidden layer can affect the results during training and testing.
 - _Size of the input:_ `pixels_per_image` — you have established that the image input is 784 (28x28) (in pixels).
 - _Number of labels_: `num_labels` — indicates the output number for the output layer where the predictions occur for 10 (0 to 9) handwritten digit labels.
 
 ```{code-cell} ipython3
 learning_rate = 0.005
-epochs = 100
+epochs = 20
 hidden_size = 100
 pixels_per_image = 784
 num_labels = 10
@@ -382,108 +382,99 @@ weights_2 = 0.2 * np.random.random((hidden_size, num_labels)) - 0.1
 
 **5.** Set up the neural network's learning experiment with a training loop and start the training process.
 
-**Note** Because the training is an intensive computational process, its
-execution is disabled by default on this notebook. To enable execution and
-test the code yourself, set `execute_training` in the cell below to `True`.
-
-```{code-cell} ipython3
-execute_training = False
-```
-
 Start the training process:
 
 ```{code-cell} ipython3
-if execute_training:
-    # To store training and test set losses and accurate predictions
-    # for visualization.
-    store_training_loss = []
-    store_training_accurate_pred = []
-    store_test_loss = []
-    store_test_accurate_pred = []
+# To store training and test set losses and accurate predictions
+# for visualization.
+store_training_loss = []
+store_training_accurate_pred = []
+store_test_loss = []
+store_test_accurate_pred = []
 
-    # This is a training loop.
-    # Run the learning experiment for a defined number of epochs (iterations).
-    for j in range(epochs):
-        # Set the initial loss/error and the number of accurate predictions to zero.
-        training_loss = 0.0
-        training_accurate_predictions = 0
-    
-        # For all images in the training set, perform a forward pass
-        # and backpropagation and adjust the weights accordingly.
-        for i in range(len(training_images)):
-            # Forward propagation/forward pass:
-            # 1. The input layer:
-            #    Initialize the training image data as inputs.
-            layer_0 = training_images[i]
-            # 2. The hidden layer:
-            #    Take in the training image data into the middle layer by 
-            #    matrix-multiplying it by randomly initialized weights. 
-            layer_1 = np.dot(layer_0, weights_1)
-            # 3. Pass the hidden layer's output through the ReLU activation function.
-            layer_1 = relu(layer_1)
-            # 4. Define the dropout function for regularization.
-            dropout_mask = np.random.randint(0, high=2, size=layer_1.shape)
-            # 5. Apply dropout to the hidden layer's output.
-            layer_1 *= dropout_mask * 2
-            # 6. The output layer:
-            #    Ingest the output of the middle layer into the the final layer
-            #    by matrix-multiplying it by randomly initialized weights.
-            #    Produce a 10-dimension vector with 10 scores.
-            layer_2 = np.dot(layer_1, weights_2)
+# This is a training loop.
+# Run the learning experiment for a defined number of epochs (iterations).
+for j in range(epochs):
+    # Set the initial loss/error and the number of accurate predictions to zero.
+    training_loss = 0.0
+    training_accurate_predictions = 0
 
-            # Backpropagation/backward pass:
-            # 1. Measure the training error (loss function) between the actual
-            #    image labels (the truth) and the prediction by the model.
-            training_loss += np.sum((training_labels[i] - layer_2) ** 2)
-            # 2. Increment the accurate prediction count.
-            training_accurate_predictions += int(np.argmax(layer_2) == np.argmax(training_labels[i]))
-            # 3. Differentiate the loss function/error.
-            layer_2_delta = (training_labels[i] - layer_2)
-            # 4. Propagate the gradients of the loss function back through the hidden layer.
-            layer_1_delta = np.dot(weights_2, layer_2_delta) * relu2deriv(layer_1)
-            # 5. Apply the dropout to the gradients.
-            layer_1_delta *= dropout_mask
-            # 6. Update the weights for the middle and input layers
-            #    by multiplying them by the learning rate and the gradients.
-            weights_1 += learning_rate * np.outer(layer_0, layer_1_delta)
-            weights_2 += learning_rate * np.outer(layer_1, layer_2_delta)
-    
-        # Store training set losses and accurate predictions.
-        store_training_loss.append(training_loss)
-        store_training_accurate_pred.append(training_accurate_predictions)
+    # For all images in the training set, perform a forward pass
+    # and backpropagation and adjust the weights accordingly.
+    for i in range(len(training_images)):
+        # Forward propagation/forward pass:
+        # 1. The input layer:
+        #    Initialize the training image data as inputs.
+        layer_0 = training_images[i]
+        # 2. The hidden layer:
+        #    Take in the training image data into the middle layer by 
+        #    matrix-multiplying it by randomly initialized weights. 
+        layer_1 = np.dot(layer_0, weights_1)
+        # 3. Pass the hidden layer's output through the ReLU activation function.
+        layer_1 = relu(layer_1)
+        # 4. Define the dropout function for regularization.
+        dropout_mask = np.random.randint(0, high=2, size=layer_1.shape)
+        # 5. Apply dropout to the hidden layer's output.
+        layer_1 *= dropout_mask * 2
+        # 6. The output layer:
+        #    Ingest the output of the middle layer into the the final layer
+        #    by matrix-multiplying it by randomly initialized weights.
+        #    Produce a 10-dimension vector with 10 scores.
+        layer_2 = np.dot(layer_1, weights_2)
 
-        # Evaluate on the test set:
-        # 1. Set the initial error and the number of accurate predictions to zero.
-        test_loss = 0.0
-        test_accurate_predictions = 0
-    
-        # 2. Start testing the model by evaluating on the test image dataset.
-        for i in range(len(test_images)):
-            # 1. Pass the test images through the input layer.
-            layer_0 = test_images[i]
-            # 2. Compute the weighted sum of the test image inputs in and
-            #    pass the hidden layer's output through ReLU.
-            layer_1 = relu(np.dot(layer_0, weights_1))
-            # 3. Compute the weighted sum of the hidden layer's inputs.
-            #    Produce a 10-dimensional vector with 10 scores.
-            layer_2 = np.dot(layer_1, weights_2)
+        # Backpropagation/backward pass:
+        # 1. Measure the training error (loss function) between the actual
+        #    image labels (the truth) and the prediction by the model.
+        training_loss += np.sum((training_labels[i] - layer_2) ** 2)
+        # 2. Increment the accurate prediction count.
+        training_accurate_predictions += int(np.argmax(layer_2) == np.argmax(training_labels[i]))
+        # 3. Differentiate the loss function/error.
+        layer_2_delta = (training_labels[i] - layer_2)
+        # 4. Propagate the gradients of the loss function back through the hidden layer.
+        layer_1_delta = np.dot(weights_2, layer_2_delta) * relu2deriv(layer_1)
+        # 5. Apply the dropout to the gradients.
+        layer_1_delta *= dropout_mask
+        # 6. Update the weights for the middle and input layers
+        #    by multiplying them by the learning rate and the gradients.
+        weights_1 += learning_rate * np.outer(layer_0, layer_1_delta)
+        weights_2 += learning_rate * np.outer(layer_1, layer_2_delta)
 
-            # 4. Measure the error between the actual label (truth) and prediction values.
-            test_loss += np.sum((test_labels[i] - layer_2) ** 2)
-            # 5. Increment the accurate prediction count.
-            test_accurate_predictions += int(np.argmax(layer_2) == np.argmax(test_labels[i]))
+    # Store training set losses and accurate predictions.
+    store_training_loss.append(training_loss)
+    store_training_accurate_pred.append(training_accurate_predictions)
 
-        # Store test set losses and accurate predictions.
-        store_test_loss.append(test_loss)
-        store_test_accurate_pred.append(test_accurate_predictions)
+    # Evaluate on the test set:
+    # 1. Set the initial error and the number of accurate predictions to zero.
+    test_loss = 0.0
+    test_accurate_predictions = 0
 
-        # 3. Display the error and accuracy metrics in the output.
-        print("\n" + \
-              "Epoch: " + str(j) + \
-              " Training set error:" + str(training_loss/ float(len(training_images)))[0:5] +\
-              " Training set accuracy:" + str(training_accurate_predictions/ float(len(training_images))) +\
-              " Test set error:" + str(test_loss/ float(len(test_images)))[0:5] +\
-              " Test set accuracy:" + str(test_accurate_predictions/ float(len(test_images))))
+    # 2. Start testing the model by evaluating on the test image dataset.
+    for i in range(len(test_images)):
+        # 1. Pass the test images through the input layer.
+        layer_0 = test_images[i]
+        # 2. Compute the weighted sum of the test image inputs in and
+        #    pass the hidden layer's output through ReLU.
+        layer_1 = relu(np.dot(layer_0, weights_1))
+        # 3. Compute the weighted sum of the hidden layer's inputs.
+        #    Produce a 10-dimensional vector with 10 scores.
+        layer_2 = np.dot(layer_1, weights_2)
+
+        # 4. Measure the error between the actual label (truth) and prediction values.
+        test_loss += np.sum((test_labels[i] - layer_2) ** 2)
+        # 5. Increment the accurate prediction count.
+        test_accurate_predictions += int(np.argmax(layer_2) == np.argmax(test_labels[i]))
+
+    # Store test set losses and accurate predictions.
+    store_test_loss.append(test_loss)
+    store_test_accurate_pred.append(test_accurate_predictions)
+
+    # 3. Display the error and accuracy metrics in the output.
+    print("\n" + \
+          "Epoch: " + str(j) + \
+          " Training set error:" + str(training_loss/ float(len(training_images)))[0:5] +\
+          " Training set accuracy:" + str(training_accurate_predictions/ float(len(training_images))) +\
+          " Test set error:" + str(test_loss/ float(len(test_images)))[0:5] +\
+          " Test set accuracy:" + str(test_accurate_predictions/ float(len(test_images))))
 ```
 
 The training process may take many minutes, depending on a number of factors, such as the processing power of the machine you are running the experiment on and the number of epochs. To reduce the waiting time, you can change the epoch (iteration) variable from 100 to a lower number, reset the runtime (which will reset the weights), and run the notebook cells again.
@@ -493,32 +484,29 @@ The training process may take many minutes, depending on a number of factors, su
 After executing the cell above, you can visualize the training and test set errors and accuracy for an instance of this training process.
 
 ```{code-cell} ipython3
-:tags: [raises-exception, hide-output]
+# The training set metrics.
+y_training_error = [store_training_loss[i]/float(len(training_images)) for i in range(len(store_training_loss))]
+x_training_error = range(1, len(store_training_loss)+1)
+y_training_accuracy = [store_training_accurate_pred[i]/ float(len(training_images)) for i in range(len(store_training_accurate_pred))]
+x_training_accuracy = range(1, len(store_training_accurate_pred)+1)
 
-if execute_training:
-    # The training set metrics.
-    y_training_error = [store_training_loss[i]/float(len(training_images)) for i in range(len(store_training_loss))]
-    x_training_error = range(1, len(store_training_loss)+1)
-    y_training_accuracy = [store_training_accurate_pred[i]/ float(len(training_images)) for i in range(len(store_training_accurate_pred))]
-    x_training_accuracy = range(1, len(store_training_accurate_pred)+1)
+# The test set metrics.
+y_test_error = [store_test_loss[i]/float(len(test_images)) for i in range(len(store_test_loss))]
+x_test_error = range(1, len(store_test_loss)+1)
+y_test_accuracy = [store_training_accurate_pred[i]/ float(len(training_images)) for i in range(len(store_training_accurate_pred))]
+x_test_accuracy = range(1, len(store_test_accurate_pred)+1)
 
-    # The test set metrics.
-    y_test_error = [store_test_loss[i]/float(len(test_images)) for i in range(len(store_test_loss))]
-    x_test_error = range(1, len(store_test_loss)+1)
-    y_test_accuracy = [store_training_accurate_pred[i]/ float(len(training_images)) for i in range(len(store_training_accurate_pred))]
-    x_test_accuracy = range(1, len(store_test_accurate_pred)+1)
-
-    # Display the plots.
-    fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(15, 5))
-    axes[0].set_title('Training set error, accuracy')
-    axes[0].plot(x_training_accuracy, y_training_accuracy, label = "Training set accuracy")
-    axes[0].plot(x_training_error, y_training_error, label = "Training set error")
-    axes[0].set_xlabel("Epochs")
-    axes[1].set_title('Test set error, accuracy')
-    axes[1].plot(x_test_accuracy, y_test_accuracy, label = "Test set accuracy")
-    axes[1].plot(x_test_error, y_test_error, label = "Test set error")
-    axes[1].set_xlabel("Epochs")
-    plt.show()
+# Display the plots.
+fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(15, 5))
+axes[0].set_title('Training set error, accuracy')
+axes[0].plot(x_training_accuracy, y_training_accuracy, label = "Training set accuracy")
+axes[0].plot(x_training_error, y_training_error, label = "Training set error")
+axes[0].set_xlabel("Epochs")
+axes[1].set_title('Test set error, accuracy')
+axes[1].plot(x_test_accuracy, y_test_accuracy, label = "Test set accuracy")
+axes[1].plot(x_test_error, y_test_error, label = "Test set error")
+axes[1].set_xlabel("Epochs")
+plt.show()
 ```
 
 The accuracy rates that your model reaches during training and testing may be somewhat plausible but you may also find the error rates to be quite high. 
