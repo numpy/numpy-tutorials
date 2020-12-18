@@ -21,6 +21,7 @@ or navigate to any of the documents listed below and download it individually.
 4. [Tutorial: Saving and sharing your NumPy arrays](content/save-load-arrays.md)
 5. [Tutorial: NumPy deep learning on MNIST from scratch](content/tutorial-deep-learning-on-mnist.md)
 6. [Tutorial: X-ray image processing](content/tutorial-x-ray-image-processing.md)
+7. [Tutorial: Static Equilibrium](content/tutorial-static_equilibrium.md)
 
 ## Contributing
 
