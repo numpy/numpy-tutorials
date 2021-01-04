@@ -23,7 +23,9 @@ jobs:
           name: Build site
           command: |
             source venv/bin/activate
-            make -C site/ html
+            # n = nitpicky (broken links), W = warnings as errors,
+            # T = full tracebacks, keep-going = run to completion even with errors
+            make -C site/ SPHINXOPTS="-nWT --keep-going" html
 
       - store_artifacts:
           path: site/_build/html
