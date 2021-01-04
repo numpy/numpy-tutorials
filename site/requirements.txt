@@ -1,5 +1,6 @@
 sphinx
 myst-nb
+MarkupSafe>=1.1
 jupytext
 sphinx-book-theme
 sphinx-copybutton
