@@ -27,11 +27,11 @@ maxdepth: 1
 ---
 
 content/cs231_tutorial
-content/tutorial-svd
-content/mooreslaw-tutorial
-content/save-load-arrays
-content/tutorial-deep-learning-on-mnist
-content/tutorial-x-ray-image-processing
+content/tutorial_svd
+content/mooreslaw_tutorial
+content/save_load_arrays
+content/tutorial_deep_learning_on_mnist
+content/tutorial_x-ray_image_processing
 ```
 
 ### Attribution
@@ -96,7 +96,7 @@ tutorials:
 ---
 maxdepth: 1
 ---
-content/tutorial-style-guide
+content/tutorial_style_guide
 ```
 
 #### Upload your content
