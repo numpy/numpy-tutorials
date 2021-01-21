@@ -1,0 +1,968 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tutorial: X-ray image processing &#8212; NumPy Tutorials</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Learn to write a NumPy tutorial" href="tutorial-style-guide.html" />
+    <link rel="prev" title="Tutorial: Deep learning on MNIST" href="tutorial-deep-learning-on-mnist.html" />
+  <meta name="robots" content="noindex" />
+  
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/numpylogo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">NumPy Tutorials</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cs231_tutorial.html">
+   CS231n Python Tutorial With Google Colab
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial-svd.html">
+   Tutorial: Linear algebra on n-dimensional arrays
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mooreslaw-tutorial.html">
+   Determining Moore’s Law with real data in NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="save-load-arrays.html">
+   Saving and sharing your NumPy arrays
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial-deep-learning-on-mnist.html">
+   Tutorial: Deep learning on MNIST
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Tutorial: X-ray image processing
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial-style-guide.html">
+   Learn to write a NumPy tutorial
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/content/tutorial-x-ray-image-processing.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/content/tutorial-x-ray-image-processing.md.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/numpy/numpy-tutorials/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-x-ray-image-processing.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/master/site/content/tutorial-x-ray-image-processing.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/master?urlpath=tree/site/content/tutorial-x-ray-image-processing.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examine-an-x-ray-with-imageio">
+   Examine an X-ray with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     imageio
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combine-images-with-np-stack-to-demonstrate-progression">
+   Combine images with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     np.stack()
+    </span>
+   </code>
+   to demonstrate progression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#edge-detection-using-the-laplacian-gaussian-gaussian-gradient-sobel-and-canny-filters">
+   Edge detection using the Laplacian-Gaussian, Gaussian gradient, Sobel, and Canny filters
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-laplace-filter-with-gaussian-second-derivatives">
+     The Laplace filter with Gaussian second derivatives
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-gaussian-gradient-magnitude-method">
+     The Gaussian gradient magnitude method
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-sobel-feldman-operator-the-sobel-filter">
+     The Sobel-Feldman operator (the Sobel filter)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-canny-filter">
+     The Canny filter
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#apply-masks-to-x-rays-with-np-where">
+   Apply masks to X-rays with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     np.where()
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-the-results">
+   Compare the results
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-steps">
+   Next steps
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="tutorial-x-ray-image-processing">
+<h1>Tutorial: X-ray image processing<a class="headerlink" href="#tutorial-x-ray-image-processing" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial demonstrates how to read and process X-ray images with NumPy,
+imageio, Matplotlib and SciPy. You will learn how to load medical images, focus
+on certain parts, and visually compare them using the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Gaussian_filter">Gaussian</a>,
+<a class="reference external" href="https://en.wikipedia.org/wiki/Laplace_distribution">Laplacian-Gaussian</a>,
+<a class="reference external" href="https://en.wikipedia.org/wiki/Sobel_operator">Sobel</a>, and
+<a class="reference external" href="https://en.wikipedia.org/wiki/Canny_edge_detector">Canny</a> filters for edge
+detection.</p>
+<p>X-ray image analysis can be part of your data analysis and
+<a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S235291481930214X">machine learning workflow</a>
+when, for example, you’re building an algorithm that helps
+<a class="reference external" href="https://www.kaggle.com/c/rsna-pneumonia-detection-challenge">detect pneumonia</a>
+as part of a <a class="reference external" href="https://www.kaggle.com">Kaggle</a>
+<a class="reference external" href="https://www.kaggle.com/eduardomineo/u-net-lung-segmentation-montgomery-shenzhen">competition</a>.
+In the healthcare industry, medical image processing and analysis is
+particularly important when images are estimated to account for
+<a class="reference external" href="https://www-03.ibm.com/press/us/en/pressrelease/51146.wss">at least 90%</a> of all
+medical data.</p>
+<p>You’ll be working with radiology images from the
+<a class="reference external" href="https://www.nih.gov/news-events/news-releases/nih-clinical-center-provides-one-largest-publicly-available-chest-x-ray-datasets-scientific-community">ChestX-ray8</a>
+dataset provided by the <a class="reference external" href="http://nih.gov">National Institutes of Health (NIH)</a>.
+ChestX-ray8 contains over 100,000 de-identified X-ray images in the PNG format
+from more than 30,000 patients. You can find ChestX-ray8’s files on NIH’s public
+Box <a class="reference external" href="https://nihcc.app.box.com/v/ChestXray-NIHCC">repository</a> in the <code class="docutils literal notranslate"><span class="pre">/images</span></code>
+folder. (For more details, refer to the research
+<a class="reference external" href="http://openaccess.thecvf.com/content_cvpr_2017/papers/Wang_ChestX-ray8_Hospital-Scale_Chest_CVPR_2017_paper.pdf">paper</a>
+published at CVPR (a computer vision conference) in 2017.)</p>
+<p>For your convenience, a small number of PNG images have been saved to this
+tutorial’s repository under <code class="docutils literal notranslate"><span class="pre">tutorial-x-ray-image-processing/</span></code>, since
+ChestX-ray8 contains gigabytes of data and you may find it challenging to
+download it in batches.</p>
+<p><img alt="image.png" src="../_images/tutorial-x-ray-image-processing.png" /></p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>The reader should have some knowledge of Python, NumPy arrays, and Matplotlib.
+To refresh the memory, you can take the
+<a class="reference external" href="https://docs.python.org/dev/tutorial/index.html">Python</a> and Matplotlib
+<a class="reference external" href="https://matplotlib.org/tutorials/introductory/pyplot.html">PyPlot</a> tutorials,
+and the NumPy <a class="reference external" href="https://numpy.org/devdocs/user/quickstart.html">quickstart</a>.</p>
+<p>The following packages are used in this tutorial:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://imageio.github.io">imageio</a> for reading and writing image data. The
+healthcare industry usually works with the
+<a class="reference external" href="https://en.wikipedia.org/wiki/DICOM">DICOM</a> format for medical imaging and
+<a class="reference external" href="https://imageio.readthedocs.io/en/stable/format_dicom.html">imageio</a> should be
+well-suited for reading that format. For simplicity, in this tutorial you’ll be
+working with PNG files.</p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/">Matplotlib</a> for data visualization.</p></li>
+<li><p><a class="reference external" href="https://www.scipy.org">SciPy</a> for multi-dimensional image processing via
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/ndimage.html"><code class="docutils literal notranslate"><span class="pre">ndimage</span></code></a>.</p></li>
+</ul>
+<p>This tutorial can be run locally in an isolated environment, such as
+<a class="reference external" href="https://virtualenv.pypa.io/en/stable/">Virtualenv</a> or
+<a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">conda</a>.
+You can use <a class="reference external" href="https://jupyter.org/install">Jupyter Notebook or JupyterLab</a> to run
+each notebook cell.</p>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Examine an X-ray with <code class="docutils literal notranslate"><span class="pre">imageio</span></code></p></li>
+<li><p>Combine images with <code class="docutils literal notranslate"><span class="pre">np.stack()</span></code> to demonstrate progression</p></li>
+<li><p>Edge detection using the Laplacian-Gaussian, Gaussian gradient, Sobel, and
+Canny filters</p></li>
+<li><p>Apply masks to X-rays with <code class="docutils literal notranslate"><span class="pre">np.where()</span></code></p></li>
+<li><p>Compare the results</p></li>
+</ol>
+</div>
+<hr class="docutils" />
+<div class="section" id="examine-an-x-ray-with-imageio">
+<h2>Examine an X-ray with <code class="docutils literal notranslate"><span class="pre">imageio</span></code><a class="headerlink" href="#examine-an-x-ray-with-imageio" title="Permalink to this headline">¶</a></h2>
+<p>Let’s begin with a simple example using just one X-ray image from the
+ChestX-ray8 dataset.</p>
+<p>The file — <code class="docutils literal notranslate"><span class="pre">00000011_001.png</span></code> — has been downloaded for you and saved in the
+<code class="docutils literal notranslate"><span class="pre">/tutorial-x-ray-image-processing</span></code> folder.</p>
+<p><strong>1.</strong> Load the image with <code class="docutils literal notranslate"><span class="pre">imageio</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">imageio</span>
+
+<span class="n">DIR</span> <span class="o">=</span> <span class="s1">&#39;tutorial-x-ray-image-processing&#39;</span>
+
+<span class="n">xray_image</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_001.png&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>2.</strong> Check that its shape is 1024x1024 pixels and that the array is made up of
+8-bit integers:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">xray_image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">xray_image</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1024, 1024)
+uint8
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>3.</strong> Import <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> and display the image in a grayscale colormap:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/tutorial-x-ray-image-processing_13_0.png" src="../_images/tutorial-x-ray-image-processing_13_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="combine-images-with-np-stack-to-demonstrate-progression">
+<h2>Combine images with <code class="docutils literal notranslate"><span class="pre">np.stack()</span></code> to demonstrate progression<a class="headerlink" href="#combine-images-with-np-stack-to-demonstrate-progression" title="Permalink to this headline">¶</a></h2>
+<p>With NumPy’s <code class="docutils literal notranslate"><span class="pre">np.stack()</span></code> you can combine multiple X-rays to make an
+n-dimensional array and then show the “health progress” in a sequential manner.</p>
+<p>In the next example, instead of 1 image you’ll use 8 X-ray 1024x1024-pixel
+images from the ChestX-ray8 dataset that have been downloaded and extracted
+from one of the dataset files. They are numbered from <code class="docutils literal notranslate"><span class="pre">...000.png</span></code> to
+<code class="docutils literal notranslate"><span class="pre">...008.png</span></code> and let’s assume they belong to the same patient.</p>
+<p><strong>1.</strong> Import NumPy, read in each of the X-rays, and stack them together with
+<code class="docutils literal notranslate"><span class="pre">np.stack()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">file1</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_000.png&#39;</span><span class="p">))</span>
+<span class="n">file2</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_001.png&#39;</span><span class="p">))</span>
+<span class="n">file3</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_003.png&#39;</span><span class="p">))</span>
+<span class="n">file4</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_004.png&#39;</span><span class="p">))</span>
+<span class="n">file5</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_005.png&#39;</span><span class="p">))</span>
+<span class="n">file6</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_006.png&#39;</span><span class="p">))</span>
+<span class="n">file7</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_007.png&#39;</span><span class="p">))</span>
+<span class="n">file8</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_008.png&#39;</span><span class="p">))</span>
+
+<span class="n">combined_xray_images_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">file1</span><span class="p">,</span> <span class="n">file2</span><span class="p">,</span> <span class="n">file3</span><span class="p">,</span> <span class="n">file4</span><span class="p">,</span> <span class="n">file5</span><span class="p">,</span> <span class="n">file6</span><span class="p">,</span> <span class="n">file7</span><span class="p">,</span> <span class="n">file8</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Alternatively, you can <code class="docutils literal notranslate"><span class="pre">append</span></code> the image arrays as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">combined_xray_images_2</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">single_xray_image</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_00&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.png&#39;</span><span class="p">))</span>
+    <span class="n">combined_xray_images_2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_xray_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Note on performance:</em></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">append</span></code>ing the images may no be faster. If you care about performance, you
+should probably use <code class="docutils literal notranslate"><span class="pre">np.stack()</span></code>, as evidenced when you try to time the code
+with Python’s <code class="docutils literal notranslate"><span class="pre">timeit</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">combined_xray_images_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">file1</span><span class="p">,</span> <span class="n">file2</span><span class="p">,</span> <span class="n">file3</span><span class="p">,</span> <span class="n">file4</span><span class="p">,</span> <span class="n">file5</span><span class="p">,</span> <span class="n">file6</span><span class="p">,</span> <span class="n">file7</span><span class="p">,</span> <span class="n">file8</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1.52 ms ± 49.3 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">C</span> <span class="o">=</span> <span class="p">[</span><span class="n">combined_xray_images_2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_00&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.png&#39;</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>159 ms ± 2.69 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+</pre></div>
+</div>
+</li>
+</ul>
+<p><strong>2.</strong> Check the shape of the new X-ray image array containing 8 stacked images:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">combined_xray_images_1</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(8, 1024, 1024)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>3.</strong> You can now display the “health progress” by plotting each of frames next
+to each other using Matplotlib:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">combined_xray_images_1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/tutorial-x-ray-image-processing_24_0.png" src="../_images/tutorial-x-ray-image-processing_24_0.png" />
+</div>
+</div>
+<p><strong>4.</strong> In addition, it can be helpful to show the progress as an animation.
+Let’s create a GIF file with <code class="docutils literal notranslate"><span class="pre">imageio.mimwrite()</span></code> and display the result in the
+notebook:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">GIF_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;xray_image.gif&#39;</span><span class="p">)</span>
+<span class="n">imageio</span><span class="o">.</span><span class="n">mimwrite</span><span class="p">(</span><span class="n">GIF_PATH</span><span class="p">,</span> <span class="n">combined_xray_images_1</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span> <span class="s1">&#39;.gif&#39;</span><span class="p">,</span> <span class="n">fps</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Which gives us:
+<img alt="health_progress" src="../_images/xray_image.gif" /></p>
+</div>
+<div class="section" id="edge-detection-using-the-laplacian-gaussian-gaussian-gradient-sobel-and-canny-filters">
+<h2>Edge detection using the Laplacian-Gaussian, Gaussian gradient, Sobel, and Canny filters<a class="headerlink" href="#edge-detection-using-the-laplacian-gaussian-gaussian-gradient-sobel-and-canny-filters" title="Permalink to this headline">¶</a></h2>
+<p>When processing biomedical data, it can be useful to emphasize the 2D
+<a class="reference external" href="https://en.wikipedia.org/wiki/Edge_detection">“edges”</a> to focus on particular
+features in an image. To do that, using
+<a class="reference external" href="https://en.wikipedia.org/wiki/Image_gradient">image gradients</a> can be
+particularly helpful when detecting the change of color pixel intensity.</p>
+<div class="section" id="the-laplace-filter-with-gaussian-second-derivatives">
+<h3>The Laplace filter with Gaussian second derivatives<a class="headerlink" href="#the-laplace-filter-with-gaussian-second-derivatives" title="Permalink to this headline">¶</a></h3>
+<p>Let’s start with an n-dimensional
+<a class="reference external" href="https://en.wikipedia.org/wiki/Laplace_distribution">Laplace</a> filter
+(“Laplacian-Gaussian”) that uses
+<a class="reference external" href="https://en.wikipedia.org/wiki/Normal_distribution">Gaussian</a> second
+derivatives. This Laplacian method focuses on pixels with rapid intensity change
+in values and is combined with Gaussian smoothing to
+<a class="reference external" href="https://homepages.inf.ed.ac.uk/rbf/HIPR2/log.htm">remove noise</a>. Let’s examine
+how it can be useful in analyzing 2D X-ray images.</p>
+<ul class="simple">
+<li><p>The implementation of the Laplacian-Gaussian filter is relatively
+straightforward: 1) import the <code class="docutils literal notranslate"><span class="pre">ndimage</span></code> module from SciPy; and 2) call
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.gaussian_laplace.html"><code class="docutils literal notranslate"><span class="pre">scipy.ndimage.gaussian_laplace()</span></code></a>
+with a sigma (scalar) parameter, which affects the standard deviations of the
+Gaussian filter (you’ll use <code class="docutils literal notranslate"><span class="pre">1</span></code> in the example below):</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span>
+
+<span class="n">xray_image_laplace_gaussian</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">gaussian_laplace</span><span class="p">(</span><span class="n">xray_image</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Display the original X-ray and the one with the Laplacian-Gaussian filter:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Laplacian-Gaussian (edges)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image_laplace_gaussian</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">i</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/tutorial-x-ray-image-processing_33_0.png" src="../_images/tutorial-x-ray-image-processing_33_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="the-gaussian-gradient-magnitude-method">
+<h3>The Gaussian gradient magnitude method<a class="headerlink" href="#the-gaussian-gradient-magnitude-method" title="Permalink to this headline">¶</a></h3>
+<p>Another method for edge detection that can be useful is the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Normal_distribution">Gaussian</a> (gradient) filter.
+It computes the multidimensional gradient magnitude with Gaussian derivatives
+and helps by remove
+<a class="reference external" href="https://www.cs.cornell.edu/courses/cs6670/2011sp/lectures/lec02_filter.pdf">high-frequency</a>
+image components.</p>
+<p><strong>1.</strong> Call <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.gaussian_gradient_magnitude.html"><code class="docutils literal notranslate"><span class="pre">scipy.ndimage.gaussian_gradient_magnitude()</span></code></a>
+with a sigma (scalar) parameter (for standard deviations; you’ll use <code class="docutils literal notranslate"><span class="pre">2</span></code> in the
+example below):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_ray_image_gaussian_gradient</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">gaussian_gradient_magnitude</span><span class="p">(</span><span class="n">xray_image</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>2.</strong> Display the original X-ray and the one with the Gaussian gradient filter:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Gaussian gradient (edges)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x_ray_image_gaussian_gradient</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">i</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/tutorial-x-ray-image-processing_38_0.png" src="../_images/tutorial-x-ray-image-processing_38_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="the-sobel-feldman-operator-the-sobel-filter">
+<h3>The Sobel-Feldman operator (the Sobel filter)<a class="headerlink" href="#the-sobel-feldman-operator-the-sobel-filter" title="Permalink to this headline">¶</a></h3>
+<p>To find regions of high spatial frequency (the edges or the edge maps) along the
+horizontal and vertical axes of a 2D X-ray image, you can use the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Sobel_operator">Sobel-Feldman operator (Sobel filter)</a>
+technique. The Sobel filter applies two 3x3 kernel matrices — one for each axis
+— onto the X-ray through a <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_(image_processing)#Convolution">convolution</a>.
+Then, these two points (gradients) are combined using the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Pythagorean_theorem">Pythagorean theorem</a> to
+produce a gradient magnitude.</p>
+<p><strong>1.</strong> Use the Sobel filters — (<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.sobel.html"><code class="docutils literal notranslate"><span class="pre">scipy.ndimage.sobel()</span></code></a>)
+— on x- and y-axes of the X-ray. Then, calculate the distance between <code class="docutils literal notranslate"><span class="pre">x</span></code> and
+<code class="docutils literal notranslate"><span class="pre">y</span></code> (with the Sobel filters applied to them) using the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Pythagorean_theorem">Pythagorean theorem</a> and
+NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.hypot.html"><code class="docutils literal notranslate"><span class="pre">np.hypot()</span></code></a>
+to obtain the magnitude. Finally, normalize the rescaled image for the pixel
+values to be between 0 and 255.</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Normalization_%28image_processing%29">Image normalization</a>
+follows the <code class="docutils literal notranslate"><span class="pre">output_channel</span> <span class="pre">=</span> <span class="pre">255.0</span> <span class="pre">*</span> <span class="pre">(input_channel</span> <span class="pre">-</span> <span class="pre">min_value)</span> <span class="pre">/</span> <span class="pre">(max_value</span> <span class="pre">-</span> <span class="pre">min_value)</span></code>
+<a class="reference external" href="http://dev.ipol.im/~nmonzon/Normalization.pdf">formula</a>. Because you’re
+using a grayscale image, you need to normalize just one channel.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_sobel</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">sobel</span><span class="p">(</span><span class="n">xray_image</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">y_sobel</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">sobel</span><span class="p">(</span><span class="n">xray_image</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">xray_image_sobel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">x_sobel</span><span class="p">,</span> <span class="n">y_sobel</span><span class="p">)</span>
+
+<span class="n">xray_image_sobel</span> <span class="o">*=</span> <span class="mf">255.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xray_image_sobel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>2.</strong> Change the new image array data type to the 32-bit floating-point format
+from <code class="docutils literal notranslate"><span class="pre">float16</span></code> to <a class="reference external" href="https://github.com/matplotlib/matplotlib/issues/15432">make it compatible</a>
+with Matplotlib:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The data type - before: &#39;</span><span class="p">,</span> <span class="n">xray_image_sobel</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="n">xray_image_sobel</span> <span class="o">=</span> <span class="n">xray_image_sobel</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The data type - after: &#39;</span><span class="p">,</span> <span class="n">xray_image_sobel</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The data type - before:  float16
+The data type - after:  float32
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>3.</strong> Display the original X-ray and the one with the Sobel “edge” filter
+applied. Note that both the grayscale and <code class="docutils literal notranslate"><span class="pre">CMRmap</span></code> colormaps are used to help
+emphasize the edges:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Sobel (edges) - grayscale&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image_sobel</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Sobel (edges) - CMRmap&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image_sobel</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;CMRmap&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">i</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/tutorial-x-ray-image-processing_45_0.png" src="../_images/tutorial-x-ray-image-processing_45_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="the-canny-filter">
+<h3>The Canny filter<a class="headerlink" href="#the-canny-filter" title="Permalink to this headline">¶</a></h3>
+<p>You can also consider using another well-known filter for edge detection called
+the <a class="reference external" href="https://en.wikipedia.org/wiki/Canny_edge_detector">Canny filter</a>.</p>
+<p>First, you apply a <a class="reference external" href="https://en.wikipedia.org/wiki/Gaussian_filter">Gaussian</a>
+filter to remove the noise in an image. In this example, you’re using using the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Fourier_transform">Fourier</a> filter which
+smoothens the X-ray through a <a class="reference external" href="https://en.wikipedia.org/wiki/Convolution">convolution</a>
+process. Next, you apply the <a class="reference external" href="https://en.wikipedia.org/wiki/Prewitt_operator">Prewitt filter</a>
+on each of the 2 axes of the image to help detect some of the edges — this will
+result in 2 gradient values. Similar to the Sobel filter, the Prewitt operator
+also applies two 3x3 kernel matrices — one for each axis — onto the X-ray
+through a <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_(image_processing)#Convolution">convolution</a>.
+In the end, you compute the magnitude between the two gradients using the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Pythagorean_theorem">Pythagorean theorem</a> and
+<a class="reference external" href="https://en.wikipedia.org/wiki/Normalization_%28image_processing%29">normalize</a>
+the images, as before.</p>
+<p><strong>1.</strong> Use SciPy’s Fourier filters — <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.fourier_gaussian.html"><code class="docutils literal notranslate"><span class="pre">scipy.ndimage.fourier_gaussian()</span></code></a>
+— with a small <code class="docutils literal notranslate"><span class="pre">sigma</span></code> value to remove some of the noise from the X-ray. Then,
+calculate two gradients using <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.prewitt.html"><code class="docutils literal notranslate"><span class="pre">scipy.ndimage.prewitt()</span></code></a>.
+Next, measure the distance between the gradients using NumPy’s <code class="docutils literal notranslate"><span class="pre">np.hypot()</span></code>.
+Finally, <a class="reference external" href="https://en.wikipedia.org/wiki/Normalization_%28image_processing%29">normalize</a>
+the rescaled image, as before.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourier_gaussian</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">fourier_gaussian</span><span class="p">(</span><span class="n">xray_image</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+
+<span class="n">x_prewitt</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">prewitt</span><span class="p">(</span><span class="n">fourier_gaussian</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">y_prewitt</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">prewitt</span><span class="p">(</span><span class="n">fourier_gaussian</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">xray_image_canny</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">x_prewitt</span><span class="p">,</span> <span class="n">y_prewitt</span><span class="p">)</span>
+
+<span class="n">xray_image_canny</span> <span class="o">*=</span> <span class="mf">255.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xray_image_canny</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The data type - &#39;</span><span class="p">,</span> <span class="n">xray_image_canny</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The data type -  float64
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>2.</strong> Plot the original X-ray image and the ones with the edges detected with
+the help of the Canny filter technique. The edges can be emphasized using the
+<code class="docutils literal notranslate"><span class="pre">prism</span></code>, <code class="docutils literal notranslate"><span class="pre">nipy_spectral</span></code>, and <code class="docutils literal notranslate"><span class="pre">terrain</span></code> Matplotlib colormaps.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canny (edges) - prism&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image_canny</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;prism&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canny (edges) - nipy_spectral&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image_canny</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;nipy_spectral&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canny (edges) - terrain&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image_canny</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;terrain&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">i</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/tutorial-x-ray-image-processing_50_0.png" src="../_images/tutorial-x-ray-image-processing_50_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="apply-masks-to-x-rays-with-np-where">
+<h2>Apply masks to X-rays with <code class="docutils literal notranslate"><span class="pre">np.where()</span></code><a class="headerlink" href="#apply-masks-to-x-rays-with-np-where" title="Permalink to this headline">¶</a></h2>
+<p>To screen out only certain pixels in X-ray images to help detect particular
+features, you can apply masks with NumPy’s
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.where.html"><code class="docutils literal notranslate"><span class="pre">np.where(condition:</span> <span class="pre">array_like</span> <span class="pre">(bool),</span> <span class="pre">x:</span> <span class="pre">array_like,</span> <span class="pre">y:</span> <span class="pre">ndarray)</span></code></a>
+that returns <code class="docutils literal notranslate"><span class="pre">x</span></code> when <code class="docutils literal notranslate"><span class="pre">True</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> when <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>Identifying regions of interest — certain sets of pixels in an image — can be
+useful and masks serve as boolean arrays of the same shape as the original
+image.</p>
+<p><strong>1.</strong> Retrieve some basics statistics about the pixel values in the original
+X-ray image you’ve been working with:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The data type of the X-ray image is: &#39;</span><span class="p">,</span> <span class="n">xray_image</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The minimum pixel value is: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">xray_image</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The maximum pixel value is: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xray_image</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The average pixel value is: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xray_image</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The median pixel value is: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">xray_image</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The data type of the X-ray image is:  uint8
+The minimum pixel value is:  0
+The maximum pixel value is:  255
+The average pixel value is:  172.52233219146729
+The median pixel value is:  195.0
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>2.</strong> The array data type is <code class="docutils literal notranslate"><span class="pre">uint8</span></code> and the minimum/maximum value results
+suggest that all 256 colors (from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">255</span></code>) are used in the X-ray. Let’s
+visualize the <em>pixel intensity distribution</em> of the original raw X-ray image
+with <code class="docutils literal notranslate"><span class="pre">ndimage.histogram()</span></code> and Matplotlib:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pixel_intensity_distribution</span> <span class="o">=</span> <span class="n">ndimage</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">xray_image</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">xray_image</span><span class="p">),</span> <span class="nb">max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xray_image</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pixel_intensity_distribution</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Pixel intensity distribution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/tutorial-x-ray-image-processing_56_0.png" src="../_images/tutorial-x-ray-image-processing_56_0.png" />
+</div>
+</div>
+<p>As the pixel intensity distribution suggests, there are many low (between around
+0 and 20) and very high (between around 200 and 240) pixel values.</p>
+<p><strong>3.</strong> You can create different conditional masks with NumPy’s <code class="docutils literal notranslate"><span class="pre">np.where()</span></code> —
+for example, let’s have only those values of the image with the pixels exceeding
+a certain threshold:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The threshold is &quot;greater than 150&quot;</span>
+<span class="c1"># Return the original image if true, `0` otherwise</span>
+<span class="n">xray_image_mask_noisy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">xray_image</span> <span class="o">&gt;</span> <span class="mi">150</span><span class="p">,</span> <span class="n">xray_image</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image_mask_noisy</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/tutorial-x-ray-image-processing_58_0.png" src="../_images/tutorial-x-ray-image-processing_58_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The threshold is &quot;greater than 150&quot;</span>
+<span class="c1"># Return `1` if true, `0` otherwise</span>
+<span class="n">xray_image_mask_less_noisy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">xray_image</span> <span class="o">&gt;</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image_mask_less_noisy</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/tutorial-x-ray-image-processing_59_0.png" src="../_images/tutorial-x-ray-image-processing_59_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="compare-the-results">
+<h2>Compare the results<a class="headerlink" href="#compare-the-results" title="Permalink to this headline">¶</a></h2>
+<p>Let’s display some of the results of processed X-ray images you’ve worked with
+so far:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Laplace-Gaussian (edges)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image_laplace_gaussian</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Gaussian gradient (edges)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x_ray_image_gaussian_gradient</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Sobel (edges) - grayscale&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image_sobel</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Sobel (edges) - hot&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image_sobel</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hot&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canny (edges) - prism)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image_canny</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;prism&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Canny (edges) - nipy_spectral)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image_canny</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;nipy_spectral&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Mask (&gt; 150, noisy)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image_mask_noisy</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Mask (&gt; 150, less noisy)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image_mask_less_noisy</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="n">i</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/tutorial-x-ray-image-processing_62_0.png" src="../_images/tutorial-x-ray-image-processing_62_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>If you want to use your own samples, you can use
+<a class="reference external" href="https://openi.nlm.nih.gov/detailedresult?img=CXR3666_IM-1824-1001&amp;query=chest%20infection&amp;it=xg&amp;req=4&amp;npos=32">this image</a>
+or search for various other ones on the <a class="reference external" href="https://openi.nlm.nih.gov"><em>Openi</em></a>
+database. Openi contains many biomedical images and it can be especially helpful
+if you have low bandwidth and/or are restricted by the amount of data you can
+download.</p>
+<p>To learn more about image processing in the context of biomedical image data or
+simply edge detection, you may find the following material useful:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.raddq.com/dicom-processing-segmentation-visualization-in-python/">DICOM processing and segmentation in Python</a> with Scikit-Image and pydicom (Radiology Data Quest)</p></li>
+<li><p><a class="reference external" href="https://scipy-lectures.org/advanced/image_processing/index.html">Image manipulation and processing using Numpy and Scipy</a> (Scipy Lecture Notes)</p></li>
+<li><p><a class="reference external" href="https://s3.amazonaws.com/assets.datacamp.com/production/course_7032/slides/chapter2.pdf">Intensity values</a> (presentation, DataCamp)</p></li>
+<li><p><a class="reference external" href="https://makersportal.com/blog/2019/4/23/image-processing-with-raspberry-pi-and-python-part-ii-spatial-statistics-and-correlations">Object detection with Raspberry Pi and Python</a> (Maker Portal)</p></li>
+<li><p><a class="reference external" href="https://www.kaggle.com/eduardomineo/u-net-lung-segmentation-montgomery-shenzhen">X-ray data preparation and segmentation</a> with deep learning (a Kaggle-hosted Jupyter notebook)</p></li>
+<li><p><a class="reference external" href="https://www.cs.cornell.edu/courses/cs6670/2011sp/lectures/lec02_filter.pdf">Image filtering</a> (lecture slides, CS6670: Computer Vision, Cornell University)</p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/edge-detection-in-python-a3c263a13e03">Edge detection in Python</a> and NumPy (Towards Data Science)</p></li>
+<li><p><a class="reference external" href="https://datacarpentry.org/image-processing/08-edge-detection/">Edge detection</a> with Scikit-Image (Data Carpentry)</p></li>
+<li><p><a class="reference external" href="https://www.cs.cmu.edu/~16385/s17/Slides/4.0_Image_Gradients_and_Gradient_Filtering.pdf">Image gradients and gradient filtering</a> (lecture slides, 16-385 Computer Vision, Carnegie Mellon University)</p></li>
+</ul>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="tutorial-deep-learning-on-mnist.html" title="previous page">Tutorial: Deep learning on MNIST</a>
+    <a class='right-next' id="next-link" href="tutorial-style-guide.html" title="next page">Learn to write a NumPy tutorial</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By the NumPy community<br/>
+        
+            &copy; Copyright 2020, the NumPy community.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

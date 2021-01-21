@@ -1,0 +1,499 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn to write a NumPy tutorial &#8212; NumPy Tutorials</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Tutorial: X-ray image processing" href="tutorial-x-ray-image-processing.html" />
+  <meta name="robots" content="noindex" />
+  
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/numpylogo.svg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">NumPy Tutorials</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cs231_tutorial.html">
+   CS231n Python Tutorial With Google Colab
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial-svd.html">
+   Tutorial: Linear algebra on n-dimensional arrays
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="mooreslaw-tutorial.html">
+   Determining Moore’s Law with real data in NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="save-load-arrays.html">
+   Saving and sharing your NumPy arrays
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial-deep-learning-on-mnist.html">
+   Tutorial: Deep learning on MNIST
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial-x-ray-image-processing.html">
+   Tutorial: X-ray image processing
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Learn to write a NumPy tutorial
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        <a class="dropdown-buttons"
+            href="../_sources/content/tutorial-style-guide.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/content/tutorial-style-guide.md.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/numpy/numpy-tutorials/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-style-guide.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/master/site/content/tutorial-style-guide.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/master?urlpath=tree/site/content/tutorial-style-guide.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-ll-do">
+   What you’ll do
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-ll-learn">
+   What you’ll learn
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-ll-need">
+   What you’ll need
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#after-a-horizontal-rule-start-your-own-headings">
+   After a horizontal rule, start your own headings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#titles-have-verbs">
+   Titles have verbs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#titles-are-lowercase">
+   Titles are lowercase
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-to-say-in-what-you-ll-learn">
+   What to say in “What you’ll learn”
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-are-what-you-ll-do-and-what-you-ll-learn-different">
+   Why are “What you’ll do” and “What you’ll learn” different?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#avoid-asides">
+   Avoid asides
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use-plots-and-illustrations">
+   Use plots and illustrations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#use-real-datasets-when-possible">
+   Use real datasets when possible
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tutorials-and-how-to-s-similar-but-different">
+   Tutorials and how-to’s  – similar but different
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#make-use-of-the-google-doc-style-guide">
+   Make use of the Google doc style guide
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-notebook-must-be-fully-executable">
+   The notebook must be fully executable
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#div-style-background-color-fcdcdc-code-style-background-color-fcdcdc-font-size-90">
+   <div style="background-color:#fcdcdc">
+    <code style="background-color:#fcdcdc;font-size:90%">
+    </code>
+   </div>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#on-your-own">
+   On your own
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#in-practice">
+   In practice…
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-reading">
+   Further reading
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="learn-to-write-a-numpy-tutorial">
+<h1>Learn to write a NumPy tutorial<a class="headerlink" href="#learn-to-write-a-numpy-tutorial" title="Permalink to this headline">¶</a></h1>
+<p><img alt="image" src="https://documentation.divio.com/_images/overview.png" /></p>
+<p style="text-align:right;font-style:italic;">Image credit: Daniele Procida's <a href="https://documentation.divio.com/">The documentation system</a></p><div class="section" id="what-you-ll-do">
+<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this headline">¶</a></h2>
+<p>Guided by a template, you’ll write a NumPy tutorial.</p>
+</div>
+<div class="section" id="what-you-ll-learn">
+<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>You’ll be able to craft a tutorial that follows a standard format and reflects good teaching practice.</p></li>
+<li><p>You’ll learn the three standard headings that open a NumPy tutorial – <strong>What you’ll do,</strong> <strong>What you’ll learn,</strong> and <strong>What you’ll need</strong> – and some optional headings for the bottom – <strong>On your own,</strong> <strong>In practice,</strong> <strong>Further reading.</strong></p></li>
+<li><p>You’ll know what makes <strong>What you’ll learn</strong> different from <strong>What you’ll do.</strong></p></li>
+<li><p>You’ll be able to distinguish a <strong>tutorial</strong> from a <strong>how-to</strong>.</p></li>
+<li><p>You’ll learn what not to put in a <strong>What you’ll learn</strong> section.</p></li>
+</ul>
+</div>
+<div class="section" id="what-you-ll-need">
+<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>This template.</p></li>
+<li><p>A portrait of your intended reader.</p>
+<ul>
+<li><p>Just as schools list prerequisites for higher-level courses, you can assume readers know some things (which you must list, as noted in the next bullet). Overexplaining bogs down the tutorial and obscures the main points.</p></li>
+<li><p>But also put yourself in the reader’s place and consider what to explain along the way.</p></li>
+</ul>
+</li>
+<li><p>“What you’ll need” is a list of:</p>
+<ul>
+<li><p>packages that must be present on the user’s machine before they begin. Don’t include <code class="docutils literal notranslate"><span class="pre">numpy</span></code>.</p></li>
+<li><p>what you assumed the reader knew in the bullet above. Don’t say <code class="docutils literal notranslate"><span class="pre">Python</span></code>;  <code class="docutils literal notranslate"><span class="pre">familiarity</span> <span class="pre">with</span> <span class="pre">Python</span> <span class="pre">iterators</span></code> is fine.</p></li>
+</ul>
+</li>
+<li><p>Informality and enthusiasm. Imagine your reader not out in the audience but next to you.</p></li>
+<li><p>Willingness to write incomplete sentences for the <strong>What you’ll need</strong> bullets. They don’t begin with the words “You’ll need.”</p></li>
+<li><p><strong>Not</strong> required are native English skills. Others can help.</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="after-a-horizontal-rule-start-your-own-headings">
+<h2>After a horizontal rule, start your own headings<a class="headerlink" href="#after-a-horizontal-rule-start-your-own-headings" title="Permalink to this headline">¶</a></h2>
+<p>Your tutorial steps begin here, using headings of your choice. At the end of the tutorial you’ll place another horizontal rule and return to standard headings.</p>
+</div>
+<div class="section" id="titles-have-verbs">
+<h2>Titles have verbs<a class="headerlink" href="#titles-have-verbs" title="Permalink to this headline">¶</a></h2>
+<p>In general, include a verb in the title; thus <strong>Learn to write a NumPy tutorial</strong> rather than “Rules for NumPy tutorials.” Consider putting verbs in the headings as well.</p>
+</div>
+<div class="section" id="titles-are-lowercase">
+<h2>Titles are lowercase<a class="headerlink" href="#titles-are-lowercase" title="Permalink to this headline">¶</a></h2>
+<p>Capitalize the first word, and after that only words that are ordinarily capitalized (so not “Titles Are Lowercase”).</p>
+</div>
+<div class="section" id="what-to-say-in-what-you-ll-learn">
+<h2>What to say in “What you’ll learn”<a class="headerlink" href="#what-to-say-in-what-you-ll-learn" title="Permalink to this headline">¶</a></h2>
+<p>Avoid abstraction. “About” is a tipoff: Rather than writing “You’ll learn about NumPy I/O,” write “You’ll learn how to read a comma-delimited text file into a NumPy array.”</p>
+</div>
+<div class="section" id="why-are-what-you-ll-do-and-what-you-ll-learn-different">
+<h2>Why are “What you’ll do” and “What you’ll learn” different?<a class="headerlink" href="#why-are-what-you-ll-do-and-what-you-ll-learn-different" title="Permalink to this headline">¶</a></h2>
+<p><strong>What you’ll do</strong> is typically one sentence listing an end product: “You’ll bake a cake.” This makes the endpoint clear. <strong>What you’ll learn</strong> lists the payoffs, and there may be many: “You’ll learn to follow a recipe. You’ll get practice measuring ingredients. You’ll learn how to tell when a cake is ready to come out of the oven.”</p>
+</div>
+<div class="section" id="avoid-asides">
+<h2>Avoid asides<a class="headerlink" href="#avoid-asides" title="Permalink to this headline">¶</a></h2>
+<p>As explained by master documentation writer <a class="reference external" href="https://documentation.divio.com/tutorials">Daniele Procida</a>:</p>
+<blockquote>
+<div><p>Don’t explain anything the learner doesn’t need to know in order to complete the tutorial.</p>
+</div></blockquote>
+<p>Because tutorial steps are chosen to be clear and easy, they may fall short of
+production-grade. Yes, you should share this, but not during the tutorial, which should be straightforward and assured. The <code class="docutils literal notranslate"><span class="pre">In</span> <span class="pre">practice</span></code> section is the place for details, exceptions, alternatives, and similar fine print.</p>
+</div>
+<div class="section" id="use-plots-and-illustrations">
+<h2>Use plots and illustrations<a class="headerlink" href="#use-plots-and-illustrations" title="Permalink to this headline">¶</a></h2>
+<p>Figures are a double win; they amplify your points and make the page inviting.  Like English skills, artistic skills (or graphic-toolset skills) aren’t required. Even if you only scan a hand illustration, somebody can polish it.</p>
+<p>An illustration below the title, even if it’s only decorative, makes your page distinctive.</p>
+</div>
+<div class="section" id="use-real-datasets-when-possible">
+<h2>Use real datasets when possible<a class="headerlink" href="#use-real-datasets-when-possible" title="Permalink to this headline">¶</a></h2>
+<p>Readers are likelier to be engaged by a real use case. Be sure you have rights to the data.</p>
+</div>
+<div class="section" id="tutorials-and-how-to-s-similar-but-different">
+<h2>Tutorials and how-to’s  – similar but different<a class="headerlink" href="#tutorials-and-how-to-s-similar-but-different" title="Permalink to this headline">¶</a></h2>
+<p>Tutorial readers are out-of-towners who want a feel for the place. Pick any single destination and explain sights along the way.</p>
+<p>Unlike how-to readers, who know what they need, tutorial readers don’t know what it is they don’t know. So while tutorials need headings like <strong>What you’ll do</strong> and <strong>What you’ll learn</strong>, these headings would never appear in a how-to.</p>
+</div>
+<div class="section" id="make-use-of-the-google-doc-style-guide">
+<h2>Make use of the Google doc style guide<a class="headerlink" href="#make-use-of-the-google-doc-style-guide" title="Permalink to this headline">¶</a></h2>
+<p>NumPy docs follow the <a class="reference external" href="https://developers.google.com/style/">Google developer documentation style guide</a>. In addition to providing answers to recurring questions (“crossreference” or “cross-reference”?) the guide is filled with suggestions that will strengthen your doc writing.</p>
+</div>
+<div class="section" id="the-notebook-must-be-fully-executable">
+<h2>The notebook must be fully executable<a class="headerlink" href="#the-notebook-must-be-fully-executable" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">all</span> <span class="pre">cells</span></code> should execute all cells to the bottom of the file. If you’re demonstrating a bad expression and want to show the traceback, comment
+the expression and put the traceback in a text cell.</p>
+<p>(Note that triple backquotes won’t be enough for a traceback that contains <code class="docutils literal notranslate"><span class="pre">&lt;text</span> <span class="pre">inside</span> <span class="pre">angle</span> <span class="pre">brackets&gt;</span></code>,
+the angle brackets must be replaced by <code class="docutils literal notranslate"><span class="pre">&amp;lt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&amp;gt;</span></code> as shown in the text cell markdown below.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#100/0</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="div-style-background-color-fcdcdc-code-style-background-color-fcdcdc-font-size-90">
+<h2><div style="background-color:#fcdcdc">
+<code style="background-color:#fcdcdc;font-size:90%"><a class="headerlink" href="#div-style-background-color-fcdcdc-code-style-background-color-fcdcdc-font-size-90" title="Permalink to this headline">¶</a></h2>
+<p>ZeroDivisionError                         Traceback (most recent call last)
+&lt;ipython-input-10-bbe761e74a70&gt; in &lt;module&gt;
+—-&gt; 1 100/0</p>
+<p>ZeroDivisionError: division by zero
+</code></p>
+</div></div>
+<hr class="docutils" />
+<div class="section" id="on-your-own">
+<h2>On your own<a class="headerlink" href="#on-your-own" title="Permalink to this headline">¶</a></h2>
+<p>Close the tutorial section with a horizontal rule. You’re free to take any direction now, but here are three suggested sections.</p>
+<p>In an optional <code class="docutils literal notranslate"><span class="pre">On</span> <span class="pre">your</span> <span class="pre">own</span></code> section, you can offer an assignment for readers to exercise their new skills. If it’s a question with an answer, provide it – perhaps in a footnote to keep it from being a spoiler.</p>
+</div>
+<div class="section" id="in-practice">
+<h2>In practice…<a class="headerlink" href="#in-practice" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The fine print that you avoided can go in this section.</p></li>
+<li><p>Don’t just say it’s usually done another way; explain why.</p></li>
+</ul>
+</div>
+<div class="section" id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Ideally, rather than giving bare links, <strong>Further reading</strong> describes the references: <a class="reference external" href="https://documentation.divio.com/">The Documentation System</a> is the inspiration for this tutorial, and describes three other kinds of documentation.</p></li>
+<li><p>The Google guide is long; there’s also <a class="reference external" href="https://developers.google.com/style/highlights?hl=pt-br">a summary</a>.</p></li>
+<li><p>NumPy’s website includes a <a class="reference external" href="https://numpy.org/devdocs/dev/howto-docs.html">documentation how-to</a>.</p></li>
+</ul>
+</div>
+</div>
+
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="tutorial-x-ray-image-processing.html" title="previous page">Tutorial: X-ray image processing</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By the NumPy community<br/>
+        
+            &copy; Copyright 2020, the NumPy community.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
