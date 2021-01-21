@@ -97,7 +97,7 @@ You will train your Pong agent through an "on-policy" method using policy gradie
 
 +++ {"id": "k7UEY24ACQVp"}
 
-1. First, First, you should install OpenAI Gym (using `pip install gym[atari]` - this package is currently not available on conda), and import NumPy, Gym and the necessary modules:
+1. First, you should install OpenAI Gym (using `pip install gym[atari]` - this package is currently not available on conda), and import NumPy, Gym and the necessary modules:
 
 ```{code-cell} ipython3
 :id: 7cWZsoNtKbFy
