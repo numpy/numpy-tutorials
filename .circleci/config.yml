@@ -2,7 +2,8 @@
 
 version: 2
 jobs:
-  build:
+
+  build-docs:
     working_directory: ~/repo
     docker:
       - image: circleci/python:3.8.5-buster
@@ -28,3 +29,51 @@ jobs:
 
       - store_artifacts:
           path: site/_build/html
+
+      - persist_to_workspace:
+          root: site/_build
+          paths: html
+
+  deploy-docs:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/python:3.8.5-buster
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: site/_build
+
+      - run:
+          name: install deploy deps
+          command : |
+            python3 -m pip install --user ghp-import
+
+      - run:
+          name: configure git
+          command: |
+            git config --global user.name "ci-doc-deploy-bot"
+            git config --global user.email "ci-doc-deploy-bot@nomail"
+            git config --global push.default simple
+
+      - add_ssh_keys:
+          fingerprints:
+            db:84:df:44:ad:77:d0:aa:2d:81:c9:73:30:9d:21:37
+
+      - run:
+          name: deploy to gh-pages
+          command: |
+            ghp-import -n -f -p -m "[skip ci] docs build of $CIRCLE_SHA1" site/_build/html
+
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build-docs
+      - deploy-docs:
+          requires:
+            - build-docs
+          filters:
+            branches:
+              only: master
