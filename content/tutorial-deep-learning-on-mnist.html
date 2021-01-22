@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tutorial: Deep learning on MNIST &#8212; NumPy Tutorials</title>
     
-  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -363,10 +363,10 @@
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: t10k-images-idx3-ubyte.gz
+Downloading file: train-labels-idx1-ubyte.gz
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-labels-idx1-ubyte.gz
-Downloading file: t10k-labels-idx1-ubyte.gz
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: t10k-labels-idx1-ubyte.gz
 </pre></div>
 </div>
 </div>
@@ -724,17 +724,17 @@ The data type of test labels: float64
 </div>
 </div>
 <p><strong>3.</strong> Set certain default values of <a class="reference external" href="https://en.wikipedia.org/wiki/Hyperparameter_(machine_learning)">hyperparameters</a>, such as:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- [_Learning rate_](https://en.wikipedia.org/wiki/Learning_rate): `learning_rate` — helps limit the magnitude of weight updates to prevent them from overcorrecting.
-- _Epochs (iterations)_: `epochs` — the number of complete passes — forward and backward propagations — of the data through the network. This parameter can positively or negatively affect the results. The higher the iterations, the longer the learning process may take.
-- _Size of the hidden (middle) layer in a network_: `hidden_size` — different sizes of the hidden layer can affect the results during training and testing.
-- _Size of the input:_ `pixels_per_image` — you have established that the image input is 784 (28x28) (in pixels).
-- _Number of labels_: `num_labels` — indicates the output number for the output layer where the predictions occur for 10 (0 to 9) handwritten digit labels.
-</pre></div>
-</div>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Learning_rate"><em>Learning rate</em></a>: <code class="docutils literal notranslate"><span class="pre">learning_rate</span></code> — helps limit the magnitude of weight updates to prevent them from overcorrecting.</p></li>
+<li><p><em>Epochs (iterations)</em>: <code class="docutils literal notranslate"><span class="pre">epochs</span></code> — the number of complete passes — forward and backward propagations — of the data through the network. This parameter can positively or negatively affect the results. The higher the iterations, the longer the learning process may take. Because this is a computationally intensive task, we have chosen a very low number of epochs (20). To get meaningful results, you should choose a much larger number.</p></li>
+<li><p><em>Size of the hidden (middle) layer in a network</em>: <code class="docutils literal notranslate"><span class="pre">hidden_size</span></code> — different sizes of the hidden layer can affect the results during training and testing.</p></li>
+<li><p><em>Size of the input:</em> <code class="docutils literal notranslate"><span class="pre">pixels_per_image</span></code> — you have established that the image input is 784 (28x28) (in pixels).</p></li>
+<li><p><em>Number of labels</em>: <code class="docutils literal notranslate"><span class="pre">num_labels</span></code> — indicates the output number for the output layer where the predictions occur for 10 (0 to 9) handwritten digit labels.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.005</span>
-<span class="n">epochs</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">hidden_size</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">pixels_per_image</span> <span class="o">=</span> <span class="mi">784</span>
 <span class="n">num_labels</span> <span class="o">=</span> <span class="mi">10</span>
@@ -751,7 +751,8 @@ The data type of test labels: float64
 </div>
 </div>
 </div>
-<p><strong>5.</strong> Set up the neural network’s learning experiment with a training loop and start the training process:</p>
+<p><strong>5.</strong> Set up the neural network’s learning experiment with a training loop and start the training process.</p>
+<p>Start the training process:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To store training and test set losses and accurate predictions</span>
@@ -767,7 +768,7 @@ The data type of test labels: float64
     <span class="c1"># Set the initial loss/error and the number of accurate predictions to zero.</span>
     <span class="n">training_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">training_accurate_predictions</span> <span class="o">=</span> <span class="mi">0</span>
-    
+
     <span class="c1"># For all images in the training set, perform a forward pass</span>
     <span class="c1"># and backpropagation and adjust the weights accordingly.</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">training_images</span><span class="p">)):</span>
@@ -807,7 +808,7 @@ The data type of test labels: float64
         <span class="c1">#    by multiplying them by the learning rate and the gradients.</span>
         <span class="n">weights_1</span> <span class="o">+=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">layer_0</span><span class="p">,</span> <span class="n">layer_1_delta</span><span class="p">)</span>
         <span class="n">weights_2</span> <span class="o">+=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">layer_1</span><span class="p">,</span> <span class="n">layer_2_delta</span><span class="p">)</span>
-    
+
     <span class="c1"># Store training set losses and accurate predictions.</span>
     <span class="n">store_training_loss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">training_loss</span><span class="p">)</span>
     <span class="n">store_training_accurate_pred</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">training_accurate_predictions</span><span class="p">)</span>
@@ -816,7 +817,7 @@ The data type of test labels: float64
     <span class="c1"># 1. Set the initial error and the number of accurate predictions to zero.</span>
     <span class="n">test_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">test_accurate_predictions</span> <span class="o">=</span> <span class="mi">0</span>
-    
+
     <span class="c1"># 2. Start testing the model by evaluating on the test image dataset.</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_images</span><span class="p">)):</span>
         <span class="c1"># 1. Pass the test images through the input layer.</span>
@@ -908,250 +909,10 @@ The data type of test labels: float64
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 19 Training set error:0.440 Training set accuracy:0.818 Test set error:0.428 Test set accuracy:0.8103
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 20 Training set error:0.430 Training set accuracy:0.809 Test set error:0.415 Test set accuracy:0.8133
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 21 Training set error:0.436 Training set accuracy:0.801 Test set error:0.435 Test set accuracy:0.8042
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 22 Training set error:0.425 Training set accuracy:0.819 Test set error:0.427 Test set accuracy:0.8008
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 23 Training set error:0.427 Training set accuracy:0.813 Test set error:0.432 Test set accuracy:0.8127
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 24 Training set error:0.431 Training set accuracy:0.806 Test set error:0.429 Test set accuracy:0.8061
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 25 Training set error:0.434 Training set accuracy:0.816 Test set error:0.428 Test set accuracy:0.8121
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 26 Training set error:0.426 Training set accuracy:0.831 Test set error:0.430 Test set accuracy:0.8084
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 27 Training set error:0.432 Training set accuracy:0.805 Test set error:0.427 Test set accuracy:0.8065
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 28 Training set error:0.411 Training set accuracy:0.831 Test set error:0.431 Test set accuracy:0.7985
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 29 Training set error:0.403 Training set accuracy:0.83 Test set error:0.424 Test set accuracy:0.8096
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 30 Training set error:0.415 Training set accuracy:0.811 Test set error:0.421 Test set accuracy:0.8114
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 31 Training set error:0.424 Training set accuracy:0.813 Test set error:0.428 Test set accuracy:0.8043
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 32 Training set error:0.411 Training set accuracy:0.83 Test set error:0.422 Test set accuracy:0.8155
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 33 Training set error:0.423 Training set accuracy:0.802 Test set error:0.420 Test set accuracy:0.8109
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 34 Training set error:0.417 Training set accuracy:0.816 Test set error:0.417 Test set accuracy:0.8123
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 35 Training set error:0.410 Training set accuracy:0.824 Test set error:0.430 Test set accuracy:0.8064
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 36 Training set error:0.417 Training set accuracy:0.826 Test set error:0.422 Test set accuracy:0.808
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 37 Training set error:0.416 Training set accuracy:0.835 Test set error:0.425 Test set accuracy:0.8099
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 38 Training set error:0.411 Training set accuracy:0.83 Test set error:0.419 Test set accuracy:0.8128
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 39 Training set error:0.409 Training set accuracy:0.827 Test set error:0.420 Test set accuracy:0.8044
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 40 Training set error:0.413 Training set accuracy:0.827 Test set error:0.419 Test set accuracy:0.8112
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 41 Training set error:0.410 Training set accuracy:0.85 Test set error:0.420 Test set accuracy:0.8102
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 42 Training set error:0.405 Training set accuracy:0.833 Test set error:0.419 Test set accuracy:0.8165
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 43 Training set error:0.409 Training set accuracy:0.824 Test set error:0.415 Test set accuracy:0.8196
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 44 Training set error:0.396 Training set accuracy:0.83 Test set error:0.415 Test set accuracy:0.8181
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 45 Training set error:0.401 Training set accuracy:0.85 Test set error:0.425 Test set accuracy:0.8083
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 46 Training set error:0.412 Training set accuracy:0.836 Test set error:0.416 Test set accuracy:0.8051
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 47 Training set error:0.404 Training set accuracy:0.844 Test set error:0.424 Test set accuracy:0.8059
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 48 Training set error:0.399 Training set accuracy:0.841 Test set error:0.417 Test set accuracy:0.8137
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 49 Training set error:0.404 Training set accuracy:0.841 Test set error:0.416 Test set accuracy:0.8151
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 50 Training set error:0.392 Training set accuracy:0.836 Test set error:0.409 Test set accuracy:0.8133
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 51 Training set error:0.398 Training set accuracy:0.838 Test set error:0.412 Test set accuracy:0.8121
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 52 Training set error:0.388 Training set accuracy:0.844 Test set error:0.417 Test set accuracy:0.8171
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 53 Training set error:0.399 Training set accuracy:0.831 Test set error:0.417 Test set accuracy:0.8101
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 54 Training set error:0.393 Training set accuracy:0.842 Test set error:0.411 Test set accuracy:0.8165
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 55 Training set error:0.387 Training set accuracy:0.847 Test set error:0.415 Test set accuracy:0.8177
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 56 Training set error:0.390 Training set accuracy:0.842 Test set error:0.416 Test set accuracy:0.8164
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 57 Training set error:0.391 Training set accuracy:0.839 Test set error:0.404 Test set accuracy:0.8178
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 58 Training set error:0.383 Training set accuracy:0.846 Test set error:0.411 Test set accuracy:0.8126
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 59 Training set error:0.394 Training set accuracy:0.852 Test set error:0.410 Test set accuracy:0.8164
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 60 Training set error:0.402 Training set accuracy:0.836 Test set error:0.412 Test set accuracy:0.8236
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 61 Training set error:0.390 Training set accuracy:0.848 Test set error:0.414 Test set accuracy:0.823
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 62 Training set error:0.386 Training set accuracy:0.846 Test set error:0.405 Test set accuracy:0.8168
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 63 Training set error:0.390 Training set accuracy:0.859 Test set error:0.409 Test set accuracy:0.8217
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 64 Training set error:0.389 Training set accuracy:0.85 Test set error:0.409 Test set accuracy:0.8186
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 65 Training set error:0.393 Training set accuracy:0.847 Test set error:0.402 Test set accuracy:0.8182
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 66 Training set error:0.380 Training set accuracy:0.843 Test set error:0.407 Test set accuracy:0.8111
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 67 Training set error:0.386 Training set accuracy:0.846 Test set error:0.419 Test set accuracy:0.813
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 68 Training set error:0.391 Training set accuracy:0.845 Test set error:0.410 Test set accuracy:0.8105
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 69 Training set error:0.400 Training set accuracy:0.856 Test set error:0.412 Test set accuracy:0.7985
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 70 Training set error:0.383 Training set accuracy:0.857 Test set error:0.412 Test set accuracy:0.8033
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 71 Training set error:0.380 Training set accuracy:0.844 Test set error:0.411 Test set accuracy:0.8115
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 72 Training set error:0.388 Training set accuracy:0.853 Test set error:0.411 Test set accuracy:0.8049
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 73 Training set error:0.374 Training set accuracy:0.856 Test set error:0.415 Test set accuracy:0.7861
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 74 Training set error:0.393 Training set accuracy:0.844 Test set error:0.412 Test set accuracy:0.8051
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 75 Training set error:0.389 Training set accuracy:0.85 Test set error:0.415 Test set accuracy:0.8124
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 76 Training set error:0.388 Training set accuracy:0.857 Test set error:0.420 Test set accuracy:0.8012
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 77 Training set error:0.384 Training set accuracy:0.851 Test set error:0.420 Test set accuracy:0.7946
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 78 Training set error:0.388 Training set accuracy:0.851 Test set error:0.422 Test set accuracy:0.7995
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 79 Training set error:0.383 Training set accuracy:0.852 Test set error:0.407 Test set accuracy:0.8076
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 80 Training set error:0.386 Training set accuracy:0.854 Test set error:0.410 Test set accuracy:0.8054
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 81 Training set error:0.378 Training set accuracy:0.863 Test set error:0.410 Test set accuracy:0.8109
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 82 Training set error:0.364 Training set accuracy:0.865 Test set error:0.408 Test set accuracy:0.7994
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 83 Training set error:0.364 Training set accuracy:0.859 Test set error:0.395 Test set accuracy:0.8164
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 84 Training set error:0.378 Training set accuracy:0.854 Test set error:0.410 Test set accuracy:0.8116
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 85 Training set error:0.388 Training set accuracy:0.844 Test set error:0.406 Test set accuracy:0.8122
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 86 Training set error:0.367 Training set accuracy:0.859 Test set error:0.404 Test set accuracy:0.8109
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 87 Training set error:0.380 Training set accuracy:0.847 Test set error:0.410 Test set accuracy:0.8092
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 88 Training set error:0.369 Training set accuracy:0.859 Test set error:0.422 Test set accuracy:0.7978
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 89 Training set error:0.362 Training set accuracy:0.865 Test set error:0.417 Test set accuracy:0.7887
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 90 Training set error:0.376 Training set accuracy:0.868 Test set error:0.411 Test set accuracy:0.8144
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 91 Training set error:0.365 Training set accuracy:0.851 Test set error:0.411 Test set accuracy:0.7982
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 92 Training set error:0.373 Training set accuracy:0.86 Test set error:0.410 Test set accuracy:0.805
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 93 Training set error:0.366 Training set accuracy:0.864 Test set error:0.397 Test set accuracy:0.8177
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 94 Training set error:0.367 Training set accuracy:0.872 Test set error:0.402 Test set accuracy:0.8112
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 95 Training set error:0.364 Training set accuracy:0.853 Test set error:0.404 Test set accuracy:0.8012
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 96 Training set error:0.365 Training set accuracy:0.867 Test set error:0.405 Test set accuracy:0.8023
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 97 Training set error:0.367 Training set accuracy:0.861 Test set error:0.408 Test set accuracy:0.7954
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 98 Training set error:0.363 Training set accuracy:0.859 Test set error:0.409 Test set accuracy:0.7974
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 99 Training set error:0.365 Training set accuracy:0.867 Test set error:0.407 Test set accuracy:0.7954
-</pre></div>
-</div>
 </div>
 </div>
 <p>The training process may take many minutes, depending on a number of factors, such as the processing power of the machine you are running the experiment on and the number of epochs. To reduce the waiting time, you can change the epoch (iteration) variable from 100 to a lower number, reset the runtime (which will reset the weights), and run the notebook cells again.</p>
-<p>Let’s visualize the training and test set errors and accuracy:</p>
+<p>After executing the cell above, you can visualize the training and test set errors and accuracy for an instance of this training process.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The training set metrics.</span>
@@ -1238,7 +999,7 @@ The data type of test labels: float64
     </div>
 
     
-  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     
