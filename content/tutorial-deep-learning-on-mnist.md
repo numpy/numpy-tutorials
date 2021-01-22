@@ -359,15 +359,15 @@ def relu2deriv(output):
 
 **3.** Set certain default values of [hyperparameters](https://en.wikipedia.org/wiki/Hyperparameter_(machine_learning)), such as:
 
-    - [_Learning rate_](https://en.wikipedia.org/wiki/Learning_rate): `learning_rate` — helps limit the magnitude of weight updates to prevent them from overcorrecting.
-    - _Epochs (iterations)_: `epochs` — the number of complete passes — forward and backward propagations — of the data through the network. This parameter can positively or negatively affect the results. The higher the iterations, the longer the learning process may take.
-    - _Size of the hidden (middle) layer in a network_: `hidden_size` — different sizes of the hidden layer can affect the results during training and testing.
-    - _Size of the input:_ `pixels_per_image` — you have established that the image input is 784 (28x28) (in pixels).
-    - _Number of labels_: `num_labels` — indicates the output number for the output layer where the predictions occur for 10 (0 to 9) handwritten digit labels.
+- [_Learning rate_](https://en.wikipedia.org/wiki/Learning_rate): `learning_rate` — helps limit the magnitude of weight updates to prevent them from overcorrecting.
+- _Epochs (iterations)_: `epochs` — the number of complete passes — forward and backward propagations — of the data through the network. This parameter can positively or negatively affect the results. The higher the iterations, the longer the learning process may take. Because this is a computationally intensive task, we have chosen a very low number of epochs (20). To get meaningful results, you should choose a much larger number.
+- _Size of the hidden (middle) layer in a network_: `hidden_size` — different sizes of the hidden layer can affect the results during training and testing.
+- _Size of the input:_ `pixels_per_image` — you have established that the image input is 784 (28x28) (in pixels).
+- _Number of labels_: `num_labels` — indicates the output number for the output layer where the predictions occur for 10 (0 to 9) handwritten digit labels.
 
 ```{code-cell} ipython3
 learning_rate = 0.005
-epochs = 100
+epochs = 20
 hidden_size = 100
 pixels_per_image = 784
 num_labels = 10
@@ -380,7 +380,9 @@ weights_1 = 0.2 * np.random.random((pixels_per_image, hidden_size)) - 0.1
 weights_2 = 0.2 * np.random.random((hidden_size, num_labels)) - 0.1
 ```
 
-**5.** Set up the neural network's learning experiment with a training loop and start the training process:
+**5.** Set up the neural network's learning experiment with a training loop and start the training process.
+
+Start the training process:
 
 ```{code-cell} ipython3
 # To store training and test set losses and accurate predictions
@@ -396,7 +398,7 @@ for j in range(epochs):
     # Set the initial loss/error and the number of accurate predictions to zero.
     training_loss = 0.0
     training_accurate_predictions = 0
-    
+
     # For all images in the training set, perform a forward pass
     # and backpropagation and adjust the weights accordingly.
     for i in range(len(training_images)):
@@ -436,7 +438,7 @@ for j in range(epochs):
         #    by multiplying them by the learning rate and the gradients.
         weights_1 += learning_rate * np.outer(layer_0, layer_1_delta)
         weights_2 += learning_rate * np.outer(layer_1, layer_2_delta)
-    
+
     # Store training set losses and accurate predictions.
     store_training_loss.append(training_loss)
     store_training_accurate_pred.append(training_accurate_predictions)
@@ -445,7 +447,7 @@ for j in range(epochs):
     # 1. Set the initial error and the number of accurate predictions to zero.
     test_loss = 0.0
     test_accurate_predictions = 0
-    
+
     # 2. Start testing the model by evaluating on the test image dataset.
     for i in range(len(test_images)):
         # 1. Pass the test images through the input layer.
@@ -479,7 +481,7 @@ The training process may take many minutes, depending on a number of factors, su
 
 +++
 
-Let's visualize the training and test set errors and accuracy:
+After executing the cell above, you can visualize the training and test set errors and accuracy for an instance of this training process.
 
 ```{code-cell} ipython3
 # The training set metrics.
