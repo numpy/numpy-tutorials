@@ -12,3 +12,5 @@ dependencies:
   - imageio
   - pip:
     - jupyter-book
+    - gym[atari]
+
