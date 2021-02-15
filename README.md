@@ -21,6 +21,7 @@ or navigate to any of the documents listed below and download it individually.
 4. [Tutorial: Saving and sharing your NumPy arrays](content/save-load-arrays.md)
 5. [Tutorial: NumPy deep learning on MNIST from scratch](content/tutorial-deep-learning-on-mnist.md)
 6. [Tutorial: X-ray image processing](content/tutorial-x-ray-image-processing.md)
+7. [Tutorial: NumPy deep reinforcement learning with Pong from pixels](content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md) 
 
 ## Contributing
 
@@ -147,4 +148,3 @@ The following links may be useful:
 Note that regular documentation issues for NumPy can be found in the [main NumPy
 repository](https://github.com/numpy/numpy/issues) (see the `Documentation`
 labels there). 
-
