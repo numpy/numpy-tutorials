@@ -13,4 +13,3 @@ dependencies:
   - pip:
     - jupyter-book
     - gym[atari]
-
