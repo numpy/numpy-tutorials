@@ -196,7 +196,7 @@ print('Reaction moment =',M)
 Let's say that instead of a force acting perpendicularly to the beam, a force was applied to our pole through a wire that was also attached to the ground.
 Given the tension in this cord, all you need to solve this problem are the physical locations of these objects.
 
-![image.png](tutorial-static_equilibrium/exampleImage.png)
+![image.png](tutorial-static_equilibrium/static_eqbm-fig01.png)
 
 In response to the forces acting upon the pole, the base generated reaction forces in the x and y directions, as well as a reaction moment.
 
