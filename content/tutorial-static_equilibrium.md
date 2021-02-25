@@ -1,6 +1,5 @@
 ---
 jupytext:
-  formats: ipynb,md:myst
   text_representation:
     extension: .md
     format_name: myst
@@ -12,24 +11,24 @@ kernelspec:
   name: python3
 ---
 
-# Determining Static Equilibrium in NumPY
+# Determining Static Equilibrium in NumPy
 
-When analyzing structures it is crucial to understand the mechanics keeping it stable. Applied forces on a floor, a beam, or any other structure, create reaction forces and moments. These reactions are the structure resisting movement without breaking. You will look at structures that do not move despite having forces applied to them. In this case Newton's second law states that both the acceleration and sum of forces in the system must be zero. Newton's second law describes the sum of forces in all directions. The reactions present must be equal and opposite to the sum of forces. You can represent and solve this concept with NumPy arrays.
+When analyzing physical structures, it is crucial to understand the mechanics keeping them stable. Applied forces on a floor, a beam, or any other structure, create reaction forces and moments. These reactions are the structure resisting movement without breaking. In cases where structures do not move despite having forces applied to them, [Newton's second law](https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion#Newton's_second_law) states that both the acceleration and sum of forces in all directions in the system must be zero. You can represent and solve this concept with NumPy arrays.
 
 ## What you'll do:
 - In this tutorial, you will use NumPy to create vectors and moments using NumPy arrays
-- Solve for cables and floors holding up structures
-- Write NumPy matrixes to isolate unkowns
-- Use NumPy functions to perform linear algebra
+- Solve problems involving cables and floors holding up structures
+- Write NumPy matrices to isolate unkowns
+- Use NumPy functions to perform linear algebra operations
     
 ## What you'll learn:
 - How to represent points, vectors, and moments with NumPy.
-- How to find the normal of vectors
+- How to find the [normal of vectors](https://en.wikipedia.org/wiki/Normal_(geometry))
 - Using NumPy to compute matrix calculations
     
 ## What you'll need:
 - NumPy
-- matplotlib
+- [Matplotlib](https://matplotlib.org/)
 
 imported with the following comands:
 
@@ -40,13 +39,8 @@ import matplotlib.pyplot as plt
 
 In this tutorial you will use the following NumPy tools:
 
-`np.linalg.norm` : this function determines the measure of vector magnitude
-
-`np.cross` : this function takes two matrices and produces the cross product
-
-`plt.figure` : this function creates a figure
-
-`Axes3D` : This gives the figure 3D axes
+* [`np.linalg.norm`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html) : this function determines the measure of vector magnitude
+* [`np.cross`](https://numpy.org/doc/stable/reference/generated/numpy.cross.html) : this function takes two matrices and produces the cross product
 
 +++
 
@@ -54,30 +48,27 @@ In this tutorial you will use the following NumPy tools:
 
 Your model consists of a beam under a sum of forces and moments. You can start analyzing this system with Newton's second law: 
 
-$\ \sum{force} = mass * acceleration$.
+$$\sum{\text{force}} = \text{mass} * \text{acceleration}.$$
 
-In order to simplify the examples looked at, assume they are static, with $\ acceleration = 0$.  Due to our system existing in three dimensions, consider forces being applied in each.  This means that you can represent these forces as vectors. You come to the same conclusion for moments, which result from forces being applied a certain distance away from an object's center of mass.
+In order to simplify the examples looked at, assume they are static, with acceleration $=0$. Due to our system existing in three dimensions, consider forces being applied in each of these dimensions. This means that you can represent these forces as vectors. You come to the same conclusion for [moments](https://en.wikipedia.org/wiki/Moment_(physics)), which result from forces being applied a certain distance away from an object's center of mass.
 
-$\ Example force = <F_{x},F_{y},F_{z}>$
-
-$\ Example Moment = <r_{x},r_{y},r_{z}>\times<F_{x},F_{y},F_{z}>$
-
-$\ \sum{force} = 0$
-
-$\ \sum{moment} = 0$
-
-where F represents the magnitude of the force being applied in each corresponding direction and r is the distance that the force is applied from the centroid of the system. In this convention assume each entry in a vector corresponds to $\ \hat{i}, \hat{j}, \hat{k}$ respectively.
+Assume that the force $F$ is represented as a three-dimensional vector
+$$F = (F_x, F_y, F_z)$$
+where each of the three components represent the magnitude of the force being applied in each corresponding direction. Assume also that each component in the vector
+$$r = (r_x, r_y, r_z)$$
+is the distance between the point where each component of the force is applied and the centroid of the system. Then, the moment can be computed by
+$r \times F = (r_x, r_y, r_z) \times (F_x, F_y, F_z).$$
 
 Start with some simple examples of force vectors
 
 ```{code-cell} ipython3
-forceA = np.array([1,0,0])
-forceB = np.array([0,1,0])
+forceA = np.array([1, 0, 0])
+forceB = np.array([0, 1, 0])
 print('Force A =', forceA)
 print('Force B =', forceB)
 ```
 
-This defines force A as being a vector with magnitude of 1 in the x direction and force B as magnitude 1 in the y direction.
+This defines `forceA` as being a vector with magnitude of 1 in the $x$ direction and `forceB` as magnitude 1 in the $y$ direction.
 
 Use matplotlib to visualize these forces.
 
@@ -101,7 +92,8 @@ d3.quiver(x,y,z,u,v,w) # plotting forceB
 plt.show()
 ```
 
-There are two forces eminating from a single point.
+There are two forces emanating from a single point.
+
 
 In order to simplify this problem, you can add them together to find the sum of forces.
 
@@ -132,43 +124,42 @@ plt.show()
 
 There is now a single vector at the origin.
 However, the goal is equilibrium.
-This means that you want your sum of forces to be <0,0,0> or else your object will experience acceleration
+This means that you want your sum of forces to be $(0, 0, 0)$ or else your object will experience acceleration.
 Therefore, there needs to be another force that counteracts the prior ones.
 
-You can write this problem as $\ A+B+R=0$,
-with R being the reaction force that solves the problem.
+You can write this problem as $A+B+R=0$, with $R$ being the reaction force that solves the problem.
 
 In this example this would mean:
 
-$\ <1,0,0>+<0,1,0>+<R_{x},R_{y},R_{z}>=<0,0,0>$
+$$(1, 0, 0) + (0, 1, 0) + (R_x, R_y, R_z) = (0, 0, 0)$$
 
-Broken into x, y, and z components this gives you:
+Broken into $x$, $y$, and $z$ components this gives you:
 
-$\ 1+0+R_{x}=0$
+$$\begin{cases}
+1+0+R_x=0\\
+0+1+R_y=0\\
+0+0+R_z=0
+\end{cases}$$
 
-$\ 0+1+R_{y}=0$
-
-$\ 0+0+R_{z}=0$
-
-solving for R_{x}, R_{y}, and R_{z} gives you a vector R of <-1,-1,0>.
+solving for R_x, R_y, and R_z gives you a vector $R$ of $(-1, -1, 0)$.
 
 Plot this and see if it works.
 
 ```{code-cell} ipython3
-R = np.array([-1,-1,0])
+R = np.array([-1, -1, 0])
 
 fig = plt.figure()
 
-d3.set_xlim(-1,1)
-d3.set_ylim(-1,1)
-d3.set_zlim(-1,1)
+d3.set_xlim(-1, 1)
+d3.set_ylim(-1, 1)
+d3.set_zlim(-1, 1)
 
 d3 = fig.gca(projection='3d')
 
-x, y, z = np.array([0,0,0])
+x, y, z = np.array([0, 0, 0])
 
 u, v, w = forceA + forceB + R # add them all together for sum of forces
-d3.quiver(x,y,z,u,v,w)
+d3.quiver(x, y, z, u, v, w)
 
 plt.show()
 ```
@@ -179,8 +170,9 @@ The empty graph signifies that there are no outlying forces. This denotes a syst
 # Solving Equilibrium as a sum of moments
 
 Next let's move to a more complicated application.
-When forces are not all applied at the same point moments are created.
-Similar to forces, these moments must all sum to zero, otherwise rotationial acceleration will be experienced.  Similar to sum of forces, this creates a linear equation for each of $\ \hat{i}, \hat{j}, \hat{k}$.
+When forces are not all applied at the same point, moments are created.
+
+Similar to forces, these moments must all sum to zero, otherwise rotational acceleration will be experienced.  Similar to the sum of forces, this creates a linear equation for each of the three coordinate directions in space.
 
 A simple example of this would be from a force applied to a stationary pole secured in the ground.
 The pole does not move, so it must apply a reaction force.
