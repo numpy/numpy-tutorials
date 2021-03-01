@@ -26,7 +26,6 @@ or use the download icon in the upper-right corner of each tutorial.
 maxdepth: 1
 ---
 
-content/cs231_tutorial
 content/tutorial-svd
 content/mooreslaw-tutorial
 content/save-load-arrays
@@ -36,12 +35,9 @@ content/tutorial-x-ray-image-processing
 
 ### Attribution
 
- - The cs231n tutorial is by [@jcjohnson][jj]. The full tutorial in 
-   its original form is linked via [numpy.org][learn].
  - The SVD tutorial is by [@melissawm][mwm]. The full tutorial is available
    via the [tutorials page][np_tutorials] of the official NumPy documentation.
 
-[jj]: https://github.com/jcjohnson
 [learn]: https://numpy.org/learn
 [mwm]: https://github.com/melissawm
 [np_tutorials]: https://numpy.org/devdocs/user/tutorials_index.html
