@@ -769,7 +769,7 @@ Finally, you can go beyond NumPy with specialized frameworks and APIs — such a
 
 2. Then, add this Python code:
 
-    ```py
+    ```
     # Import the virtual display module.
     from pyvirtualdisplay import Display
     # Import ipythondisplay and HTML from IPython for image and video rendering.
