@@ -391,7 +391,7 @@ drs = []
 
 You will reset these variables manually at the end of each episode during training after they are "full" and reshape with NumPy's [`np.vstack()`](https://numpy.org/doc/stable/reference/generated/numpy.vstack.html). This is demonstrated in the training stage towards the end of the tutorial.
 
-3. Next, to perform a gradient ascent when optimizing the agent's policy, it is common to use deep learning _optimizers_ (you're performing optimization with gradients). In this example, you'll use [RMSProp](https://en.wikipedia.org/wiki/Stochastic_gradient_descent#RMSProp) — an adaptive optimization [method](http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf)). Let's set a discounting factor — a decay rate — for the optimizer:
+3. Next, to perform a gradient ascent when optimizing the agent's policy, it is common to use deep learning _optimizers_ (you're performing optimization with gradients). In this example, you'll use [RMSProp](https://en.wikipedia.org/wiki/Stochastic_gradient_descent#RMSProp) — an adaptive optimization [method](http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf). Let's set a discounting factor — a decay rate — for the optimizer:
 
 ```{code-cell} ipython3
 :id: QVtNth_1hNX0
