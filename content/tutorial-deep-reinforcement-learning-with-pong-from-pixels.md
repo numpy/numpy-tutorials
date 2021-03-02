@@ -42,7 +42,7 @@ This tutorial can also be run locally in an isolated environment, such as [Virtu
 
 +++ {"id": "z61twYBW4BMN"}
 
-### Table of contents
+## Table of contents
 
 - A note on RL and deep RL
 - Deep RL glossary
