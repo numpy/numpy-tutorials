@@ -147,7 +147,7 @@ print(env.get_action_meanings())
 
 There are 6 actions. However, `LEFTFIRE` is actually `LEFT`, `RIGHTFIRE` — `RIGHT`, and `NOOP` — `FIRE`.
 
-For simplicity, your policy network will have one output — a (log) probability for "moving up" (indexed at `2` or `RIGHT`). The other available action will be indexed at 3 ("mode down" or `LEFT`).
+For simplicity, your policy network will have one output — a (log) probability for "moving up" (indexed at `2` or `RIGHT`). The other available action will be indexed at 3 ("move down" or `LEFT`).
 
 +++ {"id": "2BvZr2TZCjAH"}
 
