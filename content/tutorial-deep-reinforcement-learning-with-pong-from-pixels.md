@@ -28,7 +28,7 @@ This example is based on the [code](https://gist.github.com/karpathy/a4166c7fe25
 
 +++ {"id": "G08gAJigcvs2"}
 
-### Prerequisites
+## Prerequisites
 
 +++ {"id": "Rb-pZNHWczRy"}
 
@@ -817,4 +817,3 @@ Finally, you can go beyond NumPy with specialized frameworks and APIs — such a
     ```
 
 - If you're following the instructions in this tutorial in a local environment on Linux or macOS, you can add most of the code into one **Python (`.py`)** file. Then, you can run your Gym experiment through `python your-code.py` in your terminal. To enable rendering, you can use the command-line interface by following the [official OpenAI Gym documentation](https://github.com/openai/gym#rendering-on-a-server) (make sure you have Gym and Xvfb installed, as described in the guide).
-
