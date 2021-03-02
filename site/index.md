@@ -30,6 +30,7 @@ content/tutorial-svd
 content/mooreslaw-tutorial
 content/save-load-arrays
 content/tutorial-deep-learning-on-mnist
+content/tutorial-deep-reinforcement-learning-with-pong-from-pixels
 content/tutorial-x-ray-image-processing
 ```
 
