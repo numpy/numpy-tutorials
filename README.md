@@ -122,14 +122,6 @@ author, if applicable.</b>
 For more information about GitHub and its workflow, you can see
 [this document](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests).
 
-### Attribution
-
- - The SVD tutorial is by [@melissawm][mwm]. The full tutorial is available
-   via the [tutorials page][np_tutorials] of the official NumPy documentation.
-
-[mwm]: https://github.com/melissawm
-[np_tutorials]: https://numpy.org/devdocs/user/tutorials_index.html
-
 ## Useful links and resources
 
 The following links may be useful:
