@@ -16,7 +16,6 @@ or navigate to any of the documents listed below and download it individually.
 
 0. [Learn to write a NumPy tutorial](content/tutorial-style-guide.md): our style guide for writing tutorials.
 1. [Tutorial: Linear algebra on n-dimensional arrays](content/tutorial-svd.md)
-2. [Tutorial: CS231n Python Tutorial](content/cs231_tutorial.md)
 3. [Tutorial: Determining Moore's Law with real data in NumPy](content/mooreslaw-tutorial.md)
 4. [Tutorial: Saving and sharing your NumPy arrays](content/save-load-arrays.md)
 5. [Tutorial: NumPy deep learning on MNIST from scratch](content/tutorial-deep-learning-on-mnist.md)
@@ -122,17 +121,6 @@ author, if applicable.</b>
 
 For more information about GitHub and its workflow, you can see
 [this document](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests).
-
-### Attribution
-
- - The cs231n tutorial is by [@jcjohnson][jj]. The full tutorial in 
-   its original form is linked via [numpy.org][learn].
- - The SVD tutorial is by [@melissawm][mwm]. The full tutorial is available
-   via the [tutorials page][np_tutorials] of the official NumPy documentation.
-
-[jj]: https://github.com/jcjohnson
-[mwm]: https://github.com/melissawm
-[np_tutorials]: https://numpy.org/devdocs/user/tutorials_index.html
 
 ## Useful links and resources
 
