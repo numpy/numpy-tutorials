@@ -56,7 +56,7 @@ html_favicon = '_static/favicon.png'
 html_theme_options = {
     "github_url": "https://github.com/numpy/numpy-tutorials/",
     "repository_url": "https://github.com/numpy/numpy-tutorials/",
-    "repository_branch": "master",
+    "repository_branch": "main",
     "use_repository_button": True,
     "use_issues_button": True,
     "use_edit_page_button": True,
