@@ -266,7 +266,7 @@ Now, you can go ahead and repeat this experiment with other values of `k`, and e
 Now we want to do the same kind of operation, but to all three colors. Our first instinct might be to repeat the same operation we did above to each color matrix individually. However, NumPy's *broadcasting* takes care of this
 for us.
 
-If our array has more than two dimensions, then the SVD can be applied to all axes at once. However, the linear algebra functions in NumPy expect to see an array of the form `(N, M, M)`, where the first axis represents the number of matrices.
+If our array has more than two dimensions, then the SVD can be applied to all axes at once. However, the linear algebra functions in NumPy expect to see an array of the form `(n, M, N)`, where the first axis `n` represents the number of `MxN` matrices in the stack.
 
 In our case,
 
