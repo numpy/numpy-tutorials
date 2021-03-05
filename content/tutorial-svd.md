@@ -202,9 +202,9 @@ results in a `ValueError`. This happens because having a one-dimensional array f
 
 ```{code-cell} ipython3
 import numpy as np
-Sigma = np.zeros((768, 1024))
-for i in range(768):
-    Sigma[i, i] = s[i]
+Sigma = np.zeros((U.shape[0], Vt.shape[0]))
+diag_indices = (np.arange(U.shape[0]),) * 2
+Sigma[diag_indices] = s
 ```
 
 Now, we want to check if the reconstructed `U @ Sigma @ Vt` is close to the original `img_gray` matrix.
