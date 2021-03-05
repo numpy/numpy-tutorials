@@ -327,14 +327,21 @@ Note that
 reconstructed.shape
 ```
 
-and
+The reconstructed image should be indistinguishable from the original one, except for differences due to floating point errors from the reconstruction. Recall that our original image consisted of floating point values in the range `[0., 1.]`. The accumulation of floating point error from the reconstruction can result in values slightly outside this original range:
 
 ```{code-cell} ipython3
+reconstructed.min(), reconstructed.max()
+```
+
+Since `imshow` expects values in the range, we can use `clip` to excise the floating point error:
+
+```{code-cell} ipython3
+reconstructed = np.clip(reconstructed, 0, 1)
 plt.imshow(np.transpose(reconstructed, (1, 2, 0)))
 plt.show()
 ```
 
-should give you an image indistinguishable from the original one (although we may introduce floating point errors for this reconstruction). In fact, you might see a warning message saying `"Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers)."` This is expected from the manipulation we just did on the original image.
+In fact, `imshow` peforms this clipping under-the-hood, so if you skip the first line in the previous code cell, you might see a warning message saying `"Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers)."`
 
 Now, to do the approximation, we must choose only the first `k` singular values for each color channel. This can be done using the following syntax:
 
