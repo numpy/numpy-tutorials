@@ -197,14 +197,12 @@ compatible for multiplication. However, this is not true as `s` does not have a 
 s @ Vt
 ```
 
-results in a `ValueError`. This happens because having a one-dimensional array for `s`, in this case, is much more economic in practice than building a diagonal matrix with the same data. To reconstruct the original matrix, we can rebuild the diagonal matrix $\Sigma$ with the elements of `s` in its diagonal and with the appropriate dimensions for multiplying: in our case, $\Sigma$ should be 768x1024 since `U` is 768x768 and `Vt` is
-1024x1024.
+results in a `ValueError`. This happens because having a one-dimensional array for `s`, in this case, is much more economic in practice than building a diagonal matrix with the same data. To reconstruct the original matrix, we can rebuild the diagonal matrix $\Sigma$ with the elements of `s` in its diagonal and with the appropriate dimensions for multiplying: in our case, $\Sigma$ should be 768x1024 since `U` is 768x768 and `Vt` is 1024x1024.
 
 ```{code-cell} ipython3
 import numpy as np
-Sigma = np.zeros((U.shape[0], Vt.shape[0]))
-diag_indices = (np.arange(U.shape[0]),) * 2
-Sigma[diag_indices] = s
+Sigma = np.zeros((U.shape[1], Vt.shape[0]))
+np.fill_diagonal(Sigma, s)
 ```
 
 Now, we want to check if the reconstructed `U @ Sigma @ Vt` is close to the original `img_gray` matrix.
