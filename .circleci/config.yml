@@ -19,6 +19,10 @@ jobs:
             pip install --upgrade pip wheel setuptools
             pip install -r requirements.txt -r site/requirements.txt
 
+      - restore_cache:
+          keys:
+            - cache-data
+
       - run:
           name: Build site
           command: |
@@ -26,6 +30,11 @@ jobs:
             # n = nitpicky (broken links), W = warnings as errors,
             # T = full tracebacks, keep-going = run to completion even with errors
             make -C site/ SPHINXOPTS="-nWT --keep-going" html
+
+      - save_cache:
+          key: cache-data
+          paths:
+            - _data
 
       - store_artifacts:
           path: site/_build/html
