@@ -67,10 +67,15 @@ filename = [["training_images", "train-images-idx3-ubyte.gz"],   # 60,000 traini
             ["test_labels", "t10k-labels-idx1-ubyte.gz"]]        # 10,000 test labels.
 ```
 
-**2.** Download each of the 4 files in the list:
+**2.** Load the data. First check if the data is stored locally; if not, then
+download it.
 
 ```{code-cell} ipython3
 import requests
+import os
+
+data_dir = "../_data"
+os.makedirs(data_dir, exist_ok=True)
 
 base_url = "http://yann.lecun.com/exdb/mnist/"
 headers = {
@@ -78,11 +83,13 @@ headers = {
 }
 
 for name in filename:
-    print("Downloading file: " + name[1])
-    resp = requests.get(base_url + name[1], headers=headers, stream=True)
-    with open(name[1], "wb") as fh:
-        for chunk in resp.iter_content(chunk_size=128):
-            fh.write(chunk)
+    fpath = os.path.join(data_dir, name[1])
+    if not os.path.exists(fpath):
+        print("Downloading file: " + name[1])
+        resp = requests.get(base_url + name[1], headers=headers, stream=True)
+        with open(fpath, "wb") as fh:
+            for chunk in resp.iter_content(chunk_size=128):
+                fh.write(chunk)
 ```
 
 **3.** Decompress the 4 files and create 4 [`ndarrays`](https://numpy.org/doc/stable/reference/arrays.ndarray.html), saving them into a dictionary. Each original image is of size 28x28 and neural networks normally expect a 1D vector input; therefore, you also need to reshape the images by multiplying 28 by 28 (784).
@@ -95,11 +102,11 @@ mnist_dataset = {}
 
 # Images
 for name in filename[:2]:
-    with gzip.open(name[1], 'rb') as mnist_file:
+    with gzip.open(os.path.join(data_dir, name[1]), 'rb') as mnist_file:
         mnist_dataset[name[0]] = np.frombuffer(mnist_file.read(), np.uint8, offset=16).reshape(-1, 28*28)
 # Labels
 for name in filename[-2:]:
-    with gzip.open(name[1], 'rb') as mnist_file:
+    with gzip.open(os.path.join(data_dir, name[1]), 'rb') as mnist_file:
         mnist_dataset[name[0]] = np.frombuffer(mnist_file.read(), np.uint8, offset=8)
 ```
 
