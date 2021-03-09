@@ -70,13 +70,19 @@ filename = [["training_images", "train-images-idx3-ubyte.gz"],   # 60,000 traini
 **2.** Download each of the 4 files in the list:
 
 ```{code-cell} ipython3
-from urllib import request
+import requests
 
 base_url = "http://yann.lecun.com/exdb/mnist/"
+headers = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0"
+}
 
 for name in filename:
     print("Downloading file: " + name[1])
-    request.urlretrieve(base_url + name[1], name[1])
+    resp = requests.get(base_url + name[1], headers=headers, stream=True)
+    with open(name[1], "wb") as fh:
+        for chunk in resp.iter_content(chunk_size=128):
+            fh.write(chunk)
 ```
 
 **3.** Decompress the 4 files and create 4 [`ndarrays`](https://numpy.org/doc/stable/reference/arrays.ndarray.html), saving them into a dictionary. Each original image is of size 28x28 and neural networks normally expect a 1D vector input; therefore, you also need to reshape the images by multiplying 28 by 28 (784).
