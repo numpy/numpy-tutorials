@@ -61,10 +61,12 @@ In this section, you will download the zipped MNIST dataset files originally sto
 **1.** Define a variable to store the training/test image/label names of the MNIST dataset in a list:
 
 ```{code-cell} ipython3
-filename = [["training_images", "train-images-idx3-ubyte.gz"],   # 60,000 training images.
-            ["test_images", "t10k-images-idx3-ubyte.gz"],        # 10,000 test images.
-            ["training_labels", "train-labels-idx1-ubyte.gz"],   # 60,000 training labels.
-            ["test_labels", "t10k-labels-idx1-ubyte.gz"]]        # 10,000 test labels.
+data_sources = {
+    "training_images": "train-images-idx3-ubyte.gz",   # 60,000 training images.
+    "test_images": "t10k-images-idx3-ubyte.gz",        # 10,000 test images.
+    "training_labels": "train-labels-idx1-ubyte.gz",   # 60,000 training labels.
+    "test_labels": "t10k-labels-idx1-ubyte.gz"         # 10,000 test labels.
+}
 ```
 
 **2.** Load the data. First check if the data is stored locally; if not, then
@@ -82,11 +84,11 @@ headers = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0"
 }
 
-for name in filename:
-    fpath = os.path.join(data_dir, name[1])
+for fname in data_sources.values():
+    fpath = os.path.join(data_dir, fname)
     if not os.path.exists(fpath):
-        print("Downloading file: " + name[1])
-        resp = requests.get(base_url + name[1], headers=headers, stream=True)
+        print("Downloading file: " + fname)
+        resp = requests.get(base_url + fname, headers=headers, stream=True)
         with open(fpath, "wb") as fh:
             for chunk in resp.iter_content(chunk_size=128):
                 fh.write(chunk)
@@ -101,13 +103,13 @@ import numpy as np
 mnist_dataset = {}
 
 # Images
-for name in filename[:2]:
-    with gzip.open(os.path.join(data_dir, name[1]), 'rb') as mnist_file:
-        mnist_dataset[name[0]] = np.frombuffer(mnist_file.read(), np.uint8, offset=16).reshape(-1, 28*28)
+for key in ("training_images", "test_images"):
+    with gzip.open(os.path.join(data_dir, data_sources[key]), 'rb') as mnist_file:
+        mnist_dataset[key] = np.frombuffer(mnist_file.read(), np.uint8, offset=16).reshape(-1, 28*28)
 # Labels
-for name in filename[-2:]:
-    with gzip.open(os.path.join(data_dir, name[1]), 'rb') as mnist_file:
-        mnist_dataset[name[0]] = np.frombuffer(mnist_file.read(), np.uint8, offset=8)
+for key in ("training_labels", "test_labels"):
+    with gzip.open(os.path.join(data_dir, data_sources[key]), 'rb') as mnist_file:
+        mnist_dataset[key] = np.frombuffer(mnist_file.read(), np.uint8, offset=8)
 ```
 
 **4.** Split the data into training and test sets using the standard notation of `x` for data and `y` for labels, calling the training and test set images `x_train` and `x_test`, and the labels `y_train` and `y_test`:
