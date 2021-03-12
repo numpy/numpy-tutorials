@@ -405,6 +405,8 @@ weights_2 = 0.2 * np.random.random((hidden_size, num_labels)) - 0.1
 ```
 
 **5.** Set up the neural network's learning experiment with a training loop and start the training process.
+Note that the model is evaluated at each epoch by running the model on test
+set, thus the model improvement can be tracked vs. epoch.
 
 Start the training process:
 
@@ -419,6 +421,11 @@ store_test_accurate_pred = []
 # This is a training loop.
 # Run the learning experiment for a defined number of epochs (iterations).
 for j in range(epochs):
+
+    #################
+    # Training step #
+    #################
+
     # Set the initial loss/error and the number of accurate predictions to zero.
     training_loss = 0.0
     training_accurate_predictions = 0
@@ -467,26 +474,26 @@ for j in range(epochs):
     store_training_loss.append(training_loss)
     store_training_accurate_pred.append(training_accurate_predictions)
 
-    # Evaluate on the test set:
-    # 1. Set the initial error and the number of accurate predictions to zero.
-    test_loss = 0.0
-    test_accurate_predictions = 0
+    ################
+    # Testing step #
+    ################
 
-    # 2. Start testing the model by evaluating on the test image dataset.
-    for i in range(len(test_images)):
-        # 1. Pass the test images through the input layer.
-        layer_0 = test_images[i]
-        # 2. Compute the weighted sum of the test image inputs in and
-        #    pass the hidden layer's output through ReLU.
-        layer_1 = relu(np.dot(layer_0, weights_1))
-        # 3. Compute the weighted sum of the hidden layer's inputs.
-        #    Produce a 10-dimensional vector with 10 scores.
-        layer_2 = np.dot(layer_1, weights_2)
+    # Evaluate model performance on the test set at each epoch.
 
-        # 4. Measure the error between the actual label (truth) and prediction values.
-        test_loss += np.sum((test_labels[i] - layer_2) ** 2)
-        # 5. Increment the accurate prediction count.
-        test_accurate_predictions += int(np.argmax(layer_2) == np.argmax(test_labels[i]))
+    # Unlike the training step, the weights are not modified for each image
+    # (or batch). Therefore the model can be applied to the test images in a
+    # vectorized manner, eliminating the need to loop over each image
+    # individually:
+
+    results = relu(test_images @ weights_1) @ weights_2
+
+    # Measure the error between the actual label (truth) and prediction values.
+    test_loss = np.sum((test_labels - results)**2)
+
+    # Measure prediction accuracy on test set
+    test_accurate_predictions = np.sum(
+        np.argmax(results, axis=1) == np.argmax(test_labels, axis=1)
+    )
 
     # Store test set losses and accurate predictions.
     store_test_loss.append(test_loss)
