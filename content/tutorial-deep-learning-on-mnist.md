@@ -73,6 +73,17 @@ data_sources = {
 download it.
 
 ```{code-cell} ipython3
+:tags: [remove-cell]
+
+# Use responsibly! When running notebooks locally, be sure to keep local
+# copies of the datasets to prevent unnecessary server requests
+headers = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0"
+}
+request_opts = {"headers": headers}
+```
+
+```{code-cell} ipython3
 import requests
 import os
 
@@ -80,15 +91,12 @@ data_dir = "../_data"
 os.makedirs(data_dir, exist_ok=True)
 
 base_url = "http://yann.lecun.com/exdb/mnist/"
-headers = {
-    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0"
-}
 
 for fname in data_sources.values():
     fpath = os.path.join(data_dir, fname)
     if not os.path.exists(fpath):
         print("Downloading file: " + fname)
-        resp = requests.get(base_url + fname, headers=headers, stream=True)
+        resp = requests.get(base_url + fname, stream=True, **request_opts)
         with open(fpath, "wb") as fh:
             for chunk in resp.iter_content(chunk_size=128):
                 fh.write(chunk)
