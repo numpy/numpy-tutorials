@@ -411,8 +411,8 @@ weights_2 = 0.2 * np.random.random((hidden_size, num_labels)) - 0.1
 ```
 
 **5.** Set up the neural network's learning experiment with a training loop and start the training process.
-Note that the model is evaluated at each epoch by running the model on test
-set, thus the model improvement can be tracked vs. epoch.
+Note that the model is evaluated against the test set at each epoch to track
+its performance over the training epochs.
 
 Start the training process:
 
@@ -480,9 +480,9 @@ for j in range(epochs):
     store_training_loss.append(training_loss)
     store_training_accurate_pred.append(training_accurate_predictions)
 
-    ################
-    # Testing step #
-    ################
+    ###################
+    # Evaluation step #
+    ###################
 
     # Evaluate model performance on the test set at each epoch.
 
@@ -505,7 +505,7 @@ for j in range(epochs):
     store_test_loss.append(test_loss)
     store_test_accurate_pred.append(test_accurate_predictions)
 
-    # 3. Display the error and accuracy metrics in the output.
+    # Summarize error and accuracy metrics at each epoch
     print("\n" + \
           "Epoch: " + str(j) + \
           " Training set error:" + str(training_loss/ float(len(training_images)))[0:5] +\
