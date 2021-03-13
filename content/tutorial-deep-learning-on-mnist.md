@@ -97,6 +97,7 @@ for fname in data_sources.values():
     if not os.path.exists(fpath):
         print("Downloading file: " + fname)
         resp = requests.get(base_url + fname, stream=True, **request_opts)
+        resp.raise_for_status()  # Ensure download was succesful
         with open(fpath, "wb") as fh:
             for chunk in resp.iter_content(chunk_size=128):
                 fh.write(chunk)
