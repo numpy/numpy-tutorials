@@ -70,7 +70,10 @@ print('Force B =', forceB)
 
 This defines `forceA` as being a vector with magnitude of 1 in the $x$ direction and `forceB` as magnitude 1 in the $y$ direction.
 
-Use matplotlib to visualize these forces.
+It may be helpful to visualize these forces in order to better understand how they interact with each other.
+Matplotlib is a library with visualization tools that can be utilized for this purpose.
+Quiver plots will be used to demonstrate [three dimensional vectors](https://matplotlib.org/3.3.4/gallery/mplot3d/quiver3d.html), but the library can also be used for [two dimensional demonstrations](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.quiver.html).
+
 
 ```{code-cell} ipython3
 fig = plt.figure()
@@ -84,10 +87,11 @@ d3.set_zlim(-1,1)
 x, y, z = np.array([0,0,0]) # defining the point of application.  Make it the origin
 
 u, v, w = forceA # breaking the force vector into individual components
-d3.quiver(x,y,z,u,v,w) # plotting forceA
+d3.quiver(x,y,z,u,v,w,color='r') # plotting forceA
 
 u, v, w = forceB
-d3.quiver(x,y,z,u,v,w) # plotting forceB
+d3.quiver(x,y,z,u,v,w,color='b') # plotting forceB
+
 
 plt.show()
 ```
@@ -100,7 +104,6 @@ In order to simplify this problem, you can add them together to find the sum of 
 ```{code-cell} ipython3
 forceC = forceA + forceB
 print('Force C =', forceC)
-```
 
 Force C now acts as a single force that represents both A and B.
 You can plot it to see the result.
@@ -116,13 +119,14 @@ d3.set_zlim(-1,1)
 
 x, y, z = np.array([0,0,0])
 
+u, v, w = forceA
+d3.quiver(x,y,z,u,v,w,color='r')
+u, v, w = forceB
+d3.quiver(x,y,z,u,v,w,color='b')
 u, v, w = forceC
-d3.quiver(x,y,z,u,v,w)
+d3.quiver(x,y,z,u,v,w,color='g')
 
 plt.show()
-```
-
-There is now a single vector at the origin.
 However, the goal is equilibrium.
 This means that you want your sum of forces to be $(0, 0, 0)$ or else your object will experience acceleration.
 Therefore, there needs to be another force that counteracts the prior ones.
@@ -143,7 +147,8 @@ $$\begin{cases}
 
 solving for R_x, R_y, and R_z gives you a vector $R$ of $(-1, -1, 0)$.
 
-Plot this and see if it works.
+If plotted, the forces seen in prior examples should be nullified.
+Only if there is no force remaining is the system considered to be in equilibrium.
 
 ```{code-cell} ipython3
 R = np.array([-1, -1, 0])
