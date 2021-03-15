@@ -61,22 +61,46 @@ In this section, you will download the zipped MNIST dataset files originally sto
 **1.** Define a variable to store the training/test image/label names of the MNIST dataset in a list:
 
 ```{code-cell} ipython3
-filename = [["training_images", "train-images-idx3-ubyte.gz"],   # 60,000 training images.
-            ["test_images", "t10k-images-idx3-ubyte.gz"],        # 10,000 test images.
-            ["training_labels", "train-labels-idx1-ubyte.gz"],   # 60,000 training labels.
-            ["test_labels", "t10k-labels-idx1-ubyte.gz"]]        # 10,000 test labels.
+data_sources = {
+    "training_images": "train-images-idx3-ubyte.gz",   # 60,000 training images.
+    "test_images": "t10k-images-idx3-ubyte.gz",        # 10,000 test images.
+    "training_labels": "train-labels-idx1-ubyte.gz",   # 60,000 training labels.
+    "test_labels": "t10k-labels-idx1-ubyte.gz"         # 10,000 test labels.
+}
 ```
 
-**2.** Download each of the 4 files in the list:
+**2.** Load the data. First check if the data is stored locally; if not, then
+download it.
 
 ```{code-cell} ipython3
-from urllib import request
+:tags: [remove-cell]
+
+# Use responsibly! When running notebooks locally, be sure to keep local
+# copies of the datasets to prevent unnecessary server requests
+headers = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0"
+}
+request_opts = {"headers": headers}
+```
+
+```{code-cell} ipython3
+import requests
+import os
+
+data_dir = "../_data"
+os.makedirs(data_dir, exist_ok=True)
 
 base_url = "http://yann.lecun.com/exdb/mnist/"
 
-for name in filename:
-    print("Downloading file: " + name[1])
-    request.urlretrieve(base_url + name[1], name[1])
+for fname in data_sources.values():
+    fpath = os.path.join(data_dir, fname)
+    if not os.path.exists(fpath):
+        print("Downloading file: " + fname)
+        resp = requests.get(base_url + fname, stream=True, **request_opts)
+        resp.raise_for_status()  # Ensure download was succesful
+        with open(fpath, "wb") as fh:
+            for chunk in resp.iter_content(chunk_size=128):
+                fh.write(chunk)
 ```
 
 **3.** Decompress the 4 files and create 4 [`ndarrays`](https://numpy.org/doc/stable/reference/arrays.ndarray.html), saving them into a dictionary. Each original image is of size 28x28 and neural networks normally expect a 1D vector input; therefore, you also need to reshape the images by multiplying 28 by 28 (784).
@@ -88,13 +112,13 @@ import numpy as np
 mnist_dataset = {}
 
 # Images
-for name in filename[:2]:
-    with gzip.open(name[1], 'rb') as mnist_file:
-        mnist_dataset[name[0]] = np.frombuffer(mnist_file.read(), np.uint8, offset=16).reshape(-1, 28*28)
+for key in ("training_images", "test_images"):
+    with gzip.open(os.path.join(data_dir, data_sources[key]), 'rb') as mnist_file:
+        mnist_dataset[key] = np.frombuffer(mnist_file.read(), np.uint8, offset=16).reshape(-1, 28*28)
 # Labels
-for name in filename[-2:]:
-    with gzip.open(name[1], 'rb') as mnist_file:
-        mnist_dataset[name[0]] = np.frombuffer(mnist_file.read(), np.uint8, offset=8)
+for key in ("training_labels", "test_labels"):
+    with gzip.open(os.path.join(data_dir, data_sources[key]), 'rb') as mnist_file:
+        mnist_dataset[key] = np.frombuffer(mnist_file.read(), np.uint8, offset=8)
 ```
 
 **4.** Split the data into training and test sets using the standard notation of `x` for data and `y` for labels, calling the training and test set images `x_train` and `x_test`, and the labels `y_train` and `y_test`:
