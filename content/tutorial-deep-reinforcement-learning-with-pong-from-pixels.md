@@ -570,6 +570,7 @@ def update_input(prev_x, cur_x, D):
 
 ```{code-cell} ipython3
 :id: u-WL_FAE1hI0
+:tags: [output_scroll]
 
 while episode_number < max_episodes:
     # (For rendering.)
