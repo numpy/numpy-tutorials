@@ -37,7 +37,7 @@ templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'notebooks']
 
 # MyST-NB configuration
-execution_timeout = 600
+execution_timeout = 900
 
 
 # -- Options for HTML output -------------------------------------------------
