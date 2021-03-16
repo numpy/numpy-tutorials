@@ -263,8 +263,8 @@ def one_hot_encoding(labels, dimension=10):
 **3.** Encode the labels and assign the values to new variables:
 
 ```{code-cell} ipython3
-training_labels = one_hot_encoding(y_train)
-test_labels = one_hot_encoding(y_test)
+training_labels = one_hot_encoding(y_train[:training_sample])
+test_labels = one_hot_encoding(y_test[:test_sample])
 ```
 
 **4.** Check that the data type has changed to floating point:
