@@ -7,3 +7,4 @@ pytest
 nbval
 statsmodels
 imageio
+gym[atari]
