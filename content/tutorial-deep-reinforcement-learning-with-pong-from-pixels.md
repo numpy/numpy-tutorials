@@ -22,7 +22,7 @@ This tutorial demonstrates how to implement a deep reinforcement learning (RL) a
 
 Pong is a 2D game from 1972 where two players use "rackets" to play a form of table tennis. Each player moves the racket up and down the screen and tries to hit a ball in their opponent's direction by touching it. The goal is to hit the ball such that it goes past the opponent's racket (they miss their shot). According to the rules, if a player reaches 21 points, they win. In Pong, the RL agent that learns to play against an opponent is displayed on the right.
 
-<center><img src="../../../content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.png" width="800", hspace="20" vspace="20"></center>
+![pong_rl](tutorial-deep-reinforcement-learning-with-pong-from-pixels.png)
 
 This example is based on the [code](https://gist.github.com/karpathy/a4166c7fe253700972fcbc77e4ea32c5) developed by [Andrej Karpathy](https://karpathy.ai) for the [Deep RL Bootcamp](https://sites.google.com/view/deep-rl-bootcamp/home) in 2017 at UC Berkeley. His [blog post](http://karpathy.github.io/2016/05/31/rl/) from 2016 also provides more background on the mechanics and theory used in Pong RL.
 
@@ -480,7 +480,7 @@ The pseudocode for the policy gradient method for Pong:
 
             - Maximize the probability of actions that lead to high rewards.
 
-<center><img src="../../../content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.png" width="800", hspace="20" vspace="20"></center>
+![pong_rl](tutorial-deep-reinforcement-learning-with-pong-from-pixels.png)
 
 You can stop the training at any time or/and check saved MP4 videos of saved plays on your disk in the `/video` directory. You can set the maximum number of episodes that is more appropriate for your setup.
 
