@@ -59,7 +59,7 @@ output.
 > supports a variety of restructured text directives.  These Sphinx
 > markdown directives will render when NumPy tutorials are built into a
 > static website, but they will show up as raw code when you open in
-> Jupyter locally or on [Binder](mybinder.org). 
+> Jupyter locally or on [Binder](https://mybinder.org).
 
 Consider these two versions of the same __Simple notebook example__. You
 have three things in the notebooks:
