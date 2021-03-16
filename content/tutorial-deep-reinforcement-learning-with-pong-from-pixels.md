@@ -51,7 +51,7 @@ This tutorial can also be run locally in an isolated environment, such as [Virtu
 3. Create the policy (the neural network) and the forward pass
 4. Set up the update step (backpropagation)
 5. Define the discounted rewards (expected return) function
-6. Train the agent for 100 episodes
+6. Train the agent for 3 episodes
 7. Next steps
 8. Appendix
     - Notes on RL and deep RL
@@ -486,12 +486,12 @@ You can stop the training at any time or/and check saved MP4 videos of saved pla
 
 +++ {"id": "gD6XBqUqfNOV"}
 
-1. For demo purposes, let's limit the number of episodes for training to 10. If you are using hardware acceleration (CPUs and GPUs), you can increase the number to 1,000 or beyond. For comparison, Andrej Karpathy's original experiment took about 8,000 episodes.
+1. For demo purposes, let's limit the number of episodes for training to 3. If you are using hardware acceleration (CPUs and GPUs), you can increase the number to 1,000 or beyond. For comparison, Andrej Karpathy's original experiment took about 8,000 episodes.
 
 ```{code-cell} ipython3
 :id: TdRXrc37Rfvo
 
-max_episodes = 10
+max_episodes = 3
 ```
 
 +++ {"id": "ORj7JFGB0Gy8"}
@@ -503,7 +503,7 @@ max_episodes = 10
 ```{code-cell} ipython3
 :id: eKLLYUKbG-5A
 
-batch_size = 10
+batch_size = 3
 learning_rate = 1e-4
 ```
 
