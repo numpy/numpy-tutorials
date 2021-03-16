@@ -12,6 +12,10 @@ jobs:
       - checkout
 
       - run:
+          name: Install deps for building atari-py
+          command: sudo apt-get install -y cmake
+
+      - run:
           name: Install Python dependencies
           command: |
             python3 -m venv venv
