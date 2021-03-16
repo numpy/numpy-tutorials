@@ -201,12 +201,18 @@ print('The data type of training images: {}'.format(x_train.dtype))
 print('The data type of test images: {}'.format(x_test.dtype))
 ```
 
-**2.** Normalize the arrays by dividing them by 255 (and thus promoting the data type from `uint8` to `float64`) and then assign the train and test image data variables — `x_train` and `x_test` — to `training_images` and `train_labels`, respectively. To make the neural network model train faster in this example, `training_images` contains only 1,000 samples out of 60,000. To learn from the entire sample size, change the `sample` variable to `60000`.
+**2.** Normalize the arrays by dividing them by 255 (and thus promoting the data type from `uint8` to `float64`) and then assign the train and test image data variables — `x_train` and `x_test` — to `training_images` and `train_labels`, respectively.
+To reduce the model training and evaluation time in this example, only a subset
+of the training and test images will be used.
+Both `training_images` and `test_images` will contain only 1,000 samples each out
+of the complete datasets of 60,000 and 10,000 images, respectively.
+These values can be controlled by changing the  `training_sample` and
+`test_sample` below, up to their maximum values of 60,000 and 10,000.
 
 ```{code-cell} ipython3
-sample = 1000
-training_images = x_train[0:sample] / 255
-test_images = x_test / 255
+training_sample, test_sample = 1000, 1000
+training_images = x_train[0:training_sample] / 255
+test_images = x_test[0:test_sample] / 255
 ```
 
 **3.** Confirm that the image data has changed to the floating-point format:
