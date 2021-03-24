@@ -26,7 +26,7 @@
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -41,14 +41,14 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Determining Moore’s Law with real data in NumPy" href="mooreslaw-tutorial.html" />
-    <link rel="prev" title="CS231n Python Tutorial With Google Colab" href="cs231_tutorial.html" />
+    <link rel="prev" title="NumPy tutorials" href="../index.html" />
   <meta name="robots" content="noindex" />
   
 
@@ -82,11 +82,6 @@
 </form>
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <ul class="current nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="cs231_tutorial.html">
-   CS231n Python Tutorial With Google Colab
-  </a>
- </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Tutorial: Linear algebra on n-dimensional arrays
@@ -108,8 +103,20 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">
+   Tutorial: deep reinforcement learning with Pong from pixels
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="tutorial-x-ray-image-processing.html">
    Tutorial: X-ray image processing
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pairing.html">
+   Pairing Jupyter notebooks and MyST-NB
   </a>
  </li>
 </ul>
@@ -136,21 +143,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -171,7 +178,7 @@
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -185,27 +192,27 @@
             href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-svd.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/master/site/content/tutorial-svd.md"><button
+        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/tutorial-svd.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
 </div>
 
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/master?urlpath=tree/site/content/tutorial-svd.md"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=tree/site/content/tutorial-svd.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -217,13 +224,14 @@
     </div>
 </div>
 
-    </div>
+        </div>
 
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
         <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
+            <i class="fas fa-list"></i>
+            Contents
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
@@ -290,6 +298,7 @@
 
         </nav>
         
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -328,7 +337,7 @@
 </div>
 </div>
 </div>
-<p><strong>Note</strong>: If you prefer, you can use your own image as you work through this tutorial. In order to transform your image into a NumPy array that can be manipulated, you can use the <code class="docutils literal notranslate"><span class="pre">imread</span></code> function from the <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.html#module-matplotlib.pyplot">matplotlib.pyplot</a> submodule. Alternatively, you can use the <a class="reference external" href="https://imageio.readthedocs.io/en/stable/userapi.html#imageio.imread">imageio.imread</a> function from the <code class="docutils literal notranslate"><span class="pre">imageio</span></code> library. Be aware that if you use your own image, you’ll likely need to adapt the steps below. For more information on how images are treated when converted to NumPy arrays, see <a class="reference external" href="https://scikit-image.org/docs/stable/user_guide/numpy_images.htmluser_guide/numpy_images">A crash course on NumPy for images</a> from the <code class="docutils literal notranslate"><span class="pre">scikit-image</span></code> documentation.</p>
+<p><strong>Note</strong>: If you prefer, you can use your own image as you work through this tutorial. In order to transform your image into a NumPy array that can be manipulated, you can use the <code class="docutils literal notranslate"><span class="pre">imread</span></code> function from the <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.html#module-matplotlib.pyplot">matplotlib.pyplot</a> submodule. Alternatively, you can use the <a class="reference external" href="https://imageio.readthedocs.io/en/stable/userapi.html#imageio.imread">imageio.imread</a> function from the <code class="docutils literal notranslate"><span class="pre">imageio</span></code> library. Be aware that if you use your own image, you’ll likely need to adapt the steps below. For more information on how images are treated when converted to NumPy arrays, see <a class="reference external" href="https://scikit-image.org/docs/stable/user_guide/numpy_images.html">A crash course on NumPy for images</a> from the <code class="docutils literal notranslate"><span class="pre">scikit-image</span></code> documentation.</p>
 <p>Now, <code class="docutils literal notranslate"><span class="pre">img</span></code> is a NumPy array, as we can see when using the <code class="docutils literal notranslate"><span class="pre">type</span></code> function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -476,7 +485,7 @@ about maximum and minimum values for this array:</p>
 <div class="section" id="operations-on-an-axis">
 <h3>Operations on an axis<a class="headerlink" href="#operations-on-an-axis" title="Permalink to this headline">¶</a></h3>
 <p>It is possible to use methods from linear algebra to approximate an existing set of data. Here, we will use the <a class="reference external" href="https://en.wikipedia.org/wiki/Singular_value_decomposition">SVD (Singular Value Decomposition)</a> to try to rebuild an image that uses less singular value information than the original one, while still retaining some of its features.</p>
-<p><strong>Note</strong>: We will use NumPy’s linear algebra module, <a class="reference external" href="https://numpy.org/devdocs/reference/routines.linalg.html#module-numpy.linalg">numpy.linalg</a>, to perform the operations in this tutorial. Most of the linear algebra functions in this module can also be found in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg">scipy.linalg</a>, and users are encouraged to use the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/index.html#module-scipy">scipy</a> module for real-world applications. However, it is currently not possible to apply linear algebra operations to n-dimensional arrays using the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg">scipy.linalg</a> module. For more information on this, check the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/tutorial/linalg.html">scipy.linalg Reference</a>.</p>
+<p><strong>Note</strong>: We will use NumPy’s linear algebra module, <a class="reference external" href="https://numpy.org/devdocs/reference/routines.linalg.html#module-numpy.linalg">numpy.linalg</a>, to perform the operations in this tutorial. Most of the linear algebra functions in this module can also be found in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg">scipy.linalg</a>, and users are encouraged to use the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/index.html#module-scipy">scipy</a> module for real-world applications. However, some functions in the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg">scipy.linalg</a> module, such as the SVD function, only support 2D arrays. For more information on this, check the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/tutorial/linalg.html">scipy.linalg Reference</a>.</p>
 <p>To proceed, import the linear algebra submodule from NumPy:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -554,14 +563,12 @@ compatible for multiplication. However, this is not true as <code class="docutil
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">@</span> <span class="n">Vt</span>
 </pre></div>
 </div>
-<p>results in a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. This happens because having a one-dimensional array for <code class="docutils literal notranslate"><span class="pre">s</span></code>, in this case, is much more economic in practice than building a diagonal matrix with the same data. To reconstruct the original matrix, we can rebuild the diagonal matrix <span class="math notranslate nohighlight">\(\Sigma\)</span> with the elements of <code class="docutils literal notranslate"><span class="pre">s</span></code> in its diagonal and with the appropriate dimensions for multiplying: in our case, <span class="math notranslate nohighlight">\(\Sigma\)</span> should be 768x1024 since <code class="docutils literal notranslate"><span class="pre">U</span></code> is 768x768 and <code class="docutils literal notranslate"><span class="pre">Vt</span></code> is
-1024x1024.</p>
+<p>results in a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. This happens because having a one-dimensional array for <code class="docutils literal notranslate"><span class="pre">s</span></code>, in this case, is much more economic in practice than building a diagonal matrix with the same data. To reconstruct the original matrix, we can rebuild the diagonal matrix <span class="math notranslate nohighlight">\(\Sigma\)</span> with the elements of <code class="docutils literal notranslate"><span class="pre">s</span></code> in its diagonal and with the appropriate dimensions for multiplying: in our case, <span class="math notranslate nohighlight">\(\Sigma\)</span> should be 768x1024 since <code class="docutils literal notranslate"><span class="pre">U</span></code> is 768x768 and <code class="docutils literal notranslate"><span class="pre">Vt</span></code> is 1024x1024.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="n">Sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">768</span><span class="p">,</span> <span class="mi">1024</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">768</span><span class="p">):</span>
-    <span class="n">Sigma</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="n">Sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Vt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -645,7 +652,7 @@ compatible for multiplication. However, this is not true as <code class="docutil
 <h3>Applying to all colors<a class="headerlink" href="#applying-to-all-colors" title="Permalink to this headline">¶</a></h3>
 <p>Now we want to do the same kind of operation, but to all three colors. Our first instinct might be to repeat the same operation we did above to each color matrix individually. However, NumPy’s <em>broadcasting</em> takes care of this
 for us.</p>
-<p>If our array has more than two dimensions, then the SVD can be applied to all axes at once. However, the linear algebra functions in NumPy expect to see an array of the form <code class="docutils literal notranslate"><span class="pre">(N,</span> <span class="pre">M,</span> <span class="pre">M)</span></code>, where the first axis represents the number of matrices.</p>
+<p>If our array has more than two dimensions, then the SVD can be applied to all axes at once. However, the linear algebra functions in NumPy expect to see an array of the form <code class="docutils literal notranslate"><span class="pre">(n,</span> <span class="pre">M,</span> <span class="pre">N)</span></code>, where the first axis <code class="docutils literal notranslate"><span class="pre">n</span></code> represents the number of <code class="docutils literal notranslate"><span class="pre">MxN</span></code> matrices in the stack.</p>
 <p>In our case,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -735,22 +742,33 @@ for us.</p>
 </div>
 </div>
 </div>
-<p>and</p>
+<p>The reconstructed image should be indistinguishable from the original one, except for differences due to floating point errors from the reconstruction. Recall that our original image consisted of floating point values in the range <code class="docutils literal notranslate"><span class="pre">[0.,</span> <span class="pre">1.]</span></code>. The accumulation of floating point error from the reconstruction can result in values slightly outside this original range:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">reconstructed</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reconstructed</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">reconstructed</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-6.1069313668504766e-15, 1.0000000000000058)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since <code class="docutils literal notranslate"><span class="pre">imshow</span></code> expects values in the range, we can use <code class="docutils literal notranslate"><span class="pre">clip</span></code> to excise the floating point error:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reconstructed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">reconstructed</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">reconstructed</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
-</pre></div>
-</div>
-<img alt="../_images/tutorial-svd_72_1.png" src="../_images/tutorial-svd_72_1.png" />
+<img alt="../_images/tutorial-svd_74_0.png" src="../_images/tutorial-svd_74_0.png" />
 </div>
 </div>
-<p>should give you an image indistinguishable from the original one (although we may introduce floating point errors for this reconstruction). In fact, you might see a warning message saying <code class="docutils literal notranslate"><span class="pre">&quot;Clipping</span> <span class="pre">input</span> <span class="pre">data</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">valid</span> <span class="pre">range</span> <span class="pre">for</span> <span class="pre">imshow</span> <span class="pre">with</span> <span class="pre">RGB</span> <span class="pre">data</span> <span class="pre">([0..1]</span> <span class="pre">for</span> <span class="pre">floats</span> <span class="pre">or</span> <span class="pre">[0..255]</span> <span class="pre">for</span> <span class="pre">integers).&quot;</span></code> This is expected from the manipulation we just did on the original image.</p>
+<p>In fact, <code class="docutils literal notranslate"><span class="pre">imshow</span></code> peforms this clipping under-the-hood, so if you skip the first line in the previous code cell, you might see a warning message saying <code class="docutils literal notranslate"><span class="pre">&quot;Clipping</span> <span class="pre">input</span> <span class="pre">data</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">valid</span> <span class="pre">range</span> <span class="pre">for</span> <span class="pre">imshow</span> <span class="pre">with</span> <span class="pre">RGB</span> <span class="pre">data</span> <span class="pre">([0..1]</span> <span class="pre">for</span> <span class="pre">floats</span> <span class="pre">or</span> <span class="pre">[0..255]</span> <span class="pre">for</span> <span class="pre">integers).&quot;</span></code></p>
 <p>Now, to do the approximation, we must choose only the first <code class="docutils literal notranslate"><span class="pre">k</span></code> singular values for each color channel. This can be done using the following syntax:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -786,7 +804,7 @@ placeholder for other axes. For more details, see the documentation on <a class=
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
 </pre></div>
 </div>
-<img alt="../_images/tutorial-svd_78_1.png" src="../_images/tutorial-svd_78_1.png" />
+<img alt="../_images/tutorial-svd_80_1.png" src="../_images/tutorial-svd_80_1.png" />
 </div>
 </div>
 <p>Even though the image is not as sharp, using a small number of <code class="docutils literal notranslate"><span class="pre">k</span></code> singular values (compared to the original set of 768 values), we can recover many of the distinguishing features from this image.</p>
@@ -812,15 +830,15 @@ terms of the norm of the difference. For more information, see <em>G. H. Golub a
 
               </div>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="cs231_tutorial.html" title="previous page">CS231n Python Tutorial With Google Colab</a>
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../index.html" title="previous page">NumPy tutorials</a>
     <a class='right-next' id="next-link" href="mooreslaw-tutorial.html" title="next page">Determining Moore’s Law with real data in NumPy</a>
 
+        </div>
+        
+        </div>
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">

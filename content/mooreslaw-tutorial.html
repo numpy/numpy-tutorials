@@ -26,7 +26,7 @@
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -41,7 +41,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -83,11 +83,6 @@
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="cs231_tutorial.html">
-   CS231n Python Tutorial With Google Colab
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="tutorial-svd.html">
    Tutorial: Linear algebra on n-dimensional arrays
   </a>
@@ -108,8 +103,20 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">
+   Tutorial: deep reinforcement learning with Pong from pixels
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="tutorial-x-ray-image-processing.html">
    Tutorial: X-ray image processing
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pairing.html">
+   Pairing Jupyter notebooks and MyST-NB
   </a>
  </li>
 </ul>
@@ -136,21 +143,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -171,7 +178,7 @@
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -185,27 +192,27 @@
             href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/mooreslaw-tutorial.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/master/site/content/mooreslaw-tutorial.md"><button
+        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/mooreslaw-tutorial.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
 </div>
 
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/master?urlpath=tree/site/content/mooreslaw-tutorial.md"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=tree/site/content/mooreslaw-tutorial.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -217,13 +224,14 @@
     </div>
 </div>
 
-    </div>
+        </div>
 
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
         <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
+            <i class="fas fa-list"></i>
+            Contents
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
@@ -288,6 +296,7 @@
 
         </nav>
         
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -582,8 +591,8 @@ errors.  Run the
 Dep. Variable:                      y   R-squared:                       0.949
 Model:                            OLS   Adj. R-squared:                  0.949
 Method:                 Least Squares   F-statistic:                     3309.
-Date:                Fri, 22 Jan 2021   Prob (F-statistic):          1.75e-116
-Time:                        21:33:56   Log-Likelihood:                -273.43
+Date:                Wed, 24 Mar 2021   Prob (F-statistic):          1.75e-116
+Time:                        18:54:52   Log-Likelihood:                -273.43
 No. Observations:                 179   AIC:                             550.9
 Df Residuals:                     177   BIC:                             557.2
 Df Model:                           1                                         
@@ -768,7 +777,7 @@ for $\pm\frac{1}{2}~years.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19200000000.0 250000000.0 7050000000.0
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb32ce54340&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f136b11ee20&gt;
 </pre></div>
 </div>
 <img alt="../_images/mooreslaw-tutorial_29_2.png" src="../_images/mooreslaw-tutorial_29_2.png" />
@@ -871,14 +880,26 @@ regression_csts: linear regression constants A and B for log(transistor_count)=A
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01-mooreslaw-tutorial-intro.png     tutorial-deep-learning-on-mnist.png
-cs231_tutorial.md		    tutorial-style-guide.md
-mooreslaw-tutorial.md		    tutorial-svd.md
-mooreslaw_regression.csv	    tutorial-x-ray-image-processing
-mooreslaw_regression.npz	    tutorial-x-ray-image-processing.md
-save-load-arrays.md		    tutorial-x-ray-image-processing.png
-transistor_data.csv		    x_y-squared.csv
-tutorial-deep-learning-on-mnist.md  x_y-squared.npz
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01-classic.gif
+01-mooreslaw-tutorial-intro.png
+02-jupyterlab.gif
+mooreslaw-tutorial.md
+mooreslaw_regression.csv
+mooreslaw_regression.npz
+pairing.md
+save-load-arrays.md
+transistor_data.csv
+tutorial-deep-learning-on-mnist.md
+tutorial-deep-learning-on-mnist.png
+tutorial-deep-reinforcement-learning-with-pong-from-pixels.md
+tutorial-deep-reinforcement-learning-with-pong-from-pixels.png
+tutorial-style-guide.md
+tutorial-svd.md
+tutorial-x-ray-image-processing
+tutorial-x-ray-image-processing.md
+tutorial-x-ray-image-processing.png
+x_y-squared.csv
+x_y-squared.npz
 </pre></div>
 </div>
 </div>
@@ -988,9 +1009,9 @@ options to create the desired file format:</p>
 # transistor_count_predicted: linear regression model = exp(-666.33)*exp(0.34*year)
 # transistor_Moores_law: Moores law =exp(-675.38)*exp(0.35*year)
 # year:, transistor_count:, transistor_count_predicted:, transistor_Moores_law:
-1.971000000000000000e+03,2.250000000000000000e+03,1.130514785642463039e+03,2.249999999999916326e+03
-1.972000000000000000e+03,3.500000000000000000e+03,1.590908400344390657e+03,3.181980515339620069e+03
-1.973000000000000000e+03,2.500000000000000000e+03,2.238793840142484896e+03,4.500000000000097316e+03
+1.971000000000000000e+03,2.250000000000000000e+03,1.130514785642334573e+03,2.249999999999916326e+03
+1.972000000000000000e+03,3.500000000000000000e+03,1.590908400344209895e+03,3.181980515339620069e+03
+1.973000000000000000e+03,2.500000000000000000e+03,2.238793840142230238e+03,4.500000000000097316e+03
 </pre></div>
 </div>
 </div>
@@ -1029,15 +1050,15 @@ has been over the last half-century.</p>
 
               </div>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
         
+        <div class='prev-next-bottom'>
+            
     <a class='left-prev' id="prev-link" href="tutorial-svd.html" title="previous page">Tutorial: Linear algebra on n-dimensional arrays</a>
     <a class='right-next' id="next-link" href="save-load-arrays.html" title="next page">Saving and sharing your NumPy arrays</a>
 
+        </div>
+        
+        </div>
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">

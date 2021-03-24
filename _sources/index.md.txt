@@ -2,7 +2,7 @@
 
 [![Binder](https://mybinder.org/badge_logo.svg)][launch_binder]
 
-[launch_binder]: https://mybinder.org/v2/gh/numpy/numpy-tutorials/master?urlpath=lab/tree/content
+[launch_binder]: https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=lab/tree/content
 
 This set of tutorials and educational materials is being developed,
 IT IS NOT INTEGRATED IN THE HTML DOCS AT <https://www.numpy.org/devdocs/>
@@ -26,25 +26,13 @@ or use the download icon in the upper-right corner of each tutorial.
 maxdepth: 1
 ---
 
-content/cs231_tutorial
 content/tutorial-svd
 content/mooreslaw-tutorial
 content/save-load-arrays
 content/tutorial-deep-learning-on-mnist
+content/tutorial-deep-reinforcement-learning-with-pong-from-pixels
 content/tutorial-x-ray-image-processing
 ```
-
-### Attribution
-
- - The cs231n tutorial is by [@jcjohnson][jj]. The full tutorial in 
-   its original form is linked via [numpy.org][learn].
- - The SVD tutorial is by [@melissawm][mwm]. The full tutorial is available
-   via the [tutorials page][np_tutorials] of the official NumPy documentation.
-
-[jj]: https://github.com/jcjohnson
-[learn]: https://numpy.org/learn
-[mwm]: https://github.com/melissawm
-[np_tutorials]: https://numpy.org/devdocs/user/tutorials_index.html
 
 ## Contributing
 
@@ -73,6 +61,20 @@ used in the main NumPy documentation has two reasons:
    interested in contributing tutorial material.
 
 [rst]: https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html
+
+#### Note
+
+You may notice our content is in markdown format (`.md` files). We review and
+host notebooks in the [MyST-NB](https://myst-nb.readthedocs.io/) format. We
+accept both Jupyter notebooks (`.ipynb`) and MyST-NB notebooks (`.md`).
+If you want to sync your `.ipynb` to your `.md` file follow the [pairing
+tutorial](content/pairing.md).
+
+```{toctree}
+:hidden:
+
+content/pairing
+```
 
 ### Adding your own tutorials
 
@@ -134,9 +136,6 @@ Remember to clear all outputs on your notebook before uploading it.
     </summary>
     <img src="_static/04-add_to_readme.gif" width=80% height=80%>
 </details>
-
-<b>Update the attribution section (below) to credit the original tutorial
-author, if applicable.</b>
 
 <details>
     <summary>

@@ -61,22 +61,46 @@ In this section, you will download the zipped MNIST dataset files originally sto
 **1.** Define a variable to store the training/test image/label names of the MNIST dataset in a list:
 
 ```{code-cell} ipython3
-filename = [["training_images", "train-images-idx3-ubyte.gz"],   # 60,000 training images.
-            ["test_images", "t10k-images-idx3-ubyte.gz"],        # 10,000 test images.
-            ["training_labels", "train-labels-idx1-ubyte.gz"],   # 60,000 training labels.
-            ["test_labels", "t10k-labels-idx1-ubyte.gz"]]        # 10,000 test labels.
+data_sources = {
+    "training_images": "train-images-idx3-ubyte.gz",   # 60,000 training images.
+    "test_images": "t10k-images-idx3-ubyte.gz",        # 10,000 test images.
+    "training_labels": "train-labels-idx1-ubyte.gz",   # 60,000 training labels.
+    "test_labels": "t10k-labels-idx1-ubyte.gz"         # 10,000 test labels.
+}
 ```
 
-**2.** Download each of the 4 files in the list:
+**2.** Load the data. First check if the data is stored locally; if not, then
+download it.
 
 ```{code-cell} ipython3
-from urllib import request
+:tags: [remove-cell]
+
+# Use responsibly! When running notebooks locally, be sure to keep local
+# copies of the datasets to prevent unnecessary server requests
+headers = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0"
+}
+request_opts = {"headers": headers}
+```
+
+```{code-cell} ipython3
+import requests
+import os
+
+data_dir = "../_data"
+os.makedirs(data_dir, exist_ok=True)
 
 base_url = "http://yann.lecun.com/exdb/mnist/"
 
-for name in filename:
-    print("Downloading file: " + name[1])
-    request.urlretrieve(base_url + name[1], name[1])
+for fname in data_sources.values():
+    fpath = os.path.join(data_dir, fname)
+    if not os.path.exists(fpath):
+        print("Downloading file: " + fname)
+        resp = requests.get(base_url + fname, stream=True, **request_opts)
+        resp.raise_for_status()  # Ensure download was succesful
+        with open(fpath, "wb") as fh:
+            for chunk in resp.iter_content(chunk_size=128):
+                fh.write(chunk)
 ```
 
 **3.** Decompress the 4 files and create 4 [`ndarrays`](https://numpy.org/doc/stable/reference/arrays.ndarray.html), saving them into a dictionary. Each original image is of size 28x28 and neural networks normally expect a 1D vector input; therefore, you also need to reshape the images by multiplying 28 by 28 (784).
@@ -88,13 +112,13 @@ import numpy as np
 mnist_dataset = {}
 
 # Images
-for name in filename[:2]:
-    with gzip.open(name[1], 'rb') as mnist_file:
-        mnist_dataset[name[0]] = np.frombuffer(mnist_file.read(), np.uint8, offset=16).reshape(-1, 28*28)
+for key in ("training_images", "test_images"):
+    with gzip.open(os.path.join(data_dir, data_sources[key]), 'rb') as mnist_file:
+        mnist_dataset[key] = np.frombuffer(mnist_file.read(), np.uint8, offset=16).reshape(-1, 28*28)
 # Labels
-for name in filename[-2:]:
-    with gzip.open(name[1], 'rb') as mnist_file:
-        mnist_dataset[name[0]] = np.frombuffer(mnist_file.read(), np.uint8, offset=8)
+for key in ("training_labels", "test_labels"):
+    with gzip.open(os.path.join(data_dir, data_sources[key]), 'rb') as mnist_file:
+        mnist_dataset[key] = np.frombuffer(mnist_file.read(), np.uint8, offset=8)
 ```
 
 **4.** Split the data into training and test sets using the standard notation of `x` for data and `y` for labels, calling the training and test set images `x_train` and `x_test`, and the labels `y_train` and `y_test`:
@@ -177,12 +201,18 @@ print('The data type of training images: {}'.format(x_train.dtype))
 print('The data type of test images: {}'.format(x_test.dtype))
 ```
 
-**2.** Normalize the arrays by dividing them by 255 (and thus promoting the data type from `uint8` to `float64`) and then assign the train and test image data variables — `x_train` and `x_test` — to `training_images` and `train_labels`, respectively. To make the neural network model train faster in this example, `training_images` contains only 1,000 samples out of 60,000. To learn from the entire sample size, change the `sample` variable to `60000`.
+**2.** Normalize the arrays by dividing them by 255 (and thus promoting the data type from `uint8` to `float64`) and then assign the train and test image data variables — `x_train` and `x_test` — to `training_images` and `train_labels`, respectively.
+To reduce the model training and evaluation time in this example, only a subset
+of the training and test images will be used.
+Both `training_images` and `test_images` will contain only 1,000 samples each out
+of the complete datasets of 60,000 and 10,000 images, respectively.
+These values can be controlled by changing the  `training_sample` and
+`test_sample` below, up to their maximum values of 60,000 and 10,000.
 
 ```{code-cell} ipython3
-sample = 1000
-training_images = x_train[0:sample] / 255
-test_images = x_test / 255
+training_sample, test_sample = 1000, 1000
+training_images = x_train[0:training_sample] / 255
+test_images = x_test[0:test_sample] / 255
 ```
 
 **3.** Confirm that the image data has changed to the floating-point format:
@@ -233,8 +263,8 @@ def one_hot_encoding(labels, dimension=10):
 **3.** Encode the labels and assign the values to new variables:
 
 ```{code-cell} ipython3
-training_labels = one_hot_encoding(y_train)
-test_labels = one_hot_encoding(y_test)
+training_labels = one_hot_encoding(y_train[:training_sample])
+test_labels = one_hot_encoding(y_test[:test_sample])
 ```
 
 **4.** Check that the data type has changed to floating point:
@@ -381,6 +411,8 @@ weights_2 = 0.2 * np.random.random((hidden_size, num_labels)) - 0.1
 ```
 
 **5.** Set up the neural network's learning experiment with a training loop and start the training process.
+Note that the model is evaluated against the test set at each epoch to track
+its performance over the training epochs.
 
 Start the training process:
 
@@ -395,6 +427,11 @@ store_test_accurate_pred = []
 # This is a training loop.
 # Run the learning experiment for a defined number of epochs (iterations).
 for j in range(epochs):
+
+    #################
+    # Training step #
+    #################
+
     # Set the initial loss/error and the number of accurate predictions to zero.
     training_loss = 0.0
     training_accurate_predictions = 0
@@ -443,32 +480,32 @@ for j in range(epochs):
     store_training_loss.append(training_loss)
     store_training_accurate_pred.append(training_accurate_predictions)
 
-    # Evaluate on the test set:
-    # 1. Set the initial error and the number of accurate predictions to zero.
-    test_loss = 0.0
-    test_accurate_predictions = 0
+    ###################
+    # Evaluation step #
+    ###################
 
-    # 2. Start testing the model by evaluating on the test image dataset.
-    for i in range(len(test_images)):
-        # 1. Pass the test images through the input layer.
-        layer_0 = test_images[i]
-        # 2. Compute the weighted sum of the test image inputs in and
-        #    pass the hidden layer's output through ReLU.
-        layer_1 = relu(np.dot(layer_0, weights_1))
-        # 3. Compute the weighted sum of the hidden layer's inputs.
-        #    Produce a 10-dimensional vector with 10 scores.
-        layer_2 = np.dot(layer_1, weights_2)
+    # Evaluate model performance on the test set at each epoch.
 
-        # 4. Measure the error between the actual label (truth) and prediction values.
-        test_loss += np.sum((test_labels[i] - layer_2) ** 2)
-        # 5. Increment the accurate prediction count.
-        test_accurate_predictions += int(np.argmax(layer_2) == np.argmax(test_labels[i]))
+    # Unlike the training step, the weights are not modified for each image
+    # (or batch). Therefore the model can be applied to the test images in a
+    # vectorized manner, eliminating the need to loop over each image
+    # individually:
+
+    results = relu(test_images @ weights_1) @ weights_2
+
+    # Measure the error between the actual label (truth) and prediction values.
+    test_loss = np.sum((test_labels - results)**2)
+
+    # Measure prediction accuracy on test set
+    test_accurate_predictions = np.sum(
+        np.argmax(results, axis=1) == np.argmax(test_labels, axis=1)
+    )
 
     # Store test set losses and accurate predictions.
     store_test_loss.append(test_loss)
     store_test_accurate_pred.append(test_accurate_predictions)
 
-    # 3. Display the error and accuracy metrics in the output.
+    # Summarize error and accuracy metrics at each epoch
     print("\n" + \
           "Epoch: " + str(j) + \
           " Training set error:" + str(training_loss/ float(len(training_images)))[0:5] +\

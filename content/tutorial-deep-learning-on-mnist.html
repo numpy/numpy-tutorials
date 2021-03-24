@@ -26,7 +26,7 @@
 
     
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -41,13 +41,11 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tutorial: X-ray image processing" href="tutorial-x-ray-image-processing.html" />
+    <link rel="next" title="Tutorial: deep reinforcement learning with Pong from pixels" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html" />
     <link rel="prev" title="Saving and sharing your NumPy arrays" href="save-load-arrays.html" />
   <meta name="robots" content="noindex" />
   
@@ -83,11 +81,6 @@
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <ul class="current nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="cs231_tutorial.html">
-   CS231n Python Tutorial With Google Colab
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="tutorial-svd.html">
    Tutorial: Linear algebra on n-dimensional arrays
   </a>
@@ -108,8 +101,20 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">
+   Tutorial: deep reinforcement learning with Pong from pixels
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="tutorial-x-ray-image-processing.html">
    Tutorial: X-ray image processing
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pairing.html">
+   Pairing Jupyter notebooks and MyST-NB
   </a>
  </li>
 </ul>
@@ -136,21 +141,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -171,7 +176,7 @@
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -185,27 +190,27 @@
             href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-deep-learning-on-mnist.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/master/site/content/tutorial-deep-learning-on-mnist.md"><button
+        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/tutorial-deep-learning-on-mnist.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
 </div>
 
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/master?urlpath=tree/site/content/tutorial-deep-learning-on-mnist.md"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=tree/site/content/tutorial-deep-learning-on-mnist.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -217,13 +222,14 @@
     </div>
 </div>
 
-    </div>
+        </div>
 
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
         <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
+            <i class="fas fa-list"></i>
+            Contents
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
@@ -290,6 +296,7 @@
 
         </nav>
         
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -337,24 +344,37 @@
 <p><strong>1.</strong> Define a variable to store the training/test image/label names of the MNIST dataset in a list:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&quot;training_images&quot;</span><span class="p">,</span> <span class="s2">&quot;train-images-idx3-ubyte.gz&quot;</span><span class="p">],</span>   <span class="c1"># 60,000 training images.</span>
-            <span class="p">[</span><span class="s2">&quot;test_images&quot;</span><span class="p">,</span> <span class="s2">&quot;t10k-images-idx3-ubyte.gz&quot;</span><span class="p">],</span>        <span class="c1"># 10,000 test images.</span>
-            <span class="p">[</span><span class="s2">&quot;training_labels&quot;</span><span class="p">,</span> <span class="s2">&quot;train-labels-idx1-ubyte.gz&quot;</span><span class="p">],</span>   <span class="c1"># 60,000 training labels.</span>
-            <span class="p">[</span><span class="s2">&quot;test_labels&quot;</span><span class="p">,</span> <span class="s2">&quot;t10k-labels-idx1-ubyte.gz&quot;</span><span class="p">]]</span>        <span class="c1"># 10,000 test labels.</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_sources</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;training_images&quot;</span><span class="p">:</span> <span class="s2">&quot;train-images-idx3-ubyte.gz&quot;</span><span class="p">,</span>   <span class="c1"># 60,000 training images.</span>
+    <span class="s2">&quot;test_images&quot;</span><span class="p">:</span> <span class="s2">&quot;t10k-images-idx3-ubyte.gz&quot;</span><span class="p">,</span>        <span class="c1"># 10,000 test images.</span>
+    <span class="s2">&quot;training_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;train-labels-idx1-ubyte.gz&quot;</span><span class="p">,</span>   <span class="c1"># 60,000 training labels.</span>
+    <span class="s2">&quot;test_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;t10k-labels-idx1-ubyte.gz&quot;</span>         <span class="c1"># 10,000 test labels.</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>2.</strong> Download each of the 4 files in the list:</p>
+<p><strong>2.</strong> Load the data. First check if the data is stored locally; if not, then
+download it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">request</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;../_data&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">base_url</span> <span class="o">=</span> <span class="s2">&quot;http://yann.lecun.com/exdb/mnist/&quot;</span>
 
-<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloading file: &quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="n">name</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">data_sources</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">fpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Downloading file: &quot;</span> <span class="o">+</span> <span class="n">fname</span><span class="p">)</span>
+        <span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="n">fname</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">request_opts</span><span class="p">)</span>
+        <span class="n">resp</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>  <span class="c1"># Ensure download was succesful</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
+                <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -363,7 +383,9 @@
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: t10k-images-idx3-ubyte.gz
-Downloading file: train-labels-idx1-ubyte.gz
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-labels-idx1-ubyte.gz
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: t10k-labels-idx1-ubyte.gz
@@ -380,13 +402,13 @@ Downloading file: train-labels-idx1-ubyte.gz
 <span class="n">mnist_dataset</span> <span class="o">=</span> <span class="p">{}</span>
 
 <span class="c1"># Images</span>
-<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">[:</span><span class="mi">2</span><span class="p">]:</span>
-    <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mnist_file</span><span class="p">:</span>
-        <span class="n">mnist_dataset</span><span class="p">[</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">mnist_file</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="o">*</span><span class="mi">28</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;training_images&quot;</span><span class="p">,</span> <span class="s2">&quot;test_images&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">data_sources</span><span class="p">[</span><span class="n">key</span><span class="p">]),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mnist_file</span><span class="p">:</span>
+        <span class="n">mnist_dataset</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">mnist_file</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">28</span><span class="o">*</span><span class="mi">28</span><span class="p">)</span>
 <span class="c1"># Labels</span>
-<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]:</span>
-    <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">name</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mnist_file</span><span class="p">:</span>
-        <span class="n">mnist_dataset</span><span class="p">[</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">mnist_file</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;training_labels&quot;</span><span class="p">,</span> <span class="s2">&quot;test_labels&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">data_sources</span><span class="p">[</span><span class="n">key</span><span class="p">]),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">mnist_file</span><span class="p">:</span>
+        <span class="n">mnist_dataset</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">mnist_file</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -433,7 +455,7 @@ The shape of test images: (10000, 784) and test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-deep-learning-on-mnist_11_0.png" src="../_images/tutorial-deep-learning-on-mnist_11_0.png" />
+<img alt="../_images/tutorial-deep-learning-on-mnist_12_0.png" src="../_images/tutorial-deep-learning-on-mnist_12_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -449,7 +471,7 @@ The shape of test images: (10000, 784) and test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-deep-learning-on-mnist_12_0.png" src="../_images/tutorial-deep-learning-on-mnist_12_0.png" />
+<img alt="../_images/tutorial-deep-learning-on-mnist_13_0.png" src="../_images/tutorial-deep-learning-on-mnist_13_0.png" />
 </div>
 </div>
 <blockquote>
@@ -504,12 +526,18 @@ The data type of test images: uint8
 </div>
 </div>
 </div>
-<p><strong>2.</strong> Normalize the arrays by dividing them by 255 (and thus promoting the data type from <code class="docutils literal notranslate"><span class="pre">uint8</span></code> to <code class="docutils literal notranslate"><span class="pre">float64</span></code>) and then assign the train and test image data variables — <code class="docutils literal notranslate"><span class="pre">x_train</span></code> and <code class="docutils literal notranslate"><span class="pre">x_test</span></code> — to <code class="docutils literal notranslate"><span class="pre">training_images</span></code> and <code class="docutils literal notranslate"><span class="pre">train_labels</span></code>, respectively. To make the neural network model train faster in this example, <code class="docutils literal notranslate"><span class="pre">training_images</span></code> contains only 1,000 samples out of 60,000. To learn from the entire sample size, change the <code class="docutils literal notranslate"><span class="pre">sample</span></code> variable to <code class="docutils literal notranslate"><span class="pre">60000</span></code>.</p>
+<p><strong>2.</strong> Normalize the arrays by dividing them by 255 (and thus promoting the data type from <code class="docutils literal notranslate"><span class="pre">uint8</span></code> to <code class="docutils literal notranslate"><span class="pre">float64</span></code>) and then assign the train and test image data variables — <code class="docutils literal notranslate"><span class="pre">x_train</span></code> and <code class="docutils literal notranslate"><span class="pre">x_test</span></code> — to <code class="docutils literal notranslate"><span class="pre">training_images</span></code> and <code class="docutils literal notranslate"><span class="pre">train_labels</span></code>, respectively.
+To reduce the model training and evaluation time in this example, only a subset
+of the training and test images will be used.
+Both <code class="docutils literal notranslate"><span class="pre">training_images</span></code> and <code class="docutils literal notranslate"><span class="pre">test_images</span></code> will contain only 1,000 samples each out
+of the complete datasets of 60,000 and 10,000 images, respectively.
+These values can be controlled by changing the  <code class="docutils literal notranslate"><span class="pre">training_sample</span></code> and
+<code class="docutils literal notranslate"><span class="pre">test_sample</span></code> below, up to their maximum values of 60,000 and 10,000.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">training_images</span> <span class="o">=</span> <span class="n">x_train</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">sample</span><span class="p">]</span> <span class="o">/</span> <span class="mi">255</span>
-<span class="n">test_images</span> <span class="o">=</span> <span class="n">x_test</span> <span class="o">/</span> <span class="mi">255</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">training_sample</span><span class="p">,</span> <span class="n">test_sample</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span>
+<span class="n">training_images</span> <span class="o">=</span> <span class="n">x_train</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">training_sample</span><span class="p">]</span> <span class="o">/</span> <span class="mi">255</span>
+<span class="n">test_images</span> <span class="o">=</span> <span class="n">x_test</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">test_sample</span><span class="p">]</span> <span class="o">/</span> <span class="mi">255</span>
 </pre></div>
 </div>
 </div>
@@ -578,8 +606,8 @@ The data type of test labels: uint8
 <p><strong>3.</strong> Encode the labels and assign the values to new variables:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">training_labels</span> <span class="o">=</span> <span class="n">one_hot_encoding</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
-<span class="n">test_labels</span> <span class="o">=</span> <span class="n">one_hot_encoding</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">training_labels</span> <span class="o">=</span> <span class="n">one_hot_encoding</span><span class="p">(</span><span class="n">y_train</span><span class="p">[:</span><span class="n">training_sample</span><span class="p">])</span>
+<span class="n">test_labels</span> <span class="o">=</span> <span class="n">one_hot_encoding</span><span class="p">(</span><span class="n">y_test</span><span class="p">[:</span><span class="n">test_sample</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -751,7 +779,9 @@ The data type of test labels: float64
 </div>
 </div>
 </div>
-<p><strong>5.</strong> Set up the neural network’s learning experiment with a training loop and start the training process.</p>
+<p><strong>5.</strong> Set up the neural network’s learning experiment with a training loop and start the training process.
+Note that the model is evaluated against the test set at each epoch to track
+its performance over the training epochs.</p>
 <p>Start the training process:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -765,6 +795,11 @@ The data type of test labels: float64
 <span class="c1"># This is a training loop.</span>
 <span class="c1"># Run the learning experiment for a defined number of epochs (iterations).</span>
 <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+
+    <span class="c1">#################</span>
+    <span class="c1"># Training step #</span>
+    <span class="c1">#################</span>
+
     <span class="c1"># Set the initial loss/error and the number of accurate predictions to zero.</span>
     <span class="n">training_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">training_accurate_predictions</span> <span class="o">=</span> <span class="mi">0</span>
@@ -813,32 +848,32 @@ The data type of test labels: float64
     <span class="n">store_training_loss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">training_loss</span><span class="p">)</span>
     <span class="n">store_training_accurate_pred</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">training_accurate_predictions</span><span class="p">)</span>
 
-    <span class="c1"># Evaluate on the test set:</span>
-    <span class="c1"># 1. Set the initial error and the number of accurate predictions to zero.</span>
-    <span class="n">test_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
-    <span class="n">test_accurate_predictions</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1">###################</span>
+    <span class="c1"># Evaluation step #</span>
+    <span class="c1">###################</span>
 
-    <span class="c1"># 2. Start testing the model by evaluating on the test image dataset.</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_images</span><span class="p">)):</span>
-        <span class="c1"># 1. Pass the test images through the input layer.</span>
-        <span class="n">layer_0</span> <span class="o">=</span> <span class="n">test_images</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-        <span class="c1"># 2. Compute the weighted sum of the test image inputs in and</span>
-        <span class="c1">#    pass the hidden layer&#39;s output through ReLU.</span>
-        <span class="n">layer_1</span> <span class="o">=</span> <span class="n">relu</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">layer_0</span><span class="p">,</span> <span class="n">weights_1</span><span class="p">))</span>
-        <span class="c1"># 3. Compute the weighted sum of the hidden layer&#39;s inputs.</span>
-        <span class="c1">#    Produce a 10-dimensional vector with 10 scores.</span>
-        <span class="n">layer_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">layer_1</span><span class="p">,</span> <span class="n">weights_2</span><span class="p">)</span>
+    <span class="c1"># Evaluate model performance on the test set at each epoch.</span>
 
-        <span class="c1"># 4. Measure the error between the actual label (truth) and prediction values.</span>
-        <span class="n">test_loss</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">test_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">layer_2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="c1"># 5. Increment the accurate prediction count.</span>
-        <span class="n">test_accurate_predictions</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">layer_2</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="c1"># Unlike the training step, the weights are not modified for each image</span>
+    <span class="c1"># (or batch). Therefore the model can be applied to the test images in a</span>
+    <span class="c1"># vectorized manner, eliminating the need to loop over each image</span>
+    <span class="c1"># individually:</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="n">relu</span><span class="p">(</span><span class="n">test_images</span> <span class="o">@</span> <span class="n">weights_1</span><span class="p">)</span> <span class="o">@</span> <span class="n">weights_2</span>
+
+    <span class="c1"># Measure the error between the actual label (truth) and prediction values.</span>
+    <span class="n">test_loss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">test_labels</span> <span class="o">-</span> <span class="n">results</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Measure prediction accuracy on test set</span>
+    <span class="n">test_accurate_predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">test_labels</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">)</span>
 
     <span class="c1"># Store test set losses and accurate predictions.</span>
     <span class="n">store_test_loss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_loss</span><span class="p">)</span>
     <span class="n">store_test_accurate_pred</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_accurate_predictions</span><span class="p">)</span>
 
-    <span class="c1"># 3. Display the error and accuracy metrics in the output.</span>
+    <span class="c1"># Summarize error and accuracy metrics at each epoch</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> \
           <span class="s2">&quot;Epoch: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">+</span> \
           <span class="s2">&quot; Training set error:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">training_loss</span><span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">training_images</span><span class="p">)))[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">+</span>\
@@ -849,64 +884,64 @@ The data type of test labels: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0 Training set error:0.891 Training set accuracy:0.413 Test set error:0.641 Test set accuracy:0.6333
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0 Training set error:0.891 Training set accuracy:0.413 Test set error:0.666 Test set accuracy:0.605
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 1 Training set error:0.650 Training set accuracy:0.62 Test set error:0.578 Test set accuracy:0.6835
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 1 Training set error:0.650 Training set accuracy:0.62 Test set error:0.603 Test set accuracy:0.637
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 2 Training set error:0.597 Training set accuracy:0.669 Test set error:0.548 Test set accuracy:0.7125
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 2 Training set error:0.597 Training set accuracy:0.669 Test set error:0.573 Test set accuracy:0.667
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 3 Training set error:0.565 Training set accuracy:0.686 Test set error:0.530 Test set accuracy:0.7367
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 3 Training set error:0.565 Training set accuracy:0.686 Test set error:0.554 Test set accuracy:0.698
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 4 Training set error:0.547 Training set accuracy:0.712 Test set error:0.491 Test set accuracy:0.7608
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 4 Training set error:0.547 Training set accuracy:0.712 Test set error:0.515 Test set accuracy:0.714
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 5 Training set error:0.515 Training set accuracy:0.739 Test set error:0.481 Test set accuracy:0.7727
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 5 Training set error:0.515 Training set accuracy:0.739 Test set error:0.505 Test set accuracy:0.731
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 6 Training set error:0.514 Training set accuracy:0.727 Test set error:0.476 Test set accuracy:0.7855
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 6 Training set error:0.514 Training set accuracy:0.727 Test set error:0.499 Test set accuracy:0.753
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 7 Training set error:0.499 Training set accuracy:0.73 Test set error:0.462 Test set accuracy:0.7811
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 7 Training set error:0.499 Training set accuracy:0.73 Test set error:0.485 Test set accuracy:0.737
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 8 Training set error:0.483 Training set accuracy:0.759 Test set error:0.455 Test set accuracy:0.7903
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 8 Training set error:0.483 Training set accuracy:0.759 Test set error:0.478 Test set accuracy:0.753
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 9 Training set error:0.469 Training set accuracy:0.754 Test set error:0.464 Test set accuracy:0.7869
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 9 Training set error:0.469 Training set accuracy:0.754 Test set error:0.486 Test set accuracy:0.75
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 10 Training set error:0.472 Training set accuracy:0.764 Test set error:0.458 Test set accuracy:0.787
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 10 Training set error:0.472 Training set accuracy:0.764 Test set error:0.480 Test set accuracy:0.752
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 11 Training set error:0.460 Training set accuracy:0.779 Test set error:0.439 Test set accuracy:0.7984
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 11 Training set error:0.460 Training set accuracy:0.779 Test set error:0.459 Test set accuracy:0.779
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 12 Training set error:0.465 Training set accuracy:0.793 Test set error:0.451 Test set accuracy:0.805
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 12 Training set error:0.465 Training set accuracy:0.793 Test set error:0.473 Test set accuracy:0.772
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 13 Training set error:0.444 Training set accuracy:0.803 Test set error:0.441 Test set accuracy:0.8065
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 13 Training set error:0.444 Training set accuracy:0.803 Test set error:0.462 Test set accuracy:0.776
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 14 Training set error:0.458 Training set accuracy:0.786 Test set error:0.441 Test set accuracy:0.8032
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 14 Training set error:0.458 Training set accuracy:0.786 Test set error:0.460 Test set accuracy:0.777
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 15 Training set error:0.446 Training set accuracy:0.794 Test set error:0.435 Test set accuracy:0.8097
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 15 Training set error:0.446 Training set accuracy:0.794 Test set error:0.454 Test set accuracy:0.776
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 16 Training set error:0.437 Training set accuracy:0.795 Test set error:0.425 Test set accuracy:0.8155
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 16 Training set error:0.437 Training set accuracy:0.795 Test set error:0.444 Test set accuracy:0.792
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 17 Training set error:0.423 Training set accuracy:0.82 Test set error:0.419 Test set accuracy:0.814
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 17 Training set error:0.423 Training set accuracy:0.82 Test set error:0.440 Test set accuracy:0.795
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 18 Training set error:0.442 Training set accuracy:0.812 Test set error:0.430 Test set accuracy:0.8156
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 18 Training set error:0.442 Training set accuracy:0.812 Test set error:0.453 Test set accuracy:0.796
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 19 Training set error:0.440 Training set accuracy:0.818 Test set error:0.428 Test set accuracy:0.8103
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 19 Training set error:0.440 Training set accuracy:0.818 Test set error:0.445 Test set accuracy:0.794
 </pre></div>
 </div>
 </div>
@@ -942,7 +977,7 @@ The data type of test labels: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-deep-learning-on-mnist_45_0.png" src="../_images/tutorial-deep-learning-on-mnist_45_0.png" />
+<img alt="../_images/tutorial-deep-learning-on-mnist_46_0.png" src="../_images/tutorial-deep-learning-on-mnist_46_0.png" />
 </div>
 </div>
 <p>The accuracy rates that your model reaches during training and testing may be somewhat plausible but you may also find the error rates to be quite high.</p>
@@ -972,15 +1007,15 @@ The data type of test labels: float64
 
               </div>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
         
+        <div class='prev-next-bottom'>
+            
     <a class='left-prev' id="prev-link" href="save-load-arrays.html" title="previous page">Saving and sharing your NumPy arrays</a>
-    <a class='right-next' id="next-link" href="tutorial-x-ray-image-processing.html" title="next page">Tutorial: X-ray image processing</a>
+    <a class='right-next' id="next-link" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html" title="next page">Tutorial: deep reinforcement learning with Pong from pixels</a>
 
+        </div>
+        
+        </div>
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">

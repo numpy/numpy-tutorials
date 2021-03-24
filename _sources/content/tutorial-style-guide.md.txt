@@ -85,7 +85,7 @@ Avoid abstraction. "About" is a tipoff: Rather than writing "You'll learn about 
 
 ## Avoid asides
 
-As explained by master documentation writer [Daniele Procida](https://documentation.divio.com/tutorials):
+As explained by expert documentation writer [Daniele Procida](https://documentation.divio.com/tutorials):
 
 > Don’t explain anything the learner doesn’t need to know in order to complete the tutorial. 
 

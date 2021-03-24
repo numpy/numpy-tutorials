@@ -26,7 +26,7 @@
 
     
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.e7340bb3dbd8dde6db86f25597f54a1b.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -41,13 +41,11 @@
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="_static/sphinx-book-theme.7d483ff0a819d6edff12ce0b1ead3928.js"></script>
     <link rel="shortcut icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="CS231n Python Tutorial With Google Colab" href="content/cs231_tutorial.html" />
+    <link rel="next" title="Tutorial: Linear algebra on n-dimensional arrays" href="content/tutorial-svd.html" />
   <meta name="robots" content="noindex" />
   
 
@@ -82,11 +80,6 @@
 <nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="content/cs231_tutorial.html">
-   CS231n Python Tutorial With Google Colab
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="content/tutorial-svd.html">
    Tutorial: Linear algebra on n-dimensional arrays
   </a>
@@ -107,8 +100,20 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">
+   Tutorial: deep reinforcement learning with Pong from pixels
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="content/tutorial-x-ray-image-processing.html">
    Tutorial: X-ray image processing
+  </a>
+ </li>
+</ul>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="content/pairing.html">
+   Pairing Jupyter notebooks and MyST-NB
   </a>
  </li>
 </ul>
@@ -135,21 +140,21 @@
           
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="row topbar fixed-top container-xl">
-    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
-    </div>
-    <div class="col pl-2 topbar-main">
-        
-        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-            <i class="fas fa-bars"></i>
-            <i class="fas fa-arrow-left"></i>
-            <i class="fas fa-arrow-up"></i>
-        </button>
-        
-        
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
             class="fas fa-download"></i></button>
@@ -167,7 +172,7 @@
     </div>
 </div>
 
-        <!-- Source interaction buttons -->
+            <!-- Source interaction buttons -->
 
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
@@ -181,28 +186,29 @@
             href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Findex.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/master/site/index.md"><button
+        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/main/site/index.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
 </div>
 
 
-        <!-- Full screen (wrap in <a> to have style consistency -->
-        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-                title="Fullscreen mode"><i
-                    class="fas fa-expand"></i></button></a>
+            <!-- Full screen (wrap in <a> to have style consistency -->
+            <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                    data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                    title="Fullscreen mode"><i
+                        class="fas fa-expand"></i></button></a>
 
-        <!-- Launch buttons -->
+            <!-- Launch buttons -->
 
-    </div>
+        </div>
 
-    <!-- Table of contents -->
-    <div class="d-none d-md-block col-md-2 bd-toc show">
-        
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
         <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
+            <i class="fas fa-list"></i>
+            Contents
         </div>
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
@@ -210,13 +216,6 @@
   <a class="reference internal nav-link" href="#content">
    Content
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#attribution">
-     Attribution
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#contributing">
@@ -227,6 +226,13 @@
     <a class="reference internal nav-link" href="#why-jupyter-notebooks">
      Why Jupyter Notebooks?
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#note">
+       Note
+      </a>
+     </li>
+    </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#adding-your-own-tutorials">
@@ -266,6 +272,7 @@
 
         </nav>
         
+        </div>
     </div>
 </div>
     <div id="main-content" class="row">
@@ -275,7 +282,7 @@
                 
   <div class="section" id="numpy-tutorials">
 <h1>NumPy tutorials<a class="headerlink" href="#numpy-tutorials" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/master?urlpath=lab/tree/content"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
+<p><a class="reference external" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=lab/tree/content"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
 <p>This set of tutorials and educational materials is being developed,
 IT IS NOT INTEGRATED IN THE HTML DOCS AT <a class="reference external" href="https://www.numpy.org/devdocs/">https://www.numpy.org/devdocs/</a></p>
 <p>The goal of this repository is to provide high-quality resources by the
@@ -292,21 +299,12 @@ or use the download icon in the upper-right corner of each tutorial.</p>
 <h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="content/cs231_tutorial.html">CS231n Python Tutorial With Google Colab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="content/tutorial-svd.html">Tutorial: Linear algebra on n-dimensional arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="content/mooreslaw-tutorial.html">Determining Moore’s Law with real data in NumPy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="content/save-load-arrays.html">Saving and sharing your NumPy arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="content/tutorial-deep-learning-on-mnist.html">Tutorial: Deep learning on MNIST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">Tutorial: deep reinforcement learning with Pong from pixels</a></li>
 <li class="toctree-l1"><a class="reference internal" href="content/tutorial-x-ray-image-processing.html">Tutorial: X-ray image processing</a></li>
-</ul>
-</div>
-<div class="section" id="attribution">
-<h3>Attribution<a class="headerlink" href="#attribution" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>The cs231n tutorial is by <a class="reference external" href="https://github.com/jcjohnson">&#64;jcjohnson</a>. The full tutorial in
-its original form is linked via <a class="reference external" href="https://numpy.org/learn">numpy.org</a>.</p></li>
-<li><p>The SVD tutorial is by <a class="reference external" href="https://github.com/melissawm">&#64;melissawm</a>. The full tutorial is available
-via the <a class="reference external" href="https://numpy.org/devdocs/user/tutorials_index.html">tutorials page</a> of the official NumPy documentation.</p></li>
 </ul>
 </div>
 </div>
@@ -332,6 +330,16 @@ information.</p></li>
 <li><p>rST may present a barrier for some people who might otherwise be very
 interested in contributing tutorial material.</p></li>
 </ul>
+<div class="section" id="note">
+<h4>Note<a class="headerlink" href="#note" title="Permalink to this headline">¶</a></h4>
+<p>You may notice our content is in markdown format (<code class="docutils literal notranslate"><span class="pre">.md</span></code> files). We review and
+host notebooks in the <a class="reference external" href="https://myst-nb.readthedocs.io/">MyST-NB</a> format. We
+accept both Jupyter notebooks (<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>) and MyST-NB notebooks (<code class="docutils literal notranslate"><span class="pre">.md</span></code>).
+If you want to sync your <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> to your <code class="docutils literal notranslate"><span class="pre">.md</span></code> file follow the <a class="reference internal" href="content/pairing.html"><span class="doc std std-doc">pairing
+tutorial</span></a>.</p>
+<div class="toctree-wrapper compound">
+</div>
+</div>
 </div>
 <div class="section" id="adding-your-own-tutorials">
 <h3>Adding your own tutorials<a class="headerlink" href="#adding-your-own-tutorials" title="Permalink to this headline">¶</a></h3>
@@ -385,8 +393,6 @@ tutorials:</p>
     </summary>
     <img src="_static/04-add_to_readme.gif" width=80% height=80%>
 </details>
-<p><b>Update the attribution section (below) to credit the original tutorial
-author, if applicable.</b></p>
 <details>
     <summary>
         <b>Create a <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request.</a></b>
@@ -427,14 +433,14 @@ labels there).</p>
 
               </div>
               
-        </div>
-    </div>
-    
-    
-    <div class='prev-next-bottom'>
         
-    <a class='right-next' id="next-link" href="content/cs231_tutorial.html" title="next page">CS231n Python Tutorial With Google Colab</a>
+        <div class='prev-next-bottom'>
+            
+    <a class='right-next' id="next-link" href="content/tutorial-svd.html" title="next page">Tutorial: Linear algebra on n-dimensional arrays</a>
 
+        </div>
+        
+        </div>
     </div>
     <footer class="footer mt-5 mt-md-0">
     <div class="container">
