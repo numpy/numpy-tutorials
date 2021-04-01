@@ -369,10 +369,12 @@ Here is a summary of the neural network model architecture and the training proc
 
 Having covered the main deep learning concepts and the neural network architecture, let's write the code.
 
-**1.** For reproducibility, initialize a random seed with `np.random.seed()`:
+**1.** We'll start by creating a new random number generator, providing a seed
+for reproducibility:
 
 ```{code-cell} ipython3
-np.random.seed(1)
+seed = 884736743
+rng = np.random.default_rng(seed)
 ```
 
 **2.** For the hidden layer, define the ReLU activation function for forward propagation and ReLU's derivative that will be used during backpropagation:
@@ -404,11 +406,11 @@ pixels_per_image = 784
 num_labels = 10
 ```
 
-**4.** Initialize the weight vectors that will be used in the hidden and output layers with `np.random.random()`:
+**4.** Initialize the weight vectors that will be used in the hidden and output layers with random values:
 
 ```{code-cell} ipython3
-weights_1 = 0.2 * np.random.random((pixels_per_image, hidden_size)) - 0.1
-weights_2 = 0.2 * np.random.random((hidden_size, num_labels)) - 0.1
+weights_1 = 0.2 * rng.random((pixels_per_image, hidden_size)) - 0.1
+weights_2 = 0.2 * rng.random((hidden_size, num_labels)) - 0.1
 ```
 
 **5.** Set up the neural network's learning experiment with a training loop and start the training process.
@@ -451,7 +453,7 @@ for j in range(epochs):
         # 3. Pass the hidden layer's output through the ReLU activation function.
         layer_1 = relu(layer_1)
         # 4. Define the dropout function for regularization.
-        dropout_mask = np.random.randint(0, high=2, size=layer_1.shape)
+        dropout_mask = rng.integers(low=0, high=2, size=layer_1.shape)
         # 5. Apply dropout to the hidden layer's output.
         layer_1 *= dropout_mask * 2
         # 6. The output layer:
