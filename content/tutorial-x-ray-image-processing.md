@@ -50,7 +50,7 @@ tutorial's repository under `tutorial-x-ray-image-processing/`, since
 ChestX-ray8 contains gigabytes of data and you may find it challenging to
 download it in batches.
 
-![image.png](tutorial-x-ray-image-processing.png)
+![Images showing different filters applied over a chest x-ray image](../_static/tutorial-x-ray-image-processing.png)
 
 +++
 

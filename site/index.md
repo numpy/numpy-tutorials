@@ -4,18 +4,18 @@
 
 [launch_binder]: https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=lab/tree/content
 
-This set of tutorials and educational materials is being developed,
-IT IS NOT INTEGRATED IN THE HTML DOCS AT <https://www.numpy.org/devdocs/>
-
-The goal of this repository is to provide high-quality resources by the
-NumPy project, both for self-learning and for teaching classes with. If you're
-interested in adding your own content, check the [Contributing](#contributing)
-section.
+This set of tutorials and educational materials is being developed in the
+[numpy-tutorials](https://github.com/numpy/numpy-tutorials) repository, and is
+not a part of the NumPy source tree. The goal of this repository is to provide
+high-quality resources by the NumPy project, both for self-learning and for
+teaching classes with. If you're interested in adding your own content, check
+the [Contributing](#contributing) section.
 
 To open a live version of the content, click the **launch Binder** button above.
-You can also launch individual tutorials on Binder by clicking on the
-rocket icon that appears in the upper-right corner of each tutorial.
-To download a local copy of the `.ipynb` files, you can either
+To open each of the `.md` files, right click and select "Open with -> Notebook".
+You can also launch individual tutorials on Binder by clicking on the rocket
+icon that appears in the upper-right corner of each tutorial. To download a
+local copy of the `.ipynb` files, you can either
 [clone this repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
 or use the download icon in the upper-right corner of each tutorial.
 
@@ -38,7 +38,7 @@ content/tutorial-x-ray-image-processing
 
 We very much welcome contributions! If you have an idea or proposal for a new
 tutorial, please [open an issue](https://github.com/numpy/numpy-tutorials/issues)
-with an outline. 
+with an outline.
 
 Don’t worry if English is not your first language, or if you can only come up
 with a rough draft. Open source is a community effort. Do your best – we’ll help
@@ -48,15 +48,25 @@ Images and real-life data make text more engaging and powerful, but be sure what
 you use is appropriately licensed and available. Here again, even a rough idea
 for artwork can be polished by others.
 
+The NumPy tutorials are a curated collection of
+[MyST-NB](https://myst-nb.readthedocs.io/) notebooks. These notebooks are used
+to produce static websites and can be opened as notebooks in Jupyter using
+[Jupytext](https://jupytext.readthedocs.io).
+
+> __Note:__ You should use [CommonMark](https://commonmark.org) markdown
+> cells. Jupyter only renders CommonMark.
+
 ### Why Jupyter Notebooks?
 
-The choice of Jupyter Notebook in this repo instead of the usual format 
+The choice of Jupyter Notebook in this repo instead of the usual format
 ([reStructuredText][rst])
 used in the main NumPy documentation has two reasons:
 
 
  * Jupyter notebooks are a common format for communicating scientific
    information.
+ * Jupyter notebooks can be launched in [Binder](https://www.mybinder.org), so that users can interact
+   with tutorials
  * rST may present a barrier for some people who might otherwise be very
    interested in contributing tutorial material.
 
@@ -79,11 +89,11 @@ content/pairing
 ### Adding your own tutorials
 
 If you have your own tutorial in the form of a Jupyter notebook (an `.ipynb`
-file) and you'd like to try add it out to the repository:
+file) and you'd like to try add it out to the repository, follow the steps below.
 
 #### Create an issue
 
-Go to <https://github.com/numpy/numpy-tutorials/issues> and create a new issue 
+Go to <https://github.com/numpy/numpy-tutorials/issues> and create a new issue
 with your proposal.
 Give as much detail as you can about what kind of content you would like to
 write (tutorial, how-to) and what you plan to cover.
@@ -91,7 +101,7 @@ We will try to respond as quickly as possible with comments, if applicable.
 
 #### Check out our suggested template
 
-You can use this template to make your content consistent with our existing 
+You can use this template to make your content consistent with our existing
 tutorials:
 
 ```{toctree}
@@ -103,7 +113,7 @@ content/tutorial-style-guide
 
 #### Upload your content
 
-Remember to clear all outputs on your notebook before uploading it. 
+Remember to clear all outputs on your notebook before uploading it.
 
 <ul>
 <details>
@@ -112,7 +122,7 @@ Remember to clear all outputs on your notebook before uploading it.
     </summary>
     <img src="_static/01-fork.gif" width=80% height=80%>
 </details>
-    
+
 <details>
     <summary>
         <b>In your own fork, create a new branch for your content.</b>
@@ -139,7 +149,7 @@ Remember to clear all outputs on your notebook before uploading it.
 
 <details>
     <summary>
-        <b>Create a <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request.</a></b>
+        <b>Create a <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request.</a> Make sure the "Allow edits and access to secrets by maintainers" option is selected so we can properly review your submission.</b>
     </summary>
     <img src="_static/05-create_PR.gif" width=80% height=80%>
 </details>
@@ -165,7 +175,7 @@ The following links may be useful:
 
 Note that regular documentation issues for NumPy can be found in the [main NumPy
 repository](https://github.com/numpy/numpy/issues) (see the `Documentation`
-labels there). 
+labels there).
 
 
 ## Indices and tables
