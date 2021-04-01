@@ -80,7 +80,10 @@ download it.
 headers = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0"
 }
-request_opts = {"headers": headers}
+request_opts = {
+    "headers": headers,
+    "params": {"raw": "true"},
+}
 ```
 
 ```{code-cell} ipython3
@@ -90,7 +93,7 @@ import os
 data_dir = "../_data"
 os.makedirs(data_dir, exist_ok=True)
 
-base_url = "http://yann.lecun.com/exdb/mnist/"
+base_url = "https://github.com/rossbar/numpy-tutorial-data-mirror/blob/main/"
 
 for fname in data_sources.values():
     fpath = os.path.join(data_dir, fname)
