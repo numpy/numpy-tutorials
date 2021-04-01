@@ -153,12 +153,13 @@ plt.show()
 
 ```{code-cell} ipython3
 # Display 5 random images from the training set.
-np.random.seed(0)
-indices = list(np.random.randint(x_train.shape[0], size=9))
-for i in range(5):
-    plt.subplot(1, 5, i+1)
-    plt.imshow(x_train[indices[i]].reshape(28, 28), cmap='gray')
-    plt.tight_layout()
+num_examples = 5
+seed = 147197952744
+rng = np.random.default_rng(seed)
+
+fig, axes = plt.subplots(1, num_examples)
+for sample, ax in zip(rng.choice(x_train, size=num_examples, replace=False), axes):
+    ax.imshow(sample.reshape(28, 28), cmap='gray')
 ```
 
 > **Note:** You can also visualize a sample image as an array by printing `x_train[59999]`. Here, `59999` is your 60,000th training image sample (`0` would be your first). Your output will be quite long and should contain an array of 8-bit integers:
