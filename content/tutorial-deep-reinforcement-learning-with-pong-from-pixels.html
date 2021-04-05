@@ -501,7 +501,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(210, 160, 3)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fc883fed0d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f63aff93400&gt;
 </pre></div>
 </div>
 <img alt="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_29_2.png" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_29_2.png" />
@@ -564,6 +564,16 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 <ol class="simple">
 <li><p>Let’s instantiate certain parameters for the input, hidden, and output layers, and start setting up the network model.</p></li>
 </ol>
+<p>Start by creating a random number generator instance for the experiment
+(seeded for reproducibility):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">12288743</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then:</p>
 <ul class="simple">
 <li><p>Set the input (observation) dimensionality - your preprocessed screen frames:</p></li>
 </ul>
@@ -596,12 +606,12 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 </div>
 <p>In a neural network, <em>weights</em> are important adjustable parameters that the network fine-tunes by forward and backward propagating the data.</p>
 <ol class="simple">
-<li><p>Using a technique called <a class="reference external" href="https://www.deeplearning.ai/ai-notes/initialization/#IV">Xavier initialization</a>, set up the network model’s initial weights with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.randn.html"><code class="docutils literal notranslate"><span class="pre">np.random.randn()</span></code></a> that return random numbers over a standard Normal distribution, as well as <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html?highlight=numpy.sqrt#numpy.sqrt"><code class="docutils literal notranslate"><span class="pre">np.sqrt()</span></code></a>:</p></li>
+<li><p>Using a technique called <a class="reference external" href="https://www.deeplearning.ai/ai-notes/initialization/#IV">Xavier initialization</a>, set up the network model’s initial weights with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.standard_normal.html"><code class="docutils literal notranslate"><span class="pre">Generator.standard_normal()</span></code></a> that returns random numbers over a standard Normal distribution, as well as <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html?highlight=numpy.sqrt#numpy.sqrt"><code class="docutils literal notranslate"><span class="pre">np.sqrt()</span></code></a>:</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;W1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="n">D</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
-<span class="n">model</span><span class="p">[</span><span class="s1">&#39;W2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">H</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;W1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="n">D</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="n">model</span><span class="p">[</span><span class="s1">&#39;W2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">H</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -878,7 +888,7 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
     <span class="c1"># 4. Let the action indexed at `2` (&quot;move up&quot;) be that probability</span>
     <span class="c1"># if it&#39;s higher than a randomly sampled value</span>
     <span class="c1"># or use action `3` (&quot;move down&quot;) otherwise.</span>
-    <span class="n">action</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">aprob</span> <span class="k">else</span> <span class="mi">3</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">aprob</span> <span class="k">else</span> <span class="mi">3</span>
 
     <span class="c1"># 5. Cache the observations and hidden &quot;states&quot; (from the network)</span>
     <span class="c1"># in separate variables for backpropagation.</span>
@@ -1083,9 +1093,6 @@ Episode 1: Game finished. Reward: -1.0...
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: 1.0... POSITIVE REWARD!
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 </pre></div>
 </div>
@@ -1104,7 +1111,7 @@ Episode 1: Game finished. Reward: -1.0...
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -20.0 Running mean: -20.99
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -21.0 Running mean: -21.0
 Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
@@ -1141,7 +1148,7 @@ Episode 2: Game finished. Reward: -1.0...
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: 1.0... POSITIVE REWARD!
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
@@ -1168,7 +1175,10 @@ Episode 2: Game finished. Reward: -1.0...
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -21.0 Running mean: -20.990099999999998
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -20.0 Running mean: -20.99
 Episode 3: Game finished. Reward: -1.0...
 </pre></div>
 </div>

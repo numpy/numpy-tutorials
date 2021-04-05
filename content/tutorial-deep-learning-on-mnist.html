@@ -364,7 +364,7 @@ download it.</p>
 <span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;../_data&quot;</span>
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">base_url</span> <span class="o">=</span> <span class="s2">&quot;http://yann.lecun.com/exdb/mnist/&quot;</span>
+<span class="n">base_url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/rossbar/numpy-tutorial-data-mirror/blob/main/&quot;</span>
 
 <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">data_sources</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
     <span class="n">fpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
@@ -375,20 +375,6 @@ download it.</p>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
                 <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-images-idx3-ubyte.gz
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: t10k-images-idx3-ubyte.gz
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-labels-idx1-ubyte.gz
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: t10k-labels-idx1-ubyte.gz
 </pre></div>
 </div>
 </div>
@@ -461,12 +447,13 @@ The shape of test images: (10000, 784) and test labels: (10000,)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Display 5 random images from the training set.</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">9</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x_train</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">num_examples</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">seed</span> <span class="o">=</span> <span class="mi">147197952744</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_examples</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">sample</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_examples</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">axes</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -678,14 +665,14 @@ The data type of test labels: float64
 <div><p><strong>Note:</strong> For simplicity, the bias term is omitted in this example (there is no <code class="docutils literal notranslate"><span class="pre">np.dot(layer,</span> <span class="pre">weights)</span> <span class="pre">+</span> <span class="pre">bias</span></code>).</p>
 </div></blockquote>
 </li>
-<li><p><em>Weights</em>: These are important adjustable parameters that the neural network fine-tunes by forward and backward propagating the data. They are optimized through a process called <a class="reference external" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent">gradient descent</a>. Before the model training starts, the weights are randomly initialized with NumPy’s <code class="docutils literal notranslate"><span class="pre">np.random.random()</span></code> function.</p>
+<li><p><em>Weights</em>: These are important adjustable parameters that the neural network fine-tunes by forward and backward propagating the data. They are optimized through a process called <a class="reference external" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent">gradient descent</a>. Before the model training starts, the weights are randomly initialized with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.random.html"><code class="docutils literal notranslate"><span class="pre">Generator.random()</span></code></a>.</p>
 <p>The optimal weights should produce the highest prediction accuracy and the lowest error on the training and test sets.</p>
 </li>
 <li><p><em>Activation function</em>: Deep learning models are capable of determining non-linear relationships between inputs and outputs and these <a class="reference external" href="https://en.wikipedia.org/wiki/Activation_function">non-linear functions</a> are usually applied to the output of each layer.</p>
 <p>You will use a <a class="reference external" href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">rectified linear unit (ReLU)</a> to the hidden layer’s output (for example, <code class="docutils literal notranslate"><span class="pre">relu(np.dot(layer,</span> <span class="pre">weights))</span></code>.</p>
 </li>
 <li><p><em>Regularization</em>: This <a class="reference external" href="https://en.wikipedia.org/wiki/Regularization_(mathematics)">technique</a> helps prevent the neural network model from <a class="reference external" href="https://en.wikipedia.org/wiki/Overfitting">overfitting</a>.</p>
-<p>In this example, you will use a method called dropout — <a class="reference external" href="https://en.wikipedia.org/wiki/Dilution_(neural_networks)">dilution</a> — that randomly sets a number of features in a layer to 0s. You will define it with NumPy’s <code class="docutils literal notranslate"><span class="pre">np.random.randint()</span></code> function and apply it to the hidden layer of the network.</p>
+<p>In this example, you will use a method called dropout — <a class="reference external" href="https://en.wikipedia.org/wiki/Dilution_(neural_networks)">dilution</a> — that randomly sets a number of features in a layer to 0s. You will define it with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.integers.html"><code class="docutils literal notranslate"><span class="pre">Generator.integers()</span></code></a> method and apply it to the hidden layer of the network.</p>
 </li>
 <li><p><em>Loss function</em>: The computation determines the quality of predictions by comparing the image labels (the truth) with the predicted values in the final layer’s output.</p>
 <p>For simplicity, you will use a basic total squared error using NumPy’s <code class="docutils literal notranslate"><span class="pre">np.sum()</span></code> function (for example, <code class="docutils literal notranslate"><span class="pre">np.sum((final_layer_output</span> <span class="pre">-</span> <span class="pre">image_labels)</span> <span class="pre">**</span> <span class="pre">2)</span></code>).</p>
@@ -728,10 +715,12 @@ The data type of test labels: float64
 <div class="section" id="compose-the-model-and-begin-training-and-testing-it">
 <h3>Compose the model and begin training and testing it<a class="headerlink" href="#compose-the-model-and-begin-training-and-testing-it" title="Permalink to this headline">¶</a></h3>
 <p>Having covered the main deep learning concepts and the neural network architecture, let’s write the code.</p>
-<p><strong>1.</strong> For reproducibility, initialize a random seed with <code class="docutils literal notranslate"><span class="pre">np.random.seed()</span></code>:</p>
+<p><strong>1.</strong> We’ll start by creating a new random number generator, providing a seed
+for reproducibility:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seed</span> <span class="o">=</span> <span class="mi">884736743</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -770,11 +759,11 @@ The data type of test labels: float64
 </div>
 </div>
 </div>
-<p><strong>4.</strong> Initialize the weight vectors that will be used in the hidden and output layers with <code class="docutils literal notranslate"><span class="pre">np.random.random()</span></code>:</p>
+<p><strong>4.</strong> Initialize the weight vectors that will be used in the hidden and output layers with random values:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weights_1</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">pixels_per_image</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">))</span> <span class="o">-</span> <span class="mf">0.1</span>
-<span class="n">weights_2</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">num_labels</span><span class="p">))</span> <span class="o">-</span> <span class="mf">0.1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weights_1</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">pixels_per_image</span><span class="p">,</span> <span class="n">hidden_size</span><span class="p">))</span> <span class="o">-</span> <span class="mf">0.1</span>
+<span class="n">weights_2</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">hidden_size</span><span class="p">,</span> <span class="n">num_labels</span><span class="p">))</span> <span class="o">-</span> <span class="mf">0.1</span>
 </pre></div>
 </div>
 </div>
@@ -818,7 +807,7 @@ its performance over the training epochs.</p>
         <span class="c1"># 3. Pass the hidden layer&#39;s output through the ReLU activation function.</span>
         <span class="n">layer_1</span> <span class="o">=</span> <span class="n">relu</span><span class="p">(</span><span class="n">layer_1</span><span class="p">)</span>
         <span class="c1"># 4. Define the dropout function for regularization.</span>
-        <span class="n">dropout_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">layer_1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">dropout_mask</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">layer_1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
         <span class="c1"># 5. Apply dropout to the hidden layer&#39;s output.</span>
         <span class="n">layer_1</span> <span class="o">*=</span> <span class="n">dropout_mask</span> <span class="o">*</span> <span class="mi">2</span>
         <span class="c1"># 6. The output layer:</span>
@@ -884,64 +873,64 @@ its performance over the training epochs.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0 Training set error:0.891 Training set accuracy:0.413 Test set error:0.666 Test set accuracy:0.605
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0 Training set error:0.898 Training set accuracy:0.397 Test set error:0.680 Test set accuracy:0.582
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 1 Training set error:0.650 Training set accuracy:0.62 Test set error:0.603 Test set accuracy:0.637
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 1 Training set error:0.656 Training set accuracy:0.633 Test set error:0.606 Test set accuracy:0.641
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 2 Training set error:0.597 Training set accuracy:0.669 Test set error:0.573 Test set accuracy:0.667
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 2 Training set error:0.591 Training set accuracy:0.68 Test set error:0.569 Test set accuracy:0.679
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 3 Training set error:0.565 Training set accuracy:0.686 Test set error:0.554 Test set accuracy:0.698
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 3 Training set error:0.556 Training set accuracy:0.7 Test set error:0.540 Test set accuracy:0.708
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 4 Training set error:0.547 Training set accuracy:0.712 Test set error:0.515 Test set accuracy:0.714
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 4 Training set error:0.534 Training set accuracy:0.732 Test set error:0.525 Test set accuracy:0.729
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 5 Training set error:0.515 Training set accuracy:0.739 Test set error:0.505 Test set accuracy:0.731
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 5 Training set error:0.515 Training set accuracy:0.715 Test set error:0.500 Test set accuracy:0.739
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 6 Training set error:0.514 Training set accuracy:0.727 Test set error:0.499 Test set accuracy:0.753
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 6 Training set error:0.495 Training set accuracy:0.748 Test set error:0.487 Test set accuracy:0.753
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 7 Training set error:0.499 Training set accuracy:0.73 Test set error:0.485 Test set accuracy:0.737
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 7 Training set error:0.483 Training set accuracy:0.769 Test set error:0.486 Test set accuracy:0.747
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 8 Training set error:0.483 Training set accuracy:0.759 Test set error:0.478 Test set accuracy:0.753
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 8 Training set error:0.473 Training set accuracy:0.776 Test set error:0.472 Test set accuracy:0.752
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 9 Training set error:0.469 Training set accuracy:0.754 Test set error:0.486 Test set accuracy:0.75
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 9 Training set error:0.459 Training set accuracy:0.788 Test set error:0.462 Test set accuracy:0.762
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 10 Training set error:0.472 Training set accuracy:0.764 Test set error:0.480 Test set accuracy:0.752
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 10 Training set error:0.464 Training set accuracy:0.769 Test set error:0.462 Test set accuracy:0.767
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 11 Training set error:0.460 Training set accuracy:0.779 Test set error:0.459 Test set accuracy:0.779
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 11 Training set error:0.442 Training set accuracy:0.801 Test set error:0.455 Test set accuracy:0.775
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 12 Training set error:0.465 Training set accuracy:0.793 Test set error:0.473 Test set accuracy:0.772
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 12 Training set error:0.448 Training set accuracy:0.795 Test set error:0.454 Test set accuracy:0.772
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 13 Training set error:0.444 Training set accuracy:0.803 Test set error:0.462 Test set accuracy:0.776
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 13 Training set error:0.438 Training set accuracy:0.787 Test set error:0.452 Test set accuracy:0.778
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 14 Training set error:0.458 Training set accuracy:0.786 Test set error:0.460 Test set accuracy:0.777
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 14 Training set error:0.445 Training set accuracy:0.791 Test set error:0.449 Test set accuracy:0.779
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 15 Training set error:0.446 Training set accuracy:0.794 Test set error:0.454 Test set accuracy:0.776
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 15 Training set error:0.440 Training set accuracy:0.788 Test set error:0.451 Test set accuracy:0.772
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 16 Training set error:0.437 Training set accuracy:0.795 Test set error:0.444 Test set accuracy:0.792
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 16 Training set error:0.437 Training set accuracy:0.786 Test set error:0.452 Test set accuracy:0.772
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 17 Training set error:0.423 Training set accuracy:0.82 Test set error:0.440 Test set accuracy:0.795
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 17 Training set error:0.436 Training set accuracy:0.794 Test set error:0.449 Test set accuracy:0.778
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 18 Training set error:0.442 Training set accuracy:0.812 Test set error:0.453 Test set accuracy:0.796
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 18 Training set error:0.433 Training set accuracy:0.801 Test set error:0.449 Test set accuracy:0.774
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 19 Training set error:0.440 Training set accuracy:0.818 Test set error:0.445 Test set accuracy:0.794
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 19 Training set error:0.429 Training set accuracy:0.785 Test set error:0.436 Test set accuracy:0.784
 </pre></div>
 </div>
 </div>
