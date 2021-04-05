@@ -73,6 +73,19 @@ data_sources = {
 download it.
 
 ```{code-cell} ipython3
+:tags: [remove-cell]
+# Use responsibly! When running notebooks locally, be sure to keep local
+# copies of the datasets to prevent unnecessary server requests
+headers = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0"
+}
+request_opts = {
+    "headers": headers,
+    "params": {"raw": "true"},
+}
+```
+
+```{code-cell} ipython3
 import requests
 import os
 
