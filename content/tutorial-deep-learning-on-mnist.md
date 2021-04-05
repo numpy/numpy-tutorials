@@ -80,7 +80,10 @@ download it.
 headers = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0"
 }
-request_opts = {"headers": headers}
+request_opts = {
+    "headers": headers,
+    "params": {"raw": "true"},
+}
 ```
 
 ```{code-cell} ipython3
@@ -90,7 +93,7 @@ import os
 data_dir = "../_data"
 os.makedirs(data_dir, exist_ok=True)
 
-base_url = "http://yann.lecun.com/exdb/mnist/"
+base_url = "https://github.com/rossbar/numpy-tutorial-data-mirror/blob/main/"
 
 for fname in data_sources.values():
     fpath = os.path.join(data_dir, fname)
@@ -153,12 +156,13 @@ plt.show()
 
 ```{code-cell} ipython3
 # Display 5 random images from the training set.
-np.random.seed(0)
-indices = list(np.random.randint(x_train.shape[0], size=9))
-for i in range(5):
-    plt.subplot(1, 5, i+1)
-    plt.imshow(x_train[indices[i]].reshape(28, 28), cmap='gray')
-    plt.tight_layout()
+num_examples = 5
+seed = 147197952744
+rng = np.random.default_rng(seed)
+
+fig, axes = plt.subplots(1, num_examples)
+for sample, ax in zip(rng.choice(x_train, size=num_examples, replace=False), axes):
+    ax.imshow(sample.reshape(28, 28), cmap='gray')
 ```
 
 > **Note:** You can also visualize a sample image as an array by printing `x_train[59999]`. Here, `59999` is your 60,000th training image sample (`0` would be your first). Your output will be quite long and should contain an array of 8-bit integers:
@@ -308,7 +312,7 @@ Afterwards, you will construct the building blocks of a simple deep learning mod
 
     > **Note:** For simplicity, the bias term is omitted in this example (there is no `np.dot(layer, weights) + bias`).
 
-- _Weights_: These are important adjustable parameters that the neural network fine-tunes by forward and backward propagating the data. They are optimized through a process called [gradient descent](https://en.wikipedia.org/wiki/Stochastic_gradient_descent). Before the model training starts, the weights are randomly initialized with NumPy's `np.random.random()` function.
+- _Weights_: These are important adjustable parameters that the neural network fine-tunes by forward and backward propagating the data. They are optimized through a process called [gradient descent](https://en.wikipedia.org/wiki/Stochastic_gradient_descent). Before the model training starts, the weights are randomly initialized with NumPy's [`Generator.random()`](https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.random.html).
     
     The optimal weights should produce the highest prediction accuracy and the lowest error on the training and test sets. 
 
@@ -318,7 +322,7 @@ Afterwards, you will construct the building blocks of a simple deep learning mod
 
 - _Regularization_: This [technique](https://en.wikipedia.org/wiki/Regularization_(mathematics)) helps prevent the neural network model from [overfitting](https://en.wikipedia.org/wiki/Overfitting). 
 
-    In this example, you will use a method called dropout — [dilution](https://en.wikipedia.org/wiki/Dilution_(neural_networks)) — that randomly sets a number of features in a layer to 0s. You will define it with NumPy's `np.random.randint()` function and apply it to the hidden layer of the network.
+    In this example, you will use a method called dropout — [dilution](https://en.wikipedia.org/wiki/Dilution_(neural_networks)) — that randomly sets a number of features in a layer to 0s. You will define it with NumPy's [`Generator.integers()`](https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.integers.html) method and apply it to the hidden layer of the network.
 
 - _Loss function_: The computation determines the quality of predictions by comparing the image labels (the truth) with the predicted values in the final layer's output.
 
@@ -368,10 +372,12 @@ Here is a summary of the neural network model architecture and the training proc
 
 Having covered the main deep learning concepts and the neural network architecture, let's write the code.
 
-**1.** For reproducibility, initialize a random seed with `np.random.seed()`:
+**1.** We'll start by creating a new random number generator, providing a seed
+for reproducibility:
 
 ```{code-cell} ipython3
-np.random.seed(1)
+seed = 884736743
+rng = np.random.default_rng(seed)
 ```
 
 **2.** For the hidden layer, define the ReLU activation function for forward propagation and ReLU's derivative that will be used during backpropagation:
@@ -403,11 +409,11 @@ pixels_per_image = 784
 num_labels = 10
 ```
 
-**4.** Initialize the weight vectors that will be used in the hidden and output layers with `np.random.random()`:
+**4.** Initialize the weight vectors that will be used in the hidden and output layers with random values:
 
 ```{code-cell} ipython3
-weights_1 = 0.2 * np.random.random((pixels_per_image, hidden_size)) - 0.1
-weights_2 = 0.2 * np.random.random((hidden_size, num_labels)) - 0.1
+weights_1 = 0.2 * rng.random((pixels_per_image, hidden_size)) - 0.1
+weights_2 = 0.2 * rng.random((hidden_size, num_labels)) - 0.1
 ```
 
 **5.** Set up the neural network's learning experiment with a training loop and start the training process.
@@ -450,7 +456,7 @@ for j in range(epochs):
         # 3. Pass the hidden layer's output through the ReLU activation function.
         layer_1 = relu(layer_1)
         # 4. Define the dropout function for regularization.
-        dropout_mask = np.random.randint(0, high=2, size=layer_1.shape)
+        dropout_mask = rng.integers(low=0, high=2, size=layer_1.shape)
         # 5. Apply dropout to the hidden layer's output.
         layer_1 *= dropout_mask * 2
         # 6. The output layer:

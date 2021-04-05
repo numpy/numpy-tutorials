@@ -264,6 +264,16 @@ Next, you will define the policy as a simple feedforward network that uses a gam
 
 1. Let's instantiate certain parameters for the input, hidden, and output layers, and start setting up the network model.
 
+Start by creating a random number generator instance for the experiment
+(seeded for reproducibility):
+
+```{code-cell}
+
+rng = np.random.default_rng(seed=12288743)
+```
+
+Then:
+
 +++ {"id": "PbqQ3kPBRfvn"}
 
   - Set the input (observation) dimensionality - your preprocessed screen frames:
@@ -298,13 +308,13 @@ model = {}
 
 In a neural network, _weights_ are important adjustable parameters that the network fine-tunes by forward and backward propagating the data.
 
-2. Using a technique called [Xavier initialization](https://www.deeplearning.ai/ai-notes/initialization/#IV), set up the network model's initial weights with NumPy's [`np.random.randn()`](https://numpy.org/doc/stable/reference/random/generated/numpy.random.randn.html) that return random numbers over a standard Normal distribution, as well as [`np.sqrt()`](https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html?highlight=numpy.sqrt#numpy.sqrt):
+2. Using a technique called [Xavier initialization](https://www.deeplearning.ai/ai-notes/initialization/#IV), set up the network model's initial weights with NumPy's [`Generator.standard_normal()`](https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.standard_normal.html) that returns random numbers over a standard Normal distribution, as well as [`np.sqrt()`](https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html?highlight=numpy.sqrt#numpy.sqrt):
 
 ```{code-cell} ipython3
 :id: wh2pUHZ6FtUe
 
-model['W1'] = np.random.randn(H,D) / np.sqrt(D)
-model['W2'] = np.random.randn(H) / np.sqrt(H)
+model['W1'] = rng.standard_normal(size=(H,D)) / np.sqrt(D)
+model['W2'] = rng.standard_normal(size=H) / np.sqrt(H)
 ```
 
 +++ {"id": "K4J5Elsiq5Qk"}
@@ -591,7 +601,7 @@ while episode_number < max_episodes:
     # 4. Let the action indexed at `2` ("move up") be that probability
     # if it's higher than a randomly sampled value
     # or use action `3` ("move down") otherwise.
-    action = 2 if np.random.uniform() < aprob else 3
+    action = 2 if rng.uniform() < aprob else 3
 
     # 5. Cache the observations and hidden "states" (from the network)
     # in separate variables for backpropagation.
