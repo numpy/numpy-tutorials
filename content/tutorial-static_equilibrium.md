@@ -269,7 +269,8 @@ Let's look at a slightly more complicated model.  In this example you will be ob
 
 ![image.png](tutorial-static_equilibrium/problem4.png)
 
-Define distance a as 3m
+Define distance *a* as 3 meters
+
 
 As before, start by defining the location of each relevant point as an array.
 
