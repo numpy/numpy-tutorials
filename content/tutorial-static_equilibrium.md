@@ -48,7 +48,7 @@ In this tutorial you will use the following NumPy tools:
 
 Your model consists of a beam under a sum of forces and moments. You can start analyzing this system with Newton's second law: 
 
-$$\sum{\text{force}} = \text{mass} * \text{acceleration}.$$
+$$\sum{\text{force}} = \text{mass} \times \text{acceleration}.$$
 
 In order to simplify the examples looked at, assume they are static, with acceleration $=0$. Due to our system existing in three dimensions, consider forces being applied in each of these dimensions. This means that you can represent these forces as vectors. You come to the same conclusion for [moments](https://en.wikipedia.org/wiki/Moment_(physics)), which result from forces being applied a certain distance away from an object's center of mass.
 
@@ -80,26 +80,23 @@ fig = plt.figure()
 
 d3 = fig.gca(projection='3d')
 
-d3.set_xlim(-1,1)
-d3.set_ylim(-1,1)
-d3.set_zlim(-1,1)
+d3.set_xlim(-1, 1)
+d3.set_ylim(-1, 1)
+d3.set_zlim(-1, 1)
 
-x, y, z = np.array([0,0,0]) # defining the point of application.  Make it the origin
+x, y, z = np.array([0, 0, 0])  # defining the point of application.  Make it the origin
 
 u, v, w = forceA # breaking the force vector into individual components
-d3.quiver(x,y,z,u,v,w,color='r') # plotting forceA
+d3.quiver(x, y, z, u, v, w, color='r', label='forceA')
 
 u, v, w = forceB
-d3.quiver(x,y,z,u,v,w,color='b') # plotting forceB
+d3.quiver(x, y, z, u, v, w, color='b', label='forceB')
 
-
+plt.legend()
 plt.show()
 ```
 
-There are two forces emanating from a single point.
-
-
-In order to simplify this problem, you can add them together to find the sum of forces.
+There are two forces emanating from a single point. In order to simplify this problem, you can add them together to find the sum of forces. Note that both `forceA` and `forceB` are three-dimensional vectors, represented by NumPy as arrays with three components. Because NumPy is meant to simplify and optimize operations between vectors, you can easily compute the sum of these two vectors as follows:
 
 ```{code-cell} ipython3
 forceC = forceA + forceB
@@ -113,19 +110,20 @@ fig = plt.figure()
 
 d3 = fig.gca(projection='3d')
 
-d3.set_xlim(-1,1)
-d3.set_ylim(-1,1)
-d3.set_zlim(-1,1)
+d3.set_xlim(-1, 1)
+d3.set_ylim(-1, 1)
+d3.set_zlim(-1, 1)
 
-x, y, z = np.array([0,0,0])
+x, y, z = np.array([0, 0, 0])
 
 u, v, w = forceA
-d3.quiver(x,y,z,u,v,w,color='r')
+d3.quiver(x, y, z, u, v, w, color='r', label='forceA')
 u, v, w = forceB
-d3.quiver(x,y,z,u,v,w,color='b')
+d3.quiver(x, y, z, u, v, w, color='b', label='forceB')
 u, v, w = forceC
-d3.quiver(x,y,z,u,v,w,color='g')
+d3.quiver(x, y, z, u, v, w, color='g', label='forceC')
 
+plt.legend()
 plt.show()
 However, the goal is equilibrium.
 This means that you want your sum of forces to be $(0, 0, 0)$ or else your object will experience acceleration.
@@ -145,7 +143,8 @@ $$\begin{cases}
 0+0+R_z=0
 \end{cases}$$
 
-solving for R_x, R_y, and R_z gives you a vector $R$ of $(-1, -1, 0)$.
+solving for $R_x$, $R_y$, and $R_z$ gives you a vector $R$ of $(-1, -1, 0)$.
+
 
 If plotted, the forces seen in prior examples should be nullified.
 Only if there is no force remaining is the system considered to be in equilibrium.
@@ -187,13 +186,14 @@ Solve for both.
 Lets say a 5N force is applied 2m above the base of the pole.
 
 ```{code-cell} ipython3
-f = 5
-L = 2
+f = 5  # Force in newtons
+L = 2  # Length of the pole
 
 R = 0 - f
 M = 0 - f*L
 print('Reaction force =',R)
 print('Reaction moment =',M)
+
 ```
 
 # Finding values with physical properties
@@ -208,17 +208,19 @@ In response to the forces acting upon the pole, the base generated reaction forc
 Denote the base of the pole as the origin.
 Now, say the cord is attached to the ground 3m in the x direction and attached to the pole 2m up, in the z direction.
 
-Define these points in space as numpy arrays, and then use those arrays to find directional vectors.
+Define these points in space as NumPy arrays, and then use those arrays to find directional vectors.
+
 
 ```{code-cell} ipython3
-poleBase = np.array([0,0,0])
-cordBase = np.array([3,0,0])
-cordConnection = np.array([0,0,2])
+poleBase = np.array([0, 0, 0])
+cordBase = np.array([3, 0, 0])
+cordConnection = np.array([0, 0, 2])
 
 poleDirection = cordConnection - poleBase
-print('Pole direction =',poleDirection)
+print('Pole direction =', poleDirection)
 cordDirection = cordBase - cordConnection
-print('Cord direction =',cordDirection)
+print('Cord direction =', cordDirection)
+
 ```
 
 In order to use these vectors in relation to forces you need to convert them into unit vectors.
@@ -226,42 +228,44 @@ Unit vectors have a magnitude of one, and convey only the direction of the force
 
 ```{code-cell} ipython3
 cordUnit = cordDirection/np.linalg.norm(cordDirection)
-print('Cord unit vector =',cordUnit)
+print('Cord unit vector =', cordUnit)
+
 ```
 
 You can then multiply this direction with the magnitude of the force in order to find the force vector.
 
-Let's say the cord has a tension of 5N
+Let's say the cord has a tension of 5N:
+
 
 ```{code-cell} ipython3
 cordTension = 5
 forceCord = cordUnit * cordTension
-print('Force from the cord =',forceCord)
+print('Force from the cord =', forceCord)
+
 ```
 
 In order to find the moment you need the cross product of the force vector and the radius.
 
 ```{code-cell} ipython3
 momentCord = np.cross(forceCord, poleDirection)
-print('Moment from the cord =',momentCord)
+print('Moment from the cord =', momentCord)
+
 ```
 
 Now all you need to do is find the reaction force and moment.
 
 ```{code-cell} ipython3
-equilibrium = np.array([0,0,0])
+equilibrium = np.array([0, 0, 0])
 R = equilibrium - forceCord
 M = equilibrium - momentCord
-print("Reaction force =",R)
-print("Reaction moment =",M)
+print("Reaction force =", R)
+print("Reaction moment =", M)
+
 ```
 
 ## Another Example
-Let's look at a slightly more complicated model.  In this example you will be observing a beam with two cables and an applied force.  This time you need to find both the tension in the cords and the reaction forces of the beam.
+Let's look at a slightly more complicated model.  In this example you will be observing a beam with two cables and an applied force.  This time you need to find both the tension in the cords and the reaction forces of the beam. *(Source: [Vector Mechanics for Engineers: Statics](https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9780077687304.html), Problem 4.106)*
 
-[Vector Mechanics for Engineers: Statics](https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9780077687304.html)
-
-Problem 4.106
 
 ![image.png](tutorial-static_equilibrium/problem4.png)
 
@@ -270,12 +274,13 @@ Define distance a as 3m
 As before, start by defining the location of each relevant point as an array.
 
 ```{code-cell} ipython3
-A = np.array([0,0,0])
-B = np.array([0,3,0])
-C = np.array([0,6,0])
-D = np.array([1.5,0,-3])
-E = np.array([1.5,0,3])
-F = np.array([-3,0,2])
+A = np.array([0, 0, 0])
+B = np.array([0, 3, 0])
+C = np.array([0, 6, 0])
+D = np.array([1.5, 0, -3])
+E = np.array([1.5, 0, 3])
+F = np.array([-3, 0, 2])
+
 ```
 
 From these equations, you start by determining vector directions with unit vectors.
@@ -291,9 +296,10 @@ UnitBD = BD/np.linalg.norm(BD)
 UnitBE = BE/np.linalg.norm(BE)
 UnitCF = CF/np.linalg.norm(CF)
 
-RadBD = np.cross(AB,UnitBD)
-RadBE = np.cross(AB,UnitBE)
-RadCF = np.cross(AC,UnitCF)
+RadBD = np.cross(AB, UnitBD)
+RadBE = np.cross(AB, UnitBE)
+RadCF = np.cross(AC, UnitCF)
+
 ```
 
 This lets you represent the forces acting on the system as
@@ -345,17 +351,19 @@ T_{BE}\\
 \end{array}
 \right]$
 
-Where T is the tesnion in the respective cord and R is the reaction force in a respective direction. Then you just have six equations:
+Where $T$ is the tension in the respective cord and $R$ is the reaction force in a respective direction. Then you just have six equations:
+
 
 $\sum F_{x} = 0 = T_{BE}/3+T_{BD}/3-195+R_{x}$
 
-$\sum F_{y} = 0 = T_{BE}*-2/3-T_{BD}*2/3-390+R_{y}$
+$\sum F_{y} = 0 = (-\frac{2}{3})T_{BE}-\frac{2}{3}T_{BD}-390+R_{y}$
 
-$\sum F_{z} = 0 = T_{BE}*-2/3+T_{BD}*2/3+130+R_{z}$
+$\sum F_{z} = 0 = (-\frac{2}{3})T_{BE}+\frac{2}{3}T_{BD}+130+R_{z}$
 
-$\sum M_{x} = 0 = 780+2*T_{BE}-2*T_{BD}$
+$\sum M_{x} = 0 = 780+2T_{BE}-2T_{BD}$
 
 $\sum M_{z} = 0 = 1170-T_{BE}-T_{BD}$
+
 
 You now have five unknowns with five equations, and can solve for:
 
@@ -383,7 +391,3 @@ This same process can be applied to kinetic problems or in any number of dimensi
 
 1. [Vector Mechanics for Engineers: Statics (Beer & Johnston & Mazurek)](https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9780077687304.html)
 2. [NumPy Reference](https://numpy.org/doc/stable/reference/)
-
-```{code-cell} ipython3
-
-```
