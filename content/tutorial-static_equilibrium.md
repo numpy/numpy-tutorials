@@ -125,6 +125,8 @@ d3.quiver(x, y, z, u, v, w, color='g', label='forceC')
 
 plt.legend()
 plt.show()
+```
+
 However, the goal is equilibrium.
 This means that you want your sum of forces to be $(0, 0, 0)$ or else your object will experience acceleration.
 Therefore, there needs to be another force that counteracts the prior ones.
@@ -133,6 +135,7 @@ You can write this problem as $A+B+R=0$, with $R$ being the reaction force that 
 
 In this example this would mean:
 
+```{code-cell} ipython3
 $$(1, 0, 0) + (0, 1, 0) + (R_x, R_y, R_z) = (0, 0, 0)$$
 
 Broken into $x$, $y$, and $z$ components this gives you:
