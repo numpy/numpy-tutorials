@@ -323,9 +323,9 @@ R_{x}\\
 R_{y}\\
 R_{z}\\
 \end{array}
-\right]$
+\right]
 =
-$\left[
+\left[
 \begin{array}
 ~195\\
 390\\
