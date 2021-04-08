@@ -12,11 +12,7 @@ kernelspec:
   name: python3
 ---
 
-+++ {"id": "3i7nPwJw_gKw"}
-
 # Tutorial: deep reinforcement learning with Pong from pixels
-
-+++ {"id": "DI0cmQODX4jL"}
 
 This tutorial demonstrates how to implement a deep reinforcement learning (RL) agent from scratch using a policy gradient method that learns to play the [Pong](https://gym.openai.com/envs/Pong-v0/) video game using screen pixels as inputs with NumPy. Your Pong agent will obtain experience on the go using an [artificial neural network](https://en.wikipedia.org/wiki/Artificial_neural_network) as its [policy](https://en.wikipedia.org/wiki/Reinforcement_learning).
 
@@ -26,11 +22,7 @@ Pong is a 2D game from 1972 where two players use "rackets" to play a form of ta
 
 This example is based on the [code](https://gist.github.com/karpathy/a4166c7fe253700972fcbc77e4ea32c5) developed by [Andrej Karpathy](https://karpathy.ai) for the [Deep RL Bootcamp](https://sites.google.com/view/deep-rl-bootcamp/home) in 2017 at UC Berkeley. His [blog post](http://karpathy.github.io/2016/05/31/rl/) from 2016 also provides more background on the mechanics and theory used in Pong RL.
 
-+++ {"id": "G08gAJigcvs2"}
-
 ## Prerequisites
-
-+++ {"id": "Rb-pZNHWczRy"}
 
 - **OpenAI Gym**: To help with the game environment, you will use [Gym](https://gym.openai.com) — an open-source Python interface [developed by OpenAI](https://arxiv.org/abs/1606.01540) that helps perform RL tasks while supporting many simulation environments.
 - **Python and NumPy**: The reader should have some knowledge of Python, NumPy array manipulation, and linear algebra.
@@ -39,8 +31,6 @@ This example is based on the [code](https://gist.github.com/karpathy/a4166c7fe25
 - **Matplotlib**: For plotting images. Check out the [installation](https://matplotlib.org/3.3.3/users/installing.html) guide to set it up in your environment.
 
 This tutorial can also be run locally in an isolated environment, such as [Virtualenv](https://virtualenv.pypa.io/en/stable/) and [conda](https://docs.conda.io/).
-
-+++ {"id": "z61twYBW4BMN"}
 
 ## Table of contents
 
@@ -58,11 +48,7 @@ This tutorial can also be run locally in an isolated environment, such as [Virtu
     - How to set up video playback in your Jupyter notebook
 ---
 
-+++ {"id": "G-b7IQTppMdF"}
-
 ### A note on RL and deep RL
-
-+++ {"id": "gIqcGxNwyoCo"}
 
 In [_RL_](https://en.wikipedia.org/wiki/Reinforcement_learning), your agent learns from trial and error by interacting with an environment using a so-called policy to gain experience. After taking one action, the agent receives information about its reward (which it may or may not get) and the next observation of the environment. It can then proceed to take another action. This happens over a number of episodes and/or until the task is deemed to be complete. 
 
@@ -72,11 +58,7 @@ For detailed information about RL, there is an [introductory book](https://web.a
 
 Check out the Appendix at the end of the tutorial for more information.
 
-+++ {"id": "EYKhl_w9i-vu"}
-
 ### Deep RL glossary
-
-+++ {"id": "DsmpxftYohEP"}
 
 Below is a concise glossary of deep RL terms you may find useful for the remaining part of the tutorial:
 
@@ -91,83 +73,51 @@ Below is a concise glossary of deep RL terms you may find useful for the remaini
 
 You will train your Pong agent through an "on-policy" method using policy gradients — it's an algorithm belonging to a family of _policy-based_ methods. Policy gradient methods typically update the parameters of the policy with respect to the long-term cumulative reward using [_gradient descent_](https://en.wikipedia.org/wiki/Gradient_descent) that is widely used in machine learning. And, since the goal is to maximize the function (the rewards), not minimize it, the process is also called _gradient ascent_. In other words, you use a policy for the agent to take actions and the objective is to maximize the rewards, which you do by computing the gradients and use them to update the parameters in the policy (neural) network.
 
-+++ {"id": "6sWBMi61EOok"}
-
 ## Set up Pong
 
-+++ {"id": "k7UEY24ACQVp"}
-
-1. First, you should install OpenAI Gym (using `pip install gym[atari]` - this package is currently not available on conda), and import NumPy, Gym and the necessary modules:
+**1.** First, you should install OpenAI Gym (using `pip install gym[atari]` - this package is currently not available on conda), and import NumPy, Gym and the necessary modules:
 
 ```{code-cell} ipython3
-:id: 7cWZsoNtKbFy
-
 import numpy as np
 import gym
 ```
 
-+++ {"id": "zkku9ZIdRfvm"}
-
 Gym can monitor and save the output using the `Monitor` wrapper:
 
 ```{code-cell} ipython3
-:id: OKKaJHmRRfvm
-
 from gym import wrappers
 from gym.wrappers import Monitor
 ```
 
-+++ {"id": "wk69Jer36elU"}
-
-2. Instantiate a Gym environment for the game of Pong:
+**2.** Instantiate a Gym environment for the game of Pong:
 
 ```{code-cell} ipython3
-:id: m_2E9b6j5bkp
-
 env = gym.make("Pong-v0")
 ```
 
-+++ {"id": "J0M7me6d5mrK"}
-
-3. Let's review which actions are available in the `Pong-v0` environment:
+**3.** Let's review which actions are available in the `Pong-v0` environment:
 
 ```{code-cell} ipython3
-:id: 6zEAzKEu5cU0
-
 print(env.action_space)
 ```
 
 ```{code-cell} ipython3
-:id: R_kO52Hr5_5b
-
 print(env.get_action_meanings())
 ```
-
-+++ {"id": "SbBxzJ0l6HDz"}
 
 There are 6 actions. However, `LEFTFIRE` is actually `LEFT`, `RIGHTFIRE` — `RIGHT`, and `NOOP` — `FIRE`.
 
 For simplicity, your policy network will have one output — a (log) probability for "moving up" (indexed at `2` or `RIGHT`). The other available action will be indexed at 3 ("move down" or `LEFT`).
 
-+++ {"id": "2BvZr2TZCjAH"}
-
-4. Gym can save videos of the agent's learning in an MP4 format — wrap `Monitor()` around the environment by running the following:
+**4.** Gym can save videos of the agent's learning in an MP4 format — wrap `Monitor()` around the environment by running the following:
 
 ```{code-cell} ipython3
-:id: a34ZoOaTEttn
-
 env = Monitor(env, './video', force=True)
 ```
 
-+++ {"id": "aaJdSEm9DH1q"}
-
 While you can perform all kinds of RL experiments in a Jupyter notebook, rendering images or videos of a Gym environment to visualize how your agent plays the game of Pong after training can be rather challenging. If you want to set up video playback in a notebook, you can find the details in the Appendix at the end of this tutorial.
 
-+++ {"id": "suquqXhuFzvm"}
-
 ## Preprocess frames (the observation)
-
-+++ {"id": "fKCxQtwlOtlK"}
 
 In this section you will set up a function to preprocess the input data (game observation) to make it digestible for the neural network, which can only work with inputs that are in a form of tensors (multidimensional arrays) of floating-point type.
 
@@ -175,23 +125,15 @@ Your agent will use the frames from the Pong game — pixels from screen frames 
 
 Pong screen frames are 210x160 pixels over 3 color dimensions (red, green and blue). The arrays are encoded with `uint8` (or 8-bit integers), and these observations are stored on a Gym Box instance.
 
-+++ {"id": "SQk0POHw0BJ9"}
-
-1. Check the Pong's observations:
+**1.** Check the Pong's observations:
 
 ```{code-cell} ipython3
-:id: OqKk7lvKO5QJ
-
 print(env.observation_space)
 ```
 
-+++ {"id": "ieay1E9_0Cwg"}
-
 In Gym, the agent's actions and observations can be part of the `Box` (n-dimensional) or `Discrete` (fixed-range integers) classes.
 
-+++ {"id": "YxEIKhhtXbfw"}
-
-2. You can view a random observation — one frame — by:
+**2.** You can view a random observation — one frame — by:
     
     1) Setting the random `seed` before initialization (optional).
 
@@ -202,8 +144,6 @@ In Gym, the agent's actions and observations can be part of the `Box` (n-dimensi
 (You can refer to the OpenAI Gym core [API](https://github.com/openai/gym/blob/master/gym/core.py) for more information about Gym's core classes and methods.)
 
 ```{code-cell} ipython3
-:id: hKeaiZ28TCab
-
 import matplotlib.pyplot as plt
 
 env.seed(42)
@@ -213,15 +153,11 @@ print(random_frame.shape)
 plt.imshow(random_frame)
 ```
 
-+++ {"id": "viGrCqkRaDdk"}
-
 To feed the observations into the policy (neural) network, you need to convert them into 1D grayscale vectors with 6,400 (80x80x1) floating point arrays. (During training, you will use NumPy's [`np.ravel()`](https://numpy.org/doc/stable/reference/generated/numpy.ravel.html) function to flatten these arrays.)
 
-3. Set up a helper function for frame (observation) preprocessing:
+**3.** Set up a helper function for frame (observation) preprocessing:
 
 ```{code-cell} ipython3
-:id: TLAndceaFvGl
-
 def frame_preprocessing(observation_frame):
     # Crop the frame.
     observation_frame = observation_frame[35:195]
@@ -235,23 +171,15 @@ def frame_preprocessing(observation_frame):
     return observation_frame.astype(float)
 ```
 
-+++ {"id": "2rdSNkMzbx13"}
-
-4. Preprocess the random frame from earlier to test the function — the input for the policy network is an 80x80 1D image:
+**4.** Preprocess the random frame from earlier to test the function — the input for the policy network is an 80x80 1D image:
 
 ```{code-cell} ipython3
-:id: jELhjYEOb7kZ
-
 preprocessed_random_frame = frame_preprocessing(random_frame)
 plt.imshow(preprocessed_random_frame, cmap='gray')
 print(preprocessed_random_frame.shape)
 ```
 
-+++ {"id": "caec1e9a9eb6"}
-
 ## Create the policy (the neural network) and the forward pass
-
-+++ {"id": "wO7Gzk-ScV45"}
 
 Next, you will define the policy as a simple feedforward network that uses a game observation as an input and outputs an action log probability:
 
@@ -260,70 +188,47 @@ Next, you will define the policy as a simple feedforward network that uses a gam
 - Then, the _output layer_ will perform the matrix-multiplication again of  weight parameters and the hidden layer's output (with [`np.dot()`](https://numpy.org/doc/stable/reference/generated/numpy.dot.html)), and send that information through a [softmax](https://en.wikipedia.org/wiki/Softmax_function) _activation function_.
 - In the end, the policy network will output one action log probability (given that observation) for the agent — the probability for Pong action indexed in the environment at 2 ("moving the racket up").
 
-+++ {"id": "HTVDSuf5qY2E"}
-
-1. Let's instantiate certain parameters for the input, hidden, and output layers, and start setting up the network model.
+**1.** Let's instantiate certain parameters for the input, hidden, and output layers, and start setting up the network model.
 
 Start by creating a random number generator instance for the experiment
 (seeded for reproducibility):
 
 ```{code-cell}
-
 rng = np.random.default_rng(seed=12288743)
 ```
 
 Then:
 
-+++ {"id": "PbqQ3kPBRfvn"}
-
   - Set the input (observation) dimensionality - your preprocessed screen frames:
 
 ```{code-cell} ipython3
-:id: A78ihWDHcQvJ
-
 D = 80 * 80
 ```
-
-+++ {"id": "31T-D4FWRfvn"}
 
   - Set the number of hidden layer neurons.
 
 ```{code-cell} ipython3
-:id: gX92fmucRfvn
-
 H = 200
 ```
-
-+++ {"id": "l2UDuDLlRfvn"}
 
   - Instantiate your policy (neural) network model as an empty dictionary.
 
 ```{code-cell} ipython3
-:id: kmv6vtPmRfvn
-
 model = {}
 ```
 
-+++ {"id": "pCG3g4s-Fapk"}
-
 In a neural network, _weights_ are important adjustable parameters that the network fine-tunes by forward and backward propagating the data.
 
-2. Using a technique called [Xavier initialization](https://www.deeplearning.ai/ai-notes/initialization/#IV), set up the network model's initial weights with NumPy's [`Generator.standard_normal()`](https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.standard_normal.html) that returns random numbers over a standard Normal distribution, as well as [`np.sqrt()`](https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html?highlight=numpy.sqrt#numpy.sqrt):
+**2.** Using a technique called [Xavier initialization](https://www.deeplearning.ai/ai-notes/initialization/#IV), set up the network model's initial weights with NumPy's [`Generator.standard_normal()`](https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.standard_normal.html) that returns random numbers over a standard Normal distribution, as well as [`np.sqrt()`](https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html?highlight=numpy.sqrt#numpy.sqrt):
 
 ```{code-cell} ipython3
-:id: wh2pUHZ6FtUe
-
 model['W1'] = rng.standard_normal(size=(H,D)) / np.sqrt(D)
 model['W2'] = rng.standard_normal(size=H) / np.sqrt(H)
 ```
 
-+++ {"id": "K4J5Elsiq5Qk"}
-
-3. Your policy network starts by randomly initializing the weights and feeds the input data (frames) forward from the input layer through a hidden layer to the output layers. This process is called the _forward pass_ or _forward propagation_, and is outlined in the function `policy_forward()`:
+**3.** Your policy network starts by randomly initializing the weights and feeds the input data (frames) forward from the input layer through a hidden layer to the output layers. This process is called the _forward pass_ or _forward propagation_, and is outlined in the function `policy_forward()`:
 
 ```{code-cell} ipython3
-:id: cV4bIYAsKd9o
-
 def policy_forward(x, model):
     # Matrix-multiply the weights by the input in the one and only hidden layer.
     h = np.dot(model['W1'], x)
@@ -339,35 +244,25 @@ def policy_forward(x, model):
     return p, h
 ```
 
-+++ {"id": "D14eeV27rMjb"}
-
 Note that there are two _activation functions_ for determining non-linear relationships between inputs and outputs. These [non-linear functions](https://en.wikipedia.org/wiki/Activation_function) are applied to the output of the layers:
 
 - [Rectified linear unit (ReLU)](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)): defined as `h[h<0] = 0` above. It returns 0 for negative inputs and the same value if it's positive.
 - [Sigmoid](https://en.wikipedia.org/wiki/Sigmoid_function): defined below as `sigmoid()`. It "wraps" the last layer's output and returns an action log probability in the (0, 1) range.
 
-4. Define the sigmoid function separately with NumPy's [`np.exp()`](https://numpy.org/doc/stable/reference/generated/numpy.exp.html?highlight=numpy.exp#numpy.exp) for computing exponentials:
+**4.** Define the sigmoid function separately with NumPy's [`np.exp()`](https://numpy.org/doc/stable/reference/generated/numpy.exp.html?highlight=numpy.exp#numpy.exp) for computing exponentials:
 
 ```{code-cell} ipython3
-:id: 5pF2-D8kr6H5
-
 def sigmoid(x): 
     return 1.0 / (1.0 + np.exp(-x))
 ```
 
-+++ {"id": "EJGD0KX-Rfvo"}
-
 ## Set up the update step (backpropagation)
-
-+++ {"id": "6jr6WODRs3b0"}
 
 During learning in your deep RL algorithm, you use the action log probabilities (given an observation) and the discounted returns (for example, +1 or -1 in Pong) and perform the _backward pass_ or _backpropagation_ to update the parameters — the policy network's weights.
 
-1. Let's define the backward pass function (`policy_backward()`) with the help of NumPy's modules for array multiplication — [`np.dot()`](https://numpy.org/doc/stable/reference/generated/numpy.dot.html?highlight=numpy.dot#numpy.dot) (matrix multiplication), [`np.outer()`](https://numpy.org/doc/stable/reference/generated/numpy.outer.html) (outer product computation), and [`np.ravel()`](https://numpy.org/doc/stable/reference/generated/numpy.ravel.html) (to flatten arrays into 1D arrays):
+**1.** Let's define the backward pass function (`policy_backward()`) with the help of NumPy's modules for array multiplication — [`np.dot()`](https://numpy.org/doc/stable/reference/generated/numpy.dot.html?highlight=numpy.dot#numpy.dot) (matrix multiplication), [`np.outer()`](https://numpy.org/doc/stable/reference/generated/numpy.outer.html) (outer product computation), and [`np.ravel()`](https://numpy.org/doc/stable/reference/generated/numpy.ravel.html) (to flatten arrays into 1D arrays):
 
 ```{code-cell} ipython3
-:id: ZPzzDkWXcPAX
-
 def policy_backward(eph, epdlogp, model):
     dW2 = np.dot(eph.T, epdlogp).ravel()
     dh = np.outer(epdlogp, model['W2'])
@@ -377,15 +272,11 @@ def policy_backward(eph, epdlogp, model):
     return {'W1':dW1, 'W2':dW2}
 ```
 
-+++ {"id": "eIfnX6oj_WJT"}
-
 Using the intermediate hidden "states" of the network (`eph`) and the gradients of action log probabilities (`epdlogp`) for an episode, the `policy_backward` function propagates the gradients back through the policy network and update the weights.
 
-2. When applying backpropagation during agent training, you will need to save several variables for each episode. Let's instantiate empty lists to store them:
+**2.** When applying backpropagation during agent training, you will need to save several variables for each episode. Let's instantiate empty lists to store them:
 
 ```{code-cell} ipython3
-:id: OzOOhruG-UyJ
-
 # All preprocessed observations for the episode.
 xs = []
 # All hidden "states" (from the network) for the episode.
@@ -397,57 +288,35 @@ dlogps = []
 drs = []
 ```
 
-+++ {"id": "4-JgcydYZjuZ"}
-
 You will reset these variables manually at the end of each episode during training after they are "full" and reshape with NumPy's [`np.vstack()`](https://numpy.org/doc/stable/reference/generated/numpy.vstack.html). This is demonstrated in the training stage towards the end of the tutorial.
 
-3. Next, to perform a gradient ascent when optimizing the agent's policy, it is common to use deep learning _optimizers_ (you're performing optimization with gradients). In this example, you'll use [RMSProp](https://en.wikipedia.org/wiki/Stochastic_gradient_descent#RMSProp) — an adaptive optimization [method](http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf). Let's set a discounting factor — a decay rate — for the optimizer:
+**3.** Next, to perform a gradient ascent when optimizing the agent's policy, it is common to use deep learning _optimizers_ (you're performing optimization with gradients). In this example, you'll use [RMSProp](https://en.wikipedia.org/wiki/Stochastic_gradient_descent#RMSProp) — an adaptive optimization [method](http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf). Let's set a discounting factor — a decay rate — for the optimizer:
 
 ```{code-cell} ipython3
-:id: QVtNth_1hNX0
-
 decay_rate = 0.99
 ```
 
-+++ {"id": "IAaR0PmE_0I0"}
-
-4. You will also need to store the gradients (with the help of NumPy's [`np.zeros_like()`](https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html)) for the optimization step during training:
-
-+++ {"id": "pFxpBJcdRfvo"}
+**4.** You will also need to store the gradients (with the help of NumPy's [`np.zeros_like()`](https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html)) for the optimization step during training:
 
 - First, save the update buffers that add up gradients over a batch:
 
 ```{code-cell} ipython3
-:id: uL8aMfCgWP-l
-
 grad_buffer = { k : np.zeros_like(v) for k,v in model.items() }
 ```
-
-+++ {"id": "-y1DiEeMRfvo"}
 
 - Second, store the RMSProp memory for the optimizer for gradient ascent:
 
 ```{code-cell} ipython3
-:id: rcUPBupQRfvo
-
 rmsprop_cache = { k : np.zeros_like(v) for k,v in model.items() }
 ```
 
-+++ {"id": "tpOlBlNYEc3F"}
-
 ## Define the discounted rewards (expected return) function
 
-+++ {"id": "f4S7KcTWdyLE"}
-
 In this section, you will set up a function for computing discounted rewards (`discount_rewards()`) — the expected return from an observation — that uses a 1D array of rewards as inputs (with the help of NumPy's [`np.zeros_like()`](https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html)) function.
-
-+++ {"id": "uTZgxnNYenIC"}
 
 To provide more weight to shorter-term rewards over longer-term ones, you will use a _discount factor_ (gamma) that is often a floating-point number between 0.9 and 0.99.
 
 ```{code-cell} ipython3
-:id: Ot1Gn4qsGEXs
-
 gamma = 0.99
 
 def discount_rewards(r, gamma):
@@ -463,11 +332,7 @@ def discount_rewards(r, gamma):
     return discounted_r
 ```
 
-+++ {"id": "Z5t9Fls-GhB-"}
-
 ## Train the agent for a number of episodes
-
-+++ {"id": "Xg7HbH5M8Cm9"}
 
 This section covers how to set up the training process during which your agent will be learning to play Pong using its policy.
 
@@ -494,78 +359,50 @@ The pseudocode for the policy gradient method for Pong:
 
 You can stop the training at any time or/and check saved MP4 videos of saved plays on your disk in the `/video` directory. You can set the maximum number of episodes that is more appropriate for your setup.
 
-+++ {"id": "gD6XBqUqfNOV"}
-
-1. For demo purposes, let's limit the number of episodes for training to 3. If you are using hardware acceleration (CPUs and GPUs), you can increase the number to 1,000 or beyond. For comparison, Andrej Karpathy's original experiment took about 8,000 episodes.
+**1.** For demo purposes, let's limit the number of episodes for training to 3. If you are using hardware acceleration (CPUs and GPUs), you can increase the number to 1,000 or beyond. For comparison, Andrej Karpathy's original experiment took about 8,000 episodes.
 
 ```{code-cell} ipython3
-:id: TdRXrc37Rfvo
-
 max_episodes = 3
 ```
 
-+++ {"id": "ORj7JFGB0Gy8"}
-
-2. Set the batch size and the learning rate values:
+**2.** Set the batch size and the learning rate values:
 - The _batch size_ dictates how often (in episodes) the model performs a parameter update. It is the number of times your agent can collect the state-action trajectories. At the end of the collection, you can perform the maximization of action-probability multiples.
 - The [_learning rate_](https://en.wikipedia.org/wiki/Learning_rate) helps limit the magnitude of weight updates to prevent them from overcorrecting.
 
 ```{code-cell} ipython3
-:id: eKLLYUKbG-5A
-
 batch_size = 3
 learning_rate = 1e-4
 ```
 
-+++ {"id": "p2fOM3WzRfvo"}
-
-3. Set the game rendering default variable for Gym's `render` method (it is used to display the observation and is optional but can be useful during debugging):
+**3.** Set the game rendering default variable for Gym's `render` method (it is used to display the observation and is optional but can be useful during debugging):
 
 ```{code-cell} ipython3
-:id: l1mJ40OCRfvo
-
 render = False
 ```
 
-+++ {"id": "lwIAhlCvRfvo"}
-
-4. Set the agent's initial (random) observation by calling `reset()`:
+**4.** Set the agent's initial (random) observation by calling `reset()`:
 
 ```{code-cell} ipython3
-:id: g1N84e85Rfvo
-
 observation = env.reset()
 ```
 
-+++ {"id": "CcVds-NHRfvo"}
-
-5. Initialize the previous observation:
+**5.** Initialize the previous observation:
 
 ```{code-cell} ipython3
-:id: XNtdok9pRfvp
-
 prev_x = None 
 ```
 
-+++ {"id": "NhSLJnwhRfvp"}
-
-6. Initialize the reward variables and the episode count:
+**6.** Initialize the reward variables and the episode count:
 
 ```{code-cell} ipython3
-:id: hSRAPtsxRfvp
-
 running_reward = None
 reward_sum = 0
 episode_number = 0
 ```
 
-+++ {"id": "f81P6-kiRfvp"}
-
-7. To simulate motion between the frames, set the single input frame (`x`) for the policy network as the difference between the current and previous preprocessed frames:
+**7.** To simulate motion between the frames, set the single input frame (`x`) for the policy network as the difference between the current and previous preprocessed frames:
 
 ```{code-cell} ipython3
-:id: wqLSoNXVRfvp
-
 def update_input(prev_x, cur_x, D):
     if prev_x is not None:
         x = cur_x - prev_x 
@@ -574,12 +411,9 @@ def update_input(prev_x, cur_x, D):
     return x
 ```
 
-+++ {"id": "2V3qqwmsmRtT"}
-
-8. Finally, start the training loop, using the functions you have predefined:
+**8.** Finally, start the training loop, using the functions you have predefined:
 
 ```{code-cell} ipython3
-:id: u-WL_FAE1hI0
 :tags: [output_scroll]
 
 while episode_number < max_episodes:
@@ -693,29 +527,19 @@ while episode_number < max_episodes:
         print ('Episode {}: Game finished. Reward: {}...'.format(episode_number, reward) + ('' if reward == -1 else ' POSITIVE REWARD!'))
 ```
 
-+++ {"id": "-tv--3o01jsC"}
-
 A few notes:
 
 - If you have previously run an experiment and want to repeat it, your `Monitor` instance may still be running, which may throw an error the next time you try to traini the agent. Therefore, you should first shut down `Monitor` by calling `env.close()` by uncommenting and running the cell below:
 
 ```{code-cell} ipython3
-:id: x-Yt1HbAysJq
-
 # env.close()
 ```
-
-+++ {"id": "1C5Vk5gfRfvp"}
 
 - In Pong, if a player doesn't hit the ball back, they receive a negative reward (-1) and the other player gets a +1 reward. The rewards that the agent receives by playing Pong have a significant variance. Therefore, it's best practice to normalize them with the same mean (using [`np.mean()`](https://numpy.org/doc/stable/reference/generated/numpy.mean.html)) and standard deviation (using NumPy's [`np.std()`](https://numpy.org/doc/stable/reference/generated/numpy.std.html?highlight=std)).
 
 - When using only NumPy, the deep RL training process, including backpropagation, spans several lines of code that may appear quite long. One of the main reasons for this is you're not using a deep learning framework with an automatic differentiation library that usually simplifies such experiments. This tutorial shows how to perform everything from scratch but you can also use one of many Python-based frameworks with "autodiff" and "autograd", which you will learn about at the end of the tutorial.
 
-+++ {"id": "fwyhet51Dnmd"}
-
 ## Next steps
-
-+++ {"id": "rDZnzEOk1kNA"}
 
 You may notice that training an RL agent takes a long time if you increase the number of episodes from 100 to 500 or 1,000+, depending on the hardware — CPUs and GPUs — you are using for this task. 
 
@@ -737,11 +561,7 @@ If you want to learn more about deep RL, you should check out the following free
 
 Finally, you can go beyond NumPy with specialized frameworks and APIs — such as [TensorFlow](https://www.tensorflow.org/guide/tf_numpy?hl=el), [PyTorch](https://pytorch.org/docs/stable/generated/torch.from_numpy.html), Swift for TensorFlow (with [Python interoperability](https://www.tensorflow.org/swift/tutorials/python_interoperability)), and [JAX](https://github.com/google/jax) — that support NumPy, have built-in [automatic differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation), and are designed for high-performance numerical computing and machine learning.
 
-+++ {"id": "CWXax3Q7Rfvp"}
-
 ## Appendix
-
-+++ {"id": "W4pxakL_Rfvp"}
 
 ### Notes on RL and deep RL
 
@@ -758,8 +578,6 @@ Finally, you can go beyond NumPy with specialized frameworks and APIs — such a
 - One of the reasons why video games are popular in deep RL research is that, unlike real-world experiments, such as RL with [remote-controlled helicopters](http://heli.stanford.edu/papers/nips06-aerobatichelicopter.pdf) ([Pieter Abbeel](https://www2.eecs.berkeley.edu/Faculty/Homepages/abbeel.html)  et al, 2006), virtual simulations can offer safer testing environments. 
 
 - If you're interested in learning about the implications of deep RL on other fields, such as neuroscience, you can refer to a [paper](https://arxiv.org/pdf/2007.03750.pdf) by [Matthew Botvinick](https://www.youtube.com/watch?v=b0LddBiF5jM) et al (2020).
-
-+++ {"id": "6Haw66uARfvp"}
 
 ### How to set up video playback in your Jupyter notebook
 
