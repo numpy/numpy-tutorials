@@ -1,12 +1,10 @@
 # NumPy tutorials
 
-This set of tutorials and educational materials is being developed,
-IT IS NOT INTEGRATED IN THE HTML DOCS AT https://www.numpy.org/devdocs/
-
 The goal of this repository is to provide high-quality resources by the
 NumPy project, both for self-learning and for teaching classes with. If you're
 interested in adding your own content, check the [Contributing](#contributing)
-section.
+section. This set of tutorials and educational materials is not a part of the
+NumPy source tree.
 
 To download a local copy of the `.ipynb` files, you can either
 [clone this repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
@@ -26,7 +24,7 @@ or navigate to any of the documents listed below and download it individually.
 
 We very much welcome contributions! If you have an idea or proposal for a new
 tutorial, please [open an issue](https://github.com/numpy/numpy-tutorials/issues)
-with an outline. 
+with an outline.
 
 Don’t worry if English is not your first language, or if you can only come up
 with a rough draft. Open source is a community effort. Do your best – we’ll help
@@ -39,14 +37,14 @@ for artwork can be polished by others.
 The NumPy tutorials are a curated collection of
 [MyST-NB](https://myst-nb.readthedocs.io/) notebooks. These notebooks are used
 to produce static websites and can be opened as notebooks in Jupyter using
-[Jupytext](https://jupytext.readthedocs.io). 
+[Jupytext](https://jupytext.readthedocs.io).
 
 > __Note:__ You should use [CommonMark](https://commonmark.org) markdown
-> cells. Jupyter only renders CommonMark.   
+> cells. Jupyter only renders CommonMark.
 
 ### Why Jupyter Notebooks?
 
-The choice of Jupyter Notebook in this repo instead of the usual format 
+The choice of Jupyter Notebook in this repo instead of the usual format
 ([reStructuredText, through Sphinx](https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html))
 used in the main NumPy documentation has two reasons:
 
@@ -68,7 +66,7 @@ tutorial](content/pairing.md).
 ### Adding your own tutorials
 
 If you have your own tutorial in the form of a Jupyter notebook (a `.ipynb`
-file) and you'd like to add it to the repository:
+file) and you'd like to add it to the repository, follow the steps below.
 
 
 #### Create an issue
@@ -93,7 +91,7 @@ your content consistent with our existing tutorials.
     </summary>
     <img src="site/_static/01-fork.gif" width=80% height=80%>
 </details>
-    
+
 <details>
     <summary>
         <b>In your own fork, create a new branch for your content.</b>
@@ -123,7 +121,9 @@ author, if applicable.</b>
 
 <details>
     <summary>
-        <b>Create a <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request.</a></b>
+        <b>Create a <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request.</a>
+        Make sure the "Allow edits and access to secrets by maintainers" option
+        is selected so we can properly review your submission.</b>
     </summary>
     <img src="site/_static/05-create_PR.gif" width=80% height=80%>
 </details>
@@ -146,4 +146,4 @@ The following links may be useful:
 
 Note that regular documentation issues for NumPy can be found in the [main NumPy
 repository](https://github.com/numpy/numpy/issues) (see the `Documentation`
-labels there). 
+labels there).
