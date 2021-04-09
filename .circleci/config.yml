@@ -31,6 +31,8 @@ jobs:
           name: Build site
           no_output_timeout: 30m
           command: |
+            # NOTE: blas multithreading behaves badly on circleci
+            export OMP_NUM_THREADS=1
             source venv/bin/activate
             # n = nitpicky (broken links), W = warnings as errors,
             # T = full tracebacks, keep-going = run to completion even with errors
