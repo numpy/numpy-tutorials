@@ -19,7 +19,7 @@ Your deep learning model — one of the most basic artificial neural networks th
 
 Based on the image inputs and their labels ([supervised learning](https://en.wikipedia.org/wiki/Supervised_learning)), your neural network will be trained to learn their features using forward propagation and backpropagation ([reverse-mode](https://en.wikipedia.org/wiki/Automatic_differentiation#Reverse_accumulation) differentiation). The final output of the network is a vector of 10 scores — one for each handwritten digit image. You will also evaluate how good your model is at classifying the images on the test set.
 
-![image.png](tutorial-deep-learning-on-mnist.png)
+![Diagram showing operations detailed in this tutorial](_static/tutorial-deep-learning-on-mnist.png)
 
 This tutorial was adapted from the work by [Andrew Trask](https://github.com/iamtrask/Grokking-Deep-Learning) (with the author's permission).
 
@@ -334,7 +334,7 @@ Afterwards, you will construct the building blocks of a simple deep learning mod
 
 Here is a summary of the neural network model architecture and the training process:
 
-![image.png](tutorial-deep-learning-on-mnist.png)
+![Diagram showing operations detailed in this tutorial](_static/tutorial-deep-learning-on-mnist.png)
 
 - _The input layer_: 
 

@@ -323,7 +323,7 @@
 <h1>Tutorial: deep reinforcement learning with Pong from pixels<a class="headerlink" href="#tutorial-deep-reinforcement-learning-with-pong-from-pixels" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial demonstrates how to implement a deep reinforcement learning (RL) agent from scratch using a policy gradient method that learns to play the <a class="reference external" href="https://gym.openai.com/envs/Pong-v0/">Pong</a> video game using screen pixels as inputs with NumPy. Your Pong agent will obtain experience on the go using an <a class="reference external" href="https://en.wikipedia.org/wiki/Artificial_neural_network">artificial neural network</a> as its <a class="reference external" href="https://en.wikipedia.org/wiki/Reinforcement_learning">policy</a>.</p>
 <p>Pong is a 2D game from 1972 where two players use “rackets” to play a form of table tennis. Each player moves the racket up and down the screen and tries to hit a ball in their opponent’s direction by touching it. The goal is to hit the ball such that it goes past the opponent’s racket (they miss their shot). According to the rules, if a player reaches 21 points, they win. In Pong, the RL agent that learns to play against an opponent is displayed on the right.</p>
-<p><img alt="pong_rl" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels.png" /></p>
+<p><img alt="Diagram showing operations detailed in this tutorial" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels.png" /></p>
 <p>This example is based on the <a class="reference external" href="https://gist.github.com/karpathy/a4166c7fe253700972fcbc77e4ea32c5">code</a> developed by <a class="reference external" href="https://karpathy.ai">Andrej Karpathy</a> for the <a class="reference external" href="https://sites.google.com/view/deep-rl-bootcamp/home">Deep RL Bootcamp</a> in 2017 at UC Berkeley. His <a class="reference external" href="http://karpathy.github.io/2016/05/31/rl/">blog post</a> from 2016 also provides more background on the mechanics and theory used in Pong RL.</p>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
@@ -383,9 +383,7 @@
 </div>
 <div class="section" id="set-up-pong">
 <h2>Set up Pong<a class="headerlink" href="#set-up-pong" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
-<li><p>First, you should install OpenAI Gym (using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gym[atari]</span></code> - this package is currently not available on conda), and import NumPy, Gym and the necessary modules:</p></li>
-</ol>
+<p><strong>1.</strong> First, you should install OpenAI Gym (using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gym[atari]</span></code> - this package is currently not available on conda), and import NumPy, Gym and the necessary modules:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -403,9 +401,7 @@
 </div>
 </div>
 </div>
-<ol class="simple">
-<li><p>Instantiate a Gym environment for the game of Pong:</p></li>
-</ol>
+<p><strong>2.</strong> Instantiate a Gym environment for the game of Pong:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;Pong-v0&quot;</span><span class="p">)</span>
@@ -413,9 +409,7 @@
 </div>
 </div>
 </div>
-<ol class="simple">
-<li><p>Let’s review which actions are available in the <code class="docutils literal notranslate"><span class="pre">Pong-v0</span></code> environment:</p></li>
-</ol>
+<p><strong>3.</strong> Let’s review which actions are available in the <code class="docutils literal notranslate"><span class="pre">Pong-v0</span></code> environment:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="p">)</span>
@@ -442,9 +436,7 @@
 </div>
 <p>There are 6 actions. However, <code class="docutils literal notranslate"><span class="pre">LEFTFIRE</span></code> is actually <code class="docutils literal notranslate"><span class="pre">LEFT</span></code>, <code class="docutils literal notranslate"><span class="pre">RIGHTFIRE</span></code> — <code class="docutils literal notranslate"><span class="pre">RIGHT</span></code>, and <code class="docutils literal notranslate"><span class="pre">NOOP</span></code> — <code class="docutils literal notranslate"><span class="pre">FIRE</span></code>.</p>
 <p>For simplicity, your policy network will have one output — a (log) probability for “moving up” (indexed at <code class="docutils literal notranslate"><span class="pre">2</span></code> or <code class="docutils literal notranslate"><span class="pre">RIGHT</span></code>). The other available action will be indexed at 3 (“move down” or <code class="docutils literal notranslate"><span class="pre">LEFT</span></code>).</p>
-<ol class="simple">
-<li><p>Gym can save videos of the agent’s learning in an MP4 format — wrap <code class="docutils literal notranslate"><span class="pre">Monitor()</span></code> around the environment by running the following:</p></li>
-</ol>
+<p><strong>4.</strong> Gym can save videos of the agent’s learning in an MP4 format — wrap <code class="docutils literal notranslate"><span class="pre">Monitor()</span></code> around the environment by running the following:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">Monitor</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s1">&#39;./video&#39;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -459,9 +451,7 @@
 <p>In this section you will set up a function to preprocess the input data (game observation) to make it digestible for the neural network, which can only work with inputs that are in a form of tensors (multidimensional arrays) of floating-point type.</p>
 <p>Your agent will use the frames from the Pong game — pixels from screen frames — as input-observations for the policy network. The game observation tells the agent about where the ball is before it is fed (with a forward pass) into the neural network (the policy). This is similar to DeepMind’s <a class="reference external" href="https://deepmind.com/research/open-source/dqn">DQN</a> method (which is further discussed in the Appendix).</p>
 <p>Pong screen frames are 210x160 pixels over 3 color dimensions (red, green and blue). The arrays are encoded with <code class="docutils literal notranslate"><span class="pre">uint8</span></code> (or 8-bit integers), and these observations are stored on a Gym Box instance.</p>
-<ol class="simple">
-<li><p>Check the Pong’s observations:</p></li>
-</ol>
+<p><strong>1.</strong> Check the Pong’s observations:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="p">)</span>
@@ -475,15 +465,14 @@
 </div>
 </div>
 <p>In Gym, the agent’s actions and observations can be part of the <code class="docutils literal notranslate"><span class="pre">Box</span></code> (n-dimensional) or <code class="docutils literal notranslate"><span class="pre">Discrete</span></code> (fixed-range integers) classes.</p>
-<ol class="simple">
-<li><p>You can view a random observation — one frame — by:</p>
-<ol class="simple">
-<li><p>Setting the random <code class="docutils literal notranslate"><span class="pre">seed</span></code> before initialization (optional).</p></li>
-<li><p>Calling  Gym’s <code class="docutils literal notranslate"><span class="pre">reset()</span></code> to reset the environment, which returns an initial observation.</p></li>
-<li><p>Using Matplotlib to display the <code class="docutils literal notranslate"><span class="pre">render</span></code>ed observation.</p></li>
-</ol>
-</li>
-</ol>
+<p><strong>2.</strong> You can view a random observation — one frame — by:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1) Setting the random `seed` before initialization (optional).
+
+2) Calling  Gym&#39;s `reset()` to reset the environment, which returns an initial observation.
+
+3) Using Matplotlib to display the `render`ed observation.
+</pre></div>
+</div>
 <p>(You can refer to the OpenAI Gym core <a class="reference external" href="https://github.com/openai/gym/blob/master/gym/core.py">API</a> for more information about Gym’s core classes and methods.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -501,16 +490,14 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(210, 160, 3)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f1b68fc9400&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7eff5dbf2400&gt;
 </pre></div>
 </div>
-<img alt="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_29_2.png" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_29_2.png" />
+<img alt="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_14_2.png" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_14_2.png" />
 </div>
 </div>
 <p>To feed the observations into the policy (neural) network, you need to convert them into 1D grayscale vectors with 6,400 (80x80x1) floating point arrays. (During training, you will use NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ravel.html"><code class="docutils literal notranslate"><span class="pre">np.ravel()</span></code></a> function to flatten these arrays.)</p>
-<ol class="simple">
-<li><p>Set up a helper function for frame (observation) preprocessing:</p></li>
-</ol>
+<p><strong>3.</strong> Set up a helper function for frame (observation) preprocessing:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">frame_preprocessing</span><span class="p">(</span><span class="n">observation_frame</span><span class="p">):</span>
@@ -523,14 +510,12 @@
     <span class="n">observation_frame</span><span class="p">[</span><span class="n">observation_frame</span> <span class="o">==</span> <span class="mi">109</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># Erase the background (type 2).</span>
     <span class="n">observation_frame</span><span class="p">[</span><span class="n">observation_frame</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Set the items (rackets, ball) to 1.</span>
     <span class="c1"># Return the preprocessed frame as a 1D floating-point array.</span>
-    <span class="k">return</span> <span class="n">observation_frame</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">observation_frame</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<ol class="simple">
-<li><p>Preprocess the random frame from earlier to test the function — the input for the policy network is an 80x80 1D image:</p></li>
-</ol>
+<p><strong>4.</strong> Preprocess the random frame from earlier to test the function — the input for the policy network is an 80x80 1D image:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preprocessed_random_frame</span> <span class="o">=</span> <span class="n">frame_preprocessing</span><span class="p">(</span><span class="n">random_frame</span><span class="p">)</span>
@@ -543,12 +528,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(80, 80)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-9-12f76526f2d7&gt;:11: DeprecationWarning: `np.float` is a deprecated alias for the builtin `float`. To silence this warning, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
-Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
-  return observation_frame.astype(np.float)
-</pre></div>
-</div>
-<img alt="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_33_2.png" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_33_2.png" />
+<img alt="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_18_1.png" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_18_1.png" />
 </div>
 </div>
 </div>
@@ -561,9 +541,7 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 <li><p>Then, the <em>output layer</em> will perform the matrix-multiplication again of  weight parameters and the hidden layer’s output (with <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html"><code class="docutils literal notranslate"><span class="pre">np.dot()</span></code></a>), and send that information through a <a class="reference external" href="https://en.wikipedia.org/wiki/Softmax_function">softmax</a> <em>activation function</em>.</p></li>
 <li><p>In the end, the policy network will output one action log probability (given that observation) for the agent — the probability for Pong action indexed in the environment at 2 (“moving the racket up”).</p></li>
 </ul>
-<ol class="simple">
-<li><p>Let’s instantiate certain parameters for the input, hidden, and output layers, and start setting up the network model.</p></li>
-</ol>
+<p><strong>1.</strong> Let’s instantiate certain parameters for the input, hidden, and output layers, and start setting up the network model.</p>
 <p>Start by creating a random number generator instance for the experiment
 (seeded for reproducibility):</p>
 <div class="cell docutils container">
@@ -605,9 +583,7 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 </div>
 </div>
 <p>In a neural network, <em>weights</em> are important adjustable parameters that the network fine-tunes by forward and backward propagating the data.</p>
-<ol class="simple">
-<li><p>Using a technique called <a class="reference external" href="https://www.deeplearning.ai/ai-notes/initialization/#IV">Xavier initialization</a>, set up the network model’s initial weights with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.standard_normal.html"><code class="docutils literal notranslate"><span class="pre">Generator.standard_normal()</span></code></a> that returns random numbers over a standard Normal distribution, as well as <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html?highlight=numpy.sqrt#numpy.sqrt"><code class="docutils literal notranslate"><span class="pre">np.sqrt()</span></code></a>:</p></li>
-</ol>
+<p><strong>2.</strong> Using a technique called <a class="reference external" href="https://www.deeplearning.ai/ai-notes/initialization/#IV">Xavier initialization</a>, set up the network model’s initial weights with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.standard_normal.html"><code class="docutils literal notranslate"><span class="pre">Generator.standard_normal()</span></code></a> that returns random numbers over a standard Normal distribution, as well as <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html?highlight=numpy.sqrt#numpy.sqrt"><code class="docutils literal notranslate"><span class="pre">np.sqrt()</span></code></a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;W1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="n">D</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
@@ -616,9 +592,7 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 </div>
 </div>
 </div>
-<ol class="simple">
-<li><p>Your policy network starts by randomly initializing the weights and feeds the input data (frames) forward from the input layer through a hidden layer to the output layers. This process is called the <em>forward pass</em> or <em>forward propagation</em>, and is outlined in the function <code class="docutils literal notranslate"><span class="pre">policy_forward()</span></code>:</p></li>
-</ol>
+<p><strong>3.</strong> Your policy network starts by randomly initializing the weights and feeds the input data (frames) forward from the input layer through a hidden layer to the output layers. This process is called the <em>forward pass</em> or <em>forward propagation</em>, and is outlined in the function <code class="docutils literal notranslate"><span class="pre">policy_forward()</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">policy_forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
@@ -643,9 +617,7 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">Rectified linear unit (ReLU)</a>: defined as <code class="docutils literal notranslate"><span class="pre">h[h&lt;0]</span> <span class="pre">=</span> <span class="pre">0</span></code> above. It returns 0 for negative inputs and the same value if it’s positive.</p></li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Sigmoid_function">Sigmoid</a>: defined below as <code class="docutils literal notranslate"><span class="pre">sigmoid()</span></code>. It “wraps” the last layer’s output and returns an action log probability in the (0, 1) range.</p></li>
 </ul>
-<ol class="simple">
-<li><p>Define the sigmoid function separately with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.exp.html?highlight=numpy.exp#numpy.exp"><code class="docutils literal notranslate"><span class="pre">np.exp()</span></code></a> for computing exponentials:</p></li>
-</ol>
+<p><strong>4.</strong> Define the sigmoid function separately with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.exp.html?highlight=numpy.exp#numpy.exp"><code class="docutils literal notranslate"><span class="pre">np.exp()</span></code></a> for computing exponentials:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> 
@@ -658,9 +630,7 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 <div class="section" id="set-up-the-update-step-backpropagation">
 <h2>Set up the update step (backpropagation)<a class="headerlink" href="#set-up-the-update-step-backpropagation" title="Permalink to this headline">¶</a></h2>
 <p>During learning in your deep RL algorithm, you use the action log probabilities (given an observation) and the discounted returns (for example, +1 or -1 in Pong) and perform the <em>backward pass</em> or <em>backpropagation</em> to update the parameters — the policy network’s weights.</p>
-<ol class="simple">
-<li><p>Let’s define the backward pass function (<code class="docutils literal notranslate"><span class="pre">policy_backward()</span></code>) with the help of NumPy’s modules for array multiplication — <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html?highlight=numpy.dot#numpy.dot"><code class="docutils literal notranslate"><span class="pre">np.dot()</span></code></a> (matrix multiplication), <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.outer.html"><code class="docutils literal notranslate"><span class="pre">np.outer()</span></code></a> (outer product computation), and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ravel.html"><code class="docutils literal notranslate"><span class="pre">np.ravel()</span></code></a> (to flatten arrays into 1D arrays):</p></li>
-</ol>
+<p><strong>1.</strong> Let’s define the backward pass function (<code class="docutils literal notranslate"><span class="pre">policy_backward()</span></code>) with the help of NumPy’s modules for array multiplication — <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html?highlight=numpy.dot#numpy.dot"><code class="docutils literal notranslate"><span class="pre">np.dot()</span></code></a> (matrix multiplication), <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.outer.html"><code class="docutils literal notranslate"><span class="pre">np.outer()</span></code></a> (outer product computation), and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ravel.html"><code class="docutils literal notranslate"><span class="pre">np.ravel()</span></code></a> (to flatten arrays into 1D arrays):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">policy_backward</span><span class="p">(</span><span class="n">eph</span><span class="p">,</span> <span class="n">epdlogp</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
@@ -675,9 +645,7 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 </div>
 </div>
 <p>Using the intermediate hidden “states” of the network (<code class="docutils literal notranslate"><span class="pre">eph</span></code>) and the gradients of action log probabilities (<code class="docutils literal notranslate"><span class="pre">epdlogp</span></code>) for an episode, the <code class="docutils literal notranslate"><span class="pre">policy_backward</span></code> function propagates the gradients back through the policy network and update the weights.</p>
-<ol class="simple">
-<li><p>When applying backpropagation during agent training, you will need to save several variables for each episode. Let’s instantiate empty lists to store them:</p></li>
-</ol>
+<p><strong>2.</strong> When applying backpropagation during agent training, you will need to save several variables for each episode. Let’s instantiate empty lists to store them:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All preprocessed observations for the episode.</span>
@@ -694,9 +662,7 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 </div>
 </div>
 <p>You will reset these variables manually at the end of each episode during training after they are “full” and reshape with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.vstack.html"><code class="docutils literal notranslate"><span class="pre">np.vstack()</span></code></a>. This is demonstrated in the training stage towards the end of the tutorial.</p>
-<ol class="simple">
-<li><p>Next, to perform a gradient ascent when optimizing the agent’s policy, it is common to use deep learning <em>optimizers</em> (you’re performing optimization with gradients). In this example, you’ll use <a class="reference external" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#RMSProp">RMSProp</a> — an adaptive optimization <a class="reference external" href="http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf">method</a>. Let’s set a discounting factor — a decay rate — for the optimizer:</p></li>
-</ol>
+<p><strong>3.</strong> Next, to perform a gradient ascent when optimizing the agent’s policy, it is common to use deep learning <em>optimizers</em> (you’re performing optimization with gradients). In this example, you’ll use <a class="reference external" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#RMSProp">RMSProp</a> — an adaptive optimization <a class="reference external" href="http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf">method</a>. Let’s set a discounting factor — a decay rate — for the optimizer:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">decay_rate</span> <span class="o">=</span> <span class="mf">0.99</span>
@@ -704,9 +670,7 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 </div>
 </div>
 </div>
-<ol class="simple">
-<li><p>You will also need to store the gradients (with the help of NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html"><code class="docutils literal notranslate"><span class="pre">np.zeros_like()</span></code></a>) for the optimization step during training:</p></li>
-</ol>
+<p><strong>4.</strong> You will also need to store the gradients (with the help of NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html"><code class="docutils literal notranslate"><span class="pre">np.zeros_like()</span></code></a>) for the optimization step during training:</p>
 <ul class="simple">
 <li><p>First, save the update buffers that add up gradients over a batch:</p></li>
 </ul>
@@ -780,11 +744,9 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 </ul>
 </li>
 </ul>
-<p><img alt="pong_rl" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels.png" /></p>
+<p><img alt="Diagram showing operations detailed in this tutorial" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels.png" /></p>
 <p>You can stop the training at any time or/and check saved MP4 videos of saved plays on your disk in the <code class="docutils literal notranslate"><span class="pre">/video</span></code> directory. You can set the maximum number of episodes that is more appropriate for your setup.</p>
-<ol class="simple">
-<li><p>For demo purposes, let’s limit the number of episodes for training to 3. If you are using hardware acceleration (CPUs and GPUs), you can increase the number to 1,000 or beyond. For comparison, Andrej Karpathy’s original experiment took about 8,000 episodes.</p></li>
-</ol>
+<p><strong>1.</strong> For demo purposes, let’s limit the number of episodes for training to 3. If you are using hardware acceleration (CPUs and GPUs), you can increase the number to 1,000 or beyond. For comparison, Andrej Karpathy’s original experiment took about 8,000 episodes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">max_episodes</span> <span class="o">=</span> <span class="mi">3</span>
@@ -792,9 +754,7 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 </div>
 </div>
 </div>
-<ol class="simple">
-<li><p>Set the batch size and the learning rate values:</p></li>
-</ol>
+<p><strong>2.</strong> Set the batch size and the learning rate values:</p>
 <ul class="simple">
 <li><p>The <em>batch size</em> dictates how often (in episodes) the model performs a parameter update. It is the number of times your agent can collect the state-action trajectories. At the end of the collection, you can perform the maximization of action-probability multiples.</p></li>
 <li><p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Learning_rate"><em>learning rate</em></a> helps limit the magnitude of weight updates to prevent them from overcorrecting.</p></li>
@@ -807,9 +767,7 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 </div>
 </div>
 </div>
-<ol class="simple">
-<li><p>Set the game rendering default variable for Gym’s <code class="docutils literal notranslate"><span class="pre">render</span></code> method (it is used to display the observation and is optional but can be useful during debugging):</p></li>
-</ol>
+<p><strong>3.</strong> Set the game rendering default variable for Gym’s <code class="docutils literal notranslate"><span class="pre">render</span></code> method (it is used to display the observation and is optional but can be useful during debugging):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">render</span> <span class="o">=</span> <span class="kc">False</span>
@@ -817,9 +775,7 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 </div>
 </div>
 </div>
-<ol class="simple">
-<li><p>Set the agent’s initial (random) observation by calling <code class="docutils literal notranslate"><span class="pre">reset()</span></code>:</p></li>
-</ol>
+<p><strong>4.</strong> Set the agent’s initial (random) observation by calling <code class="docutils literal notranslate"><span class="pre">reset()</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observation</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
@@ -827,9 +783,7 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 </div>
 </div>
 </div>
-<ol class="simple">
-<li><p>Initialize the previous observation:</p></li>
-</ol>
+<p><strong>5.</strong> Initialize the previous observation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prev_x</span> <span class="o">=</span> <span class="kc">None</span> 
@@ -837,9 +791,7 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 </div>
 </div>
 </div>
-<ol class="simple">
-<li><p>Initialize the reward variables and the episode count:</p></li>
-</ol>
+<p><strong>6.</strong> Initialize the reward variables and the episode count:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">running_reward</span> <span class="o">=</span> <span class="kc">None</span>
@@ -849,9 +801,7 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 </div>
 </div>
 </div>
-<ol class="simple">
-<li><p>To simulate motion between the frames, set the single input frame (<code class="docutils literal notranslate"><span class="pre">x</span></code>) for the policy network as the difference between the current and previous preprocessed frames:</p></li>
-</ol>
+<p><strong>7.</strong> To simulate motion between the frames, set the single input frame (<code class="docutils literal notranslate"><span class="pre">x</span></code>) for the policy network as the difference between the current and previous preprocessed frames:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">update_input</span><span class="p">(</span><span class="n">prev_x</span><span class="p">,</span> <span class="n">cur_x</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
@@ -864,9 +814,7 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 </div>
 </div>
 </div>
-<ol class="simple">
-<li><p>Finally, start the training loop, using the functions you have predefined:</p></li>
-</ol>
+<p><strong>8.</strong> Finally, start the training loop, using the functions you have predefined:</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">episode_number</span> <span class="o">&lt;</span> <span class="n">max_episodes</span><span class="p">:</span>
@@ -982,11 +930,6 @@ Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdo
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-9-12f76526f2d7&gt;:11: DeprecationWarning: `np.float` is a deprecated alias for the builtin `float`. To silence this warning, use `float` by itself. Doing this will not modify any behavior and is safe. If you specifically wanted the numpy scalar type, use `np.float64` here.
-Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
-  return observation_frame.astype(np.float)
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
 </pre></div>
 </div>

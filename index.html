@@ -283,16 +283,17 @@
   <div class="section" id="numpy-tutorials">
 <h1>NumPy tutorials<a class="headerlink" href="#numpy-tutorials" title="Permalink to this headline">¶</a></h1>
 <p><a class="reference external" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=lab/tree/content"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
-<p>This set of tutorials and educational materials is being developed,
-IT IS NOT INTEGRATED IN THE HTML DOCS AT <a class="reference external" href="https://www.numpy.org/devdocs/">https://www.numpy.org/devdocs/</a></p>
-<p>The goal of this repository is to provide high-quality resources by the
-NumPy project, both for self-learning and for teaching classes with. If you’re
-interested in adding your own content, check the <a class="reference external" href="#contributing">Contributing</a>
-section.</p>
+<p>This set of tutorials and educational materials is being developed in the
+<a class="reference external" href="https://github.com/numpy/numpy-tutorials">numpy-tutorials</a> repository, and is
+not a part of the NumPy source tree. The goal of this repository is to provide
+high-quality resources by the NumPy project, both for self-learning and for
+teaching classes with. If you’re interested in adding your own content, check
+the <a class="reference external" href="#contributing">Contributing</a> section.</p>
 <p>To open a live version of the content, click the <strong>launch Binder</strong> button above.
-You can also launch individual tutorials on Binder by clicking on the
-rocket icon that appears in the upper-right corner of each tutorial.
-To download a local copy of the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> files, you can either
+To open each of the <code class="docutils literal notranslate"><span class="pre">.md</span></code> files, right click and select “Open with -&gt; Notebook”.
+You can also launch individual tutorials on Binder by clicking on the rocket
+icon that appears in the upper-right corner of each tutorial. To download a
+local copy of the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> files, you can either
 <a class="reference external" href="https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository">clone this repository</a>
 or use the download icon in the upper-right corner of each tutorial.</p>
 <div class="section" id="content">
@@ -319,6 +320,14 @@ fix issues.</p>
 <p>Images and real-life data make text more engaging and powerful, but be sure what
 you use is appropriately licensed and available. Here again, even a rough idea
 for artwork can be polished by others.</p>
+<p>The NumPy tutorials are a curated collection of
+<a class="reference external" href="https://myst-nb.readthedocs.io/">MyST-NB</a> notebooks. These notebooks are used
+to produce static websites and can be opened as notebooks in Jupyter using
+<a class="reference external" href="https://jupytext.readthedocs.io">Jupytext</a>.</p>
+<blockquote>
+<div><p><strong>Note:</strong> You should use <a class="reference external" href="https://commonmark.org">CommonMark</a> markdown
+cells. Jupyter only renders CommonMark.</p>
+</div></blockquote>
 <div class="section" id="why-jupyter-notebooks">
 <h3>Why Jupyter Notebooks?<a class="headerlink" href="#why-jupyter-notebooks" title="Permalink to this headline">¶</a></h3>
 <p>The choice of Jupyter Notebook in this repo instead of the usual format
@@ -327,6 +336,8 @@ used in the main NumPy documentation has two reasons:</p>
 <ul class="simple">
 <li><p>Jupyter notebooks are a common format for communicating scientific
 information.</p></li>
+<li><p>Jupyter notebooks can be launched in <a class="reference external" href="https://www.mybinder.org">Binder</a>, so that users can interact
+with tutorials</p></li>
 <li><p>rST may present a barrier for some people who might otherwise be very
 interested in contributing tutorial material.</p></li>
 </ul>
@@ -344,7 +355,7 @@ tutorial</span></a>.</p>
 <div class="section" id="adding-your-own-tutorials">
 <h3>Adding your own tutorials<a class="headerlink" href="#adding-your-own-tutorials" title="Permalink to this headline">¶</a></h3>
 <p>If you have your own tutorial in the form of a Jupyter notebook (an <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>
-file) and you’d like to try add it out to the repository:</p>
+file) and you’d like to try add it out to the repository, follow the steps below.</p>
 <div class="section" id="create-an-issue">
 <h4>Create an issue<a class="headerlink" href="#create-an-issue" title="Permalink to this headline">¶</a></h4>
 <p>Go to <a class="reference external" href="https://github.com/numpy/numpy-tutorials/issues">https://github.com/numpy/numpy-tutorials/issues</a> and create a new issue
@@ -395,7 +406,7 @@ tutorials:</p>
 </details>
 <details>
     <summary>
-        <b>Create a <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request.</a></b>
+        <b>Create a <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request.</a> Make sure the "Allow edits and access to secrets by maintainers" option is selected so we can properly review your submission.</b>
     </summary>
     <img src="_static/05-create_PR.gif" width=80% height=80%>
 </details>

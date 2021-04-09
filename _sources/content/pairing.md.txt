@@ -209,14 +209,14 @@ or the command line:
     <summary>
         <b>1. Classic Jupyter Jupytext pairing</b>.
     </summary>
-    <img src="01-classic.gif" width=80% height=80%>
+    <img src="../_static/01-classic.gif" width=80% height=80%>
 </details>
     
 <details>
     <summary>
         <b>2. Jupyter Lab Jupytext pairing</b>
     </summary>
-    <img src="02-jupyterlab.gif" width=80% height=80%>
+	<img src="../_static/02-jupyterlab.gif" width=80% height=80%>
 </details>
 
 <details>
