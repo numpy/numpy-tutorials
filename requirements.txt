@@ -1,5 +1,4 @@
 # For the tutorials
-jupyter-book
 numpy
 scipy
 matplotlib
@@ -8,3 +7,5 @@ nbval
 statsmodels
 imageio
 gym[atari]
+# For supporting .md-based notebooks
+jupytext
