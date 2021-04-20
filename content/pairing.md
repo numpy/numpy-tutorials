@@ -204,34 +204,26 @@ to include the Jupytext extension.
 
 You can pair the two formats in the classic Jupyter, Jupyter Lab,
 or the command line:
-<ul>
-<details>
-    <summary>
-        <b>1. Classic Jupyter Jupytext pairing</b>.
-    </summary>
-    <img src="../_static/01-classic.gif" width=80% height=80%>
-</details>
-    
-<details>
-    <summary>
-        <b>2. Jupyter Lab Jupytext pairing</b>
-    </summary>
-	<img src="../_static/02-jupyterlab.gif" width=80% height=80%>
-</details>
 
-<details>
-    <summary>
-		<b>3. Command line Jupytext pairing</b>
-    </summary>
-  <pre><code>
-  jupytext --set-formats ipynb,myst notebook.ipynb
-  </pre></code>
-  Then, update either the MyST markdown or notebook file:
-  <pre><code>
-  jupytext --sync notebook.ipynb
-  </pre></code>
-</details>
-</ul>
+**1. Classic Jupyter Jupytext pairing**
+
+![Animation showing pairing with Jupyter classic](_static/01-classic.gif)
+
+**2. JupyterLab Jupytext pairing**
+
+![Animation showing pairing with JupyterLab](_static/02-jupyterlab.gif)
+
+**3. Command line Jupytext pairing**
+
+```sh
+jupytext --set-formats ipynb,myst notebook.ipynb
+```
+
+Then, update either the MyST markdown or notebook file:
+
+```sh
+jupytext --sync notebook.ipynb
+```
 
 > __Note:__ With Jupytext installed, the classic Jupyter interface will
 > automatically open MyST files as notebooks. In JupyterLab, you can
