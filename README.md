@@ -19,6 +19,7 @@ or navigate to any of the documents listed below and download it individually.
 5. [Tutorial: NumPy deep learning on MNIST from scratch](content/tutorial-deep-learning-on-mnist.md)
 6. [Tutorial: X-ray image processing](content/tutorial-x-ray-image-processing.md)
 7. [Tutorial: NumPy deep reinforcement learning with Pong from pixels](content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md) 
+8. [Tutorial: Masked Arrays](content/tutorial-ma.md)
 
 ## Contributing
 
