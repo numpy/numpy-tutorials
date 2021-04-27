@@ -184,7 +184,7 @@ Similar to forces, these moments must all sum to zero, otherwise rotational acce
 A simple example of this would be from a force applied to a stationary pole secured in the ground.
 The pole does not move, so it must apply a reaction force.
 The pole also does not rotate, so it must also be creating a reaction moment.
-Solve for both.
+Solve for both the reaction force and moments.
 
 Lets say a 5N force is applied 2m above the base of the pole.
 
