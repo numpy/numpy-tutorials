@@ -19,7 +19,7 @@ Your deep learning model — one of the most basic artificial neural networks th
 
 Based on the image inputs and their labels ([supervised learning](https://en.wikipedia.org/wiki/Supervised_learning)), your neural network will be trained to learn their features using forward propagation and backpropagation ([reverse-mode](https://en.wikipedia.org/wiki/Automatic_differentiation#Reverse_accumulation) differentiation). The final output of the network is a vector of 10 scores — one for each handwritten digit image. You will also evaluate how good your model is at classifying the images on the test set.
 
-![image.png](tutorial-deep-learning-on-mnist.png)
+![Diagram showing operations detailed in this tutorial](_static/tutorial-deep-learning-on-mnist.png)
 
 This tutorial was adapted from the work by [Andrew Trask](https://github.com/iamtrask/Grokking-Deep-Learning) (with the author's permission).
 
@@ -61,22 +61,49 @@ In this section, you will download the zipped MNIST dataset files originally sto
 **1.** Define a variable to store the training/test image/label names of the MNIST dataset in a list:
 
 ```{code-cell} ipython3
-filename = [["training_images", "train-images-idx3-ubyte.gz"],   # 60,000 training images.
-            ["test_images", "t10k-images-idx3-ubyte.gz"],        # 10,000 test images.
-            ["training_labels", "train-labels-idx1-ubyte.gz"],   # 60,000 training labels.
-            ["test_labels", "t10k-labels-idx1-ubyte.gz"]]        # 10,000 test labels.
+data_sources = {
+    "training_images": "train-images-idx3-ubyte.gz",   # 60,000 training images.
+    "test_images": "t10k-images-idx3-ubyte.gz",        # 10,000 test images.
+    "training_labels": "train-labels-idx1-ubyte.gz",   # 60,000 training labels.
+    "test_labels": "t10k-labels-idx1-ubyte.gz"         # 10,000 test labels.
+}
 ```
 
-**2.** Download each of the 4 files in the list:
+**2.** Load the data. First check if the data is stored locally; if not, then
+download it.
 
 ```{code-cell} ipython3
-from urllib import request
+:tags: [remove-cell]
 
-base_url = "http://yann.lecun.com/exdb/mnist/"
+# Use responsibly! When running notebooks locally, be sure to keep local
+# copies of the datasets to prevent unnecessary server requests
+headers = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:10.0) Gecko/20100101 Firefox/10.0"
+}
+request_opts = {
+    "headers": headers,
+    "params": {"raw": "true"},
+}
+```
 
-for name in filename:
-    print("Downloading file: " + name[1])
-    request.urlretrieve(base_url + name[1], name[1])
+```{code-cell} ipython3
+import requests
+import os
+
+data_dir = "../_data"
+os.makedirs(data_dir, exist_ok=True)
+
+base_url = "https://github.com/rossbar/numpy-tutorial-data-mirror/blob/main/"
+
+for fname in data_sources.values():
+    fpath = os.path.join(data_dir, fname)
+    if not os.path.exists(fpath):
+        print("Downloading file: " + fname)
+        resp = requests.get(base_url + fname, stream=True, **request_opts)
+        resp.raise_for_status()  # Ensure download was succesful
+        with open(fpath, "wb") as fh:
+            for chunk in resp.iter_content(chunk_size=128):
+                fh.write(chunk)
 ```
 
 **3.** Decompress the 4 files and create 4 [`ndarrays`](https://numpy.org/doc/stable/reference/arrays.ndarray.html), saving them into a dictionary. Each original image is of size 28x28 and neural networks normally expect a 1D vector input; therefore, you also need to reshape the images by multiplying 28 by 28 (784).
@@ -88,13 +115,13 @@ import numpy as np
 mnist_dataset = {}
 
 # Images
-for name in filename[:2]:
-    with gzip.open(name[1], 'rb') as mnist_file:
-        mnist_dataset[name[0]] = np.frombuffer(mnist_file.read(), np.uint8, offset=16).reshape(-1, 28*28)
+for key in ("training_images", "test_images"):
+    with gzip.open(os.path.join(data_dir, data_sources[key]), 'rb') as mnist_file:
+        mnist_dataset[key] = np.frombuffer(mnist_file.read(), np.uint8, offset=16).reshape(-1, 28*28)
 # Labels
-for name in filename[-2:]:
-    with gzip.open(name[1], 'rb') as mnist_file:
-        mnist_dataset[name[0]] = np.frombuffer(mnist_file.read(), np.uint8, offset=8)
+for key in ("training_labels", "test_labels"):
+    with gzip.open(os.path.join(data_dir, data_sources[key]), 'rb') as mnist_file:
+        mnist_dataset[key] = np.frombuffer(mnist_file.read(), np.uint8, offset=8)
 ```
 
 **4.** Split the data into training and test sets using the standard notation of `x` for data and `y` for labels, calling the training and test set images `x_train` and `x_test`, and the labels `y_train` and `y_test`:
@@ -129,12 +156,13 @@ plt.show()
 
 ```{code-cell} ipython3
 # Display 5 random images from the training set.
-np.random.seed(0)
-indices = list(np.random.randint(x_train.shape[0], size=9))
-for i in range(5):
-    plt.subplot(1, 5, i+1)
-    plt.imshow(x_train[indices[i]].reshape(28, 28), cmap='gray')
-    plt.tight_layout()
+num_examples = 5
+seed = 147197952744
+rng = np.random.default_rng(seed)
+
+fig, axes = plt.subplots(1, num_examples)
+for sample, ax in zip(rng.choice(x_train, size=num_examples, replace=False), axes):
+    ax.imshow(sample.reshape(28, 28), cmap='gray')
 ```
 
 > **Note:** You can also visualize a sample image as an array by printing `x_train[59999]`. Here, `59999` is your 60,000th training image sample (`0` would be your first). Your output will be quite long and should contain an array of 8-bit integers:
@@ -177,12 +205,18 @@ print('The data type of training images: {}'.format(x_train.dtype))
 print('The data type of test images: {}'.format(x_test.dtype))
 ```
 
-**2.** Normalize the arrays by dividing them by 255 (and thus promoting the data type from `uint8` to `float64`) and then assign the train and test image data variables — `x_train` and `x_test` — to `training_images` and `train_labels`, respectively. To make the neural network model train faster in this example, `training_images` contains only 1,000 samples out of 60,000. To learn from the entire sample size, change the `sample` variable to `60000`.
+**2.** Normalize the arrays by dividing them by 255 (and thus promoting the data type from `uint8` to `float64`) and then assign the train and test image data variables — `x_train` and `x_test` — to `training_images` and `train_labels`, respectively.
+To reduce the model training and evaluation time in this example, only a subset
+of the training and test images will be used.
+Both `training_images` and `test_images` will contain only 1,000 samples each out
+of the complete datasets of 60,000 and 10,000 images, respectively.
+These values can be controlled by changing the  `training_sample` and
+`test_sample` below, up to their maximum values of 60,000 and 10,000.
 
 ```{code-cell} ipython3
-sample = 1000
-training_images = x_train[0:sample] / 255
-test_images = x_test / 255
+training_sample, test_sample = 1000, 1000
+training_images = x_train[0:training_sample] / 255
+test_images = x_test[0:test_sample] / 255
 ```
 
 **3.** Confirm that the image data has changed to the floating-point format:
@@ -233,8 +267,8 @@ def one_hot_encoding(labels, dimension=10):
 **3.** Encode the labels and assign the values to new variables:
 
 ```{code-cell} ipython3
-training_labels = one_hot_encoding(y_train)
-test_labels = one_hot_encoding(y_test)
+training_labels = one_hot_encoding(y_train[:training_sample])
+test_labels = one_hot_encoding(y_test[:test_sample])
 ```
 
 **4.** Check that the data type has changed to floating point:
@@ -278,7 +312,7 @@ Afterwards, you will construct the building blocks of a simple deep learning mod
 
     > **Note:** For simplicity, the bias term is omitted in this example (there is no `np.dot(layer, weights) + bias`).
 
-- _Weights_: These are important adjustable parameters that the neural network fine-tunes by forward and backward propagating the data. They are optimized through a process called [gradient descent](https://en.wikipedia.org/wiki/Stochastic_gradient_descent). Before the model training starts, the weights are randomly initialized with NumPy's `np.random.random()` function.
+- _Weights_: These are important adjustable parameters that the neural network fine-tunes by forward and backward propagating the data. They are optimized through a process called [gradient descent](https://en.wikipedia.org/wiki/Stochastic_gradient_descent). Before the model training starts, the weights are randomly initialized with NumPy's [`Generator.random()`](https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.random.html).
     
     The optimal weights should produce the highest prediction accuracy and the lowest error on the training and test sets. 
 
@@ -288,7 +322,7 @@ Afterwards, you will construct the building blocks of a simple deep learning mod
 
 - _Regularization_: This [technique](https://en.wikipedia.org/wiki/Regularization_(mathematics)) helps prevent the neural network model from [overfitting](https://en.wikipedia.org/wiki/Overfitting). 
 
-    In this example, you will use a method called dropout — [dilution](https://en.wikipedia.org/wiki/Dilution_(neural_networks)) — that randomly sets a number of features in a layer to 0s. You will define it with NumPy's `np.random.randint()` function and apply it to the hidden layer of the network.
+    In this example, you will use a method called dropout — [dilution](https://en.wikipedia.org/wiki/Dilution_(neural_networks)) — that randomly sets a number of features in a layer to 0s. You will define it with NumPy's [`Generator.integers()`](https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.integers.html) method and apply it to the hidden layer of the network.
 
 - _Loss function_: The computation determines the quality of predictions by comparing the image labels (the truth) with the predicted values in the final layer's output.
 
@@ -300,7 +334,7 @@ Afterwards, you will construct the building blocks of a simple deep learning mod
 
 Here is a summary of the neural network model architecture and the training process:
 
-![image.png](tutorial-deep-learning-on-mnist.png)
+![Diagram showing operations detailed in this tutorial](_static/tutorial-deep-learning-on-mnist.png)
 
 - _The input layer_: 
 
@@ -338,10 +372,12 @@ Here is a summary of the neural network model architecture and the training proc
 
 Having covered the main deep learning concepts and the neural network architecture, let's write the code.
 
-**1.** For reproducibility, initialize a random seed with `np.random.seed()`:
+**1.** We'll start by creating a new random number generator, providing a seed
+for reproducibility:
 
 ```{code-cell} ipython3
-np.random.seed(1)
+seed = 884736743
+rng = np.random.default_rng(seed)
 ```
 
 **2.** For the hidden layer, define the ReLU activation function for forward propagation and ReLU's derivative that will be used during backpropagation:
@@ -359,28 +395,32 @@ def relu2deriv(output):
 
 **3.** Set certain default values of [hyperparameters](https://en.wikipedia.org/wiki/Hyperparameter_(machine_learning)), such as:
 
-    - [_Learning rate_](https://en.wikipedia.org/wiki/Learning_rate): `learning_rate` — helps limit the magnitude of weight updates to prevent them from overcorrecting.
-    - _Epochs (iterations)_: `epochs` — the number of complete passes — forward and backward propagations — of the data through the network. This parameter can positively or negatively affect the results. The higher the iterations, the longer the learning process may take.
-    - _Size of the hidden (middle) layer in a network_: `hidden_size` — different sizes of the hidden layer can affect the results during training and testing.
-    - _Size of the input:_ `pixels_per_image` — you have established that the image input is 784 (28x28) (in pixels).
-    - _Number of labels_: `num_labels` — indicates the output number for the output layer where the predictions occur for 10 (0 to 9) handwritten digit labels.
+- [_Learning rate_](https://en.wikipedia.org/wiki/Learning_rate): `learning_rate` — helps limit the magnitude of weight updates to prevent them from overcorrecting.
+- _Epochs (iterations)_: `epochs` — the number of complete passes — forward and backward propagations — of the data through the network. This parameter can positively or negatively affect the results. The higher the iterations, the longer the learning process may take. Because this is a computationally intensive task, we have chosen a very low number of epochs (20). To get meaningful results, you should choose a much larger number.
+- _Size of the hidden (middle) layer in a network_: `hidden_size` — different sizes of the hidden layer can affect the results during training and testing.
+- _Size of the input:_ `pixels_per_image` — you have established that the image input is 784 (28x28) (in pixels).
+- _Number of labels_: `num_labels` — indicates the output number for the output layer where the predictions occur for 10 (0 to 9) handwritten digit labels.
 
 ```{code-cell} ipython3
 learning_rate = 0.005
-epochs = 100
+epochs = 20
 hidden_size = 100
 pixels_per_image = 784
 num_labels = 10
 ```
 
-**4.** Initialize the weight vectors that will be used in the hidden and output layers with `np.random.random()`:
+**4.** Initialize the weight vectors that will be used in the hidden and output layers with random values:
 
 ```{code-cell} ipython3
-weights_1 = 0.2 * np.random.random((pixels_per_image, hidden_size)) - 0.1
-weights_2 = 0.2 * np.random.random((hidden_size, num_labels)) - 0.1
+weights_1 = 0.2 * rng.random((pixels_per_image, hidden_size)) - 0.1
+weights_2 = 0.2 * rng.random((hidden_size, num_labels)) - 0.1
 ```
 
-**5.** Set up the neural network's learning experiment with a training loop and start the training process:
+**5.** Set up the neural network's learning experiment with a training loop and start the training process.
+Note that the model is evaluated against the test set at each epoch to track
+its performance over the training epochs.
+
+Start the training process:
 
 ```{code-cell} ipython3
 # To store training and test set losses and accurate predictions
@@ -393,10 +433,15 @@ store_test_accurate_pred = []
 # This is a training loop.
 # Run the learning experiment for a defined number of epochs (iterations).
 for j in range(epochs):
+
+    #################
+    # Training step #
+    #################
+
     # Set the initial loss/error and the number of accurate predictions to zero.
     training_loss = 0.0
     training_accurate_predictions = 0
-    
+
     # For all images in the training set, perform a forward pass
     # and backpropagation and adjust the weights accordingly.
     for i in range(len(training_images)):
@@ -411,7 +456,7 @@ for j in range(epochs):
         # 3. Pass the hidden layer's output through the ReLU activation function.
         layer_1 = relu(layer_1)
         # 4. Define the dropout function for regularization.
-        dropout_mask = np.random.randint(0, high=2, size=layer_1.shape)
+        dropout_mask = rng.integers(low=0, high=2, size=layer_1.shape)
         # 5. Apply dropout to the hidden layer's output.
         layer_1 *= dropout_mask * 2
         # 6. The output layer:
@@ -436,37 +481,37 @@ for j in range(epochs):
         #    by multiplying them by the learning rate and the gradients.
         weights_1 += learning_rate * np.outer(layer_0, layer_1_delta)
         weights_2 += learning_rate * np.outer(layer_1, layer_2_delta)
-    
+
     # Store training set losses and accurate predictions.
     store_training_loss.append(training_loss)
     store_training_accurate_pred.append(training_accurate_predictions)
 
-    # Evaluate on the test set:
-    # 1. Set the initial error and the number of accurate predictions to zero.
-    test_loss = 0.0
-    test_accurate_predictions = 0
-    
-    # 2. Start testing the model by evaluating on the test image dataset.
-    for i in range(len(test_images)):
-        # 1. Pass the test images through the input layer.
-        layer_0 = test_images[i]
-        # 2. Compute the weighted sum of the test image inputs in and
-        #    pass the hidden layer's output through ReLU.
-        layer_1 = relu(np.dot(layer_0, weights_1))
-        # 3. Compute the weighted sum of the hidden layer's inputs.
-        #    Produce a 10-dimensional vector with 10 scores.
-        layer_2 = np.dot(layer_1, weights_2)
+    ###################
+    # Evaluation step #
+    ###################
 
-        # 4. Measure the error between the actual label (truth) and prediction values.
-        test_loss += np.sum((test_labels[i] - layer_2) ** 2)
-        # 5. Increment the accurate prediction count.
-        test_accurate_predictions += int(np.argmax(layer_2) == np.argmax(test_labels[i]))
+    # Evaluate model performance on the test set at each epoch.
+
+    # Unlike the training step, the weights are not modified for each image
+    # (or batch). Therefore the model can be applied to the test images in a
+    # vectorized manner, eliminating the need to loop over each image
+    # individually:
+
+    results = relu(test_images @ weights_1) @ weights_2
+
+    # Measure the error between the actual label (truth) and prediction values.
+    test_loss = np.sum((test_labels - results)**2)
+
+    # Measure prediction accuracy on test set
+    test_accurate_predictions = np.sum(
+        np.argmax(results, axis=1) == np.argmax(test_labels, axis=1)
+    )
 
     # Store test set losses and accurate predictions.
     store_test_loss.append(test_loss)
     store_test_accurate_pred.append(test_accurate_predictions)
 
-    # 3. Display the error and accuracy metrics in the output.
+    # Summarize error and accuracy metrics at each epoch
     print("\n" + \
           "Epoch: " + str(j) + \
           " Training set error:" + str(training_loss/ float(len(training_images)))[0:5] +\
@@ -479,7 +524,7 @@ The training process may take many minutes, depending on a number of factors, su
 
 +++
 
-Let's visualize the training and test set errors and accuracy:
+After executing the cell above, you can visualize the training and test set errors and accuracy for an instance of this training process.
 
 ```{code-cell} ipython3
 # The training set metrics.

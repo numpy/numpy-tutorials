@@ -1,9 +1,5 @@
 # Configuration file for the Sphinx documentation builder.
 #
-# This file only contains a selection of the most common options. For a full
-# list see the documentation:
-# https://www.sphinx-doc.org/en/master/usage/configuration.html
-
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -41,7 +37,7 @@ templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'notebooks']
 
 # MyST-NB configuration
-execution_timeout = 60
+execution_timeout = 900
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -56,7 +52,7 @@ html_favicon = '_static/favicon.png'
 html_theme_options = {
     "github_url": "https://github.com/numpy/numpy-tutorials/",
     "repository_url": "https://github.com/numpy/numpy-tutorials/",
-    "repository_branch": "master",
+    "repository_branch": "main",
     "use_repository_button": True,
     "use_issues_button": True,
     "use_edit_page_button": True,
