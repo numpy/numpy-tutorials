@@ -306,7 +306,7 @@ RadCF = np.cross(AC, UnitCF)
 
 ```
 
-This lets you represent the tension and reaction forces acting on the system as
+This lets you represent the tension (T) and reaction (R) forces acting on the system as
 
 $\left[
 \begin{array}
