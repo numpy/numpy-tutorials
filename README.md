@@ -21,7 +21,6 @@ or navigate to any of the documents listed below and download it individually.
 7. [Tutorial: NumPy deep reinforcement learning with Pong from pixels](content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md) 
 8. [Tutorial: Masked Arrays](content/tutorial-ma.md)
 9. [Tutorial: Static Equilibrium](content/tutorial-static_equilibrium.md)
-=======
 
 ## Contributing
 
