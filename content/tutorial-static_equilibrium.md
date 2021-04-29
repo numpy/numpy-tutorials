@@ -207,7 +207,7 @@ print('Reaction moment =', M)
 Let's say that instead of a force acting perpendicularly to the beam, a force was applied to our pole through a wire that was also attached to the ground.
 Given the tension in this cord, all you need to solve this problem are the physical locations of these objects.
 
-![image.png](tutorial-static_equilibrium/static_eqbm-fig01.png)
+![Image representing the problem](_static/static_eqbm-fig01.png)
 
 In response to the forces acting upon the pole, the base generated reaction forces in the x and y directions, as well as a reaction moment.
 
@@ -266,7 +266,7 @@ print("Reaction moment =", M)
 Let's look at a slightly more complicated model.  In this example you will be observing a beam with two cables and an applied force.  This time you need to find both the tension in the cords and the reaction forces of the beam. *(Source: [Vector Mechanics for Engineers: Statics](https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9780077687304.html), Problem 4.106)*
 
 
-![image.png](tutorial-static_equilibrium/problem4.png)
+![image.png](_static/problem4.png)
 
 Define distance *a* as 3 meters
 
