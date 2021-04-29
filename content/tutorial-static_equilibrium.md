@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.12
-    jupytext_version: 1.9.1
+    jupytext_version: 1.7.1
 kernelspec:
   display_name: Python 3
   language: python
@@ -20,12 +20,12 @@ When analyzing physical structures, it is crucial to understand the mechanics ke
 - Solve problems involving cables and floors holding up structures
 - Write NumPy matrices to isolate unkowns
 - Use NumPy functions to perform linear algebra operations
-    
+
 ## What you'll learn:
 - How to represent points, vectors, and moments with NumPy.
 - How to find the [normal of vectors](https://en.wikipedia.org/wiki/Normal_(geometry))
 - Using NumPy to compute matrix calculations
-    
+
 ## What you'll need:
 - NumPy
 - [Matplotlib](https://matplotlib.org/)
@@ -53,11 +53,16 @@ $$\sum{\text{force}} = \text{mass} \times \text{acceleration}.$$
 In order to simplify the examples looked at, assume they are static, with acceleration $=0$. Due to our system existing in three dimensions, consider forces being applied in each of these dimensions. This means that you can represent these forces as vectors. You come to the same conclusion for [moments](https://en.wikipedia.org/wiki/Moment_(physics)), which result from forces being applied a certain distance away from an object's center of mass.
 
 Assume that the force $F$ is represented as a three-dimensional vector
+
 $$F = (F_x, F_y, F_z)$$
+
 where each of the three components represent the magnitude of the force being applied in each corresponding direction. Assume also that each component in the vector
+
 $$r = (r_x, r_y, r_z)$$
-is the distance between the point where each component of the force is applied and the centroid of the system. Then, the moment can be computed by
-$r \times F = (r_x, r_y, r_z) \times (F_x, F_y, F_z).$$
+
+is the distance between the point where each component of the force is applied and the centroid of the system. Then, the moment can be computed by 
+
+$$r \times F = (r_x, r_y, r_z) \times (F_x, F_y, F_z).$$
 
 Start with some simple examples of force vectors
 
@@ -73,7 +78,6 @@ This defines `forceA` as being a vector with magnitude of 1 in the $x$ direction
 It may be helpful to visualize these forces in order to better understand how they interact with each other.
 Matplotlib is a library with visualization tools that can be utilized for this purpose.
 Quiver plots will be used to demonstrate [three dimensional vectors](https://matplotlib.org/3.3.4/gallery/mplot3d/quiver3d.html), but the library can also be used for [two dimensional demonstrations](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.quiver.html).
-
 
 ```{code-cell} ipython3
 fig = plt.figure()
@@ -101,6 +105,7 @@ There are two forces emanating from a single point. In order to simplify this pr
 ```{code-cell} ipython3
 forceC = forceA + forceB
 print('Force C =', forceC)
+```
 
 Force C now acts as a single force that represents both A and B.
 You can plot it to see the result.
@@ -135,7 +140,6 @@ You can write this problem as $A+B+R=0$, with $R$ being the reaction force that 
 
 In this example this would mean:
 
-```{code-cell} ipython3
 $$(1, 0, 0) + (0, 1, 0) + (R_x, R_y, R_z) = (0, 0, 0)$$
 
 Broken into $x$, $y$, and $z$ components this gives you:
@@ -194,9 +198,8 @@ L = 2  # Length of the pole
 
 R = 0 - f
 M = 0 - f*L
-print('Reaction force =',R)
-print('Reaction moment =',M)
-
+print('Reaction force =', R)
+print('Reaction moment =', M)
 ```
 
 # Finding values with physical properties
@@ -213,7 +216,6 @@ Now, say the cord is attached to the ground 3m in the x direction and attached t
 
 Define these points in space as NumPy arrays, and then use those arrays to find directional vectors.
 
-
 ```{code-cell} ipython3
 poleBase = np.array([0, 0, 0])
 cordBase = np.array([3, 0, 0])
@@ -223,7 +225,6 @@ poleDirection = cordConnection - poleBase
 print('Pole direction =', poleDirection)
 cordDirection = cordBase - cordConnection
 print('Cord direction =', cordDirection)
-
 ```
 
 In order to use these vectors in relation to forces you need to convert them into unit vectors.
@@ -232,19 +233,16 @@ Unit vectors have a magnitude of one, and convey only the direction of the force
 ```{code-cell} ipython3
 cordUnit = cordDirection/np.linalg.norm(cordDirection)
 print('Cord unit vector =', cordUnit)
-
 ```
 
 You can then multiply this direction with the magnitude of the force in order to find the force vector.
 
 Let's say the cord has a tension of 5N:
 
-
 ```{code-cell} ipython3
 cordTension = 5
 forceCord = cordUnit * cordTension
 print('Force from the cord =', forceCord)
-
 ```
 
 In order to find the moment you need the cross product of the force vector and the radius.
@@ -252,7 +250,6 @@ In order to find the moment you need the cross product of the force vector and t
 ```{code-cell} ipython3
 momentCord = np.cross(forceCord, poleDirection)
 print('Moment from the cord =', momentCord)
-
 ```
 
 Now all you need to do is find the reaction force and moment.
@@ -263,7 +260,6 @@ R = equilibrium - forceCord
 M = equilibrium - momentCord
 print("Reaction force =", R)
 print("Reaction moment =", M)
-
 ```
 
 ## Another Example
@@ -284,7 +280,6 @@ C = np.array([0, 6, 0])
 D = np.array([1.5, 0, -3])
 E = np.array([1.5, 0, 3])
 F = np.array([-3, 0, 2])
-
 ```
 
 From these equations, you start by determining vector directions with unit vectors.
@@ -303,12 +298,11 @@ UnitCF = CF/np.linalg.norm(CF)
 RadBD = np.cross(AB, UnitBD)
 RadBE = np.cross(AB, UnitBE)
 RadCF = np.cross(AC, UnitCF)
-
 ```
 
 This lets you represent the tension (T) and reaction (R) forces acting on the system as
 
-$\left[
+$$\left[
 \begin{array}
 ~1/3 & 1/3 & 1 & 0 & 0\\
 -2/3 & -2/3 & 0 & 1 & 0\\
@@ -331,11 +325,11 @@ R_{z}\\
 390\\
 -130\\
 \end{array}
-\right]$
+\right]$$
 
-And the moments as
+and the moments as
 
-$\left[
+$$\left[
 \begin{array}
 ~2 & -2\\
 1 & 1\\
@@ -353,7 +347,7 @@ T_{BE}\\
 ~780\\
 1170\\
 \end{array}
-\right]$
+\right]$$
 
 Where $T$ is the tension in the respective cord and $R$ is the reaction force in a respective direction. Then you just have six equations:
 
