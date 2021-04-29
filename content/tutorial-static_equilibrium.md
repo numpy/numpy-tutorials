@@ -44,7 +44,7 @@ In this tutorial you will use the following NumPy tools:
 
 +++
 
-# Solving equilibrium with Newton's second law
+## Solving equilibrium with Newton's second law
 
 Your model consists of a beam under a sum of forces and moments. You can start analyzing this system with Newton's second law: 
 
@@ -178,7 +178,7 @@ plt.show()
 The empty graph signifies that there are no outlying forces. This denotes a system in equilibrium.
 
 
-# Solving Equilibrium as a sum of moments
+## Solving Equilibrium as a sum of moments
 
 Next let's move to a more complicated application.
 When forces are not all applied at the same point, moments are created.
@@ -202,7 +202,7 @@ print('Reaction force =', R)
 print('Reaction moment =', M)
 ```
 
-# Finding values with physical properties
+## Finding values with physical properties
 
 Let's say that instead of a force acting perpendicularly to the beam, a force was applied to our pole through a wire that was also attached to the ground.
 Given the tension in this cord, all you need to solve this problem are the physical locations of these objects.
@@ -262,7 +262,7 @@ print("Reaction force =", R)
 print("Reaction moment =", M)
 ```
 
-## Another Example
+### Another Example
 Let's look at a slightly more complicated model.  In this example you will be observing a beam with two cables and an applied force.  This time you need to find both the tension in the cords and the reaction forces of the beam. *(Source: [Vector Mechanics for Engineers: Statics](https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9780077687304.html), Problem 4.106)*
 
 
@@ -377,15 +377,15 @@ $\ R_{z} = 130N$
 
 +++
 
-# Wrapping up
+## Wrapping up
 
 You have learned how to use arrays to represent points, forces, and moments in three dimensional space. Each entry in an array can be used to represent a physical property broken into directional components. These can then be easily manipulated with NumPy functions.
 
-## Additional Applications
+### Additional Applications
 
 This same process can be applied to kinetic problems or in any number of dimensions. The examples done in this tutorial assumed three dimensional problems in static equilibrium. These methods can easily be used in more varied problems. More or less dimensions require larger or smaller arrays to represent. In systems experiencing acceleration, velocity and acceleration can be similarly be represented as vectors as well.
 
-## References
+### References
 
 1. [Vector Mechanics for Engineers: Statics (Beer & Johnston & Mazurek)](https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9780077687304.html)
 2. [NumPy Reference](https://numpy.org/doc/stable/reference/)
