@@ -11,7 +11,7 @@ kernelspec:
   name: python3
 ---
 
-# Tutorial: Deep learning on MNIST
+# Deep learning on MNIST
 
 This tutorial demonstrates how to build a simple [feedforward neural network](https://en.wikipedia.org/wiki/Feedforward_neural_network) (with one hidden layer) and train it from scratch with NumPy to recognize handwritten digit images.
 

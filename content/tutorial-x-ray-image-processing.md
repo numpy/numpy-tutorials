@@ -11,7 +11,7 @@ kernelspec:
   name: python3
 ---
 
-# Tutorial: X-ray image processing
+# X-ray image processing
 
 +++
 
