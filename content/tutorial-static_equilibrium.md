@@ -15,18 +15,18 @@ kernelspec:
 
 When analyzing physical structures, it is crucial to understand the mechanics keeping them stable. Applied forces on a floor, a beam, or any other structure, create reaction forces and moments. These reactions are the structure resisting movement without breaking. In cases where structures do not move despite having forces applied to them, [Newton's second law](https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion#Newton's_second_law) states that both the acceleration and sum of forces in all directions in the system must be zero. You can represent and solve this concept with NumPy arrays.
 
-### What you'll do:
+## What you'll do:
 - In this tutorial, you will use NumPy to create vectors and moments using NumPy arrays
 - Solve problems involving cables and floors holding up structures
 - Write NumPy matrices to isolate unkowns
 - Use NumPy functions to perform linear algebra operations
 
-### What you'll learn:
+## What you'll learn:
 - How to represent points, vectors, and moments with NumPy.
 - How to find the [normal of vectors](https://en.wikipedia.org/wiki/Normal_(geometry))
 - Using NumPy to compute matrix calculations
 
-### What you'll need:
+## What you'll need:
 - NumPy
 - [Matplotlib](https://matplotlib.org/)
 
