@@ -12,7 +12,7 @@ kernelspec:
   name: python3
 ---
 
-# Tutorial: deep reinforcement learning with Pong from pixels
+# Deep reinforcement learning with Pong from pixels
 
 This tutorial demonstrates how to implement a deep reinforcement learning (RL) agent from scratch using a policy gradient method that learns to play the [Pong](https://gym.openai.com/envs/Pong-v0/) video game using screen pixels as inputs with NumPy. Your Pong agent will obtain experience on the go using an [artificial neural network](https://en.wikipedia.org/wiki/Artificial_neural_network) as its [policy](https://en.wikipedia.org/wiki/Reinforcement_learning).
 
