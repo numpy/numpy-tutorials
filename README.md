@@ -1,5 +1,7 @@
 # NumPy tutorials
 
+_For the rendered tutorials, see https://numpy.org/numpy-tutorials/._
+
 The goal of this repository is to provide high-quality resources by the
 NumPy project, both for self-learning and for teaching classes with. If you're
 interested in adding your own content, check the [Contributing](#contributing)
@@ -18,7 +20,7 @@ or navigate to any of the documents listed below and download it individually.
 4. [Tutorial: Saving and sharing your NumPy arrays](content/save-load-arrays.md)
 5. [Tutorial: NumPy deep learning on MNIST from scratch](content/tutorial-deep-learning-on-mnist.md)
 6. [Tutorial: X-ray image processing](content/tutorial-x-ray-image-processing.md)
-7. [Tutorial: NumPy deep reinforcement learning with Pong from pixels](content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md) 
+7. [Tutorial: NumPy deep reinforcement learning with Pong from pixels](content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md)
 8. [Tutorial: Masked Arrays](content/tutorial-ma.md)
 9. [Tutorial: Static Equilibrium](content/tutorial-static_equilibrium.md)
 
