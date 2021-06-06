@@ -18,7 +18,7 @@ or navigate to any of the documents listed below and download it individually.
 4. [Tutorial: Saving and sharing your NumPy arrays](content/save-load-arrays.md)
 5. [Tutorial: NumPy deep learning on MNIST from scratch](content/tutorial-deep-learning-on-mnist.md)
 6. [Tutorial: X-ray image processing](content/tutorial-x-ray-image-processing.md)
-7. [Tutorial: NumPy deep reinforcement learning with Pong from pixels](content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md) 
+7. [Tutorial: NumPy deep reinforcement learning with Pong from pixels](content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md)
 8. [Tutorial: Masked Arrays](content/tutorial-ma.md)
 9. [Tutorial: Static Equilibrium](content/tutorial-static_equilibrium.md)
 
@@ -136,6 +136,20 @@ author, if applicable.</b>
 For more information about GitHub and its workflow, you can see
 [this document](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests).
 
+
+### Building the Sphinx site locally
+
+Building the tutorials website, which is published at
+https://github.com/numpy/numpy-tutorials, locally isn't necessary before making
+a contribution, but may be helpful:
+
+```bash
+conda env create -f environment.yml
+conda activate numpy-tutorials
+cd site
+make html
+```
+
 ## Useful links and resources
 
 The following links may be useful:
@@ -149,3 +163,4 @@ The following links may be useful:
 Note that regular documentation issues for NumPy can be found in the [main NumPy
 repository](https://github.com/numpy/numpy/issues) (see the `Documentation`
 labels there).
+
