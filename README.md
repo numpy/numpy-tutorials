@@ -1,5 +1,7 @@
 # NumPy tutorials
 
+_For the rendered tutorials, see https://numpy.org/numpy-tutorials/._
+
 The goal of this repository is to provide high-quality resources by the
 NumPy project, both for self-learning and for teaching classes with. If you're
 interested in adding your own content, check the [Contributing](#contributing)
