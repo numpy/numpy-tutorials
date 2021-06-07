@@ -12,7 +12,7 @@ kernelspec:
   name: python3
 ---
 
-# Tutorial: Masked Arrays
+# Masked Arrays
 
 ## What you'll do
 
