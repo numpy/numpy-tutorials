@@ -6,6 +6,7 @@ pytest
 nbval
 statsmodels
 imageio
-gym[atari]
+gym==0.18.0
+atari-py==0.2.5
 # For supporting .md-based notebooks
 jupytext
