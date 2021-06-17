@@ -11,11 +11,11 @@ kernelspec:
   name: python3
 ---
 
-# Tutorial: Deep learning on MNIST
+# Deep learning on MNIST
 
 This tutorial demonstrates how to build a simple [feedforward neural network](https://en.wikipedia.org/wiki/Feedforward_neural_network) (with one hidden layer) and train it from scratch with NumPy to recognize handwritten digit images.
 
-Your deep learning model — one of the most basic artificial neural networks that resembles the original [multi-layer perceptron](https://en.wikipedia.org/wiki/Multilayer_perceptron) — will learn to classify digits from 0 to 9 from the [MNIST](https://en.wikipedia.org/wiki/MNIST_database) dataset. The dataset contains 60,000 training and 10,000 test images and corresponding labels. Each training and test image is of size 784 (or 28x28 pixels) — this will be your input for the neural network. 
+Your deep learning model — one of the most basic artificial neural networks that resembles the original [multi-layer perceptron](https://en.wikipedia.org/wiki/Multilayer_perceptron) — will learn to classify digits from 0 to 9 from the [MNIST](https://en.wikipedia.org/wiki/MNIST_database) dataset. The dataset contains 60,000 training and 10,000 test images and corresponding labels. Each training and test image is of size 784 (or 28x28 pixels) — this will be your input for the neural network.
 
 Based on the image inputs and their labels ([supervised learning](https://en.wikipedia.org/wiki/Supervised_learning)), your neural network will be trained to learn their features using forward propagation and backpropagation ([reverse-mode](https://en.wikipedia.org/wiki/Automatic_differentiation#Reverse_accumulation) differentiation). The final output of the network is a vector of 10 scores — one for each handwritten digit image. You will also evaluate how good your model is at classifying the images on the test set.
 
@@ -25,13 +25,13 @@ This tutorial was adapted from the work by [Andrew Trask](https://github.com/iam
 
 ## Prerequisites
 
-The reader should have some knowledge of Python, NumPy array manipulation, and linear algebra. In addition, you should be familiar with main concepts of [deep learning](https://en.wikipedia.org/wiki/Deep_learning). 
+The reader should have some knowledge of Python, NumPy array manipulation, and linear algebra. In addition, you should be familiar with main concepts of [deep learning](https://en.wikipedia.org/wiki/Deep_learning).
 
-To refresh the memory, you can take the [Python](https://docs.python.org/dev/tutorial/index.html) and [Linear algebra on n-dimensional arrays](https://numpy.org/doc/stable/user/tutorial-svd.html) tutorials. 
+To refresh the memory, you can take the [Python](https://docs.python.org/dev/tutorial/index.html) and [Linear algebra on n-dimensional arrays](https://numpy.org/doc/stable/user/tutorial-svd.html) tutorials.
 
 You are advised to read the [Deep learning](http://www.cs.toronto.edu/~hinton/absps/NatureDeepReview.pdf) paper published in 2015 by Yann LeCun, Yoshua Bengio, and Geoffrey Hinton, who are regarded as some of the pioneers of the field. You should also consider reading Andrew Trask's [Grokking Deep Learning](https://www.manning.com/books/grokking-deep-learning), which teaches deep learning with NumPy.
 
-In addition to NumPy, you will be utilizing the following Python standard modules for data loading and processing: 
+In addition to NumPy, you will be utilizing the following Python standard modules for data loading and processing:
 - [`urllib`](https://docs.python.org/3/library/urllib.html) for URL handling
 - [`request`](https://docs.python.org/3/library/urllib.request.html) for URL opening
 - [`gzip`](https://docs.python.org/3/library/gzip.html) for gzip file decompression
@@ -167,7 +167,7 @@ for sample, ax in zip(rng.choice(x_train, size=num_examples, replace=False), axe
 
 > **Note:** You can also visualize a sample image as an array by printing `x_train[59999]`. Here, `59999` is your 60,000th training image sample (`0` would be your first). Your output will be quite long and should contain an array of 8-bit integers:
 >
-> 
+>
 > ```
 > ...
 >          0,   0,  38,  48,  48,  22,   0,   0,   0,   0,   0,   0,   0,
@@ -194,7 +194,7 @@ In practice, you can use different types of floating-point precision depending o
 
 ### Convert the image data to the floating-point format
 
-The images data contain 8-bit integers encoded in the [0, 255] interval with color values between 0 and 255. 
+The images data contain 8-bit integers encoded in the [0, 255] interval with color values between 0 and 255.
 
 You will normalize them into floating-point arrays in the [0, 1] interval by dividing them by 255.
 
@@ -227,7 +227,7 @@ print('The data type of test images: {}'.format(test_images.dtype))
 ```
 
 > **Note:** You can also check that normalization was successful by printing `training_images[0]` in a notebook cell. Your long output should contain an array of floating-point numbers:
-> 
+>
 > ```
 > ...
 >        0.        , 0.        , 0.01176471, 0.07058824, 0.07058824,
@@ -240,7 +240,7 @@ print('The data type of test images: {}'.format(test_images.dtype))
 
 You will use one-hot encoding to embed each digit label as an all-zero vector with `np.zeros()` and place `1` for a label index. As a result, your label data will be arrays with `1.0` (or `1.`) in the position of each image label.
 
-Since there are 10 labels (from 0 to 9) in total, your arrays will look similar to this: 
+Since there are 10 labels (from 0 to 9) in total, your arrays will look similar to this:
 
 ```
 array([0., 0., 0., 0., 0., 1., 0., 0., 0., 0.])
@@ -257,7 +257,7 @@ print('The data type of test labels: {}'.format(y_test.dtype))
 
 ```{code-cell} ipython3
 def one_hot_encoding(labels, dimension=10):
-    # Define a one-hot variable for an all-zero vector 
+    # Define a one-hot variable for an all-zero vector
     # with 10 dimensions (number labels from 0 to 9).
     one_hot_labels = (labels[..., None] == np.arange(dimension)[None])
     # Return one-hot encoded labels.
@@ -307,20 +307,20 @@ Afterwards, you will construct the building blocks of a simple deep learning mod
 - _Layers_: These building blocks work as data filters — they process data and learn representations from inputs to better predict the target outputs.
 
     You will use 1 hidden layer in your model to pass the inputs forward (_forward propagation_) and propagate the gradients/error derivatives of a loss function backward (_backpropagation_). These are input, hidden and output layers.
-    
+
     In the hidden (middle) and output (last) layers, the neural network model will compute the weighted sum of inputs. To compute this process, you will use NumPy's matrix multiplication function (the "dot multiply" or `np.dot(layer, weights)`).
 
     > **Note:** For simplicity, the bias term is omitted in this example (there is no `np.dot(layer, weights) + bias`).
 
 - _Weights_: These are important adjustable parameters that the neural network fine-tunes by forward and backward propagating the data. They are optimized through a process called [gradient descent](https://en.wikipedia.org/wiki/Stochastic_gradient_descent). Before the model training starts, the weights are randomly initialized with NumPy's [`Generator.random()`](https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.random.html).
-    
-    The optimal weights should produce the highest prediction accuracy and the lowest error on the training and test sets. 
+
+    The optimal weights should produce the highest prediction accuracy and the lowest error on the training and test sets.
 
 - _Activation function_: Deep learning models are capable of determining non-linear relationships between inputs and outputs and these [non-linear functions](https://en.wikipedia.org/wiki/Activation_function) are usually applied to the output of each layer.
 
     You will use a [rectified linear unit (ReLU)](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) to the hidden layer's output (for example, `relu(np.dot(layer, weights))`.
 
-- _Regularization_: This [technique](https://en.wikipedia.org/wiki/Regularization_(mathematics)) helps prevent the neural network model from [overfitting](https://en.wikipedia.org/wiki/Overfitting). 
+- _Regularization_: This [technique](https://en.wikipedia.org/wiki/Regularization_(mathematics)) helps prevent the neural network model from [overfitting](https://en.wikipedia.org/wiki/Overfitting).
 
     In this example, you will use a method called dropout — [dilution](https://en.wikipedia.org/wiki/Dilution_(neural_networks)) — that randomly sets a number of features in a layer to 0s. You will define it with NumPy's [`Generator.integers()`](https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.integers.html) method and apply it to the hidden layer of the network.
 
@@ -336,34 +336,34 @@ Here is a summary of the neural network model architecture and the training proc
 
 ![Diagram showing operations detailed in this tutorial](_static/tutorial-deep-learning-on-mnist.png)
 
-- _The input layer_: 
+- _The input layer_:
 
     It is the input for the network — the previously preprocessed data that is loaded from `training_images` into `layer_0`.
 
-- _The hidden (middle) layer_: 
+- _The hidden (middle) layer_:
 
     `layer_1` takes the output from the previous layer and performs matrix-multiplication of the input by weights (`weights_1`) with NumPy's `np.dot()`).
 
     Then, this output is passed through the ReLU activation function for non-linearity and then dropout is applied to help with overfitting.
 
-- _The output (last) layer_: 
+- _The output (last) layer_:
 
     `layer_2` ingests the output from `layer_1` and repeats the same "dot multiply" process with `weights_2`.
 
     The final output returns 10 scores for each of the 0-9 digit labels. The network model ends with a size 10 layer — a 10-dimensional vector.
 
-- _Forward propagation, backpropagation, training loop_: 
+- _Forward propagation, backpropagation, training loop_:
 
-    In the beginning of model training, your network randomly initializes the weights and feeds the input data forward through the hidden and output layers. This process is the forward pass or forward propagation. 
-    
-    Then, the network propagates the "signal" from the loss function back through the hidden layer and adjusts the weights values with the help of the learning rate parameter (more on that later). 
-    
-> **Note:** In more technical terms, you: 
->    
+    In the beginning of model training, your network randomly initializes the weights and feeds the input data forward through the hidden and output layers. This process is the forward pass or forward propagation.
+
+    Then, the network propagates the "signal" from the loss function back through the hidden layer and adjusts the weights values with the help of the learning rate parameter (more on that later).
+
+> **Note:** In more technical terms, you:
+>
 >    1. Measure the error by comparing the real label of an image (the truth) with the prediction of the model.
 >    2. Differentiate the loss function.
->    3. Ingest the [gradients](https://en.wikipedia.org/wiki/Gradient) with the respect to the output, and backpropagate them with the respect to the inputs through the layer(s). 
->    
+>    3. Ingest the [gradients](https://en.wikipedia.org/wiki/Gradient) with the respect to the output, and backpropagate them with the respect to the inputs through the layer(s).
+>
 >    Since the network contains tensor operations and weight matrices, backpropagation uses the [chain rule](https://en.wikipedia.org/wiki/Chain_rule).
 >
 >    With each iteration (epoch) of the neural network training, this forward and backward propagation cycle adjusts the weights, which is reflected in the accuracy and error metrics. As you train the model, your goal is to minimize the error and maximize the accuracy on the training data, where the model learns from, as well as the test data, where you evaluate the model.
@@ -387,7 +387,7 @@ rng = np.random.default_rng(seed)
 def relu (x):
     return (x>=0) * x
 
-# Set up a derivative of the ReLU function that returns 1 for a positive input 
+# Set up a derivative of the ReLU function that returns 1 for a positive input
 # and 0 otherwise.
 def relu2deriv(output):
     return output >= 0
@@ -450,8 +450,8 @@ for j in range(epochs):
         #    Initialize the training image data as inputs.
         layer_0 = training_images[i]
         # 2. The hidden layer:
-        #    Take in the training image data into the middle layer by 
-        #    matrix-multiplying it by randomly initialized weights. 
+        #    Take in the training image data into the middle layer by
+        #    matrix-multiplying it by randomly initialized weights.
         layer_1 = np.dot(layer_0, weights_1)
         # 3. Pass the hidden layer's output through the ReLU activation function.
         layer_1 = relu(layer_1)
@@ -552,7 +552,7 @@ axes[1].set_xlabel("Epochs")
 plt.show()
 ```
 
-The accuracy rates that your model reaches during training and testing may be somewhat plausible but you may also find the error rates to be quite high. 
+The accuracy rates that your model reaches during training and testing may be somewhat plausible but you may also find the error rates to be quite high.
 
 To reduce the error during training and testing, you can consider changing the simple loss function to, for example, categorical [cross-entropy](https://en.wikipedia.org/wiki/Cross_entropy). Other possible solutions are discussed below.
 
@@ -571,6 +571,12 @@ To further enhance and optimize your neural network model, you can consider one 
 - Apply [batch normalization](https://en.wikipedia.org/wiki/Batch_normalization) for faster and more stable training.
 - Tune other parameters, such as the learning rate and hidden layer size.
 
-Finally, you can go beyond NumPy with specialized frameworks and APIs — such as [TensorFlow](https://www.tensorflow.org/guide/tf_numpy?hl=el), [PyTorch](https://pytorch.org/docs/stable/generated/torch.from_numpy.html), Swift for TensorFlow (with [Python interoperability](https://www.tensorflow.org/swift/tutorials/python_interoperability)), and [JAX](https://github.com/google/jax) — that support NumPy, have built-in [automatic differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation), and are designed for high-performance numerical computing and machine learning.
+Building a neural network from scratch with NumPy is a great way to learn more about NumPy and about deep learning. However, for real-world applications you should use specialized frameworks — such as [PyTorch](https://pytorch.org/), [JAX](https://github.com/google/jax), [TensorFlow](https://www.tensorflow.org/guide/tf_numpy) or [MXNet](https://mxnet.apache.org) — that provide NumPy-like APIs, have built-in [automatic differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation) and GPU support, and are designed for high-performance numerical computing and machine learning.
+
+Finally, when developing a machine learning model, you should think about potential ethical issues and apply practices to avoid or mitigate those:
+- Document a trained model with a Model Card - see the [Model Cards for Model Reporting paper](https://doi.org/10.1145/3287560.3287596) by Margaret Mitchell et al..
+- Document a dataset with a Datasheet - see the [Datasheets for Datasets paper](https://arxiv.org/abs/1803.09010)) by Timnit Gebru et al..
+- Consider the impact of your model - who is affected by it, who does it benefit - see [the article](https://www.nature.com/articles/d41586-020-02003-2) and [talk](https://slideslive.com/38923453/the-values-of-machine-learning) by Pratyusha Kalluri.
+- For more resources, see [this blog post by Rachel Thomas](https://www.fast.ai/2018/09/24/ai-ethics-resources/) and the [Radical AI podcast](https://www.radicalai.org/).
 
 (Credit to [hsjeong5](https://github.com/hsjeong5/MNIST-for-Numpy) for demonstrating how to download MNIST without the use of external libraries.)

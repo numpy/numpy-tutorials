@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tutorial: deep reinforcement learning with Pong from pixels &#8212; NumPy Tutorials</title>
+    <title>Deep reinforcement learning with Pong from pixels &#8212; NumPy Tutorials</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -42,8 +42,8 @@
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tutorial: X-ray image processing" href="tutorial-x-ray-image-processing.html" />
-    <link rel="prev" title="Tutorial: Deep learning on MNIST" href="tutorial-deep-learning-on-mnist.html" />
+    <link rel="next" title="X-ray image processing" href="tutorial-x-ray-image-processing.html" />
+    <link rel="prev" title="Deep learning on MNIST" href="tutorial-deep-learning-on-mnist.html" />
   <meta name="robots" content="noindex" />
   
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -78,8 +78,13 @@
     <div class="bd-toc-item active">
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="tutorial-style-guide.html">
+   Learn to write a NumPy tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="tutorial-svd.html">
-   Tutorial: Linear algebra on n-dimensional arrays
+   Linear algebra on n-dimensional arrays
   </a>
  </li>
  <li class="toctree-l1">
@@ -94,22 +99,22 @@
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tutorial-deep-learning-on-mnist.html">
-   Tutorial: Deep learning on MNIST
+   Deep learning on MNIST
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Tutorial: deep reinforcement learning with Pong from pixels
+   Deep reinforcement learning with Pong from pixels
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tutorial-x-ray-image-processing.html">
-   Tutorial: X-ray image processing
+   X-ray image processing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tutorial-ma.html">
-   Tutorial: Masked Arrays
+   Masked Arrays
   </a>
  </li>
  <li class="toctree-l1">
@@ -325,8 +330,8 @@
         
               <div>
                 
-  <div class="section" id="tutorial-deep-reinforcement-learning-with-pong-from-pixels">
-<h1>Tutorial: deep reinforcement learning with Pong from pixels<a class="headerlink" href="#tutorial-deep-reinforcement-learning-with-pong-from-pixels" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="deep-reinforcement-learning-with-pong-from-pixels">
+<h1>Deep reinforcement learning with Pong from pixels<a class="headerlink" href="#deep-reinforcement-learning-with-pong-from-pixels" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial demonstrates how to implement a deep reinforcement learning (RL) agent from scratch using a policy gradient method that learns to play the <a class="reference external" href="https://gym.openai.com/envs/Pong-v0/">Pong</a> video game using screen pixels as inputs with NumPy. Your Pong agent will obtain experience on the go using an <a class="reference external" href="https://en.wikipedia.org/wiki/Artificial_neural_network">artificial neural network</a> as its <a class="reference external" href="https://en.wikipedia.org/wiki/Reinforcement_learning">policy</a>.</p>
 <p>Pong is a 2D game from 1972 where two players use “rackets” to play a form of table tennis. Each player moves the racket up and down the screen and tries to hit a ball in their opponent’s direction by touching it. The goal is to hit the ball such that it goes past the opponent’s racket (they miss their shot). According to the rules, if a player reaches 21 points, they win. In Pong, the RL agent that learns to play against an opponent is displayed on the right.</p>
 <p><img alt="Diagram showing operations detailed in this tutorial" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels.png" /></p>
@@ -496,7 +501,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(210, 160, 3)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fdea8b63430&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f33cc17ebb0&gt;
 </pre></div>
 </div>
 <img alt="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_14_2.png" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_14_2.png" />
@@ -611,7 +616,7 @@
     <span class="n">logit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;W2&#39;</span><span class="p">],</span> <span class="n">h</span><span class="p">)</span>
     <span class="c1"># Apply the sigmoid function (non-linear activation).</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">logit</span><span class="p">)</span>
-    <span class="c1"># Return a log probability for the action 2 (&quot;move up&quot;) </span>
+    <span class="c1"># Return a log probability for the action 2 (&quot;move up&quot;)</span>
     <span class="c1"># and the hidden &quot;state&quot; that you need for backpropagation.</span>
     <span class="k">return</span> <span class="n">p</span><span class="p">,</span> <span class="n">h</span>
 </pre></div>
@@ -626,7 +631,7 @@
 <p><strong>4.</strong> Define the sigmoid function separately with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.exp.html?highlight=numpy.exp#numpy.exp"><code class="docutils literal notranslate"><span class="pre">np.exp()</span></code></a> for computing exponentials:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -658,7 +663,7 @@
 <span class="n">xs</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="c1"># All hidden &quot;states&quot; (from the network) for the episode.</span>
 <span class="n">hs</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="c1"># All gradients of probability actions </span>
+<span class="c1"># All gradients of probability actions</span>
 <span class="c1"># (with respect to observations) for the episode.</span>
 <span class="n">dlogps</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="c1"># All rewards for the episode.</span>
@@ -792,7 +797,7 @@
 <p><strong>5.</strong> Initialize the previous observation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prev_x</span> <span class="o">=</span> <span class="kc">None</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prev_x</span> <span class="o">=</span> <span class="kc">None</span>
 </pre></div>
 </div>
 </div>
@@ -812,7 +817,7 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">update_input</span><span class="p">(</span><span class="n">prev_x</span><span class="p">,</span> <span class="n">cur_x</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">prev_x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">cur_x</span> <span class="o">-</span> <span class="n">prev_x</span> 
+        <span class="n">x</span> <span class="o">=</span> <span class="n">cur_x</span> <span class="o">-</span> <span class="n">prev_x</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">x</span>
@@ -825,18 +830,18 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">episode_number</span> <span class="o">&lt;</span> <span class="n">max_episodes</span><span class="p">:</span>
     <span class="c1"># (For rendering.)</span>
-    <span class="k">if</span> <span class="n">render</span><span class="p">:</span> 
+    <span class="k">if</span> <span class="n">render</span><span class="p">:</span>
         <span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
 
     <span class="c1"># 1. Preprocess the observation (a game frame) and flatten with NumPy&#39;s `ravel()`.</span>
     <span class="n">cur_x</span> <span class="o">=</span> <span class="n">frame_preprocessing</span><span class="p">(</span><span class="n">observation</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
-    
+
     <span class="c1"># 2. Instantiate the observation for the policy network</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">update_input</span><span class="p">(</span><span class="n">prev_x</span><span class="p">,</span> <span class="n">cur_x</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
     <span class="n">prev_x</span> <span class="o">=</span> <span class="n">cur_x</span>
 
     <span class="c1"># 3. Perform the forward pass through the policy network using the observations</span>
-    <span class="c1"># (preprocessed frames as inputs) and store the action log probabilities </span>
+    <span class="c1"># (preprocessed frames as inputs) and store the action log probabilities</span>
     <span class="c1"># and hidden &quot;states&quot; (for backpropagation) during the course of each episode.</span>
     <span class="n">aprob</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">policy_forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
     <span class="c1"># 4. Let the action indexed at `2` (&quot;move up&quot;) be that probability</span>
@@ -848,19 +853,19 @@
     <span class="c1"># in separate variables for backpropagation.</span>
     <span class="n">xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">hs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
-    
+
     <span class="c1"># 6. Compute the gradients of action log probabilities:</span>
     <span class="c1"># - If the action was to &quot;move up&quot; (index `2`):</span>
     <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="mi">0</span>
-    <span class="c1"># - The cross-entropy: </span>
+    <span class="c1"># - The cross-entropy:</span>
     <span class="c1"># `y*log(aprob) + (1 - y)*log(1-aprob)`</span>
     <span class="c1"># or `log(aprob)` if y = 1, else: `log(1 - aprob)`.</span>
-    <span class="c1"># (Recall: you used the sigmoid function (`1/(1+np.exp(-x)`) to output </span>
+    <span class="c1"># (Recall: you used the sigmoid function (`1/(1+np.exp(-x)`) to output</span>
     <span class="c1"># `aprob` action probabilities.)</span>
     <span class="c1"># - Then the gradient: `y - aprob`.</span>
     <span class="c1"># 7. Append the gradients of your action log probabilities.</span>
     <span class="n">dlogps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">aprob</span><span class="p">)</span>
-    <span class="c1"># 8. Take an action and update the parameters with Gym&#39;s `step()` </span>
+    <span class="c1"># 8. Take an action and update the parameters with Gym&#39;s `step()`</span>
     <span class="c1"># function; obtain a new observation.</span>
     <span class="n">observation</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
     <span class="c1"># 9. Update the total sum of rewards.</span>
@@ -887,7 +892,7 @@
         <span class="n">dlogps</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">drs</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="c1"># 13. Discount the rewards for the past episode using the helper </span>
+        <span class="c1"># 13. Discount the rewards for the past episode using the helper</span>
         <span class="c1"># function you defined earlier...</span>
         <span class="n">discounted_epr</span> <span class="o">=</span> <span class="n">discount_rewards</span><span class="p">(</span><span class="n">epr</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
         <span class="c1"># ...and normalize them because they have high variance</span>
@@ -895,16 +900,16 @@
         <span class="n">discounted_epr</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">discounted_epr</span><span class="p">)</span>
         <span class="n">discounted_epr</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">discounted_epr</span><span class="p">)</span>
 
-        <span class="c1"># 14. Multiply the discounted rewards by the gradients of the action </span>
+        <span class="c1"># 14. Multiply the discounted rewards by the gradients of the action</span>
         <span class="c1"># log probabilities (the &quot;advantage&quot;).</span>
         <span class="n">epdlogp</span> <span class="o">*=</span> <span class="n">discounted_epr</span>
         <span class="c1"># 15. Use the gradients to perform backpropagation and gradient ascent.</span>
         <span class="n">grad</span> <span class="o">=</span> <span class="n">policy_backward</span><span class="p">(</span><span class="n">eph</span><span class="p">,</span> <span class="n">epdlogp</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
         <span class="c1"># 16. Save the policy gradients in a buffer.</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span> 
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
             <span class="n">grad_buffer</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">grad</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
         <span class="c1"># 17. Use the RMSProp optimizer to perform the policy network</span>
-        <span class="c1"># parameter (weight) update at every batch size </span>
+        <span class="c1"># parameter (weight) update at every batch size</span>
         <span class="c1"># (by default: every 10 episodes).</span>
         <span class="k">if</span> <span class="n">episode_number</span> <span class="o">%</span> <span class="n">batch_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -984,6 +989,25 @@ Episode 1: Game finished. Reward: -1.0...
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
 </pre></div>
 </div>
@@ -991,34 +1015,17 @@ Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
-Resetting the Pong environment. Episode total reward: -21.0 Running mean: -21.0
-Episode 2: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -21.0 Running mean: -21.0
 Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
+Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 </pre></div>
@@ -1037,16 +1044,16 @@ Episode 2: Game finished. Reward: -1.0...
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -20.0 Running mean: -20.99
@@ -1085,7 +1092,7 @@ Episode 3: Game finished. Reward: -1.0...
 <li><p>Deep RL lectures taught by practitioners at <a class="reference external" href="https://www.youtube.com/c/DeepMind/videos">DeepMind</a> and <a class="reference external" href="https://www.youtube.com/channel/UC4e_-TvgALrwE1dUPvF_UTQ/videos">UC Berkeley</a>.</p></li>
 <li><p>RL <a class="reference external" href="https://www.davidsilver.uk/teaching/">lectures</a> taught by <a class="reference external" href="https://www.davidsilver.uk">David Silver</a> (DeepMind, UCL).</p></li>
 </ul>
-<p>Finally, you can go beyond NumPy with specialized frameworks and APIs — such as <a class="reference external" href="https://www.tensorflow.org/guide/tf_numpy?hl=el">TensorFlow</a>, <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.from_numpy.html">PyTorch</a>, Swift for TensorFlow (with <a class="reference external" href="https://www.tensorflow.org/swift/tutorials/python_interoperability">Python interoperability</a>), and <a class="reference external" href="https://github.com/google/jax">JAX</a> — that support NumPy, have built-in <a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">automatic differentiation</a>, and are designed for high-performance numerical computing and machine learning.</p>
+<p>Building a neural network from scratch with NumPy is a great way to learn more about NumPy and about deep learning. However, for real-world applications you should use specialized frameworks — such as <a class="reference external" href="https://pytorch.org/">PyTorch</a>, <a class="reference external" href="https://github.com/google/jax">JAX</a>, <a class="reference external" href="https://www.tensorflow.org/guide/tf_numpy">TensorFlow</a> or <a class="reference external" href="https://mxnet.apache.org">MXNet</a> — that provide NumPy-like APIs, have built-in <a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">automatic differentiation</a> and GPU support, and are designed for high-performance numerical computing and machine learning.</p>
 </div>
 <div class="section" id="appendix">
 <h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h2>
@@ -1132,7 +1139,7 @@ display.start()
 
 # Check that no display is present.
 # If no displays are present, the expected output is `:0`.
-!echo $DISPLAY 
+!echo $DISPLAY
 
 # Define a helper function to display videos in Jupyter notebooks:.
 # (Source: https://star-ai.github.io/Rendering-OpenAi-Gym-in-Colaboratory/)
@@ -1149,14 +1156,14 @@ def show_any_video(mp4video=0):
         mp4 = mp4list[mp4video]
         video = io.open(mp4, &#39;r+b&#39;).read()
         encoded = base64.b64encode(video)
-        ipythondisplay.display(HTML(data=&#39;&#39;&#39;&lt;video alt=&quot;test&quot; autoplay 
+        ipythondisplay.display(HTML(data=&#39;&#39;&#39;&lt;video alt=&quot;test&quot; autoplay
                                             loop controls style=&quot;height: 400px;&quot;&gt;
                                             &lt;source src=&quot;data:video/mp4;base64,{0}&quot; type=&quot;video/mp4&quot; /&gt;
                                             &lt;/video&gt;&#39;&#39;&#39;.format(encoded.decode(&#39;ascii&#39;))))
-        
+
     else:
         print(&#39;Could not find the video!&#39;)
-        
+
 </pre></div>
 </div>
 </li>
@@ -1179,8 +1186,8 @@ def show_any_video(mp4video=0):
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="tutorial-deep-learning-on-mnist.html" title="previous page">Tutorial: Deep learning on MNIST</a>
-    <a class='right-next' id="next-link" href="tutorial-x-ray-image-processing.html" title="next page">Tutorial: X-ray image processing</a>
+    <a class='left-prev' id="prev-link" href="tutorial-deep-learning-on-mnist.html" title="previous page">Deep learning on MNIST</a>
+    <a class='right-next' id="next-link" href="tutorial-x-ray-image-processing.html" title="next page">X-ray image processing</a>
 
         </div>
         

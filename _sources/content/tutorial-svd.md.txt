@@ -11,7 +11,7 @@ kernelspec:
   name: python3
 ---
 
-# Tutorial: Linear algebra on n-dimensional arrays
+# Linear algebra on n-dimensional arrays
 
 +++
 

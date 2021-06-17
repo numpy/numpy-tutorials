@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tutorial: Deep learning on MNIST &#8212; NumPy Tutorials</title>
+    <title>Deep learning on MNIST &#8212; NumPy Tutorials</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -42,7 +42,7 @@
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tutorial: deep reinforcement learning with Pong from pixels" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html" />
+    <link rel="next" title="Deep reinforcement learning with Pong from pixels" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html" />
     <link rel="prev" title="Saving and sharing your NumPy arrays" href="save-load-arrays.html" />
   <meta name="robots" content="noindex" />
   
@@ -78,8 +78,13 @@
     <div class="bd-toc-item active">
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="tutorial-style-guide.html">
+   Learn to write a NumPy tutorial
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="tutorial-svd.html">
-   Tutorial: Linear algebra on n-dimensional arrays
+   Linear algebra on n-dimensional arrays
   </a>
  </li>
  <li class="toctree-l1">
@@ -94,22 +99,22 @@
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Tutorial: Deep learning on MNIST
+   Deep learning on MNIST
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">
-   Tutorial: deep reinforcement learning with Pong from pixels
+   Deep reinforcement learning with Pong from pixels
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tutorial-x-ray-image-processing.html">
-   Tutorial: X-ray image processing
+   X-ray image processing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tutorial-ma.html">
-   Tutorial: Masked Arrays
+   Masked Arrays
   </a>
  </li>
  <li class="toctree-l1">
@@ -310,8 +315,8 @@
         
               <div>
                 
-  <div class="section" id="tutorial-deep-learning-on-mnist">
-<h1>Tutorial: Deep learning on MNIST<a class="headerlink" href="#tutorial-deep-learning-on-mnist" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="deep-learning-on-mnist">
+<h1>Deep learning on MNIST<a class="headerlink" href="#deep-learning-on-mnist" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial demonstrates how to build a simple <a class="reference external" href="https://en.wikipedia.org/wiki/Feedforward_neural_network">feedforward neural network</a> (with one hidden layer) and train it from scratch with NumPy to recognize handwritten digit images.</p>
 <p>Your deep learning model — one of the most basic artificial neural networks that resembles the original <a class="reference external" href="https://en.wikipedia.org/wiki/Multilayer_perceptron">multi-layer perceptron</a> — will learn to classify digits from 0 to 9 from the <a class="reference external" href="https://en.wikipedia.org/wiki/MNIST_database">MNIST</a> dataset. The dataset contains 60,000 training and 10,000 test images and corresponding labels. Each training and test image is of size 784 (or 28x28 pixels) — this will be your input for the neural network.</p>
 <p>Based on the image inputs and their labels (<a class="reference external" href="https://en.wikipedia.org/wiki/Supervised_learning">supervised learning</a>), your neural network will be trained to learn their features using forward propagation and backpropagation (<a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation#Reverse_accumulation">reverse-mode</a> differentiation). The final output of the network is a vector of 10 scores — one for each handwritten digit image. You will also evaluate how good your model is at classifying the images on the test set.</p>
@@ -381,6 +386,20 @@ download it.</p>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
                 <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-images-idx3-ubyte.gz
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: t10k-images-idx3-ubyte.gz
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-labels-idx1-ubyte.gz
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: t10k-labels-idx1-ubyte.gz
 </pre></div>
 </div>
 </div>
@@ -587,7 +606,7 @@ The data type of test labels: uint8
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">one_hot_encoding</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">dimension</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-    <span class="c1"># Define a one-hot variable for an all-zero vector </span>
+    <span class="c1"># Define a one-hot variable for an all-zero vector</span>
     <span class="c1"># with 10 dimensions (number labels from 0 to 9).</span>
     <span class="n">one_hot_labels</span> <span class="o">=</span> <span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dimension</span><span class="p">)[</span><span class="kc">None</span><span class="p">])</span>
     <span class="c1"># Return one-hot encoded labels.</span>
@@ -738,7 +757,7 @@ for reproducibility:</p>
 <span class="k">def</span> <span class="nf">relu</span> <span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span>
 
-<span class="c1"># Set up a derivative of the ReLU function that returns 1 for a positive input </span>
+<span class="c1"># Set up a derivative of the ReLU function that returns 1 for a positive input</span>
 <span class="c1"># and 0 otherwise.</span>
 <span class="k">def</span> <span class="nf">relu2deriv</span><span class="p">(</span><span class="n">output</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">output</span> <span class="o">&gt;=</span> <span class="mi">0</span>
@@ -807,8 +826,8 @@ its performance over the training epochs.</p>
         <span class="c1">#    Initialize the training image data as inputs.</span>
         <span class="n">layer_0</span> <span class="o">=</span> <span class="n">training_images</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
         <span class="c1"># 2. The hidden layer:</span>
-        <span class="c1">#    Take in the training image data into the middle layer by </span>
-        <span class="c1">#    matrix-multiplying it by randomly initialized weights. </span>
+        <span class="c1">#    Take in the training image data into the middle layer by</span>
+        <span class="c1">#    matrix-multiplying it by randomly initialized weights.</span>
         <span class="n">layer_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">layer_0</span><span class="p">,</span> <span class="n">weights_1</span><span class="p">)</span>
         <span class="c1"># 3. Pass the hidden layer&#39;s output through the ReLU activation function.</span>
         <span class="n">layer_1</span> <span class="o">=</span> <span class="n">relu</span><span class="p">(</span><span class="n">layer_1</span><span class="p">)</span>
@@ -994,7 +1013,14 @@ its performance over the training epochs.</p>
 <li><p>Apply <a class="reference external" href="https://en.wikipedia.org/wiki/Batch_normalization">batch normalization</a> for faster and more stable training.</p></li>
 <li><p>Tune other parameters, such as the learning rate and hidden layer size.</p></li>
 </ul>
-<p>Finally, you can go beyond NumPy with specialized frameworks and APIs — such as <a class="reference external" href="https://www.tensorflow.org/guide/tf_numpy?hl=el">TensorFlow</a>, <a class="reference external" href="https://pytorch.org/docs/stable/generated/torch.from_numpy.html">PyTorch</a>, Swift for TensorFlow (with <a class="reference external" href="https://www.tensorflow.org/swift/tutorials/python_interoperability">Python interoperability</a>), and <a class="reference external" href="https://github.com/google/jax">JAX</a> — that support NumPy, have built-in <a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">automatic differentiation</a>, and are designed for high-performance numerical computing and machine learning.</p>
+<p>Building a neural network from scratch with NumPy is a great way to learn more about NumPy and about deep learning. However, for real-world applications you should use specialized frameworks — such as <a class="reference external" href="https://pytorch.org/">PyTorch</a>, <a class="reference external" href="https://github.com/google/jax">JAX</a>, <a class="reference external" href="https://www.tensorflow.org/guide/tf_numpy">TensorFlow</a> or <a class="reference external" href="https://mxnet.apache.org">MXNet</a> — that provide NumPy-like APIs, have built-in <a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">automatic differentiation</a> and GPU support, and are designed for high-performance numerical computing and machine learning.</p>
+<p>Finally, when developing a machine learning model, you should think about potential ethical issues and apply practices to avoid or mitigate those:</p>
+<ul class="simple">
+<li><p>Document a trained model with a Model Card - see the <a class="reference external" href="https://doi.org/10.1145/3287560.3287596">Model Cards for Model Reporting paper</a> by Margaret Mitchell et al..</p></li>
+<li><p>Document a dataset with a Datasheet - see the <a class="reference external" href="https://arxiv.org/abs/1803.09010">Datasheets for Datasets paper</a>) by Timnit Gebru et al..</p></li>
+<li><p>Consider the impact of your model - who is affected by it, who does it benefit - see <a class="reference external" href="https://www.nature.com/articles/d41586-020-02003-2">the article</a> and <a class="reference external" href="https://slideslive.com/38923453/the-values-of-machine-learning">talk</a> by Pratyusha Kalluri.</p></li>
+<li><p>For more resources, see <a class="reference external" href="https://www.fast.ai/2018/09/24/ai-ethics-resources/">this blog post by Rachel Thomas</a> and the <a class="reference external" href="https://www.radicalai.org/">Radical AI podcast</a>.</p></li>
+</ul>
 <p>(Credit to <a class="reference external" href="https://github.com/hsjeong5/MNIST-for-Numpy">hsjeong5</a> for demonstrating how to download MNIST without the use of external libraries.)</p>
 </div>
 </div>
@@ -1006,7 +1032,7 @@ its performance over the training epochs.</p>
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="save-load-arrays.html" title="previous page">Saving and sharing your NumPy arrays</a>
-    <a class='right-next' id="next-link" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html" title="next page">Tutorial: deep reinforcement learning with Pong from pixels</a>
+    <a class='right-next' id="next-link" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html" title="next page">Deep reinforcement learning with Pong from pixels</a>
 
         </div>
         

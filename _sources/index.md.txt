@@ -26,6 +26,7 @@ or use the download icon in the upper-right corner of each tutorial.
 maxdepth: 1
 ---
 
+content/tutorial-style-guide
 content/tutorial-svd
 content/mooreslaw-tutorial
 content/save-load-arrays
