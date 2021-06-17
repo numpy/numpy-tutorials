@@ -50,9 +50,9 @@ This tutorial can also be run locally in an isolated environment, such as [Virtu
 
 ### A note on RL and deep RL
 
-In [_RL_](https://en.wikipedia.org/wiki/Reinforcement_learning), your agent learns from trial and error by interacting with an environment using a so-called policy to gain experience. After taking one action, the agent receives information about its reward (which it may or may not get) and the next observation of the environment. It can then proceed to take another action. This happens over a number of episodes and/or until the task is deemed to be complete. 
+In [_RL_](https://en.wikipedia.org/wiki/Reinforcement_learning), your agent learns from trial and error by interacting with an environment using a so-called policy to gain experience. After taking one action, the agent receives information about its reward (which it may or may not get) and the next observation of the environment. It can then proceed to take another action. This happens over a number of episodes and/or until the task is deemed to be complete.
 
-The agent's policy works by "mapping" the agent's observations to its actions — that is, assigning a presentation of what the agent observes with required actions. The overall goal is usually to optimize the agent's policy such that it maximizes the expected rewards from each observation. 
+The agent's policy works by "mapping" the agent's observations to its actions — that is, assigning a presentation of what the agent observes with required actions. The overall goal is usually to optimize the agent's policy such that it maximizes the expected rewards from each observation.
 
 For detailed information about RL, there is an [introductory book](https://web.archive.org/web/20050806080008/http://www.cs.ualberta.ca/~sutton/book/the-book.html) by Richard Sutton and Andrew Barton.
 
@@ -134,7 +134,7 @@ print(env.observation_space)
 In Gym, the agent's actions and observations can be part of the `Box` (n-dimensional) or `Discrete` (fixed-range integers) classes.
 
 **2.** You can view a random observation — one frame — by:
-    
+
     1) Setting the random `seed` before initialization (optional).
 
     2) Calling  Gym's `reset()` to reset the environment, which returns an initial observation.
@@ -184,7 +184,7 @@ print(preprocessed_random_frame.shape)
 Next, you will define the policy as a simple feedforward network that uses a game observation as an input and outputs an action log probability:
 
 - For the _input_, it will use the Pong video game frames — the preprocessed 1D vectors with 6,400 (80x80) floating point arrays.
-- The _hidden layer_ will compute the weighted sum of inputs using NumPy's dot product function [`np.dot()`](https://numpy.org/doc/stable/reference/generated/numpy.dot.html) for the arrays and then apply a _non-linear activation function_, such as [ReLU](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)). 
+- The _hidden layer_ will compute the weighted sum of inputs using NumPy's dot product function [`np.dot()`](https://numpy.org/doc/stable/reference/generated/numpy.dot.html) for the arrays and then apply a _non-linear activation function_, such as [ReLU](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)).
 - Then, the _output layer_ will perform the matrix-multiplication again of  weight parameters and the hidden layer's output (with [`np.dot()`](https://numpy.org/doc/stable/reference/generated/numpy.dot.html)), and send that information through a [softmax](https://en.wikipedia.org/wiki/Softmax_function) _activation function_.
 - In the end, the policy network will output one action log probability (given that observation) for the agent — the probability for Pong action indexed in the environment at 2 ("moving the racket up").
 
@@ -239,7 +239,7 @@ def policy_forward(x, model):
     logit = np.dot(model['W2'], h)
     # Apply the sigmoid function (non-linear activation).
     p = sigmoid(logit)
-    # Return a log probability for the action 2 ("move up") 
+    # Return a log probability for the action 2 ("move up")
     # and the hidden "state" that you need for backpropagation.
     return p, h
 ```
@@ -252,7 +252,7 @@ Note that there are two _activation functions_ for determining non-linear relati
 **4.** Define the sigmoid function separately with NumPy's [`np.exp()`](https://numpy.org/doc/stable/reference/generated/numpy.exp.html?highlight=numpy.exp#numpy.exp) for computing exponentials:
 
 ```{code-cell} ipython3
-def sigmoid(x): 
+def sigmoid(x):
     return 1.0 / (1.0 + np.exp(-x))
 ```
 
@@ -281,7 +281,7 @@ Using the intermediate hidden "states" of the network (`eph`) and the gradients 
 xs = []
 # All hidden "states" (from the network) for the episode.
 hs = []
-# All gradients of probability actions 
+# All gradients of probability actions
 # (with respect to observations) for the episode.
 dlogps = []
 # All rewards for the episode.
@@ -347,7 +347,7 @@ The pseudocode for the policy gradient method for Pong:
     - The agent takes an action for each observation, observes the received rewards and collects trajectories (over a predefined number of episodes or batch size) of state-action experiences.
     - Compute the [cross-entropy](https://en.wikipedia.org/wiki/Cross_entropy#Cross-entropy_loss_function_and_logistic_regression) (with a positive sign, since you need to maximize the rewards and not minimize the loss).
     - For every batch of episodes:
-    
+
         - Calculate the gradients of your action log probabilities using the cross-entropy.
         - Compute the cumulative return and, to provide more weight to shorter-term rewards versus the longer-term ones, use a discount factor discount.
         - Multiply the gradients of the action log probabilities by the discounted rewards (the "advantage").
@@ -389,7 +389,7 @@ observation = env.reset()
 **5.** Initialize the previous observation:
 
 ```{code-cell} ipython3
-prev_x = None 
+prev_x = None
 ```
 
 **6.** Initialize the reward variables and the episode count:
@@ -405,7 +405,7 @@ episode_number = 0
 ```{code-cell} ipython3
 def update_input(prev_x, cur_x, D):
     if prev_x is not None:
-        x = cur_x - prev_x 
+        x = cur_x - prev_x
     else:
         x = np.zeros(D)
     return x
@@ -418,18 +418,18 @@ def update_input(prev_x, cur_x, D):
 
 while episode_number < max_episodes:
     # (For rendering.)
-    if render: 
+    if render:
         env.render()
 
     # 1. Preprocess the observation (a game frame) and flatten with NumPy's `ravel()`.
     cur_x = frame_preprocessing(observation).ravel()
-    
+
     # 2. Instantiate the observation for the policy network
     x = update_input(prev_x, cur_x, D)
     prev_x = cur_x
 
     # 3. Perform the forward pass through the policy network using the observations
-    # (preprocessed frames as inputs) and store the action log probabilities 
+    # (preprocessed frames as inputs) and store the action log probabilities
     # and hidden "states" (for backpropagation) during the course of each episode.
     aprob, h = policy_forward(x, model)
     # 4. Let the action indexed at `2` ("move up") be that probability
@@ -441,19 +441,19 @@ while episode_number < max_episodes:
     # in separate variables for backpropagation.
     xs.append(x)
     hs.append(h)
-    
+
     # 6. Compute the gradients of action log probabilities:
     # - If the action was to "move up" (index `2`):
     y = 1 if action == 2 else 0
-    # - The cross-entropy: 
+    # - The cross-entropy:
     # `y*log(aprob) + (1 - y)*log(1-aprob)`
     # or `log(aprob)` if y = 1, else: `log(1 - aprob)`.
-    # (Recall: you used the sigmoid function (`1/(1+np.exp(-x)`) to output 
+    # (Recall: you used the sigmoid function (`1/(1+np.exp(-x)`) to output
     # `aprob` action probabilities.)
     # - Then the gradient: `y - aprob`.
     # 7. Append the gradients of your action log probabilities.
     dlogps.append(y - aprob)
-    # 8. Take an action and update the parameters with Gym's `step()` 
+    # 8. Take an action and update the parameters with Gym's `step()`
     # function; obtain a new observation.
     observation, reward, done, info = env.step(action)
     # 9. Update the total sum of rewards.
@@ -480,7 +480,7 @@ while episode_number < max_episodes:
         dlogps = []
         drs = []
 
-        # 13. Discount the rewards for the past episode using the helper 
+        # 13. Discount the rewards for the past episode using the helper
         # function you defined earlier...
         discounted_epr = discount_rewards(epr, gamma)
         # ...and normalize them because they have high variance
@@ -488,16 +488,16 @@ while episode_number < max_episodes:
         discounted_epr -= np.mean(discounted_epr)
         discounted_epr /= np.std(discounted_epr)
 
-        # 14. Multiply the discounted rewards by the gradients of the action 
+        # 14. Multiply the discounted rewards by the gradients of the action
         # log probabilities (the "advantage").
         epdlogp *= discounted_epr
         # 15. Use the gradients to perform backpropagation and gradient ascent.
         grad = policy_backward(eph, epdlogp, model)
         # 16. Save the policy gradients in a buffer.
-        for k in model: 
+        for k in model:
             grad_buffer[k] += grad[k]
         # 17. Use the RMSProp optimizer to perform the policy network
-        # parameter (weight) update at every batch size 
+        # parameter (weight) update at every batch size
         # (by default: every 10 episodes).
         if episode_number % batch_size == 0:
             for k,v in model.items():
@@ -541,7 +541,7 @@ A few notes:
 
 ## Next steps
 
-You may notice that training an RL agent takes a long time if you increase the number of episodes from 100 to 500 or 1,000+, depending on the hardware — CPUs and GPUs — you are using for this task. 
+You may notice that training an RL agent takes a long time if you increase the number of episodes from 100 to 500 or 1,000+, depending on the hardware — CPUs and GPUs — you are using for this task.
 
 Policy gradient methods can learn a task if you give them a lot of time, and optimization in RL is a challenging problem. Training agents to learn to play Pong or any other task can be sample-inefficient and require a lot of episodes. You may also notice in your training output that even after hundreds of episodes, the rewards may have high variance.
 
@@ -559,13 +559,14 @@ If you want to learn more about deep RL, you should check out the following free
 - Deep RL lectures taught by practitioners at [DeepMind](https://www.youtube.com/c/DeepMind/videos) and [UC Berkeley](https://www.youtube.com/channel/UC4e_-TvgALrwE1dUPvF_UTQ/videos).
 - RL [lectures](https://www.davidsilver.uk/teaching/) taught by [David Silver](https://www.davidsilver.uk) (DeepMind, UCL).
 
-Finally, you can go beyond NumPy with specialized frameworks and APIs — such as [TensorFlow](https://www.tensorflow.org/guide/tf_numpy?hl=el), [PyTorch](https://pytorch.org/docs/stable/generated/torch.from_numpy.html), Swift for TensorFlow (with [Python interoperability](https://www.tensorflow.org/swift/tutorials/python_interoperability)), and [JAX](https://github.com/google/jax) — that support NumPy, have built-in [automatic differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation), and are designed for high-performance numerical computing and machine learning.
+Building a neural network from scratch with NumPy is a great way to learn more about NumPy and about deep learning. However, for real-world applications you should use specialized frameworks — such as [PyTorch](https://pytorch.org/), [JAX](https://github.com/google/jax), [TensorFlow](https://www.tensorflow.org/guide/tf_numpy) or [MXNet](https://mxnet.apache.org) — that provide NumPy-like APIs, have built-in [automatic differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation) and GPU support, and are designed for high-performance numerical computing and machine learning.
+
 
 ## Appendix
 
 ### Notes on RL and deep RL
 
-- In [supervised](https://en.wikipedia.org/wiki/Supervised_learning) deep learning for tasks, such as image recognition, language translation, or text classification, you're more likely to use a lot of labeled data. However, in RL, agents typically don't receive direct explicit feedback indicating correct or wrong actions — they rely on other signals, such as rewards. 
+- In [supervised](https://en.wikipedia.org/wiki/Supervised_learning) deep learning for tasks, such as image recognition, language translation, or text classification, you're more likely to use a lot of labeled data. However, in RL, agents typically don't receive direct explicit feedback indicating correct or wrong actions — they rely on other signals, such as rewards.
 
 - _Deep RL_ combines RL with [deep learning](http://www.cs.toronto.edu/~hinton/absps/NatureDeepReview.pdf). The field had its first major success in more complex environments, such as video games, in 2013 — a year after the [AlexNet](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf) breakthrough in computer vision. Volodymyr Mnih and colleagues at DeepMind published a research paper called [Playing Atari with deep reinforcement learning](https://arxiv.org/abs/1312.5602) (and [updated](https://web.stanford.edu/class/psych209/Readings/MnihEtAlHassibis15NatureControlDeepRL.pdf) in 2015) that showed that they were able to train an agent that could play several classic games from the Arcade Learning Environment at a human-level. Their RL algorithm — called a deep Q-network (DQN) — used [convolutional layers](https://en.wikipedia.org/wiki/Convolutional_neural_network) in a neural network that approximated [Q learning](https://en.wikipedia.org/wiki/Q-learning) and used [experience replay](https://web.stanford.edu/class/psych209/Readings/MnihEtAlHassibis15NatureControlDeepRL.pdf).
 
@@ -575,7 +576,7 @@ Finally, you can go beyond NumPy with specialized frameworks and APIs — such a
 
 - Since 2013, researchers have come up with many notable approaches for learning to solve complex tasks using deep RL, such as [AlphaGo](https://www.nature.com/articles/nature24270.epdf?author_access_token=VJXbVjaSHxFoctQQ4p2k4tRgN0jAjWel9jnR3ZoTv0PVW4gB86EEpGqTRDtpIz-2rmo8-KG06gqVobU5NSCFeHILHcVFUeMsbvwS-lxjqQGg98faovwjxeTUgZAUMnRQ) for the game of Go (David Silver et al, 2016), [AlphaZero](http://science.sciencemag.org/cgi/content/full/362/6419/1140?ijkey=XGd77kI6W4rSc&keytype=ref&siteid=sci) that mastered Go, Chess, and Shogi with self-play (David Silver et al, 2017-2018), [OpenAI Five](https://arxiv.org/pdf/1912.06680.pdf) for Dota 2 with [self-play](https://openai.com/blog/competitive-self-play/) (OpenAI, 2019), and [AlphaStar](https://deepmind.com/blog/alphastar-mastering-real-time-strategy-game-starcraft-ii/) for StarCraft 2 that used an [actor-critic](https://arxiv.org/pdf/1802.01561.pdf) algorithm with [experience replay](https://link.springer.com/content/pdf/10.1023%2FA%3A1022628806385.pdf), [self-imitation learning](http://proceedings.mlr.press/v80/oh18b/oh18b.pdf), and [policy distillation](https://arxiv.org/pdf/1511.06295.pdf) (Oriol Vinyals et al, 2019). In addition, there have been other experiments, such as deep RL for [Battlefield 1](https://www.ea.com/seed/news/self-learning-agents-play-bf1) by engineers at Electronic Arts/DICE.
 
-- One of the reasons why video games are popular in deep RL research is that, unlike real-world experiments, such as RL with [remote-controlled helicopters](http://heli.stanford.edu/papers/nips06-aerobatichelicopter.pdf) ([Pieter Abbeel](https://www2.eecs.berkeley.edu/Faculty/Homepages/abbeel.html)  et al, 2006), virtual simulations can offer safer testing environments. 
+- One of the reasons why video games are popular in deep RL research is that, unlike real-world experiments, such as RL with [remote-controlled helicopters](http://heli.stanford.edu/papers/nips06-aerobatichelicopter.pdf) ([Pieter Abbeel](https://www2.eecs.berkeley.edu/Faculty/Homepages/abbeel.html)  et al, 2006), virtual simulations can offer safer testing environments.
 
 - If you're interested in learning about the implications of deep RL on other fields, such as neuroscience, you can refer to a [paper](https://arxiv.org/pdf/2007.03750.pdf) by [Matthew Botvinick](https://www.youtube.com/watch?v=b0LddBiF5jM) et al (2020).
 
@@ -612,7 +613,7 @@ Finally, you can go beyond NumPy with specialized frameworks and APIs — such a
 
     # Check that no display is present.
     # If no displays are present, the expected output is `:0`.
-    !echo $DISPLAY 
+    !echo $DISPLAY
 
     # Define a helper function to display videos in Jupyter notebooks:.
     # (Source: https://star-ai.github.io/Rendering-OpenAi-Gym-in-Colaboratory/)
@@ -629,14 +630,14 @@ Finally, you can go beyond NumPy with specialized frameworks and APIs — such a
             mp4 = mp4list[mp4video]
             video = io.open(mp4, 'r+b').read()
             encoded = base64.b64encode(video)
-            ipythondisplay.display(HTML(data='''<video alt="test" autoplay 
+            ipythondisplay.display(HTML(data='''<video alt="test" autoplay
                                                 loop controls style="height: 400px;">
                                                 <source src="data:video/mp4;base64,{0}" type="video/mp4" />
                                                 </video>'''.format(encoded.decode('ascii'))))
-            
+
         else:
             print('Could not find the video!')
-            
+
     ```
 
 - If you want to view the last (very quick) gameplay inside a Jupyter notebook and implemented the `show_any_video()` function earlier, run this inside a cell:
