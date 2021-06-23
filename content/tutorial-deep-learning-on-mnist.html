@@ -43,7 +43,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Deep reinforcement learning with Pong from pixels" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html" />
-    <link rel="prev" title="Saving and sharing your NumPy arrays" href="save-load-arrays.html" />
+    <link rel="prev" title="Determining Moore’s Law with real data in NumPy" href="mooreslaw-tutorial.html" />
   <meta name="robots" content="noindex" />
   
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -77,64 +77,91 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-style-guide.html">
-   Learn to write a NumPy tutorial
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../features.html">
+   NumPy Features
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-svd.html">
+     Linear algebra on n-dimensional arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="save-load-arrays.html">
+     Saving and sharing your NumPy arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-ma.html">
+     Masked Arrays
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-svd.html">
-   Linear algebra on n-dimensional arrays
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../applications.html">
+   NumPy Applications
   </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="mooreslaw-tutorial.html">
+     Determining Moore’s Law with real data in NumPy
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Deep learning on MNIST
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">
+     Deep reinforcement learning with Pong from pixels
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-x-ray-image-processing.html">
+     X-ray image processing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-static_equilibrium.html">
+     Determining Static Equilibrium in NumPy
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="mooreslaw-tutorial.html">
-   Determining Moore’s Law with real data in NumPy
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../contributing.html">
+   Contributing
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="save-load-arrays.html">
-   Saving and sharing your NumPy arrays
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Deep learning on MNIST
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">
-   Deep reinforcement learning with Pong from pixels
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-x-ray-image-processing.html">
-   X-ray image processing
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-ma.html">
-   Masked Arrays
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-static_equilibrium.html">
-   Determining Static Equilibrium in NumPy
-  </a>
- </li>
-</ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="pairing.html">
-   Pairing Jupyter notebooks and MyST-NB
-  </a>
- </li>
-</ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-style-guide.html">
-   Learn to write a NumPy tutorial
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pairing.html">
+     Pairing Jupyter notebooks and MyST-NB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-style-guide.html">
+     Learn to write a NumPy tutorial
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -386,20 +413,6 @@ download it.</p>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
                 <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-images-idx3-ubyte.gz
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: t10k-images-idx3-ubyte.gz
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-labels-idx1-ubyte.gz
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: t10k-labels-idx1-ubyte.gz
 </pre></div>
 </div>
 </div>
@@ -1031,7 +1044,7 @@ its performance over the training epochs.</p>
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="save-load-arrays.html" title="previous page">Saving and sharing your NumPy arrays</a>
+    <a class='left-prev' id="prev-link" href="mooreslaw-tutorial.html" title="previous page">Determining Moore’s Law with real data in NumPy</a>
     <a class='right-next' id="next-link" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html" title="next page">Deep reinforcement learning with Pong from pixels</a>
 
         </div>

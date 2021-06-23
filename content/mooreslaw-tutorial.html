@@ -44,8 +44,8 @@
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Saving and sharing your NumPy arrays" href="save-load-arrays.html" />
-    <link rel="prev" title="Linear algebra on n-dimensional arrays" href="tutorial-svd.html" />
+    <link rel="next" title="Deep learning on MNIST" href="tutorial-deep-learning-on-mnist.html" />
+    <link rel="prev" title="NumPy Applications" href="../applications.html" />
   <meta name="robots" content="noindex" />
   
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -79,64 +79,91 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-style-guide.html">
-   Learn to write a NumPy tutorial
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../features.html">
+   NumPy Features
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-svd.html">
+     Linear algebra on n-dimensional arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="save-load-arrays.html">
+     Saving and sharing your NumPy arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-ma.html">
+     Masked Arrays
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-svd.html">
-   Linear algebra on n-dimensional arrays
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../applications.html">
+   NumPy Applications
   </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Determining Moore’s Law with real data in NumPy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-deep-learning-on-mnist.html">
+     Deep learning on MNIST
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">
+     Deep reinforcement learning with Pong from pixels
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-x-ray-image-processing.html">
+     X-ray image processing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-static_equilibrium.html">
+     Determining Static Equilibrium in NumPy
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Determining Moore’s Law with real data in NumPy
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../contributing.html">
+   Contributing
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="save-load-arrays.html">
-   Saving and sharing your NumPy arrays
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-deep-learning-on-mnist.html">
-   Deep learning on MNIST
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">
-   Deep reinforcement learning with Pong from pixels
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-x-ray-image-processing.html">
-   X-ray image processing
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-ma.html">
-   Masked Arrays
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-static_equilibrium.html">
-   Determining Static Equilibrium in NumPy
-  </a>
- </li>
-</ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="pairing.html">
-   Pairing Jupyter notebooks and MyST-NB
-  </a>
- </li>
-</ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-style-guide.html">
-   Learn to write a NumPy tutorial
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pairing.html">
+     Pairing Jupyter notebooks and MyST-NB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-style-guide.html">
+     Learn to write a NumPy tutorial
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -602,8 +629,8 @@ errors.  Run the
 Dep. Variable:                      y   R-squared:                       0.949
 Model:                            OLS   Adj. R-squared:                  0.949
 Method:                 Least Squares   F-statistic:                     3309.
-Date:                Thu, 17 Jun 2021   Prob (F-statistic):          1.75e-116
-Time:                        20:14:54   Log-Likelihood:                -273.43
+Date:                Wed, 23 Jun 2021   Prob (F-statistic):          1.75e-116
+Time:                        20:21:42   Log-Likelihood:                -273.43
 No. Observations:                 179   AIC:                             550.9
 Df Residuals:                     177   BIC:                             557.2
 Df Model:                           1                                         
@@ -788,7 +815,7 @@ for $\pm\frac{1}{2}~years.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19200000000.0 250000000.0 7050000000.0
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f3f4ce78d60&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fdbb726d130&gt;
 </pre></div>
 </div>
 <img alt="../_images/mooreslaw-tutorial_29_2.png" src="../_images/mooreslaw-tutorial_29_2.png" />
@@ -1062,8 +1089,8 @@ has been over the last half-century.</p>
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="tutorial-svd.html" title="previous page">Linear algebra on n-dimensional arrays</a>
-    <a class='right-next' id="next-link" href="save-load-arrays.html" title="next page">Saving and sharing your NumPy arrays</a>
+    <a class='left-prev' id="prev-link" href="../applications.html" title="previous page">NumPy Applications</a>
+    <a class='right-next' id="next-link" href="tutorial-deep-learning-on-mnist.html" title="next page">Deep learning on MNIST</a>
 
         </div>
         

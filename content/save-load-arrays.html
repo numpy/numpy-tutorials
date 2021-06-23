@@ -42,8 +42,8 @@
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Deep learning on MNIST" href="tutorial-deep-learning-on-mnist.html" />
-    <link rel="prev" title="Determining Moore’s Law with real data in NumPy" href="mooreslaw-tutorial.html" />
+    <link rel="next" title="Masked Arrays" href="tutorial-ma.html" />
+    <link rel="prev" title="Linear algebra on n-dimensional arrays" href="tutorial-svd.html" />
   <meta name="robots" content="noindex" />
   
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -77,64 +77,91 @@
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-style-guide.html">
-   Learn to write a NumPy tutorial
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../features.html">
+   NumPy Features
   </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-svd.html">
+     Linear algebra on n-dimensional arrays
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Saving and sharing your NumPy arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-ma.html">
+     Masked Arrays
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-svd.html">
-   Linear algebra on n-dimensional arrays
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../applications.html">
+   NumPy Applications
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="mooreslaw-tutorial.html">
+     Determining Moore’s Law with real data in NumPy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-deep-learning-on-mnist.html">
+     Deep learning on MNIST
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">
+     Deep reinforcement learning with Pong from pixels
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-x-ray-image-processing.html">
+     X-ray image processing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-static_equilibrium.html">
+     Determining Static Equilibrium in NumPy
+    </a>
+   </li>
+  </ul>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="mooreslaw-tutorial.html">
-   Determining Moore’s Law with real data in NumPy
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../contributing.html">
+   Contributing
   </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Saving and sharing your NumPy arrays
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-deep-learning-on-mnist.html">
-   Deep learning on MNIST
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">
-   Deep reinforcement learning with Pong from pixels
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-x-ray-image-processing.html">
-   X-ray image processing
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-ma.html">
-   Masked Arrays
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-static_equilibrium.html">
-   Determining Static Equilibrium in NumPy
-  </a>
- </li>
-</ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="pairing.html">
-   Pairing Jupyter notebooks and MyST-NB
-  </a>
- </li>
-</ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="tutorial-style-guide.html">
-   Learn to write a NumPy tutorial
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pairing.html">
+     Pairing Jupyter notebooks and MyST-NB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-style-guide.html">
+     Learn to write a NumPy tutorial
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -506,7 +533,7 @@ np         module    &lt;module &#39;numpy&#39; from &#39;/ho&lt;...&gt;kages/nu
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variable   Type       Data/Info
 -------------------------------
-load_xy    NpzFile    &lt;numpy.lib.npyio.NpzFile &lt;...&gt;object at 0x7f39145be400&gt;
+load_xy    NpzFile    &lt;numpy.lib.npyio.NpzFile &lt;...&gt;object at 0x7fa36f0491f0&gt;
 np         module     &lt;module &#39;numpy&#39; from &#39;/ho&lt;...&gt;kages/numpy/__init__.py&#39;&gt;
 </pre></div>
 </div>
@@ -692,8 +719,8 @@ preserve the type of ASCII numbers as <code class="docutils literal notranslate"
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="mooreslaw-tutorial.html" title="previous page">Determining Moore’s Law with real data in NumPy</a>
-    <a class='right-next' id="next-link" href="tutorial-deep-learning-on-mnist.html" title="next page">Deep learning on MNIST</a>
+    <a class='left-prev' id="prev-link" href="tutorial-svd.html" title="previous page">Linear algebra on n-dimensional arrays</a>
+    <a class='right-next' id="next-link" href="tutorial-ma.html" title="next page">Masked Arrays</a>
 
         </div>
         

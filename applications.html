@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NumPy tutorials &#8212; NumPy Tutorials</title>
+    <title>NumPy Applications &#8212; NumPy Tutorials</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -42,7 +42,8 @@
     <link rel="shortcut icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="NumPy Features" href="features.html" />
+    <link rel="next" title="Determining Moore’s Law with real data in NumPy" href="content/mooreslaw-tutorial.html" />
+    <link rel="prev" title="Masked Arrays" href="content/tutorial-ma.html" />
   <meta name="robots" content="noindex" />
   
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -62,7 +63,7 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="#">
+    <a class="navbar-brand text-wrap" href="index.html">
       
       <img src="_static/numpylogo.svg" class="logo" alt="logo">
       
@@ -75,7 +76,7 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="features.html">
    NumPy Features
@@ -103,11 +104,11 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="applications.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
    NumPy Applications
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
@@ -203,7 +204,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/index.md.txt"><button type="button"
+        <a class="dropdown-buttons" href="_sources/applications.md.txt"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -223,10 +224,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Findex.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fapplications.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/main/site/index.md"><button
+        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/main/site/applications.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -246,29 +247,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#content">
-   Content
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#useful-links-and-resources">
-   Useful links and resources
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#indices-and-tables">
-   Indices and tables
-  </a>
- </li>
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -277,68 +255,17 @@
         
               <div>
                 
-  <div class="section" id="numpy-tutorials">
-<h1>NumPy tutorials<a class="headerlink" href="#numpy-tutorials" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=lab/tree/content"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
-<p>This set of tutorials and educational materials is being developed in the
-<a class="reference external" href="https://github.com/numpy/numpy-tutorials">numpy-tutorials</a> repository, and is
-not a part of the NumPy source tree. The goal of this repository is to provide
-high-quality resources by the NumPy project, both for self-learning and for
-teaching classes with. If you’re interested in adding your own content, check
-the <a class="reference external" href="#contributing">Contributing</a> section.</p>
-<p>To open a live version of the content, click the <strong>launch Binder</strong> button above.
-To open each of the <code class="docutils literal notranslate"><span class="pre">.md</span></code> files, right click and select “Open with -&gt; Notebook”.
-You can also launch individual tutorials on Binder by clicking on the rocket
-icon that appears in the upper-right corner of each tutorial. To download a
-local copy of the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> files, you can either
-<a class="reference external" href="https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository">clone this repository</a>
-or use the download icon in the upper-right corner of each tutorial.</p>
-<div class="section" id="content">
-<h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="numpy-applications">
+<h1>NumPy Applications<a class="headerlink" href="#numpy-applications" title="Permalink to this headline">¶</a></h1>
+<p>A collection of highlighting the use of NumPy for applications in science,
+engineering, and data analysis.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="features.html">NumPy Features</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="content/tutorial-svd.html">Linear algebra on n-dimensional arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="content/save-load-arrays.html">Saving and sharing your NumPy arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="content/tutorial-ma.html">Masked Arrays</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="applications.html">NumPy Applications</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="content/mooreslaw-tutorial.html">Determining Moore’s Law with real data in NumPy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="content/tutorial-deep-learning-on-mnist.html">Deep learning on MNIST</a></li>
-<li class="toctree-l2"><a class="reference internal" href="content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">Deep reinforcement learning with Pong from pixels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="content/tutorial-x-ray-image-processing.html">X-ray image processing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="content/tutorial-static_equilibrium.html">Determining Static Equilibrium in NumPy</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="contributing.html#why-jupyter-notebooks">Why Jupyter Notebooks?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributing.html#adding-your-own-tutorials">Adding your own tutorials</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-<div class="section" id="useful-links-and-resources">
-<h2>Useful links and resources<a class="headerlink" href="#useful-links-and-resources" title="Permalink to this headline">¶</a></h2>
-<p>The following links may be useful:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://numpy.org/doc/stable/dev/conduct/code_of_conduct.html">NumPy Code of Conduct</a></p></li>
-<li><p><a class="reference external" href="https://numpy.org/doc/stable/">Main NumPy documentation</a></p></li>
-<li><p><a class="reference external" href="https://hackmd.io/oB_boakvRqKR-_2jRV-Qjg?both">NumPy documentation team meeting notes</a></p></li>
-<li><p><a class="reference external" href="https://numpy.org/neps/nep-0044-restructuring-numpy-docs.html">NEP 44 - Restructuring the NumPy documentation</a></p></li>
-<li><p><a class="reference external" href="https://labs.quansight.org/blog/2020/03/documentation-as-a-way-to-build-community/">Blog post - Documentation as a way to build Community</a></p></li>
-</ul>
-<p>Note that regular documentation issues for NumPy can be found in the <a class="reference external" href="https://github.com/numpy/numpy/issues">main NumPy
-repository</a> (see the <code class="docutils literal notranslate"><span class="pre">Documentation</span></code>
-labels there).</p>
-</div>
-<div class="section" id="indices-and-tables">
-<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+<li class="toctree-l1"><a class="reference internal" href="content/mooreslaw-tutorial.html">Determining Moore’s Law with real data in NumPy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/tutorial-deep-learning-on-mnist.html">Deep learning on MNIST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">Deep reinforcement learning with Pong from pixels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/tutorial-x-ray-image-processing.html">X-ray image processing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/tutorial-static_equilibrium.html">Determining Static Equilibrium in NumPy</a></li>
 </ul>
 </div>
 </div>
@@ -349,7 +276,8 @@ labels there).</p>
         
         <div class='prev-next-bottom'>
             
-    <a class='right-next' id="next-link" href="features.html" title="next page">NumPy Features</a>
+    <a class='left-prev' id="prev-link" href="content/tutorial-ma.html" title="previous page">Masked Arrays</a>
+    <a class='right-next' id="next-link" href="content/mooreslaw-tutorial.html" title="next page">Determining Moore’s Law with real data in NumPy</a>
 
         </div>
         

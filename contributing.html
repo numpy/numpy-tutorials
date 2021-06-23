@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NumPy tutorials &#8212; NumPy Tutorials</title>
+    <title>Contributing &#8212; NumPy Tutorials</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -42,7 +42,8 @@
     <link rel="shortcut icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="NumPy Features" href="features.html" />
+    <link rel="next" title="Pairing Jupyter notebooks and MyST-NB" href="content/pairing.html" />
+    <link rel="prev" title="Determining Static Equilibrium in NumPy" href="content/tutorial-static_equilibrium.html" />
   <meta name="robots" content="noindex" />
   
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -62,7 +63,7 @@
 <div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
         <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="#">
+    <a class="navbar-brand text-wrap" href="index.html">
       
       <img src="_static/numpylogo.svg" class="logo" alt="logo">
       
@@ -75,7 +76,7 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="features.html">
    NumPy Features
@@ -140,11 +141,11 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="contributing.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
    Contributing
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
@@ -203,7 +204,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/index.md.txt"><button type="button"
+        <a class="dropdown-buttons" href="_sources/contributing.md.txt"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -223,10 +224,10 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Findex.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontributing.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/main/site/index.md"><button
+        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/main/site/contributing.md"><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
     </div>
@@ -252,19 +253,38 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#content">
-   Content
+  <a class="reference internal nav-link" href="#why-jupyter-notebooks">
+   Why Jupyter Notebooks?
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#note">
+     Note
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#useful-links-and-resources">
-   Useful links and resources
+  <a class="reference internal nav-link" href="#adding-your-own-tutorials">
+   Adding your own tutorials
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#indices-and-tables">
-   Indices and tables
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-an-issue">
+     Create an issue
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-out-our-suggested-template">
+     Check out our suggested template
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#upload-your-content">
+     Upload your content
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -277,69 +297,112 @@
         
               <div>
                 
-  <div class="section" id="numpy-tutorials">
-<h1>NumPy tutorials<a class="headerlink" href="#numpy-tutorials" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=lab/tree/content"><img alt="Binder" src="https://mybinder.org/badge_logo.svg" /></a></p>
-<p>This set of tutorials and educational materials is being developed in the
-<a class="reference external" href="https://github.com/numpy/numpy-tutorials">numpy-tutorials</a> repository, and is
-not a part of the NumPy source tree. The goal of this repository is to provide
-high-quality resources by the NumPy project, both for self-learning and for
-teaching classes with. If you’re interested in adding your own content, check
-the <a class="reference external" href="#contributing">Contributing</a> section.</p>
-<p>To open a live version of the content, click the <strong>launch Binder</strong> button above.
-To open each of the <code class="docutils literal notranslate"><span class="pre">.md</span></code> files, right click and select “Open with -&gt; Notebook”.
-You can also launch individual tutorials on Binder by clicking on the rocket
-icon that appears in the upper-right corner of each tutorial. To download a
-local copy of the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> files, you can either
-<a class="reference external" href="https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository">clone this repository</a>
-or use the download icon in the upper-right corner of each tutorial.</p>
-<div class="section" id="content">
-<h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<p>We very much welcome contributions! If you have an idea or proposal for a new
+tutorial, please <a class="reference external" href="https://github.com/numpy/numpy-tutorials/issues">open an issue</a>
+with an outline.</p>
+<p>Don’t worry if English is not your first language, or if you can only come up
+with a rough draft. Open source is a community effort. Do your best – we’ll help
+fix issues.</p>
+<p>Images and real-life data make text more engaging and powerful, but be sure what
+you use is appropriately licensed and available. Here again, even a rough idea
+for artwork can be polished by others.</p>
+<p>The NumPy tutorials are a curated collection of
+<a class="reference external" href="https://myst-nb.readthedocs.io/">MyST-NB</a> notebooks. These notebooks are used
+to produce static websites and can be opened as notebooks in Jupyter using
+<a class="reference external" href="https://jupytext.readthedocs.io">Jupytext</a>.</p>
+<blockquote>
+<div><p><strong>Note:</strong> You should use <a class="reference external" href="https://commonmark.org">CommonMark</a> markdown
+cells. Jupyter only renders CommonMark.</p>
+</div></blockquote>
+<div class="section" id="why-jupyter-notebooks">
+<h2>Why Jupyter Notebooks?<a class="headerlink" href="#why-jupyter-notebooks" title="Permalink to this headline">¶</a></h2>
+<p>The choice of Jupyter Notebook in this repo instead of the usual format
+(<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a>)
+used in the main NumPy documentation has two reasons:</p>
+<ul class="simple">
+<li><p>Jupyter notebooks are a common format for communicating scientific
+information.</p></li>
+<li><p>Jupyter notebooks can be launched in <a class="reference external" href="https://www.mybinder.org">Binder</a>, so that users can interact
+with tutorials</p></li>
+<li><p>rST may present a barrier for some people who might otherwise be very
+interested in contributing tutorial material.</p></li>
+</ul>
+<div class="section" id="note">
+<h3>Note<a class="headerlink" href="#note" title="Permalink to this headline">¶</a></h3>
+<p>You may notice our content is in markdown format (<code class="docutils literal notranslate"><span class="pre">.md</span></code> files). We review and
+host notebooks in the <a class="reference external" href="https://myst-nb.readthedocs.io/">MyST-NB</a> format. We
+accept both Jupyter notebooks (<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>) and MyST-NB notebooks (<code class="docutils literal notranslate"><span class="pre">.md</span></code>).
+If you want to sync your <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> to your <code class="docutils literal notranslate"><span class="pre">.md</span></code> file follow the <a class="reference internal" href="content/pairing.html"><span class="doc std std-doc">pairing
+tutorial</span></a>.</p>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+<div class="section" id="adding-your-own-tutorials">
+<h2>Adding your own tutorials<a class="headerlink" href="#adding-your-own-tutorials" title="Permalink to this headline">¶</a></h2>
+<p>If you have your own tutorial in the form of a Jupyter notebook (an <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>
+file) and you’d like to try add it out to the repository, follow the steps below.</p>
+<div class="section" id="create-an-issue">
+<h3>Create an issue<a class="headerlink" href="#create-an-issue" title="Permalink to this headline">¶</a></h3>
+<p>Go to <a class="reference external" href="https://github.com/numpy/numpy-tutorials/issues">https://github.com/numpy/numpy-tutorials/issues</a> and create a new issue
+with your proposal.
+Give as much detail as you can about what kind of content you would like to
+write (tutorial, how-to) and what you plan to cover.
+We will try to respond as quickly as possible with comments, if applicable.</p>
+</div>
+<div class="section" id="check-out-our-suggested-template">
+<h3>Check out our suggested template<a class="headerlink" href="#check-out-our-suggested-template" title="Permalink to this headline">¶</a></h3>
+<p>You can use this template to make your content consistent with our existing
+tutorials:</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="features.html">NumPy Features</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="content/tutorial-svd.html">Linear algebra on n-dimensional arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="content/save-load-arrays.html">Saving and sharing your NumPy arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="content/tutorial-ma.html">Masked Arrays</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="applications.html">NumPy Applications</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="content/mooreslaw-tutorial.html">Determining Moore’s Law with real data in NumPy</a></li>
-<li class="toctree-l2"><a class="reference internal" href="content/tutorial-deep-learning-on-mnist.html">Deep learning on MNIST</a></li>
-<li class="toctree-l2"><a class="reference internal" href="content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">Deep reinforcement learning with Pong from pixels</a></li>
-<li class="toctree-l2"><a class="reference internal" href="content/tutorial-x-ray-image-processing.html">X-ray image processing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="content/tutorial-static_equilibrium.html">Determining Static Equilibrium in NumPy</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="contributing.html#why-jupyter-notebooks">Why Jupyter Notebooks?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributing.html#adding-your-own-tutorials">Adding your own tutorials</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="content/tutorial-style-guide.html">Learn to write a NumPy tutorial</a></li>
 </ul>
 </div>
 </div>
-<div class="section" id="useful-links-and-resources">
-<h2>Useful links and resources<a class="headerlink" href="#useful-links-and-resources" title="Permalink to this headline">¶</a></h2>
-<p>The following links may be useful:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://numpy.org/doc/stable/dev/conduct/code_of_conduct.html">NumPy Code of Conduct</a></p></li>
-<li><p><a class="reference external" href="https://numpy.org/doc/stable/">Main NumPy documentation</a></p></li>
-<li><p><a class="reference external" href="https://hackmd.io/oB_boakvRqKR-_2jRV-Qjg?both">NumPy documentation team meeting notes</a></p></li>
-<li><p><a class="reference external" href="https://numpy.org/neps/nep-0044-restructuring-numpy-docs.html">NEP 44 - Restructuring the NumPy documentation</a></p></li>
-<li><p><a class="reference external" href="https://labs.quansight.org/blog/2020/03/documentation-as-a-way-to-build-community/">Blog post - Documentation as a way to build Community</a></p></li>
+<div class="section" id="upload-your-content">
+<h3>Upload your content<a class="headerlink" href="#upload-your-content" title="Permalink to this headline">¶</a></h3>
+<p>Remember to clear all outputs on your notebook before uploading it.</p>
+<ul>
+<details>
+    <summary>
+        <b>Fork this repository</b> (if you haven't before).
+    </summary>
+    <img src="_static/01-fork.gif" width=80% height=80%>
+</details>
+<details>
+    <summary>
+        <b>In your own fork, create a new branch for your content.</b>
+    </summary>
+    <img src="_static/02-create_new_branch.gif" width=80% height=80%>
+</details>
+<details>
+    <summary>
+        <b>Add your notebook to the <code>content/</code> directory.</b>
+    </summary>
+    <img src="_static/03-upload.gif" width=80% height=80%>
+</details>
+<p><b>Update the <code>environment.yml</code> file with the dependencies for your tutorial</b>
+(only if you add new dependencies).</p>
+<details>
+    <summary>
+        <b>Update this <code>README.md</code> to include your new entry.</b>
+    </summary>
+    <img src="_static/04-add_to_readme.gif" width=80% height=80%>
+</details>
+<details>
+    <summary>
+        <b>Create a <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request.</a> Make sure the "Allow edits and access to secrets by maintainers" option is selected so we can properly review your submission.</b>
+    </summary>
+    <img src="_static/05-create_PR.gif" width=80% height=80%>
+</details>
+<p>🎉 <b>Wait for review!</b></p>
 </ul>
-<p>Note that regular documentation issues for NumPy can be found in the <a class="reference external" href="https://github.com/numpy/numpy/issues">main NumPy
-repository</a> (see the <code class="docutils literal notranslate"><span class="pre">Documentation</span></code>
-labels there).</p>
+<p>For more information about GitHub and its workflow, you can see
+<a class="reference external" href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests">this document</a>.</p>
 </div>
-<div class="section" id="indices-and-tables">
-<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
 </div>
 </div>
 
@@ -349,7 +412,8 @@ labels there).</p>
         
         <div class='prev-next-bottom'>
             
-    <a class='right-next' id="next-link" href="features.html" title="next page">NumPy Features</a>
+    <a class='left-prev' id="prev-link" href="content/tutorial-static_equilibrium.html" title="previous page">Determining Static Equilibrium in NumPy</a>
+    <a class='right-next' id="next-link" href="content/pairing.html" title="next page">Pairing Jupyter notebooks and MyST-NB</a>
 
         </div>
         
