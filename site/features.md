@@ -1,7 +1,6 @@
 # NumPy Features
 
-A collection of tutorials, how-tos, and explanations pertaining to built-in
-NumPy functionality.
+A collection of notebooks pertaining to built-in NumPy functionality.
 
 ```{toctree}
 ---
