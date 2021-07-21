@@ -10,7 +10,6 @@ dependencies:
   - statsmodels
   - pip
   - imageio
-  - mpl_toolkits
   - pip:
     - jupyter-book
     - gym[atari]
