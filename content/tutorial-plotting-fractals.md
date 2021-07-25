@@ -26,7 +26,7 @@ Today we will learn how to plot these beautiful visualizations and will start to
 
 +++
 
-# What you'll do
+## What you'll do
 
 - Write a function for computing Mandelbrot fractals
 - Write a function that computes Newton fractals 
@@ -34,7 +34,7 @@ Today we will learn how to plot these beautiful visualizations and will start to
 
 +++
 
-# What you'll learn
+## What you'll learn
 
 - A better intuition for how fractals work mathematically 
 - A basic understanding about NumPy Universal Functions and Boolean Indexing
@@ -43,7 +43,7 @@ Today we will learn how to plot these beautiful visualizations and will start to
 
 +++
 
-# What you'll need
+## What you'll need
 
 - [Matplotlib](https://matplotlib.org/)
 - make_axis_locatable function from mpl_toolkits API
@@ -63,7 +63,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 +++
 
-# Warmup
+## Warmup
 
 To gain some intuition for what fractals are, we will begin with an example.
 
@@ -235,7 +235,7 @@ What this stunning visual conveys is the complexity of the function’s behaviou
 
 +++
 
-# Mandelbrot 
+## Mandelbrot 
 
 What we just explored was an example of a fractal found in the Mandelbrot set. We can write a more generalized version of the above function to gain access to a wider range of fractals.
 
@@ -310,7 +310,7 @@ kwargs = {'title':'f(z) = z^2 - \dfrac{3}{4} + 0.4i', 'cmap':'Greens_r'}
 plot_fractal(output,**kwargs);
 ```
 
-# Generalizing the Mandelbrot function
+## Generalizing the Mandelbrot function
 
 We can generalize our Mandelbrot function even further by giving it a parameter for which Universal Function we would like to pass in. This would allow us to plot fractals of the form $f(z) = g(z) + c$ where g is a Universal Function selected by us.
 
@@ -351,7 +351,7 @@ Needless to say, there is a large amount of exploring that can be done by fiddli
 
 +++
 
-## Newton Fractals
+### Newton Fractals
 
 Newton fractals are a specific class of fractals, where iterations involve adding or subtracting the ratio of a function (often a polynomial) and its derivative to the input values. Mathematically, it can be expressed as:
 
@@ -456,7 +456,7 @@ It is truly fascinating how distinct yet similar these fractals are with each ot
 
 +++
 
-# Creating your own fractals
+## Creating your own fractals
 
 
 What makes fractals more exciting is how much there is to explore once you become familiar with the basics. Now we will wrap up our tutorial by exploring some of the different ways one can experiment in creating unique fractals. I encourage you to try some things out on your own (if you have not done so already). 
@@ -531,7 +531,7 @@ Needless to say, there are a nearly endless supply of interesting fractal creati
 
 +++
 
-# In conclusion
+## In conclusion
 
 We learned a lot about generating fractals today. We saw how complicated fractals requiring many iterations could be computed efficiently using Universal Functions. We also took advantage of boolean indexing, which allowed for less computations to be made without having to individually verify each value. Finally, we learned a lot about fractals themselves. As a recap:
 
@@ -543,7 +543,7 @@ We learned a lot about generating fractals today. We saw how complicated fractal
 
 +++
 
-# On your own
+## On your own
 
 - Play around with the parameters of the Mandelbrot function, try playing with the constant value, number of iterations, function choice, radius, and colour choice. 
 
@@ -551,7 +551,7 @@ We learned a lot about generating fractals today. We saw how complicated fractal
 
 +++
 
-# Further reading 
+## Further reading 
 
 More information on the theory behind fractals - https://en.wikipedia.org/wiki/Fractal 
 
