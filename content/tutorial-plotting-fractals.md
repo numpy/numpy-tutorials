@@ -16,7 +16,7 @@ kernelspec:
 
 +++
 
-<img src="tutorial-plotting-fractals/fractal.png" alt="Fractal picture" style="width: 1000px;">
+![Fractal picture](tutorial-plotting-fractals/fractal.png)
 
 +++
 
