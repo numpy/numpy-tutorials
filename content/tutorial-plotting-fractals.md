@@ -93,7 +93,8 @@ f(0)
 Some values grow, some values shrink, some don't experience much change.
 
 ```{code-cell} ipython3
-np.round(f(4),2), np.round(f(1 - 0.2j),2), np.round(f(1.6),2)
+z = [4, 1-0.2j, 1.6]
+f(z)
 ```
 
 To see the behaviour of the function on a larger scale, we can apply the function to a subset of the complex plane and plot the result. To create our subset (or mesh), we can make use of the [**meshgrid**](https://numpy.org/doc/stable/reference/generated/numpy.meshgrid.html) function.
