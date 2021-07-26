@@ -332,19 +332,16 @@ One cool set of fractals that can be plotted using our general Mandelbrot functi
 
 ```{code-cell} ipython3
 fig, axes = plt.subplots(2,3,figsize=(8,8))
-degree = 2
+base_degree = 2
 
-for i in range(2):
-    for j in range(3):
-        
-        power = lambda z: np.power(z,degree) #Create power function for current degree 
+for deg, ax in enumerate(axes.ravel()):
+    degree = base_degree + deg
+    power = lambda z: np.power(z,degree) #Create power function for current degree 
 
-        diverge_len = general_mandelbrot(mesh,f=power,num_iter=15)
-        axes[i,j].imshow(diverge_len,extent=[-2,2,-2,2],cmap='binary')
-        axes[i,j].set_title(f'$f(z) = z^{degree} -1$')
-                
-        degree += 1
-        
+    diverge_len = general_mandelbrot(mesh,f=power,num_iter=15)
+    ax.imshow(diverge_len,extent=[-2,2,-2,2],cmap='binary')
+    ax.set_title(f'$f(z) = z^{degree} -1$')
+
 fig.tight_layout();
 ```
 
