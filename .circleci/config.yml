@@ -20,7 +20,8 @@ jobs:
           command: |
             python3 -m venv venv
             source venv/bin/activate
-            pip install --upgrade pip wheel setuptools
+            pip install pip==21.1.1
+            pip install --upgrade wheel setuptools
             pip install -r site/requirements.txt -r requirements.txt
 
       - restore_cache:
