@@ -100,8 +100,8 @@ f(z)
 To see the behaviour of the function on a larger scale, we can apply the function to a subset of the complex plane and plot the result. To create our subset (or mesh), we can make use of the [**meshgrid**](https://numpy.org/doc/stable/reference/generated/numpy.meshgrid.html) function.
 
 ```{code-cell} ipython3
-x,y = np.meshgrid(np.arange(-10,10,1),np.arange(-10,10,1))
-mesh =  x + (1j *y) #Make mesh of complex plane 
+x, y = np.meshgrid(np.arange(-10,10),np.arange(-10,10))
+mesh =  x + (1j *y) #  Make mesh of complex plane 
 ```
 
 Now we will apply our function to each value contained in the mesh. Since we used a Universal Function in our design, this means that we can pass in the entire mesh all at once. This is extremely convenient for two reasons: It reduces the amount of code needed to be written and greatly increases the efficiency (as Universal Functions make use of system level C programming in their computations). 
