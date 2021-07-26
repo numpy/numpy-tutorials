@@ -373,24 +373,21 @@ def newton_fractal(mesh,f,df,num_iter=10,r=2):
 ```
 
 Now we can experiment with some different polynomials.
-
-For $p(z) = z^8 + 15 z^4 - 16$, we have 
-
-
-$\frac{dp}{dz} = 8z^7 + 60z^3$.
-
-Putting the polynomials to code and calling the function gives us:
+For example, let's try a higher-degree polynomial:
 
 ```{code-cell} ipython3
-def poly(z):
-    return np.power(z,8) + 15* np.power(z,4) -16
+p = np.polynomial.Polynomial([-16, 0, 0, 0, 15, 0, 0, 0, 1])
+p
+```
 
-def derivative(z):
-    return 8* np.power(z,7) + 60 * np.power(z,3)
+which has the derivative:
+
+```{code-cell} ipython3
+p.deriv()
 ```
 
 ```{code-cell} ipython3
-output = newton_fractal(mesh,poly,derivative,num_iter=15,r=2)
+output = newton_fractal(mesh,p ,p.deriv(), num_iter=15,r=2)
 kwargs = {'title':'f(z) = z - \dfrac{(z^8 + 15z^4 - 16)}{(8z^7 + 60z^3)}', 'cmap':'copper'}
 
 plot_fractal(output,**kwargs)
