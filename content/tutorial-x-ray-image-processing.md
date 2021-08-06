@@ -3,8 +3,8 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.12
-    jupytext_version: 1.7.1
+    format_version: 0.13
+    jupytext_version: 1.11.1
 kernelspec:
   display_name: Python 3
   language: python
@@ -113,30 +113,30 @@ The file — `00000011_001.png` — has been downloaded for you and saved in the
 
 **1.** Load the image with `imageio`:
 
-```{code-cell} ipython3
+```{code-cell}
 import os
 import imageio
 
-DIR = 'tutorial-x-ray-image-processing'
+DIR = "tutorial-x-ray-image-processing"
 
-xray_image = imageio.imread(os.path.join(DIR, '00000011_001.png'))
+xray_image = imageio.imread(os.path.join(DIR, "00000011_001.png"))
 ```
 
 **2.** Check that its shape is 1024x1024 pixels and that the array is made up of
 8-bit integers:
 
-```{code-cell} ipython3
+```{code-cell}
 print(xray_image.shape)
 print(xray_image.dtype)
 ```
 
 **3.** Import `matplotlib` and display the image in a grayscale colormap:
 
-```{code-cell} ipython3
+```{code-cell}
 import matplotlib.pyplot as plt
 
-plt.imshow(xray_image, cmap='gray')
-plt.axis('off')
+plt.imshow(xray_image, cmap="gray")
+plt.axis("off")
 plt.show()
 ```
 
@@ -152,7 +152,7 @@ from one of the dataset files. They are numbered from `...000.png` to
 **1.** Import NumPy, read in each of the X-rays, and create a three-dimensional
 array where the first dimension corresponds to image number:
 
-```{code-cell} ipython3
+```{code-cell}
 import numpy as np
 num_imgs = 9
 
@@ -163,7 +163,7 @@ combined_xray_images_1 = np.array(
 
 **2.** Check the shape of the new X-ray image array containing 9 stacked images:
 
-```{code-cell} ipython3
+```{code-cell}
 combined_xray_images_1.shape
 ```
 
@@ -186,9 +186,10 @@ Let's create a GIF file with `imageio.mimwrite()` and display the result in the
 notebook:
 
 ```{code-cell} ipython3
-GIF_PATH = os.path.join(DIR, 'xray_image.gif')
-imageio.mimwrite(GIF_PATH, combined_xray_images_1, format= '.gif', fps = 1)
+GIF_PATH = os.path.join(DIR, "xray_image.gif")
+imageio.mimwrite(GIF_PATH, combined_xray_images_1, format= ".gif", fps=1)
 ```
+
 Which gives us:
 ![An animated gif repeatedly cycles through a series of 8 x-rays, showing the same viewpoint of the patient's chest at different points in time. The patient's bones and internal organs can be visually compared from frame to frame.](tutorial-x-ray-image-processing/xray_image.gif)
 ## Edge detection using the Laplacian-Gaussian, Gaussian gradient, Sobel, and Canny filters
@@ -222,7 +223,7 @@ straightforward: 1) import the `ndimage` module from SciPy; and 2) call
 with a sigma (scalar) parameter, which affects the standard deviations of the
 Gaussian filter (you'll use `1` in the example below):
 
-```{code-cell} ipython3
+```{code-cell}
 from scipy import ndimage
 
 xray_image_laplace_gaussian = ndimage.gaussian_laplace(xray_image, sigma=1)
@@ -230,15 +231,15 @@ xray_image_laplace_gaussian = ndimage.gaussian_laplace(xray_image, sigma=1)
 
 Display the original X-ray and the one with the Laplacian-Gaussian filter:
 
-```{code-cell} ipython3
+```{code-cell}
 fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 10))
 
-axes[0].set_title('Original')
-axes[0].imshow(xray_image, cmap='gray')
-axes[1].set_title('Laplacian-Gaussian (edges)')
-axes[1].imshow(xray_image_laplace_gaussian, cmap='gray')
+axes[0].set_title("Original")
+axes[0].imshow(xray_image, cmap="gray")
+axes[1].set_title("Laplacian-Gaussian (edges)")
+axes[1].imshow(xray_image_laplace_gaussian, cmap="gray")
 for i in axes:
-    i.axis('off')
+    i.axis("off")
 plt.show()
 ```
 
@@ -257,21 +258,21 @@ image components.
 with a sigma (scalar) parameter (for standard deviations; you'll use `2` in the
 example below):
 
-```{code-cell} ipython3
+```{code-cell}
 x_ray_image_gaussian_gradient = ndimage.gaussian_gradient_magnitude(xray_image, sigma=2)
 ```
 
 **2.** Display the original X-ray and the one with the Gaussian gradient filter:
 
-```{code-cell} ipython3
+```{code-cell}
 fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 10))
 
-axes[0].set_title('Original')
-axes[0].imshow(xray_image, cmap='gray')
-axes[1].set_title('Gaussian gradient (edges)')
-axes[1].imshow(x_ray_image_gaussian_gradient, cmap='gray')
+axes[0].set_title("Original")
+axes[0].imshow(xray_image, cmap="gray")
+axes[1].set_title("Gaussian gradient (edges)")
+axes[1].imshow(x_ray_image_gaussian_gradient, cmap="gray")
 for i in axes:
-    i.axis('off')
+    i.axis("off")
 plt.show()
 ```
 
@@ -301,7 +302,7 @@ follows the `output_channel = 255.0 * (input_channel - min_value) / (max_value -
 [formula](http://dev.ipol.im/~nmonzon/Normalization.pdf). Because you're
 using a grayscale image, you need to normalize just one channel.
 
-```{code-cell} ipython3
+```{code-cell}
 x_sobel = ndimage.sobel(xray_image, axis=0)
 y_sobel = ndimage.sobel(xray_image, axis=1)
 
@@ -314,29 +315,29 @@ xray_image_sobel *= 255.0 / np.max(xray_image_sobel)
 from `float16` to [make it compatible](https://github.com/matplotlib/matplotlib/issues/15432)
 with Matplotlib:
 
-```{code-cell} ipython3
-print('The data type - before: ', xray_image_sobel.dtype)
+```{code-cell}
+print("The data type - before: ", xray_image_sobel.dtype)
 
-xray_image_sobel = xray_image_sobel.astype('float32')
+xray_image_sobel = xray_image_sobel.astype("float32")
 
-print('The data type - after: ', xray_image_sobel.dtype)
+print("The data type - after: ", xray_image_sobel.dtype)
 ```
 
 **3.** Display the original X-ray and the one with the Sobel "edge" filter
 applied. Note that both the grayscale and `CMRmap` colormaps are used to help
 emphasize the edges:
 
-```{code-cell} ipython3
+```{code-cell}
 fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(15, 15))
 
-axes[0].set_title('Original')
-axes[0].imshow(xray_image, cmap='gray')
-axes[1].set_title('Sobel (edges) - grayscale')
-axes[1].imshow(xray_image_sobel, cmap='gray')
-axes[2].set_title('Sobel (edges) - CMRmap')
-axes[2].imshow(xray_image_sobel, cmap='CMRmap')
+axes[0].set_title("Original")
+axes[0].imshow(xray_image, cmap="gray")
+axes[1].set_title("Sobel (edges) - grayscale")
+axes[1].imshow(xray_image_sobel, cmap="gray")
+axes[2].set_title("Sobel (edges) - CMRmap")
+axes[2].imshow(xray_image_sobel, cmap="CMRmap")
 for i in axes:
-    i.axis('off')
+    i.axis("off")
 plt.show()
 ```
 
@@ -368,7 +369,7 @@ Next, measure the distance between the gradients using NumPy's `np.hypot()`.
 Finally, [normalize](https://en.wikipedia.org/wiki/Normalization_%28image_processing%29)
 the rescaled image, as before.
 
-```{code-cell} ipython3
+```{code-cell}
 fourier_gaussian = ndimage.fourier_gaussian(xray_image, sigma=0.05)
 
 x_prewitt = ndimage.prewitt(fourier_gaussian, axis=0)
@@ -378,26 +379,26 @@ xray_image_canny = np.hypot(x_prewitt, y_prewitt)
 
 xray_image_canny *= 255.0 / np.max(xray_image_canny)
 
-print('The data type - ', xray_image_canny.dtype)
+print("The data type - ", xray_image_canny.dtype)
 ```
 
 **2.** Plot the original X-ray image and the ones with the edges detected with
 the help of the Canny filter technique. The edges can be emphasized using the
 `prism`, `nipy_spectral`, and `terrain` Matplotlib colormaps.
 
-```{code-cell} ipython3
+```{code-cell}
 fig, axes = plt.subplots(nrows=1, ncols=4, figsize=(20, 15))
 
-axes[0].set_title('Original')
-axes[0].imshow(xray_image, cmap='gray')
-axes[1].set_title('Canny (edges) - prism')
-axes[1].imshow(xray_image_canny, cmap='prism')
-axes[2].set_title('Canny (edges) - nipy_spectral')
-axes[2].imshow(xray_image_canny, cmap='nipy_spectral')
-axes[3].set_title('Canny (edges) - terrain')
-axes[3].imshow(xray_image_canny, cmap='terrain')
+axes[0].set_title("Original")
+axes[0].imshow(xray_image, cmap="gray")
+axes[1].set_title("Canny (edges) - prism")
+axes[1].imshow(xray_image_canny, cmap="prism")
+axes[2].set_title("Canny (edges) - nipy_spectral")
+axes[2].imshow(xray_image_canny, cmap="nipy_spectral")
+axes[3].set_title("Canny (edges) - terrain")
+axes[3].imshow(xray_image_canny, cmap="terrain")
 for i in axes:
-    i.axis('off')
+    i.axis("off")
 plt.show()
 ```
 
@@ -419,12 +420,12 @@ image.
 **1.** Retrieve some basics statistics about the pixel values in the original
 X-ray image you've been working with:
 
-```{code-cell} ipython3
-print('The data type of the X-ray image is: ', xray_image.dtype)
-print('The minimum pixel value is: ', np.min(xray_image))
-print('The maximum pixel value is: ', np.max(xray_image))
-print('The average pixel value is: ', np.mean(xray_image))
-print('The median pixel value is: ', np.median(xray_image))
+```{code-cell}
+print("The data type of the X-ray image is: ", xray_image.dtype)
+print("The minimum pixel value is: ", np.min(xray_image))
+print("The maximum pixel value is: ", np.max(xray_image))
+print("The average pixel value is: ", np.mean(xray_image))
+print("The median pixel value is: ", np.median(xray_image))
 ```
 
 **2.** The array data type is `uint8` and the minimum/maximum value results
@@ -432,11 +433,13 @@ suggest that all 256 colors (from `0` to `255`) are used in the X-ray. Let's
 visualize the _pixel intensity distribution_ of the original raw X-ray image
 with `ndimage.histogram()` and Matplotlib:
 
-```{code-cell} ipython3
-pixel_intensity_distribution = ndimage.histogram(xray_image, min=np.min(xray_image), max=np.max(xray_image), bins=256)
+```{code-cell}
+pixel_intensity_distribution = ndimage.histogram(
+    xray_image, min=np.min(xray_image), max=np.max(xray_image), bins=256
+)
 
 plt.plot(pixel_intensity_distribution)
-plt.title('Pixel intensity distribution')
+plt.title("Pixel intensity distribution")
 plt.show()
 ```
 
@@ -447,23 +450,23 @@ As the pixel intensity distribution suggests, there are many low (between around
 for example, let's have only those values of the image with the pixels exceeding
 a certain threshold:
 
-```{code-cell} ipython3
+```{code-cell}
 # The threshold is "greater than 150"
 # Return the original image if true, `0` otherwise
 xray_image_mask_noisy = np.where(xray_image > 150, xray_image, 0)
 
-plt.imshow(xray_image_mask_noisy, cmap='gray')
-plt.axis('off')
+plt.imshow(xray_image_mask_noisy, cmap="gray")
+plt.axis("off")
 plt.show()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # The threshold is "greater than 150"
 # Return `1` if true, `0` otherwise
 xray_image_mask_less_noisy = np.where(xray_image > 150, 1, 0)
 
-plt.imshow(xray_image_mask_less_noisy, cmap='gray')
-plt.axis('off')
+plt.imshow(xray_image_mask_less_noisy, cmap="gray")
+plt.axis("off")
 plt.show()
 ```
 
@@ -474,29 +477,29 @@ plt.show()
 Let's display some of the results of processed X-ray images you've worked with
 so far:
 
-```{code-cell} ipython3
+```{code-cell}
 fig, axes = plt.subplots(nrows=1, ncols=9, figsize=(30, 30))
 
-axes[0].set_title('Original')
-axes[0].imshow(xray_image, cmap='gray')
-axes[1].set_title('Laplace-Gaussian (edges)')
-axes[1].imshow(xray_image_laplace_gaussian, cmap='gray')
-axes[2].set_title('Gaussian gradient (edges)')
-axes[2].imshow(x_ray_image_gaussian_gradient, cmap='gray')
-axes[3].set_title('Sobel (edges) - grayscale')
-axes[3].imshow(xray_image_sobel, cmap='gray')
-axes[4].set_title('Sobel (edges) - hot')
-axes[4].imshow(xray_image_sobel, cmap='hot')
-axes[5].set_title('Canny (edges) - prism)')
-axes[5].imshow(xray_image_canny, cmap='prism')
-axes[6].set_title('Canny (edges) - nipy_spectral)')
-axes[6].imshow(xray_image_canny, cmap='nipy_spectral')
-axes[7].set_title('Mask (> 150, noisy)')
-axes[7].imshow(xray_image_mask_noisy, cmap='gray')
-axes[8].set_title('Mask (> 150, less noisy)')
-axes[8].imshow(xray_image_mask_less_noisy, cmap='gray')
+axes[0].set_title("Original")
+axes[0].imshow(xray_image, cmap="gray")
+axes[1].set_title("Laplace-Gaussian (edges)")
+axes[1].imshow(xray_image_laplace_gaussian, cmap="gray")
+axes[2].set_title("Gaussian gradient (edges)")
+axes[2].imshow(x_ray_image_gaussian_gradient, cmap="gray")
+axes[3].set_title("Sobel (edges) - grayscale")
+axes[3].imshow(xray_image_sobel, cmap="gray")
+axes[4].set_title("Sobel (edges) - hot")
+axes[4].imshow(xray_image_sobel, cmap="hot")
+axes[5].set_title("Canny (edges) - prism)")
+axes[5].imshow(xray_image_canny, cmap="prism")
+axes[6].set_title("Canny (edges) - nipy_spectral)")
+axes[6].imshow(xray_image_canny, cmap="nipy_spectral")
+axes[7].set_title("Mask (> 150, noisy)")
+axes[7].imshow(xray_image_mask_noisy, cmap="gray")
+axes[8].set_title("Mask (> 150, less noisy)")
+axes[8].imshow(xray_image_mask_less_noisy, cmap="gray")
 for i in axes:
-    i.axis('off')
+    i.axis("off")
 plt.show()
 ```
 
