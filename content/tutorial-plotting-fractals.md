@@ -294,7 +294,7 @@ plot_fractal(output,**kwargs);
 
 We also can start experimenting with different values of c. It can be surprising how much influence it has on the shape of the fractal.
 
-For example, setting $c = \frac{\pi}{10}$ gives us a very elegent cloud shape, while setting c = $-\frac{3}{4} + 0.4i$ yields a completely different pattern.
+For example, setting $c = \frac{\pi}{10}$ gives us a very elegant cloud shape, while setting c = $-\frac{3}{4} + 0.4i$ yields a completely different pattern.
 
 ```{code-cell} ipython3
 output = mandelbrot(mesh,c=np.pi/10,num_iter=20)
