@@ -71,7 +71,7 @@ Consider the following equation:
 
 $f(z) = z^2 -1 $ 
 
-where z is a complex number (i.e of the form $a + bi$ )
+where `z` is a complex number (i.e of the form $a + bi$ )
 
 For our convenience, we will write a Python function for it
 
