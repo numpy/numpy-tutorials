@@ -84,7 +84,7 @@ Note that the square function we used is an example of a **[NumPy Universal Func
 
 To gain some intuition for the behaviour of the function, we can try plugging in some different values.
 
-For z = 0, we would expect to get -1
+For $z = 0$, we would expect to get $-1$:
 
 ```{code-cell} ipython3
 f(0)
