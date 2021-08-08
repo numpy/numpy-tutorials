@@ -201,7 +201,6 @@ def divergence_rate(mesh,num_iter=10,radius=2):
         diverge_len[np.abs(z) < radius] += 1
         z[np.abs(z) < radius] = f(z[np.abs(z)< radius])   
         
-        
     return diverge_len
 ```
 
