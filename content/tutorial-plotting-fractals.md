@@ -46,7 +46,7 @@ Today we will learn how to plot these beautiful visualizations and will start to
 ## What you'll need
 
 - [Matplotlib](https://matplotlib.org/)
-- make_axis_locatable function from mpl_toolkits API
+- `make_axis_locatable` function from mpl_toolkits API
  
 which can be imported as follows:
 
