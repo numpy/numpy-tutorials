@@ -547,6 +547,5 @@ We learned a lot about generating fractals today. We saw how complicated fractal
 
 ## Further reading 
 
-More information on the theory behind fractals - https://en.wikipedia.org/wiki/Fractal 
-
-A list of different fractals - https://en.wikipedia.org/wiki/List_of_fractals_by_Hausdorff_dimension
+- [More information on the theory behind fractals](https://en.wikipedia.org/wiki/Fractal)
+- [A list of different fractals](https://en.wikipedia.org/wiki/List_of_fractals_by_Hausdorff_dimension)
