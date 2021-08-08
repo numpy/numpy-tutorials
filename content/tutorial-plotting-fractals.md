@@ -473,7 +473,7 @@ kwargs = {'title':'f(z) = tan(z^2)', 'cmap':'gist_stern'}
 plot_fractal(output,**kwargs);
 ```
 
-What happens if we compose our defined function inside of a sin function?
+What happens if we compose our defined function inside of a sine function?
 
 Let's try defining 
 
