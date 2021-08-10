@@ -399,7 +399,7 @@ def newton_fractal(mesh, f, df, num_iter=10, r=2):
     return diverge_len
 ```
 
-Now we can experiment with some different functions. For polynomials, we can create our plots quite effortlessly using the [NumPy Polynomial class]('https://numpy.org/doc/stable/reference/generated/numpy.polynomial.polynomial.Polynomial.html'), which has built in functionality for computing derivatives.
+Now we can experiment with some different functions. For polynomials, we can create our plots quite effortlessly using the [NumPy Polynomial class](https://numpy.org/doc/stable/reference/generated/numpy.polynomial.polynomial.Polynomial.html), which has built in functionality for computing derivatives.
 
 For example, let's try a higher-degree polynomial:
 
