@@ -12,9 +12,9 @@ kernelspec:
 ---
 
 # Determining Moore's Law with real data in NumPy
-![Plot of Moore's Law data (add alt here)](_static/01-mooreslaw-tutorial-intro.png)
+![Scatter plot of MOS transistor count per microprocessor every two years as a demonstration of Moore's Law](_static/01-mooreslaw-tutorial-intro.png)
 
-_The number of transistors reported on a given chip plotted on a log scale in the y axis with the date of introduction on the linear scale x-axis. The blue data points are from a [transistor count table](https://en.wikipedia.org/wiki/Transistor_count#Microprocessors). The red line is an ordinary least squares prediction and the orange line is Moore's law._
+_The number of transistors reported per a given chip plotted on a log scale in the y axis with the date of introduction on the linear scale x-axis. The blue data points are from a [transistor count table](https://en.wikipedia.org/wiki/Transistor_count#Microprocessors). The red line is an ordinary least squares prediction and the orange line is Moore's law._
 
 ## What you'll do
 
