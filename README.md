@@ -1,12 +1,12 @@
 # NumPy tutorials
 
-This set of tutorials and educational materials is being developed,
-IT IS NOT INTEGRATED IN THE HTML DOCS AT https://www.numpy.org/devdocs/
+_For the rendered tutorials, see https://numpy.org/numpy-tutorials/._
 
 The goal of this repository is to provide high-quality resources by the
 NumPy project, both for self-learning and for teaching classes with. If you're
 interested in adding your own content, check the [Contributing](#contributing)
-section.
+section. This set of tutorials and educational materials is not a part of the
+NumPy source tree.
 
 To download a local copy of the `.ipynb` files, you can either
 [clone this repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
@@ -16,15 +16,19 @@ or navigate to any of the documents listed below and download it individually.
 
 0. [Learn to write a NumPy tutorial](content/tutorial-style-guide.md): our style guide for writing tutorials.
 1. [Tutorial: Linear algebra on n-dimensional arrays](content/tutorial-svd.md)
-2. [Tutorial: CS231n Python Tutorial](content/cs231_tutorial.md)
-3. [Tutorial: Determining Moore's Law with real data in NumPy](content/mooreslaw-tutorial.ipynb)
-4. [Tutorial: Saving and sharing your NumPy arrays](content/save-load-arrays.ipynb)
+3. [Tutorial: Determining Moore's Law with real data in NumPy](content/mooreslaw-tutorial.md)
+4. [Tutorial: Saving and sharing your NumPy arrays](content/save-load-arrays.md)
+5. [Tutorial: NumPy deep learning on MNIST from scratch](content/tutorial-deep-learning-on-mnist.md)
+6. [Tutorial: X-ray image processing](content/tutorial-x-ray-image-processing.md)
+7. [Tutorial: NumPy deep reinforcement learning with Pong from pixels](content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md)
+8. [Tutorial: Masked Arrays](content/tutorial-ma.md)
+9. [Tutorial: Static Equilibrium](content/tutorial-static_equilibrium.md)
 
 ## Contributing
 
 We very much welcome contributions! If you have an idea or proposal for a new
 tutorial, please [open an issue](https://github.com/numpy/numpy-tutorials/issues)
-with an outline. 
+with an outline.
 
 Don’t worry if English is not your first language, or if you can only come up
 with a rough draft. Open source is a community effort. Do your best – we’ll help
@@ -34,27 +38,40 @@ Images and real-life data make text more engaging and powerful, but be sure what
 you use is appropriately licensed and available. Here again, even a rough idea
 for artwork can be polished by others.
 
+The NumPy tutorials are a curated collection of
+[MyST-NB](https://myst-nb.readthedocs.io/) notebooks. These notebooks are used
+to produce static websites and can be opened as notebooks in Jupyter using
+[Jupytext](https://jupytext.readthedocs.io).
+
+> __Note:__ You should use [CommonMark](https://commonmark.org) markdown
+> cells. Jupyter only renders CommonMark.
+
 ### Why Jupyter Notebooks?
 
-The choice of Jupyter Notebook in this repo instead of the usual format 
+The choice of Jupyter Notebook in this repo instead of the usual format
 ([reStructuredText, through Sphinx](https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html))
 used in the main NumPy documentation has two reasons:
 
  * Jupyter notebooks are a common format for communicating scientific
    information.
+ * Jupyter notebooks can be launched in [Binder](https://www.mybinder.org), so that users can interact
+   with tutorials
  * rST may present a barrier for some people who might otherwise be very
    interested in contributing tutorial material.
 
 #### Note
 
-You may notice that some of our content is in markdown format (`.md` files). 
-This is part of an ongoing restructuring of the repository workflow. However, 
-you can still submit your content as a Jupyter Notebook file.
+You may notice our content is in markdown format (`.md` files). We review and
+host notebooks in the [MyST-NB](https://myst-nb.readthedocs.io/) format. We
+accept both Jupyter notebooks (`.ipynb`) and MyST-NB notebooks (`.md`). If you want
+to sync your `.ipynb` to your `.md` file follow the [pairing
+tutorial](content/pairing.md).
 
 ### Adding your own tutorials
 
 If you have your own tutorial in the form of a Jupyter notebook (a `.ipynb`
-file) and you'd like to add it to the repository:
+file) and you'd like to add it to the repository, follow the steps below.
+
 
 #### Create an issue
 
@@ -71,8 +88,6 @@ your content consistent with our existing tutorials.
 
 #### Upload your content
 
-Remember to clear all outputs on your notebook before uploading it. 
-
 <ul>
 <details>
     <summary>
@@ -80,7 +95,7 @@ Remember to clear all outputs on your notebook before uploading it.
     </summary>
     <img src="site/_static/01-fork.gif" width=80% height=80%>
 </details>
-    
+
 <details>
     <summary>
         <b>In your own fork, create a new branch for your content.</b>
@@ -110,7 +125,9 @@ author, if applicable.</b>
 
 <details>
     <summary>
-        <b>Create a <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request.</a></b>
+        <b>Create a <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request.</a>
+        Make sure the "Allow edits and access to secrets by maintainers" option
+        is selected so we can properly review your submission.</b>
     </summary>
     <img src="site/_static/05-create_PR.gif" width=80% height=80%>
 </details>
@@ -121,16 +138,19 @@ author, if applicable.</b>
 For more information about GitHub and its workflow, you can see
 [this document](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests).
 
-### Attribution
 
- - The cs231n tutorial is by [@jcjohnson][jj]. The full tutorial in 
-   its original form is linked via [numpy.org][learn].
- - The SVD tutorial is by [@melissawm][mwm]. The full tutorial is available
-   via the [tutorials page][np_tutorials] of the official NumPy documentation.
+### Building the Sphinx site locally
 
-[jj]: https://github.com/jcjohnson
-[mwm]: https://github.com/melissawm
-[np_tutorials]: https://numpy.org/devdocs/user/tutorials_index.html
+Building the tutorials website, which is published at
+https://github.com/numpy/numpy-tutorials, locally isn't necessary before making
+a contribution, but may be helpful:
+
+```bash
+conda env create -f environment.yml
+conda activate numpy-tutorials
+cd site
+make html
+```
 
 ## Useful links and resources
 
@@ -144,5 +164,5 @@ The following links may be useful:
 
 Note that regular documentation issues for NumPy can be found in the [main NumPy
 repository](https://github.com/numpy/numpy/issues) (see the `Documentation`
-labels there). 
+labels there).
 
