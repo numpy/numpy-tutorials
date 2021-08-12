@@ -9,7 +9,7 @@ This set of tutorials and educational materials is being developed in the
 not a part of the NumPy source tree. The goal of this repository is to provide
 high-quality resources by the NumPy project, both for self-learning and for
 teaching classes with. If you're interested in adding your own content, check
-the [Contributing](#contributing) section.
+the [Contributing](contributing.md) section.
 
 To open a live version of the content, click the **launch Binder** button above.
 To open each of the `.md` files, right click and select "Open with -> Notebook".
