@@ -346,6 +346,8 @@ plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
 plt.ylabel("# of transistors\nper microprocessor")
 ```
 
+_When run, this produces scatter plot of MOS transistor count per microprocessor every two years with a red line for the ordinary least squares prediction an orange line for Moore's law._
+
 The linear regression captures the increase in the number of transistors
 per semiconductors each year.  In 2015, semiconductor manufacturers
 claimed they could not keep up with Moore's law anymore. Your analysis
