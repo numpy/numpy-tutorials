@@ -19,7 +19,13 @@ Your deep learning model — one of the most basic artificial neural networks th
 
 Based on the image inputs and their labels ([supervised learning](https://en.wikipedia.org/wiki/Supervised_learning)), your neural network will be trained to learn their features using forward propagation and backpropagation ([reverse-mode](https://en.wikipedia.org/wiki/Automatic_differentiation#Reverse_accumulation) differentiation). The final output of the network is a vector of 10 scores — one for each handwritten digit image. You will also evaluate how good your model is at classifying the images on the test set.
 
-![Diagram showing operations detailed in this tutorial](_static/tutorial-deep-learning-on-mnist.png)
+![Diagram showing operations detailed in this tutorial (The input image
+is passed into a Hidden layer that creates a weighted sum of outputs.
+The weighted sum is passed to the Non-linearity, then regularization and
+into the output layer. The output layer creates a prediction which can
+then be compared to existing data. The errors are used to calculate the
+lass function and update weghts in the hidden layer and output
+layer.)](_static/tutorial-deep-learning-on-mnist.png)
 
 This tutorial was adapted from the work by [Andrew Trask](https://github.com/iamtrask/Grokking-Deep-Learning) (with the author's permission).
 
@@ -164,6 +170,9 @@ fig, axes = plt.subplots(1, num_examples)
 for sample, ax in zip(rng.choice(x_train, size=num_examples, replace=False), axes):
     ax.imshow(sample.reshape(28, 28), cmap='gray')
 ```
+
+_Above are five images taken from the MNIST training set. Hand-drawn
+Arabic numerals 3, 8, 9, 6, and 5._
 
 > **Note:** You can also visualize a sample image as an array by printing `x_train[59999]`. Here, `59999` is your 60,000th training image sample (`0` would be your first). Your output will be quite long and should contain an array of 8-bit integers:
 >
@@ -334,7 +343,14 @@ Afterwards, you will construct the building blocks of a simple deep learning mod
 
 Here is a summary of the neural network model architecture and the training process:
 
-![Diagram showing operations detailed in this tutorial](_static/tutorial-deep-learning-on-mnist.png)
+
+![Diagram showing operations detailed in this tutorial (The input image
+is passed into a Hidden layer that creates a weighted sum of outputs.
+The weighted sum is passed to the Non-linearity, then regularization and
+into the output layer. The output layer creates a prediction which can
+then be compared to existing data. The errors are used to calculate the
+lass function and update weghts in the hidden layer and output
+layer.)](_static/tutorial-deep-learning-on-mnist.png)
 
 - _The input layer_:
 
@@ -551,6 +567,10 @@ axes[1].plot(x_test_error, y_test_error, label = "Test set error")
 axes[1].set_xlabel("Epochs")
 plt.show()
 ```
+
+_The training and testing error is shown above in the left and right
+plots, respectiveley. As the number of Epochs increases, the total error
+decreases and the accuracy increases._
 
 The accuracy rates that your model reaches during training and testing may be somewhat plausible but you may also find the error rates to be quite high.
 
