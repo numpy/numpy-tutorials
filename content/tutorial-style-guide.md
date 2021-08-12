@@ -13,7 +13,7 @@ kernelspec:
 
 # Learn to write a NumPy tutorial
 
-![image](https://documentation.divio.com/_images/overview.png)
+![Daniele Procinda's documentation system dividing tutorials, how-to guides, explanation, and reference](https://documentation.divio.com/_images/overview.png)
 <p style="text-align:right;font-style:italic;">Image credit: Daniele Procida's <a href="https://documentation.divio.com/">The documentation system</a></p>
 
 +++ 
