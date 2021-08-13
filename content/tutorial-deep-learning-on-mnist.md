@@ -349,7 +349,7 @@ is passed into a Hidden layer that creates a weighted sum of outputs.
 The weighted sum is passed to the Non-linearity, then regularization and
 into the output layer. The output layer creates a prediction which can
 then be compared to existing data. The errors are used to calculate the
-lass function and update weghts in the hidden layer and output
+loss function and update weights in the hidden layer and output
 layer.)](_static/tutorial-deep-learning-on-mnist.png)
 
 - _The input layer_:
