@@ -22,7 +22,7 @@ on certain parts, and visually compare them using the
 [Laplacian-Gaussian](https://en.wikipedia.org/wiki/Laplace_distribution),
 [Sobel](https://en.wikipedia.org/wiki/Sobel_operator), and
 [Canny](https://en.wikipedia.org/wiki/Canny_edge_detector) filters for edge
-detection. 
+detection.
 
 X-ray image analysis can be part of your data analysis and
 [machine learning workflow](https://www.sciencedirect.com/science/article/pii/S235291481930214X)
@@ -50,7 +50,7 @@ tutorial's repository under `tutorial-x-ray-image-processing/`, since
 ChestX-ray8 contains gigabytes of data and you may find it challenging to
 download it in batches.
 
-![Images showing different filters applied over a chest x-ray image](_static/tutorial-x-ray-image-processing.png)
+![A series of 9 x-ray images of the same region of a patient's chest is shown with different types of image processing filters applied to each image. Each x-ray shows different types of biological detail.](_static/tutorial-x-ray-image-processing.png)
 
 +++
 
@@ -104,7 +104,7 @@ each notebook cell.
 +++
 
 Let's begin with a simple example using just one X-ray image from the
-ChestX-ray8 dataset. 
+ChestX-ray8 dataset.
 
 The file — `00000011_001.png` — has been downloaded for you and saved in the
 `/tutorial-x-ray-image-processing` folder.
@@ -234,10 +234,10 @@ notebook:
 
 ```{code-cell} ipython3
 GIF_PATH = os.path.join(DIR, 'xray_image.gif')
-imageio.mimwrite(GIF_PATH, combined_xray_images_1, format= '.gif', fps = 1) 
+imageio.mimwrite(GIF_PATH, combined_xray_images_1, format= '.gif', fps = 1)
 ```
 Which gives us:
-![health_progress](tutorial-x-ray-image-processing/xray_image.gif)
+![An animated gif repeatedly cycles through a series of 8 x-rays, showing the same viewpoint of the patient's chest at different points in time. The patient's bones and internal organs can be visually compared from frame to frame.](tutorial-x-ray-image-processing/xray_image.gif)
 ## Edge detection using the Laplacian-Gaussian, Gaussian gradient, Sobel, and Canny filters
 
 +++
@@ -341,7 +341,7 @@ produce a gradient magnitude.
 [Pythagorean theorem](https://en.wikipedia.org/wiki/Pythagorean_theorem) and
 NumPy's [`np.hypot()`](https://numpy.org/doc/stable/reference/generated/numpy.hypot.html)
 to obtain the magnitude. Finally, normalize the rescaled image for the pixel
-values to be between 0 and 255. 
+values to be between 0 and 255.
 
 [Image normalization](https://en.wikipedia.org/wiki/Normalization_%28image_processing%29)
 follows the `output_channel = 255.0 * (input_channel - min_value) / (max_value - min_value)`
@@ -488,7 +488,7 @@ plt.show()
 ```
 
 As the pixel intensity distribution suggests, there are many low (between around
-0 and 20) and very high (between around 200 and 240) pixel values. 
+0 and 20) and very high (between around 200 and 240) pixel values.
 
 **3.** You can create different conditional masks with NumPy's `np.where()` —
 for example, let's have only those values of the image with the pixels exceeding

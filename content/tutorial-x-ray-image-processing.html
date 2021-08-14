@@ -394,7 +394,7 @@ published at CVPR (a computer vision conference) in 2017.)</p>
 tutorial’s repository under <code class="docutils literal notranslate"><span class="pre">tutorial-x-ray-image-processing/</span></code>, since
 ChestX-ray8 contains gigabytes of data and you may find it challenging to
 download it in batches.</p>
-<p><img alt="Images showing different filters applied over a chest x-ray image" src="../_images/tutorial-x-ray-image-processing.png" /></p>
+<p><img alt="A series of 9 x-ray images of the same region of a patient's chest is shown with different types of image processing filters applied to each image. Each x-ray shows different types of biological detail." src="../_images/tutorial-x-ray-image-processing.png" /></p>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
 <p>The reader should have some knowledge of Python, NumPy arrays, and Matplotlib.
@@ -580,13 +580,13 @@ notebook:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">GIF_PATH</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;xray_image.gif&#39;</span><span class="p">)</span>
-<span class="n">imageio</span><span class="o">.</span><span class="n">mimwrite</span><span class="p">(</span><span class="n">GIF_PATH</span><span class="p">,</span> <span class="n">combined_xray_images_1</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span> <span class="s1">&#39;.gif&#39;</span><span class="p">,</span> <span class="n">fps</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> 
+<span class="n">imageio</span><span class="o">.</span><span class="n">mimwrite</span><span class="p">(</span><span class="n">GIF_PATH</span><span class="p">,</span> <span class="n">combined_xray_images_1</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span> <span class="s1">&#39;.gif&#39;</span><span class="p">,</span> <span class="n">fps</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p>Which gives us:
-<img alt="health_progress" src="../_images/xray_image.gif" /></p>
+<img alt="An animated gif repeatedly cycles through a series of 8 x-rays, showing the same viewpoint of the patient's chest at different points in time. The patient's bones and internal organs can be visually compared from frame to frame." src="../_images/xray_image.gif" /></p>
 </div>
 <div class="section" id="edge-detection-using-the-laplacian-gaussian-gaussian-gradient-sobel-and-canny-filters">
 <h2>Edge detection using the Laplacian-Gaussian, Gaussian gradient, Sobel, and Canny filters<a class="headerlink" href="#edge-detection-using-the-laplacian-gaussian-gaussian-gradient-sobel-and-canny-filters" title="Permalink to this headline">¶</a></h2>
