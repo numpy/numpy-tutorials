@@ -13,4 +13,5 @@ content/tutorial-deep-learning-on-mnist
 content/tutorial-deep-reinforcement-learning-with-pong-from-pixels
 content/tutorial-x-ray-image-processing
 content/tutorial-static_equilibrium
+content/tutorial-plotting-fractals
 ```
