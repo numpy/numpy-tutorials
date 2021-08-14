@@ -210,7 +210,7 @@ The behaviour of this function may look confusing at first glance, so it will he
 
 Our goal is to iterate over each value in the mesh and to tally the number of iterations before the value diverges. Since some values will diverge quicker than others, we need a procedure that only iterates over values that have an absolute value that is sufficiently small enough. We also want to stop tallying values once they surpass the radius. For this, we can use **[Boolean Indexing](https://numpy.org/devdocs/reference/arrays.indexing.html#boolean-array-indexing)**, a NumPy feature that when paired with universal functions is unbeatable. Boolean Indexing allows for operations to be performed conditionally on a NumPy array without having to resort to looping over and checking for each array value individually.
 
-In our case, we use a loop to apply iterations to our function $f(z) = z^2 -1 $ and keep tally. Using Boolean indexing, we only apply the iterations to values that have an absolute value less then 2.
+In our case, we use a loop to apply iterations to our function $f(z) = z^2 -1 $ and keep tally. Using Boolean indexing, we only apply the iterations to values that have an absolute value less than 2.
 
 With that out of the way, we can go about plotting our first fractal! We will use the [**imshow**](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html) function to create a colour-coded visualization of the tallies.
 
@@ -355,7 +355,7 @@ def general_julia(mesh, c=-1, f=np.square, num_iter=100, radius=2):
     return diverge_len
 ```
 
-One cool set of fractals that can be plotted using our general Julia function are ones of the form $f(z) = z^n + c$ for some positive integer n. A very cool pattern which emerges is that the number of regions that 'stick out' matches the degree in which we raise the function to while iterating over it.
+One cool set of fractals that can be plotted using our general Julia function are ones of the form $f(z) = z^n + c$ for some positive integer $n$. A very cool pattern which emerges is that the number of regions that 'stick out' matches the degree in which we raise the function to while iterating over it.
 
 ```{code-cell} ipython3
 fig, axes = plt.subplots(2, 3, figsize=(8, 8))
