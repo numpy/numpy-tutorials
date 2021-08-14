@@ -16,13 +16,15 @@ or navigate to any of the documents listed below and download it individually.
 
 0. [Learn to write a NumPy tutorial](content/tutorial-style-guide.md): our style guide for writing tutorials.
 1. [Tutorial: Linear algebra on n-dimensional arrays](content/tutorial-svd.md)
-3. [Tutorial: Determining Moore's Law with real data in NumPy](content/mooreslaw-tutorial.md)
-4. [Tutorial: Saving and sharing your NumPy arrays](content/save-load-arrays.md)
-5. [Tutorial: NumPy deep learning on MNIST from scratch](content/tutorial-deep-learning-on-mnist.md)
-6. [Tutorial: X-ray image processing](content/tutorial-x-ray-image-processing.md)
-7. [Tutorial: NumPy deep reinforcement learning with Pong from pixels](content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md)
-8. [Tutorial: Masked Arrays](content/tutorial-ma.md)
-9. [Tutorial: Static Equilibrium](content/tutorial-static_equilibrium.md)
+2. [Tutorial: Determining Moore's Law with real data in NumPy](content/mooreslaw-tutorial.md)
+3. [Tutorial: Saving and sharing your NumPy arrays](content/save-load-arrays.md)
+4. [Tutorial: NumPy deep learning on MNIST from scratch](content/tutorial-deep-learning-on-mnist.md)
+5. [Tutorial: X-ray image processing](content/tutorial-x-ray-image-processing.md)
+6. [Tutorial: NumPy deep reinforcement learning with Pong from pixels](content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md)
+7. [Tutorial: Masked Arrays](content/tutorial-ma.md)
+8. [Tutorial: Static Equilibrium](content/tutorial-static_equilibrium.md)
+9. [Tutorial: Plotting Fractals](content/tutorial-plotting-fractals.ipynb)
+
 
 ## Contributing
 
