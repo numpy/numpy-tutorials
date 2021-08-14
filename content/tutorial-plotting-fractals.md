@@ -20,7 +20,7 @@ kernelspec:
 
 +++
 
-Fractals are beautiful, compelling mathematical forms that can be oftentimes created from a relatively simple set of instructions. In nature they can be found in various places, such as coastlines, seashells, and ferns, and even were used in creating certain types of antennas. The mathematical idea of fractals was known for quite some time, but they really began to be truly appreciated in the 1970's as advancements in computer graphics and some accidental discoveries lead researchers like [Benoît Mandelbrot](https://en.wikipedia.org/wiki/Benoit_Mandelbrot) to stumble upon the truly mystifying visualizations that fractals possess. 
+Fractals are beautiful, compelling mathematical forms that can be oftentimes created from a relatively simple set of instructions. In nature they can be found in various places, such as coastlines, seashells, and ferns, and even were used in creating certain types of antennas. The mathematical idea of fractals was known for quite some time, but they really began to be truly appreciated in the 1970's as advancements in computer graphics and some accidental discoveries lead researchers like [Benoît Mandelbrot](https://en.wikipedia.org/wiki/Benoit_Mandelbrot) to stumble upon the truly mystifying visualizations that fractals possess.
 
 Today we will learn how to plot these beautiful visualizations and will start to do a bit of exploring for ourselves as we gain familiarity of the mathematics behind fractals and will use the ever powerful NumPy universal functions to perform the necessary calculations efficiently.
 
@@ -30,16 +30,16 @@ Today we will learn how to plot these beautiful visualizations and will start to
 
 - Write a function for plotting various Julia sets
 - Create a visualization of the Mandelbrot set
-- Write a function that computes Newton fractals 
+- Write a function that computes Newton fractals
 - Experiment with variations of general fractal types
 
 +++
 
 ## What you'll learn
 
-- A better intuition for how fractals work mathematically 
-- A basic understanding about NumPy Universal Functions and Boolean Indexing
-- The basics of working with complex numbers in NumPy 
+- A better intuition for how fractals work mathematically
+- A basic understanding about NumPy universal functions and Boolean Indexing
+- The basics of working with complex numbers in NumPy
 - How to create your own unique fractal visualizations
 
 +++
@@ -48,7 +48,7 @@ Today we will learn how to plot these beautiful visualizations and will start to
 
 - [Matplotlib](https://matplotlib.org/)
 - `make_axis_locatable` function from mpl_toolkits API
- 
+
 which can be imported as follows:
 
 ```{code-cell} ipython3
@@ -68,9 +68,9 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 To gain some intuition for what fractals are, we will begin with an example.
 
-Consider the following equation: 
+Consider the following equation:
 
-$f(z) = z^2 -1 $ 
+$f(z) = z^2 -1 $
 
 where `z` is a complex number (i.e of the form $a + bi$ )
 
@@ -81,7 +81,7 @@ def f(z):
     return np.square(z) - 1
 ```
 
-Note that the square function we used is an example of a **[NumPy Universal Function](https://numpy.org/doc/stable/reference/ufuncs.html)**; we will come back to the significance of this decision shortly. 
+Note that the square function we used is an example of a **[NumPy universal function](https://numpy.org/doc/stable/reference/ufuncs.html)**; we will come back to the significance of this decision shortly.
 
 To gain some intuition for the behaviour of the function, we can try plugging in some different values.
 
@@ -91,7 +91,7 @@ For $z = 0$, we would expect to get $-1$:
 f(0)
 ```
 
-Since we used a Universal Function in our design, we can compute multiple inputs at the same time:
+Since we used a universal function in our design, we can compute multiple inputs at the same time:
 
 ```{code-cell} ipython3
 z = [4, 1-0.2j, 1.6]
@@ -107,7 +107,7 @@ x, y = np.meshgrid(np.linspace(-10, 10, 20), np.linspace(-10, 10, 20))
 mesh = x + (1j * y)  # Make mesh of complex plane
 ```
 
-Now we will apply our function to each value contained in the mesh. Since we used a Universal Function in our design, this means that we can pass in the entire mesh all at once. This is extremely convenient for two reasons: It reduces the amount of code needed to be written and greatly increases the efficiency (as Universal Functions make use of system level C programming in their computations). 
+Now we will apply our function to each value contained in the mesh. Since we used a universal function in our design, this means that we can pass in the entire mesh all at once. This is extremely convenient for two reasons: It reduces the amount of code needed to be written and greatly increases the efficiency (as universal functions make use of system level C programming in their computations).
 
 
 Here we plot the absolute value (or modulus) of each element in the mesh after one “iteration” of the function using a [**3D scatterplot**](https://matplotlib.org/2.0.2/mpl_toolkits/mplot3d/tutorial.html#scatter-plots):
@@ -143,7 +143,7 @@ ax.set_zlabel('Absolute value')
 ax.set_title('Two Iterations: $ f(z) = z^2 - 1$');
 ```
 
-Once again, we see that values around the origin remain small, and values with a larger absolute value (or modulus) “explode”. 
+Once again, we see that values around the origin remain small, and values with a larger absolute value (or modulus) “explode”.
 
 From first impression, its behaviour appears to be normal, and may even seem mundane. Fractals tend to have more to them then what meets the eye; the exotic behavior shows itself when we begin applying more iterations.
 
@@ -151,7 +151,7 @@ From first impression, its behaviour appears to be normal, and may even seem mun
 
 Consider three complex numbers:
 
-$z_1 = 0.4 + 0.4i $, 
+$z_1 = 0.4 + 0.4i $,
 
 $z_2 = z_1 + 0.1$,
 
@@ -184,9 +184,9 @@ for cur_val in selected_values:
 
 To our surprise, the behaviour of the function did not come close to matching our hypothesis. This is a prime example of the chaotic behaviour fractals possess. In the first two plots, the value "exploded" on the last iteration, jumping way beyond the region that it was contained in previously. The third plot on the other hand remained bounded to a small region close to the origin, yielding completely different behaviour despite the tiny change in value.
 
-This leads us to an extremely important question: **How many iterations can be applied to each value before they diverge (“explode”)?** 
+This leads us to an extremely important question: **How many iterations can be applied to each value before they diverge (“explode”)?**
 
-As we saw from the first two plots, the further the values were from the origin, the faster they generally exploded. Although the behaviour is uncertain for smaller values (like $z_1, z_2, z_3$), we can assume that if a value surpasses a certain distance from the origin (say 2) that it is doomed to diverge. We will call this threshold the **radius**. 
+As we saw from the first two plots, the further the values were from the origin, the faster they generally exploded. Although the behaviour is uncertain for smaller values (like $z_1, z_2, z_3$), we can assume that if a value surpasses a certain distance from the origin (say 2) that it is doomed to diverge. We will call this threshold the **radius**.
 
 This allows us to quantify the behaviour of the function for a particular value without having to perform as many computations. Once the radius is surpassed, we are allowed to stop iterating, which gives us a way of answering the question we posed. If we tally how many computations were applied before divergence, we gain insight into the behaviour of the function that would be hard to keep track of otherwise.
 
@@ -208,9 +208,9 @@ def divergence_rate(mesh, num_iter=10, radius=2):
 
 The behaviour of this function may look confusing at first glance, so it will help to explain some of the notation.
 
-Our goal is to iterate over each value in the mesh and to tally the number of iterations before the value diverges. Since some values will diverge quicker than others, we need a procedure that only iterates over values that have an absolute value that is sufficiently small enough. We also want to stop tallying values once they surpass the radius. For this, we can use **[Boolean Indexing](https://numpy.org/devdocs/reference/arrays.indexing.html#boolean-array-indexing)**, a NumPy feature that when paired with Universal Functions is unbeatable. Boolean Indexing allows for operations to be performed conditionally on a NumPy array without having to resort to looping over and checking for each array value individually. 
+Our goal is to iterate over each value in the mesh and to tally the number of iterations before the value diverges. Since some values will diverge quicker than others, we need a procedure that only iterates over values that have an absolute value that is sufficiently small enough. We also want to stop tallying values once they surpass the radius. For this, we can use **[Boolean Indexing](https://numpy.org/devdocs/reference/arrays.indexing.html#boolean-array-indexing)**, a NumPy feature that when paired with universal functions is unbeatable. Boolean Indexing allows for operations to be performed conditionally on a NumPy array without having to resort to looping over and checking for each array value individually.
 
-In our case, we use a loop to apply iterations to our function $f(z) = z^2 -1 $ and keep tally. Using Boolean indexing, we only apply the iterations to values that have an absolute value less then 2. 
+In our case, we use a loop to apply iterations to our function $f(z) = z^2 -1 $ and keep tally. Using Boolean indexing, we only apply the iterations to values that have an absolute value less then 2.
 
 With that out of the way, we can go about plotting our first fractal! We will use the [**imshow**](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html) function to create a colour-coded visualization of the tallies.
 
@@ -239,9 +239,9 @@ What this stunning visual conveys is the complexity of the function’s behaviou
 
 ## Julia set
 
-What we just explored was an example of a fractal visualization of a specific Julia Set. 
+What we just explored was an example of a fractal visualization of a specific Julia Set.
 
-Consider the function $f(z) = z^2 + c$ where $c$ is a complex number. The **filled-in Julia set** of $c$ is the set of all complex numbers `z` in which the function converges at $f(z)$. Likewise, the boundary of the filled-in Julia set is what we call the **Julia set**. In our above visualization, we can see that the yellow region represents an approximation of the filled-in Julia set for $c = -1$ and the greenish-yellow border would contain the Julia set.  
+Consider the function $f(z) = z^2 + c$ where $c$ is a complex number. The **filled-in Julia set** of $c$ is the set of all complex numbers `z` in which the function converges at $f(z)$. Likewise, the boundary of the filled-in Julia set is what we call the **Julia set**. In our above visualization, we can see that the yellow region represents an approximation of the filled-in Julia set for $c = -1$ and the greenish-yellow border would contain the Julia set.
 
 To gain access to a wider range of "Julia fractals", we can write a function that allows for different values of $c$ to be passed in:
 
@@ -340,7 +340,7 @@ plot_fractal(output, **kwargs);
 
 ## Generalizing the Julia set
 
-We can generalize our Julia function even further by giving it a parameter for which Universal Function we would like to pass in. This would allow us to plot fractals of the form $f(z) = g(z) + c$ where g is a Universal Function selected by us.
+We can generalize our Julia function even further by giving it a parameter for which universal function we would like to pass in. This would allow us to plot fractals of the form $f(z) = g(z) + c$ where g is a universal function selected by us.
 
 ```{code-cell} ipython3
 def general_julia(mesh, c=-1, f=np.square, num_iter=100, radius=2):
@@ -445,7 +445,7 @@ kwargs = {'title': 'f(z) = z - \dfrac{sin(z)cos(z)}{2}', 'cmap': 'binary'}
 plot_fractal(output, **kwargs);
 ```
 
-Note that you sometimes have to play with the radius in order to get a neat looking fractal. 
+Note that you sometimes have to play with the radius in order to get a neat looking fractal.
 
 Finally, we can go a little bit wild with our function selection
 
@@ -484,9 +484,9 @@ It is truly fascinating how distinct yet similar these fractals are with each ot
 ## Creating your own fractals
 
 
-What makes fractals more exciting is how much there is to explore once you become familiar with the basics. Now we will wrap up our tutorial by exploring some of the different ways one can experiment in creating unique fractals. I encourage you to try some things out on your own (if you have not done so already). 
+What makes fractals more exciting is how much there is to explore once you become familiar with the basics. Now we will wrap up our tutorial by exploring some of the different ways one can experiment in creating unique fractals. I encourage you to try some things out on your own (if you have not done so already).
 
-One of the first places to experiment would be with the function for the generalized Julia set, where we can try passing in different functions as parameters.  
+One of the first places to experiment would be with the function for the generalized Julia set, where we can try passing in different functions as parameters.
 
 Let's start by choosing
 
@@ -506,7 +506,7 @@ plot_fractal(output, **kwargs);
 
 What happens if we compose our defined function inside of a sine function?
 
-Let's try defining 
+Let's try defining
 
 $g(z) = sin(f(z)) = sin(tan(z^2))$
 
@@ -552,15 +552,15 @@ kwargs = {'title': 'Accidental \ fractal', 'cmap': 'Blues'}
 plot_fractal(output, **kwargs);
 ```
 
-Needless to say, there are a nearly endless supply of interesting fractal creations that can be made just by playing around with various combinations of NumPy Universal Functions and by tinkering with the parameters.
+Needless to say, there are a nearly endless supply of interesting fractal creations that can be made just by playing around with various combinations of NumPy universal functions and by tinkering with the parameters.
 
 +++
 
 ## In conclusion
 
-We learned a lot about generating fractals today. We saw how complicated fractals requiring many iterations could be computed efficiently using Universal Functions. We also took advantage of boolean indexing, which allowed for less computations to be made without having to individually verify each value. Finally, we learned a lot about fractals themselves. As a recap:
+We learned a lot about generating fractals today. We saw how complicated fractals requiring many iterations could be computed efficiently using universal functions. We also took advantage of boolean indexing, which allowed for less computations to be made without having to individually verify each value. Finally, we learned a lot about fractals themselves. As a recap:
 
-- Fractal images are created by iterating a function over a set of values, and keeping tally of how long it takes for each value to pass a certain threshold 
+- Fractal images are created by iterating a function over a set of values, and keeping tally of how long it takes for each value to pass a certain threshold
 - The colours in the image correspond to the tally counts of the values
 - The filled-in Julia set for $c$ consists of all complex numbers `z` in which $f(z) = z^2 + c$ converges
 - The Julia set for $c$ is the set of complex numbers that make up the boundary of the filled-in Julia set
@@ -572,13 +572,13 @@ We learned a lot about generating fractals today. We saw how complicated fractal
 
 ## On your own
 
-- Play around with the parameters of the generalized Julia set function, try playing with the constant value, number of iterations, function choice, radius, and colour choice. 
+- Play around with the parameters of the generalized Julia set function, try playing with the constant value, number of iterations, function choice, radius, and colour choice.
 
 - Visit the “List of fractals by Hausdorff dimension” Wikipedia page (linked in the Further reading section) and try writing a function for a fractal not mentioned in this tutorial.
 
 +++
 
-## Further reading 
+## Further reading
 
 - [More information on the theory behind fractals](https://en.wikipedia.org/wiki/Fractal)
 - [Further reading on Julia sets](https://en.wikipedia.org/wiki/Julia_set)
