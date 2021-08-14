@@ -160,55 +160,10 @@ from one of the dataset files. They are numbered from `...000.png` to
 ```{code-cell} ipython3
 import numpy as np
 
-file1 = imageio.imread(os.path.join(DIR, '00000011_000.png'))
-file2 = imageio.imread(os.path.join(DIR, '00000011_001.png'))
-file3 = imageio.imread(os.path.join(DIR, '00000011_003.png'))
-file4 = imageio.imread(os.path.join(DIR, '00000011_004.png'))
-file5 = imageio.imread(os.path.join(DIR, '00000011_005.png'))
-file6 = imageio.imread(os.path.join(DIR, '00000011_006.png'))
-file7 = imageio.imread(os.path.join(DIR, '00000011_007.png'))
-file8 = imageio.imread(os.path.join(DIR, '00000011_008.png'))
-
-combined_xray_images_1 = np.stack([file1, file2, file3, file4, file5, file6, file7, file8])
+combined_xray_images_1 = np.array(
+    [imageio.imread(os.path.join(DIR, f"00000011_00{i}.png")) for i in range(9)]
+)
 ```
-
-Alternatively, you can `append` the image arrays as follows:
-
-```{code-cell} ipython3
-combined_xray_images_2 = []
-
-for i in range(8):
-    single_xray_image = imageio.imread(os.path.join(DIR, '00000011_00'+str(i)+'.png'))
-    combined_xray_images_2.append(single_xray_image)
-```
-
-_Note on performance:_
-
-- `append`ing the images may no be faster. If you care about performance, you
-   should probably use `np.stack()`, as evidenced when you try to time the code
-   with Python's `timeit`:
-
-    ```python
-    %timeit combined_xray_images_1 = np.stack([file1, file2, file3, file4, file5, file6, file7, file8])
-    ```
-
-    Example output:
-
-    ```
-    1.52 ms ± 49.3 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
-    ```
-
-    ```python
-    %timeit C = [combined_xray_images_2.append(imageio.imread(os.path.join(DIR, '00000011_00'+str(i)+'.png'))) for i in range(8)]
-    ```
-
-    Example output:
-
-    ```
-    159 ms ± 2.69 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
-    ```
-
-+++
 
 **2.** Check the shape of the new X-ray image array containing 8 stacked images:
 
