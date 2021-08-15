@@ -298,14 +298,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#combine-images-with-np-stack-to-demonstrate-progression">
-   Combine images with
-   <code class="docutils literal notranslate">
-    <span class="pre">
-     np.stack()
-    </span>
-   </code>
-   to demonstrate progression
+  <a class="reference internal nav-link" href="#combine-images-into-a-multidimensional-array-to-demonstrate-progression">
+   Combine images into a multidimensional array to demonstrate progression
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -429,7 +423,7 @@ each notebook cell.</p>
 <h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
 <li><p>Examine an X-ray with <code class="docutils literal notranslate"><span class="pre">imageio</span></code></p></li>
-<li><p>Combine images with <code class="docutils literal notranslate"><span class="pre">np.stack()</span></code> to demonstrate progression</p></li>
+<li><p>Combine images into a multi-dimensional array to demonstrate progression</p></li>
 <li><p>Edge detection using the Laplacian-Gaussian, Gaussian gradient, Sobel, and
 Canny filters</p></li>
 <li><p>Apply masks to X-rays with <code class="docutils literal notranslate"><span class="pre">np.where()</span></code></p></li>
@@ -488,68 +482,27 @@ uint8
 </div>
 </div>
 </div>
-<div class="section" id="combine-images-with-np-stack-to-demonstrate-progression">
-<h2>Combine images with <code class="docutils literal notranslate"><span class="pre">np.stack()</span></code> to demonstrate progression<a class="headerlink" href="#combine-images-with-np-stack-to-demonstrate-progression" title="Permalink to this headline">¶</a></h2>
-<p>With NumPy’s <code class="docutils literal notranslate"><span class="pre">np.stack()</span></code> you can combine multiple X-rays to make an
-n-dimensional array and then show the “health progress” in a sequential manner.</p>
-<p>In the next example, instead of 1 image you’ll use 8 X-ray 1024x1024-pixel
+<div class="section" id="combine-images-into-a-multidimensional-array-to-demonstrate-progression">
+<h2>Combine images into a multidimensional array to demonstrate progression<a class="headerlink" href="#combine-images-into-a-multidimensional-array-to-demonstrate-progression" title="Permalink to this headline">¶</a></h2>
+<p>In the next example, instead of 1 image you’ll use 9 X-ray 1024x1024-pixel
 images from the ChestX-ray8 dataset that have been downloaded and extracted
 from one of the dataset files. They are numbered from <code class="docutils literal notranslate"><span class="pre">...000.png</span></code> to
 <code class="docutils literal notranslate"><span class="pre">...008.png</span></code> and let’s assume they belong to the same patient.</p>
-<p><strong>1.</strong> Import NumPy, read in each of the X-rays, and stack them together with
-<code class="docutils literal notranslate"><span class="pre">np.stack()</span></code>:</p>
+<p><strong>1.</strong> Import NumPy, read in each of the X-rays, and create a three-dimensional
+array where the first dimension corresponds to image number:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">num_imgs</span> <span class="o">=</span> <span class="mi">9</span>
 
-<span class="n">file1</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_000.png&#39;</span><span class="p">))</span>
-<span class="n">file2</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_001.png&#39;</span><span class="p">))</span>
-<span class="n">file3</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_003.png&#39;</span><span class="p">))</span>
-<span class="n">file4</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_004.png&#39;</span><span class="p">))</span>
-<span class="n">file5</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_005.png&#39;</span><span class="p">))</span>
-<span class="n">file6</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_006.png&#39;</span><span class="p">))</span>
-<span class="n">file7</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_007.png&#39;</span><span class="p">))</span>
-<span class="n">file8</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_008.png&#39;</span><span class="p">))</span>
-
-<span class="n">combined_xray_images_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">file1</span><span class="p">,</span> <span class="n">file2</span><span class="p">,</span> <span class="n">file3</span><span class="p">,</span> <span class="n">file4</span><span class="p">,</span> <span class="n">file5</span><span class="p">,</span> <span class="n">file6</span><span class="p">,</span> <span class="n">file7</span><span class="p">,</span> <span class="n">file8</span><span class="p">])</span>
+<span class="n">combined_xray_images_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;00000011_00</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_imgs</span><span class="p">)]</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Alternatively, you can <code class="docutils literal notranslate"><span class="pre">append</span></code> the image arrays as follows:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">combined_xray_images_2</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
-    <span class="n">single_xray_image</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_00&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.png&#39;</span><span class="p">))</span>
-    <span class="n">combined_xray_images_2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_xray_image</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p><em>Note on performance:</em></p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">append</span></code>ing the images may no be faster. If you care about performance, you
-should probably use <code class="docutils literal notranslate"><span class="pre">np.stack()</span></code>, as evidenced when you try to time the code
-with Python’s <code class="docutils literal notranslate"><span class="pre">timeit</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">combined_xray_images_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">file1</span><span class="p">,</span> <span class="n">file2</span><span class="p">,</span> <span class="n">file3</span><span class="p">,</span> <span class="n">file4</span><span class="p">,</span> <span class="n">file5</span><span class="p">,</span> <span class="n">file6</span><span class="p">,</span> <span class="n">file7</span><span class="p">,</span> <span class="n">file8</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>Example output:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>1.52 ms ± 49.3 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
-</pre></div>
-</div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">timeit</span> <span class="n">C</span> <span class="o">=</span> <span class="p">[</span><span class="n">combined_xray_images_2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s1">&#39;00000011_00&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.png&#39;</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)]</span>
-</pre></div>
-</div>
-<p>Example output:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>159 ms ± 2.69 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
-</pre></div>
-</div>
-</li>
-</ul>
-<p><strong>2.</strong> Check the shape of the new X-ray image array containing 8 stacked images:</p>
+<p><strong>2.</strong> Check the shape of the new X-ray image array containing 9 stacked images:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">combined_xray_images_1</span><span class="o">.</span><span class="n">shape</span>
@@ -557,26 +510,27 @@ with Python’s <code class="docutils literal notranslate"><span class="pre">tim
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(8, 1024, 1024)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(9, 1024, 1024)
 </pre></div>
 </div>
 </div>
 </div>
+<p>Note that the shape in the first dimension matches <code class="docutils literal notranslate"><span class="pre">num_imgs</span></code>, so the
+<code class="docutils literal notranslate"><span class="pre">combined_xray_images_1</span></code> array can be interpreted as a stack of 2D images.</p>
 <p><strong>3.</strong> You can now display the “health progress” by plotting each of frames next
 to each other using Matplotlib:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">num_imgs</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">combined_xray_images_1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">img</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">combined_xray_images_1</span><span class="p">,</span> <span class="n">axes</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_24_0.png" src="../_images/tutorial-x-ray-image-processing_24_0.png" />
+<img alt="../_images/tutorial-x-ray-image-processing_20_0.png" src="../_images/tutorial-x-ray-image-processing_20_0.png" />
 </div>
 </div>
 <p><strong>4.</strong> In addition, it can be helpful to show the progress as an animation.
@@ -642,7 +596,7 @@ Gaussian filter (you’ll use <code class="docutils literal notranslate"><span c
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_33_0.png" src="../_images/tutorial-x-ray-image-processing_33_0.png" />
+<img alt="../_images/tutorial-x-ray-image-processing_29_0.png" src="../_images/tutorial-x-ray-image-processing_29_0.png" />
 </div>
 </div>
 </div>
@@ -680,7 +634,7 @@ example below):</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_38_0.png" src="../_images/tutorial-x-ray-image-processing_38_0.png" />
+<img alt="../_images/tutorial-x-ray-image-processing_34_0.png" src="../_images/tutorial-x-ray-image-processing_34_0.png" />
 </div>
 </div>
 </div>
@@ -757,7 +711,7 @@ emphasize the edges:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_45_0.png" src="../_images/tutorial-x-ray-image-processing_45_0.png" />
+<img alt="../_images/tutorial-x-ray-image-processing_41_0.png" src="../_images/tutorial-x-ray-image-processing_41_0.png" />
 </div>
 </div>
 </div>
@@ -827,7 +781,7 @@ the help of the Canny filter technique. The edges can be emphasized using the
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_50_0.png" src="../_images/tutorial-x-ray-image-processing_50_0.png" />
+<img alt="../_images/tutorial-x-ray-image-processing_46_0.png" src="../_images/tutorial-x-ray-image-processing_46_0.png" />
 </div>
 </div>
 </div>
@@ -878,7 +832,7 @@ with <code class="docutils literal notranslate"><span class="pre">ndimage.histog
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_56_0.png" src="../_images/tutorial-x-ray-image-processing_56_0.png" />
+<img alt="../_images/tutorial-x-ray-image-processing_52_0.png" src="../_images/tutorial-x-ray-image-processing_52_0.png" />
 </div>
 </div>
 <p>As the pixel intensity distribution suggests, there are many low (between around
@@ -899,7 +853,7 @@ a certain threshold:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_58_0.png" src="../_images/tutorial-x-ray-image-processing_58_0.png" />
+<img alt="../_images/tutorial-x-ray-image-processing_54_0.png" src="../_images/tutorial-x-ray-image-processing_54_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -915,7 +869,7 @@ a certain threshold:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_59_0.png" src="../_images/tutorial-x-ray-image-processing_59_0.png" />
+<img alt="../_images/tutorial-x-ray-image-processing_55_0.png" src="../_images/tutorial-x-ray-image-processing_55_0.png" />
 </div>
 </div>
 </div>
@@ -952,7 +906,7 @@ so far:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_62_0.png" src="../_images/tutorial-x-ray-image-processing_62_0.png" />
+<img alt="../_images/tutorial-x-ray-image-processing_58_0.png" src="../_images/tutorial-x-ray-image-processing_58_0.png" />
 </div>
 </div>
 </div>
