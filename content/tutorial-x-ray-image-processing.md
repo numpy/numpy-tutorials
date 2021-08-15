@@ -89,7 +89,7 @@ each notebook cell.
 +++
 
 1. Examine an X-ray with `imageio`
-2. Combine images with `np.stack()` to demonstrate progression
+2. Combine images into a multi-dimensional array to demonstrate progression
 3. Edge detection using the Laplacian-Gaussian, Gaussian gradient, Sobel, and
    Canny filters
 4. Apply masks to X-rays with `np.where()`
@@ -140,92 +140,45 @@ plt.axis('off')
 plt.show()
 ```
 
-## Combine images with `np.stack()` to demonstrate progression
+## Combine images into a multidimensional array to demonstrate progression
 
 +++
 
-With NumPy's `np.stack()` you can combine multiple X-rays to make an
-n-dimensional array and then show the "health progress" in a sequential manner.
-
-In the next example, instead of 1 image you'll use 8 X-ray 1024x1024-pixel
+In the next example, instead of 1 image you'll use 9 X-ray 1024x1024-pixel
 images from the ChestX-ray8 dataset that have been downloaded and extracted
 from one of the dataset files. They are numbered from `...000.png` to
 `...008.png` and let's assume they belong to the same patient.
 
-+++
-
-**1.** Import NumPy, read in each of the X-rays, and stack them together with
-`np.stack()`:
+**1.** Import NumPy, read in each of the X-rays, and create a three-dimensional
+array where the first dimension corresponds to image number:
 
 ```{code-cell} ipython3
 import numpy as np
+num_imgs = 9
 
-file1 = imageio.imread(os.path.join(DIR, '00000011_000.png'))
-file2 = imageio.imread(os.path.join(DIR, '00000011_001.png'))
-file3 = imageio.imread(os.path.join(DIR, '00000011_003.png'))
-file4 = imageio.imread(os.path.join(DIR, '00000011_004.png'))
-file5 = imageio.imread(os.path.join(DIR, '00000011_005.png'))
-file6 = imageio.imread(os.path.join(DIR, '00000011_006.png'))
-file7 = imageio.imread(os.path.join(DIR, '00000011_007.png'))
-file8 = imageio.imread(os.path.join(DIR, '00000011_008.png'))
-
-combined_xray_images_1 = np.stack([file1, file2, file3, file4, file5, file6, file7, file8])
+combined_xray_images_1 = np.array(
+    [imageio.imread(os.path.join(DIR, f"00000011_00{i}.png")) for i in range(num_imgs)]
+)
 ```
 
-Alternatively, you can `append` the image arrays as follows:
-
-```{code-cell} ipython3
-combined_xray_images_2 = []
-
-for i in range(8):
-    single_xray_image = imageio.imread(os.path.join(DIR, '00000011_00'+str(i)+'.png'))
-    combined_xray_images_2.append(single_xray_image)
-```
-
-_Note on performance:_
-
-- `append`ing the images may no be faster. If you care about performance, you
-   should probably use `np.stack()`, as evidenced when you try to time the code
-   with Python's `timeit`:
-
-    ```python
-    %timeit combined_xray_images_1 = np.stack([file1, file2, file3, file4, file5, file6, file7, file8])
-    ```
-
-    Example output:
-
-    ```
-    1.52 ms ± 49.3 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
-    ```
-
-    ```python
-    %timeit C = [combined_xray_images_2.append(imageio.imread(os.path.join(DIR, '00000011_00'+str(i)+'.png'))) for i in range(8)]
-    ```
-
-    Example output:
-
-    ```
-    159 ms ± 2.69 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
-    ```
-
-+++
-
-**2.** Check the shape of the new X-ray image array containing 8 stacked images:
+**2.** Check the shape of the new X-ray image array containing 9 stacked images:
 
 ```{code-cell} ipython3
 combined_xray_images_1.shape
 ```
 
+Note that the shape in the first dimension matches `num_imgs`, so the
+`combined_xray_images_1` array can be interpreted as a stack of 2D images.
+
 **3.** You can now display the "health progress" by plotting each of frames next
 to each other using Matplotlib:
 
 ```{code-cell} ipython3
-fig, axes = plt.subplots(nrows=1, ncols=8, figsize=(30, 30))
+fig, axes = plt.subplots(nrows=1, ncols=num_imgs, figsize=(30, 30))
 
-for i in range(8):
-    x = combined_xray_images_1[i]
-    axes[i].imshow(x, cmap='gray')
-    axes[i].axis('off')
+for img, ax in zip(combined_xray_images_1, axes):
+    ax.imshow(img, cmap='gray')
+    ax.axis('off')
 ```
 
 **4.** In addition, it can be helpful to show the progress as an animation.
