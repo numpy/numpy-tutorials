@@ -170,12 +170,12 @@ for i in range(num_iter):
     outputs[i+1] = f(outputs[i])  # Apply 10 iterations, save each output
 
 fig, axes = plt.subplots(1, selected_values.shape[0], figsize=(16, 6))
+axes[1].set_xlabel('Real axis')
+axes[0].set_ylabel('Imaginary axis')
 
 for ax, data in zip(axes, outputs.T):
-    ax.set_xlabel('Real axis')
-    ax.set_ylabel('Imaginary axis')
-    ax.set_title(f'Mapping of iterations on {data[0]}')
     cycle = ax.scatter(data.real, data.imag, c=range(data.shape[0]), alpha=0.6)
+    ax.set_title(f'Mapping of iterations on {data[0]}')
 
 fig.colorbar(cycle, ax=axes, location="bottom", label='Iteration');
 ```
