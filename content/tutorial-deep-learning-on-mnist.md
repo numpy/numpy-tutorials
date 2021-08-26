@@ -171,8 +171,8 @@ for sample, ax in zip(rng.choice(x_train, size=num_examples, replace=False), axe
     ax.imshow(sample.reshape(28, 28), cmap='gray')
 ```
 
-_Above are five images taken from the MNIST training set. Hand-drawn
-Arabic numerals 3, 8, 9, 6, and 5._
+_Above are five images taken from the MNIST training set. Various hand-drawn
+Arabic numerals are shown, with exact values chosen randomly with each run of the code._
 
 > **Note:** You can also visualize a sample image as an array by printing `x_train[59999]`. Here, `59999` is your 60,000th training image sample (`0` would be your first). Your output will be quite long and should contain an array of 8-bit integers:
 >
