@@ -161,25 +161,23 @@ Given the shape of our first two plots, we would expect that these values would 
 
 ```{code-cell} ipython3
 selected_values = np.array([0.4 + 0.4j, 0.41 + 0.4j, 0.4 + 0.41j])
-for cur_val in selected_values:
+num_iter = 9
 
-    outputs = np.zeros(10, dtype=complex)
-    outputs[0] = cur_val
+outputs = np.zeros((num_iter+1, selected_values.shape[0]), dtype=complex)
+outputs[0] = selected_values
 
-    for i in range(9):
-        outputs[i+1] = f(outputs[i])  # Apply 10 iterations, save each output
+for i in range(num_iter):
+    outputs[i+1] = f(outputs[i])  # Apply 10 iterations, save each output
 
-    index = np.linspace(0, 10, 10)
+fig, axes = plt.subplots(1, selected_values.shape[0], figsize=(16, 6))
+axes[1].set_xlabel('Real axis')
+axes[0].set_ylabel('Imaginary axis')
 
-    fig = plt.figure(figsize=(5, 5))
-    ax = plt.axes()
+for ax, data in zip(axes, outputs.T):
+    cycle = ax.scatter(data.real, data.imag, c=range(data.shape[0]), alpha=0.6)
+    ax.set_title(f'Mapping of iterations on {data[0]}')
 
-    ax.set_xlabel('Real axis')
-    ax.set_ylabel('Imaginary axis')
-    ax.set_title(f'Mapping of iterations on {cur_val}')
-
-    cycle = ax.scatter(np.real(outputs), np.imag(outputs), c=index, alpha=0.6)
-    fig.colorbar(cycle, label='Iteration');
+fig.colorbar(cycle, ax=axes, location="bottom", label='Iteration');
 ```
 
 To our surprise, the behaviour of the function did not come close to matching our hypothesis. This is a prime example of the chaotic behaviour fractals possess. In the first two plots, the value "exploded" on the last iteration, jumping way beyond the region that it was contained in previously. The third plot on the other hand remained bounded to a small region close to the origin, yielding completely different behaviour despite the tiny change in value.
