@@ -569,7 +569,7 @@ plt.show()
 ```
 
 _The training and testing error is shown above in the left and right
-plots, respectiveley. As the number of Epochs increases, the total error
+plots, respectively. As the number of Epochs increases, the total error
 decreases and the accuracy increases._
 
 The accuracy rates that your model reaches during training and testing may be somewhat plausible but you may also find the error rates to be quite high.
