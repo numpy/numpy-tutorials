@@ -352,7 +352,7 @@
 <p>This tutorial demonstrates how to build a simple <a class="reference external" href="https://en.wikipedia.org/wiki/Feedforward_neural_network">feedforward neural network</a> (with one hidden layer) and train it from scratch with NumPy to recognize handwritten digit images.</p>
 <p>Your deep learning model — one of the most basic artificial neural networks that resembles the original <a class="reference external" href="https://en.wikipedia.org/wiki/Multilayer_perceptron">multi-layer perceptron</a> — will learn to classify digits from 0 to 9 from the <a class="reference external" href="https://en.wikipedia.org/wiki/MNIST_database">MNIST</a> dataset. The dataset contains 60,000 training and 10,000 test images and corresponding labels. Each training and test image is of size 784 (or 28x28 pixels) — this will be your input for the neural network.</p>
 <p>Based on the image inputs and their labels (<a class="reference external" href="https://en.wikipedia.org/wiki/Supervised_learning">supervised learning</a>), your neural network will be trained to learn their features using forward propagation and backpropagation (<a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation#Reverse_accumulation">reverse-mode</a> differentiation). The final output of the network is a vector of 10 scores — one for each handwritten digit image. You will also evaluate how good your model is at classifying the images on the test set.</p>
-<p><img alt="Diagram showing operations detailed in this tutorial" src="../_images/tutorial-deep-learning-on-mnist.png" /></p>
+<p><img alt="Diagram showing operations detailed in this tutorial (The input imageis passed into a Hidden layer that creates a weighted sum of outputs.The weighted sum is passed to the Non-linearity, then regularization andinto the output layer. The output layer creates a prediction which canthen be compared to existing data. The errors are used to calculate theloss function and update weights in the hidden layer and outputlayer.)" src="../_images/tutorial-deep-learning-on-mnist.png" /></p>
 <p>This tutorial was adapted from the work by <a class="reference external" href="https://github.com/iamtrask/Grokking-Deep-Learning">Andrew Trask</a> (with the author’s permission).</p>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
@@ -504,6 +504,8 @@ The shape of test images: (10000, 784) and test labels: (10000,)
 <img alt="../_images/tutorial-deep-learning-on-mnist_13_0.png" src="../_images/tutorial-deep-learning-on-mnist_13_0.png" />
 </div>
 </div>
+<p><em>Above are five images taken from the MNIST training set. Various hand-drawn
+Arabic numerals are shown, with exact values chosen randomly with each run of the code.</em></p>
 <blockquote>
 <div><p><strong>Note:</strong> You can also visualize a sample image as an array by printing <code class="docutils literal notranslate"><span class="pre">x_train[59999]</span></code>. Here, <code class="docutils literal notranslate"><span class="pre">59999</span></code> is your 60,000th training image sample (<code class="docutils literal notranslate"><span class="pre">0</span></code> would be your first). Your output will be quite long and should contain an array of 8-bit integers:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
@@ -726,7 +728,7 @@ The data type of test labels: float64
 <div class="section" id="model-architecture-and-training-summary">
 <h3>Model architecture and training summary<a class="headerlink" href="#model-architecture-and-training-summary" title="Permalink to this headline">¶</a></h3>
 <p>Here is a summary of the neural network model architecture and the training process:</p>
-<p><img alt="Diagram showing operations detailed in this tutorial" src="../_images/tutorial-deep-learning-on-mnist.png" /></p>
+<p><img alt="Diagram showing operations detailed in this tutorial (The input imageis passed into a Hidden layer that creates a weighted sum of outputs.The weighted sum is passed to the Non-linearity, then regularization andinto the output layer. The output layer creates a prediction which canthen be compared to existing data. The errors are used to calculate theloss function and update weights in the hidden layer and outputlayer.)" src="../_images/tutorial-deep-learning-on-mnist.png" /></p>
 <ul>
 <li><p><em>The input layer</em>:</p>
 <p>It is the input for the network — the previously preprocessed data that is loaded from <code class="docutils literal notranslate"><span class="pre">training_images</span></code> into <code class="docutils literal notranslate"><span class="pre">layer_0</span></code>.</p>
@@ -1012,6 +1014,9 @@ its performance over the training epochs.</p>
 <img alt="../_images/tutorial-deep-learning-on-mnist_46_0.png" src="../_images/tutorial-deep-learning-on-mnist_46_0.png" />
 </div>
 </div>
+<p><em>The training and testing error is shown above in the left and right
+plots, respectively. As the number of Epochs increases, the total error
+decreases and the accuracy increases.</em></p>
 <p>The accuracy rates that your model reaches during training and testing may be somewhat plausible but you may also find the error rates to be quite high.</p>
 <p>To reduce the error during training and testing, you can consider changing the simple loss function to, for example, categorical <a class="reference external" href="https://en.wikipedia.org/wiki/Cross_entropy">cross-entropy</a>. Other possible solutions are discussed below.</p>
 </div>
