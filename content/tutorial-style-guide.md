@@ -13,7 +13,7 @@ kernelspec:
 
 # Learn to write a NumPy tutorial
 
-![Daniele Procinda's documentation system dividing tutorials, how-to guides, explanation, and reference](https://diataxis.fr/_images/diataxis.png)
+![The Diátaxis framework for documentation dividing tutorials, how-to guides, explanation, and reference](https://diataxis.fr/_images/diataxis.png)
 <p style="text-align:right;font-style:italic;">Image credit: Daniele Procida's <a href="https://diataxis.fr/">Diátaxis framework</a>, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
 
 +++ 
