@@ -349,8 +349,8 @@
                 
   <div class="section" id="determining-moore-s-law-with-real-data-in-numpy">
 <h1>Determining Moore’s Law with real data in NumPy<a class="headerlink" href="#determining-moore-s-law-with-real-data-in-numpy" title="Permalink to this headline">¶</a></h1>
-<p><img alt="Plot of Moore's Law data" src="../_images/01-mooreslaw-tutorial-intro.png" /></p>
-<p><em>The number of transistors reported on a given chip plotted on a log scale in the y axis with the date of introduction on the linear scale x-axis. The blue data points are from a <a class="reference external" href="https://en.wikipedia.org/wiki/Transistor_count#Microprocessors">transistor count table</a>. The red line is an ordinary least squares prediction and the orange line is Moore’s law.</em></p>
+<p><img alt="Scatter plot of MOS transistor count per microprocessor every two years as a demonstration of Moore's Law." src="../_images/01-mooreslaw-tutorial-intro.png" /></p>
+<p><em>The number of transistors reported per a given chip plotted on a log scale in the y axis with the date of introduction on the linear scale x-axis. The blue data points are from a <a class="reference external" href="https://en.wikipedia.org/wiki/Transistor_count#Microprocessors">transistor count table</a>. The red line is an ordinary least squares prediction and the orange line is Moore’s law.</em></p>
 <div class="section" id="what-you-ll-do">
 <h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this headline">¶</a></h2>
 <p>In 1965, engineer Gordon Moore
@@ -635,7 +635,7 @@ Dep. Variable:                      y   R-squared:                       0.949
 Model:                            OLS   Adj. R-squared:                  0.949
 Method:                 Least Squares   F-statistic:                     3309.
 Date:                Fri, 27 Aug 2021   Prob (F-statistic):          1.75e-116
-Time:                        20:55:27   Log-Likelihood:                -273.43
+Time:                        20:58:13   Log-Likelihood:                -273.43
 No. Observations:                 179   AIC:                             550.9
 Df Residuals:                     177   BIC:                             557.2
 Df Model:                           1                                         
@@ -766,6 +766,7 @@ https://fivethirtyeight.com elements. Change the matplotlib style with
 <img alt="../_images/mooreslaw-tutorial_27_1.png" src="../_images/mooreslaw-tutorial_27_1.png" />
 </div>
 </div>
+<p><em>A scatter plot of MOS transistor count per microprocessor every two years with a red line for the ordinary least squares prediction and an orange line for Moore’s law.</em></p>
 <p>The linear regression captures the increase in the number of transistors
 per semiconductors each year.  In 2015, semiconductor manufacturers
 claimed they could not keep up with Moore’s law anymore. Your analysis
@@ -820,7 +821,7 @@ for $\pm\frac{1}{2}~years.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19200000000.0 250000000.0 7050000000.0
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7efd30da98b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f094ce67910&gt;
 </pre></div>
 </div>
 <img alt="../_images/mooreslaw-tutorial_29_2.png" src="../_images/mooreslaw-tutorial_29_2.png" />
