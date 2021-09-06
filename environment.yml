@@ -5,6 +5,7 @@ dependencies:
   - numpy
   - scipy
   - matplotlib
+  - pandas 
   - pytest
   - nbval
   - statsmodels
