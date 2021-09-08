@@ -191,7 +191,7 @@ The problem with an RNN however, is that it cannot retain long-term memory becau
 
 ### Overview of the Model Architecture 
 
-![lstm.jpg](attachment:lstm.jpg)
+![lstm.jpg](tutorial-nlp-from-scratch/dl_architectures.jpg)
 
 +++
 
