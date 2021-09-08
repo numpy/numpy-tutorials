@@ -91,7 +91,7 @@ IMDB Reviews Dataset is a large movie review dataset collected and prepared by A
 +++
 
 ### Collecting and loading the speech transcripts
-We have chosen speeches by activists around the globe talking about issues like climate change, feminism, lgbtqa+ rights and racism. These were sourced them from newspapers, the official website of the United Nations and the archives of established universities as cited in the table below. A CSV file was created containing the transcribed speeches, their speaker and the source the speeches were obtained from. 
+We have chosen speeches by activists around the globe talking about issues like climate change, feminism, lgbtqa+ rights and racism. These were sourced from newspapers, the official website of the United Nations and the archives of established universities as cited in the table below. A CSV file was created containing the transcribed speeches, their speaker and the source the speeches were obtained from. 
 We made sure to include different demographics in our data and included a range of different topics, most of which focus on social and/or ethical issues. The dataset is subjected to the CC0 Creative Common License, which means that is free for the public to use and there are no copyrights reserved.
 
 | Speech                                           | Speaker                 | Source                                                     |
