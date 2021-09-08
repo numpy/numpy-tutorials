@@ -61,7 +61,7 @@ This tutorial can be run locally in an isolated environment, such as [Virtualenv
 ## 1. Data Collection
 ----
 
-Before we begin there are a few pointers you should always keep in mind before choosing the data you wish to train your model on:
+Before you begin there are a few pointers you should always keep in mind before choosing the data you wish to train your model on:
 - **Identifying Data Bias** - Bias is a component of the human thought process, and data collected from humans therefore inherently reflects that bias. Some ways in which this bias tends to occur in Machine Learning datasets are:
     - *Bias in historical data*: Historical data are often skewed towards, or against, particular groups.
         Data can also be severely imbalanced with limited information on protected groups.
@@ -150,7 +150,7 @@ textproc = TextPreprocess()
 X = textproc.cleantext(imdb_df, 'review', remove_stopwords = True, remove_punc = True)
 ```
 
-Now, we need to create a split between training and testing datasets. You can vary the `split_percentile` to try different ratios:
+Now, you need to create a split between training and testing datasets. You can vary the `split_percentile` to try different ratios:
 
 ```{code-cell} ipython3
 # convert the target series in the dataframe to a numpy array
@@ -158,7 +158,7 @@ y = imdb_df['sentiment'].to_numpy()
 X_train, Y_train, X_test, Y_test = textproc.split_data(X, y, split_percentile=5)
 ```
 
-Now, we will apply the same process to the speeches in our dataset:
+You can apply the same process to the speeches in our dataset:
 
 ```{code-cell} ipython3
 speech_data_path = '../data/speeches.csv'
@@ -167,7 +167,7 @@ X_pred = textproc.cleantext(speech_df, 'speech', remove_stopwords = True, remove
 speakers = speech_df['speaker'].to_numpy()
 ```
 
-We will load the `GloVe` embeddings file to build a dictionary mapping each word and word embedding. This will act as a cache for when we have to replace each word with its respective word embedding.
+You will now load the `GloVe` embeddings file to build a dictionary mapping each word and word embedding. This will act as a cache for when you need to replace each word with its respective word embedding.
 
 ```{code-cell} ipython3
 emb_matrix = textproc.loadGloveModel(emb_path)
@@ -199,8 +199,8 @@ In the above image, The rectangles labelled 'A' are called `Cells` and they are 
 
 +++
 
-### But how do we obtain sentiment from the LSTM's output?
-The hidden state we obtain from the last word in our sequence is considered to be a representation of all the information contained in a sequence. To classify this information into various classes (2 in our case, positive and negative) we can use a Fully Connected layer which firstly maps this information to a predefined output size (1 in our case) and an activation layer like sigmoid on top of it finally converts the output to a value between 0 and 1. We'll consider values greater than 0.5 to be indicative of a positive sentiment.
+### But how do you obtain sentiment from the LSTM's output?
+The hidden state you obtain from the last word in a sequence is considered to be a representation of all the information contained in a sequence. To classify this information into various classes (2 in our case, positive and negative) we can use a Fully Connected layer which firstly maps this information to a predefined output size (1 in our case) and an activation layer like sigmoid on top of it finally converts the output to a value between 0 and 1. We'll consider values greater than 0.5 to be indicative of a positive sentiment.
 
 +++
 
@@ -226,7 +226,7 @@ def initialise_params (hidden_dim, input_dim):
 
 ### Forward Propagation
 
-Now that we have our initialised parameters we pass the input data in a forward direction through the network. Each layer accepts the input data, processes it and passes it to the successive layer. This process is called `Forward Propagation`. You will undertake the following mechanism to implement the same:
+Now that you have your initialised parameters, you can pass the input data in a forward direction through the network. Each layer accepts the input data, processes it and passes it to the successive layer. This process is called `Forward Propagation`. You will undertake the following mechanism to implement the same:
 - Loading the word embeddings of the input data
 - Passing the embeddings to an LSTM to obtain the output of the final cell
 - Passing the final output from the LSTM through a fully connected layer to obtain the probability with which the sequence is positive 
@@ -318,7 +318,7 @@ def initialise_grads (parameters):
     return grads    
 ```
 
-Now we'll define a function to calculate the gradients of each intermediate value in the neural network with respect to the loss and accumulate those gradients over the entire sequence. To understand how the gradients are calculated at each step in greater depth, you are suggested to follow this helpful [blog](https://christinakouridi.blog/2019/06/19/backpropagation-lstm/) by Christina Kouridi
+Now you'll define a function to calculate the gradients of each intermediate value in the neural network with respect to the loss and accumulate those gradients over the entire sequence. To understand how the gradients are calculated at each step in greater depth, you are suggested to follow this helpful [blog](https://christinakouridi.blog/2019/06/19/backpropagation-lstm/) by Christina Kouridi
 
 ```{code-cell} ipython3
  def backprop (y, caches, hidden_dim, input_dim, time_steps, parameters):
@@ -568,7 +568,7 @@ plt.show()
 
 +++
 
-Once our model is trained, we can use the updated parameters to start making our predicitons. We break each speech into paragraphs of uniform size before passing them to the Deep Learning model and predicting the sentiment of each paragraph
+Once your model is trained, you can use the updated parameters to start making our predictions. You can break each speech into paragraphs of uniform size before passing them to the Deep Learning model and predicting the sentiment of each paragraph
 
 ```{code-cell} ipython3
 # To store predicted sentiments 
@@ -605,7 +605,7 @@ for index, text in enumerate(X_pred):
     predictions[speakers[index]] = {'pos_paras': paras[pos_indices[0]], 'neg_paras': paras[neg_indices[0]]}
 ```
 
-Visualising our predictions:
+Visualising the sentiment predictions:
 
 ```{code-cell} ipython3
 x_axis = []
@@ -671,7 +671,3 @@ Finally, to know more about how ethics come into play when developing a machine 
 - Data ethics resources by the Turing Institute. https://www.turing.ac.uk/research/data-ethics
 - Considering how artificial intelligence shifts power, an [article](https://www.nature.com/articles/d41586-020-02003-2) and [talk](https://slideslive.com/38923453/the-values-of-machine-learning) by Pratyusha Kalluri
 - More ethics resources on [this blog post](https://www.fast.ai/2018/09/24/ai-ethics-resources/) by Rachel Thomas and the [Radical AI podcast](https://www.radicalai.org/)
-
-```{code-cell} ipython3
-
-```
