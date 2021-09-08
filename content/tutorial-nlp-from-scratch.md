@@ -605,7 +605,7 @@ for index, text in enumerate(X_pred):
     predictions[speakers[index]] = {'pos_paras': paras[pos_indices[0]], 'neg_paras': paras[neg_indices[0]]}
 ```
 
-Visualising our predictions using:
+Visualising our predictions:
 
 ```{code-cell} ipython3
 x_axis = []
