@@ -14,8 +14,6 @@ kernelspec:
 
 # Sentiment Analysis on notable speeches of the last decade
 
----
-
 This tutorial demonstrates how to build a simple <a href = 'https://en.wikipedia.org/wiki/Long_short-term_memory'> Long Short Term memory network (LSTM) </a> from scratch in NumPy to perform sentiment analysis on a socially relevant and ethically acquired dataset.
 
 Your deep learning model - The LSTM is a form of a Recurrent Neural Network and will learn to classify a piece of text as positive or negative from the IMDB reviews dataset. The dataset contains 40,000 training and 10,000 test reviews and corresponding labels. Based on the numeric representations of these reviews and their corresponding labels <a href = 'https://en.wikipedia.org/wiki/Supervised_learning'> (supervised learning) </a> the neural network will be trained to learn the sentiment using forward propagation and backpropagaton through time since we are dealing with sequential data here. The output will be a vector containing the probabilities that the text samples are positive.
@@ -27,8 +25,6 @@ Today, Deep Learning is getting adopted in everyday life and now it is more impo
 +++
 
 ## Prerequisites 
-
----
 
 You are expected to be familiar with the Python programming language and array manipulation with NumPy. In addition, some understanding of Linear Algebra and Calculus is recommended. You should also be familiar with how Neural Networks work. For reference, you can visit the [Python](https://docs.python.org/dev/tutorial/index.html), [Linear algebra on n-dimensional arrays](https://numpy.org/doc/stable/user/tutorial-svd.html) and [Calculus](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/multivariable-calculus.html) tutorials.
 
@@ -44,8 +40,6 @@ This tutorial can be run locally in an isolated environment, such as [Virtualenv
 
 ## Table of contents
 
----
-
 1. Data Collection 
 
 2. Preprocess the datasets
@@ -59,7 +53,6 @@ This tutorial can be run locally in an isolated environment, such as [Virtualenv
 +++
 
 ## 1. Data Collection
-----
 
 Before you begin there are a few pointers you should always keep in mind before choosing the data you wish to train your model on:
 - **Identifying Data Bias** - Bias is a component of the human thought process, and data collected from humans therefore inherently reflects that bias. Some ways in which this bias tends to occur in Machine Learning datasets are:
@@ -174,7 +167,6 @@ emb_matrix = textproc.loadGloveModel(emb_path)
 ```
 
 ### 3. Build the Deep Learning Model¶
- ---
  It’s time to start implementing our LSTM! You will have to first familiarize yourself with some high-level concepts of the basic building blocks of a deep learning model. You can refer to the [Deep learning on MNIST from scratch tutorial](https://numpy.org/numpy-tutorials/content/tutorial-deep-learning-on-mnist.html) for the same. 
 
 You will then learn how a Recurrent Neural Network differs from a plain Neural Network and what makes it so suitable for processing sequential data. Afterwards, you will construct the building blocks of a simple deep learning model in Python and NumPy and train it to learn to classify the sentiment of a piece of text as positive or negative with a certain level of accuracy
@@ -451,7 +443,6 @@ def update_parameters (parameters, gradients, v, s, learning_rate=0.01, beta1=0.
 ```
 
 ### Training the Network
----
 
 +++
 
@@ -564,7 +555,6 @@ plt.show()
 ```
 
 ### Sentiment Analysis on the Speech Data
----
 
 +++
 
@@ -632,7 +622,6 @@ In the plot above, you're shown what percentages of each speech are expected to 
 +++
 
 ### Looking at our Neural Network from an ethical perspective
----
 
 +++
 
@@ -646,7 +635,6 @@ There are also cases where bias is only in the output and not the inputs (data, 
 +++
 
 ### Next Steps
----
 
 +++
 
