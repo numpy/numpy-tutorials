@@ -2,25 +2,24 @@
 
 _Untuk toturial yang diberikan, lihat di https://numpy.org/numpy-tutorials/._
 
-Tujuan dari repositori ini adalah untuk menyediakan sumber daya berkualitas tinggi oleh Proyek NumPy, baik untuk belajar mandiri dan untuk mengajar dengan kelas. Jika Anda tertarik untuk menambahkan konten Anda sendiri, periksa [Contributing](#contributing)
-section. This set of tutorials and educational materials is not a part of the NumPy source tree.
+Tujuan dari repositori ini adalah untuk menyediakan sumber daya berkualitas tinggi oleh Proyek NumPy, baik untuk belajar mandiri dan untuk mengajar dengan kelas. Jika Anda tertarik untuk menambahkan konten Anda sendiri, periksa bagian [Berkontribusi](#contributing). Kumpulan tutorial dan materi pendidikan ini bukan merupakan bagian dari pohon sumber NumPy.
 
-To download a local copy of the `.ipynb` files, you can either
-[clone this repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
-or navigate to any of the documents listed below and download it individually.
+Untuk mengunduh salinan lokal dari file`.ipynb`, kamu juga bisa
+[klik](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) untuk kloning repositori atau
+arahkan ke salah satu dokumen yang tercantum di bawah ini dan unduh satu per satu.
 
-## Content
+## Konten
 
-0. [Learn to write a NumPy tutorial](content/tutorial-style-guide.md): our style guide for writing tutorials.
-1. [Tutorial: Linear algebra on n-dimensional arrays](content/tutorial-svd.md)
-2. [Tutorial: Determining Moore's Law with real data in NumPy](content/mooreslaw-tutorial.md)
-3. [Tutorial: Saving and sharing your NumPy arrays](content/save-load-arrays.md)
-4. [Tutorial: NumPy deep learning on MNIST from scratch](content/tutorial-deep-learning-on-mnist.md)
-5. [Tutorial: X-ray image processing](content/tutorial-x-ray-image-processing.md)
-6. [Tutorial: NumPy deep reinforcement learning with Pong from pixels](content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md)
-7. [Tutorial: Masked Arrays](content/tutorial-ma.md)
-8. [Tutorial: Static Equilibrium](content/tutorial-static_equilibrium.md)
-9. [Tutorial: Plotting Fractals](content/tutorial-plotting-fractals.ipynb)
+0. [Toturial: Belajar menulis NumPy](content/tutorial-style-guide.md): panduan gaya kami untuk tutorial menulis.
+1. [Tutorial: Aljabar linier pada array n-dimensi](content/tutorial-svd.md)
+2. [Tutorial: Menentukan Hukum Moore dengan data nyata di NumPy](content/mooreslaw-tutorial.md)
+3. [Tutorial: Menyimpan dan membagikan array pada NumPy](content/save-load-arrays.md)
+4. [Tutorial: Pembelajaran mendalam NumPy tentang MNIST dari awal](content/tutorial-deep-learning-on-mnist.md)
+5. [Tutorial: Pemrosesan gambar sinar-X](content/tutorial-x-ray-image-processing.md)
+6. [Tutorial: Pembelajaran penguatan mendalam NumPy dengan Pong dari piksel](content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md)
+7. [Tutorial: Array Bertopeng](content/tutorial-ma.md)
+8. [Tutorial: Kesetimbangan Statis](content/tutorial-static_equilibrium.md)
+9. [Tutorial: Merencanakan Fraktal](content/tutorial-plotting-fractals.ipynb)
 
 
 ## Contributing
