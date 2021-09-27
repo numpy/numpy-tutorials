@@ -1,12 +1,9 @@
-# NumPy tutorials
+# Toturial NumPy
 
-_For the rendered tutorials, see https://numpy.org/numpy-tutorials/._
+_Untuk toturial yang diberikan, lihat di https://numpy.org/numpy-tutorials/._
 
-The goal of this repository is to provide high-quality resources by the
-NumPy project, both for self-learning and for teaching classes with. If you're
-interested in adding your own content, check the [Contributing](#contributing)
-section. This set of tutorials and educational materials is not a part of the
-NumPy source tree.
+Tujuan dari repositori ini adalah untuk menyediakan sumber daya berkualitas tinggi oleh Proyek NumPy, baik untuk belajar mandiri dan untuk mengajar dengan kelas. Jika Anda tertarik untuk menambahkan konten Anda sendiri, periksa [Contributing](#contributing)
+section. This set of tutorials and educational materials is not a part of the NumPy source tree.
 
 To download a local copy of the `.ipynb` files, you can either
 [clone this repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
@@ -149,7 +146,7 @@ a contribution, but may be helpful:
 
 ```bash
 conda env create -f environment.yml
-conda activate numpy-tutorials
+conda activate numpy-learn
 cd site
 make html
 ```
@@ -167,4 +164,3 @@ The following links may be useful:
 Note that regular documentation issues for NumPy can be found in the [main NumPy
 repository](https://github.com/numpy/numpy/issues) (see the `Documentation`
 labels there).
-

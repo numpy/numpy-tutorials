@@ -1,4 +1,4 @@
-name: numpy-tutorials
+name: numpy-learn
 channels:
   - conda-forge
 dependencies:
