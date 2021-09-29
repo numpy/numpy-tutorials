@@ -11,6 +11,10 @@ Used with permission.
 
 IMDB Reviews Dataset is a large movie review dataset collected and prepared by Andrew L. Maas from the popular movie rating service, IMDB. The IMDB Reviews dataset is used for binary sentiment classification, whether a review is positive or negative. It contains 25,000 movie reviews for training and 25,000 for testing. All these 50,000 reviews are labeled data that may be used for supervised deep learning. For ease of reproducibility, we'll be sourcing  the data from [Zenodo](https://zenodo.org/record/4117827#.YVQZ_EZBy3Ihttps://zenodo.org/record/4117827#.YVQZ_EZBy3I).
 
+> Andrea Esuli, Alejandro Moreo, & Fabrizio Sebastiani. (2020). Sentiment Quantification Datasets [Data set]. Zenodo. https://doi.org/10.5281/zenodo.4117827
+
+
+
 ---
 
 #### [Glove Embeddings](https://github.com/Dbhasin1/numpy-tutorials/blob/ethics-tutorial/content/tutorial-nlp-from-scratch/glove.6B.50d.txt)
