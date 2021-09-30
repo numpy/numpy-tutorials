@@ -355,10 +355,12 @@ data = pooch.create(
     # Base URL of the remote data store
     base_url="",
     # The cache file registry. A dictionary with all files managed by this pooch.
+    # Keys are the file names and values are their respective SHA256 hashes which
+    # verify that the correct and uncorrupted file is being downloaded. 
     registry={
-        "imdb_train.txt": None,
-         "imdb_test.txt": None,
-        "glove.6B.50d.zip": None,
+        "imdb_train.txt": "6a38ea6ab5e1902cc03f6b9294ceea5e8ab985af991f35bcabd301a08ea5b3f0",
+         "imdb_test.txt": "7363ef08ad996bf4233b115008d6d7f9814b7cc0f4d13ab570b938701eadefeb",
+        "glove.6B.50d.zip": "617afb2fe6cbd085c235baf7a465b96f4112bd7f7ccb2b2cbd649fed9cbcf2fb",
     },
     # Now specify custom URLs for some of the files in the registry.
     urls={
@@ -443,10 +445,10 @@ The problem with an RNN however, is that it cannot retain long-term memory becau
 
 ### Overview of the Model Architecture 
 
-![lstm.jpg](_static/dl_architectures.jpg)
+<img src="_static/lstm.gif" width="900" align="center">
 
 
-In the above image, The rectangles labelled 'A' are called `Cells` and they are the **Memory Blocks** of our LSTM network. They are responsible for choosing what to remember in a sequence and pass on that information to the next cell via two states called the `hidden state` $H_{t}$ and the `cell state` $C_{t}$ where $t$ indicates the time-step. We recommend you to go through [ Long Short-Term Memory (LSTM)](http://d2l.ai/chapter_recurrent-modern/lstm.html) to understand the mechanisms happening inside each cell.
+In the above gif, The rectangles labelled $A$ are called `Cells` and they are the **Memory Blocks** of our LSTM network. They are responsible for choosing what to remember in a sequence and pass on that information to the next cell via two states called the `hidden state` $H_{t}$ and the `cell state` $C_{t}$ where $t$ indicates the time-step. We recommend you to go through [ Long Short-Term Memory (LSTM)](http://d2l.ai/chapter_recurrent-modern/lstm.html) to understand the mechanisms happening inside each cell.
 
 
 ### But how do you obtain sentiment from the LSTM's output?
@@ -745,7 +747,7 @@ You will start by initialising all the parameters and hyperparameters being used
 hidden_dim = 64
 input_dim = emb_matrix['memory'].shape[0]
 learning_rate = 0.001
-epochs = 20
+epochs = 5
 parameters = initialise_params(hidden_dim,
                                input_dim)
 v, s = initialise_mav(hidden_dim,
