@@ -17,7 +17,7 @@ jupyter:
 
 This tutorial demonstrates how to build a simple <a href = 'https://en.wikipedia.org/wiki/Long_short-term_memory'> Long Short Term memory network (LSTM) </a> from scratch in NumPy to perform sentiment analysis on a socially relevant and ethically acquired dataset.
 
-Your deep learning model (the LSTM) is a form of a Recurrent Neural Network and will learn to classify a piece of text as positive or negative from the IMDB reviews dataset. The dataset contains 40,000 training and 10,000 test reviews and corresponding labels. Based on the numeric representations of these reviews and their corresponding labels <a href = 'https://en.wikipedia.org/wiki/Supervised_learning'> (supervised learning) </a> the neural network will be trained to learn the sentiment using forward propagation and backpropagaton through time since we are dealing with sequential data here. The output will be a vector containing the probabilities that the text samples are positive.
+Your deep learning model (the LSTM) is a form of a Recurrent Neural Network and will learn to classify a piece of text as positive or negative from the IMDB reviews dataset. The dataset contains 40,000 training and 10,000 test reviews and corresponding labels. Based on the numeric representations of these reviews and their corresponding labels <a href = 'https://en.wikipedia.org/wiki/Supervised_learning'> (supervised learning) </a> the neural network will be trained to learn the sentiment using forward propagation and backpropagation through time since we are dealing with sequential data here. The output will be a vector containing the probabilities that the text samples are positive.
 
 
 Today, Deep Learning is getting adopted in everyday life and now it is more important to ensure that decisions that have been taken using AI are not reflecting discriminatory behavior towards a set of populations. It is important to take fairness into consideration while consuming the output from AI. Throughout the tutorial we'll try to question all the steps in our pipeline from an ethics point of view.
@@ -69,13 +69,13 @@ Before you begin there are a few pointers you should always keep in mind before 
     - criticism/praise of a power structure especially if it compromises their safety;
     - personally-identifying information (even if anonymized in some way) including things like fingerprints or voice.
 
->While it can be difficult taking consent from so many people especially on online platforms, the necessity of it depends upon the sensitivity of the topics your data includes and other indicators like whether the platform the data was obtained from allows users to operate under pseudonyms. If the website has a policy that forces the use of a real name, then the users need to be asked for consent.
+>While it can be difficult taking consent from so many people especially on on-line platforms, the necessity of it depends upon the sensitivity of the topics your data includes and other indicators like whether the platform the data was obtained from allows users to operate under pseudonyms. If the website has a policy that forces the use of a real name, then the users need to be asked for consent.
 
-In this section, you will be collecting two different datasets: the IMDB movie reviews dataset, and a collection of 10 speeches curated for this tutorial including activists from different countries around the world, different times, and different topics. The former would be used to train the deep learning model while the latter will be used to perform sentiment analysis on.
+In this section, you will be collecting two different datasets: the IMDb movie reviews dataset, and a collection of 10 speeches curated for this tutorial including activists from different countries around the world, different times, and different topics. The former would be used to train the deep learning model while the latter will be used to perform sentiment analysis on.
 
 
-### Collecting the IMDB reviews dataset
-IMDB Reviews Dataset is a large movie review dataset collected and prepared by Andrew L. Maas from the popular movie rating service, IMDB. The IMDB Reviews dataset is used for binary sentiment classification, whether a review is positive or negative. It contains 25,000 movie reviews for training and 25,000 for testing. All these 50,000 reviews are labeled data that may be used for supervised deep learning. For ease of reproducibility, we'll be sourcing  the data from [Zenodo](https://zenodo.org/record/4117827#.YVQZ_EZBy3Ihttps://zenodo.org/record/4117827#.YVQZ_EZBy3I).
+### Collecting the IMDb reviews dataset
+IMDb Reviews Dataset is a large movie review dataset collected and prepared by Andrew L. Maas from the popular movie rating service, IMDb. The IMDb Reviews dataset is used for binary sentiment classification, whether a review is positive or negative. It contains 25,000 movie reviews for training and 25,000 for testing. All these 50,000 reviews are labeled data that may be used for supervised deep learning. For ease of reproducibility, we'll be sourcing  the data from [Zenodo](https://zenodo.org/record/4117827#.YVQZ_EZBy3Ihttps://zenodo.org/record/4117827#.YVQZ_EZBy3I).
    > The IMDb platform allows the usage of their public datasets for personal and non-commercial use. We did our best to ensure that these reviews do not contain any of the aforementioned sensitive topics pertaining to the reviewer.
 
 
@@ -144,6 +144,7 @@ class TextPreprocess:
                 lines = [splits for splits in line.split("\t") if splits != ""]
                 reviews[lines[1]] = float(lines[0])
         df = pd.DataFrame(reviews.items(), columns=['review', 'sentiment'])
+        df = df.sample(frac=1).reset_index(drop=True)
         return df 
         
     def unzipper(self, zipped, to_extract):
@@ -184,7 +185,7 @@ class TextPreprocess:
         remove_stopwords : bool
             if True, remove stopwords from text
         remove_punc : bool
-            if True, remove punctuation suymbols from text
+            if True, remove punctuation symbols from text
 
         Returns
         -------
@@ -355,8 +356,6 @@ data = pooch.create(
     # Base URL of the remote data store
     base_url="",
     # The cache file registry. A dictionary with all files managed by this pooch.
-    # Keys are the file names and values are their respective SHA256 hashes which
-    # verify that the correct and uncorrupted file is being downloaded. 
     registry={
         "imdb_train.txt": "6a38ea6ab5e1902cc03f6b9294ceea5e8ab985af991f35bcabd301a08ea5b3f0",
          "imdb_test.txt": "7363ef08ad996bf4233b115008d6d7f9814b7cc0f4d13ab570b938701eadefeb",
@@ -391,7 +390,7 @@ train_df = textproc.txt_to_df(imdb_train)
 test_df = textproc.txt_to_df(imdb_test)
 ```
 
-Now, you will clean the dataframes obtained above by removing occurences of stopwords and punctuation marks. You will also retrieve the sentiment values from each dataframe to obtain the target variables:
+Now, you will clean the dataframes obtained above by removing occurrences of stopwords and punctuation marks. You will also retrieve the sentiment values from each dataframe to obtain the target variables:
 
 ```python
 X_train = textproc.cleantext(train_df,
@@ -425,12 +424,12 @@ You will now download the `GloVe` embeddings, unzip them and build a dictionary 
 
 ```python
 glove = data.fetch('glove.6B.50d.zip')
-emb_path = textproc.unzipper(glove, 'glove.6B.50d.txt')
+emb_path = textproc.unzipper(glove, 'glove.6B.300d.txt')
 emb_matrix = textproc.loadGloveModel(emb_path)
 ```
 
 ### 3. Build the Deep Learning Model¶
- It’s time to start implementing our LSTM! You will have to first familiarize yourself with some high-level concepts of the basic building blocks of a deep learning model. You can refer to the [Deep learning on MNIST from scratch tutorial](https://numpy.org/numpy-tutorials/content/tutorial-deep-learning-on-mnist.html) for the same. 
+ It is time to start implementing our LSTM! You will have to first familiarize yourself with some high-level concepts of the basic building blocks of a deep learning model. You can refer to the [Deep learning on MNIST from scratch tutorial](https://numpy.org/numpy-tutorials/content/tutorial-deep-learning-on-mnist.html) for the same. 
 
 You will then learn how a Recurrent Neural Network differs from a plain Neural Network and what makes it so suitable for processing sequential data. Afterwards, you will construct the building blocks of a simple deep learning model in Python and NumPy and train it to learn to classify the sentiment of a piece of text as positive or negative with a certain level of accuracy
 
@@ -448,14 +447,14 @@ The problem with an RNN however, is that it cannot retain long-term memory becau
 <img src="_static/lstm.gif" width="900" align="center">
 
 
-In the above gif, The rectangles labelled $A$ are called `Cells` and they are the **Memory Blocks** of our LSTM network. They are responsible for choosing what to remember in a sequence and pass on that information to the next cell via two states called the `hidden state` $H_{t}$ and the `cell state` $C_{t}$ where $t$ indicates the time-step. We recommend you to go through [ Long Short-Term Memory (LSTM)](http://d2l.ai/chapter_recurrent-modern/lstm.html) to understand the mechanisms happening inside each cell.
+In the above gif, The rectangles labeled $A$ are called `Cells` and they are the **Memory Blocks** of our LSTM network. They are responsible for choosing what to remember in a sequence and pass on that information to the next cell via two states called the `hidden state` $H_{t}$ and the `cell state` $C_{t}$ where $t$ indicates the time-step. We recommend you to go through [ Long Short-Term Memory (LSTM)](http://d2l.ai/chapter_recurrent-modern/lstm.html) to understand the mechanisms happening inside each cell.
 
 
 ### But how do you obtain sentiment from the LSTM's output?
 The hidden state you obtain from the last word in a sequence is considered to be a representation of all the information contained in a sequence. To classify this information into various classes (2 in our case, positive and negative) we can use a Fully Connected layer which firstly maps this information to a predefined output size (1 in our case) and an activation layer like sigmoid on top of it finally converts the output to a value between 0 and 1. We'll consider values greater than 0.5 to be indicative of a positive sentiment.
 
 
-Define a function to randomly initialise the parameters which will be learnt while our model trains
+Define a function to randomly initialize the parameters which will be learned while our model trains
 
 ```python
 def initialise_params(hidden_dim, input_dim):
@@ -493,11 +492,11 @@ def initialise_params(hidden_dim, input_dim):
 
 ### Forward Propagation
 
-Now that you have your initialised parameters, you can pass the input data in a forward direction through the network. Each layer accepts the input data, processes it and passes it to the successive layer. This process is called `Forward Propagation`. You will undertake the following mechanism to implement it:
+Now that you have your initialized parameters, you can pass the input data in a forward direction through the network. Each layer accepts the input data, processes it and passes it to the successive layer. This process is called `Forward Propagation`. You will undertake the following mechanism to implement it:
 - Loading the word embeddings of the input data
 - Passing the embeddings to an LSTM to obtain the output of the final cell
 - Passing the final output from the LSTM through a fully connected layer to obtain the probability with which the sequence is positive 
-- Storing all the intermediate outputs in a cache to utilise during backpropagation
+- Storing all the intermediate outputs in a cache to utilize during backpropagation
 
 
 Define a function to calculate the sigmoid of a matrix
@@ -741,13 +740,13 @@ def update_parameters(parameters, gradients, v, s,
 ### Training the Network
 
 
-You will start by initialising all the parameters and hyperparameters being used in your network
+You will start by initializing all the parameters and hyperparameters being used in your network
 
 ```python
 hidden_dim = 64
 input_dim = emb_matrix['memory'].shape[0]
 learning_rate = 0.001
-epochs = 5
+epochs = 10
 parameters = initialise_params(hidden_dim,
                                input_dim)
 v, s = initialise_mav(hidden_dim,
@@ -755,7 +754,7 @@ v, s = initialise_mav(hidden_dim,
                       parameters)
 ```
 
-To optimise your deep learning network, you need to calculate a loss based on how well the model is doing on the training data. Loss value implies how poorly or well a model behaves after each iteration of optimization. <br>
+To optimize your deep learning network, you need to calculate a loss based on how well the model is doing on the training data. Loss value implies how poorly or well a model behaves after each iteration of optimization. <br>
 Define a function to calculate the loss using [negative log likelihood](http://d2l.ai/chapter_linear-networks/softmax-regression.html?highlight=negative%20log%20likelihood#log-likelihood)
 
 ```python
@@ -769,7 +768,7 @@ def loss_f(A, Y):
     return np.squeeze(loss)
 ```
 
-Set up the neural network's learning experiment with a training loop and start the training process. You will also evaluate the model's performance on the training dataset to see how well the model is *learning* and the testing dataset to see how well it is *generalising*.
+Set up the neural network's learning experiment with a training loop and start the training process. You will also evaluate the model's performance on the training dataset to see how well the model is *learning* and the testing dataset to see how well it is *generalizing*.
 >Skip running this cell if you already have the trained parameters stored in a `npy` file
 
 ```python
@@ -815,7 +814,6 @@ for epoch in range(epochs):
         # sentiment (the truth) and the prediction by the model.
         y_pred = caches['fc_values'][0][0][0][0]
         loss = loss_f(y_pred, target)
-
         # Store training set losses
         train_j.append(loss)
 
@@ -852,7 +850,7 @@ for epoch in range(epochs):
 np.save('tutorial-nlp-from-scratch/parameters.npy', parameters)
 ```
 
-It is a good practice to plot the training and testing losses as the learning curves are often helpful in diagnosing the behaviour of a Machine Learning model.
+It is a good practice to plot the training and testing losses as the learning curves are often helpful in diagnosing the behavior of a Machine Learning model.
 
 ```python
 fig = plt.figure()
@@ -884,7 +882,8 @@ predictions = {}
 para_len = 100
 
 # Retrieve trained values of the parameters
-parameters = np.load('parameters.npy', allow_pickle=True).item()
+if os.path.isfile('tutorial-nlp-from-scratch/parameters.npy'):
+    parameters = np.load('tutorial-nlp-from-scratch/parameters.npy', allow_pickle=True).item()
 
 # This is the prediction loop.
 for index, text in enumerate(X_pred):
@@ -915,7 +914,7 @@ for index, text in enumerate(X_pred):
                                     'neg_paras': paras[neg_indices[0]]}
 ```
 
-Visualising the sentiment predictions:
+Visualizing the sentiment predictions:
 
 ```python
 x_axis = []
@@ -941,7 +940,7 @@ ax.legend(title='labels', bbox_to_anchor=(1, 1), loc='upper left')
 plt.show()
 ```
 
-In the plot above, you're shown what percentages of each speech are expected to carry a positive and negative  sentiment. Since this implementation prioritised simplicity and clarity over performance, we cannot expect these results to be very accurate. Moreover, while making the sentiment predictions for one paragraph we did not use the neighbouring paragraphs for context which would have led to more accurate predictions. We encourage the reader to play around with the model and make some tweaks suggested in `Next Steps` and observe how the model performance changes.
+In the plot above, you're shown what percentages of each speech are expected to carry a positive and negative  sentiment. Since this implementation prioritized simplicity and clarity over performance, we cannot expect these results to be very accurate. Moreover, while making the sentiment predictions for one paragraph we did not use the neighboring paragraphs for context which would have led to more accurate predictions. We encourage the reader to play around with the model and make some tweaks suggested in `Next Steps` and observe how the model performance changes.
 
 
 ### Looking at our Neural Network from an ethical perspective
@@ -949,7 +948,7 @@ In the plot above, you're shown what percentages of each speech are expected to 
 <!-- #region -->
 It's crucial to understand that accurately identifying a text's sentiment is not easy primarily because of the complex ways in which humans express sentiment, using irony, sarcasm, humor, or, in social media, abbreviation. Moreover neatly placing text into two categories: 'positive' and 'negative' can be problematic because it is being done without any context. Words or abbreviations can convey very different sentiments depending on age and location, none of which we took into account while building our model.
 
-Along with data, there are also growing concerns that data processing algorithms are influencing policy and daily lives in ways that are not transparent and introduce biases. Certain biases such as the [Inductive Bias](https://bit.ly/2WtTKIe) are essential to help a Machine Learning model generalise better, for example the LSTM we built earlier is biased towards preserving contextual information over long sequences which makes it so suitable for processing sequential data. The problem arises when [societal biases](https://hbr.org/2019/10/what-do-we-do-about-the-biases-in-ai) creep into algorithmic predictions. Optimizing Machine algorithms via methods like [hyperparameter tuning](https://en.wikipedia.org/wiki/Hyperparameter_optimization) can then further amplify these biases by learning every bit of information in the data. 
+Along with data, there are also growing concerns that data processing algorithms are influencing policy and daily lives in ways that are not transparent and introduce biases. Certain biases such as the [Inductive Bias](https://bit.ly/2WtTKIe) are essential to help a Machine Learning model generalize better, for example the LSTM we built earlier is biased towards preserving contextual information over long sequences which makes it so suitable for processing sequential data. The problem arises when [societal biases](https://hbr.org/2019/10/what-do-we-do-about-the-biases-in-ai) creep into algorithmic predictions. Optimizing Machine algorithms via methods like [hyperparameter tuning](https://en.wikipedia.org/wiki/Hyperparameter_optimization) can then further amplify these biases by learning every bit of information in the data. 
 
 
 There are also cases where bias is only in the output and not the inputs (data, algorithm). For example, in sentiment analysis [accuracy tends to be higher on female-authored texts than on male-authored ones]( https://doi.org/10.3390/electronics9020374). End users of sentiment analysis should be aware that its small gender biases can affect the conclusions drawn from it and apply correction factors when necessary. Hence, it is important that demands for algorithmic accountability should include the ability to test the outputs of a system, including the ability to drill down into different user groups by gender, ethnicity and other characteristics, to identify, and hopefully suggest corrections for, system output biases.
@@ -962,13 +961,12 @@ You have learned how to build and train a simple Long Short Term Memory network 
 
 To further enhance and optimize your neural network model, you can consider one of a mixture of the following:
 
-- Increase the training sample size by increasing the `split_percentile`.
 - Alter the architecture by introducing multiple LSTM layers to make the network deeper.
 - Use a higher epoch size to train longer and add more regularization techniques, such as early stopping, to prevent overfitting.
 - Introduce a validation set for an unbiased evaluation of the model fit.
 - Apply batch normalization for faster and more stable training.
 - Tune other parameters, such as the learning rate and hidden layer size.
-- Initialise weights using [Xavier Initialisation](https://d2l.ai/chapter_multilayer-perceptrons/numerical-stability-and-init.html#xavier-initialization) to prevent vanishing/exploding gradients instead of initialising them randomly.
+- Initialize weights using [Xavier Initialization](https://d2l.ai/chapter_multilayer-perceptrons/numerical-stability-and-init.html#xavier-initialization) to prevent vanishing/exploding gradients instead of initializing them randomly.
 - Replace LSTM with a [Bidirectional LSTM](https://en.wikipedia.org/wiki/Bidirectional_recurrent_neural_networks) to use both left and right context for predicting sentiment.
 
 Nowadays, LSTMs have been replaced by the [Transformer](https://jalammar.github.io/illustrated-transformer/)( which uses [Attention](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/) to tackle all the problems that plague an LSTM such as as lack of [transfer learning](https://en.wikipedia.org/wiki/Transfer_learning), lack of [parallel training](https://web.stanford.edu/~rezab/classes/cme323/S16/projects_reports/hedge_usmani.pdf) and a long gradient chain for lengthy sequences
