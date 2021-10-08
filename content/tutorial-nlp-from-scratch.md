@@ -17,7 +17,7 @@ jupyter:
 
 This tutorial demonstrates how to build a simple <a href = 'https://en.wikipedia.org/wiki/Long_short-term_memory'> Long Short Term memory network (LSTM) </a> from scratch in NumPy to perform sentiment analysis on a socially relevant and ethically acquired dataset.
 
-Your deep learning model (the LSTM) is a form of a Recurrent Neural Network and will learn to classify a piece of text as positive or negative from the IMDB reviews dataset. The dataset contains 40,000 training and 10,000 test reviews and corresponding labels. Based on the numeric representations of these reviews and their corresponding labels <a href = 'https://en.wikipedia.org/wiki/Supervised_learning'> (supervised learning) </a> the neural network will be trained to learn the sentiment using forward propagation and backpropagation through time since we are dealing with sequential data here. The output will be a vector containing the probabilities that the text samples are positive.
+Your deep learning model (the LSTM) is a form of a Recurrent Neural Network and will learn to classify a piece of text as positive or negative from the IMDB reviews dataset. The dataset contains 50,000 movie reviews and corresponding labels. Based on the numeric representations of these reviews and their corresponding labels <a href = 'https://en.wikipedia.org/wiki/Supervised_learning'> (supervised learning) </a> the neural network will be trained to learn the sentiment using forward propagation and backpropagation through time since we are dealing with sequential data here. The output will be a vector containing the probabilities that the text samples are positive.
 
 
 Today, Deep Learning is getting adopted in everyday life and now it is more important to ensure that decisions that have been taken using AI are not reflecting discriminatory behavior towards a set of populations. It is important to take fairness into consideration while consuming the output from AI. Throughout the tutorial we'll try to question all the steps in our pipeline from an ethics point of view.
@@ -356,6 +356,8 @@ data = pooch.create(
     # Base URL of the remote data store
     base_url="",
     # The cache file registry. A dictionary with all files managed by this pooch.
+    # The keys are the file names and values are their respective hash codes which
+    # ensure we download the same, uncorrupted file each time. 
     registry={
         "imdb_train.txt": "6a38ea6ab5e1902cc03f6b9294ceea5e8ab985af991f35bcabd301a08ea5b3f0",
          "imdb_test.txt": "7363ef08ad996bf4233b115008d6d7f9814b7cc0f4d13ab570b938701eadefeb",
@@ -396,15 +398,15 @@ Now, you will clean the dataframes obtained above by removing occurrences of sto
 X_train = textproc.cleantext(train_df,
                        text_column='review',
                        remove_stopwords=True,
-                       remove_punc=True)
+                       remove_punc=True)[0:2000]
 
 X_test = textproc.cleantext(test_df,
                        text_column='review',
                        remove_stopwords=True,
-                       remove_punc=True)
+                       remove_punc=True)[0:1000]
 
-y_train = train_df['sentiment'].to_numpy()
-y_test = test_df['sentiment'].to_numpy()
+y_train = train_df['sentiment'].to_numpy()[0:2000]
+y_test = test_df['sentiment'].to_numpy()[0:1000]
 ```
 
 The same process is applicable on the collected speeches:
@@ -447,14 +449,10 @@ The problem with an RNN however, is that it cannot retain long-term memory becau
 <img src="_static/lstm.gif" width="900" align="center">
 
 
-In the above gif, The rectangles labeled $A$ are called `Cells` and they are the **Memory Blocks** of our LSTM network. They are responsible for choosing what to remember in a sequence and pass on that information to the next cell via two states called the `hidden state` $H_{t}$ and the `cell state` $C_{t}$ where $t$ indicates the time-step. We recommend you to go through [ Long Short-Term Memory (LSTM)](http://d2l.ai/chapter_recurrent-modern/lstm.html) to understand the mechanisms happening inside each cell.
+In the above gif, The rectangles labeled $A$ are called `Cells` and they are the **Memory Blocks** of our LSTM network. They are responsible for choosing what to remember in a sequence and pass on that information to the next cell via two states called the `hidden state` $H_{t}$ and the `cell state` $C_{t}$ where $t$ indicates the time-step. Each `Cell` has dedicated gates which are responsible for storing, writing or reading the information passed to an LSTM. You will now look closely at the architecture of the network by implementing each mechanism happening inside of it. 
 
 
-### But how do you obtain sentiment from the LSTM's output?
-The hidden state you obtain from the last word in a sequence is considered to be a representation of all the information contained in a sequence. To classify this information into various classes (2 in our case, positive and negative) we can use a Fully Connected layer which firstly maps this information to a predefined output size (1 in our case) and an activation layer like sigmoid on top of it finally converts the output to a value between 0 and 1. We'll consider values greater than 0.5 to be indicative of a positive sentiment.
-
-
-Define a function to randomly initialize the parameters which will be learned while our model trains
+Lets start with writing a function to randomly initialize the parameters which will be learned while our model trains
 
 ```python
 def initialise_params(hidden_dim, input_dim):
@@ -471,7 +469,7 @@ def initialise_params(hidden_dim, input_dim):
     Wo = np.random.randn(hidden_dim, hidden_dim + input_dim)
     bo = np.random.randn(hidden_dim, 1)
 
-    # fully connected classification layer
+    # fully connected layer for classification
     W2 = np.random.randn(1, hidden_dim)
     b2 = np.zeros((1, 1))
 
@@ -494,12 +492,13 @@ def initialise_params(hidden_dim, input_dim):
 
 Now that you have your initialized parameters, you can pass the input data in a forward direction through the network. Each layer accepts the input data, processes it and passes it to the successive layer. This process is called `Forward Propagation`. You will undertake the following mechanism to implement it:
 - Loading the word embeddings of the input data
-- Passing the embeddings to an LSTM to obtain the output of the final cell
-- Passing the final output from the LSTM through a fully connected layer to obtain the probability with which the sequence is positive 
-- Storing all the intermediate outputs in a cache to utilize during backpropagation
+- Passing the embeddings to an LSTM
+- Perform all the gate mechanisms in every memory block of the LSTM to obtain the final hidden state 
+- Passing the final hidden state through a fully connected layer to obtain the probability with which the sequence is positive 
+- Storing all the calculated values in a cache to utilize during backpropagation
 
 
-Define a function to calculate the sigmoid of a matrix
+[Sigmoid](https://d2l.ai/chapter_multilayer-perceptrons/mlp.html?highlight=sigmoid#sigmoid-function) belongs to the family of non-linear activation functions. It helps the network to update or forget the data. If the sigmoid of a value results in 0, the information is considered forgotten. Similarly, the information stays if it is 1.
 
 ```python
 def sigmoid(x):
@@ -508,7 +507,54 @@ def sigmoid(x):
     return n / d
 ```
 
-Define a function to carry out forward propagation
+The **Forget Gate** takes the current word embedding and the previous hidden state concatenated together as input. and decides what parts of the old memory cell content need attention and which can be ignored.
+
+```python
+def fp_forget_gate(concat, parameters):
+    ft = sigmoid(np.dot(parameters['Wf'], concat)
+                 + parameters['bf'])
+    return ft  
+```
+
+The **Input Gate** takes the current word embedding and the previous hidden state concatenated together as input. and governs how much of the new data we take into account via the **Candidate Memory Gate** which utilizes the [Tanh](https://d2l.ai/chapter_multilayer-perceptrons/mlp.html?highlight=tanh#tanh-function) to regulate the values flowing through the network.
+
+```python
+def fp_input_gate(concat, parameters):
+    it = sigmoid(np.dot(parameters['Wi'], concat)
+                 + parameters['bi'])
+    cmt = np.tanh(np.dot(parameters['Wcm'], concat)
+                  + parameters['bcm'])
+    return it, cmt 
+```
+
+Finally we have the **Output Gate** which takes information from the current word embedding, previous hidden state and the cell state which has been updated with information from the forget and input gates to update the value of the hidden state.
+
+```python
+def fp_output_gate(concat, next_cs, parameters):
+    ot = sigmoid(np.dot(parameters['Wo'], concat)
+                 + parameters['bo'])
+    next_hs = ot * np.tanh(next_cs)
+    return ot, next_hs
+```
+
+The following image summarizes each gate mechanism in the memory block of a LSTM network:
+>Image has been modified from [this](https://link.springer.com/chapter/10.1007%2F978-3-030-14524-8_11) source
+
+<img src="_static/mem_block.png" width="800" align="center">
+
+
+### But how do you obtain sentiment from the LSTM's output?
+The hidden state you obtain from the output gate of the last memory block in a sequence is considered to be a representation of all the information contained in a sequence. To classify this information into various classes (2 in our case, positive and negative) we use a **Fully Connected layer** which firstly maps this information to a predefined output size (1 in our case). Then, an activation function such as the sigmoid converts this output to a value between 0 and 1. We'll consider values greater than 0.5 to be indicative of a positive sentiment.
+
+```python
+def fp_fc_layer(last_hs, parameters):
+    z2 = (np.dot(parameters['W2'], last_hs)
+          + parameters['b2'])
+    a2 = sigmoid(z2)
+    return a2 
+```
+
+Now you will put all these functions together to summarize the **Forward Propagation** step in our model architecture:
 
 ```python
 def forward_prop(X_vec, parameters, input_dim):
@@ -517,61 +563,66 @@ def forward_prop(X_vec, parameters, input_dim):
     time_steps = len(X_vec)
 
     # Initialise hidden and cell state before passing to first time step
-    prev_hidden_state = np.zeros((hidden_dim, 1))
-    prev_cell_state = np.zeros(prev_hidden_state.shape)
+    prev_hs = np.zeros((hidden_dim, 1))
+    prev_cs = np.zeros(prev_hs.shape)
 
-    # Store all the intermediate and final variables here
+    # Store all the intermediate and final values here
     caches = {'lstm_values': [], 'fc_values': []}
 
     # Hidden state from the last cell in the LSTM layer is calculated.
     for t in range(time_steps):
-
+        # Retrieve word corresponding to current time step
         x = X_vec[t]
-        # Retrieve embedding for one word for each time step
-        X_t = emb_matrix.get(x, np.random.rand(input_dim, 1))
-        X_t = X_t.reshape((input_dim, 1))
+        # Retrieve the embedding for the word and reshape it to make the LSTM happy
+        xt = emb_matrix.get(x, np.random.rand(input_dim, 1))
+        xt = xt.reshape((input_dim, 1))
 
-        # Concatenate prev_hidden_state and xt
-        concat = np.vstack((prev_hidden_state, X_t))
-
+        # Input to the gates is concatenated previous hidden state and current word embedding
+        concat = np.vstack((prev_hs, xt))
+ 
         # Calculate output of the forget gate
-        ft = sigmoid(np.dot(parameters['Wf'], concat)
-                     + parameters['bf'])
+        ft = fp_forget_gate(concat, parameters)
 
         # Calculate output of the input gate
-        it = sigmoid(np.dot(parameters['Wi'], concat)
-                     + parameters['bi'])
-        cmt = np.tanh(np.dot(parameters['Wcm'], concat)
-                      + parameters['bcm'])
-        io = it * cmt
-
-        # Update the cell state
-        next_cell_state = (ft * prev_cell_state) + io
-
+        it, cmt = fp_input_gate(concat, parameters)
+        io = it * cmt   
+        
+        # Update the cell state 
+        next_cs = (ft * prev_cs) + io
+        
         # Calculate output of the output gate
-        ot = sigmoid(np.dot(parameters['Wo'], concat)
-                     + parameters['bo'])
+        ot, next_hs = fp_output_gate(concat, next_cs, parameters)
 
-        # Update the hidden input
-        next_hidden_state = ot * np.tanh(next_cell_state)
+        # store all the values used and calculated by
+        # the LSTM in a cache for backward propagation. 
+        lstm_cache = {
+        "next_hs": next_hs,
+        "next_cs": next_cs,
+        "prev_hs": prev_hs,
+        "prev_cs": prev_cs,
+        "ft": ft,
+        "it" : it,
+        "cmt": cmt,
+        "ot": ot,
+        "xt": xt,
+        }
+        caches['lstm_values'].append(lstm_cache)
 
-        # store values needed for backward propagation in cache
-        cache = (next_hidden_state, next_cell_state,
-                 prev_hidden_state, prev_cell_state,
-                 ft, it, cmt, ot, X_t)
-        caches['lstm_values'].append(cache)
+        # Pass the updated hidden state and cell state to the next time step
+        prev_hs = next_hs
+        prev_cs = next_cs
 
-        # Update hidden state and cell state for next time step
-        prev_hidden_state = next_hidden_state
-        prev_cell_state = next_cell_state
+    # Pass the LSTM output through a fully connected layer to 
+    # obtain probability of the sequence being positive 
+    a2 = fp_fc_layer(next_hs, parameters)
 
-    # Pass through a fully connected layer to perform binary classification
-    z2 = (np.dot(parameters['W2'], next_hidden_state)
-          + parameters['b2'])
-    a2 = sigmoid(z2)
-    cache = (a2, parameters['W2'])
-    caches['fc_values'].append(cache)
-
+    # store all the values used and calculated by the
+    # fully connected layer in a cache for backward propagation. 
+    fc_cache = {
+    "a2" : a2,
+    "W2" : parameters['W2']
+    }
+    caches['fc_values'].append(fc_cache)
     return caches
 ```
 
@@ -580,117 +631,136 @@ def forward_prop(X_vec, parameters, input_dim):
 After each forward pass through the network, you will implement the `backpropagation through time` algorithm to accumulate gradients of each parameter over the time steps. Backpropagation through a LSTM is not as straightforward as through other common Deep Learning architectures, due to the special way its underlying layers interact. Nonetheless, the approach is largely the same; identifying dependencies and applying the chain rule.
 
 
-Lets start with defining a function to initialise gradients of each parameter as arrays made up of zeros with same dimensions as the corresponding parameter
+Lets start with defining a function to initialize gradients of each parameter as arrays made up of zeros with same dimensions as the corresponding parameter
 
 ```python
 # Initialise the gradients
-def initialise_grads(parameters):
+def initialize_grads(parameters):
     grads = {}
     for param in parameters.keys():
         grads[f'd{param}'] = np.zeros((parameters[param].shape))
     return grads
 ```
 
-Now you'll define a function to calculate the gradients of each intermediate value in the neural network with respect to the loss and accumulate those gradients over the entire sequence. To understand how the gradients are calculated at each step in greater depth, you are suggested to follow this helpful [blog](https://christinakouridi.blog/2019/06/19/backpropagation-lstm/) by Christina Kouridi
+Now, for each gate and the fully connected layer, we define a function to calculate the gradient of the loss with respect to the input passed and the parameters used. To understand the mathematics behind how the derivatives were calculated we suggest you to follow this helpful [blog](https://christinakouridi.blog/2019/06/19/backpropagation-lstm/) by Christina Kouridi
+
+
+Define a function to calculate the gradients in the **Forget Gate**:
+
+```python
+def bp_forget_gate(hidden_dim, concat, dh_prev, dc_prev, cache, gradients, parameters):
+    # dft = dL/da2 * da2/dZ2 * dZ2/dh_prev * dh_prev/dc_prev * dc_prev/dft
+    dft = ((dc_prev * cache["prev_cs"] + cache["ot"]
+           * (1 - np.square(np.tanh(cache["next_cs"])))
+           * cache["prev_cs"] * dh_prev) * cache["ft"] * (1 - cache["ft"]))
+    # dWf = dft * dft/dWf
+    gradients['dWf'] += np.dot(dft, concat.T)
+    # dbf = dft * dft/dbf
+    gradients['dbf'] += np.sum(dft, axis=1, keepdims=True)
+    # dh_f = dft * dft/dh_prev
+    dh_f = np.dot(parameters["Wf"][:, :hidden_dim].T, dft)
+    return dh_f, gradients 
+```
+
+Define a function to calculate the gradients in the **Input Gate** and **Candidate Memory Gate**:
+
+```python
+def bp_input_gate(hidden_dim, concat, dh_prev, dc_prev, cache, gradients, parameters):
+    # dit = dL/da2 * da2/dZ2 * dZ2/dh_prev * dh_prev/dc_prev * dc_prev/dit
+    dit = ((dc_prev * cache["cmt"] + cache["ot"]
+           * (1 - np.square(np.tanh(cache["next_cs"])))
+           * cache["cmt"] * dh_prev) * cache["it"] * (1 - cache["it"]))
+    # dcmt = dL/da2 * da2/dZ2 * dZ2/dh_prev * dh_prev/dc_prev * dc_prev/dcmt
+    dcmt = ((dc_prev * cache["it"] + cache["ot"]
+            * (1 - np.square(np.tanh(cache["next_cs"])))
+            * cache["it"] * dh_prev) * (1 - np.square(cache["cmt"])))
+    # dWi = dit * dit/dWi
+    gradients['dWi'] += np.dot(dit, concat.T)
+    # dWcm = dcmt * dcmt/dWcm
+    gradients['dWcm'] += np.dot(dcmt, concat.T)
+    # dbi = dit * dit/dbi
+    gradients['dbi'] += np.sum(dit, axis=1, keepdims=True)
+    # dWcm = dcmt * dcmt/dbcm
+    gradients['dbcm'] += np.sum(dcmt, axis=1, keepdims=True)
+    # dhi = dit * dit/dh_prev
+    dh_i = np.dot(parameters["Wi"][:, :hidden_dim].T, dit)
+    # dhcm = dcmt * dcmt/dh_prev
+    dh_cm = np.dot(parameters["Wcm"][:, :hidden_dim].T, dcmt)
+    return dh_i, dh_cm, gradients 
+```
+
+Define a function to calculate the gradients for the **Output Gate**:
+
+```python
+def bp_output_gate(hidden_dim, concat, dh_prev, dc_prev, cache, gradients, parameters):
+    # dot = dL/da2 * da2/dZ2 * dZ2/dh_prev * dh_prev/dot
+    dot = (dh_prev * np.tanh(cache["next_cs"])
+           * cache["ot"] * (1 - cache["ot"]))
+    # dWo = dot * dot/dWo
+    gradients['dWo'] += np.dot(dot, concat.T)
+    # dbo = dot * dot/dbo
+    gradients['dbo'] += np.sum(dot, axis=1, keepdims=True)
+    # dho = dot * dot/dho
+    dh_o = np.dot(parameters["Wo"][:, :hidden_dim].T, dot)
+    return dh_o, gradients  
+```
+
+Define a function to calculate the gradients for the **Fully Connected Layer**:
+
+```python
+def bp_fc_layer (target, caches, gradients):
+    # dZ2 = dL/da2 * da2/dZ2
+    predicted = np.array(caches['fc_values'][0]['a2'])
+    target = np.array(target)
+    dZ2 = predicted - target
+    # dW2 = dL/da2 * da2/dZ2 * dZ2/dW2
+    last_hs = caches['lstm_values'][-1]["next_hs"]
+    gradients['dW2'] = np.dot(dZ2, last_hs.T)
+    # db2 = dL/da2 * da2/dZ2 * dZ2/db2
+    gradients['db2'] = np.sum(dZ2)
+    # dh_last = dZ2 * W2
+    W2 = caches['fc_values'][0]["W2"]
+    dh_last = np.dot(W2.T, dZ2)
+    return dh_last, gradients    
+```
+
+Put all these functions together to summarize the **Backpropagation** step for our model:
 
 ```python
 def backprop(y, caches, hidden_dim, input_dim, time_steps, parameters):
-    # Retrieve output and corresponding weights of fully connected layer
-    A2, W2 = caches['fc_values'][0]
-    # Retrieve hidden state calculated in the last time step
-    h_last = caches['lstm_values'][-1][0]
+    
+    # Initialize gradients
+    gradients = initialize_grads(parameters)
 
-    pred_value = np.array(A2)
-    target_value = np.array(y)
+    # Calculate gradients for the fully connected layer
+    dh_last, gradients = bp_fc_layer(target, caches, gradients)
 
-    # Initialise gradients
-    gradients = initialise_grads(parameters)
-
-    # Calculate gradients of the fully connected layer
-    # dZ2 = dL/da2 * da2/dZ2
-    dZ2 = pred_value - target_value
-    # dW2 = dL/da2 * da2/dZ2 * dZ2/dW2
-    gradients['dW2'] = np.dot(dZ2, h_last.T)
-    # db2 = dL/da2 * da2/dZ2 * dZ2/db2
-    gradients['db2'] = np.sum(dZ2)
-
-    # Gradient of Loss w.r.t the last hidden output of the LSTM
-    # dh_last = dZ2 * W2
-    dh_last = np.dot(W2.T, dZ2)
-
-    # Initialise gradients w.r.t previous hidden state and cell state
+    # Initialize gradients w.r.t previous hidden state and previous cell state
     dh_prev = dh_last
     dc_prev = np.zeros((dh_prev.shape))
 
     # loop back over the whole sequence
     for t in reversed(range(time_steps)):
         cache = caches['lstm_values'][t]
-
-        # Retrieve parameters from "parameters"
-        Wf = parameters["Wf"]
-        Wi = parameters["Wi"]
-        Wcm = parameters["Wcm"]
-        Wo = parameters["Wo"]
-
-        # Retrieve information from "cache"
-        (next_hidden_state, next_cell_state,
-         prev_hidden_state, prev_cell_state,
-         ft, it, cmt, ot, X_t) = cache
         
-        # Input to gates of LSTM is [prev_hidden_state, X_t]
-        concat = np.concatenate((prev_hidden_state, X_t), axis=0)
+        # Input to the gates is concatenated previous hidden state and current word embedding
+        concat = np.concatenate((cache["prev_hs"], cache["xt"]), axis=0)
 
         # Compute gates related derivatives
-        # Calculate derivative w.r.t the parameters of forget gate
-        # dft = dL/da2 * da2/dZ2 * dZ2/dh_prev * dh_prev/dc_prev * dc_prev/dft
-        dft = ((dc_prev * prev_cell_state + ot
-               * (1 - np.square(np.tanh(next_cell_state)))
-               * prev_cell_state * dh_prev) * ft * (1 - ft))
-        # dWf = dft * dft/dWf
-        gradients['dWf'] += np.dot(dft, concat.T)
-        # dbf = dft * dft/dbf
-        gradients['dbf'] += np.sum(dft, axis=1, keepdims=True)
-        # dh_f = dft * dft/dh_prev
-        dh_f = np.dot(Wf[:, :hidden_dim].T, dft)
+        # Calculate derivative w.r.t the input and parameters of forget gate
+        dh_f, gradients = bp_forget_gate(hidden_dim, concat, dh_prev, dc_prev, cache, gradients, parameters)
 
-        # Calculate derivative w.r.t the parameters of input gate
-        # dit = dL/da2 * da2/dZ2 * dZ2/dh_prev * dh_prev/dc_prev * dc_prev/dit
-        dit = ((dc_prev * cmt + ot
-               * (1 - np.square(np.tanh(next_cell_state)))
-               * cmt * dh_prev) * it * (1 - it))
-        # dcmt = dL/da2 * da2/dZ2 * dZ2/dh_prev * dh_prev/dc_prev * dc_prev/dcmt
-        dcmt = ((dc_prev * it + ot
-                * (1 - np.square(np.tanh(next_cell_state)))
-                * it * dh_prev) * (1 - np.square(cmt)))
-        # dWi = dit * dit/dWi
-        gradients['dWi'] += np.dot(dit, concat.T)
-        # dWcm = dcmt * dcmt/dWcm
-        gradients['dWcm'] += np.dot(dcmt, concat.T)
-        # dbi = dit * dit/dbi
-        gradients['dbi'] += np.sum(dit, axis=1, keepdims=True)
-        # dWcm = dcmt * dcmt/dbcm
-        gradients['dbcm'] += np.sum(dcmt, axis=1, keepdims=True)
-        # dhi = dit * dit/dh_prev
-        dh_i = np.dot(Wi[:, :hidden_dim].T, dit)
-        # dhcm = dcmt * dcmt/dh_prev
-        dh_cm = np.dot(Wcm[:, :hidden_dim].T, dcmt)
+        # Calculate derivative w.r.t the input and parameters of input gate
+        dh_i, dh_cm, gradients = bp_input_gate(hidden_dim, concat, dh_prev, dc_prev, cache, gradients, parameters)
 
-        # Calculate derivative w.r.t the parameters of output gate
-        # dot = dL/da2 * da2/dZ2 * dZ2/dh_prev * dh_prev/dot
-        dot = (dh_prev * np.tanh(next_cell_state)
-               * ot * (1 - ot))
-        # dWo = dot * dot/dWo
-        gradients['dWo'] += np.dot(dot, concat.T)
-        # dbo = dot * dot/dbo
-        gradients['dbo'] += np.sum(dot, axis=1, keepdims=True)
-        # dho = dot * dot/dho
-        dh_o = np.dot(Wo[:, :hidden_dim].T, dot)
+        # Calculate derivative w.r.t the input and parameters of output gate
+        dh_o, gradients = bp_output_gate(hidden_dim, concat, dh_prev, dc_prev, cache, gradients, parameters)
 
         # Compute derivatives w.r.t prev. hidden state and the prev. cell state
         dh_prev = dh_f + dh_i + dh_cm + dh_o
-        dc_prev = (dc_prev * ft + ot
-                   * (1 - np.square(np.tanh(next_cell_state)))
-                   * ft * dh_prev)
+        dc_prev = (dc_prev * cache["ft"] + cache["ot"]
+                   * (1 - np.square(np.tanh(cache["next_cs"])))
+                   * cache["ft"] * dh_prev)
 
     return gradients
 ```
@@ -812,7 +882,7 @@ for epoch in range(epochs):
 
         # Measure the training error (loss function) between the actual
         # sentiment (the truth) and the prediction by the model.
-        y_pred = caches['fc_values'][0][0][0][0]
+        y_pred = caches['fc_values'][0]['a2'][0][0]
         loss = loss_f(y_pred, target)
         # Store training set losses
         train_j.append(loss)
@@ -832,7 +902,7 @@ for epoch in range(epochs):
 
         # Measure the testing error (loss function) between the actual
         # sentiment (the truth) and the prediction by the model.
-        y_pred = caches['fc_values'][0][0][0][0]
+        y_pred = caches['fc_values'][0]['a2'][0][0]
         loss = loss_f(y_pred, target)
 
         # Store testing set losses
@@ -901,7 +971,7 @@ for index, text in enumerate(X_pred):
                               input_dim)
 
         # Retrieve the output of the fully connected layer
-        sent_prob = caches['fc_values'][0][0][0][0]
+        sent_prob = caches['fc_values'][0]['a2'][0][0]
         preds.append(sent_prob)
 
     threshold = 0.5
