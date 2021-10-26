@@ -3,8 +3,8 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.12
-    jupytext_version: 1.6.0
+    format_version: 0.13
+    jupytext_version: 1.11.1
 kernelspec:
   display_name: Python 3
   language: python
@@ -37,8 +37,9 @@ After this tutorial, you should be able to:
 
 In this tutorial, we will use a [matrix decomposition](https://en.wikipedia.org/wiki/Matrix_decomposition) from linear algebra, the Singular Value Decomposition, to generate a compressed approximation of an image. We'll use the `face` image from the [scipy.misc](https://docs.scipy.org/doc/scipy/reference/misc.html#module-scipy.misc) module:
 
-```{code-cell} ipython3
+```{code-cell}
 from scipy import misc
+
 img = misc.face()
 ```
 
@@ -48,18 +49,19 @@ img = misc.face()
 
 Now, `img` is a NumPy array, as we can see when using the `type` function:
 
-```{code-cell} ipython3
+```{code-cell}
 type(img)
 ```
 
 We can see the image using the [matplotlib.pyplot.imshow](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.imshow.html#matplotlib.pyplot.imshow) function & the special iPython command, `%matplotlib inline` to display plots inline:
 
-```{code-cell} ipython3
+```{code-cell}
 import matplotlib.pyplot as plt
+
 %matplotlib inline
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 plt.imshow(img)
 plt.show()
 ```
@@ -70,7 +72,7 @@ Note that, in linear algebra, the dimension of a vector refers to the number of 
 
 First, let's check for the shape of the data in our array. Since this image is two-dimensional (the pixels in the image form a rectangle), we might expect a two-dimensional array to represent it (a matrix). However, using the `shape` property of this NumPy array gives us a different result:
 
-```{code-cell} ipython3
+```{code-cell}
 img.shape
 ```
 
@@ -78,13 +80,13 @@ The output is a [tuple](https://docs.python.org/dev/tutorial/datastructures.html
 
 Furthermore, using the `ndim` property of this array, we can see that
 
-```{code-cell} ipython3
+```{code-cell}
 img.ndim
 ```
 
 NumPy refers to each dimension as an *axis*. Because of how `imread` works, the *first index in the 3rd axis* is the red pixel data for our image. We can access this by using the syntax
 
-```{code-cell} ipython3
+```{code-cell}
 img[:, :, 0]
 ```
 
@@ -93,13 +95,13 @@ use your own image instead of [scipy.misc.face](https://docs.scipy.org/doc/scipy
 
 As expected, this is a 768x1024 matrix:
 
-```{code-cell} ipython3
+```{code-cell}
 img[:, :, 0].shape
 ```
 
 Since we are going to perform linear algebra operations on this data, it might be more interesting to have real numbers between 0 and 1 in each entry of the matrices to represent the RGB values. We can do that by setting
 
-```{code-cell} ipython3
+```{code-cell}
 img_array = img / 255
 ```
 
@@ -108,19 +110,19 @@ This operation, dividing an array by a scalar, works because of NumPy's [broadca
 You can check that the above works by doing some tests; for example, inquiring
 about maximum and minimum values for this array:
 
-```{code-cell} ipython3
+```{code-cell}
 img_array.max(), img_array.min()
 ```
 
 or checking the type of data in the array:
 
-```{code-cell} ipython3
+```{code-cell}
 img_array.dtype
 ```
 
 Note that we can assign each color channel to a separate matrix using the slice syntax:
 
-```{code-cell} ipython3
+```{code-cell}
 red_array = img_array[:, :, 0]
 green_array = img_array[:, :, 1]
 blue_array = img_array[:, :, 2]
@@ -138,7 +140,7 @@ It is possible to use methods from linear algebra to approximate an existing set
 
 To proceed, import the linear algebra submodule from NumPy:
 
-```{code-cell} ipython3
+```{code-cell}
 from numpy import linalg
 ```
 
@@ -155,28 +157,28 @@ $$Y = 0.2126 R + 0.7152 G + 0.0722 B$$
 
 where $Y$ is the array representing the grayscale image, and $R$, $G$ and $B$ are the red, green and blue channel arrays we had originally. Notice we can use the `@` operator (the matrix multiplication operator for NumPy arrays, see [numpy.matmul](https://numpy.org/devdocs/reference/generated/numpy.matmul.html#numpy.matmul)) for this:
 
-```{code-cell} ipython3
+```{code-cell}
 img_gray = img_array @ [0.2126, 0.7152, 0.0722]
 ```
 
 Now, `img_gray` has shape
 
-```{code-cell} ipython3
+```{code-cell}
 img_gray.shape
 ```
 
 To see if this makes sense in our image, we should use a colormap from `matplotlib` corresponding to the color we wish to see in out image (otherwise, `matplotlib` will default to a colormap that does not correspond to the real data).
 
-In our case, we are approximating the grayscale portion of the image, so we will use the colormap `gray`:   
+In our case, we are approximating the grayscale portion of the image, so we will use the colormap `gray`:
 
-```{code-cell} ipython3
+```{code-cell}
 plt.imshow(img_gray, cmap="gray")
 plt.show()
 ```
 
 Now, applying the [linalg.svd](https://numpy.org/devdocs/reference/generated/numpy.linalg.svd.html#numpy.linalg.svd) function to this matrix, we obtain the following decomposition:
 
-```{code-cell} ipython3
+```{code-cell}
 U, s, Vt = linalg.svd(img_gray)
 ```
 
@@ -186,7 +188,7 @@ U, s, Vt = linalg.svd(img_gray)
 
 Let's check that this is what we expected:
 
-```{code-cell} ipython3
+```{code-cell}
 U.shape, s.shape, Vt.shape
 ```
 
@@ -199,8 +201,9 @@ s @ Vt
 
 results in a `ValueError`. This happens because having a one-dimensional array for `s`, in this case, is much more economic in practice than building a diagonal matrix with the same data. To reconstruct the original matrix, we can rebuild the diagonal matrix $\Sigma$ with the elements of `s` in its diagonal and with the appropriate dimensions for multiplying: in our case, $\Sigma$ should be 768x1024 since `U` is 768x768 and `Vt` is 1024x1024. In order to add the singular values to the diagonal of `Sigma`, we will use the [fill_diagonal](https://numpy.org/devdocs/reference/generated/numpy.fill_diagonal.html) function from NumPy:
 
-```{code-cell} ipython3
+```{code-cell}
 import numpy as np
+
 Sigma = np.zeros((U.shape[1], Vt.shape[0]))
 np.fill_diagonal(Sigma, s)
 ```
@@ -213,7 +216,7 @@ Now, we want to check if the reconstructed `U @ Sigma @ Vt` is close to the orig
 
 The [linalg](https://numpy.org/devdocs/reference/routines.linalg.html#module-numpy.linalg) module includes a `norm` function, which computes the norm of a vector or matrix represented in a NumPy array. For example, from the SVD explanation above, we would expect the norm of the difference between `img_gray` and the reconstructed SVD product to be small. As expected, you should see something like
 
-```{code-cell} ipython3
+```{code-cell}
 linalg.norm(img_gray - U @ Sigma @ Vt)
 ```
 
@@ -221,13 +224,13 @@ linalg.norm(img_gray - U @ Sigma @ Vt)
 
 We could also have used the [numpy.allclose](https://numpy.org/devdocs/reference/generated/numpy.allclose.html#numpy.allclose) function to make sure the reconstructed product is, in fact, *close* to our original matrix (the difference between the two arrays is small):
 
-```{code-cell} ipython3
+```{code-cell}
 np.allclose(img_gray, U @ Sigma @ Vt)
 ```
 
 To see if an approximation is reasonable, we can check the values in `s`:
 
-```{code-cell} ipython3
+```{code-cell}
 plt.plot(s)
 plt.show()
 ```
@@ -236,21 +239,21 @@ In the graph, we can see that although we have 768 singular values in `s`, most 
 
 The idea is to consider all but the first `k` singular values in `Sigma` (which are the same as in `s`) as zeros, keeping `U` and `Vt` intact, and computing the product of these matrices as the approximation.
 
-For example, if we choose 
+For example, if we choose
 
-```{code-cell} ipython3
+```{code-cell}
 k = 10
 ```
 
 we can build the approximation by doing
 
-```{code-cell} ipython3
+```{code-cell}
 approx = U @ Sigma[:, :k] @ Vt[:k, :]
 ```
 
 Note that we had to use only the first `k` rows of `Vt`, since all other rows would be multiplied by the zeros corresponding to the singular values we eliminated from this approximation.
 
-```{code-cell} ipython3
+```{code-cell}
 plt.imshow(approx, cmap="gray")
 plt.show()
 ```
@@ -268,7 +271,7 @@ If our array has more than two dimensions, then the SVD can be applied to all ax
 
 In our case,
 
-```{code-cell} ipython3
+```{code-cell}
 img_array.shape
 ```
 
@@ -280,20 +283,20 @@ indicates that the axis will be reordered such that the final shape of the trans
 
 Let's see how this goes for our array:
 
-```{code-cell} ipython3
+```{code-cell}
 img_array_transposed = np.transpose(img_array, (2, 0, 1))
 img_array_transposed.shape
 ```
 
 Now we are ready to apply the SVD:
 
-```{code-cell} ipython3
+```{code-cell}
 U, s, Vt = linalg.svd(img_array_transposed)
 ```
 
 Finally, to obtain the full approximated image, we need to reassemble these matrices into the approximation. Now, note that
 
-```{code-cell} ipython3
+```{code-cell}
 U.shape, s.shape, Vt.shape
 ```
 
@@ -307,7 +310,7 @@ If you have worked before with only one- or two-dimensional arrays in NumPy, you
 
 Now, to build our approximation, we first need to make sure that our singular values are ready for multiplication, so we build our `Sigma` matrix similarly to what we did before. The `Sigma` array must have dimensions `(3, 768, 1024)`. In order to add the singular values to the diagonal of `Sigma`, we will again use the [fill_diagonal](https://numpy.org/devdocs/reference/generated/numpy.fill_diagonal.html) function, using each of the 3 rows in `s` as the diagonal for each of the 3 matrices in `Sigma`:
 
-```{code-cell} ipython3
+```{code-cell}
 Sigma = np.zeros((3, 768, 1024))
 for j in range(3):
     np.fill_diagonal(Sigma[j, :, :], s[j, :])
@@ -315,25 +318,25 @@ for j in range(3):
 
 Now, if we wish to rebuild the full SVD (with no approximation), we can do
 
-```{code-cell} ipython3
+```{code-cell}
 reconstructed = U @ Sigma @ Vt
 ```
 
 Note that
 
-```{code-cell} ipython3
+```{code-cell}
 reconstructed.shape
 ```
 
 The reconstructed image should be indistinguishable from the original one, except for differences due to floating point errors from the reconstruction. Recall that our original image consisted of floating point values in the range `[0., 1.]`. The accumulation of floating point error from the reconstruction can result in values slightly outside this original range:
 
-```{code-cell} ipython3
+```{code-cell}
 reconstructed.min(), reconstructed.max()
 ```
 
 Since `imshow` expects values in the range, we can use `clip` to excise the floating point error:
 
-```{code-cell} ipython3
+```{code-cell}
 reconstructed = np.clip(reconstructed, 0, 1)
 plt.imshow(np.transpose(reconstructed, (1, 2, 0)))
 plt.show()
@@ -343,7 +346,7 @@ In fact, `imshow` peforms this clipping under-the-hood, so if you skip the first
 
 Now, to do the approximation, we must choose only the first `k` singular values for each color channel. This can be done using the following syntax:
 
-```{code-cell} ipython3
+```{code-cell}
 approx_img = U @ Sigma[..., :k] @ Vt[..., :k, :]
 ```
 
@@ -352,13 +355,13 @@ placeholder for other axes. For more details, see the documentation on [Indexing
 
 Now,
 
-```{code-cell} ipython3
+```{code-cell}
 approx_img.shape
 ```
 
 which is not the right shape for showing the image. Finally, reordering the axes back to our original shape of `(768, 1024, 3)`, we can see our approximation:
 
-```{code-cell} ipython3
+```{code-cell}
 plt.imshow(np.transpose(approx_img, (1, 2, 0)))
 plt.show()
 ```

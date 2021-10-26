@@ -4,8 +4,8 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.12
-    jupytext_version: 1.6.0
+    format_version: 0.13
+    jupytext_version: 1.11.1
 kernelspec:
   display_name: Python 3
   language: python
@@ -16,7 +16,7 @@ kernelspec:
 
 ## What you'll do
 This guide will keep a Jupyter notebook synced _or paired_ between
-`.ipynb` and `.md`. 
+`.ipynb` and `.md`.
 
 ## What you'll learn
 - The difference between Jupyter's json format and MyST-NB's markdown
@@ -44,15 +44,15 @@ format.
 Jupyter notebooks are stored on your disk in a
 [json format](https://nbformat.readthedocs.io/en/latest/format_description.html). The json format is
 very powerful and allows you to store almost any input and output that
-Python libraries can create. The drawback is that it is hard to see and compare changes made in the notebook file when reviewing pull requests, because this means the reviewers are looking only at the raw json files. 
+Python libraries can create. The drawback is that it is hard to see and compare changes made in the notebook file when reviewing pull requests, because this means the reviewers are looking only at the raw json files.
 
-MyST-NB notebooks are stored on your disk in a 
+MyST-NB notebooks are stored on your disk in a
 [markdown](https://en.wikipedia.org/wiki/Markdown) format. The markdown
 format is a lightweight markup language. Its key design goal is
 [_readability_](https://daringfireball.net/projects/markdown/syntax#philosophy).
 The drawback is that markdown can only store the inputs of your code.
 Each time you open the notebook, you must execute the inputs to see the
-output. 
+output.
 
 > __Note:__ You should use [common mark](https://commonmark.org)
 > markdown cells. Jupyter only renders common mark markdown, but MyST-NB
@@ -64,7 +64,7 @@ output.
 Consider these two versions of the same __Simple notebook example__. You
 have three things in the notebooks:
 
-1. A markdown cell that explains the code 
+1. A markdown cell that explains the code
     ```This code calculates 2+2 and prints the output.```
 2. A code cell that shows the code
     ```python
@@ -78,10 +78,12 @@ have three things in the notebooks:
 ---
 __<center> Simple notebook example </center>__
 This code calculates 2+2 and prints the output.
-```{code-cell} ipython3
+
+```{code-cell}
 x = 2 + 2
-print('x = ', x)
+print("x = ", x)
 ```
+
 ---
 
 Here are the two Simple notebook example raw inputs side-by-side:
@@ -186,7 +188,7 @@ When you submit a Jupyter notebook to NumPy tutorials, we (the reviewers) will c
 it to a MyST-NB format. You can also submit the MyST-NB `.md` in your
 pull request.
 To keep the `.ipynb` and `.md` in sync--_or paired_--you need
-[Jupytext](https://jupytext.readthedocs.io/en/latest/index.html). 
+[Jupytext](https://jupytext.readthedocs.io/en/latest/index.html).
 
 Install `jupytext` using:
 
@@ -200,7 +202,7 @@ conda install jupytext -c conda-forge
 
 Once installed, start your `jupyter lab` or `jupyter notebook`
 session in the browser. When launching `jupyter lab` it will ask you to rebuild
-to include the Jupytext extension. 
+to include the Jupytext extension.
 
 You can pair the two formats in the classic Jupyter, Jupyter Lab,
 or the command line:
@@ -238,8 +240,8 @@ jupytext --sync notebook.ipynb
 
 ## Wrapping up
 
-In this tutorial, you saw the json `.ipynb` and MyST-NB `.md` raw code 
+In this tutorial, you saw the json `.ipynb` and MyST-NB `.md` raw code
 to create Jupyter notebooks. You can use both formats to create
 tutorials. Now you can work in either a simple text editor like VIM
 or emacs or continue building notebooks in your browser. Jupytext can
-handle pairing to keep your work in sync. 
+handle pairing to keep your work in sync.

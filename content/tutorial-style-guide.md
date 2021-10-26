@@ -3,8 +3,8 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.12
-    jupytext_version: 1.6.0
+    format_version: 0.13
+    jupytext_version: 1.11.1
 kernelspec:
   display_name: Python 3
   language: python
@@ -16,7 +16,7 @@ kernelspec:
 ![The Diátaxis framework for documentation dividing tutorials, how-to guides, explanation, and reference](https://diataxis.fr/_images/diataxis.png)
 <p style="text-align:right;font-style:italic;">Image credit: Daniele Procida's <a href="https://diataxis.fr/">Diátaxis framework</a>, licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>.</p>
 
-+++ 
++++
 
 ## What you'll do
 
@@ -38,11 +38,11 @@ Guided by a template, you'll write a NumPy tutorial.
 
 - This template.
 
-- A portrait of your intended reader. 
+- A portrait of your intended reader.
     - Just as schools list prerequisites for higher-level courses, you can assume readers know some things (which you must list, as noted in the next bullet). Overexplaining bogs down the tutorial and obscures the main points.
     - But also put yourself in the reader's place and consider what to explain along the way.
-    
-    
+
+
 - "What you'll need" is a list of:
 
     - packages that must be present on the user's machine before they begin. Don't include `numpy`.
@@ -80,14 +80,14 @@ Avoid abstraction. "About" is a tipoff: Rather than writing "You'll learn about 
 
 ## Why are "What you'll do" and "What you'll learn" different?
 
-**What you'll do** is typically one sentence listing an end product: "You'll bake a cake." This makes the endpoint clear. **What you'll learn** lists the payoffs, and there may be many: "You'll learn to follow a recipe. You'll get practice measuring ingredients. You'll learn how to tell when a cake is ready to come out of the oven."  
+**What you'll do** is typically one sentence listing an end product: "You'll bake a cake." This makes the endpoint clear. **What you'll learn** lists the payoffs, and there may be many: "You'll learn to follow a recipe. You'll get practice measuring ingredients. You'll learn how to tell when a cake is ready to come out of the oven."
 
 
 ## Avoid asides
 
 As explained by expert documentation writer [Daniele Procida](https://documentation.divio.com/tutorials):
 
-> Don’t explain anything the learner doesn’t need to know in order to complete the tutorial. 
+> Don’t explain anything the learner doesn’t need to know in order to complete the tutorial.
 
 Because tutorial steps are chosen to be clear and easy, they may fall short of
 production-grade. Yes, you should share this, but not during the tutorial, which should be straightforward and assured. The `In practice` section is the place for details, exceptions, alternatives, and similar fine print.
@@ -120,15 +120,15 @@ NumPy docs follow the [Google developer documentation style guide](https://devel
 `Run all cells` should execute all cells to the bottom of the file. If you're demonstrating a bad expression and want to show the traceback, comment
 the expression and put the traceback in a text cell.
 
-(Note that triple backquotes won't be enough for a traceback that contains `<text inside angle brackets>`, 
+(Note that triple backquotes won't be enough for a traceback that contains `<text inside angle brackets>`,
 the angle brackets must be replaced by `&lt;` and `&gt;` as shown in the text cell markdown below.)
 
-```{code-cell} ipython3
-#100/0
+```{code-cell}
+# 100/0
 ```
 
 <div style="background-color:#fcdcdc">
-<code style="background-color:#fcdcdc;font-size:90%">    
+<code style="background-color:#fcdcdc;font-size:90%">
 ---------------------------------------------------------------------------
 ZeroDivisionError                         Traceback (most recent call last)
 &lt;ipython-input-10-bbe761e74a70&gt; in &lt;module&gt;
@@ -138,7 +138,7 @@ ZeroDivisionError: division by zero
 </code>
 </div>
 
-+++ 
++++
 
 ***
 
@@ -154,8 +154,8 @@ In an optional `On your own` section, you can offer an assignment for readers to
 
 
 
-- Don't just say it's usually done another way; explain why. 
- 
+- Don't just say it's usually done another way; explain why.
+
 
 ## Further reading
 

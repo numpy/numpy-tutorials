@@ -3,8 +3,8 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.12
-    jupytext_version: 1.7.1
+    format_version: 0.13
+    jupytext_version: 1.11.1
 kernelspec:
   display_name: Python 3
   language: python
@@ -66,19 +66,19 @@ In this section, you will download the zipped MNIST dataset files originally sto
 
 **1.** Define a variable to store the training/test image/label names of the MNIST dataset in a list:
 
-```{code-cell} ipython3
+```{code-cell}
 data_sources = {
-    "training_images": "train-images-idx3-ubyte.gz",   # 60,000 training images.
-    "test_images": "t10k-images-idx3-ubyte.gz",        # 10,000 test images.
-    "training_labels": "train-labels-idx1-ubyte.gz",   # 60,000 training labels.
-    "test_labels": "t10k-labels-idx1-ubyte.gz"         # 10,000 test labels.
+    "training_images": "train-images-idx3-ubyte.gz",  # 60,000 training images.
+    "test_images": "t10k-images-idx3-ubyte.gz",  # 10,000 test images.
+    "training_labels": "train-labels-idx1-ubyte.gz",  # 60,000 training labels.
+    "test_labels": "t10k-labels-idx1-ubyte.gz",  # 10,000 test labels.
 }
 ```
 
 **2.** Load the data. First check if the data is stored locally; if not, then
 download it.
 
-```{code-cell} ipython3
+```{code-cell}
 :tags: [remove-cell]
 
 # Use responsibly! When running notebooks locally, be sure to keep local
@@ -92,7 +92,7 @@ request_opts = {
 }
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 import requests
 import os
 
@@ -114,7 +114,7 @@ for fname in data_sources.values():
 
 **3.** Decompress the 4 files and create 4 [`ndarrays`](https://numpy.org/doc/stable/reference/arrays.ndarray.html), saving them into a dictionary. Each original image is of size 28x28 and neural networks normally expect a 1D vector input; therefore, you also need to reshape the images by multiplying 28 by 28 (784).
 
-```{code-cell} ipython3
+```{code-cell}
 import gzip
 import numpy as np
 
@@ -122,45 +122,57 @@ mnist_dataset = {}
 
 # Images
 for key in ("training_images", "test_images"):
-    with gzip.open(os.path.join(data_dir, data_sources[key]), 'rb') as mnist_file:
-        mnist_dataset[key] = np.frombuffer(mnist_file.read(), np.uint8, offset=16).reshape(-1, 28*28)
+    with gzip.open(os.path.join(data_dir, data_sources[key]), "rb") as mnist_file:
+        mnist_dataset[key] = np.frombuffer(
+            mnist_file.read(), np.uint8, offset=16
+        ).reshape(-1, 28 * 28)
 # Labels
 for key in ("training_labels", "test_labels"):
-    with gzip.open(os.path.join(data_dir, data_sources[key]), 'rb') as mnist_file:
+    with gzip.open(os.path.join(data_dir, data_sources[key]), "rb") as mnist_file:
         mnist_dataset[key] = np.frombuffer(mnist_file.read(), np.uint8, offset=8)
 ```
 
 **4.** Split the data into training and test sets using the standard notation of `x` for data and `y` for labels, calling the training and test set images `x_train` and `x_test`, and the labels `y_train` and `y_test`:
 
-```{code-cell} ipython3
-x_train, y_train, x_test, y_test = (mnist_dataset["training_images"],
-                                    mnist_dataset["training_labels"],
-                                    mnist_dataset["test_images"],
-                                    mnist_dataset["test_labels"])
+```{code-cell}
+x_train, y_train, x_test, y_test = (
+    mnist_dataset["training_images"],
+    mnist_dataset["training_labels"],
+    mnist_dataset["test_images"],
+    mnist_dataset["test_labels"],
+)
 ```
 
 **5.** You can confirm that the shape of the image arrays is `(60000, 784)` and `(10000, 784)` for training and test sets, respectively, and the labels — `(60000,)` and `(10000,)`:
 
-```{code-cell} ipython3
-print('The shape of training images: {} and training labels: {}'.format(x_train.shape, y_train.shape))
-print('The shape of test images: {} and test labels: {}'.format(x_test.shape, y_test.shape))
+```{code-cell}
+print(
+    "The shape of training images: {} and training labels: {}".format(
+        x_train.shape, y_train.shape
+    )
+)
+print(
+    "The shape of test images: {} and test labels: {}".format(
+        x_test.shape, y_test.shape
+    )
+)
 ```
 
 **6.** And you can inspect some images using Matplotlib:
 
-```{code-cell} ipython3
+```{code-cell}
 import matplotlib.pyplot as plt
 
 # Take the 60,000th image (indexed at 59,999) from the training set,
 # reshape from (784, ) to (28, 28) to have a valid shape for displaying purposes.
 mnist_image = x_train[59999, :].reshape(28, 28)
 # Set the color mapping to grayscale to have a black background.
-plt.imshow(mnist_image, cmap='gray')
+plt.imshow(mnist_image, cmap="gray")
 # Display the image.
 plt.show()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # Display 5 random images from the training set.
 num_examples = 5
 seed = 147197952744
@@ -168,7 +180,7 @@ rng = np.random.default_rng(seed)
 
 fig, axes = plt.subplots(1, num_examples)
 for sample, ax in zip(rng.choice(x_train, size=num_examples, replace=False), axes):
-    ax.imshow(sample.reshape(28, 28), cmap='gray')
+    ax.imshow(sample.reshape(28, 28), cmap="gray")
 ```
 
 _Above are five images taken from the MNIST training set. Various hand-drawn
@@ -185,7 +197,7 @@ Arabic numerals are shown, with exact values chosen randomly with each run of th
 > ...
 > ```
 
-```{code-cell} ipython3
+```{code-cell}
 # Display the label of the 60,000th image (indexed at 59,999) from the training set.
 y_train[59999]
 ```
@@ -209,9 +221,9 @@ You will normalize them into floating-point arrays in the [0, 1] interval by div
 
 **1.** Check that the vectorized image data has type `uint8`:
 
-```{code-cell} ipython3
-print('The data type of training images: {}'.format(x_train.dtype))
-print('The data type of test images: {}'.format(x_test.dtype))
+```{code-cell}
+print("The data type of training images: {}".format(x_train.dtype))
+print("The data type of test images: {}".format(x_test.dtype))
 ```
 
 **2.** Normalize the arrays by dividing them by 255 (and thus promoting the data type from `uint8` to `float64`) and then assign the train and test image data variables — `x_train` and `x_test` — to `training_images` and `train_labels`, respectively.
@@ -222,7 +234,7 @@ of the complete datasets of 60,000 and 10,000 images, respectively.
 These values can be controlled by changing the  `training_sample` and
 `test_sample` below, up to their maximum values of 60,000 and 10,000.
 
-```{code-cell} ipython3
+```{code-cell}
 training_sample, test_sample = 1000, 1000
 training_images = x_train[0:training_sample] / 255
 test_images = x_test[0:test_sample] / 255
@@ -230,9 +242,9 @@ test_images = x_test[0:test_sample] / 255
 
 **3.** Confirm that the image data has changed to the floating-point format:
 
-```{code-cell} ipython3
-print('The data type of training images: {}'.format(training_images.dtype))
-print('The data type of test images: {}'.format(test_images.dtype))
+```{code-cell}
+print("The data type of training images: {}".format(training_images.dtype))
+print("The data type of test images: {}".format(test_images.dtype))
 ```
 
 > **Note:** You can also check that normalization was successful by printing `training_images[0]` in a notebook cell. Your long output should contain an array of floating-point numbers:
@@ -257,39 +269,39 @@ array([0., 0., 0., 0., 0., 1., 0., 0., 0., 0.])
 
 **1.** Confirm that the image label data are integers with `dtype` `uint8`:
 
-```{code-cell} ipython3
-print('The data type of training labels: {}'.format(y_train.dtype))
-print('The data type of test labels: {}'.format(y_test.dtype))
+```{code-cell}
+print("The data type of training labels: {}".format(y_train.dtype))
+print("The data type of test labels: {}".format(y_test.dtype))
 ```
 
 **2.** Define a function that performs one-hot encoding on arrays:
 
-```{code-cell} ipython3
+```{code-cell}
 def one_hot_encoding(labels, dimension=10):
     # Define a one-hot variable for an all-zero vector
     # with 10 dimensions (number labels from 0 to 9).
-    one_hot_labels = (labels[..., None] == np.arange(dimension)[None])
+    one_hot_labels = labels[..., None] == np.arange(dimension)[None]
     # Return one-hot encoded labels.
     return one_hot_labels.astype(np.float64)
 ```
 
 **3.** Encode the labels and assign the values to new variables:
 
-```{code-cell} ipython3
+```{code-cell}
 training_labels = one_hot_encoding(y_train[:training_sample])
 test_labels = one_hot_encoding(y_test[:test_sample])
 ```
 
 **4.** Check that the data type has changed to floating point:
 
-```{code-cell} ipython3
-print('The data type of training labels: {}'.format(training_labels.dtype))
-print('The data type of test labels: {}'.format(test_labels.dtype))
+```{code-cell}
+print("The data type of training labels: {}".format(training_labels.dtype))
+print("The data type of test labels: {}".format(test_labels.dtype))
 ```
 
 **5.** Examine a few encoded labels:
 
-```{code-cell} ipython3
+```{code-cell}
 print(training_labels[0])
 print(training_labels[1])
 print(training_labels[2])
@@ -297,7 +309,7 @@ print(training_labels[2])
 
 ...and compare to the originals:
 
-```{code-cell} ipython3
+```{code-cell}
 print(y_train[0])
 print(y_train[1])
 print(y_train[2])
@@ -391,17 +403,18 @@ Having covered the main deep learning concepts and the neural network architectu
 **1.** We'll start by creating a new random number generator, providing a seed
 for reproducibility:
 
-```{code-cell} ipython3
+```{code-cell}
 seed = 884736743
 rng = np.random.default_rng(seed)
 ```
 
 **2.** For the hidden layer, define the ReLU activation function for forward propagation and ReLU's derivative that will be used during backpropagation:
 
-```{code-cell} ipython3
+```{code-cell}
 # Define ReLU that returns the input if it's positive and 0 otherwise.
-def relu (x):
-    return (x>=0) * x
+def relu(x):
+    return (x >= 0) * x
+
 
 # Set up a derivative of the ReLU function that returns 1 for a positive input
 # and 0 otherwise.
@@ -417,7 +430,7 @@ def relu2deriv(output):
 - _Size of the input:_ `pixels_per_image` — you have established that the image input is 784 (28x28) (in pixels).
 - _Number of labels_: `num_labels` — indicates the output number for the output layer where the predictions occur for 10 (0 to 9) handwritten digit labels.
 
-```{code-cell} ipython3
+```{code-cell}
 learning_rate = 0.005
 epochs = 20
 hidden_size = 100
@@ -427,7 +440,7 @@ num_labels = 10
 
 **4.** Initialize the weight vectors that will be used in the hidden and output layers with random values:
 
-```{code-cell} ipython3
+```{code-cell}
 weights_1 = 0.2 * rng.random((pixels_per_image, hidden_size)) - 0.1
 weights_2 = 0.2 * rng.random((hidden_size, num_labels)) - 0.1
 ```
@@ -438,7 +451,7 @@ its performance over the training epochs.
 
 Start the training process:
 
-```{code-cell} ipython3
+```{code-cell}
 # To store training and test set losses and accurate predictions
 # for visualization.
 store_training_loss = []
@@ -486,9 +499,11 @@ for j in range(epochs):
         #    image labels (the truth) and the prediction by the model.
         training_loss += np.sum((training_labels[i] - layer_2) ** 2)
         # 2. Increment the accurate prediction count.
-        training_accurate_predictions += int(np.argmax(layer_2) == np.argmax(training_labels[i]))
+        training_accurate_predictions += int(
+            np.argmax(layer_2) == np.argmax(training_labels[i])
+        )
         # 3. Differentiate the loss function/error.
-        layer_2_delta = (training_labels[i] - layer_2)
+        layer_2_delta = training_labels[i] - layer_2
         # 4. Propagate the gradients of the loss function back through the hidden layer.
         layer_1_delta = np.dot(weights_2, layer_2_delta) * relu2deriv(layer_1)
         # 5. Apply the dropout to the gradients.
@@ -516,7 +531,7 @@ for j in range(epochs):
     results = relu(test_images @ weights_1) @ weights_2
 
     # Measure the error between the actual label (truth) and prediction values.
-    test_loss = np.sum((test_labels - results)**2)
+    test_loss = np.sum((test_labels - results) ** 2)
 
     # Measure prediction accuracy on test set
     test_accurate_predictions = np.sum(
@@ -528,12 +543,19 @@ for j in range(epochs):
     store_test_accurate_pred.append(test_accurate_predictions)
 
     # Summarize error and accuracy metrics at each epoch
-    print("\n" + \
-          "Epoch: " + str(j) + \
-          " Training set error:" + str(training_loss/ float(len(training_images)))[0:5] +\
-          " Training set accuracy:" + str(training_accurate_predictions/ float(len(training_images))) +\
-          " Test set error:" + str(test_loss/ float(len(test_images)))[0:5] +\
-          " Test set accuracy:" + str(test_accurate_predictions/ float(len(test_images))))
+    print(
+        "\n"
+        + "Epoch: "
+        + str(j)
+        + " Training set error:"
+        + str(training_loss / float(len(training_images)))[0:5]
+        + " Training set accuracy:"
+        + str(training_accurate_predictions / float(len(training_images)))
+        + " Test set error:"
+        + str(test_loss / float(len(test_images)))[0:5]
+        + " Test set accuracy:"
+        + str(test_accurate_predictions / float(len(test_images)))
+    )
 ```
 
 The training process may take many minutes, depending on a number of factors, such as the processing power of the machine you are running the experiment on and the number of epochs. To reduce the waiting time, you can change the epoch (iteration) variable from 100 to a lower number, reset the runtime (which will reset the weights), and run the notebook cells again.
@@ -542,28 +564,39 @@ The training process may take many minutes, depending on a number of factors, su
 
 After executing the cell above, you can visualize the training and test set errors and accuracy for an instance of this training process.
 
-```{code-cell} ipython3
+```{code-cell}
 # The training set metrics.
-y_training_error = [store_training_loss[i]/float(len(training_images)) for i in range(len(store_training_loss))]
-x_training_error = range(1, len(store_training_loss)+1)
-y_training_accuracy = [store_training_accurate_pred[i]/ float(len(training_images)) for i in range(len(store_training_accurate_pred))]
-x_training_accuracy = range(1, len(store_training_accurate_pred)+1)
+y_training_error = [
+    store_training_loss[i] / float(len(training_images))
+    for i in range(len(store_training_loss))
+]
+x_training_error = range(1, len(store_training_loss) + 1)
+y_training_accuracy = [
+    store_training_accurate_pred[i] / float(len(training_images))
+    for i in range(len(store_training_accurate_pred))
+]
+x_training_accuracy = range(1, len(store_training_accurate_pred) + 1)
 
 # The test set metrics.
-y_test_error = [store_test_loss[i]/float(len(test_images)) for i in range(len(store_test_loss))]
-x_test_error = range(1, len(store_test_loss)+1)
-y_test_accuracy = [store_training_accurate_pred[i]/ float(len(training_images)) for i in range(len(store_training_accurate_pred))]
-x_test_accuracy = range(1, len(store_test_accurate_pred)+1)
+y_test_error = [
+    store_test_loss[i] / float(len(test_images)) for i in range(len(store_test_loss))
+]
+x_test_error = range(1, len(store_test_loss) + 1)
+y_test_accuracy = [
+    store_training_accurate_pred[i] / float(len(training_images))
+    for i in range(len(store_training_accurate_pred))
+]
+x_test_accuracy = range(1, len(store_test_accurate_pred) + 1)
 
 # Display the plots.
 fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(15, 5))
-axes[0].set_title('Training set error, accuracy')
-axes[0].plot(x_training_accuracy, y_training_accuracy, label = "Training set accuracy")
-axes[0].plot(x_training_error, y_training_error, label = "Training set error")
+axes[0].set_title("Training set error, accuracy")
+axes[0].plot(x_training_accuracy, y_training_accuracy, label="Training set accuracy")
+axes[0].plot(x_training_error, y_training_error, label="Training set error")
 axes[0].set_xlabel("Epochs")
-axes[1].set_title('Test set error, accuracy')
-axes[1].plot(x_test_accuracy, y_test_accuracy, label = "Test set accuracy")
-axes[1].plot(x_test_error, y_test_error, label = "Test set error")
+axes[1].set_title("Test set error, accuracy")
+axes[1].plot(x_test_accuracy, y_test_accuracy, label="Test set accuracy")
+axes[1].plot(x_test_error, y_test_error, label="Test set error")
 axes[1].set_xlabel("Epochs")
 plt.show()
 ```
