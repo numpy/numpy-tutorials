@@ -22,22 +22,22 @@
       
 
     
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     
   <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
 
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -64,6 +64,10 @@
     
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
       
       <img src="../_static/numpylogo.svg" class="logo" alt="logo">
       
@@ -482,7 +486,7 @@
 <p><strong>4.</strong> Gym can save videos of the agent’s learning in an MP4 format — wrap <code class="docutils literal notranslate"><span class="pre">Monitor()</span></code> around the environment by running the following:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">Monitor</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s1">&#39;./video&#39;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">Monitor</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s2">&quot;./video&quot;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -523,7 +527,7 @@
 
 <span class="n">env</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
-<span class="n">random_frame</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rgb_array&#39;</span><span class="p">)</span>
+<span class="n">random_frame</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;rgb_array&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">random_frame</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">random_frame</span><span class="p">)</span>
 </pre></div>
@@ -533,7 +537,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(210, 160, 3)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fc4e5b27df0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f0f6f5f1b80&gt;
 </pre></div>
 </div>
 <img alt="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_14_2.png" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_14_2.png" />
@@ -547,11 +551,11 @@
     <span class="c1"># Crop the frame.</span>
     <span class="n">observation_frame</span> <span class="o">=</span> <span class="n">observation_frame</span><span class="p">[</span><span class="mi">35</span><span class="p">:</span><span class="mi">195</span><span class="p">]</span>
     <span class="c1"># Downsample the frame by a factor of 2.</span>
-    <span class="n">observation_frame</span> <span class="o">=</span> <span class="n">observation_frame</span><span class="p">[::</span><span class="mi">2</span><span class="p">,::</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">observation_frame</span> <span class="o">=</span> <span class="n">observation_frame</span><span class="p">[::</span><span class="mi">2</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
     <span class="c1"># Remove the background and apply other enhancements.</span>
-    <span class="n">observation_frame</span><span class="p">[</span><span class="n">observation_frame</span> <span class="o">==</span> <span class="mi">144</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># Erase the background (type 1).</span>
-    <span class="n">observation_frame</span><span class="p">[</span><span class="n">observation_frame</span> <span class="o">==</span> <span class="mi">109</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># Erase the background (type 2).</span>
-    <span class="n">observation_frame</span><span class="p">[</span><span class="n">observation_frame</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># Set the items (rackets, ball) to 1.</span>
+    <span class="n">observation_frame</span><span class="p">[</span><span class="n">observation_frame</span> <span class="o">==</span> <span class="mi">144</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Erase the background (type 1).</span>
+    <span class="n">observation_frame</span><span class="p">[</span><span class="n">observation_frame</span> <span class="o">==</span> <span class="mi">109</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Erase the background (type 2).</span>
+    <span class="n">observation_frame</span><span class="p">[</span><span class="n">observation_frame</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Set the items (rackets, ball) to 1.</span>
     <span class="c1"># Return the preprocessed frame as a 1D floating-point array.</span>
     <span class="k">return</span> <span class="n">observation_frame</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 </pre></div>
@@ -562,7 +566,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preprocessed_random_frame</span> <span class="o">=</span> <span class="n">frame_preprocessing</span><span class="p">(</span><span class="n">random_frame</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">preprocessed_random_frame</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">preprocessed_random_frame</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">preprocessed_random_frame</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -629,8 +633,8 @@
 <p><strong>2.</strong> Using a technique called <a class="reference external" href="https://www.deeplearning.ai/ai-notes/initialization/#IV">Xavier initialization</a>, set up the network model’s initial weights with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.standard_normal.html"><code class="docutils literal notranslate"><span class="pre">Generator.standard_normal()</span></code></a> that returns random numbers over a standard Normal distribution, as well as <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html?highlight=numpy.sqrt#numpy.sqrt"><code class="docutils literal notranslate"><span class="pre">np.sqrt()</span></code></a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;W1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="n">D</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
-<span class="n">model</span><span class="p">[</span><span class="s1">&#39;W2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">H</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;W1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">D</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="n">model</span><span class="p">[</span><span class="s2">&quot;W2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">H</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -640,12 +644,12 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">policy_forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
     <span class="c1"># Matrix-multiply the weights by the input in the one and only hidden layer.</span>
-    <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;W1&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;W1&quot;</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span>
     <span class="c1"># Apply non-linearity with ReLU.</span>
-    <span class="n">h</span><span class="p">[</span><span class="n">h</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">h</span><span class="p">[</span><span class="n">h</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="c1"># Calculate the &quot;dot&quot; product in the outer layer.</span>
     <span class="c1"># The input for the sigmoid function is called logit.</span>
-    <span class="n">logit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;W2&#39;</span><span class="p">],</span> <span class="n">h</span><span class="p">)</span>
+    <span class="n">logit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;W2&quot;</span><span class="p">],</span> <span class="n">h</span><span class="p">)</span>
     <span class="c1"># Apply the sigmoid function (non-linear activation).</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">logit</span><span class="p">)</span>
     <span class="c1"># Return a log probability for the action 2 (&quot;move up&quot;)</span>
@@ -678,11 +682,11 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">policy_backward</span><span class="p">(</span><span class="n">eph</span><span class="p">,</span> <span class="n">epdlogp</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
     <span class="n">dW2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">eph</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">epdlogp</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
-    <span class="n">dh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">epdlogp</span><span class="p">,</span> <span class="n">model</span><span class="p">[</span><span class="s1">&#39;W2&#39;</span><span class="p">])</span>
+    <span class="n">dh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">epdlogp</span><span class="p">,</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;W2&quot;</span><span class="p">])</span>
     <span class="n">dh</span><span class="p">[</span><span class="n">eph</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">dW1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">epx</span><span class="p">)</span>
     <span class="c1"># Return new &quot;optimized&quot; weights for the policy network.</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;W1&#39;</span><span class="p">:</span><span class="n">dW1</span><span class="p">,</span> <span class="s1">&#39;W2&#39;</span><span class="p">:</span><span class="n">dW2</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;W1&quot;</span><span class="p">:</span> <span class="n">dW1</span><span class="p">,</span> <span class="s2">&quot;W2&quot;</span><span class="p">:</span> <span class="n">dW2</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -719,7 +723,7 @@
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grad_buffer</span> <span class="o">=</span> <span class="p">{</span> <span class="n">k</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grad_buffer</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 </pre></div>
 </div>
 </div>
@@ -729,7 +733,7 @@
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rmsprop_cache</span> <span class="o">=</span> <span class="p">{</span> <span class="n">k</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rmsprop_cache</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 </pre></div>
 </div>
 </div>
@@ -743,13 +747,15 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.99</span>
 
+
 <span class="k">def</span> <span class="nf">discount_rewards</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
     <span class="n">discounted_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
     <span class="n">running_add</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="c1"># From the last reward to the first...</span>
     <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">size</span><span class="p">)):</span>
         <span class="c1"># ...reset the reward sum</span>
-        <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span> <span class="n">running_add</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">running_add</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="c1"># ...compute the discounted reward</span>
         <span class="n">running_add</span> <span class="o">=</span> <span class="n">running_add</span> <span class="o">*</span> <span class="n">gamma</span> <span class="o">+</span> <span class="n">r</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
         <span class="n">discounted_r</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">running_add</span>
@@ -944,11 +950,13 @@
         <span class="c1"># parameter (weight) update at every batch size</span>
         <span class="c1"># (by default: every 10 episodes).</span>
         <span class="k">if</span> <span class="n">episode_number</span> <span class="o">%</span> <span class="n">batch_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="c1"># The gradient.</span>
                 <span class="n">g</span> <span class="o">=</span> <span class="n">grad_buffer</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
                 <span class="c1"># Use the RMSProp discounting factor.</span>
-                <span class="n">rmsprop_cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">decay_rate</span> <span class="o">*</span> <span class="n">rmsprop_cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">decay_rate</span><span class="p">)</span> <span class="o">*</span> <span class="n">g</span><span class="o">**</span><span class="mi">2</span>
+                <span class="n">rmsprop_cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">decay_rate</span> <span class="o">*</span> <span class="n">rmsprop_cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">decay_rate</span><span class="p">)</span> <span class="o">*</span> <span class="n">g</span> <span class="o">**</span> <span class="mi">2</span>
+                <span class="p">)</span>
                 <span class="c1"># Update the policy network with a learning rate</span>
                 <span class="c1"># and the RMSProp optimizer using gradient ascent</span>
                 <span class="c1"># (hence, there&#39;s no negative sign)</span>
@@ -957,8 +965,16 @@
                 <span class="n">grad_buffer</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 
         <span class="c1"># 18. Measure the total discounted reward.</span>
-        <span class="n">running_reward</span> <span class="o">=</span> <span class="n">reward_sum</span> <span class="k">if</span> <span class="n">running_reward</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">running_reward</span> <span class="o">*</span> <span class="mf">0.99</span> <span class="o">+</span> <span class="n">reward_sum</span> <span class="o">*</span> <span class="mf">0.01</span>
-        <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Resetting the Pong environment. Episode total reward: </span><span class="si">{}</span><span class="s1"> Running mean: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reward_sum</span><span class="p">,</span> <span class="n">running_reward</span><span class="p">))</span>
+        <span class="n">running_reward</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">reward_sum</span>
+            <span class="k">if</span> <span class="n">running_reward</span> <span class="ow">is</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="n">running_reward</span> <span class="o">*</span> <span class="mf">0.99</span> <span class="o">+</span> <span class="n">reward_sum</span> <span class="o">*</span> <span class="mf">0.01</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Resetting the Pong environment. Episode total reward: </span><span class="si">{}</span><span class="s2"> Running mean: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">reward_sum</span><span class="p">,</span> <span class="n">running_reward</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
 
         <span class="c1"># 19. Set the agent&#39;s initial observation by calling Gym&#39;s `reset()` function</span>
         <span class="c1"># for the next episode and setting the reward sum back to 0.</span>
@@ -968,30 +984,22 @@
 
     <span class="c1"># 20. Display the output during training.</span>
     <span class="k">if</span> <span class="n">reward</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;Episode </span><span class="si">{}</span><span class="s1">: Game finished. Reward: </span><span class="si">{}</span><span class="s1">...&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">episode_number</span><span class="p">,</span> <span class="n">reward</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">reward</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39; POSITIVE REWARD!&#39;</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Episode </span><span class="si">{}</span><span class="s2">: Game finished. Reward: </span><span class="si">{}</span><span class="s2">...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">episode_number</span><span class="p">,</span> <span class="n">reward</span><span class="p">)</span>
+            <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">reward</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot; POSITIVE REWARD!&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
 Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
 Episode 0: Game finished. Reward: -1.0...
 Episode 0: Game finished. Reward: -1.0...
 </pre></div>
@@ -999,11 +1007,30 @@ Episode 0: Game finished. Reward: -1.0...
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
 Episode 0: Game finished. Reward: -1.0...
 Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
 Episode 0: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
-Resetting the Pong environment. Episode total reward: -21.0 Running mean: -21.0
+Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -21.0 Running mean: -21.0
 Episode 1: Game finished. Reward: -1.0...
 </pre></div>
 </div>
@@ -1015,8 +1042,6 @@ Episode 1: Game finished. Reward: -1.0...
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
@@ -1026,13 +1051,21 @@ Episode 1: Game finished. Reward: -1.0...
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
 </pre></div>
@@ -1040,6 +1073,9 @@ Episode 1: Game finished. Reward: -1.0...
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -21.0 Running mean: -21.0
 Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 </pre></div>
@@ -1047,12 +1083,13 @@ Episode 2: Game finished. Reward: -1.0...
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
@@ -1062,12 +1099,14 @@ Episode 2: Game finished. Reward: 1.0... POSITIVE REWARD!
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 </pre></div>
@@ -1229,7 +1268,7 @@ def show_any_video(mp4video=0):
         
         </div>
     </div>
-    <footer class="footer mt-5 mt-md-0">
+    <footer class="footer">
     <div class="container">
       <p>
         

@@ -3,8 +3,8 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.12
-    jupytext_version: 1.6.0
+    format_version: 0.13
+    jupytext_version: 1.11.1
 kernelspec:
   display_name: Python 3
   language: python
@@ -22,14 +22,14 @@ file types back into NumPy workspaces.
 ## What you'll do
 
 You'll learn two ways of saving and reading files--as compressed and as
-text files--that will serve most of your storage needs in NumPy. 
+text files--that will serve most of your storage needs in NumPy.
 
-* You'll create two 1D arrays and one 2D array 
+* You'll create two 1D arrays and one 2D array
 * You'll save these arrays to files
 * You'll remove variables from your workspace
 * You'll load the variables from your saved file
 * You'll compare zipped binary files to human-readable delimited files
-* You'll finish with the skills of saving, loading, and sharing NumPy arrays 
+* You'll finish with the skills of saving, loading, and sharing NumPy arrays
 
 
 ## What you'll need
@@ -39,7 +39,7 @@ text files--that will serve most of your storage needs in NumPy.
 
 Load the necessary functions using the following command.
 
-```{code-cell} ipython3
+```{code-cell}
 import numpy as np
 ```
 
@@ -63,11 +63,11 @@ In this tutorial, you will use the following Python, IPython magic, and NumPy fu
 
 Now that you have imported the NumPy library, you can make a couple of
 arrays; let's start with two 1D arrays, `x` and `y`, where `y =
-x**2`.You 
+x**2`.You
 will assign `x` to the integers from 0 to 9 using
 [`np.arange`](https://numpy.org/doc/stable/reference/generated/numpy.arange.html).
 
-```{code-cell} ipython3
+```{code-cell}
 x = np.arange(0, 10, 1)
 y = x ** 2
 print(x)
@@ -76,7 +76,7 @@ print(y)
 
 ## Save your arrays with NumPy's [`savez`](https://numpy.org/doc/stable/reference/generated/numpy.savez.html?highlight=savez#numpy.savez)
 
-Now you have two arrays in your workspace, 
+Now you have two arrays in your workspace,
 
 `x: [0 1 2 3 4 5 6 7 8 9]`
 
@@ -85,12 +85,12 @@ Now you have two arrays in your workspace,
 The first thing you will do is save them to a file as zipped arrays
 using
 [`savez`](https://numpy.org/doc/stable/reference/generated/numpy.savez.html?highlight=savez#numpy.savez).
-You will use two options to label the arrays in the file, 
+You will use two options to label the arrays in the file,
 
 1. `x_axis = x`: this option is assigning the name `x_axis` to the variable `x`
 2. `y_axis = y`: this option is assigning the name `y_axis` to the variable `y`
 
-```{code-cell} ipython3
+```{code-cell}
 np.savez("x_y-squared.npz", x_axis=x, y_axis=y)
 ```
 
@@ -103,7 +103,7 @@ name `x_y-squared.npz`. This file is a zipped binary of the two arrays,
 format](https://numpy.org/doc/stable/reference/generated/numpy.lib.format.html#module-numpy.lib.format)
 files. The NPY format is a [native binary
 format](https://en.wikipedia.org/wiki/Binary_file). You cannot read
-the numbers in a standard text editor or spreadsheet. 
+the numbers in a standard text editor or spreadsheet.
 
 1. remove `x` and `y` from the workspaec with [`del`](https://docs.python.org/3/reference/simple_stmts.html#del)
 2. load the arrays into the workspace in a dictionary with [`np.load`](https://numpy.org/doc/stable/reference/generated/numpy.load.html#numpy.load)
@@ -112,21 +112,21 @@ To see what variables are in the workspace, use the Jupyter/IPython
 "magic" command
 [`whos`](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-whos).
 
-```{code-cell} ipython3
+```{code-cell}
 del x, y
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 %whos
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 load_xy = np.load("x_y-squared.npz")
 
 print(load_xy.files)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 whos
 ```
 
@@ -134,9 +134,9 @@ whos
 
 You've now created the dictionary with an `NpzFile`-type. The
 included files are `x_axis` and `y_axis` that you defined in your
-`savez` command. You can reassign `x` and `y` to the `load_xy` files.  
+`savez` command. You can reassign `x` and `y` to the `load_xy` files.
 
-```{code-cell} ipython3
+```{code-cell}
 x = load_xy["x_axis"]
 y = load_xy["y_axis"]
 print(x)
@@ -153,7 +153,7 @@ that is easier to share. Next, you use the
 [`savetxt`](https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html#numpy.savetxt)
 to save `x` and `y` in a comma separated value file, `x_y-squared.csv`.
 The resulting csv is composed of ASCII characters. You can load the file
-back into NumPy or read it with other programs. 
+back into NumPy or read it with other programs.
 
 ## Rearrange the data into a single 2D array
 First, you have to create a single 2D array from your two 1D arrays. The
@@ -167,7 +167,7 @@ two NumPy functions to format the data:
 
 2. [`np.newaxis`](https://numpy.org/doc/stable/reference/constants.html?highlight=newaxis#numpy.newaxis): this function forces the 1D array into a 2D column vector with 10 rows and 1 column.
 
-```{code-cell} ipython3
+```{code-cell}
 array_out = np.block([x[:, np.newaxis], y[:, np.newaxis]])
 print("the output array has shape ", array_out.shape, " with values:")
 print(array_out)
@@ -181,7 +181,7 @@ You use `savetxt` with a three options to make your file easier to read:
 * `header = 'x, y'`: this option writes a header before any data that labels the columns of the csv
 * `delimiter = ','`: this option tells `savetxt` to place a comma between each column in the file
 
-```{code-cell} ipython3
+```{code-cell}
 np.savetxt("x_y-squared.csv", X=array_out, header="x, y", delimiter=",")
 ```
 
@@ -208,31 +208,29 @@ There are two features that you shoud notice here:
 1. NumPy uses `#` to ignore headings when using `loadtxt`. If you're using
 [`loadtxt`](https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html)
 with other csv files, you can skip header rows with `skiprows =
-<number_of_header_lines>`.  
+<number_of_header_lines>`.
 2. The integers were written in scientific notation. _You can_ specify
 the format of the text using the `savetxt` option, [`fmt =
 `](https://docs.python.org/3/library/string.html#formatstrings), but it
 will still be written with ASCII characters. In general, you cannot
-preserve the type of ASCII numbers as `float` or `int`. 
+preserve the type of ASCII numbers as `float` or `int`.
 
 
-Now, delete `x` and `y` again and assign them to your columns in `x-y_squared.csv`. 
+Now, delete `x` and `y` again and assign them to your columns in `x-y_squared.csv`.
 
-```{code-cell} ipython3
+```{code-cell}
 del x, y
 ```
 
-```{code-cell} ipython3
-load_xy = np.loadtxt(
-    "x_y-squared.csv", 
-    delimiter=",")
+```{code-cell}
+load_xy = np.loadtxt("x_y-squared.csv", delimiter=",")
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 load_xy.shape
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 x = load_xy[:, 0]
 y = load_xy[:, 1]
 print(x)
@@ -242,12 +240,12 @@ print(y)
 ## Success, but remember your types
 
 When you saved the arrays to the csv file, you did not preserve the
-`int` type. When loading the arrays back into your workspace the default process will be to load the csv file as a 2D floating point array e.g. `load_xy.dtype == 'float64'` and `load_xy.shape == (10, 2)`. 
+`int` type. When loading the arrays back into your workspace the default process will be to load the csv file as a 2D floating point array e.g. `load_xy.dtype == 'float64'` and `load_xy.shape == (10, 2)`.
 
 +++
 
 ## Wrapping up
 
-In conclusion, you can create, save, and load arrays in NumPy. Saving arrays makes sharing your work and collaboration much easier. There are other ways Python can save data to files, such as [pickle](https://docs.python.org/3/library/pickle.html), but `savez` and `savetxt` will serve most of your storage needs for future NumPy work and sharing with other people, respectively. 
+In conclusion, you can create, save, and load arrays in NumPy. Saving arrays makes sharing your work and collaboration much easier. There are other ways Python can save data to files, such as [pickle](https://docs.python.org/3/library/pickle.html), but `savez` and `savetxt` will serve most of your storage needs for future NumPy work and sharing with other people, respectively.
 
 __Next steps__: you can import data with missing values from [Importing with genfromtext](https://numpy.org/devdocs/user/basics.io.genfromtxt.html) or learn more about general NumPy IO with [Reading and Writing Files](https://numpy.org/devdocs/user/how-to-io.html).

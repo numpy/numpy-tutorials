@@ -3,8 +3,8 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.12
-    jupytext_version: 1.6.0
+    format_version: 0.13
+    jupytext_version: 1.11.1
 kernelspec:
   display_name: Python 3
   language: python
@@ -34,7 +34,7 @@ the 53 years following his prediction. You will determine the best-fit constants
 - Perform linear regression and predict exponential growth using ordinary least squares
 - You'll compare exponential growth constants between models
 - Share your analysis in a file:
-    - as NumPy zipped files `*.npz` 
+    - as NumPy zipped files `*.npz`
     - as a `*.csv` file
 - Assess the amazing progress semiconductor manufacturers have made in the last five decades
 
@@ -45,16 +45,16 @@ the 53 years following his prediction. You will determine the best-fit constants
 * NumPy
 * [Matplotlib](https://matplotlib.org/)
 * [statsmodels](https://www.statsmodels.org) ordinary linear regression
-    
+
 imported with the following commands
 
-```{code-cell} ipython3
+```{code-cell}
 import matplotlib.pyplot as plt
 import numpy as np
 import statsmodels.api as sm
 ```
 
-**2.** Since this is an exponential growth law you need a little background in doing math with [natural logs](https://en.wikipedia.org/wiki/Natural_logarithm) and [exponentials](https://en.wikipedia.org/wiki/Exponential_function). 
+**2.** Since this is an exponential growth law you need a little background in doing math with [natural logs](https://en.wikipedia.org/wiki/Natural_logarithm) and [exponentials](https://en.wikipedia.org/wiki/Exponential_function).
 
 You'll use these NumPy, Matplotlib, and statsmodels functions:
 
@@ -64,7 +64,7 @@ You'll use these NumPy, Matplotlib, and statsmodels functions:
 * [`lambda`](https://docs.python.org/3/library/ast.html?highlight=lambda#ast.Lambda): this is a minimal function definition for creating a function model
 * [`plt.semilogy`](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.semilogy.html): this function will plot x-y data onto a figure with a linear x-axis and $\log_{10}$ y-axis
 [`plt.plot`](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.plot.html): this function will plot x-y data on linear axes
-* [`sm.OLS`](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html): find fitting parameters and standard errors using the statsmodels ordinary least squares model 
+* [`sm.OLS`](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html): find fitting parameters and standard errors using the statsmodels ordinary least squares model
 * slicing arrays: view parts of the data loaded into the workspace, slice the arrays e.g. `x[:10]` for the first 10 values in the array, `x`
 * boolean array indexing: to view parts of the data that match a given condition use boolean operations to index an array
 * [`np.block`](https://numpy.org/doc/stable/reference/generated/numpy.block.html): to combine arrays into 2D arrays
@@ -78,17 +78,17 @@ You'll use these NumPy, Matplotlib, and statsmodels functions:
 ## Building Moore's law as an exponential function
 
 Your empirical model assumes that the number of transistors per
-semiconductor follows an exponential growth,  
+semiconductor follows an exponential growth,
 
 $\log(\text{transistor_count})= f(\text{year}) = A\cdot \text{year}+B,$
 
 where $A$ and $B$ are fitting constants. You use semiconductor
-manufacturers' data to find the fitting constants. 
+manufacturers' data to find the fitting constants.
 
-You determine these constants for Moore's law by specifying the 
-rate for added transistors, 2, and giving an initial number of transistors for a given year. 
+You determine these constants for Moore's law by specifying the
+rate for added transistors, 2, and giving an initial number of transistors for a given year.
 
-You state Moore's law in an exponential form as follows, 
+You state Moore's law in an exponential form as follows,
 
 $\text{transistor_count}= e^{A_M\cdot \text{year} +B_M}.$
 
@@ -112,7 +112,7 @@ Since the function represents Moore's law, define it as a Python
 function using
 [`lambda`](https://docs.python.org/3/library/ast.html?highlight=lambda#ast.Lambda)
 
-```{code-cell} ipython3
+```{code-cell}
 A_M = np.log(2) / 2
 B_M = np.log(2250) - A_M * 1971
 Moores_law = lambda year: np.exp(B_M) * np.exp(A_M * year)
@@ -122,7 +122,7 @@ In 1971, there were 2250 transistors on the Intel 4004 chip. Use
 `Moores_law` to check the number of semiconductors Gordon Moore would expect
 in 1973.
 
-```{code-cell} ipython3
+```{code-cell}
 ML_1971 = Moores_law(1971)
 ML_1973 = Moores_law(1973)
 print("In 1973, G. Moore expects {:.0f} transistors on Intels chips".format(ML_1973))
@@ -139,14 +139,14 @@ file into a NumPy array, its a good idea to inspect the structure of the
 file first. Then, locate the columns of interest and save them to a
 variable. Save two columns of the file to the array, `data`.
 
-Here, print out the first 10 rows of `transistor_data.csv`. The columns are 
+Here, print out the first 10 rows of `transistor_data.csv`. The columns are
 
 |Processor|MOS transistor count|Date of Introduction|Designer|MOSprocess|Area|
 |---|---|---|---|---|---|
 |Intel 4004 (4-bit  16-pin)|2250|1971|Intel|"10,000 nm"|12 mm²|
 |...|...|...|...|...|...|
 
-```{code-cell} ipython3
+```{code-cell}
 ! head transistor_data.csv
 ```
 
@@ -156,19 +156,19 @@ __MOS transistor count__ and __Date of Introduction__, respectively.
 
 Next, you load these two columns into a NumPy array using
 [`np.loadtxt`](https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html).
-The extra options below will put the data in the desired format: 
+The extra options below will put the data in the desired format:
 
 * `delimiter = ','`: specify delimeter as a comma ',' (this is the default behavior)
 * `usecols = [1,2]`: import the second and third columns from the csv
 * `skiprows = 1`: do not use the first row, because its a header row
 
-```{code-cell} ipython3
+```{code-cell}
 data = np.loadtxt("transistor_data.csv", delimiter=",", usecols=[1, 2], skiprows=1)
 ```
 
 You loaded the entire history of semiconducting into a NumPy array named
 `data`. The first column is the __MOS transistor count__ and the second
-column is the __Date of Introduction__ in a four-digit year. 
+column is the __Date of Introduction__ in a four-digit year.
 
 Next, make the data easier to read and manage by assigning the two
 columns to variables, `year` and `transistor_count`. Print out the first
@@ -176,7 +176,7 @@ columns to variables, `year` and `transistor_count`. Print out the first
 `[:10]`. Print these values out to check that you have the saved the
 data to the correct variables.
 
-```{code-cell} ipython3
+```{code-cell}
 year = data[:, 1]  # grab the second column and assign
 transistor_count = data[:, 0]  # grab the first column and assign
 
@@ -187,15 +187,15 @@ print("trans. cnt:\t", transistor_count[:10])
 You are creating a function that predicts the transistor count given a
 year. You have an _independent variable_, `year`, and a _dependent
 variable_, `transistor_count`. Transform the independent variable to
-log-scale, 
+log-scale,
 
 $y_i = \log($ `transistor_count[i]` $),$
 
-resulting in a linear equation, 
+resulting in a linear equation,
 
 $y_i = A\cdot \text{year} +B$.
 
-```{code-cell} ipython3
+```{code-cell}
 yi = np.log(transistor_count)
 ```
 
@@ -221,7 +221,7 @@ NumPy array features will build $\mathbf{Z}$
 1. `year[:,np.newaxis]` : takes the 1D array with shape `(179,)` and turns it into a 2D column vector with shape `(179,1)`
 2. `**[1, 0]` : stacks two columns, in the first column is `year**1` and the second column is `year**0 == 1`
 
-```{code-cell} ipython3
+```{code-cell}
 Z = year[:, np.newaxis] ** [1, 0]
 ```
 
@@ -230,7 +230,7 @@ the observations are in vector, $\mathbf{y},$ you can use these
 variables to build the an ordinary least squares model with
 [`sm.OLS`](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html).
 
-```{code-cell} ipython3
+```{code-cell}
 model = sm.OLS(yi, Z)
 ```
 
@@ -239,21 +239,21 @@ errors.  Run the
 [`fit`](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html) and print the
 [`summary`](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.summary.html) to view results as such,
 
-```{code-cell} ipython3
+```{code-cell}
 results = model.fit()
 print(results.summary())
 ```
 
 The __OLS Regression Results__ summary gives a lot of information about
 the regressors, $\mathbf{Z},$ and observations, $\mathbf{y}.$ The most
-important outputs for your current analysis are 
+important outputs for your current analysis are
 
 ```
 =================================
-                 coef    std err 
+                 coef    std err
 ---------------------------------
-x1             0.3416      0.006 
-const       -666.3264     11.890 
+x1             0.3416      0.006
+const       -666.3264     11.890
 =================================
 ```
 where `x1` is slope, $A=0.3416$, `const` is the intercept,
@@ -264,7 +264,7 @@ $\log(\text{transistors}/\text{chip})$. You created an exponential growth model.
 To get the constants, save them to an array `AB` with
 `results.params` and assign $A$ and $B$ to `x1` and `constant`.
 
-```{code-cell} ipython3
+```{code-cell}
 AB = results.params
 A = AB[0]
 B = AB[1]
@@ -280,11 +280,11 @@ where increase in number of transistors is $xFactor,$ number of years is
 2, and $A$ is the best fit slope on the semilog function. The error in
 your
 prediction, $\Delta(xFactor),$ comes from the precision of your constant
-$A,$ which you calculated as the standard error $\Delta A= 0.006$. 
+$A,$ which you calculated as the standard error $\Delta A= 0.006$.
 
 $\Delta (xFactor) = \frac{\partial}{\partial A}(e^{2A})\Delta A = 2Ae^{2A}\Delta A$
 
-```{code-cell} ipython3
+```{code-cell}
 print("Rate of semiconductors added on a chip every 2 years:")
 print(
     "\tx{:.2f} +/- {:.2f} semiconductors per chip".format(
@@ -297,7 +297,7 @@ Based upon your least-squares regression model, the number of
 semiconductors per chip increased by a factor of $1.98\pm 0.01$ every two
 years. You have a model that predicts the number of semiconductors each
 year. Now compare your model to the actual manufacturing reports.  Plot
-the linear regression results and all of the transistor counts. 
+the linear regression results and all of the transistor counts.
 
 Here, use
 [`plt.semilogy`](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.semilogy.html)
@@ -314,28 +314,28 @@ $\log(\text{transistor_count}) = A\cdot \text{year} + B,$
 
 your variables, `transistor_count`, `year`, and `yi` all have the same
 dimensions, `(179,)`. NumPy arrays need the same dimensions to make a
-plot. The predicted number of transistors is now 
+plot. The predicted number of transistors is now
 
 $\text{transistor_count}_{\text{predicted}} = e^Be^{A\cdot \text{year}}$.
 
 +++
 
-In the next plot, use the 
+In the next plot, use the
 [`fivethirtyeight`](https://matplotlib.org/3.1.1/gallery/style_sheets/fivethirtyeight.html)
-style sheet. 
+style sheet.
 The style sheet replicates
 https://fivethirtyeight.com elements. Change the matplotlib style with
 [`plt.style.use`](https://matplotlib.org/3.3.2/api/style_api.html#matplotlib.style.use).
 
-```{code-cell} ipython3
+```{code-cell}
 transistor_count_predicted = np.exp(B) * np.exp(A * year)
 transistor_Moores_law = Moores_law(year)
 plt.style.use("fivethirtyeight")
-plt.semilogy(year, transistor_count, "s", label = "MOS transistor count")
-plt.semilogy(year, transistor_count_predicted, label = "linear regression")
+plt.semilogy(year, transistor_count, "s", label="MOS transistor count")
+plt.semilogy(year, transistor_count_predicted, label="linear regression")
 
 
-plt.plot(year, transistor_Moores_law, label = "Moore's Law")
+plt.plot(year, transistor_Moores_law, label="Moore's Law")
 plt.title(
     "MOS transistor count per microprocessor\n"
     + "every two years \n"
@@ -353,7 +353,7 @@ per semiconductors each year.  In 2015, semiconductor manufacturers
 claimed they could not keep up with Moore's law anymore. Your analysis
 shows that since 1971, the average increase in transistor count was
 x1.98 every 2 years, but Gordon Moore predicted it would be x2
-every 2 years. That is an amazing prediction. 
+every 2 years. That is an amazing prediction.
 
 Consider the year 2017. Compare the data to your linear regression
 model and Gordon Moore's prediction. First, get the
@@ -371,14 +371,14 @@ A great way to compare these measurements is to compare your prediction
 and Moore's prediction to the average transistor count and look at the
 range of reported values for that year. Use the
 [`plt.plot`](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.plot.html)
-option, 
+option,
 [`alpha=0.2`](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.artist.Artist.set_alpha.html),
 to increase the transparency of the data. The more opaque the points
 appear, the more reported values lie on that measurement. The green $+$
 is the average reported transistor count for 2017. Plot your predictions
 for $\pm\frac{1}{2}~years.
 
-```{code-cell} ipython3
+```{code-cell}
 transistor_count2017 = transistor_count[year == 2017]
 print(
     transistor_count2017.max(), transistor_count2017.min(), transistor_count2017.mean()
@@ -405,9 +405,9 @@ plt.legend()
 The result is that your model is close to the mean, but Gordon
 Moore's prediction is closer to the maximum number of transistors per
 microprocessor produced in 2017. Even though semiconductor manufacturers
-thought that the growth would slow, once in 1975 and now again 
+thought that the growth would slow, once in 1975 and now again
 approaching 2025, manufacturers are still producing semiconductors every 2 years that
-nearly double the number of transistors.  
+nearly double the number of transistors.
 
 The linear regression model is much better at predicting the
 average than extreme values because it satisfies the condition to
@@ -423,7 +423,7 @@ prediction. You started this process by importing a csv file into a NumPy
 array using `np.loadtxt`, to save your model use two approaches
 
 1. [`np.savez`](https://numpy.org/doc/stable/reference/generated/numpy.savez.html): save NumPy arrays for other Python sessions
-2. [`np.savetxt`](https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html): save a csv file with the original data and your predicted data 
+2. [`np.savetxt`](https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html): save a csv file with the original data and your predicted data
 
 ### Zipping the arrays into a file
 Using `np.savez`, you can save thousands of arrays and give them names. The
@@ -433,7 +433,7 @@ transistor count, predicted transistor count,  Gordon Moore's
 predicted count, and fitting constants. Add one more variable that other users can use to
 understand the model, `notes`.
 
-```{code-cell} ipython3
+```{code-cell}
 notes = "the arrays in this file are the result of a linear regression model\n"
 notes += "the arrays include\nyear: year of manufacture\n"
 notes += "transistor_count: number of transistors reported by manufacturers in a given year\n"
@@ -447,7 +447,7 @@ notes += "regression_csts: linear regression constants A and B for log(transisto
 print(notes)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 np.savez(
     "mooreslaw_regression.npz",
     notes=notes,
@@ -459,15 +459,15 @@ np.savez(
 )
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 results = np.load("mooreslaw_regression.npz")
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 print(results["regression_csts"][1])
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ! ls
 ```
 
@@ -476,23 +476,23 @@ different shapes and types. Here, you saved 4 arrays that are double
 precision floating point numbers shape = `(179,)`, one array that was
 text, and one array of double precision floating point numbers shape =
 `(2,).` This is the preferred method for saving NumPy arrays for use in
-another analysis. 
+another analysis.
 
 ### Creating your own comma separated value file
 
 If you want to share data and view the results in a table, then you have to
 create a text file. Save the data using `np.savetxt`. This
 function is more limited than `np.savez`. Delimited files, like csv's,
-need 2D arrays.  
+need 2D arrays.
 
 Prepare the data for export by creating a new 2D array whose columns
-contain the data of interest. 
+contain the data of interest.
 
 Use the `header` option to describe the data and the columns of
 the file. Define another variable that contains file
 information as `head`.
 
-```{code-cell} ipython3
+```{code-cell}
 head = "the columns in this file are the result of a linear regression model\n"
 head += "the columns include\nyear: year of manufacture\n"
 head += "transistor_count: number of transistors reported by manufacturers in a given year\n"
@@ -516,16 +516,16 @@ not fit the `(179,)` shape. The
 function appends arrays together to create a new, larger array. Arrange
 the 1D vectors as columns using
 [`np.newaxis`](https://numpy.org/doc/stable/reference/constants.html)
-e.g. 
+e.g.
 
 ```python
 >>> year.shape
 (179,)
 >>> year[:,np.newaxis].shape
-(179,1) 
+(179,1)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 output = np.block(
     [
         year[:, np.newaxis],
@@ -536,18 +536,18 @@ output = np.block(
 )
 ```
 
-Creating the `mooreslaw_regression.csv` with `np.savetxt`, use three 
-options to create the desired file format: 
+Creating the `mooreslaw_regression.csv` with `np.savetxt`, use three
+options to create the desired file format:
 
 * `X = output` : use `output` block to write the data into the file
 * `delimiter = ','` : use commas to separate columns in the file
 * `header = head` : use the header `head` defined above
 
-```{code-cell} ipython3
+```{code-cell}
 np.savetxt("mooreslaw_regression.csv", X=output, delimiter=",", header=head)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 ! head mooreslaw_regression.csv
 ```
 
@@ -560,7 +560,7 @@ every two years. Gordon Moore predicted the number of transistors would
 double every two years from 1965 through 1975, but the average growth
 has maintained a consistent increase of $\times 1.98 \pm 0.01$ every two
 years from 1971 through 2019.  In 2015, Moore revised his prediction to
-say Moore's law should hold until 2025. 
+say Moore's law should hold until 2025.
 [[3](https://spectrum.ieee.org/computing/hardware/gordon-moore-the-man-whose-name-means-progress)].
 You can share these results as a zipped NumPy array file,
 `mooreslaw_regression.npz`, or as another csv,

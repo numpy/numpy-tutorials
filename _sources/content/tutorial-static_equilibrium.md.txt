@@ -3,8 +3,8 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.12
-    jupytext_version: 1.7.1
+    format_version: 0.13
+    jupytext_version: 1.11.1
 kernelspec:
   display_name: Python 3
   language: python
@@ -32,7 +32,7 @@ When analyzing physical structures, it is crucial to understand the mechanics ke
 
 imported with the following comands:
 
-```{code-cell} ipython3
+```{code-cell}
 import numpy as np
 import matplotlib.pyplot as plt
 ```
@@ -46,7 +46,7 @@ In this tutorial you will use the following NumPy tools:
 
 ## Solving equilibrium with Newton's second law
 
-Your model consists of a beam under a sum of forces and moments. You can start analyzing this system with Newton's second law: 
+Your model consists of a beam under a sum of forces and moments. You can start analyzing this system with Newton's second law:
 
 $$\sum{\text{force}} = \text{mass} \times \text{acceleration}.$$
 
@@ -60,17 +60,17 @@ where each of the three components represent the magnitude of the force being ap
 
 $$r = (r_x, r_y, r_z)$$
 
-is the distance between the point where each component of the force is applied and the centroid of the system. Then, the moment can be computed by 
+is the distance between the point where each component of the force is applied and the centroid of the system. Then, the moment can be computed by
 
 $$r \times F = (r_x, r_y, r_z) \times (F_x, F_y, F_z).$$
 
 Start with some simple examples of force vectors
 
-```{code-cell} ipython3
+```{code-cell}
 forceA = np.array([1, 0, 0])
 forceB = np.array([0, 1, 0])
-print('Force A =', forceA)
-print('Force B =', forceB)
+print("Force A =", forceA)
+print("Force B =", forceB)
 ```
 
 This defines `forceA` as being a vector with magnitude of 1 in the $x$ direction and `forceB` as magnitude 1 in the $y$ direction.
@@ -79,10 +79,10 @@ It may be helpful to visualize these forces in order to better understand how th
 Matplotlib is a library with visualization tools that can be utilized for this purpose.
 Quiver plots will be used to demonstrate [three dimensional vectors](https://matplotlib.org/3.3.4/gallery/mplot3d/quiver3d.html), but the library can also be used for [two dimensional demonstrations](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.quiver.html).
 
-```{code-cell} ipython3
+```{code-cell}
 fig = plt.figure()
 
-d3 = fig.gca(projection='3d')
+d3 = fig.gca(projection="3d")
 
 d3.set_xlim(-1, 1)
 d3.set_ylim(-1, 1)
@@ -90,11 +90,11 @@ d3.set_zlim(-1, 1)
 
 x, y, z = np.array([0, 0, 0])  # defining the point of application.  Make it the origin
 
-u, v, w = forceA # breaking the force vector into individual components
-d3.quiver(x, y, z, u, v, w, color='r', label='forceA')
+u, v, w = forceA  # breaking the force vector into individual components
+d3.quiver(x, y, z, u, v, w, color="r", label="forceA")
 
 u, v, w = forceB
-d3.quiver(x, y, z, u, v, w, color='b', label='forceB')
+d3.quiver(x, y, z, u, v, w, color="b", label="forceB")
 
 plt.legend()
 plt.show()
@@ -102,18 +102,18 @@ plt.show()
 
 There are two forces emanating from a single point. In order to simplify this problem, you can add them together to find the sum of forces. Note that both `forceA` and `forceB` are three-dimensional vectors, represented by NumPy as arrays with three components. Because NumPy is meant to simplify and optimize operations between vectors, you can easily compute the sum of these two vectors as follows:
 
-```{code-cell} ipython3
+```{code-cell}
 forceC = forceA + forceB
-print('Force C =', forceC)
+print("Force C =", forceC)
 ```
 
 Force C now acts as a single force that represents both A and B.
 You can plot it to see the result.
 
-```{code-cell} ipython3
+```{code-cell}
 fig = plt.figure()
 
-d3 = fig.gca(projection='3d')
+d3 = fig.gca(projection="3d")
 
 d3.set_xlim(-1, 1)
 d3.set_ylim(-1, 1)
@@ -122,11 +122,11 @@ d3.set_zlim(-1, 1)
 x, y, z = np.array([0, 0, 0])
 
 u, v, w = forceA
-d3.quiver(x, y, z, u, v, w, color='r', label='forceA')
+d3.quiver(x, y, z, u, v, w, color="r", label="forceA")
 u, v, w = forceB
-d3.quiver(x, y, z, u, v, w, color='b', label='forceB')
+d3.quiver(x, y, z, u, v, w, color="b", label="forceB")
 u, v, w = forceC
-d3.quiver(x, y, z, u, v, w, color='g', label='forceC')
+d3.quiver(x, y, z, u, v, w, color="g", label="forceC")
 
 plt.legend()
 plt.show()
@@ -156,7 +156,7 @@ solving for $R_x$, $R_y$, and $R_z$ gives you a vector $R$ of $(-1, -1, 0)$.
 If plotted, the forces seen in prior examples should be nullified.
 Only if there is no force remaining is the system considered to be in equilibrium.
 
-```{code-cell} ipython3
+```{code-cell}
 R = np.array([-1, -1, 0])
 
 fig = plt.figure()
@@ -165,11 +165,11 @@ d3.set_xlim(-1, 1)
 d3.set_ylim(-1, 1)
 d3.set_zlim(-1, 1)
 
-d3 = fig.gca(projection='3d')
+d3 = fig.gca(projection="3d")
 
 x, y, z = np.array([0, 0, 0])
 
-u, v, w = forceA + forceB + R # add them all together for sum of forces
+u, v, w = forceA + forceB + R  # add them all together for sum of forces
 d3.quiver(x, y, z, u, v, w)
 
 plt.show()
@@ -192,14 +192,14 @@ Solve for both the reaction force and moments.
 
 Lets say a 5N force is applied perpendicularly 2m above the base of the pole.
 
-```{code-cell} ipython3
+```{code-cell}
 f = 5  # Force in newtons
 L = 2  # Length of the pole
 
 R = 0 - f
-M = 0 - f*L
-print('Reaction force =', R)
-print('Reaction moment =', M)
+M = 0 - f * L
+print("Reaction force =", R)
+print("Reaction moment =", M)
 ```
 
 ## Finding values with physical properties
@@ -216,45 +216,45 @@ Now, say the cord is attached to the ground 3m in the x direction and attached t
 
 Define these points in space as NumPy arrays, and then use those arrays to find directional vectors.
 
-```{code-cell} ipython3
+```{code-cell}
 poleBase = np.array([0, 0, 0])
 cordBase = np.array([3, 0, 0])
 cordConnection = np.array([0, 0, 2])
 
 poleDirection = cordConnection - poleBase
-print('Pole direction =', poleDirection)
+print("Pole direction =", poleDirection)
 cordDirection = cordBase - cordConnection
-print('Cord direction =', cordDirection)
+print("Cord direction =", cordDirection)
 ```
 
 In order to use these vectors in relation to forces you need to convert them into unit vectors.
 Unit vectors have a magnitude of one, and convey only the direction of the forces.
 
-```{code-cell} ipython3
-cordUnit = cordDirection/np.linalg.norm(cordDirection)
-print('Cord unit vector =', cordUnit)
+```{code-cell}
+cordUnit = cordDirection / np.linalg.norm(cordDirection)
+print("Cord unit vector =", cordUnit)
 ```
 
 You can then multiply this direction with the magnitude of the force in order to find the force vector.
 
 Let's say the cord has a tension of 5N:
 
-```{code-cell} ipython3
+```{code-cell}
 cordTension = 5
 forceCord = cordUnit * cordTension
-print('Force from the cord =', forceCord)
+print("Force from the cord =", forceCord)
 ```
 
 In order to find the moment you need the cross product of the force vector and the radius.
 
-```{code-cell} ipython3
+```{code-cell}
 momentCord = np.cross(forceCord, poleDirection)
-print('Moment from the cord =', momentCord)
+print("Moment from the cord =", momentCord)
 ```
 
 Now all you need to do is find the reaction force and moment.
 
-```{code-cell} ipython3
+```{code-cell}
 equilibrium = np.array([0, 0, 0])
 R = equilibrium - forceCord
 M = equilibrium - momentCord
@@ -273,7 +273,7 @@ Define distance *a* as 3 meters
 
 As before, start by defining the location of each relevant point as an array.
 
-```{code-cell} ipython3
+```{code-cell}
 A = np.array([0, 0, 0])
 B = np.array([0, 3, 0])
 C = np.array([0, 6, 0])
@@ -284,16 +284,16 @@ F = np.array([-3, 0, 2])
 
 From these equations, you start by determining vector directions with unit vectors.
 
-```{code-cell} ipython3
+```{code-cell}
 AB = B - C
 AC = C - A
 BD = D - B
 BE = E - B
 CF = F - C
 
-UnitBD = BD/np.linalg.norm(BD)
-UnitBE = BE/np.linalg.norm(BE)
-UnitCF = CF/np.linalg.norm(CF)
+UnitBD = BD / np.linalg.norm(BD)
+UnitBE = BE / np.linalg.norm(BE)
+UnitCF = CF / np.linalg.norm(CF)
 
 RadBD = np.cross(AB, UnitBD)
 RadBE = np.cross(AB, UnitBE)

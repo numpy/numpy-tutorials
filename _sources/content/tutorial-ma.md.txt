@@ -4,8 +4,8 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.12
-    jupytext_version: 1.7.1
+    format_version: 0.13
+    jupytext_version: 1.11.1
 kernelspec:
   display_name: Python 3
   language: python
@@ -67,9 +67,10 @@ Masked arrays are also a good idea since the `numpy.ma` module also comes with a
 
 From [Kaggle](https://www.kaggle.com/atilamadai/covid19) it is possible to download a dataset with initial data about the COVID-19 outbreak in the beginning of 2020. We are going to look at a small subset of this data, contained in the file `who_covid_19_sit_rep_time_series.csv`. *(Note that this file has been replaced with a version without missing data sometime in late 2020.)*
 
-```{code-cell} ipython3
+```{code-cell}
 import numpy as np
 import os
+
 # The os.getcwd() function returns the current folder; you can change
 # the filepath variable to point to the folder where you saved the .csv file
 filepath = os.getcwd()
@@ -85,22 +86,37 @@ The data file contains data of different types and is organized as follows:
 Let's explore the data inside this file for the first 14 days of records. To gather data from the `.csv` file, we will use the [numpy.genfromtxt](https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt) function, making sure we select only the columns with actual numbers instead of the first three columns which contain location data. We also skip the first 7
 rows of this file, since they contain other data we are not interested in. Separately, we will extract the information about dates and location for this data.
 
-```{code-cell} ipython3
+```{code-cell}
 # Note we are using skip_header and usecols to read only portions of the
 # data file into each variable.
 # Read just the dates for columns 3-7 from the first row
-dates = np.genfromtxt(filename, dtype=np.unicode_, delimiter=",",
-                      max_rows=1, usecols=range(3, 17),
-                      encoding="utf-8-sig")
+dates = np.genfromtxt(
+    filename,
+    dtype=np.unicode_,
+    delimiter=",",
+    max_rows=1,
+    usecols=range(3, 17),
+    encoding="utf-8-sig",
+)
 # Read the names of the geographic locations from the first two
 # columns, skipping the first seven rows
-locations = np.genfromtxt(filename, dtype=np.unicode_, delimiter=",",
-                          skip_header=7, usecols=(0, 1),
-                          encoding="utf-8-sig")
+locations = np.genfromtxt(
+    filename,
+    dtype=np.unicode_,
+    delimiter=",",
+    skip_header=7,
+    usecols=(0, 1),
+    encoding="utf-8-sig",
+)
 # Read the numeric data from just the first 14 days
-nbcases = np.genfromtxt(filename, dtype=np.int_, delimiter=",",
-                        skip_header=7, usecols=range(3, 17),
-                        encoding="utf-8-sig")
+nbcases = np.genfromtxt(
+    filename,
+    dtype=np.int_,
+    delimiter=",",
+    skip_header=7,
+    usecols=range(3, 17),
+    encoding="utf-8-sig",
+)
 ```
 
 Included in the `numpy.genfromtxt` function call, we have selected the [numpy.dtype](https://numpy.org/devdocs/reference/generated/numpy.dtype.html#numpy.dtype) for each subset of the data (either an integer - `numpy.int_` - or a string of characters - `numpy.unicode_`). We have also used the `encoding` argument to select `utf-8-sig` as the encoding for the file (read more about encoding in the [official Python documentation](https://docs.python.org/3/library/codecs.html#encodings-and-unicode). You can read more about the `numpy.genfromtxt` function from the [Reference Documentation](https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt) or from the [Basic IO tutorial](https://numpy.org/devdocs/user/basics.io.genfromtxt.html).
@@ -111,18 +127,19 @@ Included in the `numpy.genfromtxt` function call, we have selected the [numpy.dt
 
 First of all, we can plot the whole set of data we have and see what it looks like. In order to get a readable plot, we select only a few of the dates to show in our [x-axis ticks](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xticks.html#matplotlib.pyplot.xticks). Note also that in our plot command, we use `nbcases.T` (the transpose of the `nbcases` array) since this means we will plot each row of the file as a separate line. We choose to plot a dashed line (using the `'--'` line style). See the [matplotlib](https://matplotlib.org/) documentation for more info on this.
 
-```{code-cell} ipython3
+```{code-cell}
 import matplotlib.pyplot as plt
+
 selected_dates = [0, 3, 11, 13]
-plt.plot(dates, nbcases.T, '--');
-plt.xticks(selected_dates, dates[selected_dates]);
-plt.title("COVID-19 cumulative cases from Jan 21 to Feb 3 2020");
+plt.plot(dates, nbcases.T, "--")
+plt.xticks(selected_dates, dates[selected_dates])
+plt.title("COVID-19 cumulative cases from Jan 21 to Feb 3 2020")
 ```
 
 The graph has a strange shape from January 24th to February 1st. It would be interesing to know where this data comes from. If we look at the `locations` array we extracted from the `.csv` file, we can see that we have two columns, where the first would contain regions and the second would contain the name of the country. However, only the first few rows contain data for the the first column (province names in China). Following that, we only have country names. So it would make sense to group all the data from China into a single row. For this, we'll select from the `nbcases` array only the rows for which the second entry of the `locations` array corresponds to China. Next, we'll use the [numpy.sum](https://numpy.org/devdocs/reference/generated/numpy.sum.html#numpy.sum) function to sum all the selected rows (`axis=0`):
 
-```{code-cell} ipython3
-china_total = nbcases[locations[:, 1] == 'China'].sum(axis=0)
+```{code-cell}
+china_total = nbcases[locations[:, 1] == "China"].sum(axis=0)
 china_total
 ```
 
@@ -134,21 +151,22 @@ Something's wrong with this data - we are not supposed to have negative values i
 
 Looking at the data, here's what we find: there is a period with **missing data**:
 
-```{code-cell} ipython3
+```{code-cell}
 nbcases
 ```
 
 All the `-1` values we are seeing come from `numpy.genfromtxt` attempting to read missing data from the original `.csv` file. Obviously, we
 don't want to compute missing data as `-1` - we just want to skip this value so it doesn't interfere in our analysis. After importing the `numpy.ma` module, we'll create a new array, this time masking the invalid values:
 
-```{code-cell} ipython3
+```{code-cell}
 from numpy import ma
+
 nbcases_ma = ma.masked_values(nbcases, -1)
 ```
 
 If we look at the `nbcases_ma` masked array, this is what we have:
 
-```{code-cell} ipython3
+```{code-cell}
 nbcases_ma
 ```
 
@@ -160,22 +178,22 @@ Keep in mind that the `mask` attribute has a `True` value for elements correspon
 Let's try and see what the data looks like excluding the first row (data from the Hubei province in China) so we can look at the missing data more
 closely:
 
-```{code-cell} ipython3
-plt.plot(dates, nbcases_ma[1:].T, '--');
-plt.xticks(selected_dates, dates[selected_dates]);
-plt.title("COVID-19 cumulative cases from Jan 21 to Feb 3 2020");
+```{code-cell}
+plt.plot(dates, nbcases_ma[1:].T, "--")
+plt.xticks(selected_dates, dates[selected_dates])
+plt.title("COVID-19 cumulative cases from Jan 21 to Feb 3 2020")
 ```
 
 Now that our data has been masked, let's try summing up all the cases in China:
 
-```{code-cell} ipython3
-china_masked = nbcases_ma[locations[:, 1] == 'China'].sum(axis=0)
+```{code-cell}
+china_masked = nbcases_ma[locations[:, 1] == "China"].sum(axis=0)
 china_masked
 ```
 
 Note that `china_masked` is a masked array, so it has a different data structure than a regular NumPy array. Now, we can access its data directly by using the `.data` attribute:
 
-```{code-cell} ipython3
+```{code-cell}
 china_total = china_masked.data
 china_total
 ```
@@ -184,33 +202,35 @@ That is better: no more negative values. However, we can still see that for some
 
 First, we'll identify the indices of locations in mainland China:
 
-```{code-cell} ipython3
-china_mask = ((locations[:, 1] == 'China') &
-              (locations[:, 0] != 'Hong Kong') &
-              (locations[:, 0] != 'Taiwan') &
-              (locations[:, 0] != 'Macau') &
-              (locations[:, 0] != 'Unspecified*'))
+```{code-cell}
+china_mask = (
+    (locations[:, 1] == "China")
+    & (locations[:, 0] != "Hong Kong")
+    & (locations[:, 0] != "Taiwan")
+    & (locations[:, 0] != "Macau")
+    & (locations[:, 0] != "Unspecified*")
+)
 ```
 
 Now, `china_mask` is an array of boolean values (`True` or `False`); we can check that the indices are what we wanted with the [ma.nonzero](https://numpy.org/devdocs/reference/generated/numpy.ma.nonzero.html#numpy.ma.nonzero) method for masked arrays:
 
-```{code-cell} ipython3
+```{code-cell}
 china_mask.nonzero()
 ```
 
 Now we can correctly sum entries for mainland China:
 
-```{code-cell} ipython3
+```{code-cell}
 china_total = nbcases_ma[china_mask].sum(axis=0)
 china_total
 ```
 
 We can replace the data with this information and plot a new graph, focusing on Mainland China:
 
-```{code-cell} ipython3
-plt.plot(dates, china_total.T, '--');
-plt.xticks(selected_dates, dates[selected_dates]);
-plt.title("COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China");
+```{code-cell}
+plt.plot(dates, china_total.T, "--")
+plt.xticks(selected_dates, dates[selected_dates])
+plt.title("COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China")
 ```
 
 It's clear that masked arrays are the right solution here. We cannot represent the missing data without mischaracterizing the evolution of the curve.
@@ -221,7 +241,7 @@ It's clear that masked arrays are the right solution here. We cannot represent t
 
 One possibility we can think of is to interpolate the missing data to estimate the number of cases in late January. Observe that we can select the masked elements using the `.mask` attribute:
 
-```{code-cell} ipython3
+```{code-cell}
 china_total.mask
 invalid = china_total[china_total.mask]
 invalid
@@ -229,39 +249,41 @@ invalid
 
 We can also access the valid entries by using the logical negation for this mask:
 
-```{code-cell} ipython3
+```{code-cell}
 valid = china_total[~china_total.mask]
 valid
 ```
 
 Now, if we want to create a very simple approximation for this data, we should take into account the valid entries around the invalid ones. So first let's select the dates for which the data is valid. Note that we can use the mask from the `china_total` masked array to index the dates array:
 
-```{code-cell} ipython3
+```{code-cell}
 dates[~china_total.mask]
 ```
 
 Finally, we can use the [numpy.polyfit](https://numpy.org/devdocs/reference/generated/numpy.polyfit.html#numpy.polyfit) and [numpy.polyval](https://numpy.org/devdocs/reference/generated/numpy.polyval.html#numpy.polyval) functions to create a cubic polynomial that fits the data as best as possible:
 
-```{code-cell} ipython3
+```{code-cell}
 t = np.arange(len(china_total))
 params = np.polyfit(t[~china_total.mask], valid, 3)
 cubic_fit = np.polyval(params, t)
-plt.plot(t, china_total);
-plt.plot(t, cubic_fit, '--');
+plt.plot(t, china_total)
+plt.plot(t, cubic_fit, "--")
 ```
 
 This plot is not so readable since the lines seem to be over each other, so let's summarize in a more elaborate plot. We'll plot the real data when
 available, and show the cubic fit for unavailable data, using this fit to compute an estimate to the observed number of cases on January 28th 2020, 7 days after the beginning of the records:
 
-```{code-cell} ipython3
-plt.plot(t, china_total);
-plt.plot(t[china_total.mask], cubic_fit[china_total.mask], '--', color='orange');
-plt.plot(7, np.polyval(params, 7), 'r*');
-plt.xticks([0, 7, 13], dates[[0, 7, 13]]);
-plt.yticks([0, np.polyval(params, 7), 10000, 17500]);
-plt.legend(['Mainland China', 'Cubic estimate', '7 days after start']);
-plt.title("COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China\n"
-          "Cubic estimate for 7 days after start");
+```{code-cell}
+plt.plot(t, china_total)
+plt.plot(t[china_total.mask], cubic_fit[china_total.mask], "--", color="orange")
+plt.plot(7, np.polyval(params, 7), "r*")
+plt.xticks([0, 7, 13], dates[[0, 7, 13]])
+plt.yticks([0, np.polyval(params, 7), 10000, 17500])
+plt.legend(["Mainland China", "Cubic estimate", "7 days after start"])
+plt.title(
+    "COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China\n"
+    "Cubic estimate for 7 days after start"
+)
 ```
 
 ## In practice
