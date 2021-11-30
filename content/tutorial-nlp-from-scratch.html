@@ -1,0 +1,1419 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentiment Analysis on notable speeches of the last decade &#8212; NumPy Tutorials</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="X-ray image processing" href="tutorial-x-ray-image-processing.html" />
+    <link rel="prev" title="Deep reinforcement learning with Pong from pixels" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html" />
+  <meta name="robots" content="noindex" />
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/numpylogo.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">NumPy Tutorials</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../features.html">
+   NumPy Features
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-svd.html">
+     Linear algebra on n-dimensional arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="save-load-arrays.html">
+     Saving and sharing your NumPy arrays
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-ma.html">
+     Masked Arrays
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../applications.html">
+   NumPy Applications
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="mooreslaw-tutorial.html">
+     Determining Moore’s Law with real data in NumPy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-deep-learning-on-mnist.html">
+     Deep learning on MNIST
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">
+     Deep reinforcement learning with Pong from pixels
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Sentiment Analysis on notable speeches of the last decade
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-x-ray-image-processing.html">
+     X-ray image processing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-static_equilibrium.html">
+     Determining Static Equilibrium in NumPy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-plotting-fractals.html">
+     Plotting Fractals
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../contributing.html">
+   Contributing
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="pairing.html">
+     Pairing Jupyter notebooks and MyST-NB
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-style-guide.html">
+     Learn to write a NumPy tutorial
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/content/tutorial-nlp-from-scratch.md.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/numpy/numpy-tutorials/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-nlp-from-scratch.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/tutorial-nlp-from-scratch.md"><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of contents
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-collection">
+   1. Data Collection
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collecting-the-imdb-reviews-dataset">
+     Collecting the IMDb reviews dataset
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#collecting-and-loading-the-speech-transcripts">
+     Collecting and loading the speech transcripts
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preprocess-the-datasets">
+   2. Preprocess the datasets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#build-the-deep-learning-model">
+   3. Build the Deep Learning Model¶
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#introduction-to-a-long-short-term-memory-network">
+     Introduction to a Long Short Term Memory Network
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#overview-of-the-model-architecture">
+     Overview of the Model Architecture
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#forward-propagation">
+     Forward Propagation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#but-how-do-you-obtain-sentiment-from-the-lstm-s-output">
+     But how do you obtain sentiment from the LSTM’s output?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#backpropagation">
+     Backpropagation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#updating-the-parameters">
+     Updating the Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#training-the-network">
+     Training the Network
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sentiment-analysis-on-the-speech-data">
+     Sentiment Analysis on the Speech Data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#looking-at-our-neural-network-from-an-ethical-perspective">
+   Looking at our Neural Network from an ethical perspective
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-steps">
+   Next Steps
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="sentiment-analysis-on-notable-speeches-of-the-last-decade">
+<h1>Sentiment Analysis on notable speeches of the last decade<a class="headerlink" href="#sentiment-analysis-on-notable-speeches-of-the-last-decade" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial demonstrates how to build a simple <a href = 'https://en.wikipedia.org/wiki/Long_short-term_memory'> Long Short Term memory network (LSTM) </a> from scratch in NumPy to perform sentiment analysis on a socially relevant and ethically acquired dataset.</p>
+<p>Your deep learning model (the LSTM) is a form of a Recurrent Neural Network and will learn to classify a piece of text as positive or negative from the IMDB reviews dataset. The dataset contains 50,000 movie reviews and corresponding labels. Based on the numeric representations of these reviews and their corresponding labels <a href = 'https://en.wikipedia.org/wiki/Supervised_learning'> (supervised learning) </a> the neural network will be trained to learn the sentiment using forward propagation and backpropagation through time since we are dealing with sequential data here. The output will be a vector containing the probabilities that the text samples are positive.</p>
+<p>Today, Deep Learning is getting adopted in everyday life and now it is more important to ensure that decisions that have been taken using AI are not reflecting discriminatory behavior towards a set of populations. It is important to take fairness into consideration while consuming the output from AI. Throughout the tutorial we’ll try to question all the steps in our pipeline from an ethics point of view.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>You are expected to be familiar with the Python programming language and array manipulation with NumPy. In addition, some understanding of Linear Algebra and Calculus is recommended. You should also be familiar with how Neural Networks work. For reference, you can visit the <a class="reference external" href="https://docs.python.org/dev/tutorial/index.html">Python</a>, <a class="reference external" href="https://numpy.org/doc/stable/user/tutorial-svd.html">Linear algebra on n-dimensional arrays</a> and <a class="reference external" href="https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/multivariable-calculus.html">Calculus</a> tutorials.</p>
+<p>To get a refresher on Deep Learning basics, You should consider reading <a class="reference external" href="https://d2l.ai/chapter_recurrent-neural-networks/index.html">the d2l.ai book</a>, which is an interactive deep learning book with multi-framework code, math, and discussions. You can also go through the <a class="reference external" href="https://numpy.org/numpy-tutorials/content/tutorial-deep-learning-on-mnist.html">Deep learning on MNIST from scratch tutorial</a> to understand how a basic neural network is implemented from scratch.</p>
+<p>In addition to NumPy, you will be utilizing the following Python standard modules for data loading and processing:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pandas.pydata.org/docs/"><code class="docutils literal notranslate"><span class="pre">pandas</span></code></a> for handling dataframes</p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/"><code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code></a> for data visualization</p></li>
+<li><p><a class="reference external" href="https://www.fatiando.org/pooch/latest/https://www.fatiando.org/pooch/latest/"><code class="docutils literal notranslate"><span class="pre">pooch</span></code></a> to download and cache datasets</p></li>
+</ul>
+<p>This tutorial can be run locally in an isolated environment, such as <a class="reference external" href="https://virtualenv.pypa.io/en/stable/">Virtualenv</a> or <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">conda</a>. You can use <a class="reference external" href="https://jupyter.org/install">Jupyter Notebook or JupyterLab</a> to run each notebook cell.</p>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Data Collection</p></li>
+<li><p>Preprocess the datasets</p></li>
+<li><p>Build and train a LSTM network from scratch</p></li>
+<li><p>Perform sentiment analysis on collected speeches</p></li>
+<li><p>Next steps</p></li>
+</ol>
+</div>
+<div class="section" id="data-collection">
+<h2>1. Data Collection<a class="headerlink" href="#data-collection" title="Permalink to this headline">¶</a></h2>
+<p>Before you begin there are a few pointers you should always keep in mind before choosing the data you wish to train your model on:</p>
+<ul class="simple">
+<li><p><strong>Identifying Data Bias</strong> - Bias is an inherent component of the human thought process. Therefore data sourced from human activities reflects that bias. Some ways in which this bias tends to occur in Machine Learning datasets are:</p>
+<ul>
+<li><p><em>Bias in historical data</em>: Historical data are often skewed towards, or against, particular groups.
+Data can also be severely imbalanced with limited information on protected groups.</p></li>
+<li><p><em>Bias in data collection mechanisms</em>: Lack of representativeness introduces inherent biases in the data collection process.</p></li>
+<li><p><em>Bias towards observable outcomes</em>: In some scenarios, we have the information about True Outcomes only for a certain section of the population. In the absence of information on all outcomes, one cannot even measure fairness</p></li>
+</ul>
+</li>
+<li><p><strong>Preserving human anonymity for sensitive data</strong>: <a class="reference external" href="https://eprints.whiterose.ac.uk/91157/1/Ethical%20dilemmas.pdf">Trevisan and Reilly</a> identified a list of sensitive topics that need to be handled with extra care. We present the same below along with a few additions:</p>
+<ul>
+<li><p>personal daily routines (including location data);</p></li>
+<li><p>individual details about impairment and/or medical records;</p></li>
+<li><p>emotional accounts of pain and chronic illness;</p></li>
+<li><p>financial information about income and/or welfare payments;</p></li>
+<li><p>discrimination and abuse episodes;</p></li>
+<li><p>criticism/praise of individual providers of healthcare and support services;</p></li>
+<li><p>suicidal thoughts;</p></li>
+<li><p>criticism/praise of a power structure especially if it compromises their safety;</p></li>
+<li><p>personally-identifying information (even if anonymized in some way) including things like fingerprints or voice.</p></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<div><p>While it can be difficult taking consent from so many people especially on on-line platforms, the necessity of it depends upon the sensitivity of the topics your data includes and other indicators like whether the platform the data was obtained from allows users to operate under pseudonyms. If the website has a policy that forces the use of a real name, then the users need to be asked for consent.</p>
+</div></blockquote>
+<p>In this section, you will be collecting two different datasets: the IMDb movie reviews dataset, and a collection of 10 speeches curated for this tutorial including activists from different countries around the world, different times, and different topics. The former would be used to train the deep learning model while the latter will be used to perform sentiment analysis on.</p>
+<div class="section" id="collecting-the-imdb-reviews-dataset">
+<h3>Collecting the IMDb reviews dataset<a class="headerlink" href="#collecting-the-imdb-reviews-dataset" title="Permalink to this headline">¶</a></h3>
+<p>IMDb Reviews Dataset is a large movie review dataset collected and prepared by Andrew L. Maas from the popular movie rating service, IMDb. The IMDb Reviews dataset is used for binary sentiment classification, whether a review is positive or negative. It contains 25,000 movie reviews for training and 25,000 for testing. All these 50,000 reviews are labeled data that may be used for supervised deep learning. For ease of reproducibility, we’ll be sourcing  the data from <a class="reference external" href="https://zenodo.org/record/4117827#.YVQZ_EZBy3Ihttps://zenodo.org/record/4117827#.YVQZ_EZBy3I">Zenodo</a>.</p>
+<blockquote>
+<div><p>The IMDb platform allows the usage of their public datasets for personal and non-commercial use. We did our best to ensure that these reviews do not contain any of the aforementioned sensitive topics pertaining to the reviewer.</p>
+</div></blockquote>
+</div>
+<div class="section" id="collecting-and-loading-the-speech-transcripts">
+<h3>Collecting and loading the speech transcripts<a class="headerlink" href="#collecting-and-loading-the-speech-transcripts" title="Permalink to this headline">¶</a></h3>
+<p>We have chosen speeches by activists around the globe talking about issues like climate change, feminism, lgbtqa+ rights and racism. These were sourced from newspapers, the official website of the United Nations and the archives of established universities as cited in the table below. A CSV file was created containing the transcribed speeches, their speaker and the source the speeches were obtained from.
+We made sure to include different demographics in our data and included a range of different topics, most of which focus on social and/or ethical issues.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Speech</p></th>
+<th class="head"><p>Speaker</p></th>
+<th class="head"><p>Source</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Barnard College Commencement</p></td>
+<td><p>Leymah Gbowee</p></td>
+<td><p><a class="reference external" href="https://barnard.edu/news/transcript-speech-nobel-peace-prize-winner-leymah-gbowee">Barnard College</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>UN Speech on youth Education</p></td>
+<td><p>Malala Yousafzai</p></td>
+<td><p><a class="reference external" href="https://www.theguardian.com/commentisfree/2013/jul/12/malala-yousafzai-united-nations-education-speech-text">The Guardian</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Remarks in the UNGA on racial discrimination</p></td>
+<td><p>Linda Thomas Greenfield</p></td>
+<td><p><a class="reference external" href="https://usun.usmission.gov/remarks-by-ambassador-linda-thomas-greenfield-at-a-un-general-assembly-commemorative-meeting-for-intl-day-for-the-elimination-of-racial-discrimination/">United States mission to the United Nation</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>How Dare You</p></td>
+<td><p>Greta Thunberg</p></td>
+<td><p><a class="reference external" href="https://www.nbcnews.com/news/world/read-greta-thunberg-s-full-speech-united-nations-climate-action-n1057861">NBC</a></p></td>
+</tr>
+<tr class="row-even"><td><p>The speech that silenced the world for 5 minutes</p></td>
+<td><p>Severn Suzuki</p></td>
+<td><p><a class="reference external" href="https://earthcharter.org/new-voices-after-26-years-of-the-girl-who-silenced-the-world-for-5-minutes/">Earth Charter</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>The Hope Speech</p></td>
+<td><p>Harvey Milk</p></td>
+<td><p><a class="reference external" href="https://www.mfa.org/exhibitions/amalia-pica/transcript-harvey-milks-the-hope-speech">Museum of Fine Arts, Boston</a></p></td>
+</tr>
+<tr class="row-even"><td><p>Speech at the time to Thrive Conference</p></td>
+<td><p>Ellen Page</p></td>
+<td><p><a class="reference external" href="https://www.huffpost.com/entry/time-to-thrive_b_4794251">Huffpost</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>I have a dream</p></td>
+<td><p>Martin Luther King</p></td>
+<td><p><a class="reference external" href="https://www.marshall.edu/onemarshallu/i-have-a-dream/">Marshall University</a></p></td>
+</tr>
+</tbody>
+</table>
+<!-- #region -->
+</div>
+</div>
+<div class="section" id="preprocess-the-datasets">
+<h2>2. Preprocess the datasets<a class="headerlink" href="#preprocess-the-datasets" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Preprocessing data is an extremely crucial step before building any Deep learning model, however in an attempt to keep the tutorial focused on building the model, we will not dive deep into the code for preprocessing. Given below is a brief overview of all the steps we undertake to clean our data and convert it to its numeric representation.</p>
+</div></blockquote>
+<ol class="simple">
+<li><p><strong>Text Denoising</strong> : Before converting your text into vectors, it is important to clean it and remove all unhelpful parts a.k.a the noise from your data by converting all characters to lowercase, removing html tags, brackets and stop words (words that don’t add much meaning to a sentence). Without this step the dataset is often a cluster of words that the computer doesn’t understand.</p></li>
+<li><p><strong>Converting words to vectors</strong> : A word embedding is a learned representation for text where words that have the same meaning have a similar representation. Individual words are represented as real-valued vectors in a predefined vector space. GloVe is an unsupervised algorithm developed by Stanford for generating word embeddings by generating global word-word co-occurence matrix from a corpus. You can download the zipped files containing the embeddings from https://nlp.stanford.edu/projects/glove/. Here you can choose any of the four options for different sizes or training datasets. We have chosen the least memory consuming embedding file.</p></li>
+</ol>
+<blockquote>
+<div><p>The GloVe word embeddings include sets that were trained on billions of tokens, some up to 840 billion tokens. These algorithms exhibit stereotypical biases, such as gender bias which can be traced back to the original training data. For example certain occupations seem to be more biased towards a particular gender, reinforcing problematic stereotypes. The nearest solution to this problem are some de-biasing algorithms as the one presented in https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1184/reports/6835575.pdf which one can use on embeddings of their choice to mitigate bias, if present.</p>
+</div></blockquote>
+<!-- #endregion -->
+<p>You’ll start with importing the necessary packages to build our Deep Learning network</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing the necessary packages </span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+<span class="kn">import</span> <span class="nn">pooch</span>
+<span class="kn">import</span> <span class="nn">string</span>
+<span class="kn">import</span> <span class="nn">re</span> 
+<span class="kn">import</span> <span class="nn">zipfile</span> 
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TextPreprocess</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Text Preprocessing for a Natural Language Processing model.&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="nf">txt_to_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Function to convert a txt file to pandas dataframe.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        file : str</span>
+<span class="sd">            Path to the txt file.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Pandas dataframe </span>
+<span class="sd">            txt file converted to a dataframe.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">imdb_train</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">in_file</span><span class="p">:</span>
+            <span class="n">stripped</span> <span class="o">=</span> <span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">in_file</span><span class="p">)</span>
+            <span class="n">reviews</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">stripped</span><span class="p">:</span>
+                <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">splits</span> <span class="k">for</span> <span class="n">splits</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">splits</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+                <span class="n">reviews</span><span class="p">[</span><span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">reviews</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;review&#39;</span><span class="p">,</span> <span class="s1">&#39;sentiment&#39;</span><span class="p">])</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">df</span> 
+        
+    <span class="k">def</span> <span class="nf">unzipper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zipped</span><span class="p">,</span> <span class="n">to_extract</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Function to extract a file from a zipped folder.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        zipped : str</span>
+<span class="sd">            Path to the zipped folder.</span>
+<span class="sd">            </span>
+<span class="sd">        to_extract: str</span>
+<span class="sd">            Path to the file to be extracted from the zipped folder</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str </span>
+<span class="sd">            Path to the extracted file.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">zipped</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">fh</span><span class="p">)</span>
+        <span class="n">outdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">zipped</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">z</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">to_extract</span><span class="p">,</span> <span class="n">outdir</span><span class="p">)</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">to_extract</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output_file</span>
+
+    <span class="k">def</span> <span class="nf">cleantext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">text_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_punc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Function to clean text data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        df : pandas dataframe</span>
+<span class="sd">            The dataframe housing the input data.</span>
+<span class="sd">        text_column : str</span>
+<span class="sd">            Column in dataframe whose text is to be cleaned.</span>
+<span class="sd">        remove_stopwords : bool</span>
+<span class="sd">            if True, remove stopwords from text</span>
+<span class="sd">        remove_punc : bool</span>
+<span class="sd">            if True, remove punctuation symbols from text</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Numpy array</span>
+<span class="sd">            Cleaned text.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># converting all characters to lowercase</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">text_column</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">text_column</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+        <span class="c1"># List of stopwords taken from https://gist.github.com/sebleier/554280</span>
+        <span class="n">stopwords</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;about&quot;</span><span class="p">,</span> <span class="s2">&quot;above&quot;</span><span class="p">,</span> <span class="s2">&quot;after&quot;</span><span class="p">,</span> <span class="s2">&quot;again&quot;</span><span class="p">,</span> <span class="s2">&quot;against&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="s2">&quot;am&quot;</span><span class="p">,</span> <span class="s2">&quot;an&quot;</span><span class="p">,</span> <span class="s2">&quot;and&quot;</span><span class="p">,</span> <span class="s2">&quot;any&quot;</span><span class="p">,</span> <span class="s2">&quot;are&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;as&quot;</span><span class="p">,</span> <span class="s2">&quot;at&quot;</span><span class="p">,</span> <span class="s2">&quot;be&quot;</span><span class="p">,</span> <span class="s2">&quot;because&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;been&quot;</span><span class="p">,</span> <span class="s2">&quot;before&quot;</span><span class="p">,</span> <span class="s2">&quot;being&quot;</span><span class="p">,</span> <span class="s2">&quot;below&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;between&quot;</span><span class="p">,</span> <span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="s2">&quot;but&quot;</span><span class="p">,</span> <span class="s2">&quot;by&quot;</span><span class="p">,</span> <span class="s2">&quot;could&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;did&quot;</span><span class="p">,</span> <span class="s2">&quot;do&quot;</span><span class="p">,</span> <span class="s2">&quot;does&quot;</span><span class="p">,</span> <span class="s2">&quot;doing&quot;</span><span class="p">,</span> <span class="s2">&quot;down&quot;</span><span class="p">,</span> <span class="s2">&quot;during&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;each&quot;</span><span class="p">,</span> <span class="s2">&quot;few&quot;</span><span class="p">,</span> <span class="s2">&quot;for&quot;</span><span class="p">,</span> <span class="s2">&quot;from&quot;</span><span class="p">,</span> <span class="s2">&quot;further&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;had&quot;</span><span class="p">,</span> <span class="s2">&quot;has&quot;</span><span class="p">,</span> <span class="s2">&quot;have&quot;</span><span class="p">,</span> <span class="s2">&quot;having&quot;</span><span class="p">,</span> <span class="s2">&quot;he&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;he&#39;d&quot;</span><span class="p">,</span> <span class="s2">&quot;he&#39;ll&quot;</span><span class="p">,</span> <span class="s2">&quot;he&#39;s&quot;</span><span class="p">,</span> <span class="s2">&quot;her&quot;</span><span class="p">,</span> <span class="s2">&quot;here&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;here&#39;s&quot;</span><span class="p">,</span> <span class="s2">&quot;hers&quot;</span><span class="p">,</span> <span class="s2">&quot;herself&quot;</span><span class="p">,</span> <span class="s2">&quot;him&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;himself&quot;</span><span class="p">,</span> <span class="s2">&quot;his&quot;</span><span class="p">,</span> <span class="s2">&quot;how&quot;</span><span class="p">,</span> <span class="s2">&quot;how&#39;s&quot;</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;i&#39;d&quot;</span><span class="p">,</span> <span class="s2">&quot;i&#39;ll&quot;</span><span class="p">,</span> <span class="s2">&quot;i&#39;m&quot;</span><span class="p">,</span> <span class="s2">&quot;i&#39;ve&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;if&quot;</span><span class="p">,</span> <span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="s2">&quot;into&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;is&quot;</span><span class="p">,</span> <span class="s2">&quot;it&quot;</span><span class="p">,</span> <span class="s2">&quot;it&#39;s&quot;</span><span class="p">,</span> <span class="s2">&quot;its&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;itself&quot;</span><span class="p">,</span> <span class="s2">&quot;let&#39;s&quot;</span><span class="p">,</span> <span class="s2">&quot;me&quot;</span><span class="p">,</span> <span class="s2">&quot;more&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;most&quot;</span><span class="p">,</span> <span class="s2">&quot;my&quot;</span><span class="p">,</span> <span class="s2">&quot;myself&quot;</span><span class="p">,</span> <span class="s2">&quot;nor&quot;</span><span class="p">,</span> <span class="s2">&quot;of&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;on&quot;</span><span class="p">,</span> <span class="s2">&quot;once&quot;</span><span class="p">,</span> <span class="s2">&quot;only&quot;</span><span class="p">,</span> <span class="s2">&quot;or&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;other&quot;</span><span class="p">,</span> <span class="s2">&quot;ought&quot;</span><span class="p">,</span> <span class="s2">&quot;our&quot;</span><span class="p">,</span> <span class="s2">&quot;ours&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;ourselves&quot;</span><span class="p">,</span> <span class="s2">&quot;out&quot;</span><span class="p">,</span> <span class="s2">&quot;over&quot;</span><span class="p">,</span> <span class="s2">&quot;own&quot;</span><span class="p">,</span> <span class="s2">&quot;same&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;she&quot;</span><span class="p">,</span> <span class="s2">&quot;she&#39;d&quot;</span><span class="p">,</span> <span class="s2">&quot;she&#39;ll&quot;</span><span class="p">,</span> <span class="s2">&quot;she&#39;s&quot;</span><span class="p">,</span> <span class="s2">&quot;should&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;so&quot;</span><span class="p">,</span> <span class="s2">&quot;some&quot;</span><span class="p">,</span> <span class="s2">&quot;such&quot;</span><span class="p">,</span> <span class="s2">&quot;than&quot;</span><span class="p">,</span> <span class="s2">&quot;that&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;that&#39;s&quot;</span><span class="p">,</span> <span class="s2">&quot;the&quot;</span><span class="p">,</span> <span class="s2">&quot;their&quot;</span><span class="p">,</span> <span class="s2">&quot;theirs&quot;</span><span class="p">,</span> <span class="s2">&quot;them&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;themselves&quot;</span><span class="p">,</span> <span class="s2">&quot;then&quot;</span><span class="p">,</span> <span class="s2">&quot;there&quot;</span><span class="p">,</span> <span class="s2">&quot;there&#39;s&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;these&quot;</span><span class="p">,</span> <span class="s2">&quot;they&quot;</span><span class="p">,</span> <span class="s2">&quot;they&#39;d&quot;</span><span class="p">,</span> <span class="s2">&quot;they&#39;ll&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;they&#39;re&quot;</span><span class="p">,</span> <span class="s2">&quot;they&#39;ve&quot;</span><span class="p">,</span> <span class="s2">&quot;this&quot;</span><span class="p">,</span> <span class="s2">&quot;those&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;through&quot;</span><span class="p">,</span> <span class="s2">&quot;to&quot;</span><span class="p">,</span> <span class="s2">&quot;too&quot;</span><span class="p">,</span> <span class="s2">&quot;under&quot;</span><span class="p">,</span> <span class="s2">&quot;until&quot;</span><span class="p">,</span> <span class="s2">&quot;up&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;very&quot;</span><span class="p">,</span> <span class="s2">&quot;was&quot;</span><span class="p">,</span> <span class="s2">&quot;we&quot;</span><span class="p">,</span> <span class="s2">&quot;we&#39;d&quot;</span><span class="p">,</span> <span class="s2">&quot;we&#39;ll&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;we&#39;re&quot;</span><span class="p">,</span> <span class="s2">&quot;we&#39;ve&quot;</span><span class="p">,</span> <span class="s2">&quot;were&quot;</span><span class="p">,</span> <span class="s2">&quot;what&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;what&#39;s&quot;</span><span class="p">,</span> <span class="s2">&quot;when&quot;</span><span class="p">,</span> <span class="s2">&quot;when&#39;s&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;where&quot;</span><span class="p">,</span> <span class="s2">&quot;where&#39;s&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;which&quot;</span><span class="p">,</span> <span class="s2">&quot;while&quot;</span><span class="p">,</span> <span class="s2">&quot;who&quot;</span><span class="p">,</span> <span class="s2">&quot;who&#39;s&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;whom&quot;</span><span class="p">,</span> <span class="s2">&quot;why&quot;</span><span class="p">,</span> <span class="s2">&quot;why&#39;s&quot;</span><span class="p">,</span> <span class="s2">&quot;with&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;would&quot;</span><span class="p">,</span> <span class="s2">&quot;you&quot;</span><span class="p">,</span> <span class="s2">&quot;you&#39;d&quot;</span><span class="p">,</span> <span class="s2">&quot;you&#39;ll&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;you&#39;re&quot;</span><span class="p">,</span> <span class="s2">&quot;you&#39;ve&quot;</span><span class="p">,</span>
+                     <span class="s2">&quot;your&quot;</span><span class="p">,</span> <span class="s2">&quot;yours&quot;</span><span class="p">,</span> <span class="s2">&quot;yourself&quot;</span><span class="p">,</span> <span class="s2">&quot;yourselves&quot;</span><span class="p">]</span>
+
+        <span class="k">def</span> <span class="nf">remove_stopwords</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+            <span class="n">data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s1"> without stopwords&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">stopwords</span><span class="p">)]))</span>
+            <span class="k">return</span> <span class="n">data</span>
+
+        <span class="k">def</span> <span class="nf">remove_tags</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;&lt;*&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+
+        <span class="c1"># remove html tags and brackets from text</span>
+        <span class="k">if</span> <span class="n">remove_stopwords</span><span class="p">:</span>
+            <span class="n">data_without_stopwords</span> <span class="o">=</span> <span class="n">remove_stopwords</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">text_column</span><span class="p">)</span>
+            <span class="n">data_without_stopwords</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;clean_</span><span class="si">{</span><span class="n">text_column</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_without_stopwords</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">text_column</span><span class="si">}</span><span class="s1"> without stopwords&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">cw</span><span class="p">:</span> <span class="n">remove_tags</span><span class="p">(</span><span class="n">cw</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">remove_punc</span><span class="p">:</span>
+            <span class="n">data_without_stopwords</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;clean_</span><span class="si">{</span><span class="n">text_column</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_without_stopwords</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;clean_</span><span class="si">{</span><span class="n">text_column</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                <span class="s1">&#39;[</span><span class="si">{}</span><span class="s1">]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">),</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">X</span> <span class="o">=</span> <span class="n">data_without_stopwords</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;clean_</span><span class="si">{</span><span class="n">text_column</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">X</span>
+
+
+    <span class="k">def</span> <span class="nf">sent_tokeniser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Function to split text into sentences.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : str</span>
+<span class="sd">            piece of text</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list </span>
+<span class="sd">            sentences with punctuation removed.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sentences</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(?&lt;!\w\.\w.)(?&lt;![A-Z][a-z]\.)(?&lt;=\.|\?)\s&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">sentences</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="n">sentences_cleaned</span> <span class="o">=</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^\w\s]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">sentences_cleaned</span>
+
+    <span class="k">def</span> <span class="nf">word_tokeniser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Function to split text into tokens.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        x : str</span>
+<span class="sd">            piece of text</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list</span>
+<span class="sd">            words with punctuation removed.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([-\s.,;!?])+&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">if</span> <span class="p">(</span>
+            <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39;- </span><span class="se">\t\n</span><span class="s1">.,;!?</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="ow">and</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">words</span>
+
+    <span class="k">def</span> <span class="nf">loadGloveModel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">emb_path</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Function to read from the word embedding file.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Dict </span>
+<span class="sd">            mapping from word to corresponding word embedding.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Loading Glove Model&quot;</span><span class="p">)</span>
+        <span class="n">File</span> <span class="o">=</span> <span class="n">emb_path</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">File</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">gloveModel</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">splitLines</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="n">word</span> <span class="o">=</span> <span class="n">splitLines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">wordEmbedding</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">splitLines</span><span class="p">[</span><span class="mi">1</span><span class="p">:]])</span>
+            <span class="n">gloveModel</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">wordEmbedding</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gloveModel</span><span class="p">),</span> <span class="s2">&quot; words loaded!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">gloveModel</span>
+
+    <span class="k">def</span> <span class="nf">text_to_paras</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">para_len</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Function to split text into paragraphs.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        text : str</span>
+<span class="sd">            piece of text</span>
+
+<span class="sd">        para_len : int</span>
+<span class="sd">            length of each paragraph</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        list </span>
+<span class="sd">            paragraphs of specified length.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># split the speech into a list of words</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="c1"># obtain the total number of paragraphs</span>
+        <span class="n">no_paras</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">words</span><span class="p">)</span><span class="o">/</span><span class="n">para_len</span><span class="p">))</span>
+        <span class="c1"># split the speech into a list of sentences</span>
+        <span class="n">sentences</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sent_tokeniser</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="c1"># aggregate the sentences into paragraphs</span>
+        <span class="n">k</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sentences</span><span class="p">),</span> <span class="n">no_paras</span><span class="p">)</span>
+        <span class="n">agg_sentences</span> <span class="o">=</span> <span class="p">[</span><span class="n">sentences</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="nb">min</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">m</span><span class="p">):(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">k</span><span class="o">+</span><span class="nb">min</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">)]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">no_paras</span><span class="p">)]</span>
+        <span class="n">paras</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sents</span><span class="p">)</span> <span class="k">for</span> <span class="n">sents</span> <span class="ow">in</span> <span class="n">agg_sentences</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">paras</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://github.com/fatiando/pooch">Pooch</a> is a Python package made by scientists that manages downloading data files over HTTP and storing them in a local directory. We use this to set up a download manager which contains all of the information needed to fetch the data files in our registry and store them in the specified cache folder.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pooch</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="c1"># folder where the data will be stored in the </span>
+    <span class="c1"># default cache folder of your Operating System </span>
+    <span class="n">path</span><span class="o">=</span><span class="n">pooch</span><span class="o">.</span><span class="n">os_cache</span><span class="p">(</span><span class="s2">&quot;numpy-nlp-tutorial&quot;</span><span class="p">),</span>
+    <span class="c1"># Base URL of the remote data store</span>
+    <span class="n">base_url</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="c1"># The cache file registry. A dictionary with all files managed by this pooch.</span>
+    <span class="c1"># The keys are the file names and values are their respective hash codes which</span>
+    <span class="c1"># ensure we download the same, uncorrupted file each time. </span>
+    <span class="n">registry</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;imdb_train.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;6a38ea6ab5e1902cc03f6b9294ceea5e8ab985af991f35bcabd301a08ea5b3f0&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;imdb_test.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;7363ef08ad996bf4233b115008d6d7f9814b7cc0f4d13ab570b938701eadefeb&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;glove.6B.50d.zip&quot;</span><span class="p">:</span> <span class="s2">&quot;617afb2fe6cbd085c235baf7a465b96f4112bd7f7ccb2b2cbd649fed9cbcf2fb&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="c1"># Now specify custom URLs for some of the files in the registry.</span>
+    <span class="n">urls</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;imdb_train.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;doi:10.5281/zenodo.4117827/imdb_train.txt&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;imdb_test.txt&quot;</span><span class="p">:</span> <span class="s2">&quot;doi:10.5281/zenodo.4117827/imdb_test.txt&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;glove.6B.50d.zip&quot;</span><span class="p">:</span> <span class="s1">&#39;https://nlp.stanford.edu/data/glove.6B.zip&#39;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Download the IMDb training and testing data files:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">imdb_train</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s1">&#39;imdb_train.txt&#39;</span><span class="p">)</span>
+<span class="n">imdb_test</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s1">&#39;imdb_test.txt&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Instantiate the<code class="docutils literal notranslate"> <span class="pre">TextPreprocess</span></code> class to perform various operations on our datasets:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">textproc</span> <span class="o">=</span> <span class="n">TextPreprocess</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Convert each IMDb file to a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> dataframe for a more convenient preprocessing of the datasets:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">train_df</span> <span class="o">=</span> <span class="n">textproc</span><span class="o">.</span><span class="n">txt_to_df</span><span class="p">(</span><span class="n">imdb_train</span><span class="p">)</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">textproc</span><span class="o">.</span><span class="n">txt_to_df</span><span class="p">(</span><span class="n">imdb_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now, you will clean the dataframes obtained above by removing occurrences of stopwords and punctuation marks. You will also retrieve the sentiment values from each dataframe to obtain the target variables:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span> <span class="o">=</span> <span class="n">textproc</span><span class="o">.</span><span class="n">cleantext</span><span class="p">(</span><span class="n">train_df</span><span class="p">,</span>
+                       <span class="n">text_column</span><span class="o">=</span><span class="s1">&#39;review&#39;</span><span class="p">,</span>
+                       <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">remove_punc</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2000</span><span class="p">]</span>
+
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">textproc</span><span class="o">.</span><span class="n">cleantext</span><span class="p">(</span><span class="n">test_df</span><span class="p">,</span>
+                       <span class="n">text_column</span><span class="o">=</span><span class="s1">&#39;review&#39;</span><span class="p">,</span>
+                       <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">remove_punc</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1000</span><span class="p">]</span>
+
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2000</span><span class="p">]</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">test_df</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1000</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The same process is applicable on the collected speeches:</p>
+<blockquote>
+<div><p>Since we will be performing paragraph wise sentiment analysis on each speech further ahead in the tutorial, we’ll need the punctuation marks to split the text into paragraphs, hence we refrain from removing their punctuation marks at this stage</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">speech_data_path</span> <span class="o">=</span> <span class="s1">&#39;tutorial-nlp-from-scratch/speeches.csv&#39;</span>
+<span class="n">speech_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">speech_data_path</span><span class="p">)</span>
+<span class="n">X_pred</span> <span class="o">=</span> <span class="n">textproc</span><span class="o">.</span><span class="n">cleantext</span><span class="p">(</span><span class="n">speech_df</span><span class="p">,</span>
+                            <span class="n">text_column</span><span class="o">=</span><span class="s1">&#39;speech&#39;</span><span class="p">,</span>
+                            <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">remove_punc</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">speakers</span> <span class="o">=</span> <span class="n">speech_df</span><span class="p">[</span><span class="s1">&#39;speaker&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You will now download the <code class="docutils literal notranslate"><span class="pre">GloVe</span></code> embeddings, unzip them and build a dictionary mapping each word and word embedding. This will act as a cache for when you need to replace each word with its respective word embedding.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">glove</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s1">&#39;glove.6B.50d.zip&#39;</span><span class="p">)</span>
+<span class="n">emb_path</span> <span class="o">=</span> <span class="n">textproc</span><span class="o">.</span><span class="n">unzipper</span><span class="p">(</span><span class="n">glove</span><span class="p">,</span> <span class="s1">&#39;glove.6B.300d.txt&#39;</span><span class="p">)</span>
+<span class="n">emb_matrix</span> <span class="o">=</span> <span class="n">textproc</span><span class="o">.</span><span class="n">loadGloveModel</span><span class="p">(</span><span class="n">emb_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="build-the-deep-learning-model">
+<h2>3. Build the Deep Learning Model¶<a class="headerlink" href="#build-the-deep-learning-model" title="Permalink to this headline">¶</a></h2>
+<p>It is time to start implementing our LSTM! You will have to first familiarize yourself with some high-level concepts of the basic building blocks of a deep learning model. You can refer to the <a class="reference external" href="https://numpy.org/numpy-tutorials/content/tutorial-deep-learning-on-mnist.html">Deep learning on MNIST from scratch tutorial</a> for the same.</p>
+<p>You will then learn how a Recurrent Neural Network differs from a plain Neural Network and what makes it so suitable for processing sequential data. Afterwards, you will construct the building blocks of a simple deep learning model in Python and NumPy and train it to learn to classify the sentiment of a piece of text as positive or negative with a certain level of accuracy</p>
+<div class="section" id="introduction-to-a-long-short-term-memory-network">
+<h3>Introduction to a Long Short Term Memory Network<a class="headerlink" href="#introduction-to-a-long-short-term-memory-network" title="Permalink to this headline">¶</a></h3>
+<p>In a <a class="reference external" href="https://en.wikipedia.org/wiki/Multilayer_perceptron">Multilayer perceptron</a> (MLP), the information only moves in one direction — from the input layer, through the hidden layers, to the output layer. The information moves straight through the network and never takes the previous nodes into account at a later stage. Because it only considers the current input, the features learned are not shared across different positions of the sequence. Moreover, it cannot process sequences with varying lengths.</p>
+<p>Unlike an MLP, the RNN was designed to work with sequence prediction problems.RNNs introduce state variables to store past information, together with the current inputs, to determine the current outputs. Since an RNN shares the learned features with all the data points in a sequence regardless of its length, it is capable of processing sequences with varying lengths.</p>
+<p>The problem with an RNN however, is that it cannot retain long-term memory because the influence of a given input on the hidden layer, and therefore on the network output, either decays or blows up exponentially as it cycles around the network’s recurrent connections. This shortcoming is referred to as the vanishing gradient problem. Long Short-Term Memory (LSTM) is an RNN architecture specifically designed to address the <a class="reference external" href="https://en.wikipedia.org/wiki/Vanishing_gradient_problem">vanishing gradient problem</a>.</p>
+</div>
+<div class="section" id="overview-of-the-model-architecture">
+<h3>Overview of the Model Architecture<a class="headerlink" href="#overview-of-the-model-architecture" title="Permalink to this headline">¶</a></h3>
+<img src="_static/lstm.gif" width="900" align="center">
+<p>In the above gif, The rectangles labeled <span class="math notranslate nohighlight">\(A\)</span> are called <code class="docutils literal notranslate"><span class="pre">Cells</span></code> and they are the <strong>Memory Blocks</strong> of our LSTM network. They are responsible for choosing what to remember in a sequence and pass on that information to the next cell via two states called the <code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">state</span></code> <span class="math notranslate nohighlight">\(H_{t}\)</span> and the <code class="docutils literal notranslate"><span class="pre">cell</span> <span class="pre">state</span></code> <span class="math notranslate nohighlight">\(C_{t}\)</span> where <span class="math notranslate nohighlight">\(t\)</span> indicates the time-step. Each <code class="docutils literal notranslate"><span class="pre">Cell</span></code> has dedicated gates which are responsible for storing, writing or reading the information passed to an LSTM. You will now look closely at the architecture of the network by implementing each mechanism happening inside of it.</p>
+<p>Lets start with writing a function to randomly initialize the parameters which will be learned while our model trains</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initialise_params</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">):</span>
+    <span class="c1"># forget gate</span>
+    <span class="n">Wf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span> <span class="o">+</span> <span class="n">input_dim</span><span class="p">)</span>
+    <span class="n">bf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># input gate</span>
+    <span class="n">Wi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span> <span class="o">+</span> <span class="n">input_dim</span><span class="p">)</span>
+    <span class="n">bi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># candidate memory gate</span>
+    <span class="n">Wcm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span> <span class="o">+</span> <span class="n">input_dim</span><span class="p">)</span>
+    <span class="n">bcm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># output gate</span>
+    <span class="n">Wo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span> <span class="o">+</span> <span class="n">input_dim</span><span class="p">)</span>
+    <span class="n">bo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># fully connected layer for classification</span>
+    <span class="n">W2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Wf&quot;</span><span class="p">:</span> <span class="n">Wf</span><span class="p">,</span>
+        <span class="s2">&quot;bf&quot;</span><span class="p">:</span> <span class="n">bf</span><span class="p">,</span>
+        <span class="s2">&quot;Wi&quot;</span><span class="p">:</span> <span class="n">Wi</span><span class="p">,</span>
+        <span class="s2">&quot;bi&quot;</span><span class="p">:</span> <span class="n">bi</span><span class="p">,</span>
+        <span class="s2">&quot;Wcm&quot;</span><span class="p">:</span> <span class="n">Wcm</span><span class="p">,</span>
+        <span class="s2">&quot;bcm&quot;</span><span class="p">:</span> <span class="n">bcm</span><span class="p">,</span>
+        <span class="s2">&quot;Wo&quot;</span><span class="p">:</span> <span class="n">Wo</span><span class="p">,</span>
+        <span class="s2">&quot;bo&quot;</span><span class="p">:</span> <span class="n">bo</span><span class="p">,</span>
+        <span class="s2">&quot;W2&quot;</span><span class="p">:</span> <span class="n">W2</span><span class="p">,</span>
+        <span class="s2">&quot;b2&quot;</span><span class="p">:</span> <span class="n">b2</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">parameters</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="forward-propagation">
+<h3>Forward Propagation<a class="headerlink" href="#forward-propagation" title="Permalink to this headline">¶</a></h3>
+<p>Now that you have your initialized parameters, you can pass the input data in a forward direction through the network. Each layer accepts the input data, processes it and passes it to the successive layer. This process is called <code class="docutils literal notranslate"><span class="pre">Forward</span> <span class="pre">Propagation</span></code>. You will undertake the following mechanism to implement it:</p>
+<ul class="simple">
+<li><p>Loading the word embeddings of the input data</p></li>
+<li><p>Passing the embeddings to an LSTM</p></li>
+<li><p>Perform all the gate mechanisms in every memory block of the LSTM to obtain the final hidden state</p></li>
+<li><p>Passing the final hidden state through a fully connected layer to obtain the probability with which the sequence is positive</p></li>
+<li><p>Storing all the calculated values in a cache to utilize during backpropagation</p></li>
+</ul>
+<p><a class="reference external" href="https://d2l.ai/chapter_multilayer-perceptrons/mlp.html?highlight=sigmoid#sigmoid-function">Sigmoid</a> belongs to the family of non-linear activation functions. It helps the network to update or forget the data. If the sigmoid of a value results in 0, the information is considered forgotten. Similarly, the information stays if it is 1.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fmin</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">/</span> <span class="n">d</span>
+</pre></div>
+</div>
+<p>The <strong>Forget Gate</strong> takes the current word embedding and the previous hidden state concatenated together as input. and decides what parts of the old memory cell content need attention and which can be ignored.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fp_forget_gate</span><span class="p">(</span><span class="n">concat</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="n">ft</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;Wf&#39;</span><span class="p">],</span> <span class="n">concat</span><span class="p">)</span>
+                 <span class="o">+</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;bf&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">ft</span>  
+</pre></div>
+</div>
+<p>The <strong>Input Gate</strong> takes the current word embedding and the previous hidden state concatenated together as input. and governs how much of the new data we take into account via the <strong>Candidate Memory Gate</strong> which utilizes the <a class="reference external" href="https://d2l.ai/chapter_multilayer-perceptrons/mlp.html?highlight=tanh#tanh-function">Tanh</a> to regulate the values flowing through the network.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fp_input_gate</span><span class="p">(</span><span class="n">concat</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="n">it</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;Wi&#39;</span><span class="p">],</span> <span class="n">concat</span><span class="p">)</span>
+                 <span class="o">+</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;bi&#39;</span><span class="p">])</span>
+    <span class="n">cmt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;Wcm&#39;</span><span class="p">],</span> <span class="n">concat</span><span class="p">)</span>
+                  <span class="o">+</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;bcm&#39;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">it</span><span class="p">,</span> <span class="n">cmt</span> 
+</pre></div>
+</div>
+<p>Finally we have the <strong>Output Gate</strong> which takes information from the current word embedding, previous hidden state and the cell state which has been updated with information from the forget and input gates to update the value of the hidden state.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fp_output_gate</span><span class="p">(</span><span class="n">concat</span><span class="p">,</span> <span class="n">next_cs</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="n">ot</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;Wo&#39;</span><span class="p">],</span> <span class="n">concat</span><span class="p">)</span>
+                 <span class="o">+</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;bo&#39;</span><span class="p">])</span>
+    <span class="n">next_hs</span> <span class="o">=</span> <span class="n">ot</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">next_cs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ot</span><span class="p">,</span> <span class="n">next_hs</span>
+</pre></div>
+</div>
+<p>The following image summarizes each gate mechanism in the memory block of a LSTM network:</p>
+<blockquote>
+<div><p>Image has been modified from <a class="reference external" href="https://link.springer.com/chapter/10.1007%2F978-3-030-14524-8_11">this</a> source</p>
+</div></blockquote>
+<img src="_static/mem_block.png" width="800" align="center">
+</div>
+<div class="section" id="but-how-do-you-obtain-sentiment-from-the-lstm-s-output">
+<h3>But how do you obtain sentiment from the LSTM’s output?<a class="headerlink" href="#but-how-do-you-obtain-sentiment-from-the-lstm-s-output" title="Permalink to this headline">¶</a></h3>
+<p>The hidden state you obtain from the output gate of the last memory block in a sequence is considered to be a representation of all the information contained in a sequence. To classify this information into various classes (2 in our case, positive and negative) we use a <strong>Fully Connected layer</strong> which firstly maps this information to a predefined output size (1 in our case). Then, an activation function such as the sigmoid converts this output to a value between 0 and 1. We’ll consider values greater than 0.5 to be indicative of a positive sentiment.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fp_fc_layer</span><span class="p">(</span><span class="n">last_hs</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="n">z2</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;W2&#39;</span><span class="p">],</span> <span class="n">last_hs</span><span class="p">)</span>
+          <span class="o">+</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;b2&#39;</span><span class="p">])</span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">z2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a2</span> 
+</pre></div>
+</div>
+<p>Now you will put all these functions together to summarize the <strong>Forward Propagation</strong> step in our model architecture:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">forward_prop</span><span class="p">(</span><span class="n">X_vec</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">):</span>
+
+    <span class="n">hidden_dim</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;Wf&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">time_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_vec</span><span class="p">)</span>
+
+    <span class="c1"># Initialise hidden and cell state before passing to first time step</span>
+    <span class="n">prev_hs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">prev_cs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">prev_hs</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="c1"># Store all the intermediate and final values here</span>
+    <span class="n">caches</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lstm_values&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;fc_values&#39;</span><span class="p">:</span> <span class="p">[]}</span>
+
+    <span class="c1"># Hidden state from the last cell in the LSTM layer is calculated.</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">time_steps</span><span class="p">):</span>
+        <span class="c1"># Retrieve word corresponding to current time step</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">X_vec</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+        <span class="c1"># Retrieve the embedding for the word and reshape it to make the LSTM happy</span>
+        <span class="n">xt</span> <span class="o">=</span> <span class="n">emb_matrix</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">xt</span> <span class="o">=</span> <span class="n">xt</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># Input to the gates is concatenated previous hidden state and current word embedding</span>
+        <span class="n">concat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">prev_hs</span><span class="p">,</span> <span class="n">xt</span><span class="p">))</span>
+ 
+        <span class="c1"># Calculate output of the forget gate</span>
+        <span class="n">ft</span> <span class="o">=</span> <span class="n">fp_forget_gate</span><span class="p">(</span><span class="n">concat</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+        <span class="c1"># Calculate output of the input gate</span>
+        <span class="n">it</span><span class="p">,</span> <span class="n">cmt</span> <span class="o">=</span> <span class="n">fp_input_gate</span><span class="p">(</span><span class="n">concat</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+        <span class="n">io</span> <span class="o">=</span> <span class="n">it</span> <span class="o">*</span> <span class="n">cmt</span>   
+        
+        <span class="c1"># Update the cell state </span>
+        <span class="n">next_cs</span> <span class="o">=</span> <span class="p">(</span><span class="n">ft</span> <span class="o">*</span> <span class="n">prev_cs</span><span class="p">)</span> <span class="o">+</span> <span class="n">io</span>
+        
+        <span class="c1"># Calculate output of the output gate</span>
+        <span class="n">ot</span><span class="p">,</span> <span class="n">next_hs</span> <span class="o">=</span> <span class="n">fp_output_gate</span><span class="p">(</span><span class="n">concat</span><span class="p">,</span> <span class="n">next_cs</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+        <span class="c1"># store all the values used and calculated by</span>
+        <span class="c1"># the LSTM in a cache for backward propagation. </span>
+        <span class="n">lstm_cache</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;next_hs&quot;</span><span class="p">:</span> <span class="n">next_hs</span><span class="p">,</span>
+        <span class="s2">&quot;next_cs&quot;</span><span class="p">:</span> <span class="n">next_cs</span><span class="p">,</span>
+        <span class="s2">&quot;prev_hs&quot;</span><span class="p">:</span> <span class="n">prev_hs</span><span class="p">,</span>
+        <span class="s2">&quot;prev_cs&quot;</span><span class="p">:</span> <span class="n">prev_cs</span><span class="p">,</span>
+        <span class="s2">&quot;ft&quot;</span><span class="p">:</span> <span class="n">ft</span><span class="p">,</span>
+        <span class="s2">&quot;it&quot;</span> <span class="p">:</span> <span class="n">it</span><span class="p">,</span>
+        <span class="s2">&quot;cmt&quot;</span><span class="p">:</span> <span class="n">cmt</span><span class="p">,</span>
+        <span class="s2">&quot;ot&quot;</span><span class="p">:</span> <span class="n">ot</span><span class="p">,</span>
+        <span class="s2">&quot;xt&quot;</span><span class="p">:</span> <span class="n">xt</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">caches</span><span class="p">[</span><span class="s1">&#39;lstm_values&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lstm_cache</span><span class="p">)</span>
+
+        <span class="c1"># Pass the updated hidden state and cell state to the next time step</span>
+        <span class="n">prev_hs</span> <span class="o">=</span> <span class="n">next_hs</span>
+        <span class="n">prev_cs</span> <span class="o">=</span> <span class="n">next_cs</span>
+
+    <span class="c1"># Pass the LSTM output through a fully connected layer to </span>
+    <span class="c1"># obtain probability of the sequence being positive </span>
+    <span class="n">a2</span> <span class="o">=</span> <span class="n">fp_fc_layer</span><span class="p">(</span><span class="n">next_hs</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+    <span class="c1"># store all the values used and calculated by the</span>
+    <span class="c1"># fully connected layer in a cache for backward propagation. </span>
+    <span class="n">fc_cache</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;a2&quot;</span> <span class="p">:</span> <span class="n">a2</span><span class="p">,</span>
+    <span class="s2">&quot;W2&quot;</span> <span class="p">:</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;W2&#39;</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="n">caches</span><span class="p">[</span><span class="s1">&#39;fc_values&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fc_cache</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">caches</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="backpropagation">
+<h3>Backpropagation<a class="headerlink" href="#backpropagation" title="Permalink to this headline">¶</a></h3>
+<p>After each forward pass through the network, you will implement the <code class="docutils literal notranslate"><span class="pre">backpropagation</span> <span class="pre">through</span> <span class="pre">time</span></code> algorithm to accumulate gradients of each parameter over the time steps. Backpropagation through a LSTM is not as straightforward as through other common Deep Learning architectures, due to the special way its underlying layers interact. Nonetheless, the approach is largely the same; identifying dependencies and applying the chain rule.</p>
+<p>Lets start with defining a function to initialize gradients of each parameter as arrays made up of zeros with same dimensions as the corresponding parameter</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise the gradients</span>
+<span class="k">def</span> <span class="nf">initialize_grads</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
+    <span class="n">grads</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">grads</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;d</span><span class="si">{</span><span class="n">param</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">parameters</span><span class="p">[</span><span class="n">param</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">grads</span>
+</pre></div>
+</div>
+<p>Now, for each gate and the fully connected layer, we define a function to calculate the gradient of the loss with respect to the input passed and the parameters used. To understand the mathematics behind how the derivatives were calculated we suggest you to follow this helpful <a class="reference external" href="https://christinakouridi.blog/2019/06/19/backpropagation-lstm/">blog</a> by Christina Kouridi</p>
+<p>Define a function to calculate the gradients in the <strong>Forget Gate</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bp_forget_gate</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">dh_prev</span><span class="p">,</span> <span class="n">dc_prev</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="c1"># dft = dL/da2 * da2/dZ2 * dZ2/dh_prev * dh_prev/dc_prev * dc_prev/dft</span>
+    <span class="n">dft</span> <span class="o">=</span> <span class="p">((</span><span class="n">dc_prev</span> <span class="o">*</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;prev_cs&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;ot&quot;</span><span class="p">]</span>
+           <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;next_cs&quot;</span><span class="p">])))</span>
+           <span class="o">*</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;prev_cs&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">dh_prev</span><span class="p">)</span> <span class="o">*</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;ft&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;ft&quot;</span><span class="p">]))</span>
+    <span class="c1"># dWf = dft * dft/dWf</span>
+    <span class="n">gradients</span><span class="p">[</span><span class="s1">&#39;dWf&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dft</span><span class="p">,</span> <span class="n">concat</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="c1"># dbf = dft * dft/dbf</span>
+    <span class="n">gradients</span><span class="p">[</span><span class="s1">&#39;dbf&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dft</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># dh_f = dft * dft/dh_prev</span>
+    <span class="n">dh_f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;Wf&quot;</span><span class="p">][:,</span> <span class="p">:</span><span class="n">hidden_dim</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">dft</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dh_f</span><span class="p">,</span> <span class="n">gradients</span> 
+</pre></div>
+</div>
+<p>Define a function to calculate the gradients in the <strong>Input Gate</strong> and <strong>Candidate Memory Gate</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bp_input_gate</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">dh_prev</span><span class="p">,</span> <span class="n">dc_prev</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="c1"># dit = dL/da2 * da2/dZ2 * dZ2/dh_prev * dh_prev/dc_prev * dc_prev/dit</span>
+    <span class="n">dit</span> <span class="o">=</span> <span class="p">((</span><span class="n">dc_prev</span> <span class="o">*</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;cmt&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;ot&quot;</span><span class="p">]</span>
+           <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;next_cs&quot;</span><span class="p">])))</span>
+           <span class="o">*</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;cmt&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">dh_prev</span><span class="p">)</span> <span class="o">*</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;it&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;it&quot;</span><span class="p">]))</span>
+    <span class="c1"># dcmt = dL/da2 * da2/dZ2 * dZ2/dh_prev * dh_prev/dc_prev * dc_prev/dcmt</span>
+    <span class="n">dcmt</span> <span class="o">=</span> <span class="p">((</span><span class="n">dc_prev</span> <span class="o">*</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;it&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;ot&quot;</span><span class="p">]</span>
+            <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;next_cs&quot;</span><span class="p">])))</span>
+            <span class="o">*</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;it&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">dh_prev</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;cmt&quot;</span><span class="p">])))</span>
+    <span class="c1"># dWi = dit * dit/dWi</span>
+    <span class="n">gradients</span><span class="p">[</span><span class="s1">&#39;dWi&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dit</span><span class="p">,</span> <span class="n">concat</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="c1"># dWcm = dcmt * dcmt/dWcm</span>
+    <span class="n">gradients</span><span class="p">[</span><span class="s1">&#39;dWcm&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dcmt</span><span class="p">,</span> <span class="n">concat</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="c1"># dbi = dit * dit/dbi</span>
+    <span class="n">gradients</span><span class="p">[</span><span class="s1">&#39;dbi&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dit</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># dWcm = dcmt * dcmt/dbcm</span>
+    <span class="n">gradients</span><span class="p">[</span><span class="s1">&#39;dbcm&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dcmt</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># dhi = dit * dit/dh_prev</span>
+    <span class="n">dh_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;Wi&quot;</span><span class="p">][:,</span> <span class="p">:</span><span class="n">hidden_dim</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">dit</span><span class="p">)</span>
+    <span class="c1"># dhcm = dcmt * dcmt/dh_prev</span>
+    <span class="n">dh_cm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;Wcm&quot;</span><span class="p">][:,</span> <span class="p">:</span><span class="n">hidden_dim</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">dcmt</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dh_i</span><span class="p">,</span> <span class="n">dh_cm</span><span class="p">,</span> <span class="n">gradients</span> 
+</pre></div>
+</div>
+<p>Define a function to calculate the gradients for the <strong>Output Gate</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bp_output_gate</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">dh_prev</span><span class="p">,</span> <span class="n">dc_prev</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    <span class="c1"># dot = dL/da2 * da2/dZ2 * dZ2/dh_prev * dh_prev/dot</span>
+    <span class="n">dot</span> <span class="o">=</span> <span class="p">(</span><span class="n">dh_prev</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;next_cs&quot;</span><span class="p">])</span>
+           <span class="o">*</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;ot&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;ot&quot;</span><span class="p">]))</span>
+    <span class="c1"># dWo = dot * dot/dWo</span>
+    <span class="n">gradients</span><span class="p">[</span><span class="s1">&#39;dWo&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dot</span><span class="p">,</span> <span class="n">concat</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="c1"># dbo = dot * dot/dbo</span>
+    <span class="n">gradients</span><span class="p">[</span><span class="s1">&#39;dbo&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dot</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># dho = dot * dot/dho</span>
+    <span class="n">dh_o</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;Wo&quot;</span><span class="p">][:,</span> <span class="p">:</span><span class="n">hidden_dim</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">dot</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dh_o</span><span class="p">,</span> <span class="n">gradients</span>  
+</pre></div>
+</div>
+<p>Define a function to calculate the gradients for the <strong>Fully Connected Layer</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bp_fc_layer</span> <span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">caches</span><span class="p">,</span> <span class="n">gradients</span><span class="p">):</span>
+    <span class="c1"># dZ2 = dL/da2 * da2/dZ2</span>
+    <span class="n">predicted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">caches</span><span class="p">[</span><span class="s1">&#39;fc_values&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;a2&#39;</span><span class="p">])</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="n">dZ2</span> <span class="o">=</span> <span class="n">predicted</span> <span class="o">-</span> <span class="n">target</span>
+    <span class="c1"># dW2 = dL/da2 * da2/dZ2 * dZ2/dW2</span>
+    <span class="n">last_hs</span> <span class="o">=</span> <span class="n">caches</span><span class="p">[</span><span class="s1">&#39;lstm_values&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;next_hs&quot;</span><span class="p">]</span>
+    <span class="n">gradients</span><span class="p">[</span><span class="s1">&#39;dW2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dZ2</span><span class="p">,</span> <span class="n">last_hs</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="c1"># db2 = dL/da2 * da2/dZ2 * dZ2/db2</span>
+    <span class="n">gradients</span><span class="p">[</span><span class="s1">&#39;db2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dZ2</span><span class="p">)</span>
+    <span class="c1"># dh_last = dZ2 * W2</span>
+    <span class="n">W2</span> <span class="o">=</span> <span class="n">caches</span><span class="p">[</span><span class="s1">&#39;fc_values&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;W2&quot;</span><span class="p">]</span>
+    <span class="n">dh_last</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W2</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">dZ2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dh_last</span><span class="p">,</span> <span class="n">gradients</span>    
+</pre></div>
+</div>
+<p>Put all these functions together to summarize the <strong>Backpropagation</strong> step for our model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">backprop</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">caches</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">time_steps</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+    
+    <span class="c1"># Initialize gradients</span>
+    <span class="n">gradients</span> <span class="o">=</span> <span class="n">initialize_grads</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+
+    <span class="c1"># Calculate gradients for the fully connected layer</span>
+    <span class="n">dh_last</span><span class="p">,</span> <span class="n">gradients</span> <span class="o">=</span> <span class="n">bp_fc_layer</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">caches</span><span class="p">,</span> <span class="n">gradients</span><span class="p">)</span>
+
+    <span class="c1"># Initialize gradients w.r.t previous hidden state and previous cell state</span>
+    <span class="n">dh_prev</span> <span class="o">=</span> <span class="n">dh_last</span>
+    <span class="n">dc_prev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">dh_prev</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+    <span class="c1"># loop back over the whole sequence</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">time_steps</span><span class="p">)):</span>
+        <span class="n">cache</span> <span class="o">=</span> <span class="n">caches</span><span class="p">[</span><span class="s1">&#39;lstm_values&#39;</span><span class="p">][</span><span class="n">t</span><span class="p">]</span>
+        
+        <span class="c1"># Input to the gates is concatenated previous hidden state and current word embedding</span>
+        <span class="n">concat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;prev_hs&quot;</span><span class="p">],</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;xt&quot;</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># Compute gates related derivatives</span>
+        <span class="c1"># Calculate derivative w.r.t the input and parameters of forget gate</span>
+        <span class="n">dh_f</span><span class="p">,</span> <span class="n">gradients</span> <span class="o">=</span> <span class="n">bp_forget_gate</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">dh_prev</span><span class="p">,</span> <span class="n">dc_prev</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+        <span class="c1"># Calculate derivative w.r.t the input and parameters of input gate</span>
+        <span class="n">dh_i</span><span class="p">,</span> <span class="n">dh_cm</span><span class="p">,</span> <span class="n">gradients</span> <span class="o">=</span> <span class="n">bp_input_gate</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">dh_prev</span><span class="p">,</span> <span class="n">dc_prev</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+        <span class="c1"># Calculate derivative w.r.t the input and parameters of output gate</span>
+        <span class="n">dh_o</span><span class="p">,</span> <span class="n">gradients</span> <span class="o">=</span> <span class="n">bp_output_gate</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">dh_prev</span><span class="p">,</span> <span class="n">dc_prev</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+        <span class="c1"># Compute derivatives w.r.t prev. hidden state and the prev. cell state</span>
+        <span class="n">dh_prev</span> <span class="o">=</span> <span class="n">dh_f</span> <span class="o">+</span> <span class="n">dh_i</span> <span class="o">+</span> <span class="n">dh_cm</span> <span class="o">+</span> <span class="n">dh_o</span>
+        <span class="n">dc_prev</span> <span class="o">=</span> <span class="p">(</span><span class="n">dc_prev</span> <span class="o">*</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;ft&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;ot&quot;</span><span class="p">]</span>
+                   <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;next_cs&quot;</span><span class="p">])))</span>
+                   <span class="o">*</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;ft&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">dh_prev</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">gradients</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="updating-the-parameters">
+<h3>Updating the Parameters<a class="headerlink" href="#updating-the-parameters" title="Permalink to this headline">¶</a></h3>
+<p>We update the parameters through an optimization algorithm called <a class="reference external" href="https://optimization.cbe.cornell.edu/index.php?title=Adam">Adam</a> which is an extension to stochastic gradient descent that has recently seen broader adoption for deep learning applications in computer vision and natural language processing. Specifically, the algorithm calculates an exponential moving average of the gradient and the squared gradient, and the parameters <code class="docutils literal notranslate"><span class="pre">beta1</span></code> and <code class="docutils literal notranslate"><span class="pre">beta2</span></code> control the decay rates of these moving averages. Adam has shown increased convergence and robustness over other gradient descent algorithms and is often recommended as the default optimizer for training.</p>
+<p>Define a function to initialise the moving averages for each parameter</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialise the moving averages</span>
+<span class="k">def</span> <span class="nf">initialise_mav</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1"># Initialize dictionaries v, s</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+        <span class="n">v</span><span class="p">[</span><span class="s1">&#39;d&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">s</span><span class="p">[</span><span class="s1">&#39;d&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="c1"># Return initialised moving averages</span>
+    <span class="k">return</span> <span class="n">v</span><span class="p">,</span> <span class="n">s</span>
+</pre></div>
+</div>
+<p>Define a function to update the parameters</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update the parameters using Adam optimization</span>
+<span class="k">def</span> <span class="nf">update_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span>
+                      <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">beta1</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">beta2</span><span class="o">=</span><span class="mf">0.999</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+        <span class="c1"># Moving average of the gradients</span>
+        <span class="n">v</span><span class="p">[</span><span class="s1">&#39;d&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta1</span> <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;d&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">]</span>
+                        <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta1</span><span class="p">)</span> <span class="o">*</span> <span class="n">gradients</span><span class="p">[</span><span class="s1">&#39;d&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">])</span>
+
+        <span class="c1"># Moving average of the squared gradients</span>
+        <span class="n">s</span><span class="p">[</span><span class="s1">&#39;d&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta2</span> <span class="o">*</span> <span class="n">s</span><span class="p">[</span><span class="s1">&#39;d&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">]</span>
+                        <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">gradients</span><span class="p">[</span><span class="s1">&#39;d&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+
+        <span class="c1"># Update parameters</span>
+        <span class="n">parameters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">-</span> <span class="n">learning_rate</span>
+                           <span class="o">*</span> <span class="n">v</span><span class="p">[</span><span class="s1">&#39;d&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s1">&#39;d&#39;</span> <span class="o">+</span> <span class="n">key</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-8</span><span class="p">))</span>
+    <span class="c1"># Return updated parameters and moving averages</span>
+    <span class="k">return</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="training-the-network">
+<h3>Training the Network<a class="headerlink" href="#training-the-network" title="Permalink to this headline">¶</a></h3>
+<p>You will start by initializing all the parameters and hyperparameters being used in your network</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hidden_dim</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">input_dim</span> <span class="o">=</span> <span class="n">emb_matrix</span><span class="p">[</span><span class="s1">&#39;memory&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="n">initialise_params</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span>
+                               <span class="n">input_dim</span><span class="p">)</span>
+<span class="n">v</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">initialise_mav</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span>
+                      <span class="n">input_dim</span><span class="p">,</span>
+                      <span class="n">parameters</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To optimize your deep learning network, you need to calculate a loss based on how well the model is doing on the training data. Loss value implies how poorly or well a model behaves after each iteration of optimization. <br>
+Define a function to calculate the loss using <a class="reference external" href="http://d2l.ai/chapter_linear-networks/softmax-regression.html?highlight=negative%20log%20likelihood#log-likelihood">negative log likelihood</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">loss_f</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+    <span class="c1"># define value of epsilon to prevent zero division error inside a log</span>
+    <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-5</span>
+    <span class="c1"># Implement formula for negative log likelihood</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span> <span class="n">Y</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">A</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">)</span>
+            <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">Y</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">A</span> <span class="o">+</span> <span class="n">epsilon</span><span class="p">))</span>
+    <span class="c1"># Return loss</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Set up the neural network’s learning experiment with a training loop and start the training process. You will also evaluate the model’s performance on the training dataset to see how well the model is <em>learning</em> and the testing dataset to see how well it is <em>generalizing</em>.</p>
+<blockquote>
+<div><p>Skip running this cell if you already have the trained parameters stored in a <code class="docutils literal notranslate"><span class="pre">npy</span></code> file</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># To store training losses</span>
+<span class="n">training_losses</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># To store testing losses</span>
+<span class="n">testing_losses</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># This is a training loop.</span>
+<span class="c1"># Run the learning experiment for a defined number of epochs (iterations).</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="c1">#################</span>
+    <span class="c1"># Training step #</span>
+    <span class="c1">#################</span>
+    <span class="n">train_j</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">sample</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+        <span class="c1"># split text sample into words/tokens</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">textproc</span><span class="o">.</span><span class="n">word_tokeniser</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+
+        <span class="c1"># Forward propagation/forward pass:</span>
+        <span class="n">caches</span> <span class="o">=</span> <span class="n">forward_prop</span><span class="p">(</span><span class="n">b</span><span class="p">,</span>
+                              <span class="n">parameters</span><span class="p">,</span>
+                              <span class="n">input_dim</span><span class="p">)</span>
+
+        <span class="c1"># Backward propagation/backward pass:</span>
+        <span class="n">gradients</span> <span class="o">=</span> <span class="n">backprop</span><span class="p">(</span><span class="n">target</span><span class="p">,</span>
+                             <span class="n">caches</span><span class="p">,</span>
+                             <span class="n">hidden_dim</span><span class="p">,</span>
+                             <span class="n">input_dim</span><span class="p">,</span>
+                             <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">),</span>
+                             <span class="n">parameters</span><span class="p">)</span>
+
+        <span class="c1"># Update the weights and biases for the LSTM and fully connected layer</span>
+        <span class="n">parameters</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">update_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span>
+                                             <span class="n">gradients</span><span class="p">,</span>
+                                             <span class="n">v</span><span class="p">,</span>
+                                             <span class="n">s</span><span class="p">,</span>
+                                             <span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">,</span>
+                                             <span class="n">beta1</span><span class="o">=</span><span class="mf">0.999</span><span class="p">,</span>
+                                             <span class="n">beta2</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+
+        <span class="c1"># Measure the training error (loss function) between the actual</span>
+        <span class="c1"># sentiment (the truth) and the prediction by the model.</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">caches</span><span class="p">[</span><span class="s1">&#39;fc_values&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;a2&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_f</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="c1"># Store training set losses</span>
+        <span class="n">train_j</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+
+    <span class="c1">###################</span>
+    <span class="c1"># Evaluation step #</span>
+    <span class="c1">###################</span>
+    <span class="n">test_j</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">sample</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">):</span>
+        <span class="c1"># split text sample into words/tokens</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">textproc</span><span class="o">.</span><span class="n">word_tokeniser</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+
+        <span class="c1"># Forward propagation/forward pass:</span>
+        <span class="n">caches</span> <span class="o">=</span> <span class="n">forward_prop</span><span class="p">(</span><span class="n">b</span><span class="p">,</span>
+                              <span class="n">parameters</span><span class="p">,</span>
+                              <span class="n">input_dim</span><span class="p">)</span>
+
+        <span class="c1"># Measure the testing error (loss function) between the actual</span>
+        <span class="c1"># sentiment (the truth) and the prediction by the model.</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">caches</span><span class="p">[</span><span class="s1">&#39;fc_values&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;a2&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_f</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+        <span class="c1"># Store testing set losses</span>
+        <span class="n">test_j</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+
+    <span class="c1"># Calculate average of training and testing losses for one epoch</span>
+    <span class="n">mean_train_cost</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">train_j</span><span class="p">)</span>
+    <span class="n">mean_test_cost</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">test_j</span><span class="p">)</span>
+    <span class="n">training_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_train_cost</span><span class="p">)</span>
+    <span class="n">testing_losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mean_test_cost</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Epoch </span><span class="si">{}</span><span class="s1"> finished. </span><span class="se">\t</span><span class="s1">  Training Loss : </span><span class="si">{}</span><span class="s1"> </span><span class="se">\t</span><span class="s1">  Testing Loss : </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span>
+          <span class="nb">format</span><span class="p">(</span><span class="n">epoch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mean_train_cost</span><span class="p">,</span> <span class="n">mean_test_cost</span><span class="p">))</span>
+
+<span class="c1"># save the trained parameters to a npy file</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;tutorial-nlp-from-scratch/parameters.npy&#39;</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is a good practice to plot the training and testing losses as the learning curves are often helpful in diagnosing the behavior of a Machine Learning model.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="c1"># plot the training loss</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">training_losses</span><span class="p">)),</span> <span class="n">training_losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;training loss&#39;</span><span class="p">)</span>
+<span class="c1"># plot the testing loss</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">testing_losses</span><span class="p">)),</span> <span class="n">testing_losses</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;testing loss&#39;</span><span class="p">)</span>
+
+<span class="c1"># set the x and y labels</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;epochs&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;loss&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;labels&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sentiment-analysis-on-the-speech-data">
+<h3>Sentiment Analysis on the Speech Data<a class="headerlink" href="#sentiment-analysis-on-the-speech-data" title="Permalink to this headline">¶</a></h3>
+<p>Once your model is trained, you can use the updated parameters to start making our predictions. You can break each speech into paragraphs of uniform size before passing them to the Deep Learning model and predicting the sentiment of each paragraph</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># To store predicted sentiments</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># define the length of a paragraph</span>
+<span class="n">para_len</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Retrieve trained values of the parameters</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;tutorial-nlp-from-scratch/parameters.npy&#39;</span><span class="p">):</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;tutorial-nlp-from-scratch/parameters.npy&#39;</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+<span class="c1"># This is the prediction loop.</span>
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">text</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">X_pred</span><span class="p">):</span>
+    <span class="c1"># split each speech into paragraphs</span>
+    <span class="n">paras</span> <span class="o">=</span> <span class="n">textproc</span><span class="o">.</span><span class="n">text_to_paras</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">para_len</span><span class="p">)</span>
+    <span class="c1"># To store the network outputs</span>
+    <span class="n">preds</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">para</span> <span class="ow">in</span> <span class="n">paras</span><span class="p">:</span>
+        <span class="c1"># split text sample into words/tokens</span>
+        <span class="n">para_tokens</span> <span class="o">=</span> <span class="n">textproc</span><span class="o">.</span><span class="n">word_tokeniser</span><span class="p">(</span><span class="n">para</span><span class="p">)</span>
+        <span class="c1"># Forward Propagation</span>
+        <span class="n">caches</span> <span class="o">=</span> <span class="n">forward_prop</span><span class="p">(</span><span class="n">para_tokens</span><span class="p">,</span>
+                              <span class="n">parameters</span><span class="p">,</span>
+                              <span class="n">input_dim</span><span class="p">)</span>
+
+        <span class="c1"># Retrieve the output of the fully connected layer</span>
+        <span class="n">sent_prob</span> <span class="o">=</span> <span class="n">caches</span><span class="p">[</span><span class="s1">&#39;fc_values&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;a2&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">preds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sent_prob</span><span class="p">)</span>
+
+    <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">preds</span><span class="p">)</span>
+    <span class="c1"># Mark all predictions &gt; threshold as positive and &lt; threshold as negative</span>
+    <span class="n">pos_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">preds</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)</span>  <span class="c1"># indices where output &gt; 0.5</span>
+    <span class="n">neg_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">preds</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">)</span>  <span class="c1"># indices where output &lt; 0.5</span>
+    <span class="c1"># Store predictions and corresponding piece of text</span>
+    <span class="n">predictions</span><span class="p">[</span><span class="n">speakers</span><span class="p">[</span><span class="n">index</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;pos_paras&#39;</span><span class="p">:</span> <span class="n">paras</span><span class="p">[</span><span class="n">pos_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+                                    <span class="s1">&#39;neg_paras&#39;</span><span class="p">:</span> <span class="n">paras</span><span class="p">[</span><span class="n">neg_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]]}</span>
+</pre></div>
+</div>
+<p>Visualizing the sentiment predictions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x_axis</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;positive sentiment&#39;</span><span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;negative sentiment&#39;</span><span class="p">:</span> <span class="p">[]}</span>
+<span class="k">for</span> <span class="n">speaker</span> <span class="ow">in</span> <span class="n">predictions</span><span class="p">:</span>
+    <span class="c1"># The speakers will be used to label the x-axis in our plot</span>
+    <span class="n">x_axis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">speaker</span><span class="p">)</span>
+    <span class="c1"># number of paras with positive sentiment</span>
+    <span class="n">no_pos_paras</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="n">speaker</span><span class="p">][</span><span class="s1">&#39;pos_paras&#39;</span><span class="p">])</span>
+    <span class="c1"># number of paras with negative sentiment</span>
+    <span class="n">no_neg_paras</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">predictions</span><span class="p">[</span><span class="n">speaker</span><span class="p">][</span><span class="s1">&#39;neg_paras&#39;</span><span class="p">])</span>
+    <span class="c1"># Obtain percentage of paragraphs with positive predicted sentiment</span>
+    <span class="n">pos_perc</span> <span class="o">=</span> <span class="n">no_pos_paras</span> <span class="o">/</span> <span class="p">(</span><span class="n">no_pos_paras</span> <span class="o">+</span> <span class="n">no_neg_paras</span><span class="p">)</span>
+    <span class="c1"># Store positive and negative percentages</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;positive sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pos_perc</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">data</span><span class="p">[</span><span class="s1">&#39;negative sentiment&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">pos_perc</span><span class="p">))</span>
+
+<span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Index</span><span class="p">(</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;speaker&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;percentage&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;labels&#39;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In the plot above, you’re shown what percentages of each speech are expected to carry a positive and negative  sentiment. Since this implementation prioritized simplicity and clarity over performance, we cannot expect these results to be very accurate. Moreover, while making the sentiment predictions for one paragraph we did not use the neighboring paragraphs for context which would have led to more accurate predictions. We encourage the reader to play around with the model and make some tweaks suggested in <code class="docutils literal notranslate"><span class="pre">Next</span> <span class="pre">Steps</span></code> and observe how the model performance changes.</p>
+</div>
+</div>
+<div class="section" id="looking-at-our-neural-network-from-an-ethical-perspective">
+<h2>Looking at our Neural Network from an ethical perspective<a class="headerlink" href="#looking-at-our-neural-network-from-an-ethical-perspective" title="Permalink to this headline">¶</a></h2>
+<!-- #region -->
+<p>It’s crucial to understand that accurately identifying a text’s sentiment is not easy primarily because of the complex ways in which humans express sentiment, using irony, sarcasm, humor, or, in social media, abbreviation. Moreover neatly placing text into two categories: ‘positive’ and ‘negative’ can be problematic because it is being done without any context. Words or abbreviations can convey very different sentiments depending on age and location, none of which we took into account while building our model.</p>
+<p>Along with data, there are also growing concerns that data processing algorithms are influencing policy and daily lives in ways that are not transparent and introduce biases. Certain biases such as the <a class="reference external" href="https://bit.ly/2WtTKIe">Inductive Bias</a> are essential to help a Machine Learning model generalize better, for example the LSTM we built earlier is biased towards preserving contextual information over long sequences which makes it so suitable for processing sequential data. The problem arises when <a class="reference external" href="https://hbr.org/2019/10/what-do-we-do-about-the-biases-in-ai">societal biases</a> creep into algorithmic predictions. Optimizing Machine algorithms via methods like <a class="reference external" href="https://en.wikipedia.org/wiki/Hyperparameter_optimization">hyperparameter tuning</a> can then further amplify these biases by learning every bit of information in the data.</p>
+<p>There are also cases where bias is only in the output and not the inputs (data, algorithm). For example, in sentiment analysis <a class="reference external" href="https://doi.org/10.3390/electronics9020374">accuracy tends to be higher on female-authored texts than on male-authored ones</a>. End users of sentiment analysis should be aware that its small gender biases can affect the conclusions drawn from it and apply correction factors when necessary. Hence, it is important that demands for algorithmic accountability should include the ability to test the outputs of a system, including the ability to drill down into different user groups by gender, ethnicity and other characteristics, to identify, and hopefully suggest corrections for, system output biases.</p>
+<!-- #endregion -->
+</div>
+<div class="section" id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>You have learned how to build and train a simple Long Short Term Memory network from scratch using just NumPy to perform sentiment analysis.</p>
+<p>To further enhance and optimize your neural network model, you can consider one of a mixture of the following:</p>
+<ul class="simple">
+<li><p>Alter the architecture by introducing multiple LSTM layers to make the network deeper.</p></li>
+<li><p>Use a higher epoch size to train longer and add more regularization techniques, such as early stopping, to prevent overfitting.</p></li>
+<li><p>Introduce a validation set for an unbiased evaluation of the model fit.</p></li>
+<li><p>Apply batch normalization for faster and more stable training.</p></li>
+<li><p>Tune other parameters, such as the learning rate and hidden layer size.</p></li>
+<li><p>Initialize weights using <a class="reference external" href="https://d2l.ai/chapter_multilayer-perceptrons/numerical-stability-and-init.html#xavier-initialization">Xavier Initialization</a> to prevent vanishing/exploding gradients instead of initializing them randomly.</p></li>
+<li><p>Replace LSTM with a <a class="reference external" href="https://en.wikipedia.org/wiki/Bidirectional_recurrent_neural_networks">Bidirectional LSTM</a> to use both left and right context for predicting sentiment.</p></li>
+</ul>
+<p>Nowadays, LSTMs have been replaced by the <a class="reference external" href="https://jalammar.github.io/illustrated-transformer/">Transformer</a>( which uses <a class="reference external" href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Attention</a> to tackle all the problems that plague an LSTM such as as lack of <a class="reference external" href="https://en.wikipedia.org/wiki/Transfer_learning">transfer learning</a>, lack of <a class="reference external" href="https://web.stanford.edu/~rezab/classes/cme323/S16/projects_reports/hedge_usmani.pdf">parallel training</a> and a long gradient chain for lengthy sequences</p>
+<p>Building a neural network from scratch with NumPy is a great way to learn more about NumPy and about deep learning. However, for real-world applications you should use specialized frameworks — such as PyTorch, JAX, TensorFlow or MXNet — that provide NumPy-like APIs, have built-in automatic differentiation and GPU support, and are designed for high-performance numerical computing and machine learning.</p>
+<p>Finally, to know more about how ethics come into play when developing a machine learning model, you can refer to the following resources :</p>
+<ul class="simple">
+<li><p>Data ethics resources by the Turing Institute. https://www.turing.ac.uk/research/data-ethics</p></li>
+<li><p>Considering how artificial intelligence shifts power, an <a class="reference external" href="https://www.nature.com/articles/d41586-020-02003-2">article</a> and <a class="reference external" href="https://slideslive.com/38923453/the-values-of-machine-learning">talk</a> by Pratyusha Kalluri</p></li>
+<li><p>More ethics resources on <a class="reference external" href="https://www.fast.ai/2018/09/24/ai-ethics-resources/">this blog post</a> by Rachel Thomas and the <a class="reference external" href="https://www.radicalai.org/">Radical AI podcast</a></p></li>
+</ul>
+</div>
+</div>
+
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Deep reinforcement learning with Pong from pixels</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="tutorial-x-ray-image-processing.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">X-ray image processing</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By the NumPy community<br/>
+        
+            &copy; Copyright 2020, the NumPy community.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
