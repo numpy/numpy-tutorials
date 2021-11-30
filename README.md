@@ -24,6 +24,7 @@ or navigate to any of the documents listed below and download it individually.
 7. [Tutorial: Masked Arrays](content/tutorial-ma.md)
 8. [Tutorial: Static Equilibrium](content/tutorial-static_equilibrium.md)
 9. [Tutorial: Plotting Fractals](content/tutorial-plotting-fractals.ipynb)
+10. [Tutorial: NumPy natural language processing from scratch with a focus on ethics](content/tutorial-nlp-from-scratch.md)
 
 
 ## Contributing
