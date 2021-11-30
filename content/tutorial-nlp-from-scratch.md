@@ -430,7 +430,7 @@ emb_path = textproc.unzipper(glove, 'glove.6B.300d.txt')
 emb_matrix = textproc.loadGloveModel(emb_path)
 ```
 
-### 3. Build the Deep Learning Model¶
+## 3. Build the Deep Learning Model¶
  It is time to start implementing our LSTM! You will have to first familiarize yourself with some high-level concepts of the basic building blocks of a deep learning model. You can refer to the [Deep learning on MNIST from scratch tutorial](https://numpy.org/numpy-tutorials/content/tutorial-deep-learning-on-mnist.html) for the same. 
 
 You will then learn how a Recurrent Neural Network differs from a plain Neural Network and what makes it so suitable for processing sequential data. Afterwards, you will construct the building blocks of a simple deep learning model in Python and NumPy and train it to learn to classify the sentiment of a piece of text as positive or negative with a certain level of accuracy
@@ -1013,7 +1013,7 @@ plt.show()
 In the plot above, you're shown what percentages of each speech are expected to carry a positive and negative  sentiment. Since this implementation prioritized simplicity and clarity over performance, we cannot expect these results to be very accurate. Moreover, while making the sentiment predictions for one paragraph we did not use the neighboring paragraphs for context which would have led to more accurate predictions. We encourage the reader to play around with the model and make some tweaks suggested in `Next Steps` and observe how the model performance changes.
 
 
-### Looking at our Neural Network from an ethical perspective
+## Looking at our Neural Network from an ethical perspective
 
 <!-- #region -->
 It's crucial to understand that accurately identifying a text's sentiment is not easy primarily because of the complex ways in which humans express sentiment, using irony, sarcasm, humor, or, in social media, abbreviation. Moreover neatly placing text into two categories: 'positive' and 'negative' can be problematic because it is being done without any context. Words or abbreviations can convey very different sentiments depending on age and location, none of which we took into account while building our model.
@@ -1024,7 +1024,7 @@ Along with data, there are also growing concerns that data processing algorithms
 There are also cases where bias is only in the output and not the inputs (data, algorithm). For example, in sentiment analysis [accuracy tends to be higher on female-authored texts than on male-authored ones]( https://doi.org/10.3390/electronics9020374). End users of sentiment analysis should be aware that its small gender biases can affect the conclusions drawn from it and apply correction factors when necessary. Hence, it is important that demands for algorithmic accountability should include the ability to test the outputs of a system, including the ability to drill down into different user groups by gender, ethnicity and other characteristics, to identify, and hopefully suggest corrections for, system output biases.
 <!-- #endregion -->
 
-### Next Steps
+## Next Steps
 
 
 You have learned how to build and train a simple Long Short Term Memory network from scratch using just NumPy to perform sentiment analysis.
