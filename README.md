@@ -155,6 +155,11 @@ cd site
 make html
 ```
 
+## Translations
+
+While we don't have the capacity to translate and maintain translated versions
+of these tutorials, you are free to use and translate them to other languages.
+
 ## Useful links and resources
 
 The following links may be useful:
