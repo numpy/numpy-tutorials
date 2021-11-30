@@ -14,4 +14,4 @@ dependencies:
   - pooch
   - pip:
     - jupyter-book
-    - gym[atari]
+    - gym[atari]==0.19

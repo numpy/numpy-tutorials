@@ -6,14 +6,14 @@ jobs:
   build-docs:
     working_directory: ~/repo
     docker:
-      - image: circleci/python:3.8.5-buster
+      - image: cimg/python:3.8
 
     steps:
       - checkout
 
       - run:
           name: Install deps for building atari-py
-          command: sudo apt-get install -y cmake ffmpeg
+          command: sudo apt-get update && sudo apt-get install -y cmake ffmpeg
 
       - run:
           name: Install Python dependencies
