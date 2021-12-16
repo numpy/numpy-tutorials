@@ -55,7 +55,7 @@ Let's start by importing the necessary libraries into our environment.
 
 ```{code-cell} ipython3
 import numpy as np
-from scipy.stats import t
+from scipy import stats
 import matplotlib.pyplot as plt
 
 %matplotlib inline
@@ -85,13 +85,11 @@ print(pollutants_B.shape)
 Our dataset might contain missing values, denoted by `NaN`, so let's do a quick check with [np.isnan](https://numpy.org/devdocs/reference/generated/numpy.isnan.html).
 
 ```{code-cell} ipython3
-# check for missing values
-
 print(np.where(np.isnan(pollutants_A) == True))
 print(np.where(np.isnan(pollutants_B) == True))
 ```
 
-We have successfully imported the data and it is complete. Let's move on to the AQI calculations!
+We have successfully imported the data and checked that it is complete. Let's move on to the AQI calculations!
 
 +++
 
@@ -119,8 +117,27 @@ $Ip = \dfrac{\text{IHi – ILo}}{\text{BPHi – BPLo}}\cdot{\text{Cp – BPLo}} 
 - The maximum sub-index at any given time is the Air Quality Index.
     
 The Air Quality Index is calculated with the help of breakpoint ranges as shown in the chart below.
-![Chart of the breakpoint ranges](../_static/10-breakpoints.png)
+![Chart of the breakpoint ranges](_static/10-breakpoints.png)
+*Source: SAFAR-INDIA*
 
+
+Let's create two arrays to store the breakpoints so that we can use them later for our calculations.
+
+```{code-cell} ipython3
+AQI = np.array([0, 51, 101, 201, 301, 401, 501])
+
+breakpoints = {
+    'PM2.5': np.array([0, 31, 61, 91, 121, 251]),
+    'PM10': np.array([0, 51, 101, 251, 351, 431]),
+    'NO2': np.array([0, 41, 81, 181, 281, 401]),
+    'NH3': np.array([0, 201, 401, 801, 1201, 1801]),
+    'SO2': np.array([0, 41, 81, 381, 801, 1601]),
+    'CO': np.array([0, 1.1, 2.1, 10.1, 17.1, 35]),
+    'O3': np.array([0, 51, 101, 169, 209, 749])
+}
+```
+
+### Moving averages
 
 For the first step, we have to compute [moving averages](https://en.wikipedia.org/wiki/Moving_average) for `pollutants_A` over a window of 24 hours and `pollutants_B` over a
 window of 8 hours. We will write a simple function `moving_mean` using [np.cumsum](https://numpy.org/devdocs/reference/generated/numpy.cumsum.html) and [sliced indexing](https://numpy.org/devdocs/user/basics.indexing.html#slicing-and-striding) to achieve this.
@@ -145,22 +162,12 @@ Now we can join both sets with [np.concatenate](https://numpy.org/devdocs/refere
 pollutants = np.concatenate((pollutants_A_24hr_avg, pollutants_B_8hr_avg), axis=1)
 ```
 
+### Sub-indices
+
 The subindices for each pollutant are calculated according to the standard breakpoints. The final AQI is the maximum subindex for that row.
 
 ```{code-cell} ipython3
 # Calculate sub_indices
-
-AQI = np.array([0, 51, 101, 201, 301, 401, 501])
-
-breakpoints = {
-    'PM2.5': np.array([0, 31, 61, 91, 121, 251]),
-    'PM10': np.array([0, 51, 101, 251, 351, 431]),
-    'NO2': np.array([0, 41, 81, 181, 281, 401]),
-    'NH3': np.array([0, 201, 401, 801, 1201, 1801]),
-    'SO2': np.array([0, 41, 81, 381, 801, 1601]),
-    'CO': np.array([0, 1.1, 2.1, 10.1, 17.1, 35]),
-    'O3': np.array([0, 51, 101, 169, 209, 749])
-}
 
 def compute_indices(pol, con):
     bp = breakpoints[pol]
@@ -205,13 +212,19 @@ def compute_indices(pol, con):
         print("Cc out of range!")
         
     return ((Ih - Il) / (Bh - Bl)) * (con - Bl) + Il
+```
 
-# vectorize the function
+We will use [np.vectorize](https://numpy.org/devdocs/reference/generated/numpy.vectorize.html) to apply vectorization to our function. This simply means we don't have loop over each each element
+of the array ourselves. [Vectorization](https://numpy.org/devdocs/user/whatisnumpy.html#why-is-numpy-fast) is one of the key advantages of NumPy.
 
+```{code-cell} ipython3
 vcompute_indices = np.vectorize(compute_indices)
+```
 
-# calculate sub_indices
+By calling our vectorized function `vcompute_indices` for each pollutant, we get the sub-indices. Using [np.amax], we find out
+the maximum sub-index for each period, which is our Air Quality Index!
 
+```{code-cell} ipython3
 # figure out what is wrong with CO
 
 sub_indices = np.stack((vcompute_indices('PM2.5', pollutants[..., 0]),
@@ -221,9 +234,14 @@ sub_indices = np.stack((vcompute_indices('PM2.5', pollutants[..., 0]),
                         vcompute_indices('SO2', pollutants[..., 4]),
                         vcompute_indices('O3', pollutants[..., 6])), axis=1)
 
-# calculate AQIs
-
 aqi_array = np.amax(sub_indices, axis=1)
+```
+
+With this we have the air quality index for every hour from 01/06/2019 to 30/06/2020. Note that even though we started out with
+the data from 31st May, we truncated that during the moving averages step. Have a look at the AQIs.
+
+```{code-cell} ipython3
+print(aqi_array[:10])
 ```
 
 ## Paired t-test on the AQIs
@@ -248,6 +266,20 @@ before_lock = aqi_array[np.where(datetime <= np.datetime64('2020-03-21T00'))][-(
 
 print(after_lock.shape)
 print(before_lock.shape)
+```
+
+```{code-cell} ipython3
+# plot the pdf
+
+_ = plt.hist(after_lock, bins='auto', density=True) 
+```
+
+```{code-cell} ipython3
+hist_dist = stats.rv_histogram(hist)
+```
+
+```{code-cell} ipython3
+plt.plot(after_lock, stats.norm.pdf(after_lock), label='PDF')
 ```
 
 We want to determine if the lockdown had any effect on the AQI in Delhi. Let's consider the null hypothesis as "There was no effect of the lockdown on AQI." Our corresponding alternative hypothesis will be "The lockdown had an effect on the AQI and
@@ -276,7 +308,12 @@ print("The t value is {} and the p value is {}.".format(t_value, p_value))
 
 ## What do the t and p values mean?
 
-Since our p value is less than alpha i.e., 0.05, we can reject our null hypothesis.
+The test-statistics are compared with the critical values, which are calculated according to our level of significance, denoted by $\alpha$. If we perform our test at a confidence level of 95%, the significance level is 5% or 0.05. The `p value` is the probablity of observing the two data samples on the basis of the null hypothesis. If our `p value` is less than the significance level,
+i.e., 0.05, we can reject the null hypothesis.
+
+We can keep increasing the significance level as suitable for our study. Here, we'll use the [5-sigma](https://www.zmescience.com/science/what-5-sigma-means-0423423/) significance level. Here, $\alpha = 3 * {10^-7}$.
+
+Since our `p value` is less than $\alpha$, we can safely reject the null hypothesis and fail to reject our alternative hypothesis. It simply means that our data does not provide enough evidence that our alternative hypothesis is improbable.
 
 +++
 
@@ -288,3 +325,10 @@ Since our p value is less than alpha i.e., 0.05, we can reject our null hypothes
 
 - As our population was large enough we could do a t-test which is used for normal distributions. There are better tests
 for non-normal data like the [Wilcoxon test](https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test).
+
+## Further reading
+
+- There are a host of statistical tests you can choose according to the characteristics of the given data. Read more about them
+[here](https://machinelearningmastery.com/statistical-data-distributions/).
+
+-
