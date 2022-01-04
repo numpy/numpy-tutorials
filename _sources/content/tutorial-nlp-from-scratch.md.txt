@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.4
+      jupytext_version: 1.11.5
   kernelspec:
     display_name: Python 3 (ipykernel)
     language: python
@@ -23,14 +23,14 @@ Your deep learning model (the LSTM) is a form of a Recurrent Neural Network and 
 Today, Deep Learning is getting adopted in everyday life and now it is more important to ensure that decisions that have been taken using AI are not reflecting discriminatory behavior towards a set of populations. It is important to take fairness into consideration while consuming the output from AI. Throughout the tutorial we'll try to question all the steps in our pipeline from an ethics point of view.
 
 
-## Prerequisites 
+## Prerequisites
 
 You are expected to be familiar with the Python programming language and array manipulation with NumPy. In addition, some understanding of Linear Algebra and Calculus is recommended. You should also be familiar with how Neural Networks work. For reference, you can visit the [Python](https://docs.python.org/dev/tutorial/index.html), [Linear algebra on n-dimensional arrays](https://numpy.org/doc/stable/user/tutorial-svd.html) and [Calculus](https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/multivariable-calculus.html) tutorials.
 
 To get a refresher on Deep Learning basics, You should consider reading [the d2l.ai book](https://d2l.ai/chapter_recurrent-neural-networks/index.html), which is an interactive deep learning book with multi-framework code, math, and discussions. You can also go through the [Deep learning on MNIST from scratch tutorial](https://numpy.org/numpy-tutorials/content/tutorial-deep-learning-on-mnist.html) to understand how a basic neural network is implemented from scratch.
 
 In addition to NumPy, you will be utilizing the following Python standard modules for data loading and processing:
-- [`pandas`](https://pandas.pydata.org/docs/) for handling dataframes 
+- [`pandas`](https://pandas.pydata.org/docs/) for handling dataframes
 - [`Matplotlib`](https://matplotlib.org/) for data visualization
 - [`pooch`](https://www.fatiando.org/pooch/latest/https://www.fatiando.org/pooch/latest/) to download and cache datasets
 
@@ -39,13 +39,13 @@ This tutorial can be run locally in an isolated environment, such as [Virtualenv
 
 ## Table of contents
 
-1. Data Collection 
+1. Data Collection
 
 2. Preprocess the datasets
 
 3. Build and train a LSTM network from scratch
 
-4. Perform sentiment analysis on collected speeches 
+4. Perform sentiment analysis on collected speeches
 
 5. Next steps
 
@@ -105,24 +105,26 @@ We made sure to include different demographics in our data and included a range 
  >The GloVe word embeddings include sets that were trained on billions of tokens, some up to 840 billion tokens. These algorithms exhibit stereotypical biases, such as gender bias which can be traced back to the original training data. For example certain occupations seem to be more biased towards a particular gender, reinforcing problematic stereotypes. The nearest solution to this problem are some de-biasing algorithms as the one presented in https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1184/reports/6835575.pdf which one can use on embeddings of their choice to mitigate bias, if present.
 <!-- #endregion -->
 
-You'll start with importing the necessary packages to build our Deep Learning network
+You'll start with importing the necessary packages to build our Deep Learning network.
 
-```python tags=[]
-# Importing the necessary packages 
-import numpy as np 
-import pandas as pd 
-import matplotlib.pyplot as plt 
+```python
+# Importing the necessary packages
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 import pooch
 import string
-import re 
-import zipfile 
+import re
+import zipfile
 import os
 ```
 
-```python tags=["hide-input"]
+Next, you'll define set of text preprocessing helper functions.
+
+```python
 class TextPreprocess:
     """Text Preprocessing for a Natural Language Processing model."""
-    
+
     def txt_to_df(self, file):
         """Function to convert a txt file to pandas dataframe.
 
@@ -133,7 +135,7 @@ class TextPreprocess:
 
         Returns
         -------
-        Pandas dataframe 
+        Pandas dataframe
             txt file converted to a dataframe.
 
         """
@@ -145,8 +147,8 @@ class TextPreprocess:
                 reviews[lines[1]] = float(lines[0])
         df = pd.DataFrame(reviews.items(), columns=['review', 'sentiment'])
         df = df.sample(frac=1).reset_index(drop=True)
-        return df 
-        
+        return df
+
     def unzipper(self, zipped, to_extract):
         """Function to extract a file from a zipped folder.
 
@@ -154,13 +156,13 @@ class TextPreprocess:
         ----------
         zipped : str
             Path to the zipped folder.
-            
+
         to_extract: str
             Path to the file to be extracted from the zipped folder
 
         Returns
         -------
-        str 
+        str
             Path to the extracted file.
 
         """
@@ -266,7 +268,7 @@ class TextPreprocess:
 
         Returns
         -------
-        list 
+        list
             sentences with punctuation removed.
 
         """
@@ -299,7 +301,7 @@ class TextPreprocess:
 
         Returns
         -------
-        Dict 
+        Dict
             mapping from word to corresponding word embedding.
 
         """
@@ -328,7 +330,7 @@ class TextPreprocess:
 
         Returns
         -------
-        list 
+        list
             paragraphs of specified length.
 
         """
@@ -350,14 +352,14 @@ class TextPreprocess:
 
 ```python
 data = pooch.create(
-    # folder where the data will be stored in the 
-    # default cache folder of your Operating System 
+    # folder where the data will be stored in the
+    # default cache folder of your Operating System
     path=pooch.os_cache("numpy-nlp-tutorial"),
     # Base URL of the remote data store
     base_url="",
     # The cache file registry. A dictionary with all files managed by this pooch.
     # The keys are the file names and values are their respective hash codes which
-    # ensure we download the same, uncorrupted file each time. 
+    # ensure we download the same, uncorrupted file each time.
     registry={
         "imdb_train.txt": "6a38ea6ab5e1902cc03f6b9294ceea5e8ab985af991f35bcabd301a08ea5b3f0",
          "imdb_test.txt": "7363ef08ad996bf4233b115008d6d7f9814b7cc0f4d13ab570b938701eadefeb",
@@ -444,12 +446,11 @@ Unlike an MLP, the RNN was designed to work with sequence prediction problems.RN
 The problem with an RNN however, is that it cannot retain long-term memory because the influence of a given input on the hidden layer, and therefore on the network output, either decays or blows up exponentially as it cycles around the network’s recurrent connections. This shortcoming is referred to as the vanishing gradient problem. Long Short-Term Memory (LSTM) is an RNN architecture specifically designed to address the [vanishing gradient problem](https://en.wikipedia.org/wiki/Vanishing_gradient_problem).
 
 
-### Overview of the Model Architecture 
+### Overview of the Model Architecture
 
-<img src="_static/lstm.gif" width="900" align="center">
+![Overview of the model architecture, showing a series of animated boxes. There are five identical boxes labeled A and receiving as input one of the words in the phrase "life's a box of chocolates". Each box is highlighted in turn, representing the memory blocks of the LSTM network as information passes through them, ultimately reaching a "Positive" output value.](_static/lstm.gif)
 
-
-In the above gif, The rectangles labeled $A$ are called `Cells` and they are the **Memory Blocks** of our LSTM network. They are responsible for choosing what to remember in a sequence and pass on that information to the next cell via two states called the `hidden state` $H_{t}$ and the `cell state` $C_{t}$ where $t$ indicates the time-step. Each `Cell` has dedicated gates which are responsible for storing, writing or reading the information passed to an LSTM. You will now look closely at the architecture of the network by implementing each mechanism happening inside of it. 
+In the above gif, the rectangles labeled $A$ are called `Cells` and they are the **Memory Blocks** of our LSTM network. They are responsible for choosing what to remember in a sequence and pass on that information to the next cell via two states called the `hidden state` $H_{t}$ and the `cell state` $C_{t}$ where $t$ indicates the time-step. Each `Cell` has dedicated gates which are responsible for storing, writing or reading the information passed to an LSTM. You will now look closely at the architecture of the network by implementing each mechanism happening inside of it.
 
 
 Lets start with writing a function to randomly initialize the parameters which will be learned while our model trains
@@ -513,7 +514,7 @@ The **Forget Gate** takes the current word embedding and the previous hidden sta
 def fp_forget_gate(concat, parameters):
     ft = sigmoid(np.dot(parameters['Wf'], concat)
                  + parameters['bf'])
-    return ft  
+    return ft
 ```
 
 The **Input Gate** takes the current word embedding and the previous hidden state concatenated together as input. and governs how much of the new data we take into account via the **Candidate Memory Gate** which utilizes the [Tanh](https://d2l.ai/chapter_multilayer-perceptrons/mlp.html?highlight=tanh#tanh-function) to regulate the values flowing through the network.
@@ -524,7 +525,7 @@ def fp_input_gate(concat, parameters):
                  + parameters['bi'])
     cmt = np.tanh(np.dot(parameters['Wcm'], concat)
                   + parameters['bcm'])
-    return it, cmt 
+    return it, cmt
 ```
 
 Finally we have the **Output Gate** which takes information from the current word embedding, previous hidden state and the cell state which has been updated with information from the forget and input gates to update the value of the hidden state.
@@ -540,10 +541,10 @@ def fp_output_gate(concat, next_cs, parameters):
 The following image summarizes each gate mechanism in the memory block of a LSTM network:
 >Image has been modified from [this](https://link.springer.com/chapter/10.1007%2F978-3-030-14524-8_11) source
 
-<img src="_static/mem_block.png" width="800" align="center">
-
+![Diagram showing three sections of a memory block, labeled "Forget gate", "Input gate" and "Output gate". Each gate contains several subparts, representing the operations performed at that stage of the process.](_static/mem_block.png)
 
 ### But how do you obtain sentiment from the LSTM's output?
+
 The hidden state you obtain from the output gate of the last memory block in a sequence is considered to be a representation of all the information contained in a sequence. To classify this information into various classes (2 in our case, positive and negative) we use a **Fully Connected layer** which firstly maps this information to a predefined output size (1 in our case). Then, an activation function such as the sigmoid converts this output to a value between 0 and 1. We'll consider values greater than 0.5 to be indicative of a positive sentiment.
 
 ```python
@@ -551,7 +552,7 @@ def fp_fc_layer(last_hs, parameters):
     z2 = (np.dot(parameters['W2'], last_hs)
           + parameters['b2'])
     a2 = sigmoid(z2)
-    return a2 
+    return a2
 ```
 
 Now you will put all these functions together to summarize the **Forward Propagation** step in our model architecture:
@@ -579,22 +580,22 @@ def forward_prop(X_vec, parameters, input_dim):
 
         # Input to the gates is concatenated previous hidden state and current word embedding
         concat = np.vstack((prev_hs, xt))
- 
+
         # Calculate output of the forget gate
         ft = fp_forget_gate(concat, parameters)
 
         # Calculate output of the input gate
         it, cmt = fp_input_gate(concat, parameters)
-        io = it * cmt   
-        
-        # Update the cell state 
+        io = it * cmt
+
+        # Update the cell state
         next_cs = (ft * prev_cs) + io
-        
+
         # Calculate output of the output gate
         ot, next_hs = fp_output_gate(concat, next_cs, parameters)
 
         # store all the values used and calculated by
-        # the LSTM in a cache for backward propagation. 
+        # the LSTM in a cache for backward propagation.
         lstm_cache = {
         "next_hs": next_hs,
         "next_cs": next_cs,
@@ -612,12 +613,12 @@ def forward_prop(X_vec, parameters, input_dim):
         prev_hs = next_hs
         prev_cs = next_cs
 
-    # Pass the LSTM output through a fully connected layer to 
-    # obtain probability of the sequence being positive 
+    # Pass the LSTM output through a fully connected layer to
+    # obtain probability of the sequence being positive
     a2 = fp_fc_layer(next_hs, parameters)
 
     # store all the values used and calculated by the
-    # fully connected layer in a cache for backward propagation. 
+    # fully connected layer in a cache for backward propagation.
     fc_cache = {
     "a2" : a2,
     "W2" : parameters['W2']
@@ -642,7 +643,7 @@ def initialize_grads(parameters):
     return grads
 ```
 
-Now, for each gate and the fully connected layer, we define a function to calculate the gradient of the loss with respect to the input passed and the parameters used. To understand the mathematics behind how the derivatives were calculated we suggest you to follow this helpful [blog](https://christinakouridi.blog/2019/06/19/backpropagation-lstm/) by Christina Kouridi
+Now, for each gate and the fully connected layer, we define a function to calculate the gradient of the loss with respect to the input passed and the parameters used. To understand the mathematics behind how the derivatives were calculated we suggest you to follow this helpful [blog](https://christinakouridi.blog/2019/06/19/backpropagation-lstm/) by Christina Kouridi.
 
 
 Define a function to calculate the gradients in the **Forget Gate**:
@@ -659,7 +660,7 @@ def bp_forget_gate(hidden_dim, concat, dh_prev, dc_prev, cache, gradients, param
     gradients['dbf'] += np.sum(dft, axis=1, keepdims=True)
     # dh_f = dft * dft/dh_prev
     dh_f = np.dot(parameters["Wf"][:, :hidden_dim].T, dft)
-    return dh_f, gradients 
+    return dh_f, gradients
 ```
 
 Define a function to calculate the gradients in the **Input Gate** and **Candidate Memory Gate**:
@@ -686,7 +687,7 @@ def bp_input_gate(hidden_dim, concat, dh_prev, dc_prev, cache, gradients, parame
     dh_i = np.dot(parameters["Wi"][:, :hidden_dim].T, dit)
     # dhcm = dcmt * dcmt/dh_prev
     dh_cm = np.dot(parameters["Wcm"][:, :hidden_dim].T, dcmt)
-    return dh_i, dh_cm, gradients 
+    return dh_i, dh_cm, gradients
 ```
 
 Define a function to calculate the gradients for the **Output Gate**:
@@ -702,7 +703,7 @@ def bp_output_gate(hidden_dim, concat, dh_prev, dc_prev, cache, gradients, param
     gradients['dbo'] += np.sum(dot, axis=1, keepdims=True)
     # dho = dot * dot/dho
     dh_o = np.dot(parameters["Wo"][:, :hidden_dim].T, dot)
-    return dh_o, gradients  
+    return dh_o, gradients
 ```
 
 Define a function to calculate the gradients for the **Fully Connected Layer**:
@@ -721,14 +722,14 @@ def bp_fc_layer (target, caches, gradients):
     # dh_last = dZ2 * W2
     W2 = caches['fc_values'][0]["W2"]
     dh_last = np.dot(W2.T, dZ2)
-    return dh_last, gradients    
+    return dh_last, gradients
 ```
 
 Put all these functions together to summarize the **Backpropagation** step for our model:
 
 ```python
 def backprop(y, caches, hidden_dim, input_dim, time_steps, parameters):
-    
+
     # Initialize gradients
     gradients = initialize_grads(parameters)
 
@@ -742,7 +743,7 @@ def backprop(y, caches, hidden_dim, input_dim, time_steps, parameters):
     # loop back over the whole sequence
     for t in reversed(range(time_steps)):
         cache = caches['lstm_values'][t]
-        
+
         # Input to the gates is concatenated previous hidden state and current word embedding
         concat = np.concatenate((cache["prev_hs"], cache["xt"]), axis=0)
 
@@ -765,7 +766,7 @@ def backprop(y, caches, hidden_dim, input_dim, time_steps, parameters):
     return gradients
 ```
 
-### Updating the Parameters 
+### Updating the Parameters
 
 We update the parameters through an optimization algorithm called [Adam](https://optimization.cbe.cornell.edu/index.php?title=Adam) which is an extension to stochastic gradient descent that has recently seen broader adoption for deep learning applications in computer vision and natural language processing. Specifically, the algorithm calculates an exponential moving average of the gradient and the squared gradient, and the parameters `beta1` and `beta2` control the decay rates of these moving averages. Adam has shown increased convergence and robustness over other gradient descent algorithms and is often recommended as the default optimizer for training.
 

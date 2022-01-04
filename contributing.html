@@ -38,7 +38,7 @@
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <link rel="shortcut icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -226,7 +226,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -262,7 +262,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -309,7 +309,176 @@
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
+    <!-- Table of contents that is only displayed when printing the page -->
+    <div id="jb-print-docs-body" class="onlyprint">
+        <h1>Contributing</h1>
+        <!-- Table of contents -->
+        <div id="print-main-content" class="row">
+            <div class="col-12 col-md-12 pl-md-5 pr-md-5">
+            <div id="jb-print-toc">
+                
+                <div>
+                    <h2> Contents </h2>
+                </div>
+                <nav aria-label="Page">
+                    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-jupyter-notebooks">
+   Why Jupyter Notebooks?
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#note">
+     Note
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-your-own-tutorials">
+   Adding your own tutorials
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-an-issue">
+     Create an issue
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-out-our-suggested-template">
+     Check out our suggested template
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#upload-your-content">
+     Upload your content
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                </nav>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<p>We very much welcome contributions! If you have an idea or proposal for a new
+tutorial, please <a class="reference external" href="https://github.com/numpy/numpy-tutorials/issues">open an issue</a>
+with an outline.</p>
+<p>Don’t worry if English is not your first language, or if you can only come up
+with a rough draft. Open source is a community effort. Do your best – we’ll help
+fix issues.</p>
+<p>Images and real-life data make text more engaging and powerful, but be sure what
+you use is appropriately licensed and available. Here again, even a rough idea
+for artwork can be polished by others.</p>
+<p>The NumPy tutorials are a curated collection of
+<a class="reference external" href="https://myst-nb.readthedocs.io/">MyST-NB</a> notebooks. These notebooks are used
+to produce static websites and can be opened as notebooks in Jupyter using
+<a class="reference external" href="https://jupytext.readthedocs.io">Jupytext</a>.</p>
+<blockquote>
+<div><p><strong>Note:</strong> You should use <a class="reference external" href="https://commonmark.org">CommonMark</a> markdown
+cells. Jupyter only renders CommonMark.</p>
+</div></blockquote>
+<div class="section" id="why-jupyter-notebooks">
+<h2>Why Jupyter Notebooks?<a class="headerlink" href="#why-jupyter-notebooks" title="Permalink to this headline">¶</a></h2>
+<p>The choice of Jupyter Notebook in this repo instead of the usual format
+(<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a>)
+used in the main NumPy documentation has two reasons:</p>
+<ul class="simple">
+<li><p>Jupyter notebooks are a common format for communicating scientific
+information.</p></li>
+<li><p>Jupyter notebooks can be launched in <a class="reference external" href="https://www.mybinder.org">Binder</a>, so that users can interact
+with tutorials</p></li>
+<li><p>rST may present a barrier for some people who might otherwise be very
+interested in contributing tutorial material.</p></li>
+</ul>
+<div class="section" id="note">
+<h3>Note<a class="headerlink" href="#note" title="Permalink to this headline">¶</a></h3>
+<p>You may notice our content is in markdown format (<code class="docutils literal notranslate"><span class="pre">.md</span></code> files). We review and
+host notebooks in the <a class="reference external" href="https://myst-nb.readthedocs.io/">MyST-NB</a> format. We
+accept both Jupyter notebooks (<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>) and MyST-NB notebooks (<code class="docutils literal notranslate"><span class="pre">.md</span></code>).
+If you want to sync your <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> to your <code class="docutils literal notranslate"><span class="pre">.md</span></code> file follow the <a class="reference internal" href="content/pairing.html"><span class="doc std std-doc">pairing
+tutorial</span></a>.</p>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+<div class="section" id="adding-your-own-tutorials">
+<h2>Adding your own tutorials<a class="headerlink" href="#adding-your-own-tutorials" title="Permalink to this headline">¶</a></h2>
+<p>If you have your own tutorial in the form of a Jupyter notebook (an <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>
+file) and you’d like to try add it out to the repository, follow the steps below.</p>
+<div class="section" id="create-an-issue">
+<h3>Create an issue<a class="headerlink" href="#create-an-issue" title="Permalink to this headline">¶</a></h3>
+<p>Go to <a class="reference external" href="https://github.com/numpy/numpy-tutorials/issues">https://github.com/numpy/numpy-tutorials/issues</a> and create a new issue
+with your proposal.
+Give as much detail as you can about what kind of content you would like to
+write (tutorial, how-to) and what you plan to cover.
+We will try to respond as quickly as possible with comments, if applicable.</p>
+</div>
+<div class="section" id="check-out-our-suggested-template">
+<h3>Check out our suggested template<a class="headerlink" href="#check-out-our-suggested-template" title="Permalink to this headline">¶</a></h3>
+<p>You can use this template to make your content consistent with our existing
+tutorials:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="content/tutorial-style-guide.html">Learn to write a NumPy tutorial</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="upload-your-content">
+<h3>Upload your content<a class="headerlink" href="#upload-your-content" title="Permalink to this headline">¶</a></h3>
+<p>Remember to clear all outputs on your notebook before uploading it.</p>
+<ul>
+<details>
+    <summary>
+        <b>Fork this repository</b> (if you haven't before).
+    </summary>
+    <img src="_static/01-fork.gif" width=80% height=80%>
+</details>
+<details>
+    <summary>
+        <b>In your own fork, create a new branch for your content.</b>
+    </summary>
+    <img src="_static/02-create_new_branch.gif" width=80% height=80%>
+</details>
+<details>
+    <summary>
+        <b>Add your notebook to the <code>content/</code> directory.</b>
+    </summary>
+    <img src="_static/03-upload.gif" width=80% height=80%>
+</details>
+<p><b>Update the <code>environment.yml</code> file with the dependencies for your tutorial</b>
+(only if you add new dependencies).</p>
+<details>
+    <summary>
+        <b>Update this <code>README.md</code> to include your new entry.</b>
+    </summary>
+    <img src="_static/04-add_to_readme.gif" width=80% height=80%>
+</details>
+<details>
+    <summary>
+        <b>Create a <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request.</a> Make sure the "Allow edits and access to secrets by maintainers" option is selected so we can properly review your submission.</b>
+    </summary>
+    <img src="_static/05-create_PR.gif" width=80% height=80%>
+</details>
+<p>🎉 <b>Wait for review!</b></p>
+</ul>
+<p>For more information about GitHub and its workflow, you can see
+<a class="reference external" href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests">this document</a>.</p>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+            </div>
+        </div>
+    </div>
+    <div id="main-content" class="row noprint">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
         
               <div>
@@ -448,15 +617,13 @@ tutorials:</p>
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By the NumPy community<br/>
-        
-            &copy; Copyright 2020, the NumPy community.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By the NumPy community<br/>
+    
+        &copy; Copyright 2020, the NumPy community.<br/>
+  </p>
+</footer>
 </main>
 
 

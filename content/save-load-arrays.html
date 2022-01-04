@@ -38,7 +38,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -229,7 +229,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -282,7 +282,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -391,7 +391,461 @@
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
+    <!-- Table of contents that is only displayed when printing the page -->
+    <div id="jb-print-docs-body" class="onlyprint">
+        <h1>Saving and sharing your NumPy arrays</h1>
+        <!-- Table of contents -->
+        <div id="print-main-content" class="row">
+            <div class="col-12 col-md-12 pl-md-5 pr-md-5">
+            <div id="jb-print-toc">
+                
+                <div>
+                    <h2> Contents </h2>
+                </div>
+                <nav aria-label="Page">
+                    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-ll-learn">
+   What you’ll learn
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-ll-do">
+   What you’ll do
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-ll-need">
+   What you’ll need
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-your-arrays">
+   Create your arrays
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-your-arrays-with-numpy-s-savez">
+   Save your arrays with NumPy’s
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     savez
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#remove-the-saved-arrays-and-load-them-back-with-numpy-s-load">
+   Remove the saved arrays and load them back with NumPy’s
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     load
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reassign-the-npzfile-arrays-to-x-and-y">
+   Reassign the NpzFile arrays to
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     x
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     y
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#success">
+   Success
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#another-option-saving-to-human-readable-csv">
+   Another option: saving to human-readable csv
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rearrange-the-data-into-a-single-2d-array">
+   Rearrange the data into a single 2D array
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#save-the-data-to-csv-file-using-savetxt">
+   Save the data to csv file using
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     savetxt
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#our-arrays-as-a-csv-file">
+   Our arrays as a csv file
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#success-but-remember-your-types">
+   Success, but remember your types
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wrapping-up">
+   Wrapping up
+  </a>
+ </li>
+</ul>
+
+                </nav>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="saving-and-sharing-your-numpy-arrays">
+<h1>Saving and sharing your NumPy arrays<a class="headerlink" href="#saving-and-sharing-your-numpy-arrays" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-you-ll-learn">
+<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this headline">¶</a></h2>
+<p>You’ll save your NumPy arrays as zipped files and human-readable
+comma-delimited files i.e. *.csv. You will also learn to load both of these
+file types back into NumPy workspaces.</p>
+</div>
+<div class="section" id="what-you-ll-do">
+<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this headline">¶</a></h2>
+<p>You’ll learn two ways of saving and reading files–as compressed and as
+text files–that will serve most of your storage needs in NumPy.</p>
+<ul class="simple">
+<li><p>You’ll create two 1D arrays and one 2D array</p></li>
+<li><p>You’ll save these arrays to files</p></li>
+<li><p>You’ll remove variables from your workspace</p></li>
+<li><p>You’ll load the variables from your saved file</p></li>
+<li><p>You’ll compare zipped binary files to human-readable delimited files</p></li>
+<li><p>You’ll finish with the skills of saving, loading, and sharing NumPy arrays</p></li>
+</ul>
+</div>
+<div class="section" id="what-you-ll-need">
+<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>NumPy</p></li>
+<li><p>read-write access to your working directory</p></li>
+</ul>
+<p>Load the necessary functions using the following command.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this tutorial, you will use the following Python, IPython magic, and NumPy functions:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html"><code class="docutils literal notranslate"><span class="pre">np.arange</span></code></a></p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savez.html"><code class="docutils literal notranslate"><span class="pre">np.savez</span></code></a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/reference/simple_stmts.html#del"><code class="docutils literal notranslate"><span class="pre">del</span></code></a></p></li>
+<li><p><a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-whos"><code class="docutils literal notranslate"><span class="pre">whos</span></code></a></p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.load.html"><code class="docutils literal notranslate"><span class="pre">np.load</span></code></a></p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.block.html"><code class="docutils literal notranslate"><span class="pre">np.block</span></code></a></p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html?highlight=newaxis#numpy.newaxis"><code class="docutils literal notranslate"><span class="pre">np.newaxis</span></code></a></p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html"><code class="docutils literal notranslate"><span class="pre">np.savetxt</span></code></a></p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html"><code class="docutils literal notranslate"><span class="pre">np.loadtxt</span></code></a></p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="create-your-arrays">
+<h2>Create your arrays<a class="headerlink" href="#create-your-arrays" title="Permalink to this headline">¶</a></h2>
+<p>Now that you have imported the NumPy library, you can make a couple of
+arrays; let’s start with two 1D arrays, <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>, where <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x**2</span></code>.You
+will assign <code class="docutils literal notranslate"><span class="pre">x</span></code> to the integers from 0 to 9 using
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html"><code class="docutils literal notranslate"><span class="pre">np.arange</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2 3 4 5 6 7 8 9]
+[ 0  1  4  9 16 25 36 49 64 81]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="save-your-arrays-with-numpy-s-savez">
+<h2>Save your arrays with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savez.html?highlight=savez#numpy.savez"><code class="docutils literal notranslate"><span class="pre">savez</span></code></a><a class="headerlink" href="#save-your-arrays-with-numpy-s-savez" title="Permalink to this headline">¶</a></h2>
+<p>Now you have two arrays in your workspace,</p>
+<p><code class="docutils literal notranslate"><span class="pre">x:</span> <span class="pre">[0</span> <span class="pre">1</span> <span class="pre">2</span> <span class="pre">3</span> <span class="pre">4</span> <span class="pre">5</span> <span class="pre">6</span> <span class="pre">7</span> <span class="pre">8</span> <span class="pre">9]</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">y:</span> <span class="pre">[</span> <span class="pre">0</span>&#160; <span class="pre">1</span>&#160; <span class="pre">4</span>&#160; <span class="pre">9</span> <span class="pre">16</span> <span class="pre">25</span> <span class="pre">36</span> <span class="pre">49</span> <span class="pre">64</span> <span class="pre">81]</span></code></p>
+<p>The first thing you will do is save them to a file as zipped arrays
+using
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savez.html?highlight=savez#numpy.savez"><code class="docutils literal notranslate"><span class="pre">savez</span></code></a>.
+You will use two options to label the arrays in the file,</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x_axis</span> <span class="pre">=</span> <span class="pre">x</span></code>: this option is assigning the name <code class="docutils literal notranslate"><span class="pre">x_axis</span></code> to the variable <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y_axis</span> <span class="pre">=</span> <span class="pre">y</span></code>: this option is assigning the name <code class="docutils literal notranslate"><span class="pre">y_axis</span></code> to the variable <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span><span class="s2">&quot;x_y-squared.npz&quot;</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="remove-the-saved-arrays-and-load-them-back-with-numpy-s-load">
+<h2>Remove the saved arrays and load them back with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.load.html#numpy.load"><code class="docutils literal notranslate"><span class="pre">load</span></code></a><a class="headerlink" href="#remove-the-saved-arrays-and-load-them-back-with-numpy-s-load" title="Permalink to this headline">¶</a></h2>
+<p>In your current working directory, you should have a new file with the
+name <code class="docutils literal notranslate"><span class="pre">x_y-squared.npz</span></code>. This file is a zipped binary of the two arrays,
+<code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>. Let’s clear the workspace and load the values back in. This
+<code class="docutils literal notranslate"><span class="pre">x_y-squared.npz</span></code> file contains two <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.lib.format.html#module-numpy.lib.format">NPY
+format</a>
+files. The NPY format is a <a class="reference external" href="https://en.wikipedia.org/wiki/Binary_file">native binary
+format</a>. You cannot read
+the numbers in a standard text editor or spreadsheet.</p>
+<ol class="simple">
+<li><p>remove <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> from the workspaec with <a class="reference external" href="https://docs.python.org/3/reference/simple_stmts.html#del"><code class="docutils literal notranslate"><span class="pre">del</span></code></a></p></li>
+<li><p>load the arrays into the workspace in a dictionary with <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.load.html#numpy.load"><code class="docutils literal notranslate"><span class="pre">np.load</span></code></a></p></li>
+</ol>
+<p>To see what variables are in the workspace, use the Jupyter/IPython
+“magic” command
+<a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-whos"><code class="docutils literal notranslate"><span class="pre">whos</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">del</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">whos</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variable   Type      Data/Info
+------------------------------
+np         module    &lt;module &#39;numpy&#39; from &#39;/ho&lt;...&gt;kages/numpy/__init__.py&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load_xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;x_y-squared.npz&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">load_xy</span><span class="o">.</span><span class="n">files</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;x_axis&#39;, &#39;y_axis&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">whos</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variable   Type       Data/Info
+-------------------------------
+load_xy    NpzFile    &lt;numpy.lib.npyio.NpzFile &lt;...&gt;object at 0x7f730c319940&gt;
+np         module     &lt;module &#39;numpy&#39; from &#39;/ho&lt;...&gt;kages/numpy/__init__.py&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="reassign-the-npzfile-arrays-to-x-and-y">
+<h2>Reassign the NpzFile arrays to <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code><a class="headerlink" href="#reassign-the-npzfile-arrays-to-x-and-y" title="Permalink to this headline">¶</a></h2>
+<p>You’ve now created the dictionary with an <code class="docutils literal notranslate"><span class="pre">NpzFile</span></code>-type. The
+included files are <code class="docutils literal notranslate"><span class="pre">x_axis</span></code> and <code class="docutils literal notranslate"><span class="pre">y_axis</span></code> that you defined in your
+<code class="docutils literal notranslate"><span class="pre">savez</span></code> command. You can reassign <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> to the <code class="docutils literal notranslate"><span class="pre">load_xy</span></code> files.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">load_xy</span><span class="p">[</span><span class="s2">&quot;x_axis&quot;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">load_xy</span><span class="p">[</span><span class="s2">&quot;y_axis&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2 3 4 5 6 7 8 9]
+[ 0  1  4  9 16 25 36 49 64 81]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="success">
+<h2>Success<a class="headerlink" href="#success" title="Permalink to this headline">¶</a></h2>
+<p>You have created, saved, deleted, and loaded the variables <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> using <code class="docutils literal notranslate"><span class="pre">savez</span></code> and <code class="docutils literal notranslate"><span class="pre">load</span></code>. Nice work.</p>
+</div>
+<div class="section" id="another-option-saving-to-human-readable-csv">
+<h2>Another option: saving to human-readable csv<a class="headerlink" href="#another-option-saving-to-human-readable-csv" title="Permalink to this headline">¶</a></h2>
+<p>Let’s consider another scenario, you want to share <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> with
+other people or other programs. You may need human-readable text file
+that is easier to share. Next, you use the
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html#numpy.savetxt"><code class="docutils literal notranslate"><span class="pre">savetxt</span></code></a>
+to save <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> in a comma separated value file, <code class="docutils literal notranslate"><span class="pre">x_y-squared.csv</span></code>.
+The resulting csv is composed of ASCII characters. You can load the file
+back into NumPy or read it with other programs.</p>
+</div>
+<div class="section" id="rearrange-the-data-into-a-single-2d-array">
+<h2>Rearrange the data into a single 2D array<a class="headerlink" href="#rearrange-the-data-into-a-single-2d-array" title="Permalink to this headline">¶</a></h2>
+<p>First, you have to create a single 2D array from your two 1D arrays. The
+csv-filetype is a spreadsheet-style dataset. The csv arranges numbers in
+rows–separated by new lines–and columns–separated by commas. If the
+data is more complex e.g. multiple 2D arrays or higher dimensional
+arrays, it is better to use <code class="docutils literal notranslate"><span class="pre">savez</span></code>. Here, you use
+two NumPy functions to format the data:</p>
+<ol class="simple">
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.block.html?highlight=block#numpy.block"><code class="docutils literal notranslate"><span class="pre">np.block</span></code></a>: this function appends arrays together into a 2D array</p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html?highlight=newaxis#numpy.newaxis"><code class="docutils literal notranslate"><span class="pre">np.newaxis</span></code></a>: this function forces the 1D array into a 2D column vector with 10 rows and 1 column.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">array_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">block</span><span class="p">([</span><span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">y</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;the output array has shape &quot;</span><span class="p">,</span> <span class="n">array_out</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">&quot; with values:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">array_out</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>the output array has shape  (10, 2)  with values:
+[[ 0  0]
+ [ 1  1]
+ [ 2  4]
+ [ 3  9]
+ [ 4 16]
+ [ 5 25]
+ [ 6 36]
+ [ 7 49]
+ [ 8 64]
+ [ 9 81]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="save-the-data-to-csv-file-using-savetxt">
+<h2>Save the data to csv file using <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html#numpy.savetxt"><code class="docutils literal notranslate"><span class="pre">savetxt</span></code></a><a class="headerlink" href="#save-the-data-to-csv-file-using-savetxt" title="Permalink to this headline">¶</a></h2>
+<p>You use <code class="docutils literal notranslate"><span class="pre">savetxt</span></code> with a three options to make your file easier to read:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">array_out</span></code>: this option tells <code class="docutils literal notranslate"><span class="pre">savetxt</span></code> to save your 2D array, <code class="docutils literal notranslate"><span class="pre">array_out</span></code>, to the file <code class="docutils literal notranslate"><span class="pre">x_y-squared.csv</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">header</span> <span class="pre">=</span> <span class="pre">'x,</span> <span class="pre">y'</span></code>: this option writes a header before any data that labels the columns of the csv</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">delimiter</span> <span class="pre">=</span> <span class="pre">','</span></code>: this option tells <code class="docutils literal notranslate"><span class="pre">savetxt</span></code> to place a comma between each column in the file</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s2">&quot;x_y-squared.csv&quot;</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">array_out</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="s2">&quot;x, y&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Open the file, <code class="docutils literal notranslate"><span class="pre">x_y-squared.csv</span></code>, and you’ll see the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># x, y</span>
+<span class="mf">0.000000000000000000e+00</span><span class="p">,</span><span class="mf">0.000000000000000000e+00</span>
+<span class="mf">1.000000000000000000e+00</span><span class="p">,</span><span class="mf">1.000000000000000000e+00</span>
+<span class="mf">2.000000000000000000e+00</span><span class="p">,</span><span class="mf">4.000000000000000000e+00</span>
+<span class="mf">3.000000000000000000e+00</span><span class="p">,</span><span class="mf">9.000000000000000000e+00</span>
+<span class="mf">4.000000000000000000e+00</span><span class="p">,</span><span class="mf">1.600000000000000000e+01</span>
+<span class="mf">5.000000000000000000e+00</span><span class="p">,</span><span class="mf">2.500000000000000000e+01</span>
+<span class="mf">6.000000000000000000e+00</span><span class="p">,</span><span class="mf">3.600000000000000000e+01</span>
+<span class="mf">7.000000000000000000e+00</span><span class="p">,</span><span class="mf">4.900000000000000000e+01</span>
+<span class="mf">8.000000000000000000e+00</span><span class="p">,</span><span class="mf">6.400000000000000000e+01</span>
+<span class="mf">9.000000000000000000e+00</span><span class="p">,</span><span class="mf">8.100000000000000000e+01</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="our-arrays-as-a-csv-file">
+<h2>Our arrays as a csv file<a class="headerlink" href="#our-arrays-as-a-csv-file" title="Permalink to this headline">¶</a></h2>
+<p>There are two features that you shoud notice here:</p>
+<ol class="simple">
+<li><p>NumPy uses <code class="docutils literal notranslate"><span class="pre">#</span></code> to ignore headings when using <code class="docutils literal notranslate"><span class="pre">loadtxt</span></code>. If you’re using
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html"><code class="docutils literal notranslate"><span class="pre">loadtxt</span></code></a>
+with other csv files, you can skip header rows with <code class="docutils literal notranslate"><span class="pre">skiprows</span> <span class="pre">=</span> <span class="pre">&lt;number_of_header_lines&gt;</span></code>.</p></li>
+<li><p>The integers were written in scientific notation. <em>You can</em> specify
+the format of the text using the <code class="docutils literal notranslate"><span class="pre">savetxt</span></code> option, <a class="reference external" href="https://docs.python.org/3/library/string.html#formatstrings"><code class="docutils literal notranslate"><span class="pre">fmt</span> <span class="pre">=</span> </code></a>, but it
+will still be written with ASCII characters. In general, you cannot
+preserve the type of ASCII numbers as <code class="docutils literal notranslate"><span class="pre">float</span></code> or <code class="docutils literal notranslate"><span class="pre">int</span></code>.</p></li>
+</ol>
+<p>Now, delete <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> again and assign them to your columns in <code class="docutils literal notranslate"><span class="pre">x-y_squared.csv</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">del</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load_xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;x_y-squared.csv&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load_xy</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">load_xy</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">load_xy</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0. 1. 2. 3. 4. 5. 6. 7. 8. 9.]
+[ 0.  1.  4.  9. 16. 25. 36. 49. 64. 81.]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="success-but-remember-your-types">
+<h2>Success, but remember your types<a class="headerlink" href="#success-but-remember-your-types" title="Permalink to this headline">¶</a></h2>
+<p>When you saved the arrays to the csv file, you did not preserve the
+<code class="docutils literal notranslate"><span class="pre">int</span></code> type. When loading the arrays back into your workspace the default process will be to load the csv file as a 2D floating point array e.g. <code class="docutils literal notranslate"><span class="pre">load_xy.dtype</span> <span class="pre">==</span> <span class="pre">'float64'</span></code> and <code class="docutils literal notranslate"><span class="pre">load_xy.shape</span> <span class="pre">==</span> <span class="pre">(10,</span> <span class="pre">2)</span></code>.</p>
+</div>
+<div class="section" id="wrapping-up">
+<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this headline">¶</a></h2>
+<p>In conclusion, you can create, save, and load arrays in NumPy. Saving arrays makes sharing your work and collaboration much easier. There are other ways Python can save data to files, such as <a class="reference external" href="https://docs.python.org/3/library/pickle.html">pickle</a>, but <code class="docutils literal notranslate"><span class="pre">savez</span></code> and <code class="docutils literal notranslate"><span class="pre">savetxt</span></code> will serve most of your storage needs for future NumPy work and sharing with other people, respectively.</p>
+<p><strong>Next steps</strong>: you can import data with missing values from <a class="reference external" href="https://numpy.org/devdocs/user/basics.io.genfromtxt.html">Importing with genfromtext</a> or learn more about general NumPy IO with <a class="reference external" href="https://numpy.org/devdocs/user/how-to-io.html">Reading and Writing Files</a>.</p>
+</div>
+</div>
+
+
+              </div>
+              
+            </div>
+        </div>
+    </div>
+    <div id="main-content" class="row noprint">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
         
               <div>
@@ -550,7 +1004,7 @@ np         module    &lt;module &#39;numpy&#39; from &#39;/ho&lt;...&gt;kages/nu
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variable   Type       Data/Info
 -------------------------------
-load_xy    NpzFile    &lt;numpy.lib.npyio.NpzFile &lt;...&gt;object at 0x7f6d743448e0&gt;
+load_xy    NpzFile    &lt;numpy.lib.npyio.NpzFile &lt;...&gt;object at 0x7f730c319940&gt;
 np         module     &lt;module &#39;numpy&#39; from &#39;/ho&lt;...&gt;kages/numpy/__init__.py&#39;&gt;
 </pre></div>
 </div>
@@ -753,15 +1207,13 @@ preserve the type of ASCII numbers as <code class="docutils literal notranslate"
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By the NumPy community<br/>
-        
-            &copy; Copyright 2020, the NumPy community.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By the NumPy community<br/>
+    
+        &copy; Copyright 2020, the NumPy community.<br/>
+  </p>
+</footer>
 </main>
 
 

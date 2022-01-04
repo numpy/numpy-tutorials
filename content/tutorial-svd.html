@@ -38,7 +38,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -231,7 +231,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -284,7 +284,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -356,7 +356,616 @@
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
+    <!-- Table of contents that is only displayed when printing the page -->
+    <div id="jb-print-docs-body" class="onlyprint">
+        <h1>Linear algebra on n-dimensional arrays</h1>
+        <!-- Table of contents -->
+        <div id="print-main-content" class="row">
+            <div class="col-12 col-md-12 pl-md-5 pr-md-5">
+            <div id="jb-print-toc">
+                
+                <div>
+                    <h2> Contents </h2>
+                </div>
+                <nav aria-label="Page">
+                    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learner-profile">
+   Learner profile
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-objectives">
+   Learning Objectives
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#content">
+   Content
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#shape-axis-and-array-properties">
+     Shape, axis and array properties
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#operations-on-an-axis">
+     Operations on an axis
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#approximation">
+   Approximation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applying-to-all-colors">
+     Applying to all colors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#products-with-n-dimensional-arrays">
+     Products with n-dimensional arrays
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#final-words">
+     Final words
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-reading">
+   Further reading
+  </a>
+ </li>
+</ul>
+
+                </nav>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="linear-algebra-on-n-dimensional-arrays">
+<h1>Linear algebra on n-dimensional arrays<a class="headerlink" href="#linear-algebra-on-n-dimensional-arrays" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>Before reading this tutorial, you should know a bit of Python. If you would like to refresh your memory, take a look at the <a class="reference external" href="https://docs.python.org/3/tutorial/">Python tutorial</a>.</p>
+<p>If you want to be able to run the examples in this tutorial, you should also have <a class="reference external" href="https://matplotlib.org/">matplotlib</a> and <a class="reference external" href="https://scipy.org">SciPy</a> installed on your computer.</p>
+</div>
+<div class="section" id="learner-profile">
+<h2>Learner profile<a class="headerlink" href="#learner-profile" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial is for people who have a basic understanding of linear algebra and arrays in NumPy and want to understand how n-dimensional (<span class="math notranslate nohighlight">\(n&gt;=2\)</span>) arrays are represented and can be manipulated. In particular, if you don’t know how to apply common functions to n-dimensional arrays (without using for-loops), or if you want to understand axis and shape properties for n-dimensional arrays, this tutorial might be of help.</p>
+</div>
+<div class="section" id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+<p>After this tutorial, you should be able to:</p>
+<ul class="simple">
+<li><p>Understand the difference between one-, two- and n-dimensional arrays in NumPy;</p></li>
+<li><p>Understand how to apply some linear algebra operations to n-dimensional arrays without using for-loops;</p></li>
+<li><p>Understand axis and shape properties for n-dimensional arrays.</p></li>
+</ul>
+</div>
+<div class="section" id="content">
+<h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, we will use a <a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_decomposition">matrix decomposition</a> from linear algebra, the Singular Value Decomposition, to generate a compressed approximation of an image. We’ll use the <code class="docutils literal notranslate"><span class="pre">face</span></code> image from the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/misc.html#module-scipy.misc">scipy.misc</a> module:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">misc</span>
+
+<span class="n">img</span> <span class="o">=</span> <span class="n">misc</span><span class="o">.</span><span class="n">face</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note</strong>: If you prefer, you can use your own image as you work through this tutorial. In order to transform your image into a NumPy array that can be manipulated, you can use the <code class="docutils literal notranslate"><span class="pre">imread</span></code> function from the <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.html#module-matplotlib.pyplot">matplotlib.pyplot</a> submodule. Alternatively, you can use the <a class="reference external" href="https://imageio.readthedocs.io/en/stable/userapi.html#imageio.imread">imageio.imread</a> function from the <code class="docutils literal notranslate"><span class="pre">imageio</span></code> library. Be aware that if you use your own image, you’ll likely need to adapt the steps below. For more information on how images are treated when converted to NumPy arrays, see <a class="reference external" href="https://scikit-image.org/docs/stable/user_guide/numpy_images.html">A crash course on NumPy for images</a> from the <code class="docutils literal notranslate"><span class="pre">scikit-image</span></code> documentation.</p>
+<p>Now, <code class="docutils literal notranslate"><span class="pre">img</span></code> is a NumPy array, as we can see when using the <code class="docutils literal notranslate"><span class="pre">type</span></code> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>numpy.ndarray
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see the image using the <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.imshow.html#matplotlib.pyplot.imshow">matplotlib.pyplot.imshow</a> function &amp; the special iPython command, <code class="docutils literal notranslate"><span class="pre">%matplotlib</span> <span class="pre">inline</span></code> to display plots inline:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/tutorial-svd_8_0.png" src="../_images/tutorial-svd_8_0.png" />
+</div>
+</div>
+<div class="section" id="shape-axis-and-array-properties">
+<h3>Shape, axis and array properties<a class="headerlink" href="#shape-axis-and-array-properties" title="Permalink to this headline">¶</a></h3>
+<p>Note that, in linear algebra, the dimension of a vector refers to the number of entries in an array. In NumPy, it instead defines the number of axes. For example, a 1D array is a vector such as <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code>, a 2D array is a matrix, and so forth.</p>
+<p>First, let’s check for the shape of the data in our array. Since this image is two-dimensional (the pixels in the image form a rectangle), we might expect a two-dimensional array to represent it (a matrix). However, using the <code class="docutils literal notranslate"><span class="pre">shape</span></code> property of this NumPy array gives us a different result:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(768, 1024, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output is a <a class="reference external" href="https://docs.python.org/dev/tutorial/datastructures.html#tut-tuples">tuple</a> with three elements, which means that this is a three-dimensional array. In fact, since this is a color image, and we have used the <code class="docutils literal notranslate"><span class="pre">imread</span></code> function to read it, the data is organized in three 2D arrays, representing color channels (in this case, red, green and blue - RGB). You can see this by looking at the shape above: it indicates that we have an array of 3 matrices, each having shape 768x1024.</p>
+<p>Furthermore, using the <code class="docutils literal notranslate"><span class="pre">ndim</span></code> property of this array, we can see that</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="o">.</span><span class="n">ndim</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<p>NumPy refers to each dimension as an <em>axis</em>. Because of how <code class="docutils literal notranslate"><span class="pre">imread</span></code> works, the <em>first index in the 3rd axis</em> is the red pixel data for our image. We can access this by using the syntax</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[121, 138, 153, ..., 119, 131, 139],
+       [ 89, 110, 130, ..., 118, 134, 146],
+       [ 73,  94, 115, ..., 117, 133, 144],
+       ...,
+       [ 87,  94, 107, ..., 120, 119, 119],
+       [ 85,  95, 112, ..., 121, 120, 120],
+       [ 85,  97, 111, ..., 120, 119, 118]], dtype=uint8)
+</pre></div>
+</div>
+</div>
+</div>
+<p>From the output above, we can see that every value in <code class="docutils literal notranslate"><span class="pre">img[:,</span> <span class="pre">:,</span> <span class="pre">0]</span></code> is an integer value between 0 and 255, representing the level of red in each corresponding image pixel (keep in mind that this might be different if you
+use your own image instead of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.misc.face.html#scipy.misc.face">scipy.misc.face</a>).</p>
+<p>As expected, this is a 768x1024 matrix:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(768, 1024)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since we are going to perform linear algebra operations on this data, it might be more interesting to have real numbers between 0 and 1 in each entry of the matrices to represent the RGB values. We can do that by setting</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_array</span> <span class="o">=</span> <span class="n">img</span> <span class="o">/</span> <span class="mi">255</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This operation, dividing an array by a scalar, works because of NumPy’s <a class="reference external" href="https://numpy.org/devdocs/user/theory.broadcasting.html#array-broadcasting-in-numpy">broadcasting rules</a>. (Note that in real-world applications, it would be better to use, for example, the <a class="reference external" href="https://scikit-image.org/docs/stable/api/skimage.html#skimage.img_as_float">img_as_float</a> utility function from <code class="docutils literal notranslate"><span class="pre">scikit-image</span></code>).</p>
+<p>You can check that the above works by doing some tests; for example, inquiring
+about maximum and minimum values for this array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_array</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">img_array</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.0, 0.0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>or checking the type of data in the array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_array</span><span class="o">.</span><span class="n">dtype</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dtype(&#39;float64&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that we can assign each color channel to a separate matrix using the slice syntax:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">red_array</span> <span class="o">=</span> <span class="n">img_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">green_array</span> <span class="o">=</span> <span class="n">img_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">blue_array</span> <span class="o">=</span> <span class="n">img_array</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="operations-on-an-axis">
+<h3>Operations on an axis<a class="headerlink" href="#operations-on-an-axis" title="Permalink to this headline">¶</a></h3>
+<p>It is possible to use methods from linear algebra to approximate an existing set of data. Here, we will use the <a class="reference external" href="https://en.wikipedia.org/wiki/Singular_value_decomposition">SVD (Singular Value Decomposition)</a> to try to rebuild an image that uses less singular value information than the original one, while still retaining some of its features.</p>
+<p><strong>Note</strong>: We will use NumPy’s linear algebra module, <a class="reference external" href="https://numpy.org/devdocs/reference/routines.linalg.html#module-numpy.linalg">numpy.linalg</a>, to perform the operations in this tutorial. Most of the linear algebra functions in this module can also be found in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg">scipy.linalg</a>, and users are encouraged to use the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/index.html#module-scipy">scipy</a> module for real-world applications. However, some functions in the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg">scipy.linalg</a> module, such as the SVD function, only support 2D arrays. For more information on this, check the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/tutorial/linalg.html">scipy.linalg Reference</a>.</p>
+<p>To proceed, import the linear algebra submodule from NumPy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">linalg</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In order to extract information from a given matrix, we can use the SVD to obtain 3 arrays which can be multiplied to obtain the original matrix. From the theory of linear algebra, given a matrix <span class="math notranslate nohighlight">\(A\)</span>, the following product can be computed:</p>
+<div class="math notranslate nohighlight">
+\[U \Sigma V^T = A\]</div>
+<p>where <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V^T\)</span> are square and <span class="math notranslate nohighlight">\(\Sigma\)</span> is the same size as <span class="math notranslate nohighlight">\(A\)</span>. <span class="math notranslate nohighlight">\(\Sigma\)</span> is a diagonal matrix and contains the <a class="reference external" href="https://en.wikipedia.org/wiki/Singular_value">singular values</a> of <span class="math notranslate nohighlight">\(A\)</span>, organized from largest to smallest. These values are always non-negative and can be used as an indicator of the “importance” of some features represented by the matrix <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>Let’s see how this works in practice with just one matrix first. Note that according to <a class="reference external" href="https://en.wikipedia.org/wiki/Grayscale#Colorimetric_(perceptual_luminance-reserving)_conversion_to_grayscale">colorimetry</a>,
+it is possible to obtain a fairly reasonable grayscale version of our color image if we apply the formula</p>
+<div class="math notranslate nohighlight">
+\[Y = 0.2126 R + 0.7152 G + 0.0722 B\]</div>
+<p>where <span class="math notranslate nohighlight">\(Y\)</span> is the array representing the grayscale image, and <span class="math notranslate nohighlight">\(R\)</span>, <span class="math notranslate nohighlight">\(G\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are the red, green and blue channel arrays we had originally. Notice we can use the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator (the matrix multiplication operator for NumPy arrays, see <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.matmul.html#numpy.matmul">numpy.matmul</a>) for this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_gray</span> <span class="o">=</span> <span class="n">img_array</span> <span class="o">@</span> <span class="p">[</span><span class="mf">0.2126</span><span class="p">,</span> <span class="mf">0.7152</span><span class="p">,</span> <span class="mf">0.0722</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, <code class="docutils literal notranslate"><span class="pre">img_gray</span></code> has shape</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_gray</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(768, 1024)
+</pre></div>
+</div>
+</div>
+</div>
+<p>To see if this makes sense in our image, we should use a colormap from <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> corresponding to the color we wish to see in out image (otherwise, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> will default to a colormap that does not correspond to the real data).</p>
+<p>In our case, we are approximating the grayscale portion of the image, so we will use the colormap <code class="docutils literal notranslate"><span class="pre">gray</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_gray</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/tutorial-svd_34_0.png" src="../_images/tutorial-svd_34_0.png" />
+</div>
+</div>
+<p>Now, applying the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.linalg.svd.html#numpy.linalg.svd">linalg.svd</a> function to this matrix, we obtain the following decomposition:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">img_gray</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note</strong> If you are using your own image, this command might take a while to run, depending on the size of your image and your hardware. Don’t worry, this is normal! The SVD can be a pretty intensive computation.</p>
+<p>Let’s check that this is what we expected:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Vt</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((768, 768), (768,), (1024, 1024))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">s</span></code> has a particular shape: it has only one dimension. This means that some linear algebra functions that expect 2d arrays might not work. For example, from the theory, one might expect <code class="docutils literal notranslate"><span class="pre">s</span></code> and <code class="docutils literal notranslate"><span class="pre">Vt</span></code> to be
+compatible for multiplication. However, this is not true as <code class="docutils literal notranslate"><span class="pre">s</span></code> does not have a second axis. Executing</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">@</span> <span class="n">Vt</span>
+</pre></div>
+</div>
+<p>results in a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. This happens because having a one-dimensional array for <code class="docutils literal notranslate"><span class="pre">s</span></code>, in this case, is much more economic in practice than building a diagonal matrix with the same data. To reconstruct the original matrix, we can rebuild the diagonal matrix <span class="math notranslate nohighlight">\(\Sigma\)</span> with the elements of <code class="docutils literal notranslate"><span class="pre">s</span></code> in its diagonal and with the appropriate dimensions for multiplying: in our case, <span class="math notranslate nohighlight">\(\Sigma\)</span> should be 768x1024 since <code class="docutils literal notranslate"><span class="pre">U</span></code> is 768x768 and <code class="docutils literal notranslate"><span class="pre">Vt</span></code> is 1024x1024. In order to add the singular values to the diagonal of <code class="docutils literal notranslate"><span class="pre">Sigma</span></code>, we will use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.fill_diagonal.html">fill_diagonal</a> function from NumPy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">Sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Vt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we want to check if the reconstructed <code class="docutils literal notranslate"><span class="pre">U</span> <span class="pre">&#64;</span> <span class="pre">Sigma</span> <span class="pre">&#64;</span> <span class="pre">Vt</span></code> is close to the original <code class="docutils literal notranslate"><span class="pre">img_gray</span></code> matrix.</p>
+</div>
+</div>
+<div class="section" id="approximation">
+<h2>Approximation<a class="headerlink" href="#approximation" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://numpy.org/devdocs/reference/routines.linalg.html#module-numpy.linalg">linalg</a> module includes a <code class="docutils literal notranslate"><span class="pre">norm</span></code> function, which computes the norm of a vector or matrix represented in a NumPy array. For example, from the SVD explanation above, we would expect the norm of the difference between <code class="docutils literal notranslate"><span class="pre">img_gray</span></code> and the reconstructed SVD product to be small. As expected, you should see something like</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">img_gray</span> <span class="o">-</span> <span class="n">U</span> <span class="o">@</span> <span class="n">Sigma</span> <span class="o">@</span> <span class="n">Vt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.43712046073728e-12
+</pre></div>
+</div>
+</div>
+</div>
+<p>(The actual result of this operation might be different depending on your architecture and linear algebra setup. Regardless, you should see a small number.)</p>
+<p>We could also have used the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.allclose.html#numpy.allclose">numpy.allclose</a> function to make sure the reconstructed product is, in fact, <em>close</em> to our original matrix (the difference between the two arrays is small):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">img_gray</span><span class="p">,</span> <span class="n">U</span> <span class="o">@</span> <span class="n">Sigma</span> <span class="o">@</span> <span class="n">Vt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>To see if an approximation is reasonable, we can check the values in <code class="docutils literal notranslate"><span class="pre">s</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/tutorial-svd_48_0.png" src="../_images/tutorial-svd_48_0.png" />
+</div>
+</div>
+<p>In the graph, we can see that although we have 768 singular values in <code class="docutils literal notranslate"><span class="pre">s</span></code>, most of those (after the 150th entry or so) are pretty small. So it might make sense to use only the information related to the first (say, 50) <em>singular values</em> to build a more economical approximation to our image.</p>
+<p>The idea is to consider all but the first <code class="docutils literal notranslate"><span class="pre">k</span></code> singular values in <code class="docutils literal notranslate"><span class="pre">Sigma</span></code> (which are the same as in <code class="docutils literal notranslate"><span class="pre">s</span></code>) as zeros, keeping <code class="docutils literal notranslate"><span class="pre">U</span></code> and <code class="docutils literal notranslate"><span class="pre">Vt</span></code> intact, and computing the product of these matrices as the approximation.</p>
+<p>For example, if we choose</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>we can build the approximation by doing</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">approx</span> <span class="o">=</span> <span class="n">U</span> <span class="o">@</span> <span class="n">Sigma</span><span class="p">[:,</span> <span class="p">:</span><span class="n">k</span><span class="p">]</span> <span class="o">@</span> <span class="n">Vt</span><span class="p">[:</span><span class="n">k</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that we had to use only the first <code class="docutils literal notranslate"><span class="pre">k</span></code> rows of <code class="docutils literal notranslate"><span class="pre">Vt</span></code>, since all other rows would be multiplied by the zeros corresponding to the singular values we eliminated from this approximation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">approx</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/tutorial-svd_54_0.png" src="../_images/tutorial-svd_54_0.png" />
+</div>
+</div>
+<p>Now, you can go ahead and repeat this experiment with other values of <code class="docutils literal notranslate"><span class="pre">k</span></code>, and each of your experiments should give you a slightly better (or worse) image depending on the value you choose.</p>
+<div class="section" id="applying-to-all-colors">
+<h3>Applying to all colors<a class="headerlink" href="#applying-to-all-colors" title="Permalink to this headline">¶</a></h3>
+<p>Now we want to do the same kind of operation, but to all three colors. Our first instinct might be to repeat the same operation we did above to each color matrix individually. However, NumPy’s <em>broadcasting</em> takes care of this
+for us.</p>
+<p>If our array has more than two dimensions, then the SVD can be applied to all axes at once. However, the linear algebra functions in NumPy expect to see an array of the form <code class="docutils literal notranslate"><span class="pre">(n,</span> <span class="pre">M,</span> <span class="pre">N)</span></code>, where the first axis <code class="docutils literal notranslate"><span class="pre">n</span></code> represents the number of <code class="docutils literal notranslate"><span class="pre">MxN</span></code> matrices in the stack.</p>
+<p>In our case,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_array</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(768, 1024, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<p>so we need to permutate the axis on this array to get a shape like <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">768,</span> <span class="pre">1024)</span></code>. Fortunately, the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.transpose.html#numpy.transpose">numpy.transpose</a> function can do that for us:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>indicates that the axis will be reordered such that the final shape of the transposed array will be reordered according to the indices <code class="docutils literal notranslate"><span class="pre">(i,</span> <span class="pre">j,</span> <span class="pre">k)</span></code>.</p>
+<p>Let’s see how this goes for our array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_array_transposed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">img_array</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">img_array_transposed</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 768, 1024)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we are ready to apply the SVD:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">img_array_transposed</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, to obtain the full approximated image, we need to reassemble these matrices into the approximation. Now, note that</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Vt</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((3, 768, 768), (3, 768), (3, 1024, 1024))
+</pre></div>
+</div>
+</div>
+</div>
+<p>To build the final approximation matrix, we must understand how multiplication across different axes works.</p>
+</div>
+<div class="section" id="products-with-n-dimensional-arrays">
+<h3>Products with n-dimensional arrays<a class="headerlink" href="#products-with-n-dimensional-arrays" title="Permalink to this headline">¶</a></h3>
+<p>If you have worked before with only one- or two-dimensional arrays in NumPy, you might use <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.dot.html#numpy.dot">numpy.dot</a> and <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.matmul.html#numpy.matmul">numpy.matmul</a> (or the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator) interchangeably. However, for n-dimensional arrays, they work in very different ways. For more details, check the documentation on <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.matmul.html#numpy.matmul">numpy.matmul</a>.</p>
+<p>Now, to build our approximation, we first need to make sure that our singular values are ready for multiplication, so we build our <code class="docutils literal notranslate"><span class="pre">Sigma</span></code> matrix similarly to what we did before. The <code class="docutils literal notranslate"><span class="pre">Sigma</span></code> array must have dimensions <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">768,</span> <span class="pre">1024)</span></code>. In order to add the singular values to the diagonal of <code class="docutils literal notranslate"><span class="pre">Sigma</span></code>, we will again use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.fill_diagonal.html">fill_diagonal</a> function, using each of the 3 rows in <code class="docutils literal notranslate"><span class="pre">s</span></code> as the diagonal for each of the 3 matrices in <code class="docutils literal notranslate"><span class="pre">Sigma</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">768</span><span class="p">,</span> <span class="mi">1024</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">Sigma</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">s</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, if we wish to rebuild the full SVD (with no approximation), we can do</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reconstructed</span> <span class="o">=</span> <span class="n">U</span> <span class="o">@</span> <span class="n">Sigma</span> <span class="o">@</span> <span class="n">Vt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reconstructed</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 768, 1024)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The reconstructed image should be indistinguishable from the original one, except for differences due to floating point errors from the reconstruction. Recall that our original image consisted of floating point values in the range <code class="docutils literal notranslate"><span class="pre">[0.,</span> <span class="pre">1.]</span></code>. The accumulation of floating point error from the reconstruction can result in values slightly outside this original range:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reconstructed</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">reconstructed</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-5.558487697898684e-15, 1.0000000000000053)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since <code class="docutils literal notranslate"><span class="pre">imshow</span></code> expects values in the range, we can use <code class="docutils literal notranslate"><span class="pre">clip</span></code> to excise the floating point error:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reconstructed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">reconstructed</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">reconstructed</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/tutorial-svd_74_0.png" src="../_images/tutorial-svd_74_0.png" />
+</div>
+</div>
+<p>In fact, <code class="docutils literal notranslate"><span class="pre">imshow</span></code> peforms this clipping under-the-hood, so if you skip the first line in the previous code cell, you might see a warning message saying <code class="docutils literal notranslate"><span class="pre">&quot;Clipping</span> <span class="pre">input</span> <span class="pre">data</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">valid</span> <span class="pre">range</span> <span class="pre">for</span> <span class="pre">imshow</span> <span class="pre">with</span> <span class="pre">RGB</span> <span class="pre">data</span> <span class="pre">([0..1]</span> <span class="pre">for</span> <span class="pre">floats</span> <span class="pre">or</span> <span class="pre">[0..255]</span> <span class="pre">for</span> <span class="pre">integers).&quot;</span></code></p>
+<p>Now, to do the approximation, we must choose only the first <code class="docutils literal notranslate"><span class="pre">k</span></code> singular values for each color channel. This can be done using the following syntax:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">approx_img</span> <span class="o">=</span> <span class="n">U</span> <span class="o">@</span> <span class="n">Sigma</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="n">k</span><span class="p">]</span> <span class="o">@</span> <span class="n">Vt</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="n">k</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can see that we have selected only the first <code class="docutils literal notranslate"><span class="pre">k</span></code> components of the last axis for <code class="docutils literal notranslate"><span class="pre">Sigma</span></code> (this means that we have used only the first <code class="docutils literal notranslate"><span class="pre">k</span></code> columns of each of the three matrices in the stack), and that we have selected only the first <code class="docutils literal notranslate"><span class="pre">k</span></code> components in the second-to-last axis of <code class="docutils literal notranslate"><span class="pre">Vt</span></code> (this means we have selected only the first <code class="docutils literal notranslate"><span class="pre">k</span></code> rows from every matrix in the stack <code class="docutils literal notranslate"><span class="pre">Vt</span></code> and all columns). If you are unfamiliar with the ellipsis syntax, it is a
+placeholder for other axes. For more details, see the documentation on <a class="reference external" href="https://numpy.org/devdocs/user/basics.indexing.html#basics-indexing">Indexing</a>.</p>
+<p>Now,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">approx_img</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 768, 1024)
+</pre></div>
+</div>
+</div>
+</div>
+<p>which is not the right shape for showing the image. Finally, reordering the axes back to our original shape of <code class="docutils literal notranslate"><span class="pre">(768,</span> <span class="pre">1024,</span> <span class="pre">3)</span></code>, we can see our approximation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">approx_img</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+</pre></div>
+</div>
+<img alt="../_images/tutorial-svd_80_1.png" src="../_images/tutorial-svd_80_1.png" />
+</div>
+</div>
+<p>Even though the image is not as sharp, using a small number of <code class="docutils literal notranslate"><span class="pre">k</span></code> singular values (compared to the original set of 768 values), we can recover many of the distinguishing features from this image.</p>
+</div>
+<div class="section" id="final-words">
+<h3>Final words<a class="headerlink" href="#final-words" title="Permalink to this headline">¶</a></h3>
+<p>Of course, this is not the best method to <em>approximate</em> an image. However, there is, in fact, a result in linear algebra that says that the approximation we built above is the best we can get to the original matrix in
+terms of the norm of the difference. For more information, see <em>G. H. Golub and C. F. Van Loan, Matrix Computations, Baltimore, MD, Johns Hopkins University Press, 1985</em>.</p>
+</div>
+</div>
+<div class="section" id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/dev/tutorial/index.html">Python tutorial</a></p></li>
+<li><p><a class="reference external" href="https://numpy.org/devdocs/reference/index.html#reference">NumPy Reference</a></p></li>
+<li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/tutorial/index.html">SciPy Tutorial</a></p></li>
+<li><p><a class="reference external" href="https://scipy-lectures.org">SciPy Lecture Notes</a></p></li>
+<li><p><a class="reference external" href="http://mathesaurus.sf.net/">A matlab, R, IDL, NumPy/SciPy dictionary</a></p></li>
+</ul>
+</div>
+</div>
+
+
+              </div>
+              
+            </div>
+        </div>
+    </div>
+    <div id="main-content" class="row noprint">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
         
               <div>
@@ -644,7 +1253,7 @@ compatible for multiplication. However, this is not true as <code class="docutil
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4372373828273098e-12
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.43712046073728e-12
 </pre></div>
 </div>
 </div>
@@ -808,7 +1417,7 @@ for us.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-5.527858986525969e-15, 1.0000000000000056)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-5.558487697898684e-15, 1.0000000000000053)
 </pre></div>
 </div>
 </div>
@@ -910,15 +1519,13 @@ terms of the norm of the difference. For more information, see <em>G. H. Golub a
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By the NumPy community<br/>
-        
-            &copy; Copyright 2020, the NumPy community.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By the NumPy community<br/>
+    
+        &copy; Copyright 2020, the NumPy community.<br/>
+  </p>
+</footer>
 </main>
 
 

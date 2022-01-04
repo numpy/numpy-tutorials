@@ -38,7 +38,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
@@ -231,7 +231,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -284,7 +284,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -354,7 +354,837 @@
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
+    <!-- Table of contents that is only displayed when printing the page -->
+    <div id="jb-print-docs-body" class="onlyprint">
+        <h1>Determining Moore’s Law with real data in NumPy</h1>
+        <!-- Table of contents -->
+        <div id="print-main-content" class="row">
+            <div class="col-12 col-md-12 pl-md-5 pr-md-5">
+            <div id="jb-print-toc">
+                
+                <div>
+                    <h2> Contents </h2>
+                </div>
+                <nav aria-label="Page">
+                    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-ll-do">
+   What you’ll do
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#skills-you-ll-learn">
+   Skills you’ll learn
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-ll-need">
+   What you’ll need
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#building-moore-s-law-as-an-exponential-function">
+   Building Moore’s law as an exponential function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loading-historical-manufacturing-data-to-your-workspace">
+   Loading historical manufacturing data to your workspace
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-the-historical-growth-curve-for-transistors">
+   Calculating the historical growth curve for transistors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sharing-your-results-as-zipped-arrays-and-a-csv">
+   Sharing your results as zipped arrays and a csv
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#zipping-the-arrays-into-a-file">
+     Zipping the arrays into a file
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-your-own-comma-separated-value-file">
+     Creating your own comma separated value file
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wrapping-up">
+   Wrapping up
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+                </nav>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="determining-moore-s-law-with-real-data-in-numpy">
+<h1>Determining Moore’s Law with real data in NumPy<a class="headerlink" href="#determining-moore-s-law-with-real-data-in-numpy" title="Permalink to this headline">¶</a></h1>
+<p><img alt="Scatter plot of MOS transistor count per microprocessor every two years as a demonstration of Moore's Law." src="../_images/01-mooreslaw-tutorial-intro.png" /></p>
+<p><em>The number of transistors reported per a given chip plotted on a log scale in the y axis with the date of introduction on the linear scale x-axis. The blue data points are from a <a class="reference external" href="https://en.wikipedia.org/wiki/Transistor_count#Microprocessors">transistor count table</a>. The red line is an ordinary least squares prediction and the orange line is Moore’s law.</em></p>
+<div class="section" id="what-you-ll-do">
+<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this headline">¶</a></h2>
+<p>In 1965, engineer Gordon Moore
+<a class="reference external" href="https://en.wikipedia.org/wiki/Moore%27s_law">predicted</a> that
+transistors on a chip would double every two years in the coming decade
+[<a class="reference external" href="https://en.wikipedia.org/wiki/Moore%27s_law">1</a>,
+<a class="reference external" href="https://newsroom.intel.com/wp-content/uploads/sites/11/2018/05/moores-law-electronics.pdf">2</a>].
+You’ll compare Moore’s prediction against actual transistor counts in
+the 53 years following his prediction. You will determine the best-fit constants to describe the exponential growth of transistors on semiconductors compared to Moore’s Law.</p>
+</div>
+<div class="section" id="skills-you-ll-learn">
+<h2>Skills you’ll learn<a class="headerlink" href="#skills-you-ll-learn" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Load data from a <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">*.csv</a> file</p></li>
+<li><p>Perform linear regression and predict exponential growth using ordinary least squares</p></li>
+<li><p>You’ll compare exponential growth constants between models</p></li>
+<li><p>Share your analysis in a file:</p>
+<ul>
+<li><p>as NumPy zipped files <code class="docutils literal notranslate"><span class="pre">*.npz</span></code></p></li>
+<li><p>as a <code class="docutils literal notranslate"><span class="pre">*.csv</span></code> file</p></li>
+</ul>
+</li>
+<li><p>Assess the amazing progress semiconductor manufacturers have made in the last five decades</p></li>
+</ul>
+</div>
+<div class="section" id="what-you-ll-need">
+<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this headline">¶</a></h2>
+<p><strong>1.</strong> These packages:</p>
+<ul class="simple">
+<li><p>NumPy</p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/">Matplotlib</a></p></li>
+<li><p><a class="reference external" href="https://www.statsmodels.org">statsmodels</a> ordinary linear regression</p></li>
+</ul>
+<p>imported with the following commands</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>2.</strong> Since this is an exponential growth law you need a little background in doing math with <a class="reference external" href="https://en.wikipedia.org/wiki/Natural_logarithm">natural logs</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Exponential_function">exponentials</a>.</p>
+<p>You’ll use these NumPy, Matplotlib, and statsmodels functions:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html"><code class="docutils literal notranslate"><span class="pre">np.loadtxt</span></code></a>: this function loads text into a NumPy array</p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.log.html"><code class="docutils literal notranslate"><span class="pre">np.log</span></code></a>: this function takes the natural log of all elements in a NumPy array</p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.exp.html"><code class="docutils literal notranslate"><span class="pre">np.exp</span></code></a>: this function takes the exponential of all elements in a NumPy array</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/ast.html?highlight=lambda#ast.Lambda"><code class="docutils literal notranslate"><span class="pre">lambda</span></code></a>: this is a minimal function definition for creating a function model</p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.semilogy.html"><code class="docutils literal notranslate"><span class="pre">plt.semilogy</span></code></a>: this function will plot x-y data onto a figure with a linear x-axis and <span class="math notranslate nohighlight">\(\log_{10}\)</span> y-axis
+<a class="reference external" href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.plot.html"><code class="docutils literal notranslate"><span class="pre">plt.plot</span></code></a>: this function will plot x-y data on linear axes</p></li>
+<li><p><a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html"><code class="docutils literal notranslate"><span class="pre">sm.OLS</span></code></a>: find fitting parameters and standard errors using the statsmodels ordinary least squares model</p></li>
+<li><p>slicing arrays: view parts of the data loaded into the workspace, slice the arrays e.g. <code class="docutils literal notranslate"><span class="pre">x[:10]</span></code> for the first 10 values in the array, <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
+<li><p>boolean array indexing: to view parts of the data that match a given condition use boolean operations to index an array</p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.block.html"><code class="docutils literal notranslate"><span class="pre">np.block</span></code></a>: to combine arrays into 2D arrays</p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html"><code class="docutils literal notranslate"><span class="pre">np.newaxis</span></code></a>: to change a 1D vector to a row or column vector</p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savez.html"><code class="docutils literal notranslate"><span class="pre">np.savez</span></code></a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html"><code class="docutils literal notranslate"><span class="pre">np.savetxt</span></code></a>: these two functions will save your arrays in zipped array format and text, respectively</p></li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="building-moore-s-law-as-an-exponential-function">
+<h2>Building Moore’s law as an exponential function<a class="headerlink" href="#building-moore-s-law-as-an-exponential-function" title="Permalink to this headline">¶</a></h2>
+<p>Your empirical model assumes that the number of transistors per
+semiconductor follows an exponential growth,</p>
+<p><span class="math notranslate nohighlight">\(\log(\text{transistor_count})= f(\text{year}) = A\cdot \text{year}+B,\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are fitting constants. You use semiconductor
+manufacturers’ data to find the fitting constants.</p>
+<p>You determine these constants for Moore’s law by specifying the
+rate for added transistors, 2, and giving an initial number of transistors for a given year.</p>
+<p>You state Moore’s law in an exponential form as follows,</p>
+<p><span class="math notranslate nohighlight">\(\text{transistor_count}= e^{A_M\cdot \text{year} +B_M}.\)</span></p>
+<p>Where <span class="math notranslate nohighlight">\(A_M\)</span> and <span class="math notranslate nohighlight">\(B_M\)</span> are constants that double the number of transistors every two years and start at 2250 transistors in 1971,</p>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\dfrac{\text{transistor_count}(\text{year} +2)}{\text{transistor_count}(\text{year})} = 2 = \dfrac{e^{B_M}e^{A_M \text{year} + 2A_M}}{e^{B_M}e^{A_M \text{year}}} = e^{2A_M} \rightarrow A_M = \frac{\log(2)}{2}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\log(2250) = \frac{\log(2)}{2}\cdot 1971 + B_M \rightarrow B_M = \log(2250)-\frac{\log(2)}{2}\cdot 1971\)</span></p></li>
+</ol>
+<p>so Moore’s law stated as an exponential function is</p>
+<p><span class="math notranslate nohighlight">\(\log(\text{transistor_count})= A_M\cdot \text{year}+B_M,\)</span></p>
+<p>where</p>
+<p><span class="math notranslate nohighlight">\(A_M=0.3466\)</span></p>
+<p><span class="math notranslate nohighlight">\(B_M=-675.4\)</span></p>
+<p>Since the function represents Moore’s law, define it as a Python
+function using
+<a class="reference external" href="https://docs.python.org/3/library/ast.html?highlight=lambda#ast.Lambda"><code class="docutils literal notranslate"><span class="pre">lambda</span></code></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">B_M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2250</span><span class="p">)</span> <span class="o">-</span> <span class="n">A_M</span> <span class="o">*</span> <span class="mi">1971</span>
+<span class="n">Moores_law</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">year</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">B_M</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">A_M</span> <span class="o">*</span> <span class="n">year</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In 1971, there were 2250 transistors on the Intel 4004 chip. Use
+<code class="docutils literal notranslate"><span class="pre">Moores_law</span></code> to check the number of semiconductors Gordon Moore would expect
+in 1973.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ML_1971</span> <span class="o">=</span> <span class="n">Moores_law</span><span class="p">(</span><span class="mi">1971</span><span class="p">)</span>
+<span class="n">ML_1973</span> <span class="o">=</span> <span class="n">Moores_law</span><span class="p">(</span><span class="mi">1973</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;In 1973, G. Moore expects </span><span class="si">{:.0f}</span><span class="s2"> transistors on Intels chips&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ML_1973</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is x</span><span class="si">{:.2f}</span><span class="s2"> more transistors than 1971&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ML_1973</span> <span class="o">/</span> <span class="n">ML_1971</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>In 1973, G. Moore expects 4500 transistors on Intels chips
+This is x2.00 more transistors than 1971
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="loading-historical-manufacturing-data-to-your-workspace">
+<h2>Loading historical manufacturing data to your workspace<a class="headerlink" href="#loading-historical-manufacturing-data-to-your-workspace" title="Permalink to this headline">¶</a></h2>
+<p>Now, make a prediction based upon the historical data for
+semiconductors per chip. The <a class="reference external" href="https://en.wikipedia.org/wiki/Transistor_count#Microprocessors">Transistor Count
+[4]</a>
+each year is in the <code class="docutils literal notranslate"><span class="pre">transistor_data.csv</span></code> file. Before loading a *.csv
+file into a NumPy array, its a good idea to inspect the structure of the
+file first. Then, locate the columns of interest and save them to a
+variable. Save two columns of the file to the array, <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
+<p>Here, print out the first 10 rows of <code class="docutils literal notranslate"><span class="pre">transistor_data.csv</span></code>. The columns are</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Processor</p></th>
+<th class="head"><p>MOS transistor count</p></th>
+<th class="head"><p>Date of Introduction</p></th>
+<th class="head"><p>Designer</p></th>
+<th class="head"><p>MOSprocess</p></th>
+<th class="head"><p>Area</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Intel 4004 (4-bit  16-pin)</p></td>
+<td><p>2250</p></td>
+<td><p>1971</p></td>
+<td><p>Intel</p></td>
+<td><p>“10,000 nm”</p></td>
+<td><p>12 mm²</p></td>
+</tr>
+<tr class="row-odd"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span> head transistor_data.csv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Processor,MOS transistor count,Date of Introduction,Designer,MOSprocess,Area
+Intel 4004 (4-bit  16-pin),2250,1971,Intel,&quot;10,000 nm&quot;,12 mm²
+Intel 8008 (8-bit  18-pin),3500,1972,Intel,&quot;10,000 nm&quot;,14 mm²
+NEC μCOM-4 (4-bit  42-pin),2500,1973,NEC,&quot;7,500 nm&quot;,?
+Intel 4040 (4-bit  16-pin),3000,1974,Intel,&quot;10,000 nm&quot;,12 mm²
+Motorola 6800 (8-bit  40-pin),4100,1974,Motorola,&quot;6,000 nm&quot;,16 mm²
+Intel 8080 (8-bit  40-pin),6000,1974,Intel,&quot;6,000 nm&quot;,20 mm²
+TMS 1000 (4-bit  28-pin),8000,1974,Texas Instruments,&quot;8,000 nm&quot;,11 mm²
+MOS Technology 6502 (8-bit  40-pin),4528,1975,MOS Technology,&quot;8,000 nm&quot;,21 mm²
+Intersil IM6100 (12-bit  40-pin; clone of PDP-8),4000,1975,Intersil,,
+</pre></div>
+</div>
+</div>
+</div>
+<p>You don’t need the columns that specify <strong>Processor</strong>, <strong>Designer</strong>,
+<strong>MOSprocess</strong>, or <strong>Area</strong>. That leaves the second and third columns,
+<strong>MOS transistor count</strong> and <strong>Date of Introduction</strong>, respectively.</p>
+<p>Next, you load these two columns into a NumPy array using
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html"><code class="docutils literal notranslate"><span class="pre">np.loadtxt</span></code></a>.
+The extra options below will put the data in the desired format:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">delimiter</span> <span class="pre">=</span> <span class="pre">','</span></code>: specify delimeter as a comma ‘,’ (this is the default behavior)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">usecols</span> <span class="pre">=</span> <span class="pre">[1,2]</span></code>: import the second and third columns from the csv</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skiprows</span> <span class="pre">=</span> <span class="pre">1</span></code>: do not use the first row, because its a header row</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;transistor_data.csv&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You loaded the entire history of semiconducting into a NumPy array named
+<code class="docutils literal notranslate"><span class="pre">data</span></code>. The first column is the <strong>MOS transistor count</strong> and the second
+column is the <strong>Date of Introduction</strong> in a four-digit year.</p>
+<p>Next, make the data easier to read and manage by assigning the two
+columns to variables, <code class="docutils literal notranslate"><span class="pre">year</span></code> and <code class="docutils literal notranslate"><span class="pre">transistor_count</span></code>. Print out the first
+10 values by slicing the <code class="docutils literal notranslate"><span class="pre">year</span></code> and <code class="docutils literal notranslate"><span class="pre">transistor_count</span></code> arrays with
+<code class="docutils literal notranslate"><span class="pre">[:10]</span></code>. Print these values out to check that you have the saved the
+data to the correct variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">year</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># grab the second column and assign</span>
+<span class="n">transistor_count</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># grab the first column and assign</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;year:</span><span class="se">\t\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;trans. cnt:</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">transistor_count</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>year:		 [1971. 1972. 1973. 1974. 1974. 1974. 1974. 1975. 1975. 1975.]
+trans. cnt:	 [2250. 3500. 2500. 3000. 4100. 6000. 8000. 4528. 4000. 5000.]
+</pre></div>
+</div>
+</div>
+</div>
+<p>You are creating a function that predicts the transistor count given a
+year. You have an <em>independent variable</em>, <code class="docutils literal notranslate"><span class="pre">year</span></code>, and a <em>dependent
+variable</em>, <code class="docutils literal notranslate"><span class="pre">transistor_count</span></code>. Transform the independent variable to
+log-scale,</p>
+<p><span class="math notranslate nohighlight">\(y_i = \log(\)</span> <code class="docutils literal notranslate"><span class="pre">transistor_count[i]</span></code> <span class="math notranslate nohighlight">\(),\)</span></p>
+<p>resulting in a linear equation,</p>
+<p><span class="math notranslate nohighlight">\(y_i = A\cdot \text{year} +B\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">transistor_count</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="calculating-the-historical-growth-curve-for-transistors">
+<h2>Calculating the historical growth curve for transistors<a class="headerlink" href="#calculating-the-historical-growth-curve-for-transistors" title="Permalink to this headline">¶</a></h2>
+<p>Your model assume that <code class="docutils literal notranslate"><span class="pre">yi</span></code> is a function of <code class="docutils literal notranslate"><span class="pre">year</span></code>. Now, find the best-fit model that minimizes the difference between <span class="math notranslate nohighlight">\(y_i\)</span> and <span class="math notranslate nohighlight">\(A\cdot \text{year} +B, \)</span> as such</p>
+<p><span class="math notranslate nohighlight">\(\min \sum|y_i - (A\cdot \text{year}_i + B)|^2.\)</span></p>
+<p>This <a class="reference external" href="https://en.wikipedia.org/wiki/Ordinary_least_squares">sum of squares
+error</a> can be
+succinctly represented as arrays as such</p>
+<p><span class="math notranslate nohighlight">\(\sum|\mathbf{y}-\mathbf{Z} [A,~B]^T|^2,\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> are the observations of the log of the number of
+transistors in a 1D array and <span class="math notranslate nohighlight">\(\mathbf{Z}=[\text{year}_i^1,~\text{year}_i^0]\)</span> are the
+polynomial terms for <span class="math notranslate nohighlight">\(\text{year}_i\)</span> in the first and second columns. By
+creating this set of regressors in the <span class="math notranslate nohighlight">\(\mathbf{Z}-\)</span>matrix you set
+up an ordinary least squares statistical model. Some clever
+NumPy array features will build <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span></p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">year[:,np.newaxis]</span></code> : takes the 1D array with shape <code class="docutils literal notranslate"><span class="pre">(179,)</span></code> and turns it into a 2D column vector with shape <code class="docutils literal notranslate"><span class="pre">(179,1)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">**[1,</span> <span class="pre">0]</span></code> : stacks two columns, in the first column is <code class="docutils literal notranslate"><span class="pre">year**1</span></code> and the second column is <code class="docutils literal notranslate"><span class="pre">year**0</span> <span class="pre">==</span> <span class="pre">1</span></code></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Z</span> <span class="o">=</span> <span class="n">year</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">**</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that you have the created a matrix of regressors, <span class="math notranslate nohighlight">\(\mathbf{Z},\)</span> and
+the observations are in vector, <span class="math notranslate nohighlight">\(\mathbf{y},\)</span> you can use these
+variables to build the an ordinary least squares model with
+<a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html"><code class="docutils literal notranslate"><span class="pre">sm.OLS</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">yi</span><span class="p">,</span> <span class="n">Z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, you can view the fitting constants, <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>, and their standard
+errors.  Run the
+<a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html"><code class="docutils literal notranslate"><span class="pre">fit</span></code></a> and print the
+<a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.summary.html"><code class="docutils literal notranslate"><span class="pre">summary</span></code></a> to view results as such,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.949
+Model:                            OLS   Adj. R-squared:                  0.949
+Method:                 Least Squares   F-statistic:                     3309.
+Date:                Tue, 04 Jan 2022   Prob (F-statistic):          1.75e-116
+Time:                        21:35:21   Log-Likelihood:                -273.43
+No. Observations:                 179   AIC:                             550.9
+Df Residuals:                     177   BIC:                             557.2
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+x1             0.3416      0.006     57.521      0.000       0.330       0.353
+const       -666.3264     11.890    -56.042      0.000    -689.790    -642.862
+==============================================================================
+Omnibus:                      128.297   Durbin-Watson:                   1.600
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             1184.322
+Skew:                          -2.637   Prob(JB):                    6.73e-258
+Kurtosis:                      14.444   Cond. No.                     2.84e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.84e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <strong>OLS Regression Results</strong> summary gives a lot of information about
+the regressors, <span class="math notranslate nohighlight">\(\mathbf{Z},\)</span> and observations, <span class="math notranslate nohighlight">\(\mathbf{y}.\)</span> The most
+important outputs for your current analysis are</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">=================================</span>
+                 <span class="n">coef</span>    <span class="n">std</span> <span class="n">err</span>
+<span class="o">---------------------------------</span>
+<span class="n">x1</span>             <span class="mf">0.3416</span>      <span class="mf">0.006</span>
+<span class="n">const</span>       <span class="o">-</span><span class="mf">666.3264</span>     <span class="mf">11.890</span>
+<span class="o">=================================</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">x1</span></code> is slope, <span class="math notranslate nohighlight">\(A=0.3416\)</span>, <code class="docutils literal notranslate"><span class="pre">const</span></code> is the intercept,
+<span class="math notranslate nohighlight">\(B=-666.364\)</span>, and <code class="docutils literal notranslate"><span class="pre">std</span> <span class="pre">error</span></code> gives the precision of constants
+<span class="math notranslate nohighlight">\(A=0.342\pm 0.006~\dfrac{\log(\text{transistors}/\text{chip})}{\text{years}}\)</span> and <span class="math notranslate nohighlight">\(B=-666\pm
+12~\log(\text{transistors}/\text{chip}),\)</span> where the units are in
+<span class="math notranslate nohighlight">\(\log(\text{transistors}/\text{chip})\)</span>. You created an exponential growth model.
+To get the constants, save them to an array <code class="docutils literal notranslate"><span class="pre">AB</span></code> with
+<code class="docutils literal notranslate"><span class="pre">results.params</span></code> and assign <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> to <code class="docutils literal notranslate"><span class="pre">x1</span></code> and <code class="docutils literal notranslate"><span class="pre">constant</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">AB</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">params</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">AB</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">AB</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Did manufacturers double the transistor count every two years? You have
+the final formula,</p>
+<p><span class="math notranslate nohighlight">\(\dfrac{\text{transistor_count}(\text{year} +2)}{\text{transistor_count}(\text{year})} = xFactor =
+\dfrac{e^{B}e^{A( \text{year} + 2)}}{e^{B}e^{A \text{year}}} = e^{2A}\)</span></p>
+<p>where increase in number of transistors is <span class="math notranslate nohighlight">\(xFactor,\)</span> number of years is
+2, and <span class="math notranslate nohighlight">\(A\)</span> is the best fit slope on the semilog function. The error in
+your
+prediction, <span class="math notranslate nohighlight">\(\Delta(xFactor),\)</span> comes from the precision of your constant
+<span class="math notranslate nohighlight">\(A,\)</span> which you calculated as the standard error <span class="math notranslate nohighlight">\(\Delta A= 0.006\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\Delta (xFactor) = \frac{\partial}{\partial A}(e^{2A})\Delta A = 2Ae^{2A}\Delta A\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rate of semiconductors added on a chip every 2 years:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">x</span><span class="si">{:.2f}</span><span class="s2"> +/- </span><span class="si">{:.2f}</span><span class="s2"> semiconductors per chip&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">A</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.006</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rate of semiconductors added on a chip every 2 years:
+	x1.98 +/- 0.01 semiconductors per chip
+</pre></div>
+</div>
+</div>
+</div>
+<p>Based upon your least-squares regression model, the number of
+semiconductors per chip increased by a factor of <span class="math notranslate nohighlight">\(1.98\pm 0.01\)</span> every two
+years. You have a model that predicts the number of semiconductors each
+year. Now compare your model to the actual manufacturing reports.  Plot
+the linear regression results and all of the transistor counts.</p>
+<p>Here, use
+<a class="reference external" href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.semilogy.html"><code class="docutils literal notranslate"><span class="pre">plt.semilogy</span></code></a>
+to plot the number of transistors on a log-scale and the year on a
+linear scale. You have defined a three arrays to get to a final model</p>
+<p><span class="math notranslate nohighlight">\(y_i = \log(\text{transistor_count}),\)</span></p>
+<p><span class="math notranslate nohighlight">\(y_i = A \cdot \text{year} + B,\)</span></p>
+<p>and</p>
+<p><span class="math notranslate nohighlight">\(\log(\text{transistor_count}) = A\cdot \text{year} + B,\)</span></p>
+<p>your variables, <code class="docutils literal notranslate"><span class="pre">transistor_count</span></code>, <code class="docutils literal notranslate"><span class="pre">year</span></code>, and <code class="docutils literal notranslate"><span class="pre">yi</span></code> all have the same
+dimensions, <code class="docutils literal notranslate"><span class="pre">(179,)</span></code>. NumPy arrays need the same dimensions to make a
+plot. The predicted number of transistors is now</p>
+<p><span class="math notranslate nohighlight">\(\text{transistor_count}_{\text{predicted}} = e^Be^{A\cdot \text{year}}\)</span>.</p>
+<p>In the next plot, use the
+<a class="reference external" href="https://matplotlib.org/3.1.1/gallery/style_sheets/fivethirtyeight.html"><code class="docutils literal notranslate"><span class="pre">fivethirtyeight</span></code></a>
+style sheet.
+The style sheet replicates
+https://fivethirtyeight.com elements. Change the matplotlib style with
+<a class="reference external" href="https://matplotlib.org/3.3.2/api/style_api.html#matplotlib.style.use"><code class="docutils literal notranslate"><span class="pre">plt.style.use</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transistor_count_predicted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">B</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">A</span> <span class="o">*</span> <span class="n">year</span><span class="p">)</span>
+<span class="n">transistor_Moores_law</span> <span class="o">=</span> <span class="n">Moores_law</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;fivethirtyeight&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">transistor_count</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MOS transistor count&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">transistor_count_predicted</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;linear regression&quot;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">transistor_Moores_law</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Moore&#39;s Law&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
+    <span class="s2">&quot;MOS transistor count per microprocessor</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="o">+</span> <span class="s2">&quot;every two years </span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="o">+</span> <span class="s2">&quot;Transistor count was x</span><span class="si">{:.2f}</span><span class="s2"> higher&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">A</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;year introduced&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;# of transistors</span><span class="se">\n</span><span class="s2">per microprocessor&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;# of transistors\nper microprocessor&#39;)
+</pre></div>
+</div>
+<img alt="../_images/mooreslaw-tutorial_27_1.png" src="../_images/mooreslaw-tutorial_27_1.png" />
+</div>
+</div>
+<p><em>A scatter plot of MOS transistor count per microprocessor every two years with a red line for the ordinary least squares prediction and an orange line for Moore’s law.</em></p>
+<p>The linear regression captures the increase in the number of transistors
+per semiconductors each year.  In 2015, semiconductor manufacturers
+claimed they could not keep up with Moore’s law anymore. Your analysis
+shows that since 1971, the average increase in transistor count was
+x1.98 every 2 years, but Gordon Moore predicted it would be x2
+every 2 years. That is an amazing prediction.</p>
+<p>Consider the year 2017. Compare the data to your linear regression
+model and Gordon Moore’s prediction. First, get the
+transistor counts from the year 2017. You can do this with a Boolean
+comparator,</p>
+<p><code class="docutils literal notranslate"><span class="pre">year</span> <span class="pre">==</span> <span class="pre">2017</span></code>.</p>
+<p>Then, make a prediction for 2017 with <code class="docutils literal notranslate"><span class="pre">Moores_law</span></code> defined above
+and plugging in your best fit constants into your function</p>
+<p><span class="math notranslate nohighlight">\(\text{transistor_count} = e^{B}e^{A\cdot \text{year}}\)</span>.</p>
+<p>A great way to compare these measurements is to compare your prediction
+and Moore’s prediction to the average transistor count and look at the
+range of reported values for that year. Use the
+<a class="reference external" href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.plot.html"><code class="docutils literal notranslate"><span class="pre">plt.plot</span></code></a>
+option,
+<a class="reference external" href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.artist.Artist.set_alpha.html"><code class="docutils literal notranslate"><span class="pre">alpha=0.2</span></code></a>,
+to increase the transparency of the data. The more opaque the points
+appear, the more reported values lie on that measurement. The green <span class="math notranslate nohighlight">\(+\)</span>
+is the average reported transistor count for 2017. Plot your predictions
+for $\pm\frac{1}{2}~years.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transistor_count2017</span> <span class="o">=</span> <span class="n">transistor_count</span><span class="p">[</span><span class="n">year</span> <span class="o">==</span> <span class="mi">2017</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="n">transistor_count2017</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">transistor_count2017</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">transistor_count2017</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">2016.5</span><span class="p">,</span> <span class="mf">2017.5</span><span class="p">)</span>
+<span class="n">your_model2017</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">B</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">A</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">Moore_Model2017</span> <span class="o">=</span> <span class="n">Moores_law</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="mi">2017</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">year</span> <span class="o">==</span> <span class="mi">2017</span><span class="p">)),</span>
+    <span class="n">transistor_count2017</span><span class="p">,</span>
+    <span class="s2">&quot;ro&quot;</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;2017&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="n">transistor_count2017</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="s2">&quot;g+&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">mew</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">your_model2017</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Your prediction&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">Moore_Model2017</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Moores law&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;# of transistors</span><span class="se">\n</span><span class="s2">per microprocessor&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19200000000.0 250000000.0 7050000000.0
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f5c0f914250&gt;
+</pre></div>
+</div>
+<img alt="../_images/mooreslaw-tutorial_29_2.png" src="../_images/mooreslaw-tutorial_29_2.png" />
+</div>
+</div>
+<p>The result is that your model is close to the mean, but Gordon
+Moore’s prediction is closer to the maximum number of transistors per
+microprocessor produced in 2017. Even though semiconductor manufacturers
+thought that the growth would slow, once in 1975 and now again
+approaching 2025, manufacturers are still producing semiconductors every 2 years that
+nearly double the number of transistors.</p>
+<p>The linear regression model is much better at predicting the
+average than extreme values because it satisfies the condition to
+minimize <span class="math notranslate nohighlight">\(\sum |y_i - A\cdot \text{year}[i]+B|^2\)</span>.</p>
+</div>
+<div class="section" id="sharing-your-results-as-zipped-arrays-and-a-csv">
+<h2>Sharing your results as zipped arrays and a csv<a class="headerlink" href="#sharing-your-results-as-zipped-arrays-and-a-csv" title="Permalink to this headline">¶</a></h2>
+<p>The last step, is to share your findings. You created
+new arrays that represent a linear regression model and Gordon Moore’s
+prediction. You started this process by importing a csv file into a NumPy
+array using <code class="docutils literal notranslate"><span class="pre">np.loadtxt</span></code>, to save your model use two approaches</p>
+<ol class="simple">
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savez.html"><code class="docutils literal notranslate"><span class="pre">np.savez</span></code></a>: save NumPy arrays for other Python sessions</p></li>
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html"><code class="docutils literal notranslate"><span class="pre">np.savetxt</span></code></a>: save a csv file with the original data and your predicted data</p></li>
+</ol>
+<div class="section" id="zipping-the-arrays-into-a-file">
+<h3>Zipping the arrays into a file<a class="headerlink" href="#zipping-the-arrays-into-a-file" title="Permalink to this headline">¶</a></h3>
+<p>Using <code class="docutils literal notranslate"><span class="pre">np.savez</span></code>, you can save thousands of arrays and give them names. The
+function <code class="docutils literal notranslate"><span class="pre">np.load</span></code> will load the arrays back into the workspace as a
+dictionary. You’ll save a five arrays so the next user will have the year,
+transistor count, predicted transistor count,  Gordon Moore’s
+predicted count, and fitting constants. Add one more variable that other users can use to
+understand the model, <code class="docutils literal notranslate"><span class="pre">notes</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">notes</span> <span class="o">=</span> <span class="s2">&quot;the arrays in this file are the result of a linear regression model</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="n">notes</span> <span class="o">+=</span> <span class="s2">&quot;the arrays include</span><span class="se">\n</span><span class="s2">year: year of manufacture</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="n">notes</span> <span class="o">+=</span> <span class="s2">&quot;transistor_count: number of transistors reported by manufacturers in a given year</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="n">notes</span> <span class="o">+=</span> <span class="s2">&quot;transistor_count_predicted: linear regression model = exp(</span><span class="si">{:.2f}</span><span class="s2">)*exp(</span><span class="si">{:.2f}</span><span class="s2">*year)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="n">B</span><span class="p">,</span> <span class="n">A</span>
+<span class="p">)</span>
+<span class="n">notes</span> <span class="o">+=</span> <span class="s2">&quot;transistor_Moores_law: Moores law =exp(</span><span class="si">{:.2f}</span><span class="s2">)*exp(</span><span class="si">{:.2f}</span><span class="s2">*year)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="n">B_M</span><span class="p">,</span> <span class="n">A_M</span>
+<span class="p">)</span>
+<span class="n">notes</span> <span class="o">+=</span> <span class="s2">&quot;regression_csts: linear regression constants A and B for log(transistor_count)=A*year+B&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>the arrays in this file are the result of a linear regression model
+the arrays include
+year: year of manufacture
+transistor_count: number of transistors reported by manufacturers in a given year
+transistor_count_predicted: linear regression model = exp(-666.33)*exp(0.34*year)
+transistor_Moores_law: Moores law =exp(-675.38)*exp(0.35*year)
+regression_csts: linear regression constants A and B for log(transistor_count)=A*year+B
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">savez</span><span class="p">(</span>
+    <span class="s2">&quot;mooreslaw_regression.npz&quot;</span><span class="p">,</span>
+    <span class="n">notes</span><span class="o">=</span><span class="n">notes</span><span class="p">,</span>
+    <span class="n">year</span><span class="o">=</span><span class="n">year</span><span class="p">,</span>
+    <span class="n">transistor_count</span><span class="o">=</span><span class="n">transistor_count</span><span class="p">,</span>
+    <span class="n">transistor_count_predicted</span><span class="o">=</span><span class="n">transistor_count_predicted</span><span class="p">,</span>
+    <span class="n">transistor_Moores_law</span><span class="o">=</span><span class="n">transistor_Moores_law</span><span class="p">,</span>
+    <span class="n">regression_csts</span><span class="o">=</span><span class="n">AB</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;mooreslaw_regression.npz&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;regression_csts&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-666.3264063536254
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span> ls
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mooreslaw_regression.csv
+mooreslaw_regression.npz
+mooreslaw-tutorial.md
+pairing.md
+save-load-arrays.md
+_static
+text_preprocessing.py
+transistor_data.csv
+tutorial-deep-learning-on-mnist.md
+tutorial-deep-reinforcement-learning-with-pong-from-pixels.md
+tutorial-ma.md
+tutorial-nlp-from-scratch
+tutorial-nlp-from-scratch.md
+tutorial-plotting-fractals
+tutorial-plotting-fractals.md
+tutorial-static_equilibrium.md
+tutorial-style-guide.md
+tutorial-svd.md
+tutorial-x-ray-image-processing
+tutorial-x-ray-image-processing.md
+who_covid_19_sit_rep_time_series.csv
+x_y-squared.csv
+x_y-squared.npz
+</pre></div>
+</div>
+</div>
+</div>
+<p>The benefit of <code class="docutils literal notranslate"><span class="pre">np.savez</span></code> is you can save hundreds of arrays with
+different shapes and types. Here, you saved 4 arrays that are double
+precision floating point numbers shape = <code class="docutils literal notranslate"><span class="pre">(179,)</span></code>, one array that was
+text, and one array of double precision floating point numbers shape =
+<code class="docutils literal notranslate"><span class="pre">(2,).</span></code> This is the preferred method for saving NumPy arrays for use in
+another analysis.</p>
+</div>
+<div class="section" id="creating-your-own-comma-separated-value-file">
+<h3>Creating your own comma separated value file<a class="headerlink" href="#creating-your-own-comma-separated-value-file" title="Permalink to this headline">¶</a></h3>
+<p>If you want to share data and view the results in a table, then you have to
+create a text file. Save the data using <code class="docutils literal notranslate"><span class="pre">np.savetxt</span></code>. This
+function is more limited than <code class="docutils literal notranslate"><span class="pre">np.savez</span></code>. Delimited files, like csv’s,
+need 2D arrays.</p>
+<p>Prepare the data for export by creating a new 2D array whose columns
+contain the data of interest.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">header</span></code> option to describe the data and the columns of
+the file. Define another variable that contains file
+information as <code class="docutils literal notranslate"><span class="pre">head</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">head</span> <span class="o">=</span> <span class="s2">&quot;the columns in this file are the result of a linear regression model</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="n">head</span> <span class="o">+=</span> <span class="s2">&quot;the columns include</span><span class="se">\n</span><span class="s2">year: year of manufacture</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="n">head</span> <span class="o">+=</span> <span class="s2">&quot;transistor_count: number of transistors reported by manufacturers in a given year</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="n">head</span> <span class="o">+=</span> <span class="s2">&quot;transistor_count_predicted: linear regression model = exp(</span><span class="si">{:.2f}</span><span class="s2">)*exp(</span><span class="si">{:.2f}</span><span class="s2">*year)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="n">B</span><span class="p">,</span> <span class="n">A</span>
+<span class="p">)</span>
+<span class="n">head</span> <span class="o">+=</span> <span class="s2">&quot;transistor_Moores_law: Moores law =exp(</span><span class="si">{:.2f}</span><span class="s2">)*exp(</span><span class="si">{:.2f}</span><span class="s2">*year)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="n">B_M</span><span class="p">,</span> <span class="n">A_M</span>
+<span class="p">)</span>
+<span class="n">head</span> <span class="o">+=</span> <span class="s2">&quot;year:, transistor_count:, transistor_count_predicted:, transistor_Moores_law:&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>the columns in this file are the result of a linear regression model
+the columns include
+year: year of manufacture
+transistor_count: number of transistors reported by manufacturers in a given year
+transistor_count_predicted: linear regression model = exp(-666.33)*exp(0.34*year)
+transistor_Moores_law: Moores law =exp(-675.38)*exp(0.35*year)
+year:, transistor_count:, transistor_count_predicted:, transistor_Moores_law:
+</pre></div>
+</div>
+</div>
+</div>
+<p>Build a single 2D array to export to csv. Tabular data is inherently two
+dimensional. You need to organize your data to fit this 2D structure.
+Use <code class="docutils literal notranslate"><span class="pre">year</span></code>, <code class="docutils literal notranslate"><span class="pre">transistor_count</span></code>, <code class="docutils literal notranslate"><span class="pre">transistor_count_predicted</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">transistor_Moores_law</span></code> as the first through fourth columns,
+respectively. Put the calculated constants in the header since they do
+not fit the <code class="docutils literal notranslate"><span class="pre">(179,)</span></code> shape. The
+<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.block.html"><code class="docutils literal notranslate"><span class="pre">np.block</span></code></a>
+function appends arrays together to create a new, larger array. Arrange
+the 1D vectors as columns using
+<a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html"><code class="docutils literal notranslate"><span class="pre">np.newaxis</span></code></a>
+e.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">year</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(179,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">year</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(179,1)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">block</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">year</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span>
+        <span class="n">transistor_count</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span>
+        <span class="n">transistor_count_predicted</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span>
+        <span class="n">transistor_Moores_law</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Creating the <code class="docutils literal notranslate"><span class="pre">mooreslaw_regression.csv</span></code> with <code class="docutils literal notranslate"><span class="pre">np.savetxt</span></code>, use three
+options to create the desired file format:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">output</span></code> : use <code class="docutils literal notranslate"><span class="pre">output</span></code> block to write the data into the file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">delimiter</span> <span class="pre">=</span> <span class="pre">','</span></code> : use commas to separate columns in the file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">header</span> <span class="pre">=</span> <span class="pre">head</span></code> : use the header <code class="docutils literal notranslate"><span class="pre">head</span></code> defined above</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s2">&quot;mooreslaw_regression.csv&quot;</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">output</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">head</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span> head mooreslaw_regression.csv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># the columns in this file are the result of a linear regression model
+# the columns include
+# year: year of manufacture
+# transistor_count: number of transistors reported by manufacturers in a given year
+# transistor_count_predicted: linear regression model = exp(-666.33)*exp(0.34*year)
+# transistor_Moores_law: Moores law =exp(-675.38)*exp(0.35*year)
+# year:, transistor_count:, transistor_count_predicted:, transistor_Moores_law:
+1.971000000000000000e+03,2.250000000000000000e+03,1.130514785642334573e+03,2.249999999999916326e+03
+1.972000000000000000e+03,3.500000000000000000e+03,1.590908400344209895e+03,3.181980515339620069e+03
+1.973000000000000000e+03,2.500000000000000000e+03,2.238793840142230238e+03,4.500000000000097316e+03
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="wrapping-up">
+<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this headline">¶</a></h2>
+<p>In conclusion, you have compared historical data for semiconductor
+manufacturers to Moore’s law and created a linear regression model to
+find the average number of transistors added to each microprocessor
+every two years. Gordon Moore predicted the number of transistors would
+double every two years from 1965 through 1975, but the average growth
+has maintained a consistent increase of <span class="math notranslate nohighlight">\(\times 1.98 \pm 0.01\)</span> every two
+years from 1971 through 2019.  In 2015, Moore revised his prediction to
+say Moore’s law should hold until 2025.
+[<a class="reference external" href="https://spectrum.ieee.org/computing/hardware/gordon-moore-the-man-whose-name-means-progress">3</a>].
+You can share these results as a zipped NumPy array file,
+<code class="docutils literal notranslate"><span class="pre">mooreslaw_regression.npz</span></code>, or as another csv,
+<code class="docutils literal notranslate"><span class="pre">mooreslaw_regression.csv</span></code>.  The amazing progress in semiconductor
+manufacturing has enabled new industries and computational power. This
+analysis should give you a small insight into how incredible this growth
+has been over the last half-century.</p>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Moore%27s_law">“Moore’s Law.” Wikipedia article. Accessed Oct. 1, 2020.</a></p></li>
+<li><p><a class="reference external" href="https://newsroom.intel.com/wp-content/uploads/sites/11/2018/05/moores-law-electronics.pdf">Moore, Gordon E. (1965-04-19). “Cramming more components onto integrated circuits”. intel.com. Electronics Magazine. Retrieved April 1, 2020.</a></p></li>
+<li><p><a class="reference external" href="https://spectrum.ieee.org/computing/hardware/gordon-moore-the-man-whose-name-means-progress">Courtland, Rachel. “Gordon Moore: The Man Whose Name Means Progress.” IEEE Spectrum. 30 Mar. 2015.</a>.</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Transistor_count#Microprocessors">“Transistor Count.” Wikipedia article. Accessed Oct. 1, 2020.</a></p></li>
+</ol>
+</div>
+</div>
+
+
+              </div>
+              
+            </div>
+        </div>
+    </div>
+    <div id="main-content" class="row noprint">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
         
               <div>
@@ -646,8 +1476,8 @@ errors.  Run the
 Dep. Variable:                      y   R-squared:                       0.949
 Model:                            OLS   Adj. R-squared:                  0.949
 Method:                 Least Squares   F-statistic:                     3309.
-Date:                Tue, 30 Nov 2021   Prob (F-statistic):          1.75e-116
-Time:                        22:22:14   Log-Likelihood:                -273.43
+Date:                Tue, 04 Jan 2022   Prob (F-statistic):          1.75e-116
+Time:                        21:35:21   Log-Likelihood:                -273.43
 No. Observations:                 179   AIC:                             550.9
 Df Residuals:                     177   BIC:                             557.2
 Df Model:                           1                                         
@@ -833,7 +1663,7 @@ for $\pm\frac{1}{2}~years.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19200000000.0 250000000.0 7050000000.0
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f9917eb02e0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f5c0f914250&gt;
 </pre></div>
 </div>
 <img alt="../_images/mooreslaw-tutorial_29_2.png" src="../_images/mooreslaw-tutorial_29_2.png" />
@@ -1131,15 +1961,13 @@ has been over the last half-century.</p>
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By the NumPy community<br/>
-        
-            &copy; Copyright 2020, the NumPy community.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By the NumPy community<br/>
+    
+        &copy; Copyright 2020, the NumPy community.<br/>
+  </p>
+</footer>
 </main>
 
 

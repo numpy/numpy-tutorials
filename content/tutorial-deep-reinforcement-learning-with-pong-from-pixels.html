@@ -38,7 +38,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -229,7 +229,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -282,7 +282,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -369,9 +369,98 @@
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+    <!-- Table of contents that is only displayed when printing the page -->
+    <div id="jb-print-docs-body" class="onlyprint">
+        <h1>Deep reinforcement learning with Pong from pixels</h1>
+        <!-- Table of contents -->
+        <div id="print-main-content" class="row">
+            <div class="col-12 col-md-12 pl-md-5 pr-md-5">
+            <div id="jb-print-toc">
+                
+                <div>
+                    <h2> Contents </h2>
+                </div>
+                <nav aria-label="Page">
+                    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#table-of-contents">
+   Table of contents
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-note-on-rl-and-deep-rl">
+     A note on RL and deep RL
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deep-rl-glossary">
+     Deep RL glossary
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-up-pong">
+   Set up Pong
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preprocess-frames-the-observation">
+   Preprocess frames (the observation)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-the-policy-the-neural-network-and-the-forward-pass">
+   Create the policy (the neural network) and the forward pass
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-up-the-update-step-backpropagation">
+   Set up the update step (backpropagation)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#define-the-discounted-rewards-expected-return-function">
+   Define the discounted rewards (expected return) function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#train-the-agent-for-a-number-of-episodes">
+   Train the agent for a number of episodes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-steps">
+   Next steps
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#appendix">
+   Appendix
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#notes-on-rl-and-deep-rl">
+     Notes on RL and deep RL
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-to-set-up-video-playback-in-your-jupyter-notebook">
+     How to set up video playback in your Jupyter notebook
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                </nav>
+            </div>
+            
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="deep-reinforcement-learning-with-pong-from-pixels">
@@ -545,7 +634,7 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(210, 160, 3)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7ff5e62f9ee0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f5736d9afd0&gt;
 </pre></div>
 </div>
 <img alt="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_14_2.png" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_14_2.png" />
@@ -1013,6 +1102,17 @@ Episode 0: Game finished. Reward: -1.0...
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
 Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
 Episode 0: Game finished. Reward: -1.0...
 </pre></div>
 </div>
@@ -1026,20 +1126,27 @@ Episode 0: Game finished. Reward: -1.0...
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
 Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -21.0 Running mean: -21.0
 Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
 </pre></div>
 </div>
@@ -1049,45 +1156,32 @@ Episode 1: Game finished. Reward: -1.0...
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -21.0 Running mean: -21.0
 Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
@@ -1096,25 +1190,942 @@ Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: 1.0... POSITIVE REWARD!
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: 1.0... POSITIVE REWARD!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -20.0 Running mean: -20.99
+Episode 3: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+</div>
+</div>
+<p>A few notes:</p>
+<ul class="simple">
+<li><p>If you have previously run an experiment and want to repeat it, your <code class="docutils literal notranslate"><span class="pre">Monitor</span></code> instance may still be running, which may throw an error the next time you try to traini the agent. Therefore, you should first shut down <code class="docutils literal notranslate"><span class="pre">Monitor</span></code> by calling <code class="docutils literal notranslate"><span class="pre">env.close()</span></code> by uncommenting and running the cell below:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># env.close()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>In Pong, if a player doesn’t hit the ball back, they receive a negative reward (-1) and the other player gets a +1 reward. The rewards that the agent receives by playing Pong have a significant variance. Therefore, it’s best practice to normalize them with the same mean (using <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.mean.html"><code class="docutils literal notranslate"><span class="pre">np.mean()</span></code></a>) and standard deviation (using NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.std.html?highlight=std"><code class="docutils literal notranslate"><span class="pre">np.std()</span></code></a>).</p></li>
+<li><p>When using only NumPy, the deep RL training process, including backpropagation, spans several lines of code that may appear quite long. One of the main reasons for this is you’re not using a deep learning framework with an automatic differentiation library that usually simplifies such experiments. This tutorial shows how to perform everything from scratch but you can also use one of many Python-based frameworks with “autodiff” and “autograd”, which you will learn about at the end of the tutorial.</p></li>
+</ul>
+</div>
+<div class="section" id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>You may notice that training an RL agent takes a long time if you increase the number of episodes from 100 to 500 or 1,000+, depending on the hardware — CPUs and GPUs — you are using for this task.</p>
+<p>Policy gradient methods can learn a task if you give them a lot of time, and optimization in RL is a challenging problem. Training agents to learn to play Pong or any other task can be sample-inefficient and require a lot of episodes. You may also notice in your training output that even after hundreds of episodes, the rewards may have high variance.</p>
+<p>In addition, like in many deep learning-based algorithms, you should take into account a large amount of parameters that your policy has to learn. In Pong, this number adds up to 1 million or more with 200 nodes in the hidden layer of the network and the input dimension being of size 6,400 (80x80). Therefore, adding more CPUs and GPUs to assist with training can always be an option.</p>
+<p>You can use a much more advanced policy gradient-based algorithm that can help speed up training, improve the sensitivity to parameters, and resolve other issues. For example, there are “self-play” methods, such as <a class="reference external" href="https://arxiv.org/pdf/1707.06347">Proximal Policy Optimization (PPO)</a> developed by <a class="reference external" href="http://joschu.net">John Schulman</a> et al in 2017, which were <a class="reference external" href="https://openai.com/blog/openai-five/#rapid">used</a> to train the <a class="reference external" href="https://arxiv.org/pdf/1912.06680.pdf">OpenAI Five</a> agent over 10 months to play Dota 2 at a competitive level. Of course, if you apply these methods to smaller Gym environments, it should take hours, not months to train.</p>
+<p>In general, there are many RL challenges and possible solutions and you can explore some of them in <a class="reference external" href="https://static1.squarespace.com/static/555aab07e4b03e184ddaf731/t/5f5245cb100273193b14548a/1599227416572/TICS__RL_Fast_and_Slow_accepted.pdf">Reinforcement learning, fast and slow</a> by <a class="reference external" href="https://hai.stanford.edu/people/matthew-botvinick">Matthew Botvinick</a>, Sam Ritter, <a class="reference external" href="http://www.janexwang.com">Jane X. Wang</a>, Zeb Kurth-Nelson, <a class="reference external" href="http://www.gatsby.ucl.ac.uk/~ucgtcbl/">Charles Blundell</a>, and <a class="reference external" href="https://en.wikipedia.org/wiki/Demis_Hassabis">Demis Hassabis</a> (2019).</p>
+<hr class="docutils" />
+<p>If you want to learn more about deep RL, you should check out the following free educational material:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://openai.com/blog/spinning-up-in-deep-rl/">Spinning Up in Deep RL</a>: developed by OpenAI.</p></li>
+<li><p>Deep RL lectures taught by practitioners at <a class="reference external" href="https://www.youtube.com/c/DeepMind/videos">DeepMind</a> and <a class="reference external" href="https://www.youtube.com/channel/UC4e_-TvgALrwE1dUPvF_UTQ/videos">UC Berkeley</a>.</p></li>
+<li><p>RL <a class="reference external" href="https://www.davidsilver.uk/teaching/">lectures</a> taught by <a class="reference external" href="https://www.davidsilver.uk">David Silver</a> (DeepMind, UCL).</p></li>
+</ul>
+<p>Building a neural network from scratch with NumPy is a great way to learn more about NumPy and about deep learning. However, for real-world applications you should use specialized frameworks — such as <a class="reference external" href="https://pytorch.org/">PyTorch</a>, <a class="reference external" href="https://github.com/google/jax">JAX</a>, <a class="reference external" href="https://www.tensorflow.org/guide/tf_numpy">TensorFlow</a> or <a class="reference external" href="https://mxnet.apache.org">MXNet</a> — that provide NumPy-like APIs, have built-in <a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">automatic differentiation</a> and GPU support, and are designed for high-performance numerical computing and machine learning.</p>
+</div>
+<div class="section" id="appendix">
+<h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="notes-on-rl-and-deep-rl">
+<h3>Notes on RL and deep RL<a class="headerlink" href="#notes-on-rl-and-deep-rl" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>In <a class="reference external" href="https://en.wikipedia.org/wiki/Supervised_learning">supervised</a> deep learning for tasks, such as image recognition, language translation, or text classification, you’re more likely to use a lot of labeled data. However, in RL, agents typically don’t receive direct explicit feedback indicating correct or wrong actions — they rely on other signals, such as rewards.</p></li>
+<li><p><em>Deep RL</em> combines RL with <a class="reference external" href="http://www.cs.toronto.edu/~hinton/absps/NatureDeepReview.pdf">deep learning</a>. The field had its first major success in more complex environments, such as video games, in 2013 — a year after the <a class="reference external" href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf">AlexNet</a> breakthrough in computer vision. Volodymyr Mnih and colleagues at DeepMind published a research paper called <a class="reference external" href="https://arxiv.org/abs/1312.5602">Playing Atari with deep reinforcement learning</a> (and <a class="reference external" href="https://web.stanford.edu/class/psych209/Readings/MnihEtAlHassibis15NatureControlDeepRL.pdf">updated</a> in 2015) that showed that they were able to train an agent that could play several classic games from the Arcade Learning Environment at a human-level. Their RL algorithm — called a deep Q-network (DQN) — used <a class="reference external" href="https://en.wikipedia.org/wiki/Convolutional_neural_network">convolutional layers</a> in a neural network that approximated <a class="reference external" href="https://en.wikipedia.org/wiki/Q-learning">Q learning</a> and used <a class="reference external" href="https://web.stanford.edu/class/psych209/Readings/MnihEtAlHassibis15NatureControlDeepRL.pdf">experience replay</a>.</p></li>
+<li><p>Unlike the simple policy gradient method that you used in this example, DQN uses a type of “off-policy” <em>value-based</em> method (that approximates Q learning), while the original <a class="reference external" href="https://www.nature.com/articles/nature24270.epdf?author_access_token=VJXbVjaSHxFoctQQ4p2k4tRgN0jAjWel9jnR3ZoTv0PVW4gB86EEpGqTRDtpIz-2rmo8-KG06gqVobU5NSCFeHILHcVFUeMsbvwS-lxjqQGg98faovwjxeTUgZAUMnRQ">AlphaGo</a> uses policy gradients and <a class="reference external" href="https://en.wikipedia.org/wiki/Monte_Carlo_tree_search">Monte Carlo tree search</a>.</p></li>
+<li><p>Policy gradients <em>with function approximation</em>, such as neural networks, were <a class="reference external" href="https://papers.nips.cc/paper/1713-policy-gradient-methods-for-reinforcement-learning-with-function-approximation.pdf">written about</a> in 2000 by Richard Sutton et al. They were influenced by a number of previous works, including statistical gradient-following algorithms, such as <a class="reference external" href="https://www.semanticscholar.org/paper/Simple-statistical-gradient-following-algorithms-Williams/4c915c1eecb217c123a36dc6d3ce52d12c742614">REINFORCE</a> (Ronald Williams, 1992), as well as <a class="reference external" href="http://www.cs.toronto.edu/~hinton/absps/naturebp.pdf">backpropagation</a> (Geoffrey Hinton, 1986), which helps deep learning algorithms learn. RL with neural-network function approximation were introduced in the 1990s in research by Gerald Tesauro (<a class="reference external" href="https://dl.acm.org/doi/10.1145/203330.203343">Temporal difference learning and td-gammon</a>, 1995), who worked with IBM on an agent that learned to <a class="reference external" href="https://en.wikipedia.org/wiki/TD-Gammon">play backgammon</a> in 1992, and Long-Ji Lin (<a class="reference external" href="https://dl.acm.org/doi/book/10.5555/168871">Reinforcement learning for robots using neural networks</a>, 1993).</p></li>
+<li><p>Since 2013, researchers have come up with many notable approaches for learning to solve complex tasks using deep RL, such as <a class="reference external" href="https://www.nature.com/articles/nature24270.epdf?author_access_token=VJXbVjaSHxFoctQQ4p2k4tRgN0jAjWel9jnR3ZoTv0PVW4gB86EEpGqTRDtpIz-2rmo8-KG06gqVobU5NSCFeHILHcVFUeMsbvwS-lxjqQGg98faovwjxeTUgZAUMnRQ">AlphaGo</a> for the game of Go (David Silver et al, 2016), <a class="reference external" href="http://science.sciencemag.org/cgi/content/full/362/6419/1140?ijkey=XGd77kI6W4rSc&amp;keytype=ref&amp;siteid=sci">AlphaZero</a> that mastered Go, Chess, and Shogi with self-play (David Silver et al, 2017-2018), <a class="reference external" href="https://arxiv.org/pdf/1912.06680.pdf">OpenAI Five</a> for Dota 2 with <a class="reference external" href="https://openai.com/blog/competitive-self-play/">self-play</a> (OpenAI, 2019), and <a class="reference external" href="https://deepmind.com/blog/alphastar-mastering-real-time-strategy-game-starcraft-ii/">AlphaStar</a> for StarCraft 2 that used an <a class="reference external" href="https://arxiv.org/pdf/1802.01561.pdf">actor-critic</a> algorithm with <a class="reference external" href="https://link.springer.com/content/pdf/10.1023%2FA%3A1022628806385.pdf">experience replay</a>, <a class="reference external" href="http://proceedings.mlr.press/v80/oh18b/oh18b.pdf">self-imitation learning</a>, and <a class="reference external" href="https://arxiv.org/pdf/1511.06295.pdf">policy distillation</a> (Oriol Vinyals et al, 2019). In addition, there have been other experiments, such as deep RL for <a class="reference external" href="https://www.ea.com/seed/news/self-learning-agents-play-bf1">Battlefield 1</a> by engineers at Electronic Arts/DICE.</p></li>
+<li><p>One of the reasons why video games are popular in deep RL research is that, unlike real-world experiments, such as RL with <a class="reference external" href="http://heli.stanford.edu/papers/nips06-aerobatichelicopter.pdf">remote-controlled helicopters</a> (<a class="reference external" href="https://www2.eecs.berkeley.edu/Faculty/Homepages/abbeel.html">Pieter Abbeel</a>  et al, 2006), virtual simulations can offer safer testing environments.</p></li>
+<li><p>If you’re interested in learning about the implications of deep RL on other fields, such as neuroscience, you can refer to a <a class="reference external" href="https://arxiv.org/pdf/2007.03750.pdf">paper</a> by <a class="reference external" href="https://www.youtube.com/watch?v=b0LddBiF5jM">Matthew Botvinick</a> et al (2020).</p></li>
+</ul>
+</div>
+<div class="section" id="how-to-set-up-video-playback-in-your-jupyter-notebook">
+<h3>How to set up video playback in your Jupyter notebook<a class="headerlink" href="#how-to-set-up-video-playback-in-your-jupyter-notebook" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>If you’re using <a class="reference external" href="https://mybinder.org"><strong>Binder</strong></a> — a free Jupyter notebook-based tool — you can set up the Docker image and add <code class="docutils literal notranslate"><span class="pre">freeglut3-dev</span></code>, <code class="docutils literal notranslate"><span class="pre">xvfb</span></code>, and <code class="docutils literal notranslate"><span class="pre">x11-utils</span></code> to the <code class="docutils literal notranslate"><span class="pre">apt.txt</span></code> configuration file to install the initial dependencies. Then, to <code class="docutils literal notranslate"><span class="pre">binder/environment.yml</span></code> under <code class="docutils literal notranslate"><span class="pre">channels</span></code>, add <code class="docutils literal notranslate"><span class="pre">gym</span></code>, <code class="docutils literal notranslate"><span class="pre">pyvirtualdisplay</span></code> and anything else you may need, such as <code class="docutils literal notranslate"><span class="pre">python=3.7</span></code>, <code class="docutils literal notranslate"><span class="pre">pip</span></code>, and <code class="docutils literal notranslate"><span class="pre">jupyterlab</span></code>. Check the following <a class="reference external" href="https://towardsdatascience.com/rendering-openai-gym-envs-on-binder-and-google-colab-536f99391cc7">post</a> for more information.</p></li>
+<li><p>If you’re using <a class="reference external" href="https://colab.research.google.com/notebooks/intro.ipynb"><strong>Google Colaboratory</strong></a> (another free Jupyter notebook-based tool), you can enable video playback of the game environments installing and setting up <a class="reference external" href="https://en.wikipedia.org/wiki/Xvfb">X virtual frame buffer</a>/<a class="reference external" href="https://www.x.org/releases/X11R7.6/doc/man/man1/Xvfb.1.xhtml">Xvfb</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/X_Window_System">X11</a>, <a class="reference external" href="https://ffmpeg.org">FFmpeg</a>, <a class="reference external" href="https://github.com/ponty/PyVirtualDisplay">PyVirtualDisplay</a>, <a class="reference external" href="http://pyopengl.sourceforge.net">PyOpenGL</a>, and other dependencies, as described further below.</p></li>
+</ul>
+<ol>
+<li><p>If you’re using Google Colaboratory, run the following commands in the notebook cells to help with video playback:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Xvfb and X11 dependencies.</span>
+!apt-get install -y xvfb x11-utils &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="c1"># To work with videos, install FFmpeg.</span>
+!apt-get install -y ffmpeg &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="c1"># Install PyVirtualDisplay for visual feedback and other libraries/dependencies.</span>
+!pip install pyvirtualdisplay PyOpenGL PyOpenGL-accelerate &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</pre></div>
+</div>
+</li>
+<li><p>Then, add this Python code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Import the virtual display module.
+from pyvirtualdisplay import Display
+# Import ipythondisplay and HTML from IPython for image and video rendering.
+from IPython import display as ipythondisplay
+from IPython.display import HTML
+
+# Initialize the virtual buffer at 400x300 (adjustable size).
+# With Xvfb, you should set `visible=False`.
+display = Display(visible=False, size=(400, 300))
+display.start()
+
+# Check that no display is present.
+# If no displays are present, the expected output is `:0`.
+!echo $DISPLAY
+
+# Define a helper function to display videos in Jupyter notebooks:.
+# (Source: https://star-ai.github.io/Rendering-OpenAi-Gym-in-Colaboratory/)
+
+import sys
+import math
+import glob
+import io
+import base64
+
+def show_any_video(mp4video=0):
+    mp4list = glob.glob(&#39;video/*.mp4&#39;)
+    if len(mp4list) &gt; 0:
+        mp4 = mp4list[mp4video]
+        video = io.open(mp4, &#39;r+b&#39;).read()
+        encoded = base64.b64encode(video)
+        ipythondisplay.display(HTML(data=&#39;&#39;&#39;&lt;video alt=&quot;test&quot; autoplay
+                                            loop controls style=&quot;height: 400px;&quot;&gt;
+                                            &lt;source src=&quot;data:video/mp4;base64,{0}&quot; type=&quot;video/mp4&quot; /&gt;
+                                            &lt;/video&gt;&#39;&#39;&#39;.format(encoded.decode(&#39;ascii&#39;))))
+
+    else:
+        print(&#39;Could not find the video!&#39;)
+
+</pre></div>
+</div>
+</li>
+</ol>
+<ul>
+<li><p>If you want to view the last (very quick) gameplay inside a Jupyter notebook and implemented the <code class="docutils literal notranslate"><span class="pre">show_any_video()</span></code> function earlier, run this inside a cell:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">show_any_video</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>If you’re following the instructions in this tutorial in a local environment on Linux or macOS, you can add most of the code into one <strong>Python (<code class="docutils literal notranslate"><span class="pre">.py</span></code>)</strong> file. Then, you can run your Gym experiment through <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">your-code.py</span></code> in your terminal. To enable rendering, you can use the command-line interface by following the <a class="reference external" href="https://github.com/openai/gym#rendering-on-a-server">official OpenAI Gym documentation</a> (make sure you have Gym and Xvfb installed, as described in the guide).</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+            </div>
+        </div>
+    </div>
+    <div id="main-content" class="row noprint">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="deep-reinforcement-learning-with-pong-from-pixels">
+<h1>Deep reinforcement learning with Pong from pixels<a class="headerlink" href="#deep-reinforcement-learning-with-pong-from-pixels" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial demonstrates how to implement a deep reinforcement learning (RL) agent from scratch using a policy gradient method that learns to play the <a class="reference external" href="https://gym.openai.com/envs/Pong-v0/">Pong</a> video game using screen pixels as inputs with NumPy. Your Pong agent will obtain experience on the go using an <a class="reference external" href="https://en.wikipedia.org/wiki/Artificial_neural_network">artificial neural network</a> as its <a class="reference external" href="https://en.wikipedia.org/wiki/Reinforcement_learning">policy</a>.</p>
+<p>Pong is a 2D game from 1972 where two players use “rackets” to play a form of table tennis. Each player moves the racket up and down the screen and tries to hit a ball in their opponent’s direction by touching it. The goal is to hit the ball such that it goes past the opponent’s racket (they miss their shot). According to the rules, if a player reaches 21 points, they win. In Pong, the RL agent that learns to play against an opponent is displayed on the right.</p>
+<p><img alt="Diagram showing operations detailed in this tutorial" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels.png" /></p>
+<p>This example is based on the <a class="reference external" href="https://gist.github.com/karpathy/a4166c7fe253700972fcbc77e4ea32c5">code</a> developed by <a class="reference external" href="https://karpathy.ai">Andrej Karpathy</a> for the <a class="reference external" href="https://sites.google.com/view/deep-rl-bootcamp/home">Deep RL Bootcamp</a> in 2017 at UC Berkeley. His <a class="reference external" href="http://karpathy.github.io/2016/05/31/rl/">blog post</a> from 2016 also provides more background on the mechanics and theory used in Pong RL.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><strong>OpenAI Gym</strong>: To help with the game environment, you will use <a class="reference external" href="https://gym.openai.com">Gym</a> — an open-source Python interface <a class="reference external" href="https://arxiv.org/abs/1606.01540">developed by OpenAI</a> that helps perform RL tasks while supporting many simulation environments.</p></li>
+<li><p><strong>Python and NumPy</strong>: The reader should have some knowledge of Python, NumPy array manipulation, and linear algebra.</p></li>
+<li><p><strong>Deep learning and deep RL</strong>: You should be familiar with main concepts of <a class="reference external" href="https://en.wikipedia.org/wiki/Deep_learning">deep learning</a>, which are explained in the <a class="reference external" href="http://www.cs.toronto.edu/~hinton/absps/NatureDeepReview.pdf">Deep learning</a> paper published in 2015 by Yann LeCun, Yoshua Bengio, and Geoffrey Hinton, who are regarded as some of the pioneers of the field. The tutorial will try to guide you through the main concepts of deep RL and you will find various literature with links to original sources for your convenience.</p></li>
+<li><p><strong>Jupyter notebook environments</strong>: Because RL experiments can require high computing power, you can run the tutorial on the cloud for free using <a class="reference external" href="https://mybinder.org">Binder</a> or <a class="reference external" href="https://colab.research.google.com/notebooks/intro.ipynb">Google Colaboratory</a> (which offers free limited GPU and TPU acceleration).</p></li>
+<li><p><strong>Matplotlib</strong>: For plotting images. Check out the <a class="reference external" href="https://matplotlib.org/3.3.3/users/installing.html">installation</a> guide to set it up in your environment.</p></li>
+</ul>
+<p>This tutorial can also be run locally in an isolated environment, such as <a class="reference external" href="https://virtualenv.pypa.io/en/stable/">Virtualenv</a> and <a class="reference external" href="https://docs.conda.io/">conda</a>.</p>
+</div>
+<div class="section" id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>A note on RL and deep RL</p></li>
+<li><p>Deep RL glossary</p></li>
+</ul>
+<ol class="simple">
+<li><p>Set up Pong</p></li>
+<li><p>Preprocess frames (the observation)</p></li>
+<li><p>Create the policy (the neural network) and the forward pass</p></li>
+<li><p>Set up the update step (backpropagation)</p></li>
+<li><p>Define the discounted rewards (expected return) function</p></li>
+<li><p>Train the agent for 3 episodes</p></li>
+<li><p>Next steps</p></li>
+<li><p>Appendix</p>
+<ul class="simple">
+<li><p>Notes on RL and deep RL</p></li>
+<li><p>How to set up video playback in your Jupyter notebook</p></li>
+</ul>
+</li>
+</ol>
+<hr class="docutils" />
+<div class="section" id="a-note-on-rl-and-deep-rl">
+<h3>A note on RL and deep RL<a class="headerlink" href="#a-note-on-rl-and-deep-rl" title="Permalink to this headline">¶</a></h3>
+<p>In <a class="reference external" href="https://en.wikipedia.org/wiki/Reinforcement_learning"><em>RL</em></a>, your agent learns from trial and error by interacting with an environment using a so-called policy to gain experience. After taking one action, the agent receives information about its reward (which it may or may not get) and the next observation of the environment. It can then proceed to take another action. This happens over a number of episodes and/or until the task is deemed to be complete.</p>
+<p>The agent’s policy works by “mapping” the agent’s observations to its actions — that is, assigning a presentation of what the agent observes with required actions. The overall goal is usually to optimize the agent’s policy such that it maximizes the expected rewards from each observation.</p>
+<p>For detailed information about RL, there is an <a class="reference external" href="https://web.archive.org/web/20050806080008/http://www.cs.ualberta.ca/~sutton/book/the-book.html">introductory book</a> by Richard Sutton and Andrew Barton.</p>
+<p>Check out the Appendix at the end of the tutorial for more information.</p>
+</div>
+<div class="section" id="deep-rl-glossary">
+<h3>Deep RL glossary<a class="headerlink" href="#deep-rl-glossary" title="Permalink to this headline">¶</a></h3>
+<p>Below is a concise glossary of deep RL terms you may find useful for the remaining part of the tutorial:</p>
+<ul class="simple">
+<li><p>In a finite-horizon world, such as a game of Pong, the learning agent can explore (and exploit) the <em>environment</em> over an <em>episode</em>. It usually takes many episodes for the agent to learn.</p></li>
+<li><p>The agent interacts with the <em>environment</em> using <em>actions</em>.</p></li>
+<li><p>After taking an action, the agent receives some feedback through a <em>reward</em> (if there is one), depending on which action it takes and the <em>state</em> it is in. The state contains information about the environment.</p></li>
+<li><p>The agent’s <em>observation</em> is a partial observation of the state — this is the term this tutorial prefers (instead of <em>state</em>).</p></li>
+<li><p>The agent can choose an action based on cumulative <em>rewards</em> (also known as the <em>value function</em>) and the <em>policy</em>. The <em>cumulative reward function</em> estimates the quality of the observations the agent visits using its <em>policy</em>.</p></li>
+<li><p>The <em>policy</em> (defined by a neural network) outputs action choices (as (log) probabilities) that should maximize the cumulative rewards from the state the agent is in.</p></li>
+<li><p>The <em>expected return from an observation</em>, conditional to the action, is called the <em>action-value</em> function. To provide more weight to shorter-term rewards versus the longer-term ones, you usually use a <em>discount factor</em> (often a floating point number between 0.9 and 0.99).</p></li>
+<li><p>The sequence of actions and states (observations) during each policy “run” by the agent is sometimes referred to as a <em>trajectory</em> — such a sequence yields <em>rewards</em>.</p></li>
+</ul>
+<p>You will train your Pong agent through an “on-policy” method using policy gradients — it’s an algorithm belonging to a family of <em>policy-based</em> methods. Policy gradient methods typically update the parameters of the policy with respect to the long-term cumulative reward using <a class="reference external" href="https://en.wikipedia.org/wiki/Gradient_descent"><em>gradient descent</em></a> that is widely used in machine learning. And, since the goal is to maximize the function (the rewards), not minimize it, the process is also called <em>gradient ascent</em>. In other words, you use a policy for the agent to take actions and the objective is to maximize the rewards, which you do by computing the gradients and use them to update the parameters in the policy (neural) network.</p>
+</div>
+</div>
+<div class="section" id="set-up-pong">
+<h2>Set up Pong<a class="headerlink" href="#set-up-pong" title="Permalink to this headline">¶</a></h2>
+<p><strong>1.</strong> First, you should install OpenAI Gym (using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gym[atari]</span></code> - this package is currently not available on conda), and import NumPy, Gym and the necessary modules:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">gym</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Gym can monitor and save the output using the <code class="docutils literal notranslate"><span class="pre">Monitor</span></code> wrapper:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gym</span> <span class="kn">import</span> <span class="n">wrappers</span>
+<span class="kn">from</span> <span class="nn">gym.wrappers</span> <span class="kn">import</span> <span class="n">Monitor</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>2.</strong> Instantiate a Gym environment for the game of Pong:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;Pong-v0&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>3.</strong> Let’s review which actions are available in the <code class="docutils literal notranslate"><span class="pre">Pong-v0</span></code> environment:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Discrete(6)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">get_action_meanings</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;NOOP&#39;, &#39;FIRE&#39;, &#39;RIGHT&#39;, &#39;LEFT&#39;, &#39;RIGHTFIRE&#39;, &#39;LEFTFIRE&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are 6 actions. However, <code class="docutils literal notranslate"><span class="pre">LEFTFIRE</span></code> is actually <code class="docutils literal notranslate"><span class="pre">LEFT</span></code>, <code class="docutils literal notranslate"><span class="pre">RIGHTFIRE</span></code> — <code class="docutils literal notranslate"><span class="pre">RIGHT</span></code>, and <code class="docutils literal notranslate"><span class="pre">NOOP</span></code> — <code class="docutils literal notranslate"><span class="pre">FIRE</span></code>.</p>
+<p>For simplicity, your policy network will have one output — a (log) probability for “moving up” (indexed at <code class="docutils literal notranslate"><span class="pre">2</span></code> or <code class="docutils literal notranslate"><span class="pre">RIGHT</span></code>). The other available action will be indexed at 3 (“move down” or <code class="docutils literal notranslate"><span class="pre">LEFT</span></code>).</p>
+<p><strong>4.</strong> Gym can save videos of the agent’s learning in an MP4 format — wrap <code class="docutils literal notranslate"><span class="pre">Monitor()</span></code> around the environment by running the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">Monitor</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s2">&quot;./video&quot;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>While you can perform all kinds of RL experiments in a Jupyter notebook, rendering images or videos of a Gym environment to visualize how your agent plays the game of Pong after training can be rather challenging. If you want to set up video playback in a notebook, you can find the details in the Appendix at the end of this tutorial.</p>
+</div>
+<div class="section" id="preprocess-frames-the-observation">
+<h2>Preprocess frames (the observation)<a class="headerlink" href="#preprocess-frames-the-observation" title="Permalink to this headline">¶</a></h2>
+<p>In this section you will set up a function to preprocess the input data (game observation) to make it digestible for the neural network, which can only work with inputs that are in a form of tensors (multidimensional arrays) of floating-point type.</p>
+<p>Your agent will use the frames from the Pong game — pixels from screen frames — as input-observations for the policy network. The game observation tells the agent about where the ball is before it is fed (with a forward pass) into the neural network (the policy). This is similar to DeepMind’s <a class="reference external" href="https://deepmind.com/research/open-source/dqn">DQN</a> method (which is further discussed in the Appendix).</p>
+<p>Pong screen frames are 210x160 pixels over 3 color dimensions (red, green and blue). The arrays are encoded with <code class="docutils literal notranslate"><span class="pre">uint8</span></code> (or 8-bit integers), and these observations are stored on a Gym Box instance.</p>
+<p><strong>1.</strong> Check the Pong’s observations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Box(0, 255, (210, 160, 3), uint8)
+</pre></div>
+</div>
+</div>
+</div>
+<p>In Gym, the agent’s actions and observations can be part of the <code class="docutils literal notranslate"><span class="pre">Box</span></code> (n-dimensional) or <code class="docutils literal notranslate"><span class="pre">Discrete</span></code> (fixed-range integers) classes.</p>
+<p><strong>2.</strong> You can view a random observation — one frame — by:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1) Setting the random `seed` before initialization (optional).
+
+2) Calling  Gym&#39;s `reset()` to reset the environment, which returns an initial observation.
+
+3) Using Matplotlib to display the `render`ed observation.
+</pre></div>
+</div>
+<p>(You can refer to the OpenAI Gym core <a class="reference external" href="https://github.com/openai/gym/blob/master/gym/core.py">API</a> for more information about Gym’s core classes and methods.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">env</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="n">random_frame</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;rgb_array&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random_frame</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">random_frame</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(210, 160, 3)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f5736d9afd0&gt;
+</pre></div>
+</div>
+<img alt="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_14_2.png" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_14_2.png" />
+</div>
+</div>
+<p>To feed the observations into the policy (neural) network, you need to convert them into 1D grayscale vectors with 6,400 (80x80x1) floating point arrays. (During training, you will use NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ravel.html"><code class="docutils literal notranslate"><span class="pre">np.ravel()</span></code></a> function to flatten these arrays.)</p>
+<p><strong>3.</strong> Set up a helper function for frame (observation) preprocessing:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">frame_preprocessing</span><span class="p">(</span><span class="n">observation_frame</span><span class="p">):</span>
+    <span class="c1"># Crop the frame.</span>
+    <span class="n">observation_frame</span> <span class="o">=</span> <span class="n">observation_frame</span><span class="p">[</span><span class="mi">35</span><span class="p">:</span><span class="mi">195</span><span class="p">]</span>
+    <span class="c1"># Downsample the frame by a factor of 2.</span>
+    <span class="n">observation_frame</span> <span class="o">=</span> <span class="n">observation_frame</span><span class="p">[::</span><span class="mi">2</span><span class="p">,</span> <span class="p">::</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># Remove the background and apply other enhancements.</span>
+    <span class="n">observation_frame</span><span class="p">[</span><span class="n">observation_frame</span> <span class="o">==</span> <span class="mi">144</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Erase the background (type 1).</span>
+    <span class="n">observation_frame</span><span class="p">[</span><span class="n">observation_frame</span> <span class="o">==</span> <span class="mi">109</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Erase the background (type 2).</span>
+    <span class="n">observation_frame</span><span class="p">[</span><span class="n">observation_frame</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Set the items (rackets, ball) to 1.</span>
+    <span class="c1"># Return the preprocessed frame as a 1D floating-point array.</span>
+    <span class="k">return</span> <span class="n">observation_frame</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>4.</strong> Preprocess the random frame from earlier to test the function — the input for the policy network is an 80x80 1D image:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preprocessed_random_frame</span> <span class="o">=</span> <span class="n">frame_preprocessing</span><span class="p">(</span><span class="n">random_frame</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">preprocessed_random_frame</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">preprocessed_random_frame</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(80, 80)
+</pre></div>
+</div>
+<img alt="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_18_1.png" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_18_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="create-the-policy-the-neural-network-and-the-forward-pass">
+<h2>Create the policy (the neural network) and the forward pass<a class="headerlink" href="#create-the-policy-the-neural-network-and-the-forward-pass" title="Permalink to this headline">¶</a></h2>
+<p>Next, you will define the policy as a simple feedforward network that uses a game observation as an input and outputs an action log probability:</p>
+<ul class="simple">
+<li><p>For the <em>input</em>, it will use the Pong video game frames — the preprocessed 1D vectors with 6,400 (80x80) floating point arrays.</p></li>
+<li><p>The <em>hidden layer</em> will compute the weighted sum of inputs using NumPy’s dot product function <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html"><code class="docutils literal notranslate"><span class="pre">np.dot()</span></code></a> for the arrays and then apply a <em>non-linear activation function</em>, such as <a class="reference external" href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a>.</p></li>
+<li><p>Then, the <em>output layer</em> will perform the matrix-multiplication again of  weight parameters and the hidden layer’s output (with <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html"><code class="docutils literal notranslate"><span class="pre">np.dot()</span></code></a>), and send that information through a <a class="reference external" href="https://en.wikipedia.org/wiki/Softmax_function">softmax</a> <em>activation function</em>.</p></li>
+<li><p>In the end, the policy network will output one action log probability (given that observation) for the agent — the probability for Pong action indexed in the environment at 2 (“moving the racket up”).</p></li>
+</ul>
+<p><strong>1.</strong> Let’s instantiate certain parameters for the input, hidden, and output layers, and start setting up the network model.</p>
+<p>Start by creating a random number generator instance for the experiment
+(seeded for reproducibility):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">12288743</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then:</p>
+<ul class="simple">
+<li><p>Set the input (observation) dimensionality - your preprocessed screen frames:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="mi">80</span> <span class="o">*</span> <span class="mi">80</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Set the number of hidden layer neurons.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="mi">200</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Instantiate your policy (neural) network model as an empty dictionary.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="p">{}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In a neural network, <em>weights</em> are important adjustable parameters that the network fine-tunes by forward and backward propagating the data.</p>
+<p><strong>2.</strong> Using a technique called <a class="reference external" href="https://www.deeplearning.ai/ai-notes/initialization/#IV">Xavier initialization</a>, set up the network model’s initial weights with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.standard_normal.html"><code class="docutils literal notranslate"><span class="pre">Generator.standard_normal()</span></code></a> that returns random numbers over a standard Normal distribution, as well as <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html?highlight=numpy.sqrt#numpy.sqrt"><code class="docutils literal notranslate"><span class="pre">np.sqrt()</span></code></a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;W1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">D</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="n">model</span><span class="p">[</span><span class="s2">&quot;W2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">H</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>3.</strong> Your policy network starts by randomly initializing the weights and feeds the input data (frames) forward from the input layer through a hidden layer to the output layers. This process is called the <em>forward pass</em> or <em>forward propagation</em>, and is outlined in the function <code class="docutils literal notranslate"><span class="pre">policy_forward()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">policy_forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+    <span class="c1"># Matrix-multiply the weights by the input in the one and only hidden layer.</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;W1&quot;</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span>
+    <span class="c1"># Apply non-linearity with ReLU.</span>
+    <span class="n">h</span><span class="p">[</span><span class="n">h</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Calculate the &quot;dot&quot; product in the outer layer.</span>
+    <span class="c1"># The input for the sigmoid function is called logit.</span>
+    <span class="n">logit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;W2&quot;</span><span class="p">],</span> <span class="n">h</span><span class="p">)</span>
+    <span class="c1"># Apply the sigmoid function (non-linear activation).</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">logit</span><span class="p">)</span>
+    <span class="c1"># Return a log probability for the action 2 (&quot;move up&quot;)</span>
+    <span class="c1"># and the hidden &quot;state&quot; that you need for backpropagation.</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">,</span> <span class="n">h</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that there are two <em>activation functions</em> for determining non-linear relationships between inputs and outputs. These <a class="reference external" href="https://en.wikipedia.org/wiki/Activation_function">non-linear functions</a> are applied to the output of the layers:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">Rectified linear unit (ReLU)</a>: defined as <code class="docutils literal notranslate"><span class="pre">h[h&lt;0]</span> <span class="pre">=</span> <span class="pre">0</span></code> above. It returns 0 for negative inputs and the same value if it’s positive.</p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Sigmoid_function">Sigmoid</a>: defined below as <code class="docutils literal notranslate"><span class="pre">sigmoid()</span></code>. It “wraps” the last layer’s output and returns an action log probability in the (0, 1) range.</p></li>
+</ul>
+<p><strong>4.</strong> Define the sigmoid function separately with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.exp.html?highlight=numpy.exp#numpy.exp"><code class="docutils literal notranslate"><span class="pre">np.exp()</span></code></a> for computing exponentials:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="set-up-the-update-step-backpropagation">
+<h2>Set up the update step (backpropagation)<a class="headerlink" href="#set-up-the-update-step-backpropagation" title="Permalink to this headline">¶</a></h2>
+<p>During learning in your deep RL algorithm, you use the action log probabilities (given an observation) and the discounted returns (for example, +1 or -1 in Pong) and perform the <em>backward pass</em> or <em>backpropagation</em> to update the parameters — the policy network’s weights.</p>
+<p><strong>1.</strong> Let’s define the backward pass function (<code class="docutils literal notranslate"><span class="pre">policy_backward()</span></code>) with the help of NumPy’s modules for array multiplication — <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html?highlight=numpy.dot#numpy.dot"><code class="docutils literal notranslate"><span class="pre">np.dot()</span></code></a> (matrix multiplication), <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.outer.html"><code class="docutils literal notranslate"><span class="pre">np.outer()</span></code></a> (outer product computation), and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ravel.html"><code class="docutils literal notranslate"><span class="pre">np.ravel()</span></code></a> (to flatten arrays into 1D arrays):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">policy_backward</span><span class="p">(</span><span class="n">eph</span><span class="p">,</span> <span class="n">epdlogp</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+    <span class="n">dW2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">eph</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">epdlogp</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="n">dh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">epdlogp</span><span class="p">,</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;W2&quot;</span><span class="p">])</span>
+    <span class="n">dh</span><span class="p">[</span><span class="n">eph</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">dW1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">dh</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">epx</span><span class="p">)</span>
+    <span class="c1"># Return new &quot;optimized&quot; weights for the policy network.</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;W1&quot;</span><span class="p">:</span> <span class="n">dW1</span><span class="p">,</span> <span class="s2">&quot;W2&quot;</span><span class="p">:</span> <span class="n">dW2</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using the intermediate hidden “states” of the network (<code class="docutils literal notranslate"><span class="pre">eph</span></code>) and the gradients of action log probabilities (<code class="docutils literal notranslate"><span class="pre">epdlogp</span></code>) for an episode, the <code class="docutils literal notranslate"><span class="pre">policy_backward</span></code> function propagates the gradients back through the policy network and update the weights.</p>
+<p><strong>2.</strong> When applying backpropagation during agent training, you will need to save several variables for each episode. Let’s instantiate empty lists to store them:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All preprocessed observations for the episode.</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># All hidden &quot;states&quot; (from the network) for the episode.</span>
+<span class="n">hs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># All gradients of probability actions</span>
+<span class="c1"># (with respect to observations) for the episode.</span>
+<span class="n">dlogps</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># All rewards for the episode.</span>
+<span class="n">drs</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You will reset these variables manually at the end of each episode during training after they are “full” and reshape with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.vstack.html"><code class="docutils literal notranslate"><span class="pre">np.vstack()</span></code></a>. This is demonstrated in the training stage towards the end of the tutorial.</p>
+<p><strong>3.</strong> Next, to perform a gradient ascent when optimizing the agent’s policy, it is common to use deep learning <em>optimizers</em> (you’re performing optimization with gradients). In this example, you’ll use <a class="reference external" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#RMSProp">RMSProp</a> — an adaptive optimization <a class="reference external" href="http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf">method</a>. Let’s set a discounting factor — a decay rate — for the optimizer:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">decay_rate</span> <span class="o">=</span> <span class="mf">0.99</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>4.</strong> You will also need to store the gradients (with the help of NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html"><code class="docutils literal notranslate"><span class="pre">np.zeros_like()</span></code></a>) for the optimization step during training:</p>
+<ul class="simple">
+<li><p>First, save the update buffers that add up gradients over a batch:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grad_buffer</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Second, store the RMSProp memory for the optimizer for gradient ascent:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rmsprop_cache</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="define-the-discounted-rewards-expected-return-function">
+<h2>Define the discounted rewards (expected return) function<a class="headerlink" href="#define-the-discounted-rewards-expected-return-function" title="Permalink to this headline">¶</a></h2>
+<p>In this section, you will set up a function for computing discounted rewards (<code class="docutils literal notranslate"><span class="pre">discount_rewards()</span></code>) — the expected return from an observation — that uses a 1D array of rewards as inputs (with the help of NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html"><code class="docutils literal notranslate"><span class="pre">np.zeros_like()</span></code></a>) function.</p>
+<p>To provide more weight to shorter-term rewards over longer-term ones, you will use a <em>discount factor</em> (gamma) that is often a floating-point number between 0.9 and 0.99.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.99</span>
+
+
+<span class="k">def</span> <span class="nf">discount_rewards</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
+    <span class="n">discounted_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="n">running_add</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># From the last reward to the first...</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">size</span><span class="p">)):</span>
+        <span class="c1"># ...reset the reward sum</span>
+        <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">running_add</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># ...compute the discounted reward</span>
+        <span class="n">running_add</span> <span class="o">=</span> <span class="n">running_add</span> <span class="o">*</span> <span class="n">gamma</span> <span class="o">+</span> <span class="n">r</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
+        <span class="n">discounted_r</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">running_add</span>
+    <span class="k">return</span> <span class="n">discounted_r</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="train-the-agent-for-a-number-of-episodes">
+<h2>Train the agent for a number of episodes<a class="headerlink" href="#train-the-agent-for-a-number-of-episodes" title="Permalink to this headline">¶</a></h2>
+<p>This section covers how to set up the training process during which your agent will be learning to play Pong using its policy.</p>
+<p>The pseudocode for the policy gradient method for Pong:</p>
+<ul class="simple">
+<li><p>Instantiate the policy — your neural network — and randomly initialize the weights in the policy network.</p></li>
+<li><p>Initialize a random observation.</p></li>
+<li><p>Randomly initialize the weights in the policy network.</p></li>
+<li><p>Repeat over a number of episodes:</p>
+<ul>
+<li><p>Input an observation into the policy network and output action probabilities for the agent (forward propagation).</p></li>
+<li><p>The agent takes an action for each observation, observes the received rewards and collects trajectories (over a predefined number of episodes or batch size) of state-action experiences.</p></li>
+<li><p>Compute the <a class="reference external" href="https://en.wikipedia.org/wiki/Cross_entropy#Cross-entropy_loss_function_and_logistic_regression">cross-entropy</a> (with a positive sign, since you need to maximize the rewards and not minimize the loss).</p></li>
+<li><p>For every batch of episodes:</p>
+<ul>
+<li><p>Calculate the gradients of your action log probabilities using the cross-entropy.</p></li>
+<li><p>Compute the cumulative return and, to provide more weight to shorter-term rewards versus the longer-term ones, use a discount factor discount.</p></li>
+<li><p>Multiply the gradients of the action log probabilities by the discounted rewards (the “advantage”).</p></li>
+<li><p>Perform gradient ascent (backpropagation) to optimize the policy network’s parameters (its weights).</p>
+<ul>
+<li><p>Maximize the probability of actions that lead to high rewards.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img alt="Diagram showing operations detailed in this tutorial" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels.png" /></p>
+<p>You can stop the training at any time or/and check saved MP4 videos of saved plays on your disk in the <code class="docutils literal notranslate"><span class="pre">/video</span></code> directory. You can set the maximum number of episodes that is more appropriate for your setup.</p>
+<p><strong>1.</strong> For demo purposes, let’s limit the number of episodes for training to 3. If you are using hardware acceleration (CPUs and GPUs), you can increase the number to 1,000 or beyond. For comparison, Andrej Karpathy’s original experiment took about 8,000 episodes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">max_episodes</span> <span class="o">=</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>2.</strong> Set the batch size and the learning rate values:</p>
+<ul class="simple">
+<li><p>The <em>batch size</em> dictates how often (in episodes) the model performs a parameter update. It is the number of times your agent can collect the state-action trajectories. At the end of the collection, you can perform the maximization of action-probability multiples.</p></li>
+<li><p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Learning_rate"><em>learning rate</em></a> helps limit the magnitude of weight updates to prevent them from overcorrecting.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-4</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>3.</strong> Set the game rendering default variable for Gym’s <code class="docutils literal notranslate"><span class="pre">render</span></code> method (it is used to display the observation and is optional but can be useful during debugging):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">render</span> <span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>4.</strong> Set the agent’s initial (random) observation by calling <code class="docutils literal notranslate"><span class="pre">reset()</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observation</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>5.</strong> Initialize the previous observation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prev_x</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>6.</strong> Initialize the reward variables and the episode count:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">running_reward</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">reward_sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">episode_number</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>7.</strong> To simulate motion between the frames, set the single input frame (<code class="docutils literal notranslate"><span class="pre">x</span></code>) for the policy network as the difference between the current and previous preprocessed frames:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">update_input</span><span class="p">(</span><span class="n">prev_x</span><span class="p">,</span> <span class="n">cur_x</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">prev_x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">cur_x</span> <span class="o">-</span> <span class="n">prev_x</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>8.</strong> Finally, start the training loop, using the functions you have predefined:</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">episode_number</span> <span class="o">&lt;</span> <span class="n">max_episodes</span><span class="p">:</span>
+    <span class="c1"># (For rendering.)</span>
+    <span class="k">if</span> <span class="n">render</span><span class="p">:</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+
+    <span class="c1"># 1. Preprocess the observation (a game frame) and flatten with NumPy&#39;s `ravel()`.</span>
+    <span class="n">cur_x</span> <span class="o">=</span> <span class="n">frame_preprocessing</span><span class="p">(</span><span class="n">observation</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+    <span class="c1"># 2. Instantiate the observation for the policy network</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">update_input</span><span class="p">(</span><span class="n">prev_x</span><span class="p">,</span> <span class="n">cur_x</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+    <span class="n">prev_x</span> <span class="o">=</span> <span class="n">cur_x</span>
+
+    <span class="c1"># 3. Perform the forward pass through the policy network using the observations</span>
+    <span class="c1"># (preprocessed frames as inputs) and store the action log probabilities</span>
+    <span class="c1"># and hidden &quot;states&quot; (for backpropagation) during the course of each episode.</span>
+    <span class="n">aprob</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">policy_forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+    <span class="c1"># 4. Let the action indexed at `2` (&quot;move up&quot;) be that probability</span>
+    <span class="c1"># if it&#39;s higher than a randomly sampled value</span>
+    <span class="c1"># or use action `3` (&quot;move down&quot;) otherwise.</span>
+    <span class="n">action</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">aprob</span> <span class="k">else</span> <span class="mi">3</span>
+
+    <span class="c1"># 5. Cache the observations and hidden &quot;states&quot; (from the network)</span>
+    <span class="c1"># in separate variables for backpropagation.</span>
+    <span class="n">xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">hs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+
+    <span class="c1"># 6. Compute the gradients of action log probabilities:</span>
+    <span class="c1"># - If the action was to &quot;move up&quot; (index `2`):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="mi">2</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="c1"># - The cross-entropy:</span>
+    <span class="c1"># `y*log(aprob) + (1 - y)*log(1-aprob)`</span>
+    <span class="c1"># or `log(aprob)` if y = 1, else: `log(1 - aprob)`.</span>
+    <span class="c1"># (Recall: you used the sigmoid function (`1/(1+np.exp(-x)`) to output</span>
+    <span class="c1"># `aprob` action probabilities.)</span>
+    <span class="c1"># - Then the gradient: `y - aprob`.</span>
+    <span class="c1"># 7. Append the gradients of your action log probabilities.</span>
+    <span class="n">dlogps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">aprob</span><span class="p">)</span>
+    <span class="c1"># 8. Take an action and update the parameters with Gym&#39;s `step()`</span>
+    <span class="c1"># function; obtain a new observation.</span>
+    <span class="n">observation</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+    <span class="c1"># 9. Update the total sum of rewards.</span>
+    <span class="n">reward_sum</span> <span class="o">+=</span> <span class="n">reward</span>
+    <span class="c1"># 10. Append the reward for the previous action.</span>
+    <span class="n">drs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+
+    <span class="c1"># After an episode is finished:</span>
+    <span class="k">if</span> <span class="n">done</span><span class="p">:</span>
+        <span class="n">episode_number</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># 11. Collect and reshape stored values with `np.vstack()` of:</span>
+        <span class="c1"># - Observation frames (inputs),</span>
+        <span class="n">epx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+        <span class="c1"># - hidden &quot;states&quot; (from the network),</span>
+        <span class="n">eph</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">hs</span><span class="p">)</span>
+        <span class="c1"># - gradients of action log probabilities,</span>
+        <span class="n">epdlogp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">dlogps</span><span class="p">)</span>
+        <span class="c1"># - and received rewards for the past episode.</span>
+        <span class="n">epr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">drs</span><span class="p">)</span>
+
+        <span class="c1"># 12. Reset the stored variables for the new episode:</span>
+        <span class="n">xs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">hs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">dlogps</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">drs</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># 13. Discount the rewards for the past episode using the helper</span>
+        <span class="c1"># function you defined earlier...</span>
+        <span class="n">discounted_epr</span> <span class="o">=</span> <span class="n">discount_rewards</span><span class="p">(</span><span class="n">epr</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+        <span class="c1"># ...and normalize them because they have high variance</span>
+        <span class="c1"># (this is explained below.)</span>
+        <span class="n">discounted_epr</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">discounted_epr</span><span class="p">)</span>
+        <span class="n">discounted_epr</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">discounted_epr</span><span class="p">)</span>
+
+        <span class="c1"># 14. Multiply the discounted rewards by the gradients of the action</span>
+        <span class="c1"># log probabilities (the &quot;advantage&quot;).</span>
+        <span class="n">epdlogp</span> <span class="o">*=</span> <span class="n">discounted_epr</span>
+        <span class="c1"># 15. Use the gradients to perform backpropagation and gradient ascent.</span>
+        <span class="n">grad</span> <span class="o">=</span> <span class="n">policy_backward</span><span class="p">(</span><span class="n">eph</span><span class="p">,</span> <span class="n">epdlogp</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+        <span class="c1"># 16. Save the policy gradients in a buffer.</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
+            <span class="n">grad_buffer</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">grad</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="c1"># 17. Use the RMSProp optimizer to perform the policy network</span>
+        <span class="c1"># parameter (weight) update at every batch size</span>
+        <span class="c1"># (by default: every 10 episodes).</span>
+        <span class="k">if</span> <span class="n">episode_number</span> <span class="o">%</span> <span class="n">batch_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="c1"># The gradient.</span>
+                <span class="n">g</span> <span class="o">=</span> <span class="n">grad_buffer</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                <span class="c1"># Use the RMSProp discounting factor.</span>
+                <span class="n">rmsprop_cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">decay_rate</span> <span class="o">*</span> <span class="n">rmsprop_cache</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">decay_rate</span><span class="p">)</span> <span class="o">*</span> <span class="n">g</span> <span class="o">**</span> <span class="mi">2</span>
+                <span class="p">)</span>
+                <span class="c1"># Update the policy network with a learning rate</span>
+                <span class="c1"># and the RMSProp optimizer using gradient ascent</span>
+                <span class="c1"># (hence, there&#39;s no negative sign)</span>
+                <span class="n">model</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">g</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">rmsprop_cache</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="o">+</span> <span class="mf">1e-5</span><span class="p">)</span>
+                <span class="c1"># Reset the gradient buffer at the end.</span>
+                <span class="n">grad_buffer</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+        <span class="c1"># 18. Measure the total discounted reward.</span>
+        <span class="n">running_reward</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">reward_sum</span>
+            <span class="k">if</span> <span class="n">running_reward</span> <span class="ow">is</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="n">running_reward</span> <span class="o">*</span> <span class="mf">0.99</span> <span class="o">+</span> <span class="n">reward_sum</span> <span class="o">*</span> <span class="mf">0.01</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Resetting the Pong environment. Episode total reward: </span><span class="si">{}</span><span class="s2"> Running mean: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">reward_sum</span><span class="p">,</span> <span class="n">running_reward</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># 19. Set the agent&#39;s initial observation by calling Gym&#39;s `reset()` function</span>
+        <span class="c1"># for the next episode and setting the reward sum back to 0.</span>
+        <span class="n">reward_sum</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">observation</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="n">prev_x</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># 20. Display the output during training.</span>
+    <span class="k">if</span> <span class="n">reward</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Episode </span><span class="si">{}</span><span class="s2">: Game finished. Reward: </span><span class="si">{}</span><span class="s2">...&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">episode_number</span><span class="p">,</span> <span class="n">reward</span><span class="p">)</span>
+            <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">reward</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot; POSITIVE REWARD!&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -21.0 Running mean: -21.0
+Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -21.0 Running mean: -21.0
+Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: 1.0... POSITIVE REWARD!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+Episode 2: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -20.0 Running mean: -20.99
@@ -1266,15 +2277,13 @@ def show_any_video(mp4video=0):
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By the NumPy community<br/>
-        
-            &copy; Copyright 2020, the NumPy community.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By the NumPy community<br/>
+    
+        &copy; Copyright 2020, the NumPy community.<br/>
+  </p>
+</footer>
 </main>
 
 
