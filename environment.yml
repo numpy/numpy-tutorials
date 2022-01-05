@@ -5,11 +5,13 @@ dependencies:
   - numpy
   - scipy
   - matplotlib
+  - pandas 
   - pytest
   - nbval
   - statsmodels
   - pip
   - imageio
+  - pooch
   - pip:
     - jupyter-book
-    - gym[atari]
+    - gym[atari]==0.19
