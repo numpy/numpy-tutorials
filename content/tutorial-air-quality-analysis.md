@@ -14,6 +14,7 @@ kernelspec:
 
 # Analyzing the impact of the lockdown on air quality in Delhi, India
 
+![A grid showing the India Gate in smog above and clear air below](_static/10-delhi-aqi.jpg)
 
 ## What you'll do
 
@@ -25,9 +26,9 @@ Calculate Air Quality Indices (AQI) and perform paired t-test on them.
 
 - You'll learn how to calculate Air Quality Index (AQI)
 
-- You'll learn how to perform a paired t-test and find the t and p values
+- You'll learn how to perform a paired t-test and find the `t` and `p` values
 
-- You'll learn to interpret these values
+- You'll learn how to interpret these values
 
 
 ## What you'll need
@@ -44,14 +45,13 @@ Calculate Air Quality Indices (AQI) and perform paired t-test on them.
 ## The problem of air pollution
 
 Air pollution is one of the most prominent types of pollution we face that has an immediate effect on our daily lives. The
-COVID-19 pandemic resulted in lockdowns in different parts of the world, offering a rare opportunity to study the effect of
+COVID-19 pandemic resulted in lockdowns in different parts of the world; offering a rare opportunity to study the effect of
 human activity (or lack there of) on air pollution. In this tutorial, we will study the air quality in Delhi, one of the
 worst affected cities by air pollution, before and during the lockdown from March to June 2020. For this, we will first compute
-the Air Quality Index for each day from the collected pollutant measurements. Next, we will sample these indices and perform
-a [paired t-test](https://en.wikipedia.org/wiki/Student%27s_t-test#Dependent_t-test_for_paired_samples) on them. It will statistically show us that the air quality improved due to the lockdown, supporting our
-intuition.
+the Air Quality Index for each hour from the collected pollutant measurements. Next, we will sample these indices and perform
+a [paired t-test](https://en.wikipedia.org/wiki/Student%27s_t-test#Dependent_t-test_for_paired_samples) on them. It will statistically show us that the air quality improved due to the lockdown, supporting our intuition.
 
-Let's start by importing the necessary libraries into our environment.
+Let's start by importing the necessary libraries into our environment. Also, enable IPython's [magic function](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-matplotlib) to see the Matplotlib plots in the cell outputs.
 
 ```{code-cell} ipython3
 import numpy as np
@@ -63,20 +63,24 @@ import matplotlib.pyplot as plt
 
 ## Building the dataset
 
-We will use a condensed version of the [Air Quality Data in India](https://www.kaggle.com/rohanrao/air-quality-data-in-india) dataset. The dataset contains air quality data and AQI (Air Quality Index) at hourly and daily level of various stations across multiple cities in India. The condensed version available with this tutorial contains hourly pollutant measurements for Delhi
-from 31/05/2019 to 30/06/2020. It has data of the standard pollutants that are required for Air Quality Index calculation:
-Particulate Matter (PM 10 and PM 2.5), Nitrogen dioxide (NO2), ammonia (NH3), sulfur dioxide (SO2), carbon monoxide (CO), and ozone (O3).
+We will use a condensed version of the [Air Quality Data in India](https://www.kaggle.com/rohanrao/air-quality-data-in-india) dataset. This dataset contains air quality data and AQI (Air Quality Index) at hourly and daily level of various stations across multiple cities in India. The condensed version available with this tutorial contains hourly pollutant measurements for Delhi
+from May 31, 2019 to June 30, 2020. It has measurements of the standard pollutants that are required for Air Quality Index calculation and a few other important ones:
+Particulate Matter (PM 2.5 and PM 10), nitrogen dioxide (NO2), ammonia (NH3), sulfur dioxide (SO2), carbon monoxide (CO), ozone (O3), oxides of nitrogen (NOx), nitric oxide (NO), benzene, toluene, and xylene.
+
+Let's print out the first few rows to have a glimpse of our dataset.
 
 ```{code-cell} ipython3
 ! head air-quality-data.csv
 ```
 
-We'll initially create two sets: `pollutants_A` with PM 2.5, PM 10, NO2, NH3, and SO2, and `pollutants_B` with CO and O3. The
-two sets will be processed slightly differently, as you'll see later on.
+For the purpose of this tutorial, we are only concerned with standard pollutants required for calculating the AQI, viz., PM 2.5, PM 10, NO2, NH3, SO2, CO, and O3. So, we will only import these particular columns with [np.genfromtxt](https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html). We'll initially create two sets: `pollutants_A` with PM 2.5, PM 10, NO2, NH3, and SO2, and `pollutants_B` with CO and O3. The
+two sets will be processed slightly differently, as we'll see later on.
 
 ```{code-cell} ipython3
-pollutants_A = np.genfromtxt("air-quality-data.csv", dtype='f8', delimiter=",", skip_header=1, usecols=(1, 2, 3, 4, 5))
-pollutants_B = np.genfromtxt("air-quality-data.csv", dtype='f8', delimiter=",", skip_header=1, usecols=(6, 7))
+pollutants_A = np.genfromtxt("air-quality-data.csv", dtype='f8', delimiter=",",
+                             skip_header=1, usecols=(1, 2, 3, 4, 5))
+pollutants_B = np.genfromtxt("air-quality-data.csv", dtype='f8', delimiter=",",
+                             skip_header=1, usecols=(6, 7))
 
 print(pollutants_A.shape)
 print(pollutants_B.shape)
@@ -89,16 +93,16 @@ print(np.where(np.isnan(pollutants_A) == True))
 print(np.where(np.isnan(pollutants_B) == True))
 ```
 
-We have successfully imported the data and checked that it is complete. Let's move on to the AQI calculations!
+With this, we have successfully imported the data and checked that it is complete. Let's move on to the AQI calculations!
 
 +++
 
 ## Calculating the Air Quality Index
 
 
-We will calculate the AQI using [the method](http://safar.tropmet.res.in/AQI-47-12-Details) adopted by the [Central Pollution Control Board](https://www.cpcb.nic.in/national-air-quality-index) of India.  To summarize the steps:
+We will calculate the AQI using [the method](https://app.cpcbccr.com/ccr_docs/FINAL-REPORT_AQI_.pdf) adopted by the [Central Pollution Control Board](https://www.cpcb.nic.in/national-air-quality-index) of India.  To summarize the steps:
 
-- Collect 24-hourly average concentration value for the standard pollutants; 8-hourly in case of CO and O3.
+- Collect 24-hourly average concentration values for the standard pollutants; 8-hourly in case of CO and O3.
 
 
 - Calculate the sub-indices for these pollutants with the formula: 
@@ -106,22 +110,22 @@ $Ip = \dfrac{\text{IHi – ILo}}{\text{BPHi – BPLo}}\cdot{\text{Cp – BPLo}} 
 
     Where,
 
-    `Ip` = sub-index of pollutant p\
-    `Cp` = averaged concentration of pollutant p\
-    `BPHi` = concentration breakpoint i.e. greater than or equal to Cp\
-    `BPLo` = concentration breakpoint i.e. less than or equal to Cp\
-    `IHi` = AQI value corresponding to BPHi\
-    `ILo` = AQI value corresponding to BPLo
+    `Ip` = sub-index of pollutant `p`\
+    `Cp` = averaged concentration of pollutant `p`\
+    `BPHi` = concentration breakpoint i.e. greater than or equal to `Cp`\
+    `BPLo` = concentration breakpoint i.e. less than or equal to `Cp`\
+    `IHi` = AQI value corresponding to `BPHi`\
+    `ILo` = AQI value corresponding to `BPLo`
     
 
 - The maximum sub-index at any given time is the Air Quality Index.
     
 The Air Quality Index is calculated with the help of breakpoint ranges as shown in the chart below.
+
 ![Chart of the breakpoint ranges](_static/10-breakpoints.png)
-*Source: SAFAR-INDIA*
 
 
-Let's create two arrays to store the breakpoints so that we can use them later for our calculations.
+Let's create two arrays to store the AQI ranges and breakpoints so that we can use them later for our calculations.
 
 ```{code-cell} ipython3
 AQI = np.array([0, 51, 101, 201, 301, 401, 501])
@@ -155,7 +159,7 @@ pollutants_A_24hr_avg = moving_mean(pollutants_A, 24)
 pollutants_B_8hr_avg = moving_mean(pollutants_B, 8)[-(pollutants_A_24hr_avg.shape[0]):]
 ```
 
-Now we can join both sets with [np.concatenate](https://numpy.org/devdocs/reference/generated/numpy.concatenate.html) to form a single data set of all the averaged concentrations. Note that we have to join our arrays column-wise so we pass the
+Now, we can join both sets with [np.concatenate](https://numpy.org/devdocs/reference/generated/numpy.concatenate.html) to form a single data set of all the averaged concentrations. Note that we have to join our arrays column-wise so we pass the
 `axis=1` parameter.
 
 ```{code-cell} ipython3
@@ -164,103 +168,109 @@ pollutants = np.concatenate((pollutants_A_24hr_avg, pollutants_B_8hr_avg), axis=
 
 ### Sub-indices
 
-The subindices for each pollutant are calculated according to the standard breakpoints. The final AQI is the maximum subindex for that row.
+The subindices for each pollutant are calculated according to the linear relationship between the AQI and standard breakpoint ranges with the formula as above: $Ip = \dfrac{\text{IHi – ILo}}{\text{BPHi – BPLo}}\cdot{\text{Cp – BPLo}} + \text{ILo}$.
 
 ```{code-cell} ipython3
-# Calculate sub_indices
-
 def compute_indices(pol, con):
     bp = breakpoints[pol]
     
+    if pol == 'CO':
+        inc = 0.1
+    else:
+        inc = 1
+    
     if bp[0] <= con < bp[1]:
         Bl = bp[0]
-        Bh = bp[1] - 1
-        Ih = AQI[1] - 1
+        Bh = bp[1] - inc
+        Ih = AQI[1] - inc
         Il = AQI[0]
 
     elif bp[1] <= con < bp[2]:
         Bl = bp[1]
-        Bh = bp[2] - 1
-        Ih = AQI[2] - 1
+        Bh = bp[2] - inc
+        Ih = AQI[2] - inc
         Il = AQI[1]
 
     elif bp[2] <= con < bp[3]:
         Bl = bp[2]
-        Bh = bp[3] - 1
-        Ih = AQI[3] - 1
+        Bh = bp[3] - inc
+        Ih = AQI[3] - inc
         Il = AQI[2]
 
     elif bp[3] <= con < bp[4]:
         Bl = bp[3]
-        Bh = bp[4] - 1
-        Ih = AQI[4] - 1
+        Bh = bp[4] - inc
+        Ih = AQI[4] - inc
         Il = AQI[3]
 
     elif bp[4] <= con < bp[5]:
         Bl = bp[4]
-        Bh = bp[5] - 1
-        Ih = AQI[5] - 1
+        Bh = bp[5] - inc
+        Ih = AQI[5] - inc
         Il = AQI[4]
 
     elif bp[5] <= con:
         Bl = bp[5]
-        Bh = bp[5] + bp[4] - 2
+        Bh = bp[5] + bp[4] - (2 * inc)
         Ih = AQI[6]
         Il = AQI[5]
 
     else:
-        print("Cc out of range!")
+        print("Concentration out of range!")
         
     return ((Ih - Il) / (Bh - Bl)) * (con - Bl) + Il
 ```
 
-We will use [np.vectorize](https://numpy.org/devdocs/reference/generated/numpy.vectorize.html) to apply vectorization to our function. This simply means we don't have loop over each each element
-of the array ourselves. [Vectorization](https://numpy.org/devdocs/user/whatisnumpy.html#why-is-numpy-fast) is one of the key advantages of NumPy.
+We will use [np.vectorize](https://numpy.org/devdocs/reference/generated/numpy.vectorize.html) to utilize the concept of vectorization. This simply means we don't have loop over each element of the array ourselves. [Vectorization](https://numpy.org/devdocs/user/whatisnumpy.html#why-is-numpy-fast) is one of the key advantages of NumPy.
 
 ```{code-cell} ipython3
 vcompute_indices = np.vectorize(compute_indices)
 ```
 
-By calling our vectorized function `vcompute_indices` for each pollutant, we get the sub-indices. Using [np.amax], we find out
-the maximum sub-index for each period, which is our Air Quality Index!
+By calling our vectorized function `vcompute_indices` for each pollutant, we get the sub-indices. To get back an array with the original shape, we use [np.stack](https://numpy.org/devdocs/reference/generated/numpy.stack.html).
 
 ```{code-cell} ipython3
-# figure out what is wrong with CO
-
 sub_indices = np.stack((vcompute_indices('PM2.5', pollutants[..., 0]),
                         vcompute_indices('PM10', pollutants[..., 1]),
                         vcompute_indices('NO2', pollutants[..., 2]),
                         vcompute_indices('NH3', pollutants[..., 3]),
                         vcompute_indices('SO2', pollutants[..., 4]),
+                        vcompute_indices('CO', pollutants[..., 5]),
                         vcompute_indices('O3', pollutants[..., 6])), axis=1)
+```
 
+### Air quality indices
+
+Using [np.amax](https://numpy.org/devdocs/reference/generated/numpy.amax.html), we find out the maximum sub-index for each period, which is our Air Quality Index!
+
+```{code-cell} ipython3
 aqi_array = np.amax(sub_indices, axis=1)
 ```
 
-With this we have the air quality index for every hour from 01/06/2019 to 30/06/2020. Note that even though we started out with
-the data from 31st May, we truncated that during the moving averages step. Have a look at the AQIs.
+With this, we have the AQI for every hour from June 1, 2019 to June 30, 2020. Note that even though we started out with
+the data from 31st May, we truncated that during the moving averages step.
 
-```{code-cell} ipython3
-print(aqi_array[:10])
-```
++++
 
 ## Paired t-test on the AQIs
 
-We will now import the datetime column into a *datetime64* dtype array. We will use this array to index the AQI array and
-obtain sub-sets of the dataset. We will have a dataset of around 2 months before and after the lockdown.
+Hypothesis testing is a form of descriptive statistics used to help us make decisions with the data. From the calculated AQI data, we want to find out if there was a statistically significant difference in average AQI before and after the lockdown was imposed. We will use the left-tailed, [paired t-test](https://en.wikipedia.org/wiki/Student%27s_t-test#Dependent_t-test_for_paired_samples) to compute two test statistics- the [`t statistic`](https://en.wikipedia.org/wiki/T-statistic) and the [`p value`](https://en.wikipedia.org/wiki/P-value). We will then compare these with the corresponding critical values to make a decision.
+
+![Normal distribution plot showing area of rejection in one-tailed test (left tailed)](_static/10-one-tailed-test.svg)
+
+### Sampling
+
+We will now import the `datetime` column from our original dataset into a [*datetime64* dtype](https://numpy.org/devdocs/reference/arrays.scalars.html) array. We will use this array to index the AQI array and obtain subsets of the dataset.
 
 ```{code-cell} ipython3
-# datetime_data is from 31/05/2019 to 30/06/2020
+datetime = np.genfromtxt("air-quality-data.csv", dtype='M8[h]', delimiter=",",
+                         skip_header=1, usecols=(0, ))[-(pollutants_A_24hr_avg.shape[0]):]
+```
 
-datetime = np.genfromtxt("air-quality-data.csv", dtype='M8[h]', delimiter=",", skip_header=1, usecols=(0, ))[-(pollutants_A_24hr_avg.shape[0]):]
+Since total lockdown commenced in Delhi from March 24, 2020, the after-lockdown subset is of the period March 24, 2020 to June 30, 2020. The before-lockdown subset is for the same length of time before 24th March.
 
-# lockdown in Delhi started on 24th March 2020
-
-# let first dataset be from 24/03/2020 to 30/06/2020
-
+```{code-cell} ipython3
 after_lock = aqi_array[np.where(datetime >= np.datetime64('2020-03-24T00'))]
-
-# let second dataset be as many days before 24/03/2020
 
 before_lock = aqi_array[np.where(datetime <= np.datetime64('2020-03-21T00'))][-(after_lock.shape[0]):]
 
@@ -268,52 +278,65 @@ print(after_lock.shape)
 print(before_lock.shape)
 ```
 
-```{code-cell} ipython3
-# plot the pdf
+To make sure our samples are *approximately* normally distributed, we take samples of size `n = 30`. `before_sample_A` and `after_sample_A` are the set of random observations drawn before and after the total lockdown. We use [np.random.permutation](https://numpy.org/devdocs/reference/random/generated/numpy.random.permutation.html) to generate the samples.
 
-_ = plt.hist(after_lock, bins='auto', density=True) 
+```{code-cell} ipython3
+before_sample = np.random.permutation(before_lock)[:30]
+after_sample = np.random.permutation(after_lock)[:30]
 ```
 
-```{code-cell} ipython3
-hist_dist = stats.rv_histogram(hist)
-```
+### Defining the hypothesis
+
+Let us assume that there is no significant difference between the sample means before and after the lockdown. This will be the null hypothesis. The alternative hypothesis would be that there *is* a significant difference between the means and the AQI *improved*. Mathematically,
+
+$H_{0}: \mu_{after-before} = 0$ \
+$H_{a}: \mu_{after-before} < 0$
+
++++
+
+### Calculating the test statistics
+
+We will use the `t` statistic to evaluate our hypothesis and even calculate the `p value` from it. The formula for the `t` statistic is:
+$t = \frac{\mu_{after-before}}{\sqrt{\sigma^{2}/n}}$
+
+where,
+
+$\mu_{after-before}$ = mean differences of samples \
+$\sigma^{2}$ = variance of mean differences \
+$n$ = sample size
 
 ```{code-cell} ipython3
-plt.plot(after_lock, stats.norm.pdf(after_lock), label='PDF')
-```
-
-We want to determine if the lockdown had any effect on the AQI in Delhi. Let's consider the null hypothesis as "There was no effect of the lockdown on AQI." Our corresponding alternative hypothesis will be "The lockdown had an effect on the AQI and
-they were improved." To accept or reject our null hypothesis, we will do a one-tailed paired t-test.
-
-```{code-cell} ipython3
-# make samples from before_lock, after_lock
-
-before_sample_A = np.random.permutation(before_lock)[:50]
-after_sample_A = np.random.permutation(after_lock)[:50]
-
-# do a paired t-test
-
-dof = 49
-
 def t_test(x, y):
-    diff = x - y
-    return np.mean(diff) / (np.std(diff) / np.sqrt(len(x)))
+    diff = y - x
+    var = np.var(diff, ddof=1)
+    num = np.mean(diff)
+    denom = np.sqrt(var / len(x))
+    return np.divide(num, denom)
 
-t_value = t_test(before_sample_A, after_sample_A)
+t_value = t_test(before_sample, after_sample)
+```
 
-p_value = 1 - t.cdf(np.abs(t_value), dof)
+For the `p` value, we will use SciPy's `stats.distributions.t.cdf()` function. It takes two arguments- `t` statistic and the degrees of freedom (`dof`). The formula for `dof` is `n - 1`.
+
+```{code-cell} ipython3
+dof = len(before_sample) - 1
+
+p_value = stats.distributions.t.cdf(t_value, dof)
 
 print("The t value is {} and the p value is {}.".format(t_value, p_value))
 ```
 
-## What do the t and p values mean?
+## What do the `t` and `p` values mean?
 
-The test-statistics are compared with the critical values, which are calculated according to our level of significance, denoted by $\alpha$. If we perform our test at a confidence level of 95%, the significance level is 5% or 0.05. The `p value` is the probablity of observing the two data samples on the basis of the null hypothesis. If our `p value` is less than the significance level,
-i.e., 0.05, we can reject the null hypothesis.
+We will now compare the calculated test statistics with the critical test statistics. The critical `t` value is calculated by looking up the [t-distribution table](https://en.wikipedia.org/wiki/Student%27s_t-distribution#Table_of_selected_values).
 
-We can keep increasing the significance level as suitable for our study. Here, we'll use the [5-sigma](https://www.zmescience.com/science/what-5-sigma-means-0423423/) significance level. Here, $\alpha = 3 * {10^-7}$.
+![Table of selected t values at different confidence levels. T value for 29 dof at 95% confidence level is highlighted with a yellow square](_static/10-t-table.png)
 
-Since our `p value` is less than $\alpha$, we can safely reject the null hypothesis and fail to reject our alternative hypothesis. It simply means that our data does not provide enough evidence that our alternative hypothesis is improbable.
+From the table above, the critical value is 1.699 for 29 `dof` at a confidence level of 95%. Since we are using the left tailed test, our critical value is -1.699. Clearly, the calculated `t` value is less than the critical value so we can safely reject the null hypothesis.
+
+The critical `p` value, denoted by $\alpha$, is usually chosen to be 0.05, corresponding to a confidence level of 95%. If the calculated `p` value is less than $\alpha$, then the null hypothesis can be safely rejected. Clearly, our `p` value is much less than $\alpha$, so we can reject the null hypothesis.
+
+Note that this does not mean we can accept the alternative hypothesis. It only tells us that there is not enough evidence to reject $H_{a}$. In other words, we fail to reject the alternative hypothesis so, it *may* be true.
 
 +++
 
@@ -321,14 +344,15 @@ Since our `p value` is less than $\alpha$, we can safely reject the null hypothe
 
 ## In practice...
 
-- The pandas library is preferable to use for time-series data analysis
+- The [pandas](https://pandas.pydata.org/) library is preferable to use for time-series data analysis.
 
-- As our population was large enough we could do a t-test which is used for normal distributions. There are better tests
-for non-normal data like the [Wilcoxon test](https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test).
+- The SciPy stats module provides the [stats.ttest_rel](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_rel.html) function which can be used to get the `t statistic` and `p value`.
+
+- In real life, data are generally not normally distributed. There are tests for such non-normal data like the [Wilcoxon test](https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test).
 
 ## Further reading
 
-- There are a host of statistical tests you can choose according to the characteristics of the given data. Read more about them
-[here](https://machinelearningmastery.com/statistical-data-distributions/).
+- There are a host of statistical tests you can choose according to the characteristics of the given data. Read more about them at
+[A Gentle Introduction to Statistical Data Distributions](https://machinelearningmastery.com/statistical-data-distributions/).
 
--
+- There are various versions of the [Student's t-test](https://en.wikipedia.org/wiki/Student%27s_t-test) that you can adopt according to your needs.
