@@ -14,7 +14,7 @@ kernelspec:
 
 # Analyzing the impact of the lockdown on air quality in Delhi, India
 
-![A grid showing the India Gate in smog above and clear air below](_static/10-delhi-aqi.jpg)
+![A grid showing the India Gate in smog above and clear air below](_static/11-delhi-aqi.jpg)
 
 ## What you'll do
 
@@ -122,7 +122,7 @@ $Ip = \dfrac{\text{IHi – ILo}}{\text{BPHi – BPLo}}\cdot{\text{Cp – BPLo}} 
     
 The Air Quality Index is calculated with the help of breakpoint ranges as shown in the chart below.
 
-![Chart of the breakpoint ranges](_static/10-breakpoints.png)
+![Chart of the breakpoint ranges](_static/11-breakpoints.png)
 
 
 Let's create two arrays to store the AQI ranges and breakpoints so that we can use them later for our calculations.
@@ -256,7 +256,7 @@ the data from 31st May, we truncated that during the moving averages step.
 
 Hypothesis testing is a form of descriptive statistics used to help us make decisions with the data. From the calculated AQI data, we want to find out if there was a statistically significant difference in average AQI before and after the lockdown was imposed. We will use the left-tailed, [paired t-test](https://en.wikipedia.org/wiki/Student%27s_t-test#Dependent_t-test_for_paired_samples) to compute two test statistics- the [`t statistic`](https://en.wikipedia.org/wiki/T-statistic) and the [`p value`](https://en.wikipedia.org/wiki/P-value). We will then compare these with the corresponding critical values to make a decision.
 
-![Normal distribution plot showing area of rejection in one-tailed test (left tailed)](_static/10-one-tailed-test.svg)
+![Normal distribution plot showing area of rejection in one-tailed test (left tailed)](_static/11-one-tailed-test.svg)
 
 ### Sampling
 
@@ -330,7 +330,7 @@ print("The t value is {} and the p value is {}.".format(t_value, p_value))
 
 We will now compare the calculated test statistics with the critical test statistics. The critical `t` value is calculated by looking up the [t-distribution table](https://en.wikipedia.org/wiki/Student%27s_t-distribution#Table_of_selected_values).
 
-![Table of selected t values at different confidence levels. T value for 29 dof at 95% confidence level is highlighted with a yellow square](_static/10-t-table.png)
+![Table of selected t values at different confidence levels. T value for 29 dof at 95% confidence level is highlighted with a yellow square](_static/11-t-table.png)
 
 From the table above, the critical value is 1.699 for 29 `dof` at a confidence level of 95%. Since we are using the left tailed test, our critical value is -1.699. Clearly, the calculated `t` value is less than the critical value so we can safely reject the null hypothesis.
 
