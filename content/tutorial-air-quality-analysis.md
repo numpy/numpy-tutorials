@@ -18,7 +18,7 @@ kernelspec:
 
 ## What you'll do
 
-Calculate Air Quality Indices (AQI) and perform paired t-test on them.
+Calculate Air Quality Indices (AQI) and perform paired Student's t-test on them.
 
 ## What you'll learn
 
@@ -26,14 +26,14 @@ Calculate Air Quality Indices (AQI) and perform paired t-test on them.
 
 - You'll learn how to calculate Air Quality Index (AQI)
 
-- You'll learn how to perform a paired t-test and find the `t` and `p` values
+- You'll learn how to perform a paired Student's t-test and find the `t` and `p` values
 
 - You'll learn how to interpret these values
 
 
 ## What you'll need
 
-- SciPy and Matplotlib installed in your environment
+- [SciPy](https://scipy.org/install/) and [Matplotlib](https://matplotlib.org/stable/users/installing/index.html) installed in your environment
 
 - Basic understanding of statistical terms like population, sample, mean, standard deviation etc.
 
@@ -49,7 +49,7 @@ COVID-19 pandemic resulted in lockdowns in different parts of the world; offerin
 human activity (or lack there of) on air pollution. In this tutorial, we will study the air quality in Delhi, one of the
 worst affected cities by air pollution, before and during the lockdown from March to June 2020. For this, we will first compute
 the Air Quality Index for each hour from the collected pollutant measurements. Next, we will sample these indices and perform
-a [paired t-test](https://en.wikipedia.org/wiki/Student%27s_t-test#Dependent_t-test_for_paired_samples) on them. It will statistically show us that the air quality improved due to the lockdown, supporting our intuition.
+a [paired Student's t-test](https://en.wikipedia.org/wiki/Student%27s_t-test#Dependent_t-test_for_paired_samples) on them. It will statistically show us that the air quality improved due to the lockdown, supporting our intuition.
 
 Let's start by importing the necessary libraries into our environment. Also, enable IPython's [magic function](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-matplotlib) to see the Matplotlib plots in the cell outputs.
 
@@ -170,6 +170,8 @@ pollutants = np.concatenate((pollutants_A_24hr_avg, pollutants_B_8hr_avg), axis=
 
 The subindices for each pollutant are calculated according to the linear relationship between the AQI and standard breakpoint ranges with the formula as above: $Ip = \dfrac{\text{IHi – ILo}}{\text{BPHi – BPLo}}\cdot{\text{Cp – BPLo}} + \text{ILo}$.
 
+The `compute_indices` function first fetches the correct upper and lower bounds of AQI categories and breakpoint concentrations for the input concentration and pollutant with the help of arrays `AQI` and `breakpoints` we created above. Then, it feeds these values into the formula to calculate the sub-index.
+
 ```{code-cell} ipython3
 def compute_indices(pol, con):
     bp = breakpoints[pol]
@@ -221,7 +223,7 @@ def compute_indices(pol, con):
     return ((Ih - Il) / (Bh - Bl)) * (con - Bl) + Il
 ```
 
-We will use [np.vectorize](https://numpy.org/devdocs/reference/generated/numpy.vectorize.html) to utilize the concept of vectorization. This simply means we don't have loop over each element of the array ourselves. [Vectorization](https://numpy.org/devdocs/user/whatisnumpy.html#why-is-numpy-fast) is one of the key advantages of NumPy.
+We will use [np.vectorize](https://numpy.org/devdocs/reference/generated/numpy.vectorize.html) to utilize the concept of vectorization. This simply means we don't have loop over each element of the pollutant array ourselves. [Vectorization](https://numpy.org/devdocs/user/whatisnumpy.html#why-is-numpy-fast) is one of the key advantages of NumPy.
 
 ```{code-cell} ipython3
 vcompute_indices = np.vectorize(compute_indices)
@@ -252,9 +254,9 @@ the data from 31st May, we truncated that during the moving averages step.
 
 +++
 
-## Paired t-test on the AQIs
+## Paired Student's t-test on the AQIs
 
-Hypothesis testing is a form of descriptive statistics used to help us make decisions with the data. From the calculated AQI data, we want to find out if there was a statistically significant difference in average AQI before and after the lockdown was imposed. We will use the left-tailed, [paired t-test](https://en.wikipedia.org/wiki/Student%27s_t-test#Dependent_t-test_for_paired_samples) to compute two test statistics- the [`t statistic`](https://en.wikipedia.org/wiki/T-statistic) and the [`p value`](https://en.wikipedia.org/wiki/P-value). We will then compare these with the corresponding critical values to make a decision.
+Hypothesis testing is a form of descriptive statistics used to help us make decisions with the data. From the calculated AQI data, we want to find out if there was a statistically significant difference in average AQI before and after the lockdown was imposed. We will use the left-tailed, [paired Student's t-test](https://en.wikipedia.org/wiki/Student%27s_t-test#Dependent_t-test_for_paired_samples) to compute two test statistics- the [`t statistic`](https://en.wikipedia.org/wiki/T-statistic) and the [`p value`](https://en.wikipedia.org/wiki/P-value). We will then compare these with the corresponding critical values to make a decision.
 
 ![Normal distribution plot showing area of rejection in one-tailed test (left tailed)](_static/11-one-tailed-test.svg)
 
