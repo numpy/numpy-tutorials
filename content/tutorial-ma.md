@@ -83,7 +83,7 @@ The data file contains data of different types and is organized as follows:
 - The second through seventh row contain summary data that is of a different type than that which we are going to examine, so we will need to exclude that from the data with which we will work.
 - The numerical data we wish to work with begins at column 4, row 8, and extends from there to the rightmost column and the lowermost row.
 
-Let's explore the data inside this file for the first 14 days of records. To gather data from the `.csv` file, we will use the [numpy.genfromtxt](https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt) function, making sure we select only the columns with actual numbers instead of the first four columns which contain location data. We also skip the first 7
+Let's explore the data inside this file for the first 14 days of records. To gather data from the `.csv` file, we will use the [numpy.genfromtxt](https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt) function, making sure we select only the columns with actual numbers instead of the first four columns which contain location data. We also skip the first 6
 rows of this file, since they contain other data we are not interested in. Separately, we will extract the information about dates and location for this data.
 
 ```{code-cell}
@@ -99,12 +99,12 @@ dates = np.genfromtxt(
     encoding="utf-8-sig",
 )
 # Read the names of the geographic locations from the first two
-# columns, skipping the first seven rows
+# columns, skipping the first six rows
 locations = np.genfromtxt(
     filename,
     dtype=np.unicode_,
     delimiter=",",
-    skip_header=7,
+    skip_header=6,
     usecols=(0, 1),
     encoding="utf-8-sig",
 )
@@ -113,7 +113,7 @@ nbcases = np.genfromtxt(
     filename,
     dtype=np.int_,
     delimiter=",",
-    skip_header=7,
+    skip_header=6,
     usecols=range(4, 18),
     encoding="utf-8-sig",
 )
