@@ -136,9 +136,13 @@ plt.xticks(selected_dates, dates[selected_dates])
 plt.title("COVID-19 cumulative cases from Jan 21 to Feb 3 2020")
 ```
 
-The graph has a strange shape from January 24th to February 1st. It would be interesing to know where this data comes from. If we look at the `locations` array we extracted from the `.csv` file, we can see that we have two columns, where the first would contain regions and the second would contain the name of the country. However, only the first few rows contain data for the the first column (province names in China). Following that, we only have country names. So it would make sense to group all the data from China into a single row. For this, we'll select from the `nbcases` array only the rows for which the second entry of the `locations` array corresponds to China. Next, we'll use the [numpy.sum](https://numpy.org/devdocs/reference/generated/numpy.sum.html#numpy.sum) function to sum all the selected rows (`axis=0`):
+The graph has a strange shape from January 24th to February 1st. It would be interesing to know where this data comes from. If we look at the `locations` array we extracted from the `.csv` file, we can see that we have two columns, where the first would contain regions and the second would contain the name of the country. However, only the first few rows contain data for the the first column (province names in China). Following that, we only have country names. So it would make sense to group all the data from China into a single row. For this, we'll select from the `nbcases` array only the rows for which the second entry of the `locations` array corresponds to China. Next, we'll use the [numpy.sum](https://numpy.org/devdocs/reference/generated/numpy.sum.html#numpy.sum) function to sum all the selected rows (`axis=0`). Note also that row 35 corresponds to the total counts for the whole country for each date. Since we want to calculate the sum ourselves from the provinces data, we have to remove that row first from both `locations` and `nbcases`:
 
 ```{code-cell}
+totals_row = 35
+locations = np.delete(locations, (totals_row), axis=0)
+nbcases = np.delete(nbcases, (totals_row), axis=0)
+
 china_total = nbcases[locations[:, 1] == "China"].sum(axis=0)
 china_total
 ```
