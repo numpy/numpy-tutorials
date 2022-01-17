@@ -38,7 +38,7 @@ Use the masked arrays module from NumPy to analyze COVID-19 data and deal with m
 
 ## What are masked arrays?
 
-Consider the following problem. You have a dataset with missing or invalid entries. If you're doing any kind of processing on this data, and want to *skip* or flag these unwanted entries without just deleting them, you may have to use conditionals or filter your data somehow. The [numpy.ma](https://numpy.org/devdocs/reference/maskedarray.generic.html#module-numpy.ma) module provides some of the same funcionality of [NumPy ndarrays](https://numpy.org/devdocs/reference/generated/numpy.ndarray.html#numpy.ndarray) with added structure to ensure invalid entries are not used in computation.
+Consider the following problem. You have a dataset with missing or invalid entries. If you're doing any kind of processing on this data, and want to *skip* or flag these unwanted entries without just deleting them, you may have to use conditionals or filter your data somehow. The [numpy.ma](https://numpy.org/devdocs/reference/maskedarray.generic.html#module-numpy.ma) module provides some of the same functionality of [NumPy ndarrays](https://numpy.org/devdocs/reference/generated/numpy.ndarray.html#numpy.ndarray) with added structure to ensure invalid entries are not used in computation.
 
 From the [Reference Guide](https://numpy.org/devdocs/reference/maskedarray.generic.html#module-numpy.ma):
 
@@ -83,28 +83,28 @@ The data file contains data of different types and is organized as follows:
 - The second through seventh row contain summary data that is of a different type than that which we are going to examine, so we will need to exclude that from the data with which we will work.
 - The numerical data we wish to work with begins at column 4, row 8, and extends from there to the rightmost column and the lowermost row.
 
-Let's explore the data inside this file for the first 14 days of records. To gather data from the `.csv` file, we will use the [numpy.genfromtxt](https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt) function, making sure we select only the columns with actual numbers instead of the first three columns which contain location data. We also skip the first 7
+Let's explore the data inside this file for the first 14 days of records. To gather data from the `.csv` file, we will use the [numpy.genfromtxt](https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt) function, making sure we select only the columns with actual numbers instead of the first four columns which contain location data. We also skip the first 6
 rows of this file, since they contain other data we are not interested in. Separately, we will extract the information about dates and location for this data.
 
 ```{code-cell}
 # Note we are using skip_header and usecols to read only portions of the
 # data file into each variable.
-# Read just the dates for columns 3-7 from the first row
+# Read just the dates for columns 4-18 from the first row
 dates = np.genfromtxt(
     filename,
     dtype=np.unicode_,
     delimiter=",",
     max_rows=1,
-    usecols=range(3, 17),
+    usecols=range(4, 18),
     encoding="utf-8-sig",
 )
 # Read the names of the geographic locations from the first two
-# columns, skipping the first seven rows
+# columns, skipping the first six rows
 locations = np.genfromtxt(
     filename,
     dtype=np.unicode_,
     delimiter=",",
-    skip_header=7,
+    skip_header=6,
     usecols=(0, 1),
     encoding="utf-8-sig",
 )
@@ -113,8 +113,8 @@ nbcases = np.genfromtxt(
     filename,
     dtype=np.int_,
     delimiter=",",
-    skip_header=7,
-    usecols=range(3, 17),
+    skip_header=6,
+    usecols=range(4, 18),
     encoding="utf-8-sig",
 )
 ```
@@ -136,9 +136,13 @@ plt.xticks(selected_dates, dates[selected_dates])
 plt.title("COVID-19 cumulative cases from Jan 21 to Feb 3 2020")
 ```
 
-The graph has a strange shape from January 24th to February 1st. It would be interesing to know where this data comes from. If we look at the `locations` array we extracted from the `.csv` file, we can see that we have two columns, where the first would contain regions and the second would contain the name of the country. However, only the first few rows contain data for the the first column (province names in China). Following that, we only have country names. So it would make sense to group all the data from China into a single row. For this, we'll select from the `nbcases` array only the rows for which the second entry of the `locations` array corresponds to China. Next, we'll use the [numpy.sum](https://numpy.org/devdocs/reference/generated/numpy.sum.html#numpy.sum) function to sum all the selected rows (`axis=0`):
+The graph has a strange shape from January 24th to February 1st. It would be interesting to know where this data comes from. If we look at the `locations` array we extracted from the `.csv` file, we can see that we have two columns, where the first would contain regions and the second would contain the name of the country. However, only the first few rows contain data for the the first column (province names in China). Following that, we only have country names. So it would make sense to group all the data from China into a single row. For this, we'll select from the `nbcases` array only the rows for which the second entry of the `locations` array corresponds to China. Next, we'll use the [numpy.sum](https://numpy.org/devdocs/reference/generated/numpy.sum.html#numpy.sum) function to sum all the selected rows (`axis=0`). Note also that row 35 corresponds to the total counts for the whole country for each date. Since we want to calculate the sum ourselves from the provinces data, we have to remove that row first from both `locations` and `nbcases`:
 
 ```{code-cell}
+totals_row = 35
+locations = np.delete(locations, (totals_row), axis=0)
+nbcases = np.delete(nbcases, (totals_row), axis=0)
+
 china_total = nbcases[locations[:, 1] == "China"].sum(axis=0)
 china_total
 ```

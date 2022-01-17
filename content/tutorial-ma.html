@@ -23,7 +23,7 @@
 
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -38,7 +38,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -63,7 +63,12 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
     
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
@@ -196,22 +201,22 @@
 
 
           
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
     <div class="topbar container-xl fixed-top">
     <div class="topbar-contents row">
         <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
         <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
             
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
@@ -272,6 +277,7 @@
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
                     alt="Interact on binder">Binder</button></a>
+        
         
         
         
@@ -357,19 +363,20 @@
         </div>
     </div>
 </div>
-    <!-- Table of contents that is only displayed when printing the page -->
-    <div id="jb-print-docs-body" class="onlyprint">
-        <h1>Masked Arrays</h1>
-        <!-- Table of contents -->
-        <div id="print-main-content" class="row">
-            <div class="col-12 col-md-12 pl-md-5 pr-md-5">
-            <div id="jb-print-toc">
-                
-                <div>
-                    <h2> Contents </h2>
-                </div>
-                <nav aria-label="Page">
-                    <ul class="visible nav section-nav flex-column">
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Masked Arrays</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-you-ll-do">
    What you’ll do
@@ -434,7 +441,9 @@
  </li>
 </ul>
 
-                </nav>
+                        </nav>
+                    </div>
+                </div>
             </div>
             
               <div>
@@ -464,7 +473,7 @@
 <hr class="docutils" />
 <div class="section" id="what-are-masked-arrays">
 <h2>What are masked arrays?<a class="headerlink" href="#what-are-masked-arrays" title="Permalink to this headline">¶</a></h2>
-<p>Consider the following problem. You have a dataset with missing or invalid entries. If you’re doing any kind of processing on this data, and want to <em>skip</em> or flag these unwanted entries without just deleting them, you may have to use conditionals or filter your data somehow. The <a class="reference external" href="https://numpy.org/devdocs/reference/maskedarray.generic.html#module-numpy.ma">numpy.ma</a> module provides some of the same funcionality of <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.ndarray.html#numpy.ndarray">NumPy ndarrays</a> with added structure to ensure invalid entries are not used in computation.</p>
+<p>Consider the following problem. You have a dataset with missing or invalid entries. If you’re doing any kind of processing on this data, and want to <em>skip</em> or flag these unwanted entries without just deleting them, you may have to use conditionals or filter your data somehow. The <a class="reference external" href="https://numpy.org/devdocs/reference/maskedarray.generic.html#module-numpy.ma">numpy.ma</a> module provides some of the same functionality of <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.ndarray.html#numpy.ndarray">NumPy ndarrays</a> with added structure to ensure invalid entries are not used in computation.</p>
 <p>From the <a class="reference external" href="https://numpy.org/devdocs/reference/maskedarray.generic.html#module-numpy.ma">Reference Guide</a>:</p>
 <blockquote>
 <div><p>A masked array is the combination of a standard <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.ndarray.html#numpy.ndarray">numpy.ndarray</a> and a <strong>mask</strong>. A mask is either <code class="docutils literal notranslate"><span class="pre">nomask</span></code>, indicating that no value of the associated array is invalid, or an array of booleans that determines for each element of the associated array whether the value is valid or not. When an element of the mask is <code class="docutils literal notranslate"><span class="pre">False</span></code>, the corresponding element of the associated array is valid and is said to be unmasked. When an element of the mask is <code class="docutils literal notranslate"><span class="pre">True</span></code>, the corresponding element of the associated array is said to be masked (invalid).</p>
@@ -509,28 +518,28 @@
 <li><p>The second through seventh row contain summary data that is of a different type than that which we are going to examine, so we will need to exclude that from the data with which we will work.</p></li>
 <li><p>The numerical data we wish to work with begins at column 4, row 8, and extends from there to the rightmost column and the lowermost row.</p></li>
 </ul>
-<p>Let’s explore the data inside this file for the first 14 days of records. To gather data from the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file, we will use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt">numpy.genfromtxt</a> function, making sure we select only the columns with actual numbers instead of the first three columns which contain location data. We also skip the first 7
+<p>Let’s explore the data inside this file for the first 14 days of records. To gather data from the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file, we will use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt">numpy.genfromtxt</a> function, making sure we select only the columns with actual numbers instead of the first four columns which contain location data. We also skip the first 6
 rows of this file, since they contain other data we are not interested in. Separately, we will extract the information about dates and location for this data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note we are using skip_header and usecols to read only portions of the</span>
 <span class="c1"># data file into each variable.</span>
-<span class="c1"># Read just the dates for columns 3-7 from the first row</span>
+<span class="c1"># Read just the dates for columns 4-18 from the first row</span>
 <span class="n">dates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span>
     <span class="n">filename</span><span class="p">,</span>
     <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unicode_</span><span class="p">,</span>
     <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
     <span class="n">max_rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">usecols</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
+    <span class="n">usecols</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span>
     <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="c1"># Read the names of the geographic locations from the first two</span>
-<span class="c1"># columns, skipping the first seven rows</span>
+<span class="c1"># columns, skipping the first six rows</span>
 <span class="n">locations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span>
     <span class="n">filename</span><span class="p">,</span>
     <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unicode_</span><span class="p">,</span>
     <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
-    <span class="n">skip_header</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+    <span class="n">skip_header</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
     <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
     <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">,</span>
 <span class="p">)</span>
@@ -539,8 +548,8 @@ rows of this file, since they contain other data we are not interested in. Separ
     <span class="n">filename</span><span class="p">,</span>
     <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">,</span>
     <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
-    <span class="n">skip_header</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
-    <span class="n">usecols</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
+    <span class="n">skip_header</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">usecols</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span>
     <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
@@ -570,10 +579,14 @@ rows of this file, since they contain other data we are not interested in. Separ
 <img alt="../_images/tutorial-ma_9_1.png" src="../_images/tutorial-ma_9_1.png" />
 </div>
 </div>
-<p>The graph has a strange shape from January 24th to February 1st. It would be interesing to know where this data comes from. If we look at the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array we extracted from the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file, we can see that we have two columns, where the first would contain regions and the second would contain the name of the country. However, only the first few rows contain data for the the first column (province names in China). Following that, we only have country names. So it would make sense to group all the data from China into a single row. For this, we’ll select from the <code class="docutils literal notranslate"><span class="pre">nbcases</span></code> array only the rows for which the second entry of the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array corresponds to China. Next, we’ll use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.sum.html#numpy.sum">numpy.sum</a> function to sum all the selected rows (<code class="docutils literal notranslate"><span class="pre">axis=0</span></code>):</p>
+<p>The graph has a strange shape from January 24th to February 1st. It would be interesting to know where this data comes from. If we look at the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array we extracted from the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file, we can see that we have two columns, where the first would contain regions and the second would contain the name of the country. However, only the first few rows contain data for the the first column (province names in China). Following that, we only have country names. So it would make sense to group all the data from China into a single row. For this, we’ll select from the <code class="docutils literal notranslate"><span class="pre">nbcases</span></code> array only the rows for which the second entry of the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array corresponds to China. Next, we’ll use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.sum.html#numpy.sum">numpy.sum</a> function to sum all the selected rows (<code class="docutils literal notranslate"><span class="pre">axis=0</span></code>). Note also that row 35 corresponds to the total counts for the whole country for each date. Since we want to calculate the sum ourselves from the provinces data, we have to remove that row first from both <code class="docutils literal notranslate"><span class="pre">locations</span></code> and <code class="docutils literal notranslate"><span class="pre">nbcases</span></code>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">china_total</span> <span class="o">=</span> <span class="n">nbcases</span><span class="p">[</span><span class="n">locations</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;China&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">totals_row</span> <span class="o">=</span> <span class="mi">35</span>
+<span class="n">locations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">locations</span><span class="p">,</span> <span class="p">(</span><span class="n">totals_row</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">nbcases</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">nbcases</span><span class="p">,</span> <span class="p">(</span><span class="n">totals_row</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">china_total</span> <span class="o">=</span> <span class="n">nbcases</span><span class="p">[</span><span class="n">locations</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;China&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">china_total</span>
 </pre></div>
 </div>
@@ -826,7 +839,7 @@ closely:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f9a78b98f40&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f741fbe75e0&gt;]
 </pre></div>
 </div>
 <img alt="../_images/tutorial-ma_42_1.png" src="../_images/tutorial-ma_42_1.png" />
@@ -882,459 +895,8 @@ available, and show the cubic fit for unavailable data, using this fit to comput
 
               </div>
               
-            </div>
-        </div>
-    </div>
-    <div id="main-content" class="row noprint">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
-                
-  <div class="tex2jax_ignore mathjax_ignore section" id="masked-arrays">
-<h1>Masked Arrays<a class="headerlink" href="#masked-arrays" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="what-you-ll-do">
-<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this headline">¶</a></h2>
-<p>Use the masked arrays module from NumPy to analyze COVID-19 data and deal with missing values.</p>
-</div>
-<div class="section" id="what-you-ll-learn">
-<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>You’ll understand what are masked arrays and how they can be created</p></li>
-<li><p>You’ll see how to access and modify data for masked arrays</p></li>
-<li><p>You’ll be able to decide when the use of masked arrays is appropriate in some of your applications</p></li>
-</ul>
-</div>
-<div class="section" id="what-you-ll-need">
-<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Basic familiarity with Python. If you would like to refresh your memory, take a look at the <a class="reference external" href="https://docs.python.org/dev/tutorial/index.html">Python tutorial</a>.</p></li>
-<li><p>Basic familiarity with NumPy</p></li>
-<li><p>To run the plots on your computer, you need <a class="reference external" href="https://matplotlib.org">matplotlib</a>.</p></li>
-</ul>
-</div>
-<hr class="docutils" />
-<div class="section" id="what-are-masked-arrays">
-<h2>What are masked arrays?<a class="headerlink" href="#what-are-masked-arrays" title="Permalink to this headline">¶</a></h2>
-<p>Consider the following problem. You have a dataset with missing or invalid entries. If you’re doing any kind of processing on this data, and want to <em>skip</em> or flag these unwanted entries without just deleting them, you may have to use conditionals or filter your data somehow. The <a class="reference external" href="https://numpy.org/devdocs/reference/maskedarray.generic.html#module-numpy.ma">numpy.ma</a> module provides some of the same funcionality of <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.ndarray.html#numpy.ndarray">NumPy ndarrays</a> with added structure to ensure invalid entries are not used in computation.</p>
-<p>From the <a class="reference external" href="https://numpy.org/devdocs/reference/maskedarray.generic.html#module-numpy.ma">Reference Guide</a>:</p>
-<blockquote>
-<div><p>A masked array is the combination of a standard <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.ndarray.html#numpy.ndarray">numpy.ndarray</a> and a <strong>mask</strong>. A mask is either <code class="docutils literal notranslate"><span class="pre">nomask</span></code>, indicating that no value of the associated array is invalid, or an array of booleans that determines for each element of the associated array whether the value is valid or not. When an element of the mask is <code class="docutils literal notranslate"><span class="pre">False</span></code>, the corresponding element of the associated array is valid and is said to be unmasked. When an element of the mask is <code class="docutils literal notranslate"><span class="pre">True</span></code>, the corresponding element of the associated array is said to be masked (invalid).</p>
-</div></blockquote>
-<p>We can think of a <a class="reference external" href="https://numpy.org/devdocs/reference/maskedarray.baseclass.html#numpy.ma.MaskedArray">MaskedArray</a> as a combination of:</p>
-<ul class="simple">
-<li><p>Data, as a regular <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> of any shape or datatype;</p></li>
-<li><p>A boolean mask with the same shape as the data;</p></li>
-<li><p>A <code class="docutils literal notranslate"><span class="pre">fill_value</span></code>, a value that may be used to replace the invalid entries in order to return a standard <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>.</p></li>
-</ul>
-</div>
-<div class="section" id="when-can-they-be-useful">
-<h2>When can they be useful?<a class="headerlink" href="#when-can-they-be-useful" title="Permalink to this headline">¶</a></h2>
-<p>There are a few situations where masked arrays can be more useful than just eliminating the invalid entries of an array:</p>
-<ul class="simple">
-<li><p>When you want to preserve the values you masked for later processing, without copying the array;</p></li>
-<li><p>When you have to handle many arrays, each with their own mask. If the mask is part of the array, you avoid bugs and the code is possibly more compact;</p></li>
-<li><p>When you have different flags for missing or invalid values, and wish to preserve these flags without replacing them in the original dataset, but exclude them from computations;</p></li>
-<li><p>If you can’t avoid or eliminate missing values, but don’t want to deal with <a class="reference external" href="https://numpy.org/devdocs/reference/constants.html#numpy.nan">NaN (Not a Number)</a> values in your operations.</p></li>
-</ul>
-<p>Masked arrays are also a good idea since the <code class="docutils literal notranslate"><span class="pre">numpy.ma</span></code> module also comes with a specific implementation of most <a class="reference external" href="https://numpy.org/devdocs/glossary.html#term-ufunc">NumPy universal functions (ufuncs)</a>, which means that you can still apply fast vectorized functions and operations on masked data. The output is then a masked array. We’ll see some examples of how this works in practice below.</p>
-</div>
-<div class="section" id="using-masked-arrays-to-see-covid-19-data">
-<h2>Using masked arrays to see COVID-19 data<a class="headerlink" href="#using-masked-arrays-to-see-covid-19-data" title="Permalink to this headline">¶</a></h2>
-<p>From <a class="reference external" href="https://www.kaggle.com/atilamadai/covid19">Kaggle</a> it is possible to download a dataset with initial data about the COVID-19 outbreak in the beginning of 2020. We are going to look at a small subset of this data, contained in the file <code class="docutils literal notranslate"><span class="pre">who_covid_19_sit_rep_time_series.csv</span></code>. <em>(Note that this file has been replaced with a version without missing data sometime in late 2020.)</em></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">os</span>
-
-<span class="c1"># The os.getcwd() function returns the current folder; you can change</span>
-<span class="c1"># the filepath variable to point to the folder where you saved the .csv file</span>
-<span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-<span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="s2">&quot;who_covid_19_sit_rep_time_series.csv&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The data file contains data of different types and is organized as follows:</p>
-<ul class="simple">
-<li><p>The first row is a header line that (mostly) describes the data in each column that follow in the rows below, and beginning in the fourth column, the header is the date of the observation.</p></li>
-<li><p>The second through seventh row contain summary data that is of a different type than that which we are going to examine, so we will need to exclude that from the data with which we will work.</p></li>
-<li><p>The numerical data we wish to work with begins at column 4, row 8, and extends from there to the rightmost column and the lowermost row.</p></li>
-</ul>
-<p>Let’s explore the data inside this file for the first 14 days of records. To gather data from the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file, we will use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt">numpy.genfromtxt</a> function, making sure we select only the columns with actual numbers instead of the first three columns which contain location data. We also skip the first 7
-rows of this file, since they contain other data we are not interested in. Separately, we will extract the information about dates and location for this data.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note we are using skip_header and usecols to read only portions of the</span>
-<span class="c1"># data file into each variable.</span>
-<span class="c1"># Read just the dates for columns 3-7 from the first row</span>
-<span class="n">dates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span>
-    <span class="n">filename</span><span class="p">,</span>
-    <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unicode_</span><span class="p">,</span>
-    <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
-    <span class="n">max_rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">usecols</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
-    <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="c1"># Read the names of the geographic locations from the first two</span>
-<span class="c1"># columns, skipping the first seven rows</span>
-<span class="n">locations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span>
-    <span class="n">filename</span><span class="p">,</span>
-    <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unicode_</span><span class="p">,</span>
-    <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
-    <span class="n">skip_header</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
-    <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="c1"># Read the numeric data from just the first 14 days</span>
-<span class="n">nbcases</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span>
-    <span class="n">filename</span><span class="p">,</span>
-    <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int_</span><span class="p">,</span>
-    <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
-    <span class="n">skip_header</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
-    <span class="n">usecols</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">17</span><span class="p">),</span>
-    <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Included in the <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> function call, we have selected the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.dtype.html#numpy.dtype">numpy.dtype</a> for each subset of the data (either an integer - <code class="docutils literal notranslate"><span class="pre">numpy.int_</span></code> - or a string of characters - <code class="docutils literal notranslate"><span class="pre">numpy.unicode_</span></code>). We have also used the <code class="docutils literal notranslate"><span class="pre">encoding</span></code> argument to select <code class="docutils literal notranslate"><span class="pre">utf-8-sig</span></code> as the encoding for the file (read more about encoding in the <a class="reference external" href="https://docs.python.org/3/library/codecs.html#encodings-and-unicode">official Python documentation</a>. You can read more about the <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> function from the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt">Reference Documentation</a> or from the <a class="reference external" href="https://numpy.org/devdocs/user/basics.io.genfromtxt.html">Basic IO tutorial</a>.</p>
-</div>
-<div class="section" id="exploring-the-data">
-<h2>Exploring the data<a class="headerlink" href="#exploring-the-data" title="Permalink to this headline">¶</a></h2>
-<p>First of all, we can plot the whole set of data we have and see what it looks like. In order to get a readable plot, we select only a few of the dates to show in our <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xticks.html#matplotlib.pyplot.xticks">x-axis ticks</a>. Note also that in our plot command, we use <code class="docutils literal notranslate"><span class="pre">nbcases.T</span></code> (the transpose of the <code class="docutils literal notranslate"><span class="pre">nbcases</span></code> array) since this means we will plot each row of the file as a separate line. We choose to plot a dashed line (using the <code class="docutils literal notranslate"><span class="pre">'--'</span></code> line style). See the <a class="reference external" href="https://matplotlib.org/">matplotlib</a> documentation for more info on this.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="n">selected_dates</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">nbcases</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">selected_dates</span><span class="p">,</span> <span class="n">dates</span><span class="p">[</span><span class="n">selected_dates</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;COVID-19 cumulative cases from Jan 21 to Feb 3 2020&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020&#39;)
-</pre></div>
-</div>
-<img alt="../_images/tutorial-ma_9_1.png" src="../_images/tutorial-ma_9_1.png" />
-</div>
-</div>
-<p>The graph has a strange shape from January 24th to February 1st. It would be interesing to know where this data comes from. If we look at the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array we extracted from the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file, we can see that we have two columns, where the first would contain regions and the second would contain the name of the country. However, only the first few rows contain data for the the first column (province names in China). Following that, we only have country names. So it would make sense to group all the data from China into a single row. For this, we’ll select from the <code class="docutils literal notranslate"><span class="pre">nbcases</span></code> array only the rows for which the second entry of the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array corresponds to China. Next, we’ll use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.sum.html#numpy.sum">numpy.sum</a> function to sum all the selected rows (<code class="docutils literal notranslate"><span class="pre">axis=0</span></code>):</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">china_total</span> <span class="o">=</span> <span class="n">nbcases</span><span class="p">[</span><span class="n">locations</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;China&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">china_total</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([  247,   288,   556,   817,   -22,   -22,   -15,   -10,    -9,
-          -7,    -4, 11820, 14410, 17237])
-</pre></div>
-</div>
-</div>
-</div>
-<p>Something’s wrong with this data - we are not supposed to have negative values in a cumulative data set. What’s going on?</p>
-</div>
-<div class="section" id="missing-data">
-<h2>Missing data<a class="headerlink" href="#missing-data" title="Permalink to this headline">¶</a></h2>
-<p>Looking at the data, here’s what we find: there is a period with <strong>missing data</strong>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nbcases</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[  258,   270,   375, ...,  7153,  9074, 11177],
-       [   14,    17,    26, ...,   520,   604,   683],
-       [   -1,     1,     1, ...,   422,   493,   566],
-       ...,
-       [   -1,    -1,    -1, ...,    -1,    -1,    -1],
-       [   -1,    -1,    -1, ...,    -1,    -1,    -1],
-       [   -1,    -1,    -1, ...,    -1,    -1,    -1]])
-</pre></div>
-</div>
-</div>
-</div>
-<p>All the <code class="docutils literal notranslate"><span class="pre">-1</span></code> values we are seeing come from <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> attempting to read missing data from the original <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file. Obviously, we
-don’t want to compute missing data as <code class="docutils literal notranslate"><span class="pre">-1</span></code> - we just want to skip this value so it doesn’t interfere in our analysis. After importing the <code class="docutils literal notranslate"><span class="pre">numpy.ma</span></code> module, we’ll create a new array, this time masking the invalid values:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ma</span>
-
-<span class="n">nbcases_ma</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_values</span><span class="p">(</span><span class="n">nbcases</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>If we look at the <code class="docutils literal notranslate"><span class="pre">nbcases_ma</span></code> masked array, this is what we have:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nbcases_ma</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>masked_array(
-  data=[[258, 270, 375, ..., 7153, 9074, 11177],
-        [14, 17, 26, ..., 520, 604, 683],
-        [--, 1, 1, ..., 422, 493, 566],
-        ...,
-        [--, --, --, ..., --, --, --],
-        [--, --, --, ..., --, --, --],
-        [--, --, --, ..., --, --, --]],
-  mask=[[False, False, False, ..., False, False, False],
-        [False, False, False, ..., False, False, False],
-        [ True, False, False, ..., False, False, False],
-        ...,
-        [ True,  True,  True, ...,  True,  True,  True],
-        [ True,  True,  True, ...,  True,  True,  True],
-        [ True,  True,  True, ...,  True,  True,  True]],
-  fill_value=-1)
-</pre></div>
-</div>
-</div>
-</div>
-<p>We can see that this is a different kind of array. As mentioned in the introduction, it has three attributes (<code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">mask</span></code> and <code class="docutils literal notranslate"><span class="pre">fill_value</span></code>).
-Keep in mind that the <code class="docutils literal notranslate"><span class="pre">mask</span></code> attribute has a <code class="docutils literal notranslate"><span class="pre">True</span></code> value for elements corresponding to <strong>invalid</strong> data (represented by two dashes in the <code class="docutils literal notranslate"><span class="pre">data</span></code> attribute).</p>
-<p>Let’s try and see what the data looks like excluding the first row (data from the Hubei province in China) so we can look at the missing data more
-closely:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">nbcases_ma</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">selected_dates</span><span class="p">,</span> <span class="n">dates</span><span class="p">[</span><span class="n">selected_dates</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;COVID-19 cumulative cases from Jan 21 to Feb 3 2020&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020&#39;)
-</pre></div>
-</div>
-<img alt="../_images/tutorial-ma_21_1.png" src="../_images/tutorial-ma_21_1.png" />
-</div>
-</div>
-<p>Now that our data has been masked, let’s try summing up all the cases in China:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">china_masked</span> <span class="o">=</span> <span class="n">nbcases_ma</span><span class="p">[</span><span class="n">locations</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;China&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">china_masked</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>masked_array(data=[278, 309, 574, 835, 10, 10, 17, 22, 23, 25, 28, 11821,
-                   14411, 17238],
-             mask=[False, False, False, False, False, False, False, False,
-                   False, False, False, False, False, False],
-       fill_value=999999)
-</pre></div>
-</div>
-</div>
-</div>
-<p>Note that <code class="docutils literal notranslate"><span class="pre">china_masked</span></code> is a masked array, so it has a different data structure than a regular NumPy array. Now, we can access its data directly by using the <code class="docutils literal notranslate"><span class="pre">.data</span></code> attribute:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">china_total</span> <span class="o">=</span> <span class="n">china_masked</span><span class="o">.</span><span class="n">data</span>
-<span class="n">china_total</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([  278,   309,   574,   835,    10,    10,    17,    22,    23,
-          25,    28, 11821, 14411, 17238])
-</pre></div>
-</div>
-</div>
-</div>
-<p>That is better: no more negative values. However, we can still see that for some days, the cumulative number of cases seems to go down (from 835 to 10, for example), which does not agree with the definition of “cumulative data”. If we look more closely at the data, we can see that in the period where there was missing data in mainland China, there was valid data for Hong Kong, Taiwan, Macau and “Unspecified” regions of China. Maybe we can remove those from the total sum of cases in China, to get a better understanding of the data.</p>
-<p>First, we’ll identify the indices of locations in mainland China:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">china_mask</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="p">(</span><span class="n">locations</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;China&quot;</span><span class="p">)</span>
-    <span class="o">&amp;</span> <span class="p">(</span><span class="n">locations</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;Hong Kong&quot;</span><span class="p">)</span>
-    <span class="o">&amp;</span> <span class="p">(</span><span class="n">locations</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;Taiwan&quot;</span><span class="p">)</span>
-    <span class="o">&amp;</span> <span class="p">(</span><span class="n">locations</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;Macau&quot;</span><span class="p">)</span>
-    <span class="o">&amp;</span> <span class="p">(</span><span class="n">locations</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;Unspecified*&quot;</span><span class="p">)</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now, <code class="docutils literal notranslate"><span class="pre">china_mask</span></code> is an array of boolean values (<code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>); we can check that the indices are what we wanted with the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.ma.nonzero.html#numpy.ma.nonzero">ma.nonzero</a> method for masked arrays:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">china_mask</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-        17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 31, 33]),)
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now we can correctly sum entries for mainland China:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">china_total</span> <span class="o">=</span> <span class="n">nbcases_ma</span><span class="p">[</span><span class="n">china_mask</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">china_total</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>masked_array(data=[278, 308, 440, 446, --, --, --, --, --, --, --, 11791,
-                   14380, 17205],
-             mask=[False, False, False, False,  True,  True,  True,  True,
-                    True,  True,  True, False, False, False],
-       fill_value=999999)
-</pre></div>
-</div>
-</div>
-</div>
-<p>We can replace the data with this information and plot a new graph, focusing on Mainland China:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">china_total</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">selected_dates</span><span class="p">,</span> <span class="n">dates</span><span class="p">[</span><span class="n">selected_dates</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China&#39;)
-</pre></div>
-</div>
-<img alt="../_images/tutorial-ma_33_1.png" src="../_images/tutorial-ma_33_1.png" />
-</div>
-</div>
-<p>It’s clear that masked arrays are the right solution here. We cannot represent the missing data without mischaracterizing the evolution of the curve.</p>
-</div>
-<div class="section" id="fitting-data">
-<h2>Fitting Data<a class="headerlink" href="#fitting-data" title="Permalink to this headline">¶</a></h2>
-<p>One possibility we can think of is to interpolate the missing data to estimate the number of cases in late January. Observe that we can select the masked elements using the <code class="docutils literal notranslate"><span class="pre">.mask</span></code> attribute:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">china_total</span><span class="o">.</span><span class="n">mask</span>
-<span class="n">invalid</span> <span class="o">=</span> <span class="n">china_total</span><span class="p">[</span><span class="n">china_total</span><span class="o">.</span><span class="n">mask</span><span class="p">]</span>
-<span class="n">invalid</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>masked_array(data=[--, --, --, --, --, --, --],
-             mask=[ True,  True,  True,  True,  True,  True,  True],
-       fill_value=999999,
-            dtype=int64)
-</pre></div>
-</div>
-</div>
-</div>
-<p>We can also access the valid entries by using the logical negation for this mask:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">valid</span> <span class="o">=</span> <span class="n">china_total</span><span class="p">[</span><span class="o">~</span><span class="n">china_total</span><span class="o">.</span><span class="n">mask</span><span class="p">]</span>
-<span class="n">valid</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>masked_array(data=[278, 308, 440, 446, 11791, 14380, 17205],
-             mask=[False, False, False, False, False, False, False],
-       fill_value=999999)
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now, if we want to create a very simple approximation for this data, we should take into account the valid entries around the invalid ones. So first let’s select the dates for which the data is valid. Note that we can use the mask from the <code class="docutils literal notranslate"><span class="pre">china_total</span></code> masked array to index the dates array:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dates</span><span class="p">[</span><span class="o">~</span><span class="n">china_total</span><span class="o">.</span><span class="n">mask</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;1/21/20&#39;, &#39;1/22/20&#39;, &#39;1/23/20&#39;, &#39;1/24/20&#39;, &#39;2/1/20&#39;, &#39;2/2/20&#39;,
-       &#39;2/3/20&#39;], dtype=&#39;&lt;U7&#39;)
-</pre></div>
-</div>
-</div>
-</div>
-<p>Finally, we can use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.polyfit.html#numpy.polyfit">numpy.polyfit</a> and <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.polyval.html#numpy.polyval">numpy.polyval</a> functions to create a cubic polynomial that fits the data as best as possible:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">china_total</span><span class="p">))</span>
-<span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="o">~</span><span class="n">china_total</span><span class="o">.</span><span class="n">mask</span><span class="p">],</span> <span class="n">valid</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">cubic_fit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">china_total</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">cubic_fit</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f9a78b98f40&gt;]
-</pre></div>
-</div>
-<img alt="../_images/tutorial-ma_42_1.png" src="../_images/tutorial-ma_42_1.png" />
-</div>
-</div>
-<p>This plot is not so readable since the lines seem to be over each other, so let’s summarize in a more elaborate plot. We’ll plot the real data when
-available, and show the cubic fit for unavailable data, using this fit to compute an estimate to the observed number of cases on January 28th 2020, 7 days after the beginning of the records:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">china_total</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">china_total</span><span class="o">.</span><span class="n">mask</span><span class="p">],</span> <span class="n">cubic_fit</span><span class="p">[</span><span class="n">china_total</span><span class="o">.</span><span class="n">mask</span><span class="p">],</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="s2">&quot;r*&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span> <span class="n">dates</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">13</span><span class="p">]])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">17500</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;Mainland China&quot;</span><span class="p">,</span> <span class="s2">&quot;Cubic estimate&quot;</span><span class="p">,</span> <span class="s2">&quot;7 days after start&quot;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span>
-    <span class="s2">&quot;COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China</span><span class="se">\n</span><span class="s2">&quot;</span>
-    <span class="s2">&quot;Cubic estimate for 7 days after start&quot;</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China\nCubic estimate for 7 days after start&#39;)
-</pre></div>
-</div>
-<img alt="../_images/tutorial-ma_44_1.png" src="../_images/tutorial-ma_44_1.png" />
-</div>
-</div>
-</div>
-<div class="section" id="in-practice">
-<h2>In practice<a class="headerlink" href="#in-practice" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Adding <code class="docutils literal notranslate"><span class="pre">-1</span></code> to missing data is not a problem with <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code>; in this particular case, substituting the missing value with <code class="docutils literal notranslate"><span class="pre">0</span></code> might have been fine, but we’ll see later that this is far from a general solution. Also, it is possible to call the <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> function using the <code class="docutils literal notranslate"><span class="pre">usemask</span></code> parameter. If <code class="docutils literal notranslate"><span class="pre">usemask=True</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> automatically returns a masked array.</p></li>
-</ul>
-</div>
-<div class="section" id="further-reading">
-<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
-<p>Topics not covered in this tutorial can be found in the documentation:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.ma.harden_mask.html#numpy.ma.harden_mask">Hardmasks</a> vs. <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.ma.soften_mask.html#numpy.ma.soften_mask">softmasks</a></p></li>
-<li><p><a class="reference external" href="https://numpy.org/devdocs/reference/maskedarray.generic.html#maskedarray-generic">The numpy.ma module</a></p></li>
-</ul>
-<div class="section" id="reference">
-<h3>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h3>
-<ul class="simple">
-<li><p>Ensheng Dong, Hongru Du, Lauren Gardner, <em>An interactive web-based dashboard to track COVID-19 in real time</em>, The Lancet Infectious Diseases, Volume 20, Issue 5, 2020, Pages 533-534, ISSN 1473-3099, <a class="reference external" href="https://doi.org/10.1016/S1473-3099(20)30120-1">https://doi.org/10.1016/S1473-3099(20)30120-1</a>.</p></li>
-</ul>
-</div>
-</div>
-</div>
-
-
-              </div>
-              
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="save-load-arrays.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -1351,7 +913,7 @@ available, and show the cubic fit for unavailable data, using this fit to comput
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">

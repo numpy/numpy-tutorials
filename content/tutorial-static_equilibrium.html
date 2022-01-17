@@ -23,7 +23,7 @@
 
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -38,9 +38,9 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -65,7 +65,12 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
     
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
@@ -198,22 +203,22 @@
 
 
           
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
     <div class="topbar container-xl fixed-top">
     <div class="topbar-contents row">
         <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
         <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
             
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
@@ -274,6 +279,7 @@
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
                     alt="Interact on binder">Binder</button></a>
+        
         
         
         
@@ -351,19 +357,20 @@
         </div>
     </div>
 </div>
-    <!-- Table of contents that is only displayed when printing the page -->
-    <div id="jb-print-docs-body" class="onlyprint">
-        <h1>Determining Static Equilibrium in NumPy</h1>
-        <!-- Table of contents -->
-        <div id="print-main-content" class="row">
-            <div class="col-12 col-md-12 pl-md-5 pr-md-5">
-            <div id="jb-print-toc">
-                
-                <div>
-                    <h2> Contents </h2>
-                </div>
-                <nav aria-label="Page">
-                    <ul class="visible nav section-nav flex-column">
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Determining Static Equilibrium in NumPy</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-you-ll-do">
    What you’ll do:
@@ -420,7 +427,9 @@
  </li>
 </ul>
 
-                </nav>
+                        </nav>
+                    </div>
+                </div>
             </div>
             
               <div>
@@ -526,7 +535,7 @@ Quiver plots will be used to demonstrate <a class="reference external" href="htt
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2893/1945622222.py:3: MatplotlibDeprecationWarning: Calling gca() with keyword arguments was deprecated in Matplotlib 3.4. Starting two minor releases later, gca() will take no keyword arguments. The gca() function should only be used to get the current axes, or if no axes exist, create new axes with default keyword arguments. To create a new axes with non-default arguments, use plt.axes() or plt.subplot().
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2895/1945622222.py:3: MatplotlibDeprecationWarning: Calling gca() with keyword arguments was deprecated in Matplotlib 3.4. Starting two minor releases later, gca() will take no keyword arguments. The gca() function should only be used to get the current axes, or if no axes exist, create new axes with default keyword arguments. To create a new axes with non-default arguments, use plt.axes() or plt.subplot().
   d3 = fig.gca(projection=&quot;3d&quot;)
 </pre></div>
 </div>
@@ -574,7 +583,7 @@ You can plot it to see the result.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2893/2686522130.py:3: MatplotlibDeprecationWarning: Calling gca() with keyword arguments was deprecated in Matplotlib 3.4. Starting two minor releases later, gca() will take no keyword arguments. The gca() function should only be used to get the current axes, or if no axes exist, create new axes with default keyword arguments. To create a new axes with non-default arguments, use plt.axes() or plt.subplot().
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2895/2686522130.py:3: MatplotlibDeprecationWarning: Calling gca() with keyword arguments was deprecated in Matplotlib 3.4. Starting two minor releases later, gca() will take no keyword arguments. The gca() function should only be used to get the current axes, or if no axes exist, create new axes with default keyword arguments. To create a new axes with non-default arguments, use plt.axes() or plt.subplot().
   d3 = fig.gca(projection=&quot;3d&quot;)
 </pre></div>
 </div>
@@ -620,7 +629,7 @@ Only if there is no force remaining is the system considered to be in equilibriu
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2893/1445521346.py:9: MatplotlibDeprecationWarning: Calling gca() with keyword arguments was deprecated in Matplotlib 3.4. Starting two minor releases later, gca() will take no keyword arguments. The gca() function should only be used to get the current axes, or if no axes exist, create new axes with default keyword arguments. To create a new axes with non-default arguments, use plt.axes() or plt.subplot().
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2895/1445521346.py:9: MatplotlibDeprecationWarning: Calling gca() with keyword arguments was deprecated in Matplotlib 3.4. Starting two minor releases later, gca() will take no keyword arguments. The gca() function should only be used to get the current axes, or if no axes exist, create new axes with default keyword arguments. To create a new axes with non-default arguments, use plt.axes() or plt.subplot().
   d3 = fig.gca(projection=&quot;3d&quot;)
 </pre></div>
 </div>
@@ -870,461 +879,8 @@ T_{BE}\\
 
               </div>
               
-            </div>
-        </div>
-    </div>
-    <div id="main-content" class="row noprint">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
-                
-  <div class="tex2jax_ignore mathjax_ignore section" id="determining-static-equilibrium-in-numpy">
-<h1>Determining Static Equilibrium in NumPy<a class="headerlink" href="#determining-static-equilibrium-in-numpy" title="Permalink to this headline">¶</a></h1>
-<p>When analyzing physical structures, it is crucial to understand the mechanics keeping them stable. Applied forces on a floor, a beam, or any other structure, create reaction forces and moments. These reactions are the structure resisting movement without breaking. In cases where structures do not move despite having forces applied to them, <a class="reference external" href="https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion#Newton%27s_second_law">Newton’s second law</a> states that both the acceleration and sum of forces in all directions in the system must be zero. You can represent and solve this concept with NumPy arrays.</p>
-<div class="section" id="what-you-ll-do">
-<h2>What you’ll do:<a class="headerlink" href="#what-you-ll-do" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>In this tutorial, you will use NumPy to create vectors and moments using NumPy arrays</p></li>
-<li><p>Solve problems involving cables and floors holding up structures</p></li>
-<li><p>Write NumPy matrices to isolate unkowns</p></li>
-<li><p>Use NumPy functions to perform linear algebra operations</p></li>
-</ul>
-</div>
-<div class="section" id="what-you-ll-learn">
-<h2>What you’ll learn:<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>How to represent points, vectors, and moments with NumPy.</p></li>
-<li><p>How to find the <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_(geometry)">normal of vectors</a></p></li>
-<li><p>Using NumPy to compute matrix calculations</p></li>
-</ul>
-</div>
-<div class="section" id="what-you-ll-need">
-<h2>What you’ll need:<a class="headerlink" href="#what-you-ll-need" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>NumPy</p></li>
-<li><p><a class="reference external" href="https://matplotlib.org/">Matplotlib</a></p></li>
-</ul>
-<p>imported with the following comands:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>In this tutorial you will use the following NumPy tools:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html"><code class="docutils literal notranslate"><span class="pre">np.linalg.norm</span></code></a> : this function determines the measure of vector magnitude</p></li>
-<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.cross.html"><code class="docutils literal notranslate"><span class="pre">np.cross</span></code></a> : this function takes two matrices and produces the cross product</p></li>
-</ul>
-</div>
-<div class="section" id="solving-equilibrium-with-newton-s-second-law">
-<h2>Solving equilibrium with Newton’s second law<a class="headerlink" href="#solving-equilibrium-with-newton-s-second-law" title="Permalink to this headline">¶</a></h2>
-<p>Your model consists of a beam under a sum of forces and moments. You can start analyzing this system with Newton’s second law:</p>
-<div class="math notranslate nohighlight">
-\[\sum{\text{force}} = \text{mass} \times \text{acceleration}.\]</div>
-<p>In order to simplify the examples looked at, assume they are static, with acceleration <span class="math notranslate nohighlight">\(=0\)</span>. Due to our system existing in three dimensions, consider forces being applied in each of these dimensions. This means that you can represent these forces as vectors. You come to the same conclusion for <a class="reference external" href="https://en.wikipedia.org/wiki/Moment_(physics)">moments</a>, which result from forces being applied a certain distance away from an object’s center of mass.</p>
-<p>Assume that the force <span class="math notranslate nohighlight">\(F\)</span> is represented as a three-dimensional vector</p>
-<div class="math notranslate nohighlight">
-\[F = (F_x, F_y, F_z)\]</div>
-<p>where each of the three components represent the magnitude of the force being applied in each corresponding direction. Assume also that each component in the vector</p>
-<div class="math notranslate nohighlight">
-\[r = (r_x, r_y, r_z)\]</div>
-<p>is the distance between the point where each component of the force is applied and the centroid of the system. Then, the moment can be computed by</p>
-<div class="math notranslate nohighlight">
-\[r \times F = (r_x, r_y, r_z) \times (F_x, F_y, F_z).\]</div>
-<p>Start with some simple examples of force vectors</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">forceA</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">forceB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Force A =&quot;</span><span class="p">,</span> <span class="n">forceA</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Force B =&quot;</span><span class="p">,</span> <span class="n">forceB</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Force A = [1 0 0]
-Force B = [0 1 0]
-</pre></div>
-</div>
-</div>
-</div>
-<p>This defines <code class="docutils literal notranslate"><span class="pre">forceA</span></code> as being a vector with magnitude of 1 in the <span class="math notranslate nohighlight">\(x\)</span> direction and <code class="docutils literal notranslate"><span class="pre">forceB</span></code> as magnitude 1 in the <span class="math notranslate nohighlight">\(y\)</span> direction.</p>
-<p>It may be helpful to visualize these forces in order to better understand how they interact with each other.
-Matplotlib is a library with visualization tools that can be utilized for this purpose.
-Quiver plots will be used to demonstrate <a class="reference external" href="https://matplotlib.org/3.3.4/gallery/mplot3d/quiver3d.html">three dimensional vectors</a>, but the library can also be used for <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.quiver.html">two dimensional demonstrations</a>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-
-<span class="n">d3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
-
-<span class="n">d3</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">d3</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">d3</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>  <span class="c1"># defining the point of application.  Make it the origin</span>
-
-<span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">forceA</span>  <span class="c1"># breaking the force vector into individual components</span>
-<span class="n">d3</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;forceA&quot;</span><span class="p">)</span>
-
-<span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">forceB</span>
-<span class="n">d3</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;forceB&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2893/1945622222.py:3: MatplotlibDeprecationWarning: Calling gca() with keyword arguments was deprecated in Matplotlib 3.4. Starting two minor releases later, gca() will take no keyword arguments. The gca() function should only be used to get the current axes, or if no axes exist, create new axes with default keyword arguments. To create a new axes with non-default arguments, use plt.axes() or plt.subplot().
-  d3 = fig.gca(projection=&quot;3d&quot;)
-</pre></div>
-</div>
-<img alt="../_images/tutorial-static_equilibrium_6_1.png" src="../_images/tutorial-static_equilibrium_6_1.png" />
-</div>
-</div>
-<p>There are two forces emanating from a single point. In order to simplify this problem, you can add them together to find the sum of forces. Note that both <code class="docutils literal notranslate"><span class="pre">forceA</span></code> and <code class="docutils literal notranslate"><span class="pre">forceB</span></code> are three-dimensional vectors, represented by NumPy as arrays with three components. Because NumPy is meant to simplify and optimize operations between vectors, you can easily compute the sum of these two vectors as follows:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">forceC</span> <span class="o">=</span> <span class="n">forceA</span> <span class="o">+</span> <span class="n">forceB</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Force C =&quot;</span><span class="p">,</span> <span class="n">forceC</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Force C = [1 1 0]
-</pre></div>
-</div>
-</div>
-</div>
-<p>Force C now acts as a single force that represents both A and B.
-You can plot it to see the result.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-
-<span class="n">d3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
-
-<span class="n">d3</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">d3</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">d3</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-
-<span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">forceA</span>
-<span class="n">d3</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;forceA&quot;</span><span class="p">)</span>
-<span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">forceB</span>
-<span class="n">d3</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;forceB&quot;</span><span class="p">)</span>
-<span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">forceC</span>
-<span class="n">d3</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;forceC&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2893/2686522130.py:3: MatplotlibDeprecationWarning: Calling gca() with keyword arguments was deprecated in Matplotlib 3.4. Starting two minor releases later, gca() will take no keyword arguments. The gca() function should only be used to get the current axes, or if no axes exist, create new axes with default keyword arguments. To create a new axes with non-default arguments, use plt.axes() or plt.subplot().
-  d3 = fig.gca(projection=&quot;3d&quot;)
-</pre></div>
-</div>
-<img alt="../_images/tutorial-static_equilibrium_10_1.png" src="../_images/tutorial-static_equilibrium_10_1.png" />
-</div>
-</div>
-<p>However, the goal is equilibrium.
-This means that you want your sum of forces to be <span class="math notranslate nohighlight">\((0, 0, 0)\)</span> or else your object will experience acceleration.
-Therefore, there needs to be another force that counteracts the prior ones.</p>
-<p>You can write this problem as <span class="math notranslate nohighlight">\(A+B+R=0\)</span>, with <span class="math notranslate nohighlight">\(R\)</span> being the reaction force that solves the problem.</p>
-<p>In this example this would mean:</p>
-<div class="math notranslate nohighlight">
-\[(1, 0, 0) + (0, 1, 0) + (R_x, R_y, R_z) = (0, 0, 0)\]</div>
-<p>Broken into <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, and <span class="math notranslate nohighlight">\(z\)</span> components this gives you:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\begin{cases}
-1+0+R_x=0\\
-0+1+R_y=0\\
-0+0+R_z=0
-\end{cases}\end{split}\]</div>
-<p>solving for <span class="math notranslate nohighlight">\(R_x\)</span>, <span class="math notranslate nohighlight">\(R_y\)</span>, and <span class="math notranslate nohighlight">\(R_z\)</span> gives you a vector <span class="math notranslate nohighlight">\(R\)</span> of <span class="math notranslate nohighlight">\((-1, -1, 0)\)</span>.</p>
-<p>If plotted, the forces seen in prior examples should be nullified.
-Only if there is no force remaining is the system considered to be in equilibrium.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-
-<span class="n">d3</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">d3</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">d3</span><span class="o">.</span><span class="n">set_zlim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="n">d3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
-
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-
-<span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">forceA</span> <span class="o">+</span> <span class="n">forceB</span> <span class="o">+</span> <span class="n">R</span>  <span class="c1"># add them all together for sum of forces</span>
-<span class="n">d3</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2893/1445521346.py:9: MatplotlibDeprecationWarning: Calling gca() with keyword arguments was deprecated in Matplotlib 3.4. Starting two minor releases later, gca() will take no keyword arguments. The gca() function should only be used to get the current axes, or if no axes exist, create new axes with default keyword arguments. To create a new axes with non-default arguments, use plt.axes() or plt.subplot().
-  d3 = fig.gca(projection=&quot;3d&quot;)
-</pre></div>
-</div>
-<img alt="../_images/tutorial-static_equilibrium_12_1.png" src="../_images/tutorial-static_equilibrium_12_1.png" />
-</div>
-</div>
-<p>The empty graph signifies that there are no outlying forces. This denotes a system in equilibrium.</p>
-</div>
-<div class="section" id="solving-equilibrium-as-a-sum-of-moments">
-<h2>Solving Equilibrium as a sum of moments<a class="headerlink" href="#solving-equilibrium-as-a-sum-of-moments" title="Permalink to this headline">¶</a></h2>
-<p>Next let’s move to a more complicated application.
-When forces are not all applied at the same point, moments are created.</p>
-<p>Similar to forces, these moments must all sum to zero, otherwise rotational acceleration will be experienced.  Similar to the sum of forces, this creates a linear equation for each of the three coordinate directions in space.</p>
-<p>A simple example of this would be from a force applied to a stationary pole secured in the ground.
-The pole does not move, so it must apply a reaction force.
-The pole also does not rotate, so it must also be creating a reaction moment.
-Solve for both the reaction force and moments.</p>
-<p>Lets say a 5N force is applied perpendicularly 2m above the base of the pole.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># Force in newtons</span>
-<span class="n">L</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># Length of the pole</span>
-
-<span class="n">R</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">f</span>
-<span class="n">M</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">-</span> <span class="n">f</span> <span class="o">*</span> <span class="n">L</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reaction force =&quot;</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reaction moment =&quot;</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reaction force = -5
-Reaction moment = -10
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="finding-values-with-physical-properties">
-<h2>Finding values with physical properties<a class="headerlink" href="#finding-values-with-physical-properties" title="Permalink to this headline">¶</a></h2>
-<p>Let’s say that instead of a force acting perpendicularly to the beam, a force was applied to our pole through a wire that was also attached to the ground.
-Given the tension in this cord, all you need to solve this problem are the physical locations of these objects.</p>
-<p><img alt="Image representing the problem" src="../_images/static_eqbm-fig01.png" /></p>
-<p>In response to the forces acting upon the pole, the base generated reaction forces in the x and y directions, as well as a reaction moment.</p>
-<p>Denote the base of the pole as the origin.
-Now, say the cord is attached to the ground 3m in the x direction and attached to the pole 2m up, in the z direction.</p>
-<p>Define these points in space as NumPy arrays, and then use those arrays to find directional vectors.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poleBase</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">cordBase</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">cordConnection</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-
-<span class="n">poleDirection</span> <span class="o">=</span> <span class="n">cordConnection</span> <span class="o">-</span> <span class="n">poleBase</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pole direction =&quot;</span><span class="p">,</span> <span class="n">poleDirection</span><span class="p">)</span>
-<span class="n">cordDirection</span> <span class="o">=</span> <span class="n">cordBase</span> <span class="o">-</span> <span class="n">cordConnection</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cord direction =&quot;</span><span class="p">,</span> <span class="n">cordDirection</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pole direction = [0 0 2]
-Cord direction = [ 3  0 -2]
-</pre></div>
-</div>
-</div>
-</div>
-<p>In order to use these vectors in relation to forces you need to convert them into unit vectors.
-Unit vectors have a magnitude of one, and convey only the direction of the forces.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cordUnit</span> <span class="o">=</span> <span class="n">cordDirection</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">cordDirection</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cord unit vector =&quot;</span><span class="p">,</span> <span class="n">cordUnit</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cord unit vector = [ 0.83205029  0.         -0.5547002 ]
-</pre></div>
-</div>
-</div>
-</div>
-<p>You can then multiply this direction with the magnitude of the force in order to find the force vector.</p>
-<p>Let’s say the cord has a tension of 5N:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cordTension</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">forceCord</span> <span class="o">=</span> <span class="n">cordUnit</span> <span class="o">*</span> <span class="n">cordTension</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Force from the cord =&quot;</span><span class="p">,</span> <span class="n">forceCord</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Force from the cord = [ 4.16025147  0.         -2.77350098]
-</pre></div>
-</div>
-</div>
-</div>
-<p>In order to find the moment you need the cross product of the force vector and the radius.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">momentCord</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">forceCord</span><span class="p">,</span> <span class="n">poleDirection</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Moment from the cord =&quot;</span><span class="p">,</span> <span class="n">momentCord</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Moment from the cord = [ 0.         -8.32050294  0.        ]
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now all you need to do is find the reaction force and moment.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">equilibrium</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">R</span> <span class="o">=</span> <span class="n">equilibrium</span> <span class="o">-</span> <span class="n">forceCord</span>
-<span class="n">M</span> <span class="o">=</span> <span class="n">equilibrium</span> <span class="o">-</span> <span class="n">momentCord</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reaction force =&quot;</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reaction moment =&quot;</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reaction force = [-4.16025147  0.          2.77350098]
-Reaction moment = [0.         8.32050294 0.        ]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="section" id="another-example">
-<h3>Another Example<a class="headerlink" href="#another-example" title="Permalink to this headline">¶</a></h3>
-<p>Let’s look at a slightly more complicated model.  In this example you will be observing a beam with two cables and an applied force.  This time you need to find both the tension in the cords and the reaction forces of the beam. <em>(Source: <a class="reference external" href="https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9780077687304.html">Vector Mechanics for Engineers: Statics</a>, Problem 4.106)</em></p>
-<p><img alt="image.png" src="../_images/problem4.png" /></p>
-<p>Define distance <em>a</em> as 3 meters</p>
-<p>As before, start by defining the location of each relevant point as an array.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">])</span>
-<span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
-<span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>From these equations, you start by determining vector directions with unit vectors.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">AB</span> <span class="o">=</span> <span class="n">B</span> <span class="o">-</span> <span class="n">C</span>
-<span class="n">AC</span> <span class="o">=</span> <span class="n">C</span> <span class="o">-</span> <span class="n">A</span>
-<span class="n">BD</span> <span class="o">=</span> <span class="n">D</span> <span class="o">-</span> <span class="n">B</span>
-<span class="n">BE</span> <span class="o">=</span> <span class="n">E</span> <span class="o">-</span> <span class="n">B</span>
-<span class="n">CF</span> <span class="o">=</span> <span class="n">F</span> <span class="o">-</span> <span class="n">C</span>
-
-<span class="n">UnitBD</span> <span class="o">=</span> <span class="n">BD</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">BD</span><span class="p">)</span>
-<span class="n">UnitBE</span> <span class="o">=</span> <span class="n">BE</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">BE</span><span class="p">)</span>
-<span class="n">UnitCF</span> <span class="o">=</span> <span class="n">CF</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">CF</span><span class="p">)</span>
-
-<span class="n">RadBD</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">AB</span><span class="p">,</span> <span class="n">UnitBD</span><span class="p">)</span>
-<span class="n">RadBE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">AB</span><span class="p">,</span> <span class="n">UnitBE</span><span class="p">)</span>
-<span class="n">RadCF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cross</span><span class="p">(</span><span class="n">AC</span><span class="p">,</span> <span class="n">UnitCF</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>This lets you represent the tension (T) and reaction (R) forces acting on the system as</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\left[
-\begin{array}
-~1/3 &amp; 1/3 &amp; 1 &amp; 0 &amp; 0\\
--2/3 &amp; -2/3 &amp; 0 &amp; 1 &amp; 0\\
--2/3 &amp; 2/3 &amp; 0 &amp; 0 &amp; 1\\
-\end{array}
-\right]
-\left[
-\begin{array}
-~T_{BD}\\
-T_{BE}\\
-R_{x}\\
-R_{y}\\
-R_{z}\\
-\end{array}
-\right]
-=
-\left[
-\begin{array}
-~195\\
-390\\
--130\\
-\end{array}
-\right]\end{split}\]</div>
-<p>and the moments as</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\left[
-\begin{array}
-~2 &amp; -2\\
-1 &amp; 1\\
-\end{array}
-\right]
-\left[
-\begin{array}
-~T_{BD}\\
-T_{BE}\\
-\end{array}
-\right]
-=
-\left[
-\begin{array}
-~780\\
-1170\\
-\end{array}
-\right]\end{split}\]</div>
-<p>Where <span class="math notranslate nohighlight">\(T\)</span> is the tension in the respective cord and <span class="math notranslate nohighlight">\(R\)</span> is the reaction force in a respective direction. Then you just have six equations:</p>
-<p><span class="math notranslate nohighlight">\(\sum F_{x} = 0 = T_{BE}/3+T_{BD}/3-195+R_{x}\)</span></p>
-<p><span class="math notranslate nohighlight">\(\sum F_{y} = 0 = (-\frac{2}{3})T_{BE}-\frac{2}{3}T_{BD}-390+R_{y}\)</span></p>
-<p><span class="math notranslate nohighlight">\(\sum F_{z} = 0 = (-\frac{2}{3})T_{BE}+\frac{2}{3}T_{BD}+130+R_{z}\)</span></p>
-<p><span class="math notranslate nohighlight">\(\sum M_{x} = 0 = 780+2T_{BE}-2T_{BD}\)</span></p>
-<p><span class="math notranslate nohighlight">\(\sum M_{z} = 0 = 1170-T_{BE}-T_{BD}\)</span></p>
-<p>You now have five unknowns with five equations, and can solve for:</p>
-<p><span class="math notranslate nohighlight">\(\ T_{BD} = 780N\)</span></p>
-<p><span class="math notranslate nohighlight">\(\ T_{BE} = 390N\)</span></p>
-<p><span class="math notranslate nohighlight">\(\ R_{x} = -195N\)</span></p>
-<p><span class="math notranslate nohighlight">\(\ R_{y} = 1170N\)</span></p>
-<p><span class="math notranslate nohighlight">\(\ R_{z} = 130N\)</span></p>
-</div>
-</div>
-<div class="section" id="wrapping-up">
-<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this headline">¶</a></h2>
-<p>You have learned how to use arrays to represent points, forces, and moments in three dimensional space. Each entry in an array can be used to represent a physical property broken into directional components. These can then be easily manipulated with NumPy functions.</p>
-<div class="section" id="additional-applications">
-<h3>Additional Applications<a class="headerlink" href="#additional-applications" title="Permalink to this headline">¶</a></h3>
-<p>This same process can be applied to kinetic problems or in any number of dimensions. The examples done in this tutorial assumed three dimensional problems in static equilibrium. These methods can easily be used in more varied problems. More or less dimensions require larger or smaller arrays to represent. In systems experiencing acceleration, velocity and acceleration can be similarly be represented as vectors as well.</p>
-</div>
-<div class="section" id="references">
-<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
-<ol class="simple">
-<li><p><a class="reference external" href="https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9780077687304.html">Vector Mechanics for Engineers: Statics (Beer &amp; Johnston &amp; Mazurek)</a></p></li>
-<li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/">NumPy Reference</a></p></li>
-</ol>
-</div>
-</div>
-</div>
-
-
-              </div>
-              
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="tutorial-x-ray-image-processing.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -1341,7 +897,7 @@ T_{BE}\\
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">

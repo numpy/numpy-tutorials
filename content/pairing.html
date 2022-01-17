@@ -23,7 +23,7 @@
 
     
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -38,7 +38,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -63,7 +63,12 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
     
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
@@ -196,22 +201,22 @@
 
 
           
+<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
+<div class="sbt-scroll-pixel-helper"></div>
 <main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
     <div class="topbar container-xl fixed-top">
     <div class="topbar-contents row">
         <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
         <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
+            <div class="topbar-left">
+                
+                <label class="nav-toggle-button" for="__navigation">
+                    <div class="visually-hidden">Toggle navigation</div>
+                    <i class="fas fa-bars"></i>
+                </label>
+                
+            </div>
             
 <div class="dropdown-buttons-trigger">
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
@@ -276,6 +281,7 @@
         
         
         
+        
     </div>
 </div>
 
@@ -336,19 +342,20 @@
         </div>
     </div>
 </div>
-    <!-- Table of contents that is only displayed when printing the page -->
-    <div id="jb-print-docs-body" class="onlyprint">
-        <h1>Pairing Jupyter notebooks and MyST-NB</h1>
-        <!-- Table of contents -->
-        <div id="print-main-content" class="row">
-            <div class="col-12 col-md-12 pl-md-5 pr-md-5">
-            <div id="jb-print-toc">
-                
-                <div>
-                    <h2> Contents </h2>
-                </div>
-                <nav aria-label="Page">
-                    <ul class="visible nav section-nav flex-column">
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Pairing Jupyter notebooks and MyST-NB</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-you-ll-do">
    What you’ll do
@@ -392,7 +399,9 @@
  </li>
 </ul>
 
-                </nav>
+                        </nav>
+                    </div>
+                </div>
             </div>
             
               <div>
@@ -632,251 +641,8 @@ handle pairing to keep your work in sync.</p>
 
               </div>
               
-            </div>
-        </div>
-    </div>
-    <div id="main-content" class="row noprint">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
-                
-  <div class="tex2jax_ignore mathjax_ignore section" id="pairing-jupyter-notebooks-and-myst-nb">
-<h1>Pairing Jupyter notebooks and MyST-NB<a class="headerlink" href="#pairing-jupyter-notebooks-and-myst-nb" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="what-you-ll-do">
-<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this headline">¶</a></h2>
-<p>This guide will keep a Jupyter notebook synced <em>or paired</em> between
-<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">.md</span></code>.</p>
-</div>
-<div class="section" id="what-you-ll-learn">
-<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>The difference between Jupyter’s json format and MyST-NB’s markdown
-format</p></li>
-<li><p>The benefits and drawbacks of json and markdown</p></li>
-<li><p>How to keep <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">.md</span></code> files in sync</p></li>
-</ul>
-</div>
-<div class="section" id="what-you-ll-need">
-<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://jupyter.org/">Jupyter</a></p></li>
-<li><p><a class="reference external" href="https://jupytext.readthedocs.io/en/latest/index.html">Jupytext</a></p></li>
-</ul>
-</div>
-<hr class="docutils" />
-<div class="section" id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="https://github.com/numpy/numpy-tutorials">NumPy tutorials</a> are
-reviewed and executed as <a class="reference external" href="https://myst-nb.readthedocs.io/">MyST-NB</a>
-notebooks. Content is easier to review in this markdown format. You can
-keep your <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> in sync with the content on NumPy tutorials. The
-NumPy tutorials use
-<a class="reference external" href="https://jupytext.readthedocs.io/en/latest/index.html">Jupytext</a> to
-convert your <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file to <a class="reference external" href="https://github.com/mwouts/jupytext/blob/master/docs/formats.md#myst-markdown">MyST
-Markdown</a>
-format.</p>
-<p>Jupyter notebooks are stored on your disk in a
-<a class="reference external" href="https://nbformat.readthedocs.io/en/latest/format_description.html">json format</a>. The json format is
-very powerful and allows you to store almost any input and output that
-Python libraries can create. The drawback is that it is hard to see and compare changes made in the notebook file when reviewing pull requests, because this means the reviewers are looking only at the raw json files.</p>
-<p>MyST-NB notebooks are stored on your disk in a
-<a class="reference external" href="https://en.wikipedia.org/wiki/Markdown">markdown</a> format. The markdown
-format is a lightweight markup language. Its key design goal is
-<a class="reference external" href="https://daringfireball.net/projects/markdown/syntax#philosophy"><em>readability</em></a>.
-The drawback is that markdown can only store the inputs of your code.
-Each time you open the notebook, you must execute the inputs to see the
-output.</p>
-<blockquote>
-<div><p><strong>Note:</strong> You should use <a class="reference external" href="https://commonmark.org">common mark</a>
-markdown cells. Jupyter only renders common mark markdown, but MyST-NB
-supports a variety of restructured text directives.  These Sphinx
-markdown directives will render when NumPy tutorials are built into a
-static website, but they will show up as raw code when you open in
-Jupyter locally or on <a class="reference external" href="https://mybinder.org">Binder</a>.</p>
-</div></blockquote>
-<p>Consider these two versions of the same <strong>Simple notebook example</strong>. You
-have three things in the notebooks:</p>
-<ol>
-<li><p>A markdown cell that explains the code
-<code class="docutils literal notranslate"><span class="pre">This</span> <span class="pre">code</span> <span class="pre">calculates</span> <span class="pre">2+2</span> <span class="pre">and</span> <span class="pre">prints</span> <span class="pre">the</span> <span class="pre">output.</span></code></p></li>
-<li><p>A code cell that shows the code</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x = &#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-</pre></div>
-</div>
-</li>
-<li><p>The output of the code cell</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">4</span>
-</pre></div>
-</div>
-</li>
-</ol>
-<hr class="docutils" />
-<p><strong><center> Simple notebook example </center></strong>
-This code calculates 2+2 and prints the output.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x = &quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x =  4
-</pre></div>
-</div>
-</div>
-</div>
-<hr class="docutils" />
-<p>Here are the two Simple notebook example raw inputs side-by-side:</p>
-<table>
-<tr>
-<th>json <code>.ipynb</code></th>
-<th>MyST-NB <code>.md</code></th>
-</tr>
-<tr>
-<td>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w"> </span><span class="nt">&quot;cells&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;cell_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;markdown&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;This code calculates 2+2 and prints the output&quot;</span><span class="w"></span>
-<span class="w">   </span><span class="p">]</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="p">{</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;cell_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;code&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;execution_count&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;outputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">     </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stdout&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">     </span><span class="nt">&quot;output_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;stream&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">     </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">      </span><span class="s2">&quot;x =  4\n&quot;</span><span class="w"></span>
-<span class="w">     </span><span class="p">]</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">   </span><span class="p">],</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;x = 2 + 2\n&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;print(&#39;x = &#39;, x)&quot;</span><span class="w"></span>
-<span class="w">   </span><span class="p">]</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="w"> </span><span class="p">],</span><span class="w"></span>
-<span class="w"> </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;kernelspec&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;display_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Python 3&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python3&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;language_info&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;codemirror_mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ipython&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w"></span>
-<span class="w">   </span><span class="p">},</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;file_extension&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;.py&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;mimetype&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;text/x-python&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;nbconvert_exporter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;pygments_lexer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ipython3&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">   </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3.8.3&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
-<span class="w"> </span><span class="p">},</span><span class="w"></span>
-<span class="w"> </span><span class="nt">&quot;nbformat&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"></span>
-<span class="w"> </span><span class="nt">&quot;nbformat_minor&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</pre></div>
-</div>
-</td>
-<td>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>---
-jupytext:
-  formats: ipynb,md:myst
-  text_representation:
-    extension: .md
-    format_name: myst
-    format_version: 0.12
-    jupytext_version: 1.6.0
-kernelspec:
-  display_name: Python 3
-  language: python
-  name: python3
----
-
-This code calculates 2+2 and prints the output
-
-```{code-cell} ipython3
-x = 2 + 2
-print(&#39;x = &#39;, x)
-```
-</pre></div>
-</div>
-</td>
-</tr>
-</table>
-<p>The MyST-NB <code class="docutils literal notranslate"><span class="pre">.md</span></code> is much shorter, but it does not save the output <code class="docutils literal notranslate"><span class="pre">4</span></code>.</p>
-</div>
-<div class="section" id="pair-your-notebook-files-ipynb-and-md">
-<h2>Pair your notebook files <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">.md</span></code><a class="headerlink" href="#pair-your-notebook-files-ipynb-and-md" title="Permalink to this headline">¶</a></h2>
-<p>When you submit a Jupyter notebook to NumPy tutorials, we (the reviewers) will convert
-it to a MyST-NB format. You can also submit the MyST-NB <code class="docutils literal notranslate"><span class="pre">.md</span></code> in your
-pull request.
-To keep the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">.md</span></code> in sync–<em>or paired</em>–you need
-<a class="reference external" href="https://jupytext.readthedocs.io/en/latest/index.html">Jupytext</a>.</p>
-<p>Install <code class="docutils literal notranslate"><span class="pre">jupytext</span></code> using:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">jupytext</span>
-</pre></div>
-</div>
-<p>or</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">jupytext</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-</pre></div>
-</div>
-<p>Once installed, start your <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">lab</span></code> or <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code>
-session in the browser. When launching <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">lab</span></code> it will ask you to rebuild
-to include the Jupytext extension.</p>
-<p>You can pair the two formats in the classic Jupyter, Jupyter Lab,
-or the command line:</p>
-<div class="toggle admonition">
-<p class="admonition-title"><strong>1. Classic Jupyter Jupytext pairing</strong></p>
-<p><img alt="Animation showing pairing with Jupyter classic" src="../_images/01-classic.gif" /></p>
-</div>
-<div class="toggle admonition">
-<p class="admonition-title"><strong>2. JupyterLab Jupytext pairing</strong></p>
-<p><img alt="Animation showing pairing with JupyterLab" src="../_images/02-jupyterlab.gif" /></p>
-</div>
-<div class="toggle admonition">
-<p class="admonition-title"><strong>3. Command line Jupytext pairing</strong></p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>jupytext --set-formats ipynb,myst notebook.ipynb
-</pre></div>
-</div>
-<p>Then, update either the MyST markdown or notebook file:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>jupytext --sync notebook.ipynb
-</pre></div>
-</div>
-</div>
-<blockquote>
-<div><p><strong>Note:</strong> With Jupytext installed, the classic Jupyter interface will
-automatically open MyST files as notebooks. In JupyterLab, you can
-right-click and choose “Open With -&gt; Notebook” to open as a notebook.
-The outputs of your code cells are only saved in the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> file.</p>
-</div></blockquote>
-</div>
-<div class="section" id="wrapping-up">
-<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this headline">¶</a></h2>
-<p>In this tutorial, you saw the json <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> and MyST-NB <code class="docutils literal notranslate"><span class="pre">.md</span></code> raw code
-to create Jupyter notebooks. You can use both formats to create
-tutorials. Now you can work in either a simple text editor like VIM
-or emacs or continue building notebooks in your browser. Jupytext can
-handle pairing to keep your work in sync.</p>
-</div>
-</div>
-
-
-              </div>
-              
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="../contributing.html" title="previous page">
         <i class="fas fa-angle-left"></i>
@@ -893,7 +659,7 @@ handle pairing to keep your work in sync.</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
