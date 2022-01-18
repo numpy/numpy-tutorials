@@ -35,7 +35,7 @@ contributing
 
 The following links may be useful:
 
-- [NumPy Code of Conduct](https://numpy.org/doc/stable/dev/conduct/code_of_conduct.html)
+- [NumPy Code of Conduct](https://numpy.org/code-of-conduct/)
 - [Main NumPy documentation](https://numpy.org/doc/stable/)
 - [NumPy documentation team meeting notes](https://hackmd.io/oB_boakvRqKR-_2jRV-Qjg?both)
 - [NEP 44 - Restructuring the NumPy documentation](https://numpy.org/neps/nep-0044-restructuring-numpy-docs.html)
