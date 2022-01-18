@@ -45,7 +45,7 @@ Calculate Air Quality Indices (AQI) and perform paired Student's t-test on them.
 ## The problem of air pollution
 
 Air pollution is one of the most prominent types of pollution we face that has an immediate effect on our daily lives. The
-COVID-19 pandemic resulted in lockdowns in different parts of the world; offering a rare opportunity to study the effect of
+COVID-19 pandemic resulted in lockdowns in different parts of the world, offering a rare opportunity to study the effect of
 human activity (or lack there of) on air pollution. In this tutorial, we will study the air quality in Delhi, one of the
 worst affected cities by air pollution, before and during the lockdown from March to June 2020. For this, we will first compute
 the Air Quality Index for each hour from the collected pollutant measurements. Next, we will sample these indices and perform
@@ -106,7 +106,7 @@ We will calculate the AQI using [the method](https://app.cpcbccr.com/ccr_docs/FI
 
 
 - Calculate the sub-indices for these pollutants with the formula: 
-$Ip = \dfrac{\text{IHi – ILo}}{\text{BPHi – BPLo}}\cdot{\text{Cp – BPLo}} + \text{ILo}$
+$$Ip = \dfrac{\text{IHi – ILo}}{\text{BPHi – BPLo}}\cdot{\text{Cp – BPLo}} + \text{ILo}$$
 
     Where,
 
@@ -291,19 +291,19 @@ after_sample = np.random.permutation(after_lock)[:30]
 
 Let us assume that there is no significant difference between the sample means before and after the lockdown. This will be the null hypothesis. The alternative hypothesis would be that there *is* a significant difference between the means and the AQI *improved*. Mathematically,
 
-$H_{0}: \mu_{after-before} = 0$ \
-$H_{a}: \mu_{after-before} < 0$
+$H_{0}: \mu_\text{after-before} = 0$ \
+$H_{a}: \mu_\text{after-before} < 0$
 
 +++
 
 ### Calculating the test statistics
 
 We will use the `t` statistic to evaluate our hypothesis and even calculate the `p value` from it. The formula for the `t` statistic is:
-$t = \frac{\mu_{after-before}}{\sqrt{\sigma^{2}/n}}$
+$$t = \frac{\mu_\text{after-before}}{\sqrt{\sigma^{2}/n}}$$
 
 where,
 
-$\mu_{after-before}$ = mean differences of samples \
+$\mu_\text{after-before}$ = mean differences of samples \
 $\sigma^{2}$ = variance of mean differences \
 $n$ = sample size
 
