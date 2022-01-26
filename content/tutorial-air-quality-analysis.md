@@ -45,8 +45,8 @@ Calculate Air Quality Indices (AQI) and perform paired Student's t-test on them.
 ## The problem of air pollution
 
 Air pollution is one of the most prominent types of pollution we face that has an immediate effect on our daily lives. The
-COVID-19 pandemic resulted in lockdowns in different parts of the world, offering a rare opportunity to study the effect of
-human activity (or lack there of) on air pollution. In this tutorial, we will study the air quality in Delhi, one of the
+COVID-19 pandemic resulted in lockdowns in different parts of the world; offering a rare opportunity to study the effect of
+human activity (or lack thereof) on air pollution. In this tutorial, we will study the air quality in Delhi, one of the
 worst affected cities by air pollution, before and during the lockdown from March to June 2020. For this, we will first compute
 the Air Quality Index for each hour from the collected pollutant measurements. Next, we will sample these indices and perform
 a [paired Student's t-test](https://en.wikipedia.org/wiki/Student%27s_t-test#Dependent_t-test_for_paired_samples) on them. It will statistically show us that the air quality improved due to the lockdown, supporting our intuition.
@@ -55,6 +55,7 @@ Let's start by importing the necessary libraries into our environment. Also, ena
 
 ```{code-cell} ipython3
 import numpy as np
+from numpy.random import default_rng
 from scipy import stats
 import matplotlib.pyplot as plt
 
@@ -73,24 +74,23 @@ Let's print out the first few rows to have a glimpse of our dataset.
 ! head air-quality-data.csv
 ```
 
-For the purpose of this tutorial, we are only concerned with standard pollutants required for calculating the AQI, viz., PM 2.5, PM 10, NO2, NH3, SO2, CO, and O3. So, we will only import these particular columns with [np.genfromtxt](https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html). We'll initially create two sets: `pollutants_A` with PM 2.5, PM 10, NO2, NH3, and SO2, and `pollutants_B` with CO and O3. The
+For the purpose of this tutorial, we are only concerned with standard pollutants required for calculating the AQI, viz., PM 2.5, PM 10, NO2, NH3, SO2, CO, and O3. So, we will only import these particular columns with [np.loadtxt](https://numpy.org/devdocs/reference/generated/numpy.loadtxt.html). We'll then [slice](https://numpy.org/devdocs/glossary.html#term-0) and create two sets: `pollutants_A` with PM 2.5, PM 10, NO2, NH3, and SO2, and `pollutants_B` with CO and O3. The
 two sets will be processed slightly differently, as we'll see later on.
 
 ```{code-cell} ipython3
-pollutants_A = np.genfromtxt("air-quality-data.csv", dtype='f8', delimiter=",",
-                             skip_header=1, usecols=(1, 2, 3, 4, 5))
-pollutants_B = np.genfromtxt("air-quality-data.csv", dtype='f8', delimiter=",",
-                             skip_header=1, usecols=(6, 7))
+pollutant_data = np.loadtxt("air-quality-data.csv", dtype=float, delimiter=",",
+                            skiprows=1, usecols=range(1, 8))
+pollutants_A = pollutant_data[:, 0:5]
+pollutants_B = pollutant_data[:, 5:]
 
 print(pollutants_A.shape)
 print(pollutants_B.shape)
 ```
 
-Our dataset might contain missing values, denoted by `NaN`, so let's do a quick check with [np.isnan](https://numpy.org/devdocs/reference/generated/numpy.isnan.html).
+Our dataset might contain missing values, denoted by `NaN`, so let's do a quick check with [np.isfinite](https://numpy.org/devdocs/reference/generated/numpy.isfinite.html).
 
 ```{code-cell} ipython3
-print(np.where(np.isnan(pollutants_A) == True))
-print(np.where(np.isnan(pollutants_B) == True))
+np.all(np.isfinite(pollutant_data))
 ```
 
 With this, we have successfully imported the data and checked that it is complete. Let's move on to the AQI calculations!
@@ -105,8 +105,13 @@ We will calculate the AQI using [the method](https://app.cpcbccr.com/ccr_docs/FI
 - Collect 24-hourly average concentration values for the standard pollutants; 8-hourly in case of CO and O3.
 
 
-- Calculate the sub-indices for these pollutants with the formula: 
-$$Ip = \dfrac{\text{IHi – ILo}}{\text{BPHi – BPLo}}\cdot{\text{Cp – BPLo}} + \text{ILo}$$
+- Calculate the sub-indices for these pollutants with the formula:
+
+
+    $$
+    Ip = \dfrac{\text{IHi – ILo}}{\text{BPHi – BPLo}}\cdot{\text{Cp – BPLo}} + \text{ILo}
+    $$
+
 
     Where,
 
@@ -168,7 +173,11 @@ pollutants = np.concatenate((pollutants_A_24hr_avg, pollutants_B_8hr_avg), axis=
 
 ### Sub-indices
 
-The subindices for each pollutant are calculated according to the linear relationship between the AQI and standard breakpoint ranges with the formula as above: $Ip = \dfrac{\text{IHi – ILo}}{\text{BPHi – BPLo}}\cdot{\text{Cp – BPLo}} + \text{ILo}$.
+The subindices for each pollutant are calculated according to the linear relationship between the AQI and standard breakpoint ranges with the formula as above: 
+
+$$
+Ip = \dfrac{\text{IHi – ILo}}{\text{BPHi – BPLo}}\cdot{\text{Cp – BPLo}} + \text{ILo}
+$$
 
 The `compute_indices` function first fetches the correct upper and lower bounds of AQI categories and breakpoint concentrations for the input concentration and pollutant with the help of arrays `AQI` and `breakpoints` we created above. Then, it feeds these values into the formula to calculate the sub-index.
 
@@ -243,10 +252,10 @@ sub_indices = np.stack((vcompute_indices('PM2.5', pollutants[..., 0]),
 
 ### Air quality indices
 
-Using [np.amax](https://numpy.org/devdocs/reference/generated/numpy.amax.html), we find out the maximum sub-index for each period, which is our Air Quality Index!
+Using [np.max](https://numpy.org/devdocs/reference/generated/numpy.maximum.html), we find out the maximum sub-index for each period, which is our Air Quality Index!
 
 ```{code-cell} ipython3
-aqi_array = np.amax(sub_indices, axis=1)
+aqi_array = np.max(sub_indices, axis=1)
 ```
 
 With this, we have the AQI for every hour from June 1, 2019 to June 30, 2020. Note that even though we started out with
@@ -265,8 +274,8 @@ Hypothesis testing is a form of descriptive statistics used to help us make deci
 We will now import the `datetime` column from our original dataset into a [*datetime64* dtype](https://numpy.org/devdocs/reference/arrays.scalars.html) array. We will use this array to index the AQI array and obtain subsets of the dataset.
 
 ```{code-cell} ipython3
-datetime = np.genfromtxt("air-quality-data.csv", dtype='M8[h]', delimiter=",",
-                         skip_header=1, usecols=(0, ))[-(pollutants_A_24hr_avg.shape[0]):]
+datetime = np.loadtxt("air-quality-data.csv", dtype='M8[h]', delimiter=",",
+                         skiprows=1, usecols=(0, ))[-(pollutants_A_24hr_avg.shape[0]):]
 ```
 
 Since total lockdown commenced in Delhi from March 24, 2020, the after-lockdown subset is of the period March 24, 2020 to June 30, 2020. The before-lockdown subset is for the same length of time before 24th March.
@@ -280,11 +289,13 @@ print(after_lock.shape)
 print(before_lock.shape)
 ```
 
-To make sure our samples are *approximately* normally distributed, we take samples of size `n = 30`. `before_sample_A` and `after_sample_A` are the set of random observations drawn before and after the total lockdown. We use [np.random.permutation](https://numpy.org/devdocs/reference/random/generated/numpy.random.permutation.html) to generate the samples.
+To make sure our samples are *approximately* normally distributed, we take samples of size `n = 30`. `before_sample` and `after_sample` are the set of random observations drawn before and after the total lockdown. We use [random.Generator.choice](https://numpy.org/devdocs/reference/random/generated/numpy.random.Generator.choice.html) to generate the samples.
 
 ```{code-cell} ipython3
-before_sample = np.random.permutation(before_lock)[:30]
-after_sample = np.random.permutation(after_lock)[:30]
+rng = default_rng()
+
+before_sample = rng.choice(before_lock, size=30, replace=False)
+after_sample = rng.choice(after_lock, size=30, replace=False)
 ```
 
 ### Defining the hypothesis
@@ -299,7 +310,10 @@ $H_{a}: \mu_\text{after-before} < 0$
 ### Calculating the test statistics
 
 We will use the `t` statistic to evaluate our hypothesis and even calculate the `p value` from it. The formula for the `t` statistic is:
-$$t = \frac{\mu_\text{after-before}}{\sqrt{\sigma^{2}/n}}$$
+
+$$
+t = \frac{\mu_\text{after-before}}{\sqrt{\sigma^{2}/n}}
+$$
 
 where,
 
@@ -318,7 +332,7 @@ def t_test(x, y):
 t_value = t_test(before_sample, after_sample)
 ```
 
-For the `p` value, we will use SciPy's `stats.distributions.t.cdf()` function. It takes two arguments- `t` statistic and the degrees of freedom (`dof`). The formula for `dof` is `n - 1`.
+For the `p` value, we will use SciPy's `stats.distributions.t.cdf()` function. It takes two arguments- the `t statistic` and the degrees of freedom (`dof`). The formula for `dof` is `n - 1`.
 
 ```{code-cell} ipython3
 dof = len(before_sample) - 1
