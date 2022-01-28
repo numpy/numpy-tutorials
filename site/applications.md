@@ -15,4 +15,5 @@ content/tutorial-nlp-from-scratch
 content/tutorial-x-ray-image-processing
 content/tutorial-static_equilibrium
 content/tutorial-plotting-fractals
+content/tutorial-air-quality-analysis
 ```
