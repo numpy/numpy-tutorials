@@ -38,6 +38,11 @@ contributing
 
 ```{glue:} thumb_svd
 ```
+
++++
+
+{badge}`numpy.linalg, badge-primary`
+
 ---
 
 {doc}`content/tutorial-ma`
@@ -46,12 +51,21 @@ contributing
 ```{glue:} thumb_ma
 ```
 
++++
+
+{badge}`numpy.ma, badge-primary`
+{badge}`numpy.polynomial, badge-primary`
+
 ---
 
 {doc}`content/save-load-arrays`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ![Default thumbnail: NumPy logo](_static/numpylogo.svg)
+
++++
+
+{badge}`I/O, badge-primary`
 ````
 
 ## NumPy Applications
