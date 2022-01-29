@@ -19,17 +19,40 @@ local copy of the `.ipynb` files, you can either
 [clone this repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
 or use the download icon in the upper-right corner of each tutorial.
 
-## Content
-
 ```{toctree}
 ---
-maxdepth: 2
+hidden: true
 ---
 
 features
 applications
 contributing
 ```
+
+## NumPy Features
+
+````{panels}
+
+{doc}`content/tutorial-svd`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+```{glue:} thumb_svd
+```
+---
+
+{doc}`content/tutorial-ma`
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+```{glue:} thumb_ma
+```
+
+---
+
+{doc}`content/save-load-arrays`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+![Default thumbnail: NumPy logo](_static/numpylogo.svg)
+````
 
 ## Useful links and resources
 

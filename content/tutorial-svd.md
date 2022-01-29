@@ -362,7 +362,8 @@ approx_img.shape
 which is not the right shape for showing the image. Finally, reordering the axes back to our original shape of `(768, 1024, 3)`, we can see our approximation:
 
 ```{code-cell}
-plt.imshow(np.transpose(approx_img, (1, 2, 0)))
+fig, ax = plt.subplots()
+ax.imshow(np.transpose(approx_img, (1, 2, 0)))
 plt.show()
 ```
 
@@ -382,3 +383,22 @@ terms of the norm of the difference. For more information, see *G. H. Golub and 
 -  [SciPy Tutorial](https://docs.scipy.org/doc/scipy/reference/tutorial/index.html)
 -  [SciPy Lecture Notes](https://scipy-lectures.org)
 -  [A matlab, R, IDL, NumPy/SciPy dictionary](http://mathesaurus.sf.net/)
+
+```{code-cell} ipython3
+---
+tags: [remove-cell]
+---
+# Create notebook thumbnail
+from myst_nb import glue
+fig, ax = plt.subplots(1, 2)
+for a, im, ttl in zip(
+    ax,
+    (img_array, approx_img.transpose(1, 2, 0)),
+    ("Original", f"Reconstructed from\n{k} principal components"),
+):
+    a.imshow(im)
+    a.set_title(ttl)
+    a.axis("off")
+fig.tight_layout()
+glue("thumb_svd", fig, display=False)
+```

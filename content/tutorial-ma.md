@@ -278,16 +278,27 @@ This plot is not so readable since the lines seem to be over each other, so let'
 available, and show the cubic fit for unavailable data, using this fit to compute an estimate to the observed number of cases on January 28th 2020, 7 days after the beginning of the records:
 
 ```{code-cell}
-plt.plot(t, china_total)
-plt.plot(t[china_total.mask], cubic_fit[china_total.mask], "--", color="orange")
-plt.plot(7, np.polyval(params, 7), "r*")
-plt.xticks([0, 7, 13], dates[[0, 7, 13]])
-plt.yticks([0, np.polyval(params, 7), 10000, 17500])
-plt.legend(["Mainland China", "Cubic estimate", "7 days after start"])
-plt.title(
-    "COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China\n"
-    "Cubic estimate for 7 days after start"
+fig, ax = plt.subplots()
+ax.plot(t, china_total)
+ax.plot(t[china_total.mask], cubic_fit[china_total.mask], "--", color="orange")
+ax.plot(7, np.polyval(params, 7), "r*")
+ax.set_xticks([0, 7, 13], dates[[0, 7, 13]])
+ax.set_yticks([0, np.polyval(params, 7), 10000, 17500])
+ax.legend(["Mainland China", "Cubic estimate", "7 days after start"])
+ax.set_title(
+    "COVID-19 cumulative cases from Jan 21 to Feb 3 2020\n"
+    "Mainland China Cubic estimate for 7 days after start"
 )
+fig.tight_layout()
+```
+
+```{code-cell}
+---
+tags: [remove-cell]
+---
+# Create a thumbnail for the notebook
+from myst_nb import glue
+glue("thumb_ma", fig, display=False)
 ```
 
 ## In practice
