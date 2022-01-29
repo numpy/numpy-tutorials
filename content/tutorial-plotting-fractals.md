@@ -16,7 +16,7 @@ kernelspec:
 
 +++
 
-![Fractal picture](tutorial-plotting-fractals/fractal.png)
+![Fractal picture](_static/fractal.png)
 
 +++
 

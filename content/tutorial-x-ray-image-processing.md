@@ -234,13 +234,25 @@ Display the original X-ray and the one with the Laplacian-Gaussian filter:
 ```{code-cell}
 fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(10, 10))
 
-axes[0].set_title("Original")
-axes[0].imshow(xray_image, cmap="gray")
-axes[1].set_title("Laplacian-Gaussian (edges)")
-axes[1].imshow(xray_image_laplace_gaussian, cmap="gray")
-for i in axes:
-    i.axis("off")
+for ax, img, title in zip(
+    axes,
+    (xray_image, xray_image_laplace_gaussian),
+    ("Original", "Laplacian-Gaussian (edges)"),
+):
+    ax.imshow(img, cmap="gray")
+    ax.set_title(title)
+    ax.axis("off")
+fig.tight_layout()
 plt.show()
+```
+
+```{code-cell} ipython3
+---
+tags: [remove-cell]
+---
+# Create tutorial thumbnail
+from myst_nb import glue
+glue("thumb_xray", fig, display=False)
 ```
 
 ### The Gaussian gradient magnitude method

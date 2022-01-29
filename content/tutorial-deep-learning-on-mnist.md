@@ -178,9 +178,19 @@ num_examples = 5
 seed = 147197952744
 rng = np.random.default_rng(seed)
 
-fig, axes = plt.subplots(1, num_examples)
+fig, axes = plt.subplots(1, num_examples, figsize=(15, 3))
 for sample, ax in zip(rng.choice(x_train, size=num_examples, replace=False), axes):
     ax.imshow(sample.reshape(28, 28), cmap="gray")
+    ax.axis("off")
+```
+
+```{code-cell} ipython3
+---
+tags: [remove-cell]
+---
+# Create tutorial thumbnail
+from myst_nb import glue
+glue("thumb_mnist", fig, display=False)
 ```
 
 _Above are five images taken from the MNIST training set. Various hand-drawn

@@ -54,6 +54,75 @@ contributing
 ![Default thumbnail: NumPy logo](_static/numpylogo.svg)
 ````
 
+## NumPy Applications
+
+````{panels}
+
+{doc}`content/mooreslaw-tutorial`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+```{glue:} thumb_mooreslaw
+```
+
+---
+
+{doc}`content/tutorial-deep-learning-on-mnist`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+```{glue:} thumb_mnist
+```
+
+---
+
+{doc}`content/tutorial-deep-reinforcement-learning-with-pong-from-pixels`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+![Diagram showing the component operations of reinforcement learning detailed
+in this tutorial](content/_static/tutorial-deep-reinforcement-learning-with-pong-from-pixels.png)
+
+---
+
+{doc}`content/tutorial-nlp-from-scratch`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+![Overview of the model architecture, showing a series of animated boxes.
+There are five identical boxes labeled A and receiving as input one of the
+words in the phrase "life's a box of chocolates". Each box is highlighted in
+turn, representing the memory blocks of the LSTM network as information passes
+through them, ultimately reaching a "Positive" output value.](content/_static/lstm.gif)
+
+---
+
+{doc}`content/tutorial-x-ray-image-processing`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+```{glue:} thumb_xray
+```
+
+---
+
+{doc}`content/tutorial-static_equilibrium`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+```{glue:} thumb_static_eq
+```
+
+---
+
+{doc}`content/tutorial-plotting-fractals`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+![An example of a fractal visualization from this tutorial](content/_static/fractal.png)
+
+---
+
+{doc}`content/tutorial-air-quality-analysis`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+![A grid showing the India Gate in smog above and clear air below](content/_static/11-delhi-aqi.jpg)
+
+````
+
 ## Useful links and resources
 
 The following links may be useful:

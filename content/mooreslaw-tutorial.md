@@ -331,19 +331,29 @@ https://fivethirtyeight.com elements. Change the matplotlib style with
 transistor_count_predicted = np.exp(B) * np.exp(A * year)
 transistor_Moores_law = Moores_law(year)
 plt.style.use("fivethirtyeight")
-plt.semilogy(year, transistor_count, "s", label="MOS transistor count")
-plt.semilogy(year, transistor_count_predicted, label="linear regression")
+fig, ax = plt.subplots()
+ax.semilogy(year, transistor_count, "s", label="MOS transistor count")
+ax.semilogy(year, transistor_count_predicted, label="linear regression")
 
 
-plt.plot(year, transistor_Moores_law, label="Moore's Law")
-plt.title(
+ax.plot(year, transistor_Moores_law, label="Moore's Law")
+ax.set_title(
     "MOS transistor count per microprocessor\n"
-    + "every two years \n"
-    + "Transistor count was x{:.2f} higher".format(np.exp(A * 2))
+    "every two years\n"
+    "Transistor count was x{:.2f} higher".format(np.exp(A * 2))
 )
-plt.xlabel("year introduced")
-plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
-plt.ylabel("# of transistors\nper microprocessor")
+ax.legend(loc="center left", bbox_to_anchor=(1, 0.5))
+ax.set_xlabel("year introduced")
+ax.set_ylabel("# of transistors\nper microprocessor")
+```
+
+```{code-cell} ipython3
+---
+tags: [remove-cell]
+---
+# Create tutorial thumbnail
+from myst_nb import glue
+glue("thumb_mooreslaw", fig, display=False)
 ```
 
 _A scatter plot of MOS transistor count per microprocessor every two years with a red line for the ordinary least squares prediction and an orange line for Moore's law._

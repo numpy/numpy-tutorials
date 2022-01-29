@@ -82,7 +82,7 @@ Quiver plots will be used to demonstrate [three dimensional vectors](https://mat
 ```{code-cell}
 fig = plt.figure()
 
-d3 = fig.gca(projection="3d")
+d3 = fig.add_subplot(111, projection="3d")
 
 d3.set_xlim(-1, 1)
 d3.set_ylim(-1, 1)
@@ -96,7 +96,7 @@ d3.quiver(x, y, z, u, v, w, color="r", label="forceA")
 u, v, w = forceB
 d3.quiver(x, y, z, u, v, w, color="b", label="forceB")
 
-plt.legend()
+d3.legend()
 plt.show()
 ```
 
@@ -113,7 +113,7 @@ You can plot it to see the result.
 ```{code-cell}
 fig = plt.figure()
 
-d3 = fig.gca(projection="3d")
+d3 = fig.add_subplot(111, projection="3d")
 
 d3.set_xlim(-1, 1)
 d3.set_ylim(-1, 1)
@@ -131,6 +131,16 @@ d3.quiver(x, y, z, u, v, w, color="g", label="forceC")
 plt.legend()
 plt.show()
 ```
+
+```{code-cell} ipython3
+---
+tags: [remove-cell]
+---
+# Create thumbnail for tutorial
+from myst_nb import glue
+glue("thumb_static_eq", fig, display=False);
+```
+
 
 However, the goal is equilibrium.
 This means that you want your sum of forces to be $(0, 0, 0)$ or else your object will experience acceleration.
