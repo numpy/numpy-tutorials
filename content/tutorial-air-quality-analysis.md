@@ -33,7 +33,7 @@ Calculate Air Quality Indices (AQI) and perform paired Student's t-test on them.
 
 ## What you'll need
 
-- [SciPy](https://scipy.org/install/) and [Matplotlib](https://matplotlib.org/stable/users/installing/index.html) installed in your environment
+- [SciPy](https://scipy.org/install/) installed in your environment
 
 - Basic understanding of statistical terms like population, sample, mean, standard deviation etc.
 
@@ -51,15 +51,12 @@ worst affected cities by air pollution, before and during the lockdown from Marc
 the Air Quality Index for each hour from the collected pollutant measurements. Next, we will sample these indices and perform
 a [paired Student's t-test](https://en.wikipedia.org/wiki/Student%27s_t-test#Dependent_t-test_for_paired_samples) on them. It will statistically show us that the air quality improved due to the lockdown, supporting our intuition.
 
-Let's start by importing the necessary libraries into our environment. Also, enable IPython's [magic function](https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-matplotlib) to see the Matplotlib plots in the cell outputs.
+Let's start by importing the necessary libraries into our environment.
 
 ```{code-cell} ipython3
 import numpy as np
 from numpy.random import default_rng
 from scipy import stats
-import matplotlib.pyplot as plt
-
-%matplotlib inline
 ```
 
 ## Building the dataset
