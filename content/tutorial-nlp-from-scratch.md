@@ -117,6 +117,9 @@ import string
 import re
 import zipfile
 import os
+
+# Creating the random instance
+rng = np.random.default_rng()
 ```
 
 Next, you'll define set of text preprocessing helper functions.
@@ -457,7 +460,6 @@ Lets start with writing a function to randomly initialize the parameters which w
 
 ```python
 def initialise_params(hidden_dim, input_dim):
-    rng = np.random.default_rng()
     # forget gate
     Wf = rng.standard_normal(size=(hidden_dim, hidden_dim + input_dim))
     bf = rng.standard_normal(size=(hidden_dim, 1))
@@ -576,7 +578,7 @@ def forward_prop(X_vec, parameters, input_dim):
         # Retrieve word corresponding to current time step
         x = X_vec[t]
         # Retrieve the embedding for the word and reshape it to make the LSTM happy
-        xt = emb_matrix.get(x, np.random.default_rng().standard_normal(size=(input_dim, 1)))
+        xt = emb_matrix.get(x, rng.standard_normal(size=(input_dim, 1)))
         xt = xt.reshape((input_dim, 1))
 
         # Input to the gates is concatenated previous hidden state and current word embedding

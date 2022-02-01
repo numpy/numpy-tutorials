@@ -1,6 +1,7 @@
 import pandas as pd
 import argparse
 import numpy as np
+rng = np.random.default_rng() # crating the random instance
 import re # (https://docs.python.org/3/library/re.html) for tokenising textual data 
 import string # (https://docs.python.org/3/library/string.html) for string operations  
 
@@ -84,7 +85,7 @@ class TextPreprocess:
 
         """
         y = np.array(list(map(lambda x: 1 if x=="positive" else 0, y)))
-        arr_rand = np.random.default_rng().random(X.shape[0])
+        arr_rand = rng.random(X.shape[0])
         split = arr_rand < np.percentile(arr_rand, split_percentile)
         X_train = X[split]
         y_train = y[split]
