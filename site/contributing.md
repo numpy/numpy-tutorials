@@ -121,6 +121,39 @@ Remember to clear all outputs on your notebook before uploading it.
 🎉 <b>Wait for review!</b>
 </ul>
 
+### Adding a tutorial thumbnail
+
+You may add a thumbnail to the front page of the tutorials site with the
+following procedure:
+
+1. In `index.md`, find the `panels` directive for your tutorial's category
+   (e.g. `NumPy Features` or `NumPy Applications`). The `panels` directive
+   begins with ````` ````{panels}```` `````.
+2. Add a new card to the bottom of the `panels`:
+
+   ```
+   ---
+
+   {doc}`<path-to-tutorial>`
+
+   +++
+
+   <thumbnail_img>
+   ```
+
+   Where `<path-to-tutorial>` should be replaced with the path to the tutorial
+   (typically `content/<filename.md>`) and <thumbnail_img> should be replaced
+   with the image you'd like to use as the thumbnail.
+
+   This can either be a static image, in which case traditional markdown image
+   syntax will work, or a figure generated during the execution of your
+   tutorial. In the latter case, use [the glue feature of myst-nb][myst_nb_glue].
+
+[myst_nb_glue]: https://myst-nb.readthedocs.io/en/latest/use/glue.html
+
+Don't worry if you get stuck - a reviewer/maintainer can help with the
+process of creating a thumbnail for your tutorial.
+
 For more information about GitHub and its workflow, you can see
 [this document][collab].
 
