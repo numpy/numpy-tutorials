@@ -4,7 +4,7 @@ import numpy as np
 import re # (https://docs.python.org/3/library/re.html) for tokenising textual data 
 import string # (https://docs.python.org/3/library/string.html) for string operations  
 
-# Crating the random instance
+# Creating the random instance
 rng = np.random.default_rng()
 
 class TextPreprocess:
