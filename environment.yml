@@ -12,6 +12,6 @@ dependencies:
   - pip
   - imageio
   - pooch
-  - jupyter-book
   - pip:
     - gym[atari]==0.19
+    - -r site/requirements.txt
