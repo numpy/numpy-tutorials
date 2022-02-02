@@ -578,7 +578,7 @@ def forward_prop(X_vec, parameters, input_dim):
         # Retrieve word corresponding to current time step
         x = X_vec[t]
         # Retrieve the embedding for the word and reshape it to make the LSTM happy
-        xt = emb_matrix.get(x, rng.standard_normal(size=(input_dim, 1)))
+        xt = emb_matrix.get(x, rng.random(size=(input_dim, 1)))
         xt = xt.reshape((input_dim, 1))
 
         # Input to the gates is concatenated previous hidden state and current word embedding
