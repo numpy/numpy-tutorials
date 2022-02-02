@@ -117,6 +117,9 @@ import string
 import re
 import zipfile
 import os
+
+# Creating the random instance
+rng = np.random.default_rng()
 ```
 
 Next, you'll define set of text preprocessing helper functions.
@@ -458,20 +461,20 @@ Lets start with writing a function to randomly initialize the parameters which w
 ```python
 def initialise_params(hidden_dim, input_dim):
     # forget gate
-    Wf = np.random.randn(hidden_dim, hidden_dim + input_dim)
-    bf = np.random.randn(hidden_dim, 1)
+    Wf = rng.standard_normal(size=(hidden_dim, hidden_dim + input_dim))
+    bf = rng.standard_normal(size=(hidden_dim, 1))
     # input gate
-    Wi = np.random.randn(hidden_dim, hidden_dim + input_dim)
-    bi = np.random.randn(hidden_dim, 1)
+    Wi = rng.standard_normal(size=(hidden_dim, hidden_dim + input_dim))
+    bi = rng.standard_normal(size=(hidden_dim, 1))
     # candidate memory gate
-    Wcm = np.random.randn(hidden_dim, hidden_dim + input_dim)
-    bcm = np.random.randn(hidden_dim, 1)
+    Wcm = rng.standard_normal(size=(hidden_dim, hidden_dim + input_dim))
+    bcm = rng.standard_normal(size=(hidden_dim, 1))
     # output gate
-    Wo = np.random.randn(hidden_dim, hidden_dim + input_dim)
-    bo = np.random.randn(hidden_dim, 1)
+    Wo = rng.standard_normal(size=(hidden_dim, hidden_dim + input_dim))
+    bo = rng.standard_normal(size=(hidden_dim, 1))
 
     # fully connected layer for classification
-    W2 = np.random.randn(1, hidden_dim)
+    W2 = rng.standard_normal(size=(1, hidden_dim))
     b2 = np.zeros((1, 1))
 
     parameters = {
@@ -575,7 +578,7 @@ def forward_prop(X_vec, parameters, input_dim):
         # Retrieve word corresponding to current time step
         x = X_vec[t]
         # Retrieve the embedding for the word and reshape it to make the LSTM happy
-        xt = emb_matrix.get(x, np.random.rand(input_dim, 1))
+        xt = emb_matrix.get(x, rng.random(size=(input_dim, 1)))
         xt = xt.reshape((input_dim, 1))
 
         # Input to the gates is concatenated previous hidden state and current word embedding
