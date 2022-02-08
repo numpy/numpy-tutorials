@@ -2,16 +2,20 @@ name: numpy-tutorials
 channels:
   - conda-forge
 dependencies:
+  # For running the tutorials
   - numpy
   - scipy
   - matplotlib
   - pandas 
-  - pytest
-  - nbval
   - statsmodels
   - pip
   - imageio
   - pooch
+  - ffmpeg  # For gym/atari
+  # For building the site
+  - sphinx
+  - myst-nb
+  - sphinx-book-theme
+  - sphinx-copybutton
   - pip:
     - gym[atari]==0.19
-    - -r site/requirements.txt

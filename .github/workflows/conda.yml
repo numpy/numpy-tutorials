@@ -1,0 +1,52 @@
+name: Build site
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}-latest
+
+    strategy:
+      matrix:
+        # NOTE: Gym/atari deps need to be solved for this to work on windows
+        os: [ubuntu, macos] #, windows]
+
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          activate-environment: numpy-tutorials
+          environment-file: environment.yml
+          miniforge-variant: Mambaforge
+          miniforge-version: latest
+          use-mamba: true
+          python-version: "3.10"
+          auto-activate-base: false
+      - name: inspect and build
+        id: build_step
+        continue-on-error: true
+        run: |
+          conda info
+          conda list
+          make -C site/ SPHINXOPTS="-nWT --keep-going" html
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: sphinx-build-artifact
+          path: site/_build/html/reports
+
+      - name: fail on build errors
+        if: steps.build_step.outcome != 'success'
+        run: exit 1
+
