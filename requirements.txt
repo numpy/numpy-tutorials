@@ -1,14 +1,1 @@
-# For the tutorials
-numpy
-scipy
-matplotlib
-pandas
-pytest
-nbval
-statsmodels
-imageio
-gym==0.18.3
-atari-py==0.2.5
-pooch==1.5.1
-# For supporting .md-based notebooks
-jupytext
+
