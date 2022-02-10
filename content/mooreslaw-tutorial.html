@@ -34,9 +34,12 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
@@ -491,12 +494,6 @@ the 53 years following his prediction. You will determine the best-fit constants
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/circleci/repo/venv/lib/python3.8/site-packages/statsmodels/compat/pandas.py:65: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
-  from pandas import Int64Index as NumericIndex
-</pre></div>
-</div>
-</div>
 </div>
 <p><strong>2.</strong> Since this is an exponential growth law you need a little background in doing math with <a class="reference external" href="https://en.wikipedia.org/wiki/Natural_logarithm">natural logs</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Exponential_function">exponentials</a>.</p>
 <p>You’ll use these NumPy, Matplotlib, and statsmodels functions:</p>
@@ -738,8 +735,8 @@ errors.  Run the
 Dep. Variable:                      y   R-squared:                       0.949
 Model:                            OLS   Adj. R-squared:                  0.949
 Method:                 Least Squares   F-statistic:                     3309.
-Date:                Tue, 08 Feb 2022   Prob (F-statistic):          1.75e-116
-Time:                        17:13:55   Log-Likelihood:                -273.43
+Date:                Thu, 10 Feb 2022   Prob (F-statistic):          1.75e-116
+Time:                        23:07:40   Log-Likelihood:                -273.43
 No. Observations:                 179   AIC:                             550.9
 Df Residuals:                     177   BIC:                             557.2
 Df Model:                           1                                         
@@ -925,7 +922,7 @@ for $\pm\frac{1}{2}~years.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19200000000.0 250000000.0 7050000000.0
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f8f0b7d9100&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa83bad8fd0&gt;
 </pre></div>
 </div>
 <img alt="../_images/mooreslaw-tutorial_29_2.png" src="../_images/mooreslaw-tutorial_29_2.png" />
@@ -1099,6 +1096,9 @@ transistor_count: number of transistors reported by manufacturers in a given yea
 transistor_count_predicted: linear regression model = exp(-666.33)*exp(0.34*year)
 transistor_Moores_law: Moores law =exp(-675.38)*exp(0.35*year)
 year:, transistor_count:, transistor_count_predicted:, transistor_Moores_law:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
