@@ -3,8 +3,6 @@ numpy
 scipy
 matplotlib
 pandas
-pytest
-nbval
 statsmodels
 imageio
 gym==0.18.3
