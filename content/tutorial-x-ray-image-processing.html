@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>X-ray image processing &#8212; NumPy Tutorials</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,17 +20,14 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -40,8 +39,8 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -57,7 +56,21 @@
     
 
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -66,14 +79,10 @@
     <div class="container-xl">
       <div class="row">
           
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -196,113 +205,243 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
-<div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
             </div>
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../_sources/content/tutorial-x-ray-image-processing.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/tutorial-x-ray-image-processing.md.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/numpy/numpy-tutorials/"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-x-ray-image-processing.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/tutorial-x-ray-image-processing.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=tree/site/content/tutorial-x-ray-image-processing.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-        
-    </div>
-</div>
-
         </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=tree/site/content/tutorial-x-ray-image-processing.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials/"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-x-ray-image-processing.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/tutorial-x-ray-image-processing.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/content/tutorial-x-ray-image-processing.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/content/tutorial-x-ray-image-processing.md.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#prerequisites">
    Prerequisites
@@ -377,12 +516,11 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>X-ray image processing</h1>
@@ -473,11 +611,12 @@
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="x-ray-image-processing">
-<h1>X-ray image processing<a class="headerlink" href="#x-ray-image-processing" title="Permalink to this headline">¶</a></h1>
+  <section id="x-ray-image-processing">
+<h1>X-ray image processing<a class="headerlink" href="#x-ray-image-processing" title="Permalink to this headline">#</a></h1>
 <p>This tutorial demonstrates how to read and process X-ray images with NumPy,
 imageio, Matplotlib and SciPy. You will learn how to load medical images, focus
 on certain parts, and visually compare them using the
@@ -510,8 +649,8 @@ tutorial’s repository under <code class="docutils literal notranslate"><span c
 ChestX-ray8 contains gigabytes of data and you may find it challenging to
 download it in batches.</p>
 <p><img alt="A series of 9 x-ray images of the same region of a patient's chest is shown with different types of image processing filters applied to each image. Each x-ray shows different types of biological detail." src="../_images/tutorial-x-ray-image-processing.png" /></p>
-<div class="section" id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">#</a></h2>
 <p>The reader should have some knowledge of Python, NumPy arrays, and Matplotlib.
 To refresh the memory, you can take the
 <a class="reference external" href="https://docs.python.org/dev/tutorial/index.html">Python</a> and Matplotlib
@@ -534,10 +673,10 @@ working with PNG files.</p></li>
 <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">conda</a>.
 You can use <a class="reference external" href="https://jupyter.org/install">Jupyter Notebook or JupyterLab</a> to run
 each notebook cell.</p>
-</div>
-<div class="section" id="table-of-contents">
-<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
+</section>
+<section id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">#</a></h2>
+<ol class="arabic simple">
 <li><p>Examine an X-ray with <code class="docutils literal notranslate"><span class="pre">imageio</span></code></p></li>
 <li><p>Combine images into a multi-dimensional array to demonstrate progression</p></li>
 <li><p>Edge detection using the Laplacian-Gaussian, Gaussian gradient, Sobel, and
@@ -545,10 +684,10 @@ Canny filters</p></li>
 <li><p>Apply masks to X-rays with <code class="docutils literal notranslate"><span class="pre">np.where()</span></code></p></li>
 <li><p>Compare the results</p></li>
 </ol>
-</div>
+</section>
 <hr class="docutils" />
-<div class="section" id="examine-an-x-ray-with-imageio">
-<h2>Examine an X-ray with <code class="docutils literal notranslate"><span class="pre">imageio</span></code><a class="headerlink" href="#examine-an-x-ray-with-imageio" title="Permalink to this headline">¶</a></h2>
+<section id="examine-an-x-ray-with-imageio">
+<h2>Examine an X-ray with <code class="docutils literal notranslate"><span class="pre">imageio</span></code><a class="headerlink" href="#examine-an-x-ray-with-imageio" title="Permalink to this headline">#</a></h2>
 <p>Let’s begin with a simple example using just one X-ray image from the
 ChestX-ray8 dataset.</p>
 <p>The file — <code class="docutils literal notranslate"><span class="pre">00000011_001.png</span></code> — has been downloaded for you and saved in the
@@ -594,12 +733,12 @@ uint8
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_13_0.png" src="../_images/tutorial-x-ray-image-processing_13_0.png" />
+<img alt="../_images/53115deed4456850f581f1bfc7be10d990dc953aecf2c7be9841589985e5c98d.png" src="../_images/53115deed4456850f581f1bfc7be10d990dc953aecf2c7be9841589985e5c98d.png" />
 </div>
 </div>
-</div>
-<div class="section" id="combine-images-into-a-multidimensional-array-to-demonstrate-progression">
-<h2>Combine images into a multidimensional array to demonstrate progression<a class="headerlink" href="#combine-images-into-a-multidimensional-array-to-demonstrate-progression" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="combine-images-into-a-multidimensional-array-to-demonstrate-progression">
+<h2>Combine images into a multidimensional array to demonstrate progression<a class="headerlink" href="#combine-images-into-a-multidimensional-array-to-demonstrate-progression" title="Permalink to this headline">#</a></h2>
 <p>In the next example, instead of 1 image you’ll use 9 X-ray 1024x1024-pixel
 images from the ChestX-ray8 dataset that have been downloaded and extracted
 from one of the dataset files. They are numbered from <code class="docutils literal notranslate"><span class="pre">...000.png</span></code> to
@@ -646,7 +785,7 @@ to each other using Matplotlib:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_20_0.png" src="../_images/tutorial-x-ray-image-processing_20_0.png" />
+<img alt="../_images/bef9c9e36ca88191dce34266cced2e56e6f4a81e15568b298ecf4eb2b42c95f5.png" src="../_images/bef9c9e36ca88191dce34266cced2e56e6f4a81e15568b298ecf4eb2b42c95f5.png" />
 </div>
 </div>
 <p><strong>4.</strong> In addition, it can be helpful to show the progress as an animation.
@@ -662,16 +801,16 @@ notebook:</p>
 </div>
 <p>Which gives us:
 <img alt="An animated gif repeatedly cycles through a series of 8 x-rays, showing the same viewpoint of the patient's chest at different points in time. The patient's bones and internal organs can be visually compared from frame to frame." src="../_images/xray_image.gif" /></p>
-</div>
-<div class="section" id="edge-detection-using-the-laplacian-gaussian-gaussian-gradient-sobel-and-canny-filters">
-<h2>Edge detection using the Laplacian-Gaussian, Gaussian gradient, Sobel, and Canny filters<a class="headerlink" href="#edge-detection-using-the-laplacian-gaussian-gaussian-gradient-sobel-and-canny-filters" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="edge-detection-using-the-laplacian-gaussian-gaussian-gradient-sobel-and-canny-filters">
+<h2>Edge detection using the Laplacian-Gaussian, Gaussian gradient, Sobel, and Canny filters<a class="headerlink" href="#edge-detection-using-the-laplacian-gaussian-gaussian-gradient-sobel-and-canny-filters" title="Permalink to this headline">#</a></h2>
 <p>When processing biomedical data, it can be useful to emphasize the 2D
 <a class="reference external" href="https://en.wikipedia.org/wiki/Edge_detection">“edges”</a> to focus on particular
 features in an image. To do that, using
 <a class="reference external" href="https://en.wikipedia.org/wiki/Image_gradient">image gradients</a> can be
 particularly helpful when detecting the change of color pixel intensity.</p>
-<div class="section" id="the-laplace-filter-with-gaussian-second-derivatives">
-<h3>The Laplace filter with Gaussian second derivatives<a class="headerlink" href="#the-laplace-filter-with-gaussian-second-derivatives" title="Permalink to this headline">¶</a></h3>
+<section id="the-laplace-filter-with-gaussian-second-derivatives">
+<h3>The Laplace filter with Gaussian second derivatives<a class="headerlink" href="#the-laplace-filter-with-gaussian-second-derivatives" title="Permalink to this headline">#</a></h3>
 <p>Let’s start with an n-dimensional
 <a class="reference external" href="https://en.wikipedia.org/wiki/Laplace_distribution">Laplace</a> filter
 (“Laplacian-Gaussian”) that uses
@@ -712,12 +851,12 @@ Gaussian filter (you’ll use <code class="docutils literal notranslate"><span c
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_29_0.png" src="../_images/tutorial-x-ray-image-processing_29_0.png" />
+<img alt="../_images/97b8798d7530b0abbad8069e465c316f2a536349701602c5a5d242ed4e28d5aa.png" src="../_images/97b8798d7530b0abbad8069e465c316f2a536349701602c5a5d242ed4e28d5aa.png" />
 </div>
 </div>
-</div>
-<div class="section" id="the-gaussian-gradient-magnitude-method">
-<h3>The Gaussian gradient magnitude method<a class="headerlink" href="#the-gaussian-gradient-magnitude-method" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="the-gaussian-gradient-magnitude-method">
+<h3>The Gaussian gradient magnitude method<a class="headerlink" href="#the-gaussian-gradient-magnitude-method" title="Permalink to this headline">#</a></h3>
 <p>Another method for edge detection that can be useful is the
 <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_distribution">Gaussian</a> (gradient) filter.
 It computes the multidimensional gradient magnitude with Gaussian derivatives
@@ -750,12 +889,12 @@ example below):</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_34_0.png" src="../_images/tutorial-x-ray-image-processing_34_0.png" />
+<img alt="../_images/2f7ae85a8900a9e79d2946c3c453d05fd862dfd2ee53338a64812e2aba446e36.png" src="../_images/2f7ae85a8900a9e79d2946c3c453d05fd862dfd2ee53338a64812e2aba446e36.png" />
 </div>
 </div>
-</div>
-<div class="section" id="the-sobel-feldman-operator-the-sobel-filter">
-<h3>The Sobel-Feldman operator (the Sobel filter)<a class="headerlink" href="#the-sobel-feldman-operator-the-sobel-filter" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="the-sobel-feldman-operator-the-sobel-filter">
+<h3>The Sobel-Feldman operator (the Sobel filter)<a class="headerlink" href="#the-sobel-feldman-operator-the-sobel-filter" title="Permalink to this headline">#</a></h3>
 <p>To find regions of high spatial frequency (the edges or the edge maps) along the
 horizontal and vertical axes of a 2D X-ray image, you can use the
 <a class="reference external" href="https://en.wikipedia.org/wiki/Sobel_operator">Sobel-Feldman operator (Sobel filter)</a>
@@ -827,12 +966,12 @@ emphasize the edges:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_41_0.png" src="../_images/tutorial-x-ray-image-processing_41_0.png" />
+<img alt="../_images/b46eb0e688c6c5de56bdde7e6a54ac7296b266e242fe4dbbf420449e2a0bc888.png" src="../_images/b46eb0e688c6c5de56bdde7e6a54ac7296b266e242fe4dbbf420449e2a0bc888.png" />
 </div>
 </div>
-</div>
-<div class="section" id="the-canny-filter">
-<h3>The Canny filter<a class="headerlink" href="#the-canny-filter" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="the-canny-filter">
+<h3>The Canny filter<a class="headerlink" href="#the-canny-filter" title="Permalink to this headline">#</a></h3>
 <p>You can also consider using another well-known filter for edge detection called
 the <a class="reference external" href="https://en.wikipedia.org/wiki/Canny_edge_detector">Canny filter</a>.</p>
 <p>First, you apply a <a class="reference external" href="https://en.wikipedia.org/wiki/Gaussian_filter">Gaussian</a>
@@ -897,13 +1036,13 @@ the help of the Canny filter technique. The edges can be emphasized using the
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_46_0.png" src="../_images/tutorial-x-ray-image-processing_46_0.png" />
+<img alt="../_images/489b39da5b7eb11de893e78fd9ed78e7a64e8f3c296fc605f934ce85069c6bf8.png" src="../_images/489b39da5b7eb11de893e78fd9ed78e7a64e8f3c296fc605f934ce85069c6bf8.png" />
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="apply-masks-to-x-rays-with-np-where">
-<h2>Apply masks to X-rays with <code class="docutils literal notranslate"><span class="pre">np.where()</span></code><a class="headerlink" href="#apply-masks-to-x-rays-with-np-where" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="apply-masks-to-x-rays-with-np-where">
+<h2>Apply masks to X-rays with <code class="docutils literal notranslate"><span class="pre">np.where()</span></code><a class="headerlink" href="#apply-masks-to-x-rays-with-np-where" title="Permalink to this headline">#</a></h2>
 <p>To screen out only certain pixels in X-ray images to help detect particular
 features, you can apply masks with NumPy’s
 <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.where.html"><code class="docutils literal notranslate"><span class="pre">np.where(condition:</span> <span class="pre">array_like</span> <span class="pre">(bool),</span> <span class="pre">x:</span> <span class="pre">array_like,</span> <span class="pre">y:</span> <span class="pre">ndarray)</span></code></a>
@@ -950,7 +1089,7 @@ with <code class="docutils literal notranslate"><span class="pre">ndimage.histog
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_52_0.png" src="../_images/tutorial-x-ray-image-processing_52_0.png" />
+<img alt="../_images/23a500d62afaecf180cc7e9b974083ad65cc1dc09c49dc4a1a3bc3a9604ec4e9.png" src="../_images/23a500d62afaecf180cc7e9b974083ad65cc1dc09c49dc4a1a3bc3a9604ec4e9.png" />
 </div>
 </div>
 <p>As the pixel intensity distribution suggests, there are many low (between around
@@ -971,7 +1110,7 @@ a certain threshold:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_54_0.png" src="../_images/tutorial-x-ray-image-processing_54_0.png" />
+<img alt="../_images/6542eb3acd90b33e8c23b8dbd06a0853a349550fdf8a8f3a4028e0ed251cf75a.png" src="../_images/6542eb3acd90b33e8c23b8dbd06a0853a349550fdf8a8f3a4028e0ed251cf75a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -987,12 +1126,12 @@ a certain threshold:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_55_0.png" src="../_images/tutorial-x-ray-image-processing_55_0.png" />
+<img alt="../_images/e93d54305139819b62688dcdad028113516ed7ec22ae318fa69eefc8c1b90789.png" src="../_images/e93d54305139819b62688dcdad028113516ed7ec22ae318fa69eefc8c1b90789.png" />
 </div>
 </div>
-</div>
-<div class="section" id="compare-the-results">
-<h2>Compare the results<a class="headerlink" href="#compare-the-results" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="compare-the-results">
+<h2>Compare the results<a class="headerlink" href="#compare-the-results" title="Permalink to this headline">#</a></h2>
 <p>Let’s display some of the results of processed X-ray images you’ve worked with
 so far:</p>
 <div class="cell docutils container">
@@ -1024,12 +1163,12 @@ so far:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-x-ray-image-processing_58_0.png" src="../_images/tutorial-x-ray-image-processing_58_0.png" />
+<img alt="../_images/ed6d9570599e0ef7f9f9777c77b0f8393bbfc619a11b352eec0439eb70bc6db8.png" src="../_images/ed6d9570599e0ef7f9f9777c77b0f8393bbfc619a11b352eec0439eb70bc6db8.png" />
 </div>
 </div>
-</div>
-<div class="section" id="next-steps">
-<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">#</a></h2>
 <p>If you want to use your own samples, you can use
 <a class="reference external" href="https://openi.nlm.nih.gov/detailedresult?img=CXR3666_IM-1824-1001&amp;query=chest%20infection&amp;it=xg&amp;req=4&amp;npos=32">this image</a>
 or search for various other ones on the <a class="reference external" href="https://openi.nlm.nih.gov"><em>Openi</em></a>
@@ -1049,15 +1188,17 @@ simply edge detection, you may find the following material useful:</p>
 <li><p><a class="reference external" href="https://datacarpentry.org/image-processing/08-edge-detection/">Edge detection</a> with Scikit-Image (Data Carpentry)</p></li>
 <li><p><a class="reference external" href="https://www.cs.cmu.edu/~16385/s17/Slides/4.0_Image_Gradients_and_Gradient_Filtering.pdf">Image gradients and gradient filtering</a> (lecture slides, 16-385 Computer Vision, Carnegie Mellon University)</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="tutorial-nlp-from-scratch.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1073,24 +1214,28 @@ simply edge detection, you may find the following material useful:</p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By the NumPy community<br/>
+  
+      &copy; Copyright 2020, the NumPy community.<br/>
+</p>
+        </footer>
+    </div>
     
-      By the NumPy community<br/>
-    
-        &copy; Copyright 2020, the NumPy community.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

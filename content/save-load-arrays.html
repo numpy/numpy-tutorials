@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Saving and sharing your NumPy arrays &#8212; NumPy Tutorials</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,17 +20,14 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -40,8 +39,8 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -57,7 +56,21 @@
     
 
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -66,14 +79,10 @@
     <div class="container-xl">
       <div class="row">
           
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -196,113 +205,243 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
-<div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
             </div>
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../_sources/content/save-load-arrays.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/save-load-arrays.md.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/numpy/numpy-tutorials/"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/save-load-arrays.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/save-load-arrays.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=tree/site/content/save-load-arrays.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-        
-    </div>
-</div>
-
         </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=tree/site/content/save-load-arrays.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials/"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/save-load-arrays.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/save-load-arrays.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/content/save-load-arrays.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/content/save-load-arrays.md.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-you-ll-learn">
    What you’ll learn
@@ -401,12 +540,11 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Saving and sharing your NumPy arrays</h1>
@@ -521,19 +659,20 @@
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="saving-and-sharing-your-numpy-arrays">
-<h1>Saving and sharing your NumPy arrays<a class="headerlink" href="#saving-and-sharing-your-numpy-arrays" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="what-you-ll-learn">
-<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this headline">¶</a></h2>
+  <section id="saving-and-sharing-your-numpy-arrays">
+<h1>Saving and sharing your NumPy arrays<a class="headerlink" href="#saving-and-sharing-your-numpy-arrays" title="Permalink to this headline">#</a></h1>
+<section id="what-you-ll-learn">
+<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this headline">#</a></h2>
 <p>You’ll save your NumPy arrays as zipped files and human-readable
 comma-delimited files i.e. *.csv. You will also learn to load both of these
 file types back into NumPy workspaces.</p>
-</div>
-<div class="section" id="what-you-ll-do">
-<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="what-you-ll-do">
+<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this headline">#</a></h2>
 <p>You’ll learn two ways of saving and reading files–as compressed and as
 text files–that will serve most of your storage needs in NumPy.</p>
 <ul class="simple">
@@ -544,9 +683,9 @@ text files–that will serve most of your storage needs in NumPy.</p>
 <li><p>You’ll compare zipped binary files to human-readable delimited files</p></li>
 <li><p>You’ll finish with the skills of saving, loading, and sharing NumPy arrays</p></li>
 </ul>
-</div>
-<div class="section" id="what-you-ll-need">
-<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="what-you-ll-need">
+<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>NumPy</p></li>
 <li><p>read-write access to your working directory</p></li>
@@ -571,10 +710,10 @@ text files–that will serve most of your storage needs in NumPy.</p>
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html"><code class="docutils literal notranslate"><span class="pre">np.savetxt</span></code></a></p></li>
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html"><code class="docutils literal notranslate"><span class="pre">np.loadtxt</span></code></a></p></li>
 </ul>
-</div>
+</section>
 <hr class="docutils" />
-<div class="section" id="create-your-arrays">
-<h2>Create your arrays<a class="headerlink" href="#create-your-arrays" title="Permalink to this headline">¶</a></h2>
+<section id="create-your-arrays">
+<h2>Create your arrays<a class="headerlink" href="#create-your-arrays" title="Permalink to this headline">#</a></h2>
 <p>Now that you have imported the NumPy library, you can make a couple of
 arrays; let’s start with two 1D arrays, <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>, where <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x**2</span></code>.You
 will assign <code class="docutils literal notranslate"><span class="pre">x</span></code> to the integers from 0 to 9 using
@@ -595,9 +734,9 @@ will assign <code class="docutils literal notranslate"><span class="pre">x</span
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="save-your-arrays-with-numpy-s-savez">
-<h2>Save your arrays with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savez.html?highlight=savez#numpy.savez"><code class="docutils literal notranslate"><span class="pre">savez</span></code></a><a class="headerlink" href="#save-your-arrays-with-numpy-s-savez" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="save-your-arrays-with-numpy-s-savez">
+<h2>Save your arrays with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savez.html?highlight=savez#numpy.savez"><code class="docutils literal notranslate"><span class="pre">savez</span></code></a><a class="headerlink" href="#save-your-arrays-with-numpy-s-savez" title="Permalink to this headline">#</a></h2>
 <p>Now you have two arrays in your workspace,</p>
 <p><code class="docutils literal notranslate"><span class="pre">x:</span> <span class="pre">[0</span> <span class="pre">1</span> <span class="pre">2</span> <span class="pre">3</span> <span class="pre">4</span> <span class="pre">5</span> <span class="pre">6</span> <span class="pre">7</span> <span class="pre">8</span> <span class="pre">9]</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">y:</span> <span class="pre">[</span> <span class="pre">0</span>&#160; <span class="pre">1</span>&#160; <span class="pre">4</span>&#160; <span class="pre">9</span> <span class="pre">16</span> <span class="pre">25</span> <span class="pre">36</span> <span class="pre">49</span> <span class="pre">64</span> <span class="pre">81]</span></code></p>
@@ -605,7 +744,7 @@ will assign <code class="docutils literal notranslate"><span class="pre">x</span
 using
 <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savez.html?highlight=savez#numpy.savez"><code class="docutils literal notranslate"><span class="pre">savez</span></code></a>.
 You will use two options to label the arrays in the file,</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">x_axis</span> <span class="pre">=</span> <span class="pre">x</span></code>: this option is assigning the name <code class="docutils literal notranslate"><span class="pre">x_axis</span></code> to the variable <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">y_axis</span> <span class="pre">=</span> <span class="pre">y</span></code>: this option is assigning the name <code class="docutils literal notranslate"><span class="pre">y_axis</span></code> to the variable <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
 </ol>
@@ -616,9 +755,9 @@ You will use two options to label the arrays in the file,</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="remove-the-saved-arrays-and-load-them-back-with-numpy-s-load">
-<h2>Remove the saved arrays and load them back with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.load.html#numpy.load"><code class="docutils literal notranslate"><span class="pre">load</span></code></a><a class="headerlink" href="#remove-the-saved-arrays-and-load-them-back-with-numpy-s-load" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="remove-the-saved-arrays-and-load-them-back-with-numpy-s-load">
+<h2>Remove the saved arrays and load them back with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.load.html#numpy.load"><code class="docutils literal notranslate"><span class="pre">load</span></code></a><a class="headerlink" href="#remove-the-saved-arrays-and-load-them-back-with-numpy-s-load" title="Permalink to this headline">#</a></h2>
 <p>In your current working directory, you should have a new file with the
 name <code class="docutils literal notranslate"><span class="pre">x_y-squared.npz</span></code>. This file is a zipped binary of the two arrays,
 <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>. Let’s clear the workspace and load the values back in. This
@@ -627,7 +766,7 @@ format</a>
 files. The NPY format is a <a class="reference external" href="https://en.wikipedia.org/wiki/Binary_file">native binary
 format</a>. You cannot read
 the numbers in a standard text editor or spreadsheet.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>remove <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> from the workspaec with <a class="reference external" href="https://docs.python.org/3/reference/simple_stmts.html#del"><code class="docutils literal notranslate"><span class="pre">del</span></code></a></p></li>
 <li><p>load the arrays into the workspace in a dictionary with <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.load.html#numpy.load"><code class="docutils literal notranslate"><span class="pre">np.load</span></code></a></p></li>
 </ol>
@@ -678,15 +817,15 @@ np         module    &lt;module &#39;numpy&#39; from &#39;/ho&lt;...&gt;kages/nu
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variable   Type       Data/Info
 -------------------------------
-load_xy    NpzFile    &lt;numpy.lib.npyio.NpzFile &lt;...&gt;object at 0x7fc8c422b820&gt;
+load_xy    NpzFile    &lt;numpy.lib.npyio.NpzFile &lt;...&gt;object at 0x7fa3b02a8a60&gt;
 np         module     &lt;module &#39;numpy&#39; from &#39;/ho&lt;...&gt;kages/numpy/__init__.py&#39;&gt;
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="reassign-the-npzfile-arrays-to-x-and-y">
-<h2>Reassign the NpzFile arrays to <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code><a class="headerlink" href="#reassign-the-npzfile-arrays-to-x-and-y" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="reassign-the-npzfile-arrays-to-x-and-y">
+<h2>Reassign the NpzFile arrays to <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code><a class="headerlink" href="#reassign-the-npzfile-arrays-to-x-and-y" title="Permalink to this headline">#</a></h2>
 <p>You’ve now created the dictionary with an <code class="docutils literal notranslate"><span class="pre">NpzFile</span></code>-type. The
 included files are <code class="docutils literal notranslate"><span class="pre">x_axis</span></code> and <code class="docutils literal notranslate"><span class="pre">y_axis</span></code> that you defined in your
 <code class="docutils literal notranslate"><span class="pre">savez</span></code> command. You can reassign <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> to the <code class="docutils literal notranslate"><span class="pre">load_xy</span></code> files.</p>
@@ -706,13 +845,13 @@ included files are <code class="docutils literal notranslate"><span class="pre">
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="success">
-<h2>Success<a class="headerlink" href="#success" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="success">
+<h2>Success<a class="headerlink" href="#success" title="Permalink to this headline">#</a></h2>
 <p>You have created, saved, deleted, and loaded the variables <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> using <code class="docutils literal notranslate"><span class="pre">savez</span></code> and <code class="docutils literal notranslate"><span class="pre">load</span></code>. Nice work.</p>
-</div>
-<div class="section" id="another-option-saving-to-human-readable-csv">
-<h2>Another option: saving to human-readable csv<a class="headerlink" href="#another-option-saving-to-human-readable-csv" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="another-option-saving-to-human-readable-csv">
+<h2>Another option: saving to human-readable csv<a class="headerlink" href="#another-option-saving-to-human-readable-csv" title="Permalink to this headline">#</a></h2>
 <p>Let’s consider another scenario, you want to share <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> with
 other people or other programs. You may need human-readable text file
 that is easier to share. Next, you use the
@@ -720,16 +859,16 @@ that is easier to share. Next, you use the
 to save <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> in a comma separated value file, <code class="docutils literal notranslate"><span class="pre">x_y-squared.csv</span></code>.
 The resulting csv is composed of ASCII characters. You can load the file
 back into NumPy or read it with other programs.</p>
-</div>
-<div class="section" id="rearrange-the-data-into-a-single-2d-array">
-<h2>Rearrange the data into a single 2D array<a class="headerlink" href="#rearrange-the-data-into-a-single-2d-array" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="rearrange-the-data-into-a-single-2d-array">
+<h2>Rearrange the data into a single 2D array<a class="headerlink" href="#rearrange-the-data-into-a-single-2d-array" title="Permalink to this headline">#</a></h2>
 <p>First, you have to create a single 2D array from your two 1D arrays. The
 csv-filetype is a spreadsheet-style dataset. The csv arranges numbers in
 rows–separated by new lines–and columns–separated by commas. If the
 data is more complex e.g. multiple 2D arrays or higher dimensional
 arrays, it is better to use <code class="docutils literal notranslate"><span class="pre">savez</span></code>. Here, you use
 two NumPy functions to format the data:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.block.html?highlight=block#numpy.block"><code class="docutils literal notranslate"><span class="pre">np.block</span></code></a>: this function appends arrays together into a 2D array</p></li>
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html?highlight=newaxis#numpy.newaxis"><code class="docutils literal notranslate"><span class="pre">np.newaxis</span></code></a>: this function forces the 1D array into a 2D column vector with 10 rows and 1 column.</p></li>
 </ol>
@@ -757,9 +896,9 @@ two NumPy functions to format the data:</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="save-the-data-to-csv-file-using-savetxt">
-<h2>Save the data to csv file using <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html#numpy.savetxt"><code class="docutils literal notranslate"><span class="pre">savetxt</span></code></a><a class="headerlink" href="#save-the-data-to-csv-file-using-savetxt" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="save-the-data-to-csv-file-using-savetxt">
+<h2>Save the data to csv file using <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html#numpy.savetxt"><code class="docutils literal notranslate"><span class="pre">savetxt</span></code></a><a class="headerlink" href="#save-the-data-to-csv-file-using-savetxt" title="Permalink to this headline">#</a></h2>
 <p>You use <code class="docutils literal notranslate"><span class="pre">savetxt</span></code> with a three options to make your file easier to read:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">array_out</span></code>: this option tells <code class="docutils literal notranslate"><span class="pre">savetxt</span></code> to save your 2D array, <code class="docutils literal notranslate"><span class="pre">array_out</span></code>, to the file <code class="docutils literal notranslate"><span class="pre">x_y-squared.csv</span></code></p></li>
@@ -787,11 +926,11 @@ two NumPy functions to format the data:</p>
 <span class="mf">9.000000000000000000e+00</span><span class="p">,</span><span class="mf">8.100000000000000000e+01</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="our-arrays-as-a-csv-file">
-<h2>Our arrays as a csv file<a class="headerlink" href="#our-arrays-as-a-csv-file" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="our-arrays-as-a-csv-file">
+<h2>Our arrays as a csv file<a class="headerlink" href="#our-arrays-as-a-csv-file" title="Permalink to this headline">#</a></h2>
 <p>There are two features that you shoud notice here:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>NumPy uses <code class="docutils literal notranslate"><span class="pre">#</span></code> to ignore headings when using <code class="docutils literal notranslate"><span class="pre">loadtxt</span></code>. If you’re using
 <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html"><code class="docutils literal notranslate"><span class="pre">loadtxt</span></code></a>
 with other csv files, you can skip header rows with <code class="docutils literal notranslate"><span class="pre">skiprows</span> <span class="pre">=</span> <span class="pre">&lt;number_of_header_lines&gt;</span></code>.</p></li>
@@ -843,25 +982,27 @@ preserve the type of ASCII numbers as <code class="docutils literal notranslate"
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="success-but-remember-your-types">
-<h2>Success, but remember your types<a class="headerlink" href="#success-but-remember-your-types" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="success-but-remember-your-types">
+<h2>Success, but remember your types<a class="headerlink" href="#success-but-remember-your-types" title="Permalink to this headline">#</a></h2>
 <p>When you saved the arrays to the csv file, you did not preserve the
 <code class="docutils literal notranslate"><span class="pre">int</span></code> type. When loading the arrays back into your workspace the default process will be to load the csv file as a 2D floating point array e.g. <code class="docutils literal notranslate"><span class="pre">load_xy.dtype</span> <span class="pre">==</span> <span class="pre">'float64'</span></code> and <code class="docutils literal notranslate"><span class="pre">load_xy.shape</span> <span class="pre">==</span> <span class="pre">(10,</span> <span class="pre">2)</span></code>.</p>
-</div>
-<div class="section" id="wrapping-up">
-<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="wrapping-up">
+<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this headline">#</a></h2>
 <p>In conclusion, you can create, save, and load arrays in NumPy. Saving arrays makes sharing your work and collaboration much easier. There are other ways Python can save data to files, such as <a class="reference external" href="https://docs.python.org/3/library/pickle.html">pickle</a>, but <code class="docutils literal notranslate"><span class="pre">savez</span></code> and <code class="docutils literal notranslate"><span class="pre">savetxt</span></code> will serve most of your storage needs for future NumPy work and sharing with other people, respectively.</p>
 <p><strong>Next steps</strong>: you can import data with missing values from <a class="reference external" href="https://numpy.org/devdocs/user/basics.io.genfromtxt.html">Importing with genfromtext</a> or learn more about general NumPy IO with <a class="reference external" href="https://numpy.org/devdocs/user/how-to-io.html">Reading and Writing Files</a>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="tutorial-svd.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -877,24 +1018,28 @@ preserve the type of ASCII numbers as <code class="docutils literal notranslate"
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By the NumPy community<br/>
+  
+      &copy; Copyright 2020, the NumPy community.<br/>
+</p>
+        </footer>
+    </div>
     
-      By the NumPy community<br/>
-    
-        &copy; Copyright 2020, the NumPy community.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

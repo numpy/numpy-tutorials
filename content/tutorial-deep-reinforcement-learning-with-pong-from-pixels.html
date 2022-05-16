@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Deep reinforcement learning with Pong from pixels &#8212; NumPy Tutorials</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,17 +20,14 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -40,8 +39,8 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -57,7 +56,21 @@
     
 
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -66,14 +79,10 @@
     <div class="container-xl">
       <div class="row">
           
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -196,113 +205,243 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
-<div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
             </div>
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../_sources/content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/numpy/numpy-tutorials/"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-deep-reinforcement-learning-with-pong-from-pixels.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=tree/site/content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-        
-    </div>
-</div>
-
         </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=tree/site/content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials/"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-deep-reinforcement-learning-with-pong-from-pixels.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#prerequisites">
    Prerequisites
@@ -379,12 +518,11 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Deep reinforcement learning with Pong from pixels</h1>
@@ -477,17 +615,18 @@
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="deep-reinforcement-learning-with-pong-from-pixels">
-<h1>Deep reinforcement learning with Pong from pixels<a class="headerlink" href="#deep-reinforcement-learning-with-pong-from-pixels" title="Permalink to this headline">¶</a></h1>
+  <section id="deep-reinforcement-learning-with-pong-from-pixels">
+<h1>Deep reinforcement learning with Pong from pixels<a class="headerlink" href="#deep-reinforcement-learning-with-pong-from-pixels" title="Permalink to this headline">#</a></h1>
 <p>This tutorial demonstrates how to implement a deep reinforcement learning (RL) agent from scratch using a policy gradient method that learns to play the <a class="reference external" href="https://gym.openai.com/envs/Pong-v0/">Pong</a> video game using screen pixels as inputs with NumPy. Your Pong agent will obtain experience on the go using an <a class="reference external" href="https://en.wikipedia.org/wiki/Artificial_neural_network">artificial neural network</a> as its <a class="reference external" href="https://en.wikipedia.org/wiki/Reinforcement_learning">policy</a>.</p>
 <p>Pong is a 2D game from 1972 where two players use “rackets” to play a form of table tennis. Each player moves the racket up and down the screen and tries to hit a ball in their opponent’s direction by touching it. The goal is to hit the ball such that it goes past the opponent’s racket (they miss their shot). According to the rules, if a player reaches 21 points, they win. In Pong, the RL agent that learns to play against an opponent is displayed on the right.</p>
 <p><img alt="Diagram showing operations detailed in this tutorial" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels.png" /></p>
 <p>This example is based on the <a class="reference external" href="https://gist.github.com/karpathy/a4166c7fe253700972fcbc77e4ea32c5">code</a> developed by <a class="reference external" href="https://karpathy.ai">Andrej Karpathy</a> for the <a class="reference external" href="https://sites.google.com/view/deep-rl-bootcamp/home">Deep RL Bootcamp</a> in 2017 at UC Berkeley. His <a class="reference external" href="http://karpathy.github.io/2016/05/31/rl/">blog post</a> from 2016 also provides more background on the mechanics and theory used in Pong RL.</p>
-<div class="section" id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><strong>OpenAI Gym</strong>: To help with the game environment, you will use <a class="reference external" href="https://gym.openai.com">Gym</a> — an open-source Python interface <a class="reference external" href="https://arxiv.org/abs/1606.01540">developed by OpenAI</a> that helps perform RL tasks while supporting many simulation environments.</p></li>
 <li><p><strong>Python and NumPy</strong>: The reader should have some knowledge of Python, NumPy array manipulation, and linear algebra.</p></li>
@@ -496,14 +635,14 @@
 <li><p><strong>Matplotlib</strong>: For plotting images. Check out the <a class="reference external" href="https://matplotlib.org/3.3.3/users/installing.html">installation</a> guide to set it up in your environment.</p></li>
 </ul>
 <p>This tutorial can also be run locally in an isolated environment, such as <a class="reference external" href="https://virtualenv.pypa.io/en/stable/">Virtualenv</a> and <a class="reference external" href="https://docs.conda.io/">conda</a>.</p>
-</div>
-<div class="section" id="table-of-contents">
-<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>A note on RL and deep RL</p></li>
 <li><p>Deep RL glossary</p></li>
 </ul>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Set up Pong</p></li>
 <li><p>Preprocess frames (the observation)</p></li>
 <li><p>Create the policy (the neural network) and the forward pass</p></li>
@@ -519,15 +658,15 @@
 </li>
 </ol>
 <hr class="docutils" />
-<div class="section" id="a-note-on-rl-and-deep-rl">
-<h3>A note on RL and deep RL<a class="headerlink" href="#a-note-on-rl-and-deep-rl" title="Permalink to this headline">¶</a></h3>
+<section id="a-note-on-rl-and-deep-rl">
+<h3>A note on RL and deep RL<a class="headerlink" href="#a-note-on-rl-and-deep-rl" title="Permalink to this headline">#</a></h3>
 <p>In <a class="reference external" href="https://en.wikipedia.org/wiki/Reinforcement_learning"><em>RL</em></a>, your agent learns from trial and error by interacting with an environment using a so-called policy to gain experience. After taking one action, the agent receives information about its reward (which it may or may not get) and the next observation of the environment. It can then proceed to take another action. This happens over a number of episodes and/or until the task is deemed to be complete.</p>
 <p>The agent’s policy works by “mapping” the agent’s observations to its actions — that is, assigning a presentation of what the agent observes with required actions. The overall goal is usually to optimize the agent’s policy such that it maximizes the expected rewards from each observation.</p>
 <p>For detailed information about RL, there is an <a class="reference external" href="https://web.archive.org/web/20050806080008/http://www.cs.ualberta.ca/~sutton/book/the-book.html">introductory book</a> by Richard Sutton and Andrew Barton.</p>
 <p>Check out the Appendix at the end of the tutorial for more information.</p>
-</div>
-<div class="section" id="deep-rl-glossary">
-<h3>Deep RL glossary<a class="headerlink" href="#deep-rl-glossary" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="deep-rl-glossary">
+<h3>Deep RL glossary<a class="headerlink" href="#deep-rl-glossary" title="Permalink to this headline">#</a></h3>
 <p>Below is a concise glossary of deep RL terms you may find useful for the remaining part of the tutorial:</p>
 <ul class="simple">
 <li><p>In a finite-horizon world, such as a game of Pong, the learning agent can explore (and exploit) the <em>environment</em> over an <em>episode</em>. It usually takes many episodes for the agent to learn.</p></li>
@@ -540,10 +679,10 @@
 <li><p>The sequence of actions and states (observations) during each policy “run” by the agent is sometimes referred to as a <em>trajectory</em> — such a sequence yields <em>rewards</em>.</p></li>
 </ul>
 <p>You will train your Pong agent through an “on-policy” method using policy gradients — it’s an algorithm belonging to a family of <em>policy-based</em> methods. Policy gradient methods typically update the parameters of the policy with respect to the long-term cumulative reward using <a class="reference external" href="https://en.wikipedia.org/wiki/Gradient_descent"><em>gradient descent</em></a> that is widely used in machine learning. And, since the goal is to maximize the function (the rewards), not minimize it, the process is also called <em>gradient ascent</em>. In other words, you use a policy for the agent to take actions and the objective is to maximize the rewards, which you do by computing the gradients and use them to update the parameters in the policy (neural) network.</p>
-</div>
-</div>
-<div class="section" id="set-up-pong">
-<h2>Set up Pong<a class="headerlink" href="#set-up-pong" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="set-up-pong">
+<h2>Set up Pong<a class="headerlink" href="#set-up-pong" title="Permalink to this headline">#</a></h2>
 <p><strong>1.</strong> First, you should install OpenAI Gym (using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gym[atari]</span></code> - this package is currently not available on conda), and import NumPy, Gym and the necessary modules:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -606,9 +745,9 @@
 </div>
 </div>
 <p>While you can perform all kinds of RL experiments in a Jupyter notebook, rendering images or videos of a Gym environment to visualize how your agent plays the game of Pong after training can be rather challenging. If you want to set up video playback in a notebook, you can find the details in the Appendix at the end of this tutorial.</p>
-</div>
-<div class="section" id="preprocess-frames-the-observation">
-<h2>Preprocess frames (the observation)<a class="headerlink" href="#preprocess-frames-the-observation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="preprocess-frames-the-observation">
+<h2>Preprocess frames (the observation)<a class="headerlink" href="#preprocess-frames-the-observation" title="Permalink to this headline">#</a></h2>
 <p>In this section you will set up a function to preprocess the input data (game observation) to make it digestible for the neural network, which can only work with inputs that are in a form of tensors (multidimensional arrays) of floating-point type.</p>
 <p>Your agent will use the frames from the Pong game — pixels from screen frames — as input-observations for the policy network. The game observation tells the agent about where the ball is before it is fed (with a forward pass) into the neural network (the policy). This is similar to DeepMind’s <a class="reference external" href="https://deepmind.com/research/open-source/dqn">DQN</a> method (which is further discussed in the Appendix).</p>
 <p>Pong screen frames are 210x160 pixels over 3 color dimensions (red, green and blue). The arrays are encoded with <code class="docutils literal notranslate"><span class="pre">uint8</span></code> (or 8-bit integers), and these observations are stored on a Gym Box instance.</p>
@@ -651,10 +790,10 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(210, 160, 3)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f36626e2f40&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f6b4ffe50a0&gt;
 </pre></div>
 </div>
-<img alt="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_14_2.png" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_14_2.png" />
+<img alt="../_images/77dbb1debda46fc9ae8179c00a3a369ed3e4335d3ee5abe1269a212c253ff927.png" src="../_images/77dbb1debda46fc9ae8179c00a3a369ed3e4335d3ee5abe1269a212c253ff927.png" />
 </div>
 </div>
 <p>To feed the observations into the policy (neural) network, you need to convert them into 1D grayscale vectors with 6,400 (80x80x1) floating point arrays. (During training, you will use NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ravel.html"><code class="docutils literal notranslate"><span class="pre">np.ravel()</span></code></a> function to flatten these arrays.)</p>
@@ -689,12 +828,12 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(80, 80)
 </pre></div>
 </div>
-<img alt="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_18_1.png" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels_18_1.png" />
+<img alt="../_images/a7c43b74c3b79238f13ebfee6b630ee344311daef43187912abe404779a64e76.png" src="../_images/a7c43b74c3b79238f13ebfee6b630ee344311daef43187912abe404779a64e76.png" />
 </div>
 </div>
-</div>
-<div class="section" id="create-the-policy-the-neural-network-and-the-forward-pass">
-<h2>Create the policy (the neural network) and the forward pass<a class="headerlink" href="#create-the-policy-the-neural-network-and-the-forward-pass" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="create-the-policy-the-neural-network-and-the-forward-pass">
+<h2>Create the policy (the neural network) and the forward pass<a class="headerlink" href="#create-the-policy-the-neural-network-and-the-forward-pass" title="Permalink to this headline">#</a></h2>
 <p>Next, you will define the policy as a simple feedforward network that uses a game observation as an input and outputs an action log probability:</p>
 <ul class="simple">
 <li><p>For the <em>input</em>, it will use the Pong video game frames — the preprocessed 1D vectors with 6,400 (80x80) floating point arrays.</p></li>
@@ -787,9 +926,9 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="set-up-the-update-step-backpropagation">
-<h2>Set up the update step (backpropagation)<a class="headerlink" href="#set-up-the-update-step-backpropagation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="set-up-the-update-step-backpropagation">
+<h2>Set up the update step (backpropagation)<a class="headerlink" href="#set-up-the-update-step-backpropagation" title="Permalink to this headline">#</a></h2>
 <p>During learning in your deep RL algorithm, you use the action log probabilities (given an observation) and the discounted returns (for example, +1 or -1 in Pong) and perform the <em>backward pass</em> or <em>backpropagation</em> to update the parameters — the policy network’s weights.</p>
 <p><strong>1.</strong> Let’s define the backward pass function (<code class="docutils literal notranslate"><span class="pre">policy_backward()</span></code>) with the help of NumPy’s modules for array multiplication — <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html?highlight=numpy.dot#numpy.dot"><code class="docutils literal notranslate"><span class="pre">np.dot()</span></code></a> (matrix multiplication), <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.outer.html"><code class="docutils literal notranslate"><span class="pre">np.outer()</span></code></a> (outer product computation), and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ravel.html"><code class="docutils literal notranslate"><span class="pre">np.ravel()</span></code></a> (to flatten arrays into 1D arrays):</p>
 <div class="cell docutils container">
@@ -852,9 +991,9 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="define-the-discounted-rewards-expected-return-function">
-<h2>Define the discounted rewards (expected return) function<a class="headerlink" href="#define-the-discounted-rewards-expected-return-function" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="define-the-discounted-rewards-expected-return-function">
+<h2>Define the discounted rewards (expected return) function<a class="headerlink" href="#define-the-discounted-rewards-expected-return-function" title="Permalink to this headline">#</a></h2>
 <p>In this section, you will set up a function for computing discounted rewards (<code class="docutils literal notranslate"><span class="pre">discount_rewards()</span></code>) — the expected return from an observation — that uses a 1D array of rewards as inputs (with the help of NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html"><code class="docutils literal notranslate"><span class="pre">np.zeros_like()</span></code></a>) function.</p>
 <p>To provide more weight to shorter-term rewards over longer-term ones, you will use a <em>discount factor</em> (gamma) that is often a floating-point number between 0.9 and 0.99.</p>
 <div class="cell docutils container">
@@ -878,9 +1017,9 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="train-the-agent-for-a-number-of-episodes">
-<h2>Train the agent for a number of episodes<a class="headerlink" href="#train-the-agent-for-a-number-of-episodes" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="train-the-agent-for-a-number-of-episodes">
+<h2>Train the agent for a number of episodes<a class="headerlink" href="#train-the-agent-for-a-number-of-episodes" title="Permalink to this headline">#</a></h2>
 <p>This section covers how to set up the training process during which your agent will be learning to play Pong using its policy.</p>
 <p>The pseudocode for the policy gradient method for Pong:</p>
 <ul class="simple">
@@ -1117,12 +1256,6 @@ Episode 0: Game finished. Reward: -1.0...
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
 Episode 0: Game finished. Reward: -1.0...
 Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
@@ -1138,7 +1271,17 @@ Episode 0: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
-Resetting the Pong environment. Episode total reward: -21.0 Running mean: -21.0
+Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
+Episode 0: Game finished. Reward: -1.0...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -21.0 Running mean: -21.0
+Episode 1: Game finished. Reward: -1.0...
+Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
 </pre></div>
 </div>
@@ -1150,10 +1293,6 @@ Episode 1: Game finished. Reward: -1.0...
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
 Episode 1: Game finished. Reward: -1.0...
 </pre></div>
 </div>
@@ -1184,22 +1323,20 @@ Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: 1.0... POSITIVE REWARD!
 Episode 2: Game finished. Reward: -1.0...
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+Episode 2: Game finished. Reward: 1.0... POSITIVE REWARD!
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
+Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
 Episode 2: Game finished. Reward: -1.0...
@@ -1232,9 +1369,9 @@ Episode 3: Game finished. Reward: -1.0...
 <li><p>In Pong, if a player doesn’t hit the ball back, they receive a negative reward (-1) and the other player gets a +1 reward. The rewards that the agent receives by playing Pong have a significant variance. Therefore, it’s best practice to normalize them with the same mean (using <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.mean.html"><code class="docutils literal notranslate"><span class="pre">np.mean()</span></code></a>) and standard deviation (using NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.std.html?highlight=std"><code class="docutils literal notranslate"><span class="pre">np.std()</span></code></a>).</p></li>
 <li><p>When using only NumPy, the deep RL training process, including backpropagation, spans several lines of code that may appear quite long. One of the main reasons for this is you’re not using a deep learning framework with an automatic differentiation library that usually simplifies such experiments. This tutorial shows how to perform everything from scratch but you can also use one of many Python-based frameworks with “autodiff” and “autograd”, which you will learn about at the end of the tutorial.</p></li>
 </ul>
-</div>
-<div class="section" id="next-steps">
-<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">#</a></h2>
 <p>You may notice that training an RL agent takes a long time if you increase the number of episodes from 100 to 500 or 1,000+, depending on the hardware — CPUs and GPUs — you are using for this task.</p>
 <p>Policy gradient methods can learn a task if you give them a lot of time, and optimization in RL is a challenging problem. Training agents to learn to play Pong or any other task can be sample-inefficient and require a lot of episodes. You may also notice in your training output that even after hundreds of episodes, the rewards may have high variance.</p>
 <p>In addition, like in many deep learning-based algorithms, you should take into account a large amount of parameters that your policy has to learn. In Pong, this number adds up to 1 million or more with 200 nodes in the hidden layer of the network and the input dimension being of size 6,400 (80x80). Therefore, adding more CPUs and GPUs to assist with training can always be an option.</p>
@@ -1248,11 +1385,11 @@ Episode 3: Game finished. Reward: -1.0...
 <li><p>RL <a class="reference external" href="https://www.davidsilver.uk/teaching/">lectures</a> taught by <a class="reference external" href="https://www.davidsilver.uk">David Silver</a> (DeepMind, UCL).</p></li>
 </ul>
 <p>Building a neural network from scratch with NumPy is a great way to learn more about NumPy and about deep learning. However, for real-world applications you should use specialized frameworks — such as <a class="reference external" href="https://pytorch.org/">PyTorch</a>, <a class="reference external" href="https://github.com/google/jax">JAX</a>, <a class="reference external" href="https://www.tensorflow.org/guide/tf_numpy">TensorFlow</a> or <a class="reference external" href="https://mxnet.apache.org">MXNet</a> — that provide NumPy-like APIs, have built-in <a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">automatic differentiation</a> and GPU support, and are designed for high-performance numerical computing and machine learning.</p>
-</div>
-<div class="section" id="appendix">
-<h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="notes-on-rl-and-deep-rl">
-<h3>Notes on RL and deep RL<a class="headerlink" href="#notes-on-rl-and-deep-rl" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="appendix">
+<h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">#</a></h2>
+<section id="notes-on-rl-and-deep-rl">
+<h3>Notes on RL and deep RL<a class="headerlink" href="#notes-on-rl-and-deep-rl" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>In <a class="reference external" href="https://en.wikipedia.org/wiki/Supervised_learning">supervised</a> deep learning for tasks, such as image recognition, language translation, or text classification, you’re more likely to use a lot of labeled data. However, in RL, agents typically don’t receive direct explicit feedback indicating correct or wrong actions — they rely on other signals, such as rewards.</p></li>
 <li><p><em>Deep RL</em> combines RL with <a class="reference external" href="http://www.cs.toronto.edu/~hinton/absps/NatureDeepReview.pdf">deep learning</a>. The field had its first major success in more complex environments, such as video games, in 2013 — a year after the <a class="reference external" href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf">AlexNet</a> breakthrough in computer vision. Volodymyr Mnih and colleagues at DeepMind published a research paper called <a class="reference external" href="https://arxiv.org/abs/1312.5602">Playing Atari with deep reinforcement learning</a> (and <a class="reference external" href="https://web.stanford.edu/class/psych209/Readings/MnihEtAlHassibis15NatureControlDeepRL.pdf">updated</a> in 2015) that showed that they were able to train an agent that could play several classic games from the Arcade Learning Environment at a human-level. Their RL algorithm — called a deep Q-network (DQN) — used <a class="reference external" href="https://en.wikipedia.org/wiki/Convolutional_neural_network">convolutional layers</a> in a neural network that approximated <a class="reference external" href="https://en.wikipedia.org/wiki/Q-learning">Q learning</a> and used <a class="reference external" href="https://web.stanford.edu/class/psych209/Readings/MnihEtAlHassibis15NatureControlDeepRL.pdf">experience replay</a>.</p></li>
@@ -1262,14 +1399,14 @@ Episode 3: Game finished. Reward: -1.0...
 <li><p>One of the reasons why video games are popular in deep RL research is that, unlike real-world experiments, such as RL with <a class="reference external" href="http://heli.stanford.edu/papers/nips06-aerobatichelicopter.pdf">remote-controlled helicopters</a> (<a class="reference external" href="https://www2.eecs.berkeley.edu/Faculty/Homepages/abbeel.html">Pieter Abbeel</a>  et al, 2006), virtual simulations can offer safer testing environments.</p></li>
 <li><p>If you’re interested in learning about the implications of deep RL on other fields, such as neuroscience, you can refer to a <a class="reference external" href="https://arxiv.org/pdf/2007.03750.pdf">paper</a> by <a class="reference external" href="https://www.youtube.com/watch?v=b0LddBiF5jM">Matthew Botvinick</a> et al (2020).</p></li>
 </ul>
-</div>
-<div class="section" id="how-to-set-up-video-playback-in-your-jupyter-notebook">
-<h3>How to set up video playback in your Jupyter notebook<a class="headerlink" href="#how-to-set-up-video-playback-in-your-jupyter-notebook" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="how-to-set-up-video-playback-in-your-jupyter-notebook">
+<h3>How to set up video playback in your Jupyter notebook<a class="headerlink" href="#how-to-set-up-video-playback-in-your-jupyter-notebook" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>If you’re using <a class="reference external" href="https://mybinder.org"><strong>Binder</strong></a> — a free Jupyter notebook-based tool — you can set up the Docker image and add <code class="docutils literal notranslate"><span class="pre">freeglut3-dev</span></code>, <code class="docutils literal notranslate"><span class="pre">xvfb</span></code>, and <code class="docutils literal notranslate"><span class="pre">x11-utils</span></code> to the <code class="docutils literal notranslate"><span class="pre">apt.txt</span></code> configuration file to install the initial dependencies. Then, to <code class="docutils literal notranslate"><span class="pre">binder/environment.yml</span></code> under <code class="docutils literal notranslate"><span class="pre">channels</span></code>, add <code class="docutils literal notranslate"><span class="pre">gym</span></code>, <code class="docutils literal notranslate"><span class="pre">pyvirtualdisplay</span></code> and anything else you may need, such as <code class="docutils literal notranslate"><span class="pre">python=3.7</span></code>, <code class="docutils literal notranslate"><span class="pre">pip</span></code>, and <code class="docutils literal notranslate"><span class="pre">jupyterlab</span></code>. Check the following <a class="reference external" href="https://towardsdatascience.com/rendering-openai-gym-envs-on-binder-and-google-colab-536f99391cc7">post</a> for more information.</p></li>
 <li><p>If you’re using <a class="reference external" href="https://colab.research.google.com/notebooks/intro.ipynb"><strong>Google Colaboratory</strong></a> (another free Jupyter notebook-based tool), you can enable video playback of the game environments installing and setting up <a class="reference external" href="https://en.wikipedia.org/wiki/Xvfb">X virtual frame buffer</a>/<a class="reference external" href="https://www.x.org/releases/X11R7.6/doc/man/man1/Xvfb.1.xhtml">Xvfb</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/X_Window_System">X11</a>, <a class="reference external" href="https://ffmpeg.org">FFmpeg</a>, <a class="reference external" href="https://github.com/ponty/PyVirtualDisplay">PyVirtualDisplay</a>, <a class="reference external" href="http://pyopengl.sourceforge.net">PyOpenGL</a>, and other dependencies, as described further below.</p></li>
 </ul>
-<ol>
+<ol class="arabic">
 <li><p>If you’re using Google Colaboratory, run the following commands in the notebook cells to help with video playback:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install Xvfb and X11 dependencies.</span>
 !apt-get install -y xvfb x11-utils &gt; /dev/null <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
@@ -1331,16 +1468,18 @@ def show_any_video(mp4video=0):
 </li>
 <li><p>If you’re following the instructions in this tutorial in a local environment on Linux or macOS, you can add most of the code into one <strong>Python (<code class="docutils literal notranslate"><span class="pre">.py</span></code>)</strong> file. Then, you can run your Gym experiment through <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">your-code.py</span></code> in your terminal. To enable rendering, you can use the command-line interface by following the <a class="reference external" href="https://github.com/openai/gym#rendering-on-a-server">official OpenAI Gym documentation</a> (make sure you have Gym and Xvfb installed, as described in the guide).</p></li>
 </ul>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="tutorial-deep-learning-on-mnist.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1356,24 +1495,28 @@ def show_any_video(mp4video=0):
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By the NumPy community<br/>
+  
+      &copy; Copyright 2020, the NumPy community.<br/>
+</p>
+        </footer>
+    </div>
     
-      By the NumPy community<br/>
-    
-        &copy; Copyright 2020, the NumPy community.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

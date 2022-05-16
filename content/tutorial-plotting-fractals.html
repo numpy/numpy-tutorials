@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Plotting Fractals &#8212; NumPy Tutorials</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,17 +20,14 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -40,10 +39,9 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -59,7 +57,21 @@
     
 
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -68,14 +80,10 @@
     <div class="container-xl">
       <div class="row">
           
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -198,113 +206,243 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
-<div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
             </div>
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../_sources/content/tutorial-plotting-fractals.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/tutorial-plotting-fractals.md.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/numpy/numpy-tutorials/"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-plotting-fractals.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/tutorial-plotting-fractals.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=tree/site/content/tutorial-plotting-fractals.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-        
-    </div>
-</div>
-
         </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=tree/site/content/tutorial-plotting-fractals.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials/"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-plotting-fractals.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/tutorial-plotting-fractals.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/content/tutorial-plotting-fractals.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/content/tutorial-plotting-fractals.md.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-you-ll-do">
    What you’ll do
@@ -369,12 +507,11 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Plotting Fractals</h1>
@@ -455,34 +592,35 @@
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="plotting-fractals">
-<h1>Plotting Fractals<a class="headerlink" href="#plotting-fractals" title="Permalink to this headline">¶</a></h1>
+  <section id="plotting-fractals">
+<h1>Plotting Fractals<a class="headerlink" href="#plotting-fractals" title="Permalink to this headline">#</a></h1>
 <p><img alt="Fractal picture" src="../_images/fractal.png" /></p>
 <p>Fractals are beautiful, compelling mathematical forms that can be oftentimes created from a relatively simple set of instructions. In nature they can be found in various places, such as coastlines, seashells, and ferns, and even were used in creating certain types of antennas. The mathematical idea of fractals was known for quite some time, but they really began to be truly appreciated in the 1970’s as advancements in computer graphics and some accidental discoveries lead researchers like <a class="reference external" href="https://en.wikipedia.org/wiki/Benoit_Mandelbrot">Benoît Mandelbrot</a> to stumble upon the truly mystifying visualizations that fractals possess.</p>
 <p>Today we will learn how to plot these beautiful visualizations and will start to do a bit of exploring for ourselves as we gain familiarity of the mathematics behind fractals and will use the ever powerful NumPy universal functions to perform the necessary calculations efficiently.</p>
-<div class="section" id="what-you-ll-do">
-<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this headline">¶</a></h2>
+<section id="what-you-ll-do">
+<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Write a function for plotting various Julia sets</p></li>
 <li><p>Create a visualization of the Mandelbrot set</p></li>
 <li><p>Write a function that computes Newton fractals</p></li>
 <li><p>Experiment with variations of general fractal types</p></li>
 </ul>
-</div>
-<div class="section" id="what-you-ll-learn">
-<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="what-you-ll-learn">
+<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>A better intuition for how fractals work mathematically</p></li>
 <li><p>A basic understanding about NumPy universal functions and Boolean Indexing</p></li>
 <li><p>The basics of working with complex numbers in NumPy</p></li>
 <li><p>How to create your own unique fractal visualizations</p></li>
 </ul>
-</div>
-<div class="section" id="what-you-ll-need">
-<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="what-you-ll-need">
+<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://matplotlib.org/">Matplotlib</a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">make_axis_locatable</span></code> function from mpl_toolkits API</p></li>
@@ -503,13 +641,13 @@
 <li><p>A very basic understanding of <a class="reference external" href="https://en.wikipedia.org/wiki/Complex_number">complex numbers</a> would be useful</p></li>
 <li><p>Knowledge of <a class="reference external" href="https://en.wikipedia.org/wiki/Derivative">derivatives</a> may be helpful</p></li>
 </ul>
-</div>
-<div class="section" id="warmup">
-<h2>Warmup<a class="headerlink" href="#warmup" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="warmup">
+<h2>Warmup<a class="headerlink" href="#warmup" title="Permalink to this headline">#</a></h2>
 <p>To gain some intuition for what fractals are, we will begin with an example.</p>
 <p>Consider the following equation:</p>
-<p><span class="math notranslate nohighlight">\(f(z) = z^2 -1 \)</span></p>
-<p>where <code class="docutils literal notranslate"><span class="pre">z</span></code> is a complex number (i.e of the form <span class="math notranslate nohighlight">\(a + bi\)</span> )</p>
+<p>$f(z) = z^2 -1 $</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">z</span></code> is a complex number (i.e of the form $a + bi$ )</p>
 <p>For our convenience, we will write a Python function for it</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -521,7 +659,7 @@
 </div>
 <p>Note that the square function we used is an example of a <strong><a class="reference external" href="https://numpy.org/doc/stable/reference/ufuncs.html">NumPy universal function</a></strong>; we will come back to the significance of this decision shortly.</p>
 <p>To gain some intuition for the behaviour of the function, we can try plugging in some different values.</p>
-<p>For <span class="math notranslate nohighlight">\(z = 0\)</span>, we would expect to get <span class="math notranslate nohighlight">\(-1\)</span>:</p>
+<p>For $z = 0$, we would expect to get $-1$:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -577,10 +715,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-plotting-fractals_17_0.png" src="../_images/tutorial-plotting-fractals_17_0.png" />
+<img alt="../_images/ae2357050e395783912ad83bd159ae7da59c7616a4d1f95c1458fe8937227c6c.png" src="../_images/ae2357050e395783912ad83bd159ae7da59c7616a4d1f95c1458fe8937227c6c.png" />
 </div>
 </div>
-<p>This gives us a rough idea of what one iteration of the function does. Certain areas (notably in the areas closest to <span class="math notranslate nohighlight">\((0,0i)\)</span>) remain rather small while other areas grow quite considerably. Note that we lose information about the output by taking the absolute value, but it is the only way for us to be able to make a plot.</p>
+<p>This gives us a rough idea of what one iteration of the function does. Certain areas (notably in the areas closest to $(0,0i)$) remain rather small while other areas grow quite considerably. Note that we lose information about the output by taking the absolute value, but it is the only way for us to be able to make a plot.</p>
 <p>Let’s see what happens when we apply 2 iterations to the mesh:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -598,15 +736,15 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-plotting-fractals_19_0.png" src="../_images/tutorial-plotting-fractals_19_0.png" />
+<img alt="../_images/36ecda65ad5ebfc1813ad151bd68941c6dfc8f473eda8939ab3174948998e712.png" src="../_images/36ecda65ad5ebfc1813ad151bd68941c6dfc8f473eda8939ab3174948998e712.png" />
 </div>
 </div>
 <p>Once again, we see that values around the origin remain small, and values with a larger absolute value (or modulus) “explode”.</p>
 <p>From first impression, its behaviour appears to be normal, and may even seem mundane. Fractals tend to have more to them then what meets the eye; the exotic behavior shows itself when we begin applying more iterations.</p>
 <p>Consider three complex numbers:</p>
-<p><span class="math notranslate nohighlight">\(z_1 = 0.4 + 0.4i \)</span>,</p>
-<p><span class="math notranslate nohighlight">\(z_2 = z_1 + 0.1\)</span>,</p>
-<p><span class="math notranslate nohighlight">\(z_3 = z_1 + 0.1i\)</span></p>
+<p>$z_1 = 0.4 + 0.4i $,</p>
+<p>$z_2 = z_1 + 0.1$,</p>
+<p>$z_3 = z_1 + 0.1i$</p>
 <p>Given the shape of our first two plots, we would expect that these values would remain near the origin as we apply iterations to them. Let us see what happens when we apply 10 iterations to each value:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -632,12 +770,12 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-plotting-fractals_22_0.png" src="../_images/tutorial-plotting-fractals_22_0.png" />
+<img alt="../_images/0e2ebc2912d2a8bea982031dee4bf92230589453b646c8a73fb03cf8d1cb9d6a.png" src="../_images/0e2ebc2912d2a8bea982031dee4bf92230589453b646c8a73fb03cf8d1cb9d6a.png" />
 </div>
 </div>
 <p>To our surprise, the behaviour of the function did not come close to matching our hypothesis. This is a prime example of the chaotic behaviour fractals possess. In the first two plots, the value “exploded” on the last iteration, jumping way beyond the region that it was contained in previously. The third plot on the other hand remained bounded to a small region close to the origin, yielding completely different behaviour despite the tiny change in value.</p>
 <p>This leads us to an extremely important question: <strong>How many iterations can be applied to each value before they diverge (“explode”)?</strong></p>
-<p>As we saw from the first two plots, the further the values were from the origin, the faster they generally exploded. Although the behaviour is uncertain for smaller values (like <span class="math notranslate nohighlight">\(z_1, z_2, z_3\)</span>), we can assume that if a value surpasses a certain distance from the origin (say 2) that it is doomed to diverge. We will call this threshold the <strong>radius</strong>.</p>
+<p>As we saw from the first two plots, the further the values were from the origin, the faster they generally exploded. Although the behaviour is uncertain for smaller values (like $z_1, z_2, z_3$), we can assume that if a value surpasses a certain distance from the origin (say 2) that it is doomed to diverge. We will call this threshold the <strong>radius</strong>.</p>
 <p>This allows us to quantify the behaviour of the function for a particular value without having to perform as many computations. Once the radius is surpassed, we are allowed to stop iterating, which gives us a way of answering the question we posed. If we tally how many computations were applied before divergence, we gain insight into the behaviour of the function that would be hard to keep track of otherwise.</p>
 <p>Of course, we can do much better and design a function that performs the procedure on an entire mesh.</p>
 <div class="cell docutils container">
@@ -660,7 +798,7 @@
 </div>
 <p>The behaviour of this function may look confusing at first glance, so it will help to explain some of the notation.</p>
 <p>Our goal is to iterate over each value in the mesh and to tally the number of iterations before the value diverges. Since some values will diverge quicker than others, we need a procedure that only iterates over values that have an absolute value that is sufficiently small enough. We also want to stop tallying values once they surpass the radius. For this, we can use <strong><a class="reference external" href="https://numpy.org/devdocs/reference/arrays.indexing.html#boolean-array-indexing">Boolean Indexing</a></strong>, a NumPy feature that when paired with universal functions is unbeatable. Boolean Indexing allows for operations to be performed conditionally on a NumPy array without having to resort to looping over and checking for each array value individually.</p>
-<p>In our case, we use a loop to apply iterations to our function <span class="math notranslate nohighlight">\(f(z) = z^2 -1 \)</span> and keep tally. Using Boolean indexing, we only apply the iterations to values that have an absolute value less than 2.</p>
+<p>In our case, we use a loop to apply iterations to our function $f(z) = z^2 -1 $ and keep tally. Using Boolean indexing, we only apply the iterations to values that have an absolute value less than 2.</p>
 <p>With that out of the way, we can go about plotting our first fractal! We will use the <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html"><strong>imshow</strong></a> function to create a colour-coded visualization of the tallies.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -684,16 +822,16 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-plotting-fractals_26_0.png" src="../_images/tutorial-plotting-fractals_26_0.png" />
+<img alt="../_images/32c239b3d5af646a7ce86342f231e7621cd1004bec8603b5f360ee7e87703abb.png" src="../_images/32c239b3d5af646a7ce86342f231e7621cd1004bec8603b5f360ee7e87703abb.png" />
 </div>
 </div>
 <p>What this stunning visual conveys is the complexity of the function’s behaviour. The yellow region represents values that remain small, while the purple region represents the divergent values. The beautiful pattern that arises on the border of the converging and diverging values is even more fascinating when you realize that it is created from such a simple function.</p>
-</div>
-<div class="section" id="julia-set">
-<h2>Julia set<a class="headerlink" href="#julia-set" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="julia-set">
+<h2>Julia set<a class="headerlink" href="#julia-set" title="Permalink to this headline">#</a></h2>
 <p>What we just explored was an example of a fractal visualization of a specific Julia Set.</p>
-<p>Consider the function <span class="math notranslate nohighlight">\(f(z) = z^2 + c\)</span> where <span class="math notranslate nohighlight">\(c\)</span> is a complex number. The <strong>filled-in Julia set</strong> of <span class="math notranslate nohighlight">\(c\)</span> is the set of all complex numbers <code class="docutils literal notranslate"><span class="pre">z</span></code> in which the function converges at <span class="math notranslate nohighlight">\(f(z)\)</span>. Likewise, the boundary of the filled-in Julia set is what we call the <strong>Julia set</strong>. In our above visualization, we can see that the yellow region represents an approximation of the filled-in Julia set for <span class="math notranslate nohighlight">\(c = -1\)</span> and the greenish-yellow border would contain the Julia set.</p>
-<p>To gain access to a wider range of “Julia fractals”, we can write a function that allows for different values of <span class="math notranslate nohighlight">\(c\)</span> to be passed in:</p>
+<p>Consider the function $f(z) = z^2 + c$ where $c$ is a complex number. The <strong>filled-in Julia set</strong> of $c$ is the set of all complex numbers <code class="docutils literal notranslate"><span class="pre">z</span></code> in which the function converges at $f(z)$. Likewise, the boundary of the filled-in Julia set is what we call the <strong>Julia set</strong>. In our above visualization, we can see that the yellow region represents an approximation of the filled-in Julia set for $c = -1$ and the greenish-yellow border would contain the Julia set.</p>
+<p>To gain access to a wider range of “Julia fractals”, we can write a function that allows for different values of $c$ to be passed in:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">julia</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">c</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
@@ -754,11 +892,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-plotting-fractals_35_0.png" src="../_images/tutorial-plotting-fractals_35_0.png" />
+<img alt="../_images/6840954d8c64d8ba5823ca32fd61d9eac4104372b92d7e70e469c0814cba0ad3.png" src="../_images/6840954d8c64d8ba5823ca32fd61d9eac4104372b92d7e70e469c0814cba0ad3.png" />
 </div>
 </div>
-<p>We also can explore some different Julia sets by experimenting with different values of <span class="math notranslate nohighlight">\(c\)</span>. It can be surprising how much influence it has on the shape of the fractal.</p>
-<p>For example, setting <span class="math notranslate nohighlight">\(c = \frac{\pi}{10}\)</span> gives us a very elegant cloud shape, while setting c = <span class="math notranslate nohighlight">\(-\frac{3}{4} + 0.4i\)</span> yields a completely different pattern.</p>
+<p>We also can explore some different Julia sets by experimenting with different values of $c$. It can be surprising how much influence it has on the shape of the fractal.</p>
+<p>For example, setting $c = \frac{\pi}{10}$ gives us a very elegant cloud shape, while setting c = $-\frac{3}{4} + 0.4i$ yields a completely different pattern.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">julia</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span> <span class="n">num_iter</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -769,7 +907,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-plotting-fractals_37_0.png" src="../_images/tutorial-plotting-fractals_37_0.png" />
+<img alt="../_images/3c49681a9dcff9ff9a643e37d226181b40d416bdb4030afcd7276966c090ee86.png" src="../_images/3c49681a9dcff9ff9a643e37d226181b40d416bdb4030afcd7276966c090ee86.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -782,13 +920,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-plotting-fractals_38_0.png" src="../_images/tutorial-plotting-fractals_38_0.png" />
+<img alt="../_images/988d0d16c9c75f62a211254d68e1b5ad6188700726dacae12e57a652c3a286f6.png" src="../_images/988d0d16c9c75f62a211254d68e1b5ad6188700726dacae12e57a652c3a286f6.png" />
 </div>
 </div>
-</div>
-<div class="section" id="mandelbrot-set">
-<h2>Mandelbrot set<a class="headerlink" href="#mandelbrot-set" title="Permalink to this headline">¶</a></h2>
-<p>Closely related to the Julia set is the famous <strong>Mandelbrot set</strong>, which has a slightly different definition. Once again, we define <span class="math notranslate nohighlight">\(f(z) = z^2 + c\)</span> where <span class="math notranslate nohighlight">\(c\)</span> is a complex number, but this time our focus is on our choice of <span class="math notranslate nohighlight">\(c\)</span>. We say that <span class="math notranslate nohighlight">\(c\)</span> is an element of the Mandelbrot set if f converges at <span class="math notranslate nohighlight">\(z = 0\)</span>. An equivalent definition is to say that <span class="math notranslate nohighlight">\(c\)</span> is an element of the Mandelbrot set if <span class="math notranslate nohighlight">\(f(c)\)</span> can be iterated infinitely and not ‘explode’. We will tweak our Julia function slightly (and rename it appropriately) so that we can plot a visualization of the Mandelbrot set, which possesses an elegant fractal pattern.</p>
+</section>
+<section id="mandelbrot-set">
+<h2>Mandelbrot set<a class="headerlink" href="#mandelbrot-set" title="Permalink to this headline">#</a></h2>
+<p>Closely related to the Julia set is the famous <strong>Mandelbrot set</strong>, which has a slightly different definition. Once again, we define $f(z) = z^2 + c$ where $c$ is a complex number, but this time our focus is on our choice of $c$. We say that $c$ is an element of the Mandelbrot set if f converges at $z = 0$. An equivalent definition is to say that $c$ is an element of the Mandelbrot set if $f(c)$ can be iterated infinitely and not ‘explode’. We will tweak our Julia function slightly (and rename it appropriately) so that we can plot a visualization of the Mandelbrot set, which possesses an elegant fractal pattern.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mandelbrot</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">num_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
@@ -817,13 +955,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-plotting-fractals_41_0.png" src="../_images/tutorial-plotting-fractals_41_0.png" />
+<img alt="../_images/938fa36b935d28c3100dc5a0bcf8e80e06e002ed25f41ac91be9c05ec5512147.png" src="../_images/938fa36b935d28c3100dc5a0bcf8e80e06e002ed25f41ac91be9c05ec5512147.png" />
 </div>
 </div>
-</div>
-<div class="section" id="generalizing-the-julia-set">
-<h2>Generalizing the Julia set<a class="headerlink" href="#generalizing-the-julia-set" title="Permalink to this headline">¶</a></h2>
-<p>We can generalize our Julia function even further by giving it a parameter for which universal function we would like to pass in. This would allow us to plot fractals of the form <span class="math notranslate nohighlight">\(f(z) = g(z) + c\)</span> where g is a universal function selected by us.</p>
+</section>
+<section id="generalizing-the-julia-set">
+<h2>Generalizing the Julia set<a class="headerlink" href="#generalizing-the-julia-set" title="Permalink to this headline">#</a></h2>
+<p>We can generalize our Julia function even further by giving it a parameter for which universal function we would like to pass in. This would allow us to plot fractals of the form $f(z) = g(z) + c$ where g is a universal function selected by us.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">general_julia</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">c</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">,</span> <span class="n">num_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
@@ -841,7 +979,7 @@
 </div>
 </div>
 </div>
-<p>One cool set of fractals that can be plotted using our general Julia function are ones of the form <span class="math notranslate nohighlight">\(f(z) = z^n + c\)</span> for some positive integer <span class="math notranslate nohighlight">\(n\)</span>. A very cool pattern which emerges is that the number of regions that ‘stick out’ matches the degree in which we raise the function to while iterating over it.</p>
+<p>One cool set of fractals that can be plotted using our general Julia function are ones of the form $f(z) = z^n + c$ for some positive integer $n$. A very cool pattern which emerges is that the number of regions that ‘stick out’ matches the degree in which we raise the function to while iterating over it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
@@ -860,14 +998,14 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-plotting-fractals_45_0.png" src="../_images/tutorial-plotting-fractals_45_0.png" />
+<img alt="../_images/cb9400fc83987108fe3bf7f94504557fcecd8a2ce39054f2ee8842b012e91a1c.png" src="../_images/cb9400fc83987108fe3bf7f94504557fcecd8a2ce39054f2ee8842b012e91a1c.png" />
 </div>
 </div>
-<p>Needless to say, there is a large amount of exploring that can be done by fiddling with the inputted function, value of <span class="math notranslate nohighlight">\(c\)</span>, number of iterations, radius and even the density of the mesh and choice of colours.</p>
-<div class="section" id="newton-fractals">
-<h3>Newton Fractals<a class="headerlink" href="#newton-fractals" title="Permalink to this headline">¶</a></h3>
+<p>Needless to say, there is a large amount of exploring that can be done by fiddling with the inputted function, value of $c$, number of iterations, radius and even the density of the mesh and choice of colours.</p>
+<section id="newton-fractals">
+<h3>Newton Fractals<a class="headerlink" href="#newton-fractals" title="Permalink to this headline">#</a></h3>
 <p>Newton fractals are a specific class of fractals, where iterations involve adding or subtracting the ratio of a function (often a polynomial) and its derivative to the input values. Mathematically, it can be expressed as:</p>
-<p><span class="math notranslate nohighlight">\(z := z - \frac{f(z)}{f'(z)}\)</span></p>
+<p>$z := z - \frac{f(z)}{f’(z)}$</p>
 <p>We will define a general version of the fractal which will allow for different variations to be plotted by passing in our functions of choice.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -924,13 +1062,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-plotting-fractals_53_0.png" src="../_images/tutorial-plotting-fractals_53_0.png" />
+<img alt="../_images/c9650b685004738d5fb383ce6abdc18fad230642e1ca6cb25832032869f453ed.png" src="../_images/c9650b685004738d5fb383ce6abdc18fad230642e1ca6cb25832032869f453ed.png" />
 </div>
 </div>
 <p>Beautiful! Let’s try another one:</p>
-<p>f(z) = <span class="math notranslate nohighlight">\(tan^2(z)\)</span></p>
-<p><span class="math notranslate nohighlight">\(\frac{df}{dz} = 2 \cdot tan(z) sec^2(z) =\frac{2 \cdot tan(z)}{cos^2(z)}\)</span></p>
-<p>This makes <span class="math notranslate nohighlight">\(\frac{f(z)}{f'(z)} =  tan^2(z) \cdot \frac{cos^2(z)}{2 \cdot tan(z)} = \frac{tan(z)\cdot cos^2(z)}{2} = \frac{sin(z)\cdot cos(z)}{2}\)</span></p>
+<p>f(z) = $tan^2(z)$</p>
+<p>$\frac{df}{dz} = 2 \cdot tan(z) sec^2(z) =\frac{2 \cdot tan(z)}{cos^2(z)}$</p>
+<p>This makes $\frac{f(z)}{f’(z)} =  tan^2(z) \cdot \frac{cos^2(z)}{2 \cdot tan(z)} = \frac{tan(z)\cdot cos^2(z)}{2} = \frac{sin(z)\cdot cos(z)}{2}$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_tan</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
@@ -953,13 +1091,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-plotting-fractals_56_0.png" src="../_images/tutorial-plotting-fractals_56_0.png" />
+<img alt="../_images/79d06e4125037df2f6bb16fa90cce6c30843ca2f14241aa3ffc35a1cc28e9263.png" src="../_images/79d06e4125037df2f6bb16fa90cce6c30843ca2f14241aa3ffc35a1cc28e9263.png" />
 </div>
 </div>
 <p>Note that you sometimes have to play with the radius in order to get a neat looking fractal.</p>
 <p>Finally, we can go a little bit wild with our function selection</p>
-<p><span class="math notranslate nohighlight">\(f(z) = \sum_{i=1}^{10} sin^i(z)\)</span></p>
-<p><span class="math notranslate nohighlight">\(\frac{df}{dz} = \sum_{i=1}^{10} i \cdot sin^{i-1}(z) \cdot cos(z)\)</span></p>
+<p>$f(z) = \sum_{i=1}^{10} sin^i(z)$</p>
+<p>$\frac{df}{dz} = \sum_{i=1}^{10} i \cdot sin^{i-1}(z) \cdot cos(z)$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sin_sum</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
@@ -989,18 +1127,18 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-plotting-fractals_60_0.png" src="../_images/tutorial-plotting-fractals_60_0.png" />
+<img alt="../_images/891e093be787e305965b60252fb6c278bb79385e5cdf6741ab3e981cd851f9c6.png" src="../_images/891e093be787e305965b60252fb6c278bb79385e5cdf6741ab3e981cd851f9c6.png" />
 </div>
 </div>
 <p>It is truly fascinating how distinct yet similar these fractals are with each other. This leads us to the final section.</p>
-</div>
-</div>
-<div class="section" id="creating-your-own-fractals">
-<h2>Creating your own fractals<a class="headerlink" href="#creating-your-own-fractals" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="creating-your-own-fractals">
+<h2>Creating your own fractals<a class="headerlink" href="#creating-your-own-fractals" title="Permalink to this headline">#</a></h2>
 <p>What makes fractals more exciting is how much there is to explore once you become familiar with the basics. Now we will wrap up our tutorial by exploring some of the different ways one can experiment in creating unique fractals. I encourage you to try some things out on your own (if you have not done so already).</p>
 <p>One of the first places to experiment would be with the function for the generalized Julia set, where we can try passing in different functions as parameters.</p>
 <p>Let’s start by choosing</p>
-<p><span class="math notranslate nohighlight">\(f(z) = tan(z^2)\)</span></p>
+<p>$f(z) = tan(z^2)$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
@@ -1019,12 +1157,12 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-plotting-fractals_64_0.png" src="../_images/tutorial-plotting-fractals_64_0.png" />
+<img alt="../_images/e84e9ed45375e474849c64733fd0f2d580654b5678402b465da43d60854d85ec.png" src="../_images/e84e9ed45375e474849c64733fd0f2d580654b5678402b465da43d60854d85ec.png" />
 </div>
 </div>
 <p>What happens if we compose our defined function inside of a sine function?</p>
 <p>Let’s try defining</p>
-<p><span class="math notranslate nohighlight">\(g(z) = sin(f(z)) = sin(tan(z^2))\)</span></p>
+<p>$g(z) = sin(f(z)) = sin(tan(z^2))$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
@@ -1043,11 +1181,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-plotting-fractals_67_0.png" src="../_images/tutorial-plotting-fractals_67_0.png" />
+<img alt="../_images/2dbc480cad25e1cf74a7b58055f8e4190aa75c5249aa4d0c51ba0b5094d1928e.png" src="../_images/2dbc480cad25e1cf74a7b58055f8e4190aa75c5249aa4d0c51ba0b5094d1928e.png" />
 </div>
 </div>
 <p>Next, let’s create a function that applies both f and g to the inputs each iteration and adds the result together:</p>
-<p><span class="math notranslate nohighlight">\(h(z) = f(z) + g(z) = tan(z^2) + sin(tan(z^2))\)</span></p>
+<p>$h(z) = f(z) + g(z) = tan(z^2) + sin(tan(z^2))$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">h</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
@@ -1066,7 +1204,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-plotting-fractals_70_0.png" src="../_images/tutorial-plotting-fractals_70_0.png" />
+<img alt="../_images/2485763458f1ccb62a65ca54d74573b6193aa5eb6c53b7b55874dbe41c8511bd.png" src="../_images/2485763458f1ccb62a65ca54d74573b6193aa5eb6c53b7b55874dbe41c8511bd.png" />
 </div>
 </div>
 <p>You can even create beautiful fractals through your own errors. Here is one that got created accidently by making a mistake in computing the derivative of a Newton fractal:</p>
@@ -1088,33 +1226,33 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-plotting-fractals_73_0.png" src="../_images/tutorial-plotting-fractals_73_0.png" />
+<img alt="../_images/89149cdc0a19a330019d48f1c50402a9d522023d5b363d2b892eb34d55ce24ea.png" src="../_images/89149cdc0a19a330019d48f1c50402a9d522023d5b363d2b892eb34d55ce24ea.png" />
 </div>
 </div>
 <p>Needless to say, there are a nearly endless supply of interesting fractal creations that can be made just by playing around with various combinations of NumPy universal functions and by tinkering with the parameters.</p>
-</div>
-<div class="section" id="in-conclusion">
-<h2>In conclusion<a class="headerlink" href="#in-conclusion" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="in-conclusion">
+<h2>In conclusion<a class="headerlink" href="#in-conclusion" title="Permalink to this headline">#</a></h2>
 <p>We learned a lot about generating fractals today. We saw how complicated fractals requiring many iterations could be computed efficiently using universal functions. We also took advantage of boolean indexing, which allowed for less computations to be made without having to individually verify each value. Finally, we learned a lot about fractals themselves. As a recap:</p>
 <ul class="simple">
 <li><p>Fractal images are created by iterating a function over a set of values, and keeping tally of how long it takes for each value to pass a certain threshold</p></li>
 <li><p>The colours in the image correspond to the tally counts of the values</p></li>
-<li><p>The filled-in Julia set for <span class="math notranslate nohighlight">\(c\)</span> consists of all complex numbers <code class="docutils literal notranslate"><span class="pre">z</span></code> in which <span class="math notranslate nohighlight">\(f(z) = z^2 + c\)</span> converges</p></li>
-<li><p>The Julia set for <span class="math notranslate nohighlight">\(c\)</span> is the set of complex numbers that make up the boundary of the filled-in Julia set</p></li>
-<li><p>The Mandelbrot set is all values <span class="math notranslate nohighlight">\(c\)</span> in which <span class="math notranslate nohighlight">\(f(z) = z^2 + c\)</span> converges at 0</p></li>
-<li><p>Newton fractals use functions of the form <span class="math notranslate nohighlight">\(f(z) = z - \frac{p(z)}{p'(z)}\)</span></p></li>
+<li><p>The filled-in Julia set for $c$ consists of all complex numbers <code class="docutils literal notranslate"><span class="pre">z</span></code> in which $f(z) = z^2 + c$ converges</p></li>
+<li><p>The Julia set for $c$ is the set of complex numbers that make up the boundary of the filled-in Julia set</p></li>
+<li><p>The Mandelbrot set is all values $c$ in which $f(z) = z^2 + c$ converges at 0</p></li>
+<li><p>Newton fractals use functions of the form $f(z) = z - \frac{p(z)}{p’(z)}$</p></li>
 <li><p>The fractal images can vary as you adjust the number of iterations, radius of convergence, mesh size, colours, function choice and parameter choice</p></li>
 </ul>
-</div>
-<div class="section" id="on-your-own">
-<h2>On your own<a class="headerlink" href="#on-your-own" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="on-your-own">
+<h2>On your own<a class="headerlink" href="#on-your-own" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>Play around with the parameters of the generalized Julia set function, try playing with the constant value, number of iterations, function choice, radius, and colour choice.</p></li>
 <li><p>Visit the “List of fractals by Hausdorff dimension” Wikipedia page (linked in the Further reading section) and try writing a function for a fractal not mentioned in this tutorial.</p></li>
 </ul>
-</div>
-<div class="section" id="further-reading">
-<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Fractal">More information on the theory behind fractals</a></p></li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Julia_set">Further reading on Julia sets</a></p></li>
@@ -1122,15 +1260,17 @@
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Newton_fractal">A more complete treatment of Newton Fractals</a></p></li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/List_of_fractals_by_Hausdorff_dimension">A list of different fractals</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="tutorial-static_equilibrium.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1146,24 +1286,28 @@
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By the NumPy community<br/>
+  
+      &copy; Copyright 2020, the NumPy community.<br/>
+</p>
+        </footer>
+    </div>
     
-      By the NumPy community<br/>
-    
-        &copy; Copyright 2020, the NumPy community.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

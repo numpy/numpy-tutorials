@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Sentiment Analysis on notable speeches of the last decade &#8212; NumPy Tutorials</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,17 +20,14 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -40,10 +39,8 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -59,7 +56,21 @@
     
 
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -68,14 +79,10 @@
     <div class="container-xl">
       <div class="row">
           
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -198,92 +205,197 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
-<div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
             </div>
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/tutorial-nlp-from-scratch.md.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/numpy/numpy-tutorials/"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-nlp-from-scratch.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/tutorial-nlp-from-scratch.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
         </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials/"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-nlp-from-scratch.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/tutorial-nlp-from-scratch.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/content/tutorial-nlp-from-scratch.md.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#prerequisites">
    Prerequisites
@@ -375,12 +487,11 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Sentiment Analysis on notable speeches of the last decade</h1>
@@ -488,16 +599,17 @@
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="sentiment-analysis-on-notable-speeches-of-the-last-decade">
-<h1>Sentiment Analysis on notable speeches of the last decade<a class="headerlink" href="#sentiment-analysis-on-notable-speeches-of-the-last-decade" title="Permalink to this headline">¶</a></h1>
+  <section id="sentiment-analysis-on-notable-speeches-of-the-last-decade">
+<h1>Sentiment Analysis on notable speeches of the last decade<a class="headerlink" href="#sentiment-analysis-on-notable-speeches-of-the-last-decade" title="Permalink to this headline">#</a></h1>
 <p>This tutorial demonstrates how to build a simple <a href = 'https://en.wikipedia.org/wiki/Long_short-term_memory'> Long Short Term memory network (LSTM) </a> from scratch in NumPy to perform sentiment analysis on a socially relevant and ethically acquired dataset.</p>
 <p>Your deep learning model (the LSTM) is a form of a Recurrent Neural Network and will learn to classify a piece of text as positive or negative from the IMDB reviews dataset. The dataset contains 50,000 movie reviews and corresponding labels. Based on the numeric representations of these reviews and their corresponding labels <a href = 'https://en.wikipedia.org/wiki/Supervised_learning'> (supervised learning) </a> the neural network will be trained to learn the sentiment using forward propagation and backpropagation through time since we are dealing with sequential data here. The output will be a vector containing the probabilities that the text samples are positive.</p>
 <p>Today, Deep Learning is getting adopted in everyday life and now it is more important to ensure that decisions that have been taken using AI are not reflecting discriminatory behavior towards a set of populations. It is important to take fairness into consideration while consuming the output from AI. Throughout the tutorial we’ll try to question all the steps in our pipeline from an ethics point of view.</p>
-<div class="section" id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">#</a></h2>
 <p>You are expected to be familiar with the Python programming language and array manipulation with NumPy. In addition, some understanding of Linear Algebra and Calculus is recommended. You should also be familiar with how Neural Networks work. For reference, you can visit the <a class="reference external" href="https://docs.python.org/dev/tutorial/index.html">Python</a>, <a class="reference external" href="https://numpy.org/doc/stable/user/tutorial-svd.html">Linear algebra on n-dimensional arrays</a> and <a class="reference external" href="https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/multivariable-calculus.html">Calculus</a> tutorials.</p>
 <p>To get a refresher on Deep Learning basics, You should consider reading <a class="reference external" href="https://d2l.ai/chapter_recurrent-neural-networks/index.html">the d2l.ai book</a>, which is an interactive deep learning book with multi-framework code, math, and discussions. You can also go through the <a class="reference external" href="https://numpy.org/numpy-tutorials/content/tutorial-deep-learning-on-mnist.html">Deep learning on MNIST from scratch tutorial</a> to understand how a basic neural network is implemented from scratch.</p>
 <p>In addition to NumPy, you will be utilizing the following Python standard modules for data loading and processing:</p>
@@ -507,19 +619,19 @@
 <li><p><a class="reference external" href="https://www.fatiando.org/pooch/latest/https://www.fatiando.org/pooch/latest/"><code class="docutils literal notranslate"><span class="pre">pooch</span></code></a> to download and cache datasets</p></li>
 </ul>
 <p>This tutorial can be run locally in an isolated environment, such as <a class="reference external" href="https://virtualenv.pypa.io/en/stable/">Virtualenv</a> or <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">conda</a>. You can use <a class="reference external" href="https://jupyter.org/install">Jupyter Notebook or JupyterLab</a> to run each notebook cell.</p>
-</div>
-<div class="section" id="table-of-contents">
-<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
+</section>
+<section id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">#</a></h2>
+<ol class="arabic simple">
 <li><p>Data Collection</p></li>
 <li><p>Preprocess the datasets</p></li>
 <li><p>Build and train a LSTM network from scratch</p></li>
 <li><p>Perform sentiment analysis on collected speeches</p></li>
 <li><p>Next steps</p></li>
 </ol>
-</div>
-<div class="section" id="data-collection">
-<h2>1. Data Collection<a class="headerlink" href="#data-collection" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="data-collection">
+<h2>1. Data Collection<a class="headerlink" href="#data-collection" title="Permalink to this headline">#</a></h2>
 <p>Before you begin there are a few pointers you should always keep in mind before choosing the data you wish to train your model on:</p>
 <ul class="simple">
 <li><p><strong>Identifying Data Bias</strong> - Bias is an inherent component of the human thought process. Therefore data sourced from human activities reflects that bias. Some ways in which this bias tends to occur in Machine Learning datasets are:</p>
@@ -548,15 +660,15 @@ Data can also be severely imbalanced with limited information on protected group
 <div><p>While it can be difficult taking consent from so many people especially on on-line platforms, the necessity of it depends upon the sensitivity of the topics your data includes and other indicators like whether the platform the data was obtained from allows users to operate under pseudonyms. If the website has a policy that forces the use of a real name, then the users need to be asked for consent.</p>
 </div></blockquote>
 <p>In this section, you will be collecting two different datasets: the IMDb movie reviews dataset, and a collection of 10 speeches curated for this tutorial including activists from different countries around the world, different times, and different topics. The former would be used to train the deep learning model while the latter will be used to perform sentiment analysis on.</p>
-<div class="section" id="collecting-the-imdb-reviews-dataset">
-<h3>Collecting the IMDb reviews dataset<a class="headerlink" href="#collecting-the-imdb-reviews-dataset" title="Permalink to this headline">¶</a></h3>
+<section id="collecting-the-imdb-reviews-dataset">
+<h3>Collecting the IMDb reviews dataset<a class="headerlink" href="#collecting-the-imdb-reviews-dataset" title="Permalink to this headline">#</a></h3>
 <p>IMDb Reviews Dataset is a large movie review dataset collected and prepared by Andrew L. Maas from the popular movie rating service, IMDb. The IMDb Reviews dataset is used for binary sentiment classification, whether a review is positive or negative. It contains 25,000 movie reviews for training and 25,000 for testing. All these 50,000 reviews are labeled data that may be used for supervised deep learning. For ease of reproducibility, we’ll be sourcing  the data from <a class="reference external" href="https://zenodo.org/record/4117827#.YVQZ_EZBy3Ihttps://zenodo.org/record/4117827#.YVQZ_EZBy3I">Zenodo</a>.</p>
 <blockquote>
 <div><p>The IMDb platform allows the usage of their public datasets for personal and non-commercial use. We did our best to ensure that these reviews do not contain any of the aforementioned sensitive topics pertaining to the reviewer.</p>
 </div></blockquote>
-</div>
-<div class="section" id="collecting-and-loading-the-speech-transcripts">
-<h3>Collecting and loading the speech transcripts<a class="headerlink" href="#collecting-and-loading-the-speech-transcripts" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="collecting-and-loading-the-speech-transcripts">
+<h3>Collecting and loading the speech transcripts<a class="headerlink" href="#collecting-and-loading-the-speech-transcripts" title="Permalink to this headline">#</a></h3>
 <p>We have chosen speeches by activists around the globe talking about issues like climate change, feminism, lgbtqa+ rights and racism. These were sourced from newspapers, the official website of the United Nations and the archives of established universities as cited in the table below. A CSV file was created containing the transcribed speeches, their speaker and the source the speeches were obtained from.
 We made sure to include different demographics in our data and included a range of different topics, most of which focus on social and/or ethical issues.</p>
 <table class="colwidths-auto table">
@@ -602,14 +714,14 @@ We made sure to include different demographics in our data and included a range 
 </tbody>
 </table>
 <!-- #region -->
-</div>
-</div>
-<div class="section" id="preprocess-the-datasets">
-<h2>2. Preprocess the datasets<a class="headerlink" href="#preprocess-the-datasets" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="preprocess-the-datasets">
+<h2>2. Preprocess the datasets<a class="headerlink" href="#preprocess-the-datasets" title="Permalink to this headline">#</a></h2>
 <blockquote>
 <div><p>Preprocessing data is an extremely crucial step before building any Deep learning model, however in an attempt to keep the tutorial focused on building the model, we will not dive deep into the code for preprocessing. Given below is a brief overview of all the steps we undertake to clean our data and convert it to its numeric representation.</p>
 </div></blockquote>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><strong>Text Denoising</strong> : Before converting your text into vectors, it is important to clean it and remove all unhelpful parts a.k.a the noise from your data by converting all characters to lowercase, removing html tags, brackets and stop words (words that don’t add much meaning to a sentence). Without this step the dataset is often a cluster of words that the computer doesn’t understand.</p></li>
 <li><p><strong>Converting words to vectors</strong> : A word embedding is a learned representation for text where words that have the same meaning have a similar representation. Individual words are represented as real-valued vectors in a predefined vector space. GloVe is an unsupervised algorithm developed by Stanford for generating word embeddings by generating global word-word co-occurence matrix from a corpus. You can download the zipped files containing the embeddings from https://nlp.stanford.edu/projects/glove/. Here you can choose any of the four options for different sizes or training datasets. We have chosen the least memory consuming embedding file.</p></li>
 </ol>
@@ -931,21 +1043,21 @@ We made sure to include different demographics in our data and included a range 
 <span class="n">emb_matrix</span> <span class="o">=</span> <span class="n">textproc</span><span class="o">.</span><span class="n">loadGloveModel</span><span class="p">(</span><span class="n">emb_path</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="build-the-deep-learning-model">
-<h2>3. Build the Deep Learning Model¶<a class="headerlink" href="#build-the-deep-learning-model" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="build-the-deep-learning-model">
+<h2>3. Build the Deep Learning Model¶<a class="headerlink" href="#build-the-deep-learning-model" title="Permalink to this headline">#</a></h2>
 <p>It is time to start implementing our LSTM! You will have to first familiarize yourself with some high-level concepts of the basic building blocks of a deep learning model. You can refer to the <a class="reference external" href="https://numpy.org/numpy-tutorials/content/tutorial-deep-learning-on-mnist.html">Deep learning on MNIST from scratch tutorial</a> for the same.</p>
 <p>You will then learn how a Recurrent Neural Network differs from a plain Neural Network and what makes it so suitable for processing sequential data. Afterwards, you will construct the building blocks of a simple deep learning model in Python and NumPy and train it to learn to classify the sentiment of a piece of text as positive or negative with a certain level of accuracy</p>
-<div class="section" id="introduction-to-a-long-short-term-memory-network">
-<h3>Introduction to a Long Short Term Memory Network<a class="headerlink" href="#introduction-to-a-long-short-term-memory-network" title="Permalink to this headline">¶</a></h3>
+<section id="introduction-to-a-long-short-term-memory-network">
+<h3>Introduction to a Long Short Term Memory Network<a class="headerlink" href="#introduction-to-a-long-short-term-memory-network" title="Permalink to this headline">#</a></h3>
 <p>In a <a class="reference external" href="https://en.wikipedia.org/wiki/Multilayer_perceptron">Multilayer perceptron</a> (MLP), the information only moves in one direction — from the input layer, through the hidden layers, to the output layer. The information moves straight through the network and never takes the previous nodes into account at a later stage. Because it only considers the current input, the features learned are not shared across different positions of the sequence. Moreover, it cannot process sequences with varying lengths.</p>
 <p>Unlike an MLP, the RNN was designed to work with sequence prediction problems.RNNs introduce state variables to store past information, together with the current inputs, to determine the current outputs. Since an RNN shares the learned features with all the data points in a sequence regardless of its length, it is capable of processing sequences with varying lengths.</p>
 <p>The problem with an RNN however, is that it cannot retain long-term memory because the influence of a given input on the hidden layer, and therefore on the network output, either decays or blows up exponentially as it cycles around the network’s recurrent connections. This shortcoming is referred to as the vanishing gradient problem. Long Short-Term Memory (LSTM) is an RNN architecture specifically designed to address the <a class="reference external" href="https://en.wikipedia.org/wiki/Vanishing_gradient_problem">vanishing gradient problem</a>.</p>
-</div>
-<div class="section" id="overview-of-the-model-architecture">
-<h3>Overview of the Model Architecture<a class="headerlink" href="#overview-of-the-model-architecture" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="overview-of-the-model-architecture">
+<h3>Overview of the Model Architecture<a class="headerlink" href="#overview-of-the-model-architecture" title="Permalink to this headline">#</a></h3>
 <p><img alt="Overview of the model architecture, showing a series of animated boxes. There are five identical boxes labeled A and receiving as input one of the words in the phrase &quot;life's a box of chocolates&quot;. Each box is highlighted in turn, representing the memory blocks of the LSTM network as information passes through them, ultimately reaching a &quot;Positive&quot; output value." src="../_images/lstm.gif" /></p>
-<p>In the above gif, the rectangles labeled <span class="math notranslate nohighlight">\(A\)</span> are called <code class="docutils literal notranslate"><span class="pre">Cells</span></code> and they are the <strong>Memory Blocks</strong> of our LSTM network. They are responsible for choosing what to remember in a sequence and pass on that information to the next cell via two states called the <code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">state</span></code> <span class="math notranslate nohighlight">\(H_{t}\)</span> and the <code class="docutils literal notranslate"><span class="pre">cell</span> <span class="pre">state</span></code> <span class="math notranslate nohighlight">\(C_{t}\)</span> where <span class="math notranslate nohighlight">\(t\)</span> indicates the time-step. Each <code class="docutils literal notranslate"><span class="pre">Cell</span></code> has dedicated gates which are responsible for storing, writing or reading the information passed to an LSTM. You will now look closely at the architecture of the network by implementing each mechanism happening inside of it.</p>
+<p>In the above gif, the rectangles labeled $A$ are called <code class="docutils literal notranslate"><span class="pre">Cells</span></code> and they are the <strong>Memory Blocks</strong> of our LSTM network. They are responsible for choosing what to remember in a sequence and pass on that information to the next cell via two states called the <code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">state</span></code> $H_{t}$ and the <code class="docutils literal notranslate"><span class="pre">cell</span> <span class="pre">state</span></code> $C_{t}$ where $t$ indicates the time-step. Each <code class="docutils literal notranslate"><span class="pre">Cell</span></code> has dedicated gates which are responsible for storing, writing or reading the information passed to an LSTM. You will now look closely at the architecture of the network by implementing each mechanism happening inside of it.</p>
 <p>Lets start with writing a function to randomly initialize the parameters which will be learned while our model trains</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initialise_params</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">):</span>
     <span class="c1"># forget gate</span>
@@ -980,9 +1092,9 @@ We made sure to include different demographics in our data and included a range 
     <span class="k">return</span> <span class="n">parameters</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="forward-propagation">
-<h3>Forward Propagation<a class="headerlink" href="#forward-propagation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="forward-propagation">
+<h3>Forward Propagation<a class="headerlink" href="#forward-propagation" title="Permalink to this headline">#</a></h3>
 <p>Now that you have your initialized parameters, you can pass the input data in a forward direction through the network. Each layer accepts the input data, processes it and passes it to the successive layer. This process is called <code class="docutils literal notranslate"><span class="pre">Forward</span> <span class="pre">Propagation</span></code>. You will undertake the following mechanism to implement it:</p>
 <ul class="simple">
 <li><p>Loading the word embeddings of the input data</p></li>
@@ -1027,9 +1139,9 @@ We made sure to include different demographics in our data and included a range 
 <div><p>Image has been modified from <a class="reference external" href="https://link.springer.com/chapter/10.1007%2F978-3-030-14524-8_11">this</a> source</p>
 </div></blockquote>
 <p><img alt="Diagram showing three sections of a memory block, labeled &quot;Forget gate&quot;, &quot;Input gate&quot; and &quot;Output gate&quot;. Each gate contains several subparts, representing the operations performed at that stage of the process." src="../_images/mem_block.png" /></p>
-</div>
-<div class="section" id="but-how-do-you-obtain-sentiment-from-the-lstm-s-output">
-<h3>But how do you obtain sentiment from the LSTM’s output?<a class="headerlink" href="#but-how-do-you-obtain-sentiment-from-the-lstm-s-output" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="but-how-do-you-obtain-sentiment-from-the-lstm-s-output">
+<h3>But how do you obtain sentiment from the LSTM’s output?<a class="headerlink" href="#but-how-do-you-obtain-sentiment-from-the-lstm-s-output" title="Permalink to this headline">#</a></h3>
 <p>The hidden state you obtain from the output gate of the last memory block in a sequence is considered to be a representation of all the information contained in a sequence. To classify this information into various classes (2 in our case, positive and negative) we use a <strong>Fully Connected layer</strong> which firstly maps this information to a predefined output size (1 in our case). Then, an activation function such as the sigmoid converts this output to a value between 0 and 1. We’ll consider values greater than 0.5 to be indicative of a positive sentiment.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fp_fc_layer</span><span class="p">(</span><span class="n">last_hs</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
     <span class="n">z2</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;W2&#39;</span><span class="p">],</span> <span class="n">last_hs</span><span class="p">)</span>
@@ -1108,9 +1220,9 @@ We made sure to include different demographics in our data and included a range 
     <span class="k">return</span> <span class="n">caches</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="backpropagation">
-<h3>Backpropagation<a class="headerlink" href="#backpropagation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="backpropagation">
+<h3>Backpropagation<a class="headerlink" href="#backpropagation" title="Permalink to this headline">#</a></h3>
 <p>After each forward pass through the network, you will implement the <code class="docutils literal notranslate"><span class="pre">backpropagation</span> <span class="pre">through</span> <span class="pre">time</span></code> algorithm to accumulate gradients of each parameter over the time steps. Backpropagation through a LSTM is not as straightforward as through other common Deep Learning architectures, due to the special way its underlying layers interact. Nonetheless, the approach is largely the same; identifying dependencies and applying the chain rule.</p>
 <p>Lets start with defining a function to initialize gradients of each parameter as arrays made up of zeros with same dimensions as the corresponding parameter</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise the gradients</span>
@@ -1232,9 +1344,9 @@ We made sure to include different demographics in our data and included a range 
     <span class="k">return</span> <span class="n">gradients</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="updating-the-parameters">
-<h3>Updating the Parameters<a class="headerlink" href="#updating-the-parameters" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="updating-the-parameters">
+<h3>Updating the Parameters<a class="headerlink" href="#updating-the-parameters" title="Permalink to this headline">#</a></h3>
 <p>We update the parameters through an optimization algorithm called <a class="reference external" href="https://optimization.cbe.cornell.edu/index.php?title=Adam">Adam</a> which is an extension to stochastic gradient descent that has recently seen broader adoption for deep learning applications in computer vision and natural language processing. Specifically, the algorithm calculates an exponential moving average of the gradient and the squared gradient, and the parameters <code class="docutils literal notranslate"><span class="pre">beta1</span></code> and <code class="docutils literal notranslate"><span class="pre">beta2</span></code> control the decay rates of these moving averages. Adam has shown increased convergence and robustness over other gradient descent algorithms and is often recommended as the default optimizer for training.</p>
 <p>Define a function to initialise the moving averages for each parameter</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialise the moving averages</span>
@@ -1269,9 +1381,9 @@ We made sure to include different demographics in our data and included a range 
     <span class="k">return</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">s</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="training-the-network">
-<h3>Training the Network<a class="headerlink" href="#training-the-network" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="training-the-network">
+<h3>Training the Network<a class="headerlink" href="#training-the-network" title="Permalink to this headline">#</a></h3>
 <p>You will start by initializing all the parameters and hyperparameters being used in your network</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hidden_dim</span> <span class="o">=</span> <span class="mi">64</span>
 <span class="n">input_dim</span> <span class="o">=</span> <span class="n">emb_matrix</span><span class="p">[</span><span class="s1">&#39;memory&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1395,9 +1507,9 @@ Define a function to calculate the loss using <a class="reference external" href
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="sentiment-analysis-on-the-speech-data">
-<h3>Sentiment Analysis on the Speech Data<a class="headerlink" href="#sentiment-analysis-on-the-speech-data" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="sentiment-analysis-on-the-speech-data">
+<h3>Sentiment Analysis on the Speech Data<a class="headerlink" href="#sentiment-analysis-on-the-speech-data" title="Permalink to this headline">#</a></h3>
 <p>Once your model is trained, you can use the updated parameters to start making our predictions. You can break each speech into paragraphs of uniform size before passing them to the Deep Learning model and predicting the sentiment of each paragraph</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># To store predicted sentiments</span>
 <span class="n">predictions</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1463,18 +1575,18 @@ Define a function to calculate the loss using <a class="reference external" href
 </pre></div>
 </div>
 <p>In the plot above, you’re shown what percentages of each speech are expected to carry a positive and negative  sentiment. Since this implementation prioritized simplicity and clarity over performance, we cannot expect these results to be very accurate. Moreover, while making the sentiment predictions for one paragraph we did not use the neighboring paragraphs for context which would have led to more accurate predictions. We encourage the reader to play around with the model and make some tweaks suggested in <code class="docutils literal notranslate"><span class="pre">Next</span> <span class="pre">Steps</span></code> and observe how the model performance changes.</p>
-</div>
-</div>
-<div class="section" id="looking-at-our-neural-network-from-an-ethical-perspective">
-<h2>Looking at our Neural Network from an ethical perspective<a class="headerlink" href="#looking-at-our-neural-network-from-an-ethical-perspective" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="looking-at-our-neural-network-from-an-ethical-perspective">
+<h2>Looking at our Neural Network from an ethical perspective<a class="headerlink" href="#looking-at-our-neural-network-from-an-ethical-perspective" title="Permalink to this headline">#</a></h2>
 <!-- #region -->
 <p>It’s crucial to understand that accurately identifying a text’s sentiment is not easy primarily because of the complex ways in which humans express sentiment, using irony, sarcasm, humor, or, in social media, abbreviation. Moreover neatly placing text into two categories: ‘positive’ and ‘negative’ can be problematic because it is being done without any context. Words or abbreviations can convey very different sentiments depending on age and location, none of which we took into account while building our model.</p>
 <p>Along with data, there are also growing concerns that data processing algorithms are influencing policy and daily lives in ways that are not transparent and introduce biases. Certain biases such as the <a class="reference external" href="https://bit.ly/2WtTKIe">Inductive Bias</a> are essential to help a Machine Learning model generalize better, for example the LSTM we built earlier is biased towards preserving contextual information over long sequences which makes it so suitable for processing sequential data. The problem arises when <a class="reference external" href="https://hbr.org/2019/10/what-do-we-do-about-the-biases-in-ai">societal biases</a> creep into algorithmic predictions. Optimizing Machine algorithms via methods like <a class="reference external" href="https://en.wikipedia.org/wiki/Hyperparameter_optimization">hyperparameter tuning</a> can then further amplify these biases by learning every bit of information in the data.</p>
 <p>There are also cases where bias is only in the output and not the inputs (data, algorithm). For example, in sentiment analysis <a class="reference external" href="https://doi.org/10.3390/electronics9020374">accuracy tends to be higher on female-authored texts than on male-authored ones</a>. End users of sentiment analysis should be aware that its small gender biases can affect the conclusions drawn from it and apply correction factors when necessary. Hence, it is important that demands for algorithmic accountability should include the ability to test the outputs of a system, including the ability to drill down into different user groups by gender, ethnicity and other characteristics, to identify, and hopefully suggest corrections for, system output biases.</p>
 <!-- #endregion -->
-</div>
-<div class="section" id="next-steps">
-<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">#</a></h2>
 <p>You have learned how to build and train a simple Long Short Term Memory network from scratch using just NumPy to perform sentiment analysis.</p>
 <p>To further enhance and optimize your neural network model, you can consider one of a mixture of the following:</p>
 <ul class="simple">
@@ -1494,15 +1606,17 @@ Define a function to calculate the loss using <a class="reference external" href
 <li><p>Considering how artificial intelligence shifts power, an <a class="reference external" href="https://www.nature.com/articles/d41586-020-02003-2">article</a> and <a class="reference external" href="https://slideslive.com/38923453/the-values-of-machine-learning">talk</a> by Pratyusha Kalluri</p></li>
 <li><p>More ethics resources on <a class="reference external" href="https://www.fast.ai/2018/09/24/ai-ethics-resources/">this blog post</a> by Rachel Thomas and the <a class="reference external" href="https://www.radicalai.org/">Radical AI podcast</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1518,24 +1632,28 @@ Define a function to calculate the loss using <a class="reference external" href
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By the NumPy community<br/>
+  
+      &copy; Copyright 2020, the NumPy community.<br/>
+</p>
+        </footer>
+    </div>
     
-      By the NumPy community<br/>
-    
-        &copy; Copyright 2020, the NumPy community.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

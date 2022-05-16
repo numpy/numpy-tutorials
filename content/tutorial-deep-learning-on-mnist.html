@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Deep learning on MNIST &#8212; NumPy Tutorials</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,17 +20,14 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -40,8 +39,8 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -57,7 +56,21 @@
     
 
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -66,14 +79,10 @@
     <div class="container-xl">
       <div class="row">
           
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -196,113 +205,243 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
-<div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
             </div>
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../_sources/content/tutorial-deep-learning-on-mnist.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/tutorial-deep-learning-on-mnist.md.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/numpy/numpy-tutorials/"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-deep-learning-on-mnist.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/tutorial-deep-learning-on-mnist.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=tree/site/content/tutorial-deep-learning-on-mnist.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-        
-    </div>
-</div>
-
         </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=tree/site/content/tutorial-deep-learning-on-mnist.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials/"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-deep-learning-on-mnist.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/tutorial-deep-learning-on-mnist.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/content/tutorial-deep-learning-on-mnist.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/content/tutorial-deep-learning-on-mnist.md.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#prerequisites">
    Prerequisites
@@ -364,12 +503,11 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Deep learning on MNIST</h1>
@@ -447,18 +585,19 @@
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="deep-learning-on-mnist">
-<h1>Deep learning on MNIST<a class="headerlink" href="#deep-learning-on-mnist" title="Permalink to this headline">¶</a></h1>
+  <section id="deep-learning-on-mnist">
+<h1>Deep learning on MNIST<a class="headerlink" href="#deep-learning-on-mnist" title="Permalink to this headline">#</a></h1>
 <p>This tutorial demonstrates how to build a simple <a class="reference external" href="https://en.wikipedia.org/wiki/Feedforward_neural_network">feedforward neural network</a> (with one hidden layer) and train it from scratch with NumPy to recognize handwritten digit images.</p>
 <p>Your deep learning model — one of the most basic artificial neural networks that resembles the original <a class="reference external" href="https://en.wikipedia.org/wiki/Multilayer_perceptron">multi-layer perceptron</a> — will learn to classify digits from 0 to 9 from the <a class="reference external" href="https://en.wikipedia.org/wiki/MNIST_database">MNIST</a> dataset. The dataset contains 60,000 training and 10,000 test images and corresponding labels. Each training and test image is of size 784 (or 28x28 pixels) — this will be your input for the neural network.</p>
 <p>Based on the image inputs and their labels (<a class="reference external" href="https://en.wikipedia.org/wiki/Supervised_learning">supervised learning</a>), your neural network will be trained to learn their features using forward propagation and backpropagation (<a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation#Reverse_accumulation">reverse-mode</a> differentiation). The final output of the network is a vector of 10 scores — one for each handwritten digit image. You will also evaluate how good your model is at classifying the images on the test set.</p>
 <p><img alt="Diagram showing operations detailed in this tutorial (The input imageis passed into a Hidden layer that creates a weighted sum of outputs.The weighted sum is passed to the Non-linearity, then regularization andinto the output layer. The output layer creates a prediction which canthen be compared to existing data. The errors are used to calculate theloss function and update weights in the hidden layer and outputlayer.)" src="../_images/tutorial-deep-learning-on-mnist.png" /></p>
 <p>This tutorial was adapted from the work by <a class="reference external" href="https://github.com/iamtrask/Grokking-Deep-Learning">Andrew Trask</a> (with the author’s permission).</p>
-<div class="section" id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">#</a></h2>
 <p>The reader should have some knowledge of Python, NumPy array manipulation, and linear algebra. In addition, you should be familiar with main concepts of <a class="reference external" href="https://en.wikipedia.org/wiki/Deep_learning">deep learning</a>.</p>
 <p>To refresh the memory, you can take the <a class="reference external" href="https://docs.python.org/dev/tutorial/index.html">Python</a> and <a class="reference external" href="https://numpy.org/doc/stable/user/tutorial-svd.html">Linear algebra on n-dimensional arrays</a> tutorials.</p>
 <p>You are advised to read the <a class="reference external" href="http://www.cs.toronto.edu/~hinton/absps/NatureDeepReview.pdf">Deep learning</a> paper published in 2015 by Yann LeCun, Yoshua Bengio, and Geoffrey Hinton, who are regarded as some of the pioneers of the field. You should also consider reading Andrew Trask’s <a class="reference external" href="https://www.manning.com/books/grokking-deep-learning">Grokking Deep Learning</a>, which teaches deep learning with NumPy.</p>
@@ -473,19 +612,19 @@
 <li><p><a class="reference external" href="https://matplotlib.org/">Matplotlib</a> for data visualization</p></li>
 </ul>
 <p>This tutorial can be run locally in an isolated environment, such as <a class="reference external" href="https://virtualenv.pypa.io/en/stable/">Virtualenv</a> or <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">conda</a>. You can use <a class="reference external" href="https://jupyter.org/install">Jupyter Notebook or JupyterLab</a> to run each notebook cell. Don’t forget to <a class="reference external" href="https://numpy.org/doc/stable/user/absolute_beginners.html#installing-numpy">set up NumPy</a> and <a class="reference external" href="https://matplotlib.org/users/installing.html#installing-an-official-release">Matplotlib</a>.</p>
-</div>
-<div class="section" id="table-of-contents">
-<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
+</section>
+<section id="table-of-contents">
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">#</a></h2>
+<ol class="arabic simple">
 <li><p>Load the MNIST dataset</p></li>
 <li><p>Preprocess the dataset</p></li>
 <li><p>Build and train a small neural network from scratch</p></li>
 <li><p>Next steps</p></li>
 </ol>
-</div>
+</section>
 <hr class="docutils" />
-<div class="section" id="load-the-mnist-dataset">
-<h2>1. Load the MNIST dataset<a class="headerlink" href="#load-the-mnist-dataset" title="Permalink to this headline">¶</a></h2>
+<section id="load-the-mnist-dataset">
+<h2>1. Load the MNIST dataset<a class="headerlink" href="#load-the-mnist-dataset" title="Permalink to this headline">#</a></h2>
 <p>In this section, you will download the zipped MNIST dataset files originally stored in <a class="reference external" href="http://yann.lecun.com/exdb/mnist/">Yann LeCun’s website</a>. Then, you will transform them into 4 files of NumPy array type using built-in Python modules. Finally, you will split the arrays into training and test sets.</p>
 <p><strong>1.</strong> Define a variable to store the training/test image/label names of the MNIST dataset in a list:</p>
 <div class="cell docutils container">
@@ -521,6 +660,18 @@ download it.</p>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
                 <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-images-idx3-ubyte.gz
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: t10k-images-idx3-ubyte.gz
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-labels-idx1-ubyte.gz
+Downloading file: t10k-labels-idx1-ubyte.gz
 </pre></div>
 </div>
 </div>
@@ -599,7 +750,7 @@ The shape of test images: (10000, 784) and test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-deep-learning-on-mnist_12_0.png" src="../_images/tutorial-deep-learning-on-mnist_12_0.png" />
+<img alt="../_images/66452e7166102e1f2a478572eec0ae2dade70c5c467de433e4760bba957857d0.png" src="../_images/66452e7166102e1f2a478572eec0ae2dade70c5c467de433e4760bba957857d0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -616,7 +767,7 @@ The shape of test images: (10000, 784) and test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-deep-learning-on-mnist_13_0.png" src="../_images/tutorial-deep-learning-on-mnist_13_0.png" />
+<img alt="../_images/d6959b1a0a3d57d4b52c2f70fdb6ce2da7125ee908d82fb5a7641625bb035865.png" src="../_images/d6959b1a0a3d57d4b52c2f70fdb6ce2da7125ee908d82fb5a7641625bb035865.png" />
 </div>
 </div>
 <p><em>Above are five images taken from the MNIST training set. Various hand-drawn
@@ -644,9 +795,9 @@ Arabic numerals are shown, with exact values chosen randomly with each run of th
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="preprocess-the-data">
-<h2>2. Preprocess the data<a class="headerlink" href="#preprocess-the-data" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="preprocess-the-data">
+<h2>2. Preprocess the data<a class="headerlink" href="#preprocess-the-data" title="Permalink to this headline">#</a></h2>
 <p>Neural networks can work with inputs that are in a form of tensors (multidimensional arrays) of floating-point type. When preprocessing the data, you should consider the following processes: <a class="reference external" href="https://en.wikipedia.org/wiki/Vectorization_%28mathematics%29">vectorization</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Floating-point_arithmetic#Floating-point_numbers">conversion to a floating-point format</a>.</p>
 <p>Since the MNIST data is already vectorized and the arrays are of <code class="docutils literal notranslate"><span class="pre">dtype</span></code> <code class="docutils literal notranslate"><span class="pre">uint8</span></code>, your next challenge is to convert them to a floating-point format, such as <code class="docutils literal notranslate"><span class="pre">float64</span></code> (<a class="reference external" href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">double-precision</a>):</p>
 <ul class="simple">
@@ -654,8 +805,8 @@ Arabic numerals are shown, with exact values chosen randomly with each run of th
 <li><p><em><a class="reference external" href="https://en.wikipedia.org/wiki/One-hot">One-hot/categorical encoding</a></em> of the image labels.</p></li>
 </ul>
 <p>In practice, you can use different types of floating-point precision depending on your goals and you can find more information about that in the <a class="reference external" href="https://blogs.nvidia.com/blog/2019/11/15/whats-the-difference-between-single-double-multi-and-mixed-precision-computing/">Nvidia</a> and <a class="reference external" href="https://cloud.google.com/blog/products/ai-machine-learning/bfloat16-the-secret-to-high-performance-on-cloud-tpus">Google Cloud</a> blog posts.</p>
-<div class="section" id="convert-the-image-data-to-the-floating-point-format">
-<h3>Convert the image data to the floating-point format<a class="headerlink" href="#convert-the-image-data-to-the-floating-point-format" title="Permalink to this headline">¶</a></h3>
+<section id="convert-the-image-data-to-the-floating-point-format">
+<h3>Convert the image data to the floating-point format<a class="headerlink" href="#convert-the-image-data-to-the-floating-point-format" title="Permalink to this headline">#</a></h3>
 <p>The images data contain 8-bit integers encoded in the [0, 255] interval with color values between 0 and 255.</p>
 <p>You will normalize them into floating-point arrays in the [0, 1] interval by dividing them by 255.</p>
 <p><strong>1.</strong> Check that the vectorized image data has type <code class="docutils literal notranslate"><span class="pre">uint8</span></code>:</p>
@@ -714,9 +865,9 @@ The data type of test images: float64
 </pre></div>
 </div>
 </div></blockquote>
-</div>
-<div class="section" id="convert-the-labels-to-floating-point-through-categorical-one-hot-encoding">
-<h3>Convert the labels to floating point through categorical/one-hot encoding<a class="headerlink" href="#convert-the-labels-to-floating-point-through-categorical-one-hot-encoding" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="convert-the-labels-to-floating-point-through-categorical-one-hot-encoding">
+<h3>Convert the labels to floating point through categorical/one-hot encoding<a class="headerlink" href="#convert-the-labels-to-floating-point-through-categorical-one-hot-encoding" title="Permalink to this headline">#</a></h3>
 <p>You will use one-hot encoding to embed each digit label as an all-zero vector with <code class="docutils literal notranslate"><span class="pre">np.zeros()</span></code> and place <code class="docutils literal notranslate"><span class="pre">1</span></code> for a label index. As a result, your label data will be arrays with <code class="docutils literal notranslate"><span class="pre">1.0</span></code> (or <code class="docutils literal notranslate"><span class="pre">1.</span></code>) in the position of each image label.</p>
 <p>Since there are 10 labels (from 0 to 9) in total, your arrays will look similar to this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
@@ -809,14 +960,14 @@ The data type of test labels: float64
 </div>
 </div>
 <p>You have finished preparing the dataset.</p>
-</div>
-</div>
-<div class="section" id="build-and-train-a-small-neural-network-from-scratch">
-<h2>3. Build and train a small neural network from scratch<a class="headerlink" href="#build-and-train-a-small-neural-network-from-scratch" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="build-and-train-a-small-neural-network-from-scratch">
+<h2>3. Build and train a small neural network from scratch<a class="headerlink" href="#build-and-train-a-small-neural-network-from-scratch" title="Permalink to this headline">#</a></h2>
 <p>In this section you will familiarize yourself with some high-level concepts of the basic building blocks of a deep learning model. You can refer to the original <a class="reference external" href="http://www.cs.toronto.edu/~hinton/absps/NatureDeepReview.pdf">Deep learning</a> research publication for more information.</p>
 <p>Afterwards, you will construct the building blocks of a simple deep learning model in Python and NumPy and train it to learn to identify handwritten digits from the MNIST dataset with a certain level of accuracy.</p>
-<div class="section" id="neural-network-building-blocks-with-numpy">
-<h3>Neural network building blocks with NumPy<a class="headerlink" href="#neural-network-building-blocks-with-numpy" title="Permalink to this headline">¶</a></h3>
+<section id="neural-network-building-blocks-with-numpy">
+<h3>Neural network building blocks with NumPy<a class="headerlink" href="#neural-network-building-blocks-with-numpy" title="Permalink to this headline">#</a></h3>
 <ul>
 <li><p><em>Layers</em>: These building blocks work as data filters — they process data and learn representations from inputs to better predict the target outputs.</p>
 <p>You will use 1 hidden layer in your model to pass the inputs forward (<em>forward propagation</em>) and propagate the gradients/error derivatives of a loss function backward (<em>backpropagation</em>). These are input, hidden and output layers.</p>
@@ -839,9 +990,9 @@ The data type of test labels: float64
 </li>
 <li><p><em>Accuracy</em>: This metric measures the accuracy of the network’s ability to predict on the data it hasn’t seen.</p></li>
 </ul>
-</div>
-<div class="section" id="model-architecture-and-training-summary">
-<h3>Model architecture and training summary<a class="headerlink" href="#model-architecture-and-training-summary" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="model-architecture-and-training-summary">
+<h3>Model architecture and training summary<a class="headerlink" href="#model-architecture-and-training-summary" title="Permalink to this headline">#</a></h3>
 <p>Here is a summary of the neural network model architecture and the training process:</p>
 <p><img alt="Diagram showing operations detailed in this tutorial (The input imageis passed into a Hidden layer that creates a weighted sum of outputs.The weighted sum is passed to the Non-linearity, then regularization andinto the output layer. The output layer creates a prediction which canthen be compared to existing data. The errors are used to calculate theloss function and update weights in the hidden layer and outputlayer.)" src="../_images/tutorial-deep-learning-on-mnist.png" /></p>
 <ul>
@@ -863,7 +1014,7 @@ The data type of test labels: float64
 </ul>
 <blockquote>
 <div><p><strong>Note:</strong> In more technical terms, you:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Measure the error by comparing the real label of an image (the truth) with the prediction of the model.</p></li>
 <li><p>Differentiate the loss function.</p></li>
 <li><p>Ingest the <a class="reference external" href="https://en.wikipedia.org/wiki/Gradient">gradients</a> with the respect to the output, and backpropagate them with the respect to the inputs through the layer(s).</p></li>
@@ -871,9 +1022,9 @@ The data type of test labels: float64
 <p>Since the network contains tensor operations and weight matrices, backpropagation uses the <a class="reference external" href="https://en.wikipedia.org/wiki/Chain_rule">chain rule</a>.</p>
 <p>With each iteration (epoch) of the neural network training, this forward and backward propagation cycle adjusts the weights, which is reflected in the accuracy and error metrics. As you train the model, your goal is to minimize the error and maximize the accuracy on the training data, where the model learns from, as well as the test data, where you evaluate the model.</p>
 </div></blockquote>
-</div>
-<div class="section" id="compose-the-model-and-begin-training-and-testing-it">
-<h3>Compose the model and begin training and testing it<a class="headerlink" href="#compose-the-model-and-begin-training-and-testing-it" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="compose-the-model-and-begin-training-and-testing-it">
+<h3>Compose the model and begin training and testing it<a class="headerlink" href="#compose-the-model-and-begin-training-and-testing-it" title="Permalink to this headline">#</a></h3>
 <p>Having covered the main deep learning concepts and the neural network architecture, let’s write the code.</p>
 <p><strong>1.</strong> We’ll start by creating a new random number generator, providing a seed
 for reproducibility:</p>
@@ -1147,7 +1298,7 @@ its performance over the training epochs.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-deep-learning-on-mnist_46_0.png" src="../_images/tutorial-deep-learning-on-mnist_46_0.png" />
+<img alt="../_images/ae00bfcce4b76caf05869cffcb193091b2e22fda23b8f5ad70e28b17c7c6a0a6.png" src="../_images/ae00bfcce4b76caf05869cffcb193091b2e22fda23b8f5ad70e28b17c7c6a0a6.png" />
 </div>
 </div>
 <p><em>The training and testing error is shown above in the left and right
@@ -1155,10 +1306,10 @@ plots, respectively. As the number of Epochs increases, the total error
 decreases and the accuracy increases.</em></p>
 <p>The accuracy rates that your model reaches during training and testing may be somewhat plausible but you may also find the error rates to be quite high.</p>
 <p>To reduce the error during training and testing, you can consider changing the simple loss function to, for example, categorical <a class="reference external" href="https://en.wikipedia.org/wiki/Cross_entropy">cross-entropy</a>. Other possible solutions are discussed below.</p>
-</div>
-</div>
-<div class="section" id="next-steps">
-<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">#</a></h2>
 <p>You have learned how to build and train a simple feed-forward neural network from scratch using just NumPy to classify handwritten MNIST digits.</p>
 <p>To further enhance and optimize your neural network model, you can consider one of a mixture of the following:</p>
 <ul class="simple">
@@ -1181,15 +1332,17 @@ decreases and the accuracy increases.</em></p>
 <li><p>For more resources, see <a class="reference external" href="https://www.fast.ai/2018/09/24/ai-ethics-resources/">this blog post by Rachel Thomas</a> and the <a class="reference external" href="https://www.radicalai.org/">Radical AI podcast</a>.</p></li>
 </ul>
 <p>(Credit to <a class="reference external" href="https://github.com/hsjeong5/MNIST-for-Numpy">hsjeong5</a> for demonstrating how to download MNIST without the use of external libraries.)</p>
-</div>
-</div>
+</section>
+</section>
 
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="mooreslaw-tutorial.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1205,24 +1358,28 @@ decreases and the accuracy increases.</em></p>
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By the NumPy community<br/>
+  
+      &copy; Copyright 2020, the NumPy community.<br/>
+</p>
+        </footer>
+    </div>
     
-      By the NumPy community<br/>
-    
-        &copy; Copyright 2020, the NumPy community.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

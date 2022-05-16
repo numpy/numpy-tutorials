@@ -4,11 +4,13 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Linear algebra on n-dimensional arrays &#8212; NumPy Tutorials</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet">
-  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,17 +20,14 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=84ace793992934648b4de8eed757e5a2" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -40,10 +39,8 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.9d8b4a8b9bb19db25eeaddc40d639ba2.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -59,7 +56,21 @@
     
 
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -68,14 +79,10 @@
     <div class="container-xl">
       <div class="row">
           
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<div class="col-12 col-md-3 bd-sidebar site-navigation " id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -198,113 +205,243 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<!-- This is an invisible pixel that we watch to see if we've scrolled. -->
-<div class="sbt-scroll-pixel-helper"></div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            <div class="topbar-left">
-                
-                <label class="nav-toggle-button" for="__navigation">
-                    <div class="visually-hidden">Toggle navigation</div>
-                    <i class="fas fa-bars"></i>
-                </label>
-                
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
             </div>
             
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        <a class="dropdown-buttons"
-            href="../_sources/content/tutorial-svd.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download notebook file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/content/tutorial-svd.md.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.md</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/numpy/numpy-tutorials/"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-svd.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
-        <a class="edit-button" href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/tutorial-svd.md"><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Edit this page"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=tree/site/content/tutorial-svd.md"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-        
-    </div>
-</div>
-
         </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=tree/site/content/tutorial-svd.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials/"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials//issues/new?title=Issue%20on%20page%20%2Fcontent/tutorial-svd.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/numpy/numpy-tutorials/edit/main/site/content/tutorial-svd.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/content/tutorial-svd.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/content/tutorial-svd.md.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#prerequisites">
    Prerequisites
@@ -366,12 +503,11 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Linear algebra on n-dimensional arrays</h1>
@@ -449,31 +585,32 @@
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="linear-algebra-on-n-dimensional-arrays">
-<h1>Linear algebra on n-dimensional arrays<a class="headerlink" href="#linear-algebra-on-n-dimensional-arrays" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+  <section id="linear-algebra-on-n-dimensional-arrays">
+<h1>Linear algebra on n-dimensional arrays<a class="headerlink" href="#linear-algebra-on-n-dimensional-arrays" title="Permalink to this headline">#</a></h1>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">#</a></h2>
 <p>Before reading this tutorial, you should know a bit of Python. If you would like to refresh your memory, take a look at the <a class="reference external" href="https://docs.python.org/3/tutorial/">Python tutorial</a>.</p>
 <p>If you want to be able to run the examples in this tutorial, you should also have <a class="reference external" href="https://matplotlib.org/">matplotlib</a> and <a class="reference external" href="https://scipy.org">SciPy</a> installed on your computer.</p>
-</div>
-<div class="section" id="learner-profile">
-<h2>Learner profile<a class="headerlink" href="#learner-profile" title="Permalink to this headline">¶</a></h2>
-<p>This tutorial is for people who have a basic understanding of linear algebra and arrays in NumPy and want to understand how n-dimensional (<span class="math notranslate nohighlight">\(n&gt;=2\)</span>) arrays are represented and can be manipulated. In particular, if you don’t know how to apply common functions to n-dimensional arrays (without using for-loops), or if you want to understand axis and shape properties for n-dimensional arrays, this tutorial might be of help.</p>
-</div>
-<div class="section" id="learning-objectives">
-<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="learner-profile">
+<h2>Learner profile<a class="headerlink" href="#learner-profile" title="Permalink to this headline">#</a></h2>
+<p>This tutorial is for people who have a basic understanding of linear algebra and arrays in NumPy and want to understand how n-dimensional ($n&gt;=2$) arrays are represented and can be manipulated. In particular, if you don’t know how to apply common functions to n-dimensional arrays (without using for-loops), or if you want to understand axis and shape properties for n-dimensional arrays, this tutorial might be of help.</p>
+</section>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
 <p>After this tutorial, you should be able to:</p>
 <ul class="simple">
 <li><p>Understand the difference between one-, two- and n-dimensional arrays in NumPy;</p></li>
 <li><p>Understand how to apply some linear algebra operations to n-dimensional arrays without using for-loops;</p></li>
 <li><p>Understand axis and shape properties for n-dimensional arrays.</p></li>
 </ul>
-</div>
-<div class="section" id="content">
-<h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="content">
+<h2>Content<a class="headerlink" href="#content" title="Permalink to this headline">#</a></h2>
 <p>In this tutorial, we will use a <a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_decomposition">matrix decomposition</a> from linear algebra, the Singular Value Decomposition, to generate a compressed approximation of an image. We’ll use the <code class="docutils literal notranslate"><span class="pre">face</span></code> image from the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/misc.html#module-scipy.misc">scipy.misc</a> module:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -516,11 +653,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-svd_8_0.png" src="../_images/tutorial-svd_8_0.png" />
+<img alt="../_images/fdf3f942c3527bba6485257bbf96b89648fbe5d456ff63c3d89bb9c0dc8977f1.png" src="../_images/fdf3f942c3527bba6485257bbf96b89648fbe5d456ff63c3d89bb9c0dc8977f1.png" />
 </div>
 </div>
-<div class="section" id="shape-axis-and-array-properties">
-<h3>Shape, axis and array properties<a class="headerlink" href="#shape-axis-and-array-properties" title="Permalink to this headline">¶</a></h3>
+<section id="shape-axis-and-array-properties">
+<h3>Shape, axis and array properties<a class="headerlink" href="#shape-axis-and-array-properties" title="Permalink to this headline">#</a></h3>
 <p>Note that, in linear algebra, the dimension of a vector refers to the number of entries in an array. In NumPy, it instead defines the number of axes. For example, a 1D array is a vector such as <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code>, a 2D array is a matrix, and so forth.</p>
 <p>First, let’s check for the shape of the data in our array. Since this image is two-dimensional (the pixels in the image form a rectangle), we might expect a two-dimensional array to represent it (a matrix). However, using the <code class="docutils literal notranslate"><span class="pre">shape</span></code> property of this NumPy array gives us a different result:</p>
 <div class="cell docutils container">
@@ -629,9 +766,9 @@ about maximum and minimum values for this array:</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="operations-on-an-axis">
-<h3>Operations on an axis<a class="headerlink" href="#operations-on-an-axis" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="operations-on-an-axis">
+<h3>Operations on an axis<a class="headerlink" href="#operations-on-an-axis" title="Permalink to this headline">#</a></h3>
 <p>It is possible to use methods from linear algebra to approximate an existing set of data. Here, we will use the <a class="reference external" href="https://en.wikipedia.org/wiki/Singular_value_decomposition">SVD (Singular Value Decomposition)</a> to try to rebuild an image that uses less singular value information than the original one, while still retaining some of its features.</p>
 <p><strong>Note</strong>: We will use NumPy’s linear algebra module, <a class="reference external" href="https://numpy.org/devdocs/reference/routines.linalg.html#module-numpy.linalg">numpy.linalg</a>, to perform the operations in this tutorial. Most of the linear algebra functions in this module can also be found in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg">scipy.linalg</a>, and users are encouraged to use the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/index.html#module-scipy">scipy</a> module for real-world applications. However, some functions in the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg">scipy.linalg</a> module, such as the SVD function, only support 2D arrays. For more information on this, check the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/tutorial/linalg.html">scipy.linalg Reference</a>.</p>
 <p>To proceed, import the linear algebra submodule from NumPy:</p>
@@ -642,15 +779,13 @@ about maximum and minimum values for this array:</p>
 </div>
 </div>
 </div>
-<p>In order to extract information from a given matrix, we can use the SVD to obtain 3 arrays which can be multiplied to obtain the original matrix. From the theory of linear algebra, given a matrix <span class="math notranslate nohighlight">\(A\)</span>, the following product can be computed:</p>
-<div class="math notranslate nohighlight">
-\[U \Sigma V^T = A\]</div>
-<p>where <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V^T\)</span> are square and <span class="math notranslate nohighlight">\(\Sigma\)</span> is the same size as <span class="math notranslate nohighlight">\(A\)</span>. <span class="math notranslate nohighlight">\(\Sigma\)</span> is a diagonal matrix and contains the <a class="reference external" href="https://en.wikipedia.org/wiki/Singular_value">singular values</a> of <span class="math notranslate nohighlight">\(A\)</span>, organized from largest to smallest. These values are always non-negative and can be used as an indicator of the “importance” of some features represented by the matrix <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<p>In order to extract information from a given matrix, we can use the SVD to obtain 3 arrays which can be multiplied to obtain the original matrix. From the theory of linear algebra, given a matrix $A$, the following product can be computed:</p>
+<p>$$U \Sigma V^T = A$$</p>
+<p>where $U$ and $V^T$ are square and $\Sigma$ is the same size as $A$. $\Sigma$ is a diagonal matrix and contains the <a class="reference external" href="https://en.wikipedia.org/wiki/Singular_value">singular values</a> of $A$, organized from largest to smallest. These values are always non-negative and can be used as an indicator of the “importance” of some features represented by the matrix $A$.</p>
 <p>Let’s see how this works in practice with just one matrix first. Note that according to <a class="reference external" href="https://en.wikipedia.org/wiki/Grayscale#Colorimetric_(perceptual_luminance-reserving)_conversion_to_grayscale">colorimetry</a>,
 it is possible to obtain a fairly reasonable grayscale version of our color image if we apply the formula</p>
-<div class="math notranslate nohighlight">
-\[Y = 0.2126 R + 0.7152 G + 0.0722 B\]</div>
-<p>where <span class="math notranslate nohighlight">\(Y\)</span> is the array representing the grayscale image, and <span class="math notranslate nohighlight">\(R\)</span>, <span class="math notranslate nohighlight">\(G\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are the red, green and blue channel arrays we had originally. Notice we can use the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator (the matrix multiplication operator for NumPy arrays, see <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.matmul.html#numpy.matmul">numpy.matmul</a>) for this:</p>
+<p>$$Y = 0.2126 R + 0.7152 G + 0.0722 B$$</p>
+<p>where $Y$ is the array representing the grayscale image, and $R$, $G$ and $B$ are the red, green and blue channel arrays we had originally. Notice we can use the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator (the matrix multiplication operator for NumPy arrays, see <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.matmul.html#numpy.matmul">numpy.matmul</a>) for this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_gray</span> <span class="o">=</span> <span class="n">img_array</span> <span class="o">@</span> <span class="p">[</span><span class="mf">0.2126</span><span class="p">,</span> <span class="mf">0.7152</span><span class="p">,</span> <span class="mf">0.0722</span><span class="p">]</span>
@@ -681,7 +816,7 @@ it is possible to obtain a fairly reasonable grayscale version of our color imag
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-svd_34_0.png" src="../_images/tutorial-svd_34_0.png" />
+<img alt="../_images/8c5a6e5c74215eae5a43d452137fc9b6c5b105b3a69a7a7cefd39e1eafe08085.png" src="../_images/8c5a6e5c74215eae5a43d452137fc9b6c5b105b3a69a7a7cefd39e1eafe08085.png" />
 </div>
 </div>
 <p>Now, applying the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.linalg.svd.html#numpy.linalg.svd">linalg.svd</a> function to this matrix, we obtain the following decomposition:</p>
@@ -711,7 +846,7 @@ compatible for multiplication. However, this is not true as <code class="docutil
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">@</span> <span class="n">Vt</span>
 </pre></div>
 </div>
-<p>results in a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. This happens because having a one-dimensional array for <code class="docutils literal notranslate"><span class="pre">s</span></code>, in this case, is much more economic in practice than building a diagonal matrix with the same data. To reconstruct the original matrix, we can rebuild the diagonal matrix <span class="math notranslate nohighlight">\(\Sigma\)</span> with the elements of <code class="docutils literal notranslate"><span class="pre">s</span></code> in its diagonal and with the appropriate dimensions for multiplying: in our case, <span class="math notranslate nohighlight">\(\Sigma\)</span> should be 768x1024 since <code class="docutils literal notranslate"><span class="pre">U</span></code> is 768x768 and <code class="docutils literal notranslate"><span class="pre">Vt</span></code> is 1024x1024. In order to add the singular values to the diagonal of <code class="docutils literal notranslate"><span class="pre">Sigma</span></code>, we will use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.fill_diagonal.html">fill_diagonal</a> function from NumPy:</p>
+<p>results in a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. This happens because having a one-dimensional array for <code class="docutils literal notranslate"><span class="pre">s</span></code>, in this case, is much more economic in practice than building a diagonal matrix with the same data. To reconstruct the original matrix, we can rebuild the diagonal matrix $\Sigma$ with the elements of <code class="docutils literal notranslate"><span class="pre">s</span></code> in its diagonal and with the appropriate dimensions for multiplying: in our case, $\Sigma$ should be 768x1024 since <code class="docutils literal notranslate"><span class="pre">U</span></code> is 768x768 and <code class="docutils literal notranslate"><span class="pre">Vt</span></code> is 1024x1024. In order to add the singular values to the diagonal of <code class="docutils literal notranslate"><span class="pre">Sigma</span></code>, we will use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.fill_diagonal.html">fill_diagonal</a> function from NumPy:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -723,10 +858,10 @@ compatible for multiplication. However, this is not true as <code class="docutil
 </div>
 </div>
 <p>Now, we want to check if the reconstructed <code class="docutils literal notranslate"><span class="pre">U</span> <span class="pre">&#64;</span> <span class="pre">Sigma</span> <span class="pre">&#64;</span> <span class="pre">Vt</span></code> is close to the original <code class="docutils literal notranslate"><span class="pre">img_gray</span></code> matrix.</p>
-</div>
-</div>
-<div class="section" id="approximation">
-<h2>Approximation<a class="headerlink" href="#approximation" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="approximation">
+<h2>Approximation<a class="headerlink" href="#approximation" title="Permalink to this headline">#</a></h2>
 <p>The <a class="reference external" href="https://numpy.org/devdocs/reference/routines.linalg.html#module-numpy.linalg">linalg</a> module includes a <code class="docutils literal notranslate"><span class="pre">norm</span></code> function, which computes the norm of a vector or matrix represented in a NumPy array. For example, from the SVD explanation above, we would expect the norm of the difference between <code class="docutils literal notranslate"><span class="pre">img_gray</span></code> and the reconstructed SVD product to be small. As expected, you should see something like</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -763,7 +898,7 @@ compatible for multiplication. However, this is not true as <code class="docutil
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-svd_48_0.png" src="../_images/tutorial-svd_48_0.png" />
+<img alt="../_images/7cf7c50086fc9025d46d39a4d8d672bff22fbb8b24f7055bf7e39e3e5dda5ffb.png" src="../_images/7cf7c50086fc9025d46d39a4d8d672bff22fbb8b24f7055bf7e39e3e5dda5ffb.png" />
 </div>
 </div>
 <p>In the graph, we can see that although we have 768 singular values in <code class="docutils literal notranslate"><span class="pre">s</span></code>, most of those (after the 150th entry or so) are pretty small. So it might make sense to use only the information related to the first (say, 50) <em>singular values</em> to build a more economical approximation to our image.</p>
@@ -793,12 +928,12 @@ compatible for multiplication. However, this is not true as <code class="docutil
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-svd_54_0.png" src="../_images/tutorial-svd_54_0.png" />
+<img alt="../_images/8e25207770c356c114adb0f23c8ce1227e4f661f16998b79452f2b9ab78722fb.png" src="../_images/8e25207770c356c114adb0f23c8ce1227e4f661f16998b79452f2b9ab78722fb.png" />
 </div>
 </div>
 <p>Now, you can go ahead and repeat this experiment with other values of <code class="docutils literal notranslate"><span class="pre">k</span></code>, and each of your experiments should give you a slightly better (or worse) image depending on the value you choose.</p>
-<div class="section" id="applying-to-all-colors">
-<h3>Applying to all colors<a class="headerlink" href="#applying-to-all-colors" title="Permalink to this headline">¶</a></h3>
+<section id="applying-to-all-colors">
+<h3>Applying to all colors<a class="headerlink" href="#applying-to-all-colors" title="Permalink to this headline">#</a></h3>
 <p>Now we want to do the same kind of operation, but to all three colors. Our first instinct might be to repeat the same operation we did above to each color matrix individually. However, NumPy’s <em>broadcasting</em> takes care of this
 for us.</p>
 <p>If our array has more than two dimensions, then the SVD can be applied to all axes at once. However, the linear algebra functions in NumPy expect to see an array of the form <code class="docutils literal notranslate"><span class="pre">(n,</span> <span class="pre">M,</span> <span class="pre">N)</span></code>, where the first axis <code class="docutils literal notranslate"><span class="pre">n</span></code> represents the number of <code class="docutils literal notranslate"><span class="pre">MxN</span></code> matrices in the stack.</p>
@@ -856,9 +991,9 @@ for us.</p>
 </div>
 </div>
 <p>To build the final approximation matrix, we must understand how multiplication across different axes works.</p>
-</div>
-<div class="section" id="products-with-n-dimensional-arrays">
-<h3>Products with n-dimensional arrays<a class="headerlink" href="#products-with-n-dimensional-arrays" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="products-with-n-dimensional-arrays">
+<h3>Products with n-dimensional arrays<a class="headerlink" href="#products-with-n-dimensional-arrays" title="Permalink to this headline">#</a></h3>
 <p>If you have worked before with only one- or two-dimensional arrays in NumPy, you might use <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.dot.html#numpy.dot">numpy.dot</a> and <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.matmul.html#numpy.matmul">numpy.matmul</a> (or the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator) interchangeably. However, for n-dimensional arrays, they work in very different ways. For more details, check the documentation on <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.matmul.html#numpy.matmul">numpy.matmul</a>.</p>
 <p>Now, to build our approximation, we first need to make sure that our singular values are ready for multiplication, so we build our <code class="docutils literal notranslate"><span class="pre">Sigma</span></code> matrix similarly to what we did before. The <code class="docutils literal notranslate"><span class="pre">Sigma</span></code> array must have dimensions <code class="docutils literal notranslate"><span class="pre">(3,</span> <span class="pre">768,</span> <span class="pre">1024)</span></code>. In order to add the singular values to the diagonal of <code class="docutils literal notranslate"><span class="pre">Sigma</span></code>, we will again use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.fill_diagonal.html">fill_diagonal</a> function, using each of the 3 rows in <code class="docutils literal notranslate"><span class="pre">s</span></code> as the diagonal for each of the 3 matrices in <code class="docutils literal notranslate"><span class="pre">Sigma</span></code>:</p>
 <div class="cell docutils container">
@@ -914,7 +1049,7 @@ for us.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/tutorial-svd_74_0.png" src="../_images/tutorial-svd_74_0.png" />
+<img alt="../_images/110dec3d5b200bbe70a3a8d88e649950696f468938eab6da2a404e37402eac89.png" src="../_images/110dec3d5b200bbe70a3a8d88e649950696f468938eab6da2a404e37402eac89.png" />
 </div>
 </div>
 <p>In fact, <code class="docutils literal notranslate"><span class="pre">imshow</span></code> peforms this clipping under-the-hood, so if you skip the first line in the previous code cell, you might see a warning message saying <code class="docutils literal notranslate"><span class="pre">&quot;Clipping</span> <span class="pre">input</span> <span class="pre">data</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">valid</span> <span class="pre">range</span> <span class="pre">for</span> <span class="pre">imshow</span> <span class="pre">with</span> <span class="pre">RGB</span> <span class="pre">data</span> <span class="pre">([0..1]</span> <span class="pre">for</span> <span class="pre">floats</span> <span class="pre">or</span> <span class="pre">[0..255]</span> <span class="pre">for</span> <span class="pre">integers).&quot;</span></code></p>
@@ -953,19 +1088,19 @@ placeholder for other axes. For more details, see the documentation on <a class=
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
 </pre></div>
 </div>
-<img alt="../_images/tutorial-svd_80_1.png" src="../_images/tutorial-svd_80_1.png" />
+<img alt="../_images/6c141c67b680a37a2a56bd3d1492f2efa817904dfdda6467dcc1aef91e1a8147.png" src="../_images/6c141c67b680a37a2a56bd3d1492f2efa817904dfdda6467dcc1aef91e1a8147.png" />
 </div>
 </div>
 <p>Even though the image is not as sharp, using a small number of <code class="docutils literal notranslate"><span class="pre">k</span></code> singular values (compared to the original set of 768 values), we can recover many of the distinguishing features from this image.</p>
-</div>
-<div class="section" id="final-words">
-<h3>Final words<a class="headerlink" href="#final-words" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="final-words">
+<h3>Final words<a class="headerlink" href="#final-words" title="Permalink to this headline">#</a></h3>
 <p>Of course, this is not the best method to <em>approximate</em> an image. However, there is, in fact, a result in linear algebra that says that the approximation we built above is the best we can get to the original matrix in
 terms of the norm of the difference. For more information, see <em>G. H. Golub and C. F. Van Loan, Matrix Computations, Baltimore, MD, Johns Hopkins University Press, 1985</em>.</p>
-</div>
-</div>
-<div class="section" id="further-reading">
-<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://docs.python.org/dev/tutorial/index.html">Python tutorial</a></p></li>
 <li><p><a class="reference external" href="https://numpy.org/devdocs/reference/index.html#reference">NumPy Reference</a></p></li>
@@ -973,15 +1108,17 @@ terms of the norm of the difference. For more information, see <em>G. H. Golub a
 <li><p><a class="reference external" href="https://scipy-lectures.org">SciPy Lecture Notes</a></p></li>
 <li><p><a class="reference external" href="http://mathesaurus.sf.net/">A matlab, R, IDL, NumPy/SciPy dictionary</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="../features.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -997,24 +1134,28 @@ terms of the norm of the difference. For more information, see <em>G. H. Golub a
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By the NumPy community<br/>
+  
+      &copy; Copyright 2020, the NumPy community.<br/>
+</p>
+        </footer>
+    </div>
     
-      By the NumPy community<br/>
-    
-        &copy; Copyright 2020, the NumPy community.<br/>
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>
