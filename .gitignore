@@ -92,3 +92,8 @@ Thumbs.db
 ###################################
 site/_build/*
 site/notebooks/*
+
+# Content generated during notebook execution
+content/mooreslaw_regression*
+content/tutorial-x-ray-image-processing/xray_image.gif
+content/video
