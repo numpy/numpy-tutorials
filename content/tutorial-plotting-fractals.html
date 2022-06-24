@@ -41,7 +41,8 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -596,7 +597,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="plotting-fractals">
+  <section class="tex2jax_ignore mathjax_ignore" id="plotting-fractals">
 <h1>Plotting Fractals<a class="headerlink" href="#plotting-fractals" title="Permalink to this headline">#</a></h1>
 <p><img alt="Fractal picture" src="../_images/fractal.png" /></p>
 <p>Fractals are beautiful, compelling mathematical forms that can be oftentimes created from a relatively simple set of instructions. In nature they can be found in various places, such as coastlines, seashells, and ferns, and even were used in creating certain types of antennas. The mathematical idea of fractals was known for quite some time, but they really began to be truly appreciated in the 1970’s as advancements in computer graphics and some accidental discoveries lead researchers like <a class="reference external" href="https://en.wikipedia.org/wiki/Benoit_Mandelbrot">Benoît Mandelbrot</a> to stumble upon the truly mystifying visualizations that fractals possess.</p>
@@ -646,8 +647,8 @@ title="Print to PDF"
 <h2>Warmup<a class="headerlink" href="#warmup" title="Permalink to this headline">#</a></h2>
 <p>To gain some intuition for what fractals are, we will begin with an example.</p>
 <p>Consider the following equation:</p>
-<p>$f(z) = z^2 -1 $</p>
-<p>where <code class="docutils literal notranslate"><span class="pre">z</span></code> is a complex number (i.e of the form $a + bi$ )</p>
+<p><span class="math notranslate nohighlight">\(f(z) = z^2 -1 \)</span></p>
+<p>where <code class="docutils literal notranslate"><span class="pre">z</span></code> is a complex number (i.e of the form <span class="math notranslate nohighlight">\(a + bi\)</span> )</p>
 <p>For our convenience, we will write a Python function for it</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -659,7 +660,7 @@ title="Print to PDF"
 </div>
 <p>Note that the square function we used is an example of a <strong><a class="reference external" href="https://numpy.org/doc/stable/reference/ufuncs.html">NumPy universal function</a></strong>; we will come back to the significance of this decision shortly.</p>
 <p>To gain some intuition for the behaviour of the function, we can try plugging in some different values.</p>
-<p>For $z = 0$, we would expect to get $-1$:</p>
+<p>For <span class="math notranslate nohighlight">\(z = 0\)</span>, we would expect to get <span class="math notranslate nohighlight">\(-1\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -718,7 +719,7 @@ title="Print to PDF"
 <img alt="../_images/ae2357050e395783912ad83bd159ae7da59c7616a4d1f95c1458fe8937227c6c.png" src="../_images/ae2357050e395783912ad83bd159ae7da59c7616a4d1f95c1458fe8937227c6c.png" />
 </div>
 </div>
-<p>This gives us a rough idea of what one iteration of the function does. Certain areas (notably in the areas closest to $(0,0i)$) remain rather small while other areas grow quite considerably. Note that we lose information about the output by taking the absolute value, but it is the only way for us to be able to make a plot.</p>
+<p>This gives us a rough idea of what one iteration of the function does. Certain areas (notably in the areas closest to <span class="math notranslate nohighlight">\((0,0i)\)</span>) remain rather small while other areas grow quite considerably. Note that we lose information about the output by taking the absolute value, but it is the only way for us to be able to make a plot.</p>
 <p>Let’s see what happens when we apply 2 iterations to the mesh:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -742,9 +743,9 @@ title="Print to PDF"
 <p>Once again, we see that values around the origin remain small, and values with a larger absolute value (or modulus) “explode”.</p>
 <p>From first impression, its behaviour appears to be normal, and may even seem mundane. Fractals tend to have more to them then what meets the eye; the exotic behavior shows itself when we begin applying more iterations.</p>
 <p>Consider three complex numbers:</p>
-<p>$z_1 = 0.4 + 0.4i $,</p>
-<p>$z_2 = z_1 + 0.1$,</p>
-<p>$z_3 = z_1 + 0.1i$</p>
+<p><span class="math notranslate nohighlight">\(z_1 = 0.4 + 0.4i \)</span>,</p>
+<p><span class="math notranslate nohighlight">\(z_2 = z_1 + 0.1\)</span>,</p>
+<p><span class="math notranslate nohighlight">\(z_3 = z_1 + 0.1i\)</span></p>
 <p>Given the shape of our first two plots, we would expect that these values would remain near the origin as we apply iterations to them. Let us see what happens when we apply 10 iterations to each value:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -775,7 +776,7 @@ title="Print to PDF"
 </div>
 <p>To our surprise, the behaviour of the function did not come close to matching our hypothesis. This is a prime example of the chaotic behaviour fractals possess. In the first two plots, the value “exploded” on the last iteration, jumping way beyond the region that it was contained in previously. The third plot on the other hand remained bounded to a small region close to the origin, yielding completely different behaviour despite the tiny change in value.</p>
 <p>This leads us to an extremely important question: <strong>How many iterations can be applied to each value before they diverge (“explode”)?</strong></p>
-<p>As we saw from the first two plots, the further the values were from the origin, the faster they generally exploded. Although the behaviour is uncertain for smaller values (like $z_1, z_2, z_3$), we can assume that if a value surpasses a certain distance from the origin (say 2) that it is doomed to diverge. We will call this threshold the <strong>radius</strong>.</p>
+<p>As we saw from the first two plots, the further the values were from the origin, the faster they generally exploded. Although the behaviour is uncertain for smaller values (like <span class="math notranslate nohighlight">\(z_1, z_2, z_3\)</span>), we can assume that if a value surpasses a certain distance from the origin (say 2) that it is doomed to diverge. We will call this threshold the <strong>radius</strong>.</p>
 <p>This allows us to quantify the behaviour of the function for a particular value without having to perform as many computations. Once the radius is surpassed, we are allowed to stop iterating, which gives us a way of answering the question we posed. If we tally how many computations were applied before divergence, we gain insight into the behaviour of the function that would be hard to keep track of otherwise.</p>
 <p>Of course, we can do much better and design a function that performs the procedure on an entire mesh.</p>
 <div class="cell docutils container">
@@ -798,7 +799,7 @@ title="Print to PDF"
 </div>
 <p>The behaviour of this function may look confusing at first glance, so it will help to explain some of the notation.</p>
 <p>Our goal is to iterate over each value in the mesh and to tally the number of iterations before the value diverges. Since some values will diverge quicker than others, we need a procedure that only iterates over values that have an absolute value that is sufficiently small enough. We also want to stop tallying values once they surpass the radius. For this, we can use <strong><a class="reference external" href="https://numpy.org/devdocs/reference/arrays.indexing.html#boolean-array-indexing">Boolean Indexing</a></strong>, a NumPy feature that when paired with universal functions is unbeatable. Boolean Indexing allows for operations to be performed conditionally on a NumPy array without having to resort to looping over and checking for each array value individually.</p>
-<p>In our case, we use a loop to apply iterations to our function $f(z) = z^2 -1 $ and keep tally. Using Boolean indexing, we only apply the iterations to values that have an absolute value less than 2.</p>
+<p>In our case, we use a loop to apply iterations to our function <span class="math notranslate nohighlight">\(f(z) = z^2 -1 \)</span> and keep tally. Using Boolean indexing, we only apply the iterations to values that have an absolute value less than 2.</p>
 <p>With that out of the way, we can go about plotting our first fractal! We will use the <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.imshow.html"><strong>imshow</strong></a> function to create a colour-coded visualization of the tallies.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -830,8 +831,8 @@ title="Print to PDF"
 <section id="julia-set">
 <h2>Julia set<a class="headerlink" href="#julia-set" title="Permalink to this headline">#</a></h2>
 <p>What we just explored was an example of a fractal visualization of a specific Julia Set.</p>
-<p>Consider the function $f(z) = z^2 + c$ where $c$ is a complex number. The <strong>filled-in Julia set</strong> of $c$ is the set of all complex numbers <code class="docutils literal notranslate"><span class="pre">z</span></code> in which the function converges at $f(z)$. Likewise, the boundary of the filled-in Julia set is what we call the <strong>Julia set</strong>. In our above visualization, we can see that the yellow region represents an approximation of the filled-in Julia set for $c = -1$ and the greenish-yellow border would contain the Julia set.</p>
-<p>To gain access to a wider range of “Julia fractals”, we can write a function that allows for different values of $c$ to be passed in:</p>
+<p>Consider the function <span class="math notranslate nohighlight">\(f(z) = z^2 + c\)</span> where <span class="math notranslate nohighlight">\(c\)</span> is a complex number. The <strong>filled-in Julia set</strong> of <span class="math notranslate nohighlight">\(c\)</span> is the set of all complex numbers <code class="docutils literal notranslate"><span class="pre">z</span></code> in which the function converges at <span class="math notranslate nohighlight">\(f(z)\)</span>. Likewise, the boundary of the filled-in Julia set is what we call the <strong>Julia set</strong>. In our above visualization, we can see that the yellow region represents an approximation of the filled-in Julia set for <span class="math notranslate nohighlight">\(c = -1\)</span> and the greenish-yellow border would contain the Julia set.</p>
+<p>To gain access to a wider range of “Julia fractals”, we can write a function that allows for different values of <span class="math notranslate nohighlight">\(c\)</span> to be passed in:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">julia</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">c</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
@@ -895,8 +896,8 @@ title="Print to PDF"
 <img alt="../_images/6840954d8c64d8ba5823ca32fd61d9eac4104372b92d7e70e469c0814cba0ad3.png" src="../_images/6840954d8c64d8ba5823ca32fd61d9eac4104372b92d7e70e469c0814cba0ad3.png" />
 </div>
 </div>
-<p>We also can explore some different Julia sets by experimenting with different values of $c$. It can be surprising how much influence it has on the shape of the fractal.</p>
-<p>For example, setting $c = \frac{\pi}{10}$ gives us a very elegant cloud shape, while setting c = $-\frac{3}{4} + 0.4i$ yields a completely different pattern.</p>
+<p>We also can explore some different Julia sets by experimenting with different values of <span class="math notranslate nohighlight">\(c\)</span>. It can be surprising how much influence it has on the shape of the fractal.</p>
+<p>For example, setting <span class="math notranslate nohighlight">\(c = \frac{\pi}{10}\)</span> gives us a very elegant cloud shape, while setting c = <span class="math notranslate nohighlight">\(-\frac{3}{4} + 0.4i\)</span> yields a completely different pattern.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">julia</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span> <span class="n">num_iter</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -926,7 +927,7 @@ title="Print to PDF"
 </section>
 <section id="mandelbrot-set">
 <h2>Mandelbrot set<a class="headerlink" href="#mandelbrot-set" title="Permalink to this headline">#</a></h2>
-<p>Closely related to the Julia set is the famous <strong>Mandelbrot set</strong>, which has a slightly different definition. Once again, we define $f(z) = z^2 + c$ where $c$ is a complex number, but this time our focus is on our choice of $c$. We say that $c$ is an element of the Mandelbrot set if f converges at $z = 0$. An equivalent definition is to say that $c$ is an element of the Mandelbrot set if $f(c)$ can be iterated infinitely and not ‘explode’. We will tweak our Julia function slightly (and rename it appropriately) so that we can plot a visualization of the Mandelbrot set, which possesses an elegant fractal pattern.</p>
+<p>Closely related to the Julia set is the famous <strong>Mandelbrot set</strong>, which has a slightly different definition. Once again, we define <span class="math notranslate nohighlight">\(f(z) = z^2 + c\)</span> where <span class="math notranslate nohighlight">\(c\)</span> is a complex number, but this time our focus is on our choice of <span class="math notranslate nohighlight">\(c\)</span>. We say that <span class="math notranslate nohighlight">\(c\)</span> is an element of the Mandelbrot set if f converges at <span class="math notranslate nohighlight">\(z = 0\)</span>. An equivalent definition is to say that <span class="math notranslate nohighlight">\(c\)</span> is an element of the Mandelbrot set if <span class="math notranslate nohighlight">\(f(c)\)</span> can be iterated infinitely and not ‘explode’. We will tweak our Julia function slightly (and rename it appropriately) so that we can plot a visualization of the Mandelbrot set, which possesses an elegant fractal pattern.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mandelbrot</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">num_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
@@ -961,7 +962,7 @@ title="Print to PDF"
 </section>
 <section id="generalizing-the-julia-set">
 <h2>Generalizing the Julia set<a class="headerlink" href="#generalizing-the-julia-set" title="Permalink to this headline">#</a></h2>
-<p>We can generalize our Julia function even further by giving it a parameter for which universal function we would like to pass in. This would allow us to plot fractals of the form $f(z) = g(z) + c$ where g is a universal function selected by us.</p>
+<p>We can generalize our Julia function even further by giving it a parameter for which universal function we would like to pass in. This would allow us to plot fractals of the form <span class="math notranslate nohighlight">\(f(z) = g(z) + c\)</span> where g is a universal function selected by us.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">general_julia</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">c</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">,</span> <span class="n">num_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
@@ -979,7 +980,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>One cool set of fractals that can be plotted using our general Julia function are ones of the form $f(z) = z^n + c$ for some positive integer $n$. A very cool pattern which emerges is that the number of regions that ‘stick out’ matches the degree in which we raise the function to while iterating over it.</p>
+<p>One cool set of fractals that can be plotted using our general Julia function are ones of the form <span class="math notranslate nohighlight">\(f(z) = z^n + c\)</span> for some positive integer <span class="math notranslate nohighlight">\(n\)</span>. A very cool pattern which emerges is that the number of regions that ‘stick out’ matches the degree in which we raise the function to while iterating over it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
@@ -1001,11 +1002,11 @@ title="Print to PDF"
 <img alt="../_images/cb9400fc83987108fe3bf7f94504557fcecd8a2ce39054f2ee8842b012e91a1c.png" src="../_images/cb9400fc83987108fe3bf7f94504557fcecd8a2ce39054f2ee8842b012e91a1c.png" />
 </div>
 </div>
-<p>Needless to say, there is a large amount of exploring that can be done by fiddling with the inputted function, value of $c$, number of iterations, radius and even the density of the mesh and choice of colours.</p>
+<p>Needless to say, there is a large amount of exploring that can be done by fiddling with the inputted function, value of <span class="math notranslate nohighlight">\(c\)</span>, number of iterations, radius and even the density of the mesh and choice of colours.</p>
 <section id="newton-fractals">
 <h3>Newton Fractals<a class="headerlink" href="#newton-fractals" title="Permalink to this headline">#</a></h3>
 <p>Newton fractals are a specific class of fractals, where iterations involve adding or subtracting the ratio of a function (often a polynomial) and its derivative to the input values. Mathematically, it can be expressed as:</p>
-<p>$z := z - \frac{f(z)}{f’(z)}$</p>
+<p><span class="math notranslate nohighlight">\(z := z - \frac{f(z)}{f'(z)}\)</span></p>
 <p>We will define a general version of the fractal which will allow for different variations to be plotted by passing in our functions of choice.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1066,9 +1067,9 @@ title="Print to PDF"
 </div>
 </div>
 <p>Beautiful! Let’s try another one:</p>
-<p>f(z) = $tan^2(z)$</p>
-<p>$\frac{df}{dz} = 2 \cdot tan(z) sec^2(z) =\frac{2 \cdot tan(z)}{cos^2(z)}$</p>
-<p>This makes $\frac{f(z)}{f’(z)} =  tan^2(z) \cdot \frac{cos^2(z)}{2 \cdot tan(z)} = \frac{tan(z)\cdot cos^2(z)}{2} = \frac{sin(z)\cdot cos(z)}{2}$</p>
+<p>f(z) = <span class="math notranslate nohighlight">\(tan^2(z)\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac{df}{dz} = 2 \cdot tan(z) sec^2(z) =\frac{2 \cdot tan(z)}{cos^2(z)}\)</span></p>
+<p>This makes <span class="math notranslate nohighlight">\(\frac{f(z)}{f'(z)} =  tan^2(z) \cdot \frac{cos^2(z)}{2 \cdot tan(z)} = \frac{tan(z)\cdot cos^2(z)}{2} = \frac{sin(z)\cdot cos(z)}{2}\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f_tan</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
@@ -1096,8 +1097,8 @@ title="Print to PDF"
 </div>
 <p>Note that you sometimes have to play with the radius in order to get a neat looking fractal.</p>
 <p>Finally, we can go a little bit wild with our function selection</p>
-<p>$f(z) = \sum_{i=1}^{10} sin^i(z)$</p>
-<p>$\frac{df}{dz} = \sum_{i=1}^{10} i \cdot sin^{i-1}(z) \cdot cos(z)$</p>
+<p><span class="math notranslate nohighlight">\(f(z) = \sum_{i=1}^{10} sin^i(z)\)</span></p>
+<p><span class="math notranslate nohighlight">\(\frac{df}{dz} = \sum_{i=1}^{10} i \cdot sin^{i-1}(z) \cdot cos(z)\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sin_sum</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
@@ -1138,7 +1139,7 @@ title="Print to PDF"
 <p>What makes fractals more exciting is how much there is to explore once you become familiar with the basics. Now we will wrap up our tutorial by exploring some of the different ways one can experiment in creating unique fractals. I encourage you to try some things out on your own (if you have not done so already).</p>
 <p>One of the first places to experiment would be with the function for the generalized Julia set, where we can try passing in different functions as parameters.</p>
 <p>Let’s start by choosing</p>
-<p>$f(z) = tan(z^2)$</p>
+<p><span class="math notranslate nohighlight">\(f(z) = tan(z^2)\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
@@ -1162,7 +1163,7 @@ title="Print to PDF"
 </div>
 <p>What happens if we compose our defined function inside of a sine function?</p>
 <p>Let’s try defining</p>
-<p>$g(z) = sin(f(z)) = sin(tan(z^2))$</p>
+<p><span class="math notranslate nohighlight">\(g(z) = sin(f(z)) = sin(tan(z^2))\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
@@ -1185,7 +1186,7 @@ title="Print to PDF"
 </div>
 </div>
 <p>Next, let’s create a function that applies both f and g to the inputs each iteration and adds the result together:</p>
-<p>$h(z) = f(z) + g(z) = tan(z^2) + sin(tan(z^2))$</p>
+<p><span class="math notranslate nohighlight">\(h(z) = f(z) + g(z) = tan(z^2) + sin(tan(z^2))\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">h</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
@@ -1237,10 +1238,10 @@ title="Print to PDF"
 <ul class="simple">
 <li><p>Fractal images are created by iterating a function over a set of values, and keeping tally of how long it takes for each value to pass a certain threshold</p></li>
 <li><p>The colours in the image correspond to the tally counts of the values</p></li>
-<li><p>The filled-in Julia set for $c$ consists of all complex numbers <code class="docutils literal notranslate"><span class="pre">z</span></code> in which $f(z) = z^2 + c$ converges</p></li>
-<li><p>The Julia set for $c$ is the set of complex numbers that make up the boundary of the filled-in Julia set</p></li>
-<li><p>The Mandelbrot set is all values $c$ in which $f(z) = z^2 + c$ converges at 0</p></li>
-<li><p>Newton fractals use functions of the form $f(z) = z - \frac{p(z)}{p’(z)}$</p></li>
+<li><p>The filled-in Julia set for <span class="math notranslate nohighlight">\(c\)</span> consists of all complex numbers <code class="docutils literal notranslate"><span class="pre">z</span></code> in which <span class="math notranslate nohighlight">\(f(z) = z^2 + c\)</span> converges</p></li>
+<li><p>The Julia set for <span class="math notranslate nohighlight">\(c\)</span> is the set of complex numbers that make up the boundary of the filled-in Julia set</p></li>
+<li><p>The Mandelbrot set is all values <span class="math notranslate nohighlight">\(c\)</span> in which <span class="math notranslate nohighlight">\(f(z) = z^2 + c\)</span> converges at 0</p></li>
+<li><p>Newton fractals use functions of the form <span class="math notranslate nohighlight">\(f(z) = z - \frac{p(z)}{p'(z)}\)</span></p></li>
 <li><p>The fractal images can vary as you adjust the number of iterations, radius of convergence, mesh size, colours, function choice and parameter choice</p></li>
 </ul>
 </section>

@@ -41,6 +41,8 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -589,7 +591,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="linear-algebra-on-n-dimensional-arrays">
+  <section class="tex2jax_ignore mathjax_ignore" id="linear-algebra-on-n-dimensional-arrays">
 <h1>Linear algebra on n-dimensional arrays<a class="headerlink" href="#linear-algebra-on-n-dimensional-arrays" title="Permalink to this headline">#</a></h1>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">#</a></h2>
@@ -598,7 +600,7 @@ title="Print to PDF"
 </section>
 <section id="learner-profile">
 <h2>Learner profile<a class="headerlink" href="#learner-profile" title="Permalink to this headline">#</a></h2>
-<p>This tutorial is for people who have a basic understanding of linear algebra and arrays in NumPy and want to understand how n-dimensional ($n&gt;=2$) arrays are represented and can be manipulated. In particular, if you don’t know how to apply common functions to n-dimensional arrays (without using for-loops), or if you want to understand axis and shape properties for n-dimensional arrays, this tutorial might be of help.</p>
+<p>This tutorial is for people who have a basic understanding of linear algebra and arrays in NumPy and want to understand how n-dimensional (<span class="math notranslate nohighlight">\(n&gt;=2\)</span>) arrays are represented and can be manipulated. In particular, if you don’t know how to apply common functions to n-dimensional arrays (without using for-loops), or if you want to understand axis and shape properties for n-dimensional arrays, this tutorial might be of help.</p>
 </section>
 <section id="learning-objectives">
 <h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permalink to this headline">#</a></h2>
@@ -779,13 +781,15 @@ about maximum and minimum values for this array:</p>
 </div>
 </div>
 </div>
-<p>In order to extract information from a given matrix, we can use the SVD to obtain 3 arrays which can be multiplied to obtain the original matrix. From the theory of linear algebra, given a matrix $A$, the following product can be computed:</p>
-<p>$$U \Sigma V^T = A$$</p>
-<p>where $U$ and $V^T$ are square and $\Sigma$ is the same size as $A$. $\Sigma$ is a diagonal matrix and contains the <a class="reference external" href="https://en.wikipedia.org/wiki/Singular_value">singular values</a> of $A$, organized from largest to smallest. These values are always non-negative and can be used as an indicator of the “importance” of some features represented by the matrix $A$.</p>
+<p>In order to extract information from a given matrix, we can use the SVD to obtain 3 arrays which can be multiplied to obtain the original matrix. From the theory of linear algebra, given a matrix <span class="math notranslate nohighlight">\(A\)</span>, the following product can be computed:</p>
+<div class="math notranslate nohighlight">
+\[U \Sigma V^T = A\]</div>
+<p>where <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V^T\)</span> are square and <span class="math notranslate nohighlight">\(\Sigma\)</span> is the same size as <span class="math notranslate nohighlight">\(A\)</span>. <span class="math notranslate nohighlight">\(\Sigma\)</span> is a diagonal matrix and contains the <a class="reference external" href="https://en.wikipedia.org/wiki/Singular_value">singular values</a> of <span class="math notranslate nohighlight">\(A\)</span>, organized from largest to smallest. These values are always non-negative and can be used as an indicator of the “importance” of some features represented by the matrix <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <p>Let’s see how this works in practice with just one matrix first. Note that according to <a class="reference external" href="https://en.wikipedia.org/wiki/Grayscale#Colorimetric_(perceptual_luminance-reserving)_conversion_to_grayscale">colorimetry</a>,
 it is possible to obtain a fairly reasonable grayscale version of our color image if we apply the formula</p>
-<p>$$Y = 0.2126 R + 0.7152 G + 0.0722 B$$</p>
-<p>where $Y$ is the array representing the grayscale image, and $R$, $G$ and $B$ are the red, green and blue channel arrays we had originally. Notice we can use the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator (the matrix multiplication operator for NumPy arrays, see <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.matmul.html#numpy.matmul">numpy.matmul</a>) for this:</p>
+<div class="math notranslate nohighlight">
+\[Y = 0.2126 R + 0.7152 G + 0.0722 B\]</div>
+<p>where <span class="math notranslate nohighlight">\(Y\)</span> is the array representing the grayscale image, and <span class="math notranslate nohighlight">\(R\)</span>, <span class="math notranslate nohighlight">\(G\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are the red, green and blue channel arrays we had originally. Notice we can use the <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> operator (the matrix multiplication operator for NumPy arrays, see <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.matmul.html#numpy.matmul">numpy.matmul</a>) for this:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_gray</span> <span class="o">=</span> <span class="n">img_array</span> <span class="o">@</span> <span class="p">[</span><span class="mf">0.2126</span><span class="p">,</span> <span class="mf">0.7152</span><span class="p">,</span> <span class="mf">0.0722</span><span class="p">]</span>
@@ -846,7 +850,7 @@ compatible for multiplication. However, this is not true as <code class="docutil
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">@</span> <span class="n">Vt</span>
 </pre></div>
 </div>
-<p>results in a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. This happens because having a one-dimensional array for <code class="docutils literal notranslate"><span class="pre">s</span></code>, in this case, is much more economic in practice than building a diagonal matrix with the same data. To reconstruct the original matrix, we can rebuild the diagonal matrix $\Sigma$ with the elements of <code class="docutils literal notranslate"><span class="pre">s</span></code> in its diagonal and with the appropriate dimensions for multiplying: in our case, $\Sigma$ should be 768x1024 since <code class="docutils literal notranslate"><span class="pre">U</span></code> is 768x768 and <code class="docutils literal notranslate"><span class="pre">Vt</span></code> is 1024x1024. In order to add the singular values to the diagonal of <code class="docutils literal notranslate"><span class="pre">Sigma</span></code>, we will use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.fill_diagonal.html">fill_diagonal</a> function from NumPy:</p>
+<p>results in a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. This happens because having a one-dimensional array for <code class="docutils literal notranslate"><span class="pre">s</span></code>, in this case, is much more economic in practice than building a diagonal matrix with the same data. To reconstruct the original matrix, we can rebuild the diagonal matrix <span class="math notranslate nohighlight">\(\Sigma\)</span> with the elements of <code class="docutils literal notranslate"><span class="pre">s</span></code> in its diagonal and with the appropriate dimensions for multiplying: in our case, <span class="math notranslate nohighlight">\(\Sigma\)</span> should be 768x1024 since <code class="docutils literal notranslate"><span class="pre">U</span></code> is 768x768 and <code class="docutils literal notranslate"><span class="pre">Vt</span></code> is 1024x1024. In order to add the singular values to the diagonal of <code class="docutils literal notranslate"><span class="pre">Sigma</span></code>, we will use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.fill_diagonal.html">fill_diagonal</a> function from NumPy:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -870,7 +874,7 @@ compatible for multiplication. However, this is not true as <code class="docutil
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.43712046073728e-12
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4049006864018454e-12
 </pre></div>
 </div>
 </div>
@@ -1034,7 +1038,7 @@ for us.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-5.558487697898684e-15, 1.0000000000000053)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-5.319529539082879e-15, 1.0000000000000049)
 </pre></div>
 </div>
 </div>

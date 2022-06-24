@@ -41,6 +41,8 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -663,7 +665,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="analyzing-the-impact-of-the-lockdown-on-air-quality-in-delhi-india">
+  <section class="tex2jax_ignore mathjax_ignore" id="analyzing-the-impact-of-the-lockdown-on-air-quality-in-delhi-india">
 <h1>Analyzing the impact of the lockdown on air quality in Delhi, India<a class="headerlink" href="#analyzing-the-impact-of-the-lockdown-on-air-quality-in-delhi-india" title="Permalink to this headline">#</a></h1>
 <p><img alt="A grid showing the India Gate in smog above and clear air below" src="../_images/11-delhi-aqi.jpg" /></p>
 <section id="what-you-ll-do">
@@ -775,9 +777,10 @@ two sets will be processed slightly differently, as we’ll see later on.</p>
 <ul>
 <li><p>Collect 24-hourly average concentration values for the standard pollutants; 8-hourly in case of CO and O3.</p></li>
 <li><p>Calculate the sub-indices for these pollutants with the formula:</p>
-<p>$$
-Ip = \dfrac{\text{IHi – ILo}}{\text{BPHi – BPLo}}\cdot{\text{Cp – BPLo}} + \text{ILo}
-$$</p>
+<div class="math notranslate nohighlight">
+\[
+    Ip = \dfrac{\text{IHi – ILo}}{\text{BPHi – BPLo}}\cdot{\text{Cp – BPLo}} + \text{ILo}
+    \]</div>
 <p>Where,</p>
 <p><code class="docutils literal notranslate"><span class="pre">Ip</span></code> = sub-index of pollutant <code class="docutils literal notranslate"><span class="pre">p</span></code><br />
 <code class="docutils literal notranslate"><span class="pre">Cp</span></code> = averaged concentration of pollutant <code class="docutils literal notranslate"><span class="pre">p</span></code><br />
@@ -840,9 +843,10 @@ window of 8 hours. We will write a simple function <code class="docutils literal
 <section id="sub-indices">
 <h3>Sub-indices<a class="headerlink" href="#sub-indices" title="Permalink to this headline">#</a></h3>
 <p>The subindices for each pollutant are calculated according to the linear relationship between the AQI and standard breakpoint ranges with the formula as above:</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[
 Ip = \dfrac{\text{IHi – ILo}}{\text{BPHi – BPLo}}\cdot{\text{Cp – BPLo}} + \text{ILo}
-$$</p>
+\]</div>
 <p>The <code class="docutils literal notranslate"><span class="pre">compute_indices</span></code> function first fetches the correct upper and lower bounds of AQI categories and breakpoint concentrations for the input concentration and pollutant with the help of arrays <code class="docutils literal notranslate"><span class="pre">AQI</span></code> and <code class="docutils literal notranslate"><span class="pre">breakpoints</span></code> we created above. Then, it feeds these values into the formula to calculate the sub-index.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -984,19 +988,20 @@ the data from 31st May, we truncated that during the moving averages step.</p>
 <section id="defining-the-hypothesis">
 <h3>Defining the hypothesis<a class="headerlink" href="#defining-the-hypothesis" title="Permalink to this headline">#</a></h3>
 <p>Let us assume that there is no significant difference between the sample means before and after the lockdown. This will be the null hypothesis. The alternative hypothesis would be that there <em>is</em> a significant difference between the means and the AQI <em>improved</em>. Mathematically,</p>
-<p>$H_{0}: \mu_\text{after-before} = 0$ <br />
-$H_{a}: \mu_\text{after-before} &lt; 0$</p>
+<p><span class="math notranslate nohighlight">\(H_{0}: \mu_\text{after-before} = 0\)</span> <br />
+<span class="math notranslate nohighlight">\(H_{a}: \mu_\text{after-before} &lt; 0\)</span></p>
 </section>
 <section id="calculating-the-test-statistics">
 <h3>Calculating the test statistics<a class="headerlink" href="#calculating-the-test-statistics" title="Permalink to this headline">#</a></h3>
 <p>We will use the <code class="docutils literal notranslate"><span class="pre">t</span></code> statistic to evaluate our hypothesis and even calculate the <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">value</span></code> from it. The formula for the <code class="docutils literal notranslate"><span class="pre">t</span></code> statistic is:</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[
 t = \frac{\mu_\text{after-before}}{\sqrt{\sigma^{2}/n}}
-$$</p>
+\]</div>
 <p>where,</p>
-<p>$\mu_\text{after-before}$ = mean differences of samples <br />
-$\sigma^{2}$ = variance of mean differences <br />
-$n$ = sample size</p>
+<p><span class="math notranslate nohighlight">\(\mu_\text{after-before}\)</span> = mean differences of samples <br />
+<span class="math notranslate nohighlight">\(\sigma^{2}\)</span> = variance of mean differences <br />
+<span class="math notranslate nohighlight">\(n\)</span> = sample size</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">t_test</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
@@ -1023,7 +1028,7 @@ $n$ = sample size</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The t value is -7.546685287337698 and the p value is 1.277870458947408e-08.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The t value is -6.952433251339312 and the p value is 6.069822397739086e-08.
 </pre></div>
 </div>
 </div>
@@ -1035,8 +1040,8 @@ $n$ = sample size</p>
 <p>We will now compare the calculated test statistics with the critical test statistics. The critical <code class="docutils literal notranslate"><span class="pre">t</span></code> value is calculated by looking up the <a class="reference external" href="https://en.wikipedia.org/wiki/Student%27s_t-distribution#Table_of_selected_values">t-distribution table</a>.</p>
 <p><img alt="Table of selected t values at different confidence levels. T value for 29 dof at 95% confidence level is highlighted with a yellow square" src="../_images/11-t-table.png" /></p>
 <p>From the table above, the critical value is 1.699 for 29 <code class="docutils literal notranslate"><span class="pre">dof</span></code> at a confidence level of 95%. Since we are using the left tailed test, our critical value is -1.699. Clearly, the calculated <code class="docutils literal notranslate"><span class="pre">t</span></code> value is less than the critical value so we can safely reject the null hypothesis.</p>
-<p>The critical <code class="docutils literal notranslate"><span class="pre">p</span></code> value, denoted by $\alpha$, is usually chosen to be 0.05, corresponding to a confidence level of 95%. If the calculated <code class="docutils literal notranslate"><span class="pre">p</span></code> value is less than $\alpha$, then the null hypothesis can be safely rejected. Clearly, our <code class="docutils literal notranslate"><span class="pre">p</span></code> value is much less than $\alpha$, so we can reject the null hypothesis.</p>
-<p>Note that this does not mean we can accept the alternative hypothesis. It only tells us that there is not enough evidence to reject $H_{a}$. In other words, we fail to reject the alternative hypothesis so, it <em>may</em> be true.</p>
+<p>The critical <code class="docutils literal notranslate"><span class="pre">p</span></code> value, denoted by <span class="math notranslate nohighlight">\(\alpha\)</span>, is usually chosen to be 0.05, corresponding to a confidence level of 95%. If the calculated <code class="docutils literal notranslate"><span class="pre">p</span></code> value is less than <span class="math notranslate nohighlight">\(\alpha\)</span>, then the null hypothesis can be safely rejected. Clearly, our <code class="docutils literal notranslate"><span class="pre">p</span></code> value is much less than <span class="math notranslate nohighlight">\(\alpha\)</span>, so we can reject the null hypothesis.</p>
+<p>Note that this does not mean we can accept the alternative hypothesis. It only tells us that there is not enough evidence to reject <span class="math notranslate nohighlight">\(H_{a}\)</span>. In other words, we fail to reject the alternative hypothesis so, it <em>may</em> be true.</p>
 </section>
 <hr class="docutils" />
 <section id="in-practice">

@@ -41,6 +41,8 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -442,102 +444,57 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Determining Static Equilibrium in NumPy
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-ll-do">
+   What you’ll do:
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-you-ll-do">
-     What you’ll do:
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-ll-learn">
+   What you’ll learn:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-ll-need">
+   What you’ll need:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-equilibrium-with-newton-s-second-law">
+   Solving equilibrium with Newton’s second law
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-equilibrium-as-a-sum-of-moments">
+   Solving Equilibrium as a sum of moments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-values-with-physical-properties">
+   Finding values with physical properties
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#another-example">
+     Another Example
     </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-you-ll-learn">
-     What you’ll learn:
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-you-ll-need">
-     What you’ll need:
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solving-equilibrium-with-newton-s-second-law">
-     Solving equilibrium with Newton’s second law
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solving-equilibrium-as-a-sum-of-moments">
-     Solving Equilibrium as a sum of moments
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#finding-values-with-physical-properties">
-     Finding values with physical properties
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#another-example">
-       Another Example
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#left-begin-array-1-3-1-3-1-0-0-2-3-2-3-0-1-0-2-3-2-3-0-0-1-end-array-right-left-begin-array-t-bd-t-be-r-x-r-y-r-z-end-array-right">
-   $$\left[
-\begin{array}
-~1/3 &amp; 1/3 &amp; 1 &amp; 0 &amp; 0\
--2/3 &amp; -2/3 &amp; 0 &amp; 1 &amp; 0\
--2/3 &amp; 2/3 &amp; 0 &amp; 0 &amp; 1\
-\end{array}
-\right]
-\left[
-\begin{array}
-~T_{BD}\
-T_{BE}\
-R_{x}\
-R_{y}\
-R_{z}\
-\end{array}
-\right]
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wrapping-up">
+   Wrapping up
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#left-begin-array-2-2-1-1-end-array-right-left-begin-array-t-bd-t-be-end-array-right">
-   $$\left[
-\begin{array}
-~2 &amp; -2\
-1 &amp; 1\
-\end{array}
-\right]
-\left[
-\begin{array}
-~T_{BD}\
-T_{BE}\
-\end{array}
-\right]
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#wrapping-up">
-     Wrapping up
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#additional-applications">
+     Additional Applications
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#additional-applications">
-       Additional Applications
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#references">
-       References
-      </a>
-     </li>
-    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#references">
+     References
+    </a>
    </li>
   </ul>
  </li>
@@ -560,102 +517,57 @@ T_{BE}\
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Determining Static Equilibrium in NumPy
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-ll-do">
+   What you’ll do:
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-you-ll-do">
-     What you’ll do:
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-ll-learn">
+   What you’ll learn:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-you-ll-need">
+   What you’ll need:
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-equilibrium-with-newton-s-second-law">
+   Solving equilibrium with Newton’s second law
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-equilibrium-as-a-sum-of-moments">
+   Solving Equilibrium as a sum of moments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-values-with-physical-properties">
+   Finding values with physical properties
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#another-example">
+     Another Example
     </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-you-ll-learn">
-     What you’ll learn:
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-you-ll-need">
-     What you’ll need:
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solving-equilibrium-with-newton-s-second-law">
-     Solving equilibrium with Newton’s second law
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solving-equilibrium-as-a-sum-of-moments">
-     Solving Equilibrium as a sum of moments
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#finding-values-with-physical-properties">
-     Finding values with physical properties
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#another-example">
-       Another Example
-      </a>
-     </li>
-    </ul>
    </li>
   </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#left-begin-array-1-3-1-3-1-0-0-2-3-2-3-0-1-0-2-3-2-3-0-0-1-end-array-right-left-begin-array-t-bd-t-be-r-x-r-y-r-z-end-array-right">
-   $$\left[
-\begin{array}
-~1/3 &amp; 1/3 &amp; 1 &amp; 0 &amp; 0\
--2/3 &amp; -2/3 &amp; 0 &amp; 1 &amp; 0\
--2/3 &amp; 2/3 &amp; 0 &amp; 0 &amp; 1\
-\end{array}
-\right]
-\left[
-\begin{array}
-~T_{BD}\
-T_{BE}\
-R_{x}\
-R_{y}\
-R_{z}\
-\end{array}
-\right]
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wrapping-up">
+   Wrapping up
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#left-begin-array-2-2-1-1-end-array-right-left-begin-array-t-bd-t-be-end-array-right">
-   $$\left[
-\begin{array}
-~2 &amp; -2\
-1 &amp; 1\
-\end{array}
-\right]
-\left[
-\begin{array}
-~T_{BD}\
-T_{BE}\
-\end{array}
-\right]
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#wrapping-up">
-     Wrapping up
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#additional-applications">
+     Additional Applications
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#additional-applications">
-       Additional Applications
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#references">
-       References
-      </a>
-     </li>
-    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#references">
+     References
+    </a>
    </li>
   </ul>
  </li>
@@ -669,7 +581,7 @@ T_{BE}\
                 
               <div>
                 
-  <section id="determining-static-equilibrium-in-numpy">
+  <section class="tex2jax_ignore mathjax_ignore" id="determining-static-equilibrium-in-numpy">
 <h1>Determining Static Equilibrium in NumPy<a class="headerlink" href="#determining-static-equilibrium-in-numpy" title="Permalink to this headline">#</a></h1>
 <p>When analyzing physical structures, it is crucial to understand the mechanics keeping them stable. Applied forces on a floor, a beam, or any other structure, create reaction forces and moments. These reactions are the structure resisting movement without breaking. In cases where structures do not move despite having forces applied to them, <a class="reference external" href="https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion#Newton's_second_law">Newton’s second law</a> states that both the acceleration and sum of forces in all directions in the system must be zero. You can represent and solve this concept with NumPy arrays.</p>
 <section id="what-you-ll-do">
@@ -713,14 +625,18 @@ T_{BE}\
 <section id="solving-equilibrium-with-newton-s-second-law">
 <h2>Solving equilibrium with Newton’s second law<a class="headerlink" href="#solving-equilibrium-with-newton-s-second-law" title="Permalink to this headline">#</a></h2>
 <p>Your model consists of a beam under a sum of forces and moments. You can start analyzing this system with Newton’s second law:</p>
-<p>$$\sum{\text{force}} = \text{mass} \times \text{acceleration}.$$</p>
-<p>In order to simplify the examples looked at, assume they are static, with acceleration $=0$. Due to our system existing in three dimensions, consider forces being applied in each of these dimensions. This means that you can represent these forces as vectors. You come to the same conclusion for <a class="reference external" href="https://en.wikipedia.org/wiki/Moment_(physics)">moments</a>, which result from forces being applied a certain distance away from an object’s center of mass.</p>
-<p>Assume that the force $F$ is represented as a three-dimensional vector</p>
-<p>$$F = (F_x, F_y, F_z)$$</p>
+<div class="math notranslate nohighlight">
+\[\sum{\text{force}} = \text{mass} \times \text{acceleration}.\]</div>
+<p>In order to simplify the examples looked at, assume they are static, with acceleration <span class="math notranslate nohighlight">\(=0\)</span>. Due to our system existing in three dimensions, consider forces being applied in each of these dimensions. This means that you can represent these forces as vectors. You come to the same conclusion for <a class="reference external" href="https://en.wikipedia.org/wiki/Moment_(physics)">moments</a>, which result from forces being applied a certain distance away from an object’s center of mass.</p>
+<p>Assume that the force <span class="math notranslate nohighlight">\(F\)</span> is represented as a three-dimensional vector</p>
+<div class="math notranslate nohighlight">
+\[F = (F_x, F_y, F_z)\]</div>
 <p>where each of the three components represent the magnitude of the force being applied in each corresponding direction. Assume also that each component in the vector</p>
-<p>$$r = (r_x, r_y, r_z)$$</p>
+<div class="math notranslate nohighlight">
+\[r = (r_x, r_y, r_z)\]</div>
 <p>is the distance between the point where each component of the force is applied and the centroid of the system. Then, the moment can be computed by</p>
-<p>$$r \times F = (r_x, r_y, r_z) \times (F_x, F_y, F_z).$$</p>
+<div class="math notranslate nohighlight">
+\[r \times F = (r_x, r_y, r_z) \times (F_x, F_y, F_z).\]</div>
 <p>Start with some simple examples of force vectors</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -738,7 +654,7 @@ Force B = [0 1 0]
 </div>
 </div>
 </div>
-<p>This defines <code class="docutils literal notranslate"><span class="pre">forceA</span></code> as being a vector with magnitude of 1 in the $x$ direction and <code class="docutils literal notranslate"><span class="pre">forceB</span></code> as magnitude 1 in the $y$ direction.</p>
+<p>This defines <code class="docutils literal notranslate"><span class="pre">forceA</span></code> as being a vector with magnitude of 1 in the <span class="math notranslate nohighlight">\(x\)</span> direction and <code class="docutils literal notranslate"><span class="pre">forceB</span></code> as magnitude 1 in the <span class="math notranslate nohighlight">\(y\)</span> direction.</p>
 <p>It may be helpful to visualize these forces in order to better understand how they interact with each other.
 Matplotlib is a library with visualization tools that can be utilized for this purpose.
 Quiver plots will be used to demonstrate <a class="reference external" href="https://matplotlib.org/3.3.4/gallery/mplot3d/quiver3d.html">three dimensional vectors</a>, but the library can also be used for <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.quiver.html">two dimensional demonstrations</a>.</p>
@@ -766,7 +682,7 @@ Quiver plots will be used to demonstrate <a class="reference external" href="htt
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2941/1945622222.py:3: MatplotlibDeprecationWarning: Calling gca() with keyword arguments was deprecated in Matplotlib 3.4. Starting two minor releases later, gca() will take no keyword arguments. The gca() function should only be used to get the current axes, or if no axes exist, create new axes with default keyword arguments. To create a new axes with non-default arguments, use plt.axes() or plt.subplot().
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2939/1945622222.py:3: MatplotlibDeprecationWarning: Calling gca() with keyword arguments was deprecated in Matplotlib 3.4. Starting two minor releases later, gca() will take no keyword arguments. The gca() function should only be used to get the current axes, or if no axes exist, create new axes with default keyword arguments. To create a new axes with non-default arguments, use plt.axes() or plt.subplot().
   d3 = fig.gca(projection=&quot;3d&quot;)
 </pre></div>
 </div>
@@ -814,7 +730,7 @@ You can plot it to see the result.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2941/2686522130.py:3: MatplotlibDeprecationWarning: Calling gca() with keyword arguments was deprecated in Matplotlib 3.4. Starting two minor releases later, gca() will take no keyword arguments. The gca() function should only be used to get the current axes, or if no axes exist, create new axes with default keyword arguments. To create a new axes with non-default arguments, use plt.axes() or plt.subplot().
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2939/2686522130.py:3: MatplotlibDeprecationWarning: Calling gca() with keyword arguments was deprecated in Matplotlib 3.4. Starting two minor releases later, gca() will take no keyword arguments. The gca() function should only be used to get the current axes, or if no axes exist, create new axes with default keyword arguments. To create a new axes with non-default arguments, use plt.axes() or plt.subplot().
   d3 = fig.gca(projection=&quot;3d&quot;)
 </pre></div>
 </div>
@@ -822,18 +738,20 @@ You can plot it to see the result.</p>
 </div>
 </div>
 <p>However, the goal is equilibrium.
-This means that you want your sum of forces to be $(0, 0, 0)$ or else your object will experience acceleration.
+This means that you want your sum of forces to be <span class="math notranslate nohighlight">\((0, 0, 0)\)</span> or else your object will experience acceleration.
 Therefore, there needs to be another force that counteracts the prior ones.</p>
-<p>You can write this problem as $A+B+R=0$, with $R$ being the reaction force that solves the problem.</p>
+<p>You can write this problem as <span class="math notranslate nohighlight">\(A+B+R=0\)</span>, with <span class="math notranslate nohighlight">\(R\)</span> being the reaction force that solves the problem.</p>
 <p>In this example this would mean:</p>
-<p>$$(1, 0, 0) + (0, 1, 0) + (R_x, R_y, R_z) = (0, 0, 0)$$</p>
-<p>Broken into $x$, $y$, and $z$ components this gives you:</p>
-<p>$$\begin{cases}
-1+0+R_x=0\
-0+1+R_y=0\
+<div class="math notranslate nohighlight">
+\[(1, 0, 0) + (0, 1, 0) + (R_x, R_y, R_z) = (0, 0, 0)\]</div>
+<p>Broken into <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, and <span class="math notranslate nohighlight">\(z\)</span> components this gives you:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{cases}
+1+0+R_x=0\\
+0+1+R_y=0\\
 0+0+R_z=0
-\end{cases}$$</p>
-<p>solving for $R_x$, $R_y$, and $R_z$ gives you a vector $R$ of $(-1, -1, 0)$.</p>
+\end{cases}\end{split}\]</div>
+<p>solving for <span class="math notranslate nohighlight">\(R_x\)</span>, <span class="math notranslate nohighlight">\(R_y\)</span>, and <span class="math notranslate nohighlight">\(R_z\)</span> gives you a vector <span class="math notranslate nohighlight">\(R\)</span> of <span class="math notranslate nohighlight">\((-1, -1, 0)\)</span>.</p>
 <p>If plotted, the forces seen in prior examples should be nullified.
 Only if there is no force remaining is the system considered to be in equilibrium.</p>
 <div class="cell docutils container">
@@ -858,7 +776,7 @@ Only if there is no force remaining is the system considered to be in equilibriu
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2941/1445521346.py:9: MatplotlibDeprecationWarning: Calling gca() with keyword arguments was deprecated in Matplotlib 3.4. Starting two minor releases later, gca() will take no keyword arguments. The gca() function should only be used to get the current axes, or if no axes exist, create new axes with default keyword arguments. To create a new axes with non-default arguments, use plt.axes() or plt.subplot().
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2939/1445521346.py:9: MatplotlibDeprecationWarning: Calling gca() with keyword arguments was deprecated in Matplotlib 3.4. Starting two minor releases later, gca() will take no keyword arguments. The gca() function should only be used to get the current axes, or if no axes exist, create new axes with default keyword arguments. To create a new axes with non-default arguments, use plt.axes() or plt.subplot().
   d3 = fig.gca(projection=&quot;3d&quot;)
 </pre></div>
 </div>
@@ -1028,66 +946,66 @@ Reaction moment = [0.         8.32050294 0.        ]
 </div>
 </div>
 <p>This lets you represent the tension (T) and reaction (R) forces acting on the system as</p>
-</section>
-</section>
-</section>
-<section id="left-begin-array-1-3-1-3-1-0-0-2-3-2-3-0-1-0-2-3-2-3-0-0-1-end-array-right-left-begin-array-t-bd-t-be-r-x-r-y-r-z-end-array-right">
-<h1>$$\left[
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[
 \begin{array}
-~1/3 &amp; 1/3 &amp; 1 &amp; 0 &amp; 0\
--2/3 &amp; -2/3 &amp; 0 &amp; 1 &amp; 0\
--2/3 &amp; 2/3 &amp; 0 &amp; 0 &amp; 1\
+~1/3 &amp; 1/3 &amp; 1 &amp; 0 &amp; 0\\
+-2/3 &amp; -2/3 &amp; 0 &amp; 1 &amp; 0\\
+-2/3 &amp; 2/3 &amp; 0 &amp; 0 &amp; 1\\
 \end{array}
 \right]
 \left[
 \begin{array}
-~T_{BD}\
-T_{BE}\
-R_{x}\
-R_{y}\
-R_{z}\
+~T_{BD}\\
+T_{BE}\\
+R_{x}\\
+R_{y}\\
+R_{z}\\
 \end{array}
-\right]<a class="headerlink" href="#left-begin-array-1-3-1-3-1-0-0-2-3-2-3-0-1-0-2-3-2-3-0-0-1-end-array-right-left-begin-array-t-bd-t-be-r-x-r-y-r-z-end-array-right" title="Permalink to this headline">#</a></h1>
-<p>\left[
+\right]
+=
+\left[
 \begin{array}
-~195\
-390\
--130\
+~195\\
+390\\
+-130\\
 \end{array}
-\right]$$</p>
+\right]\end{split}\]</div>
 <p>and the moments as</p>
-</section>
-<section id="left-begin-array-2-2-1-1-end-array-right-left-begin-array-t-bd-t-be-end-array-right">
-<h1>$$\left[
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[
 \begin{array}
-~2 &amp; -2\
-1 &amp; 1\
+~2 &amp; -2\\
+1 &amp; 1\\
 \end{array}
 \right]
 \left[
 \begin{array}
-~T_{BD}\
-T_{BE}\
+~T_{BD}\\
+T_{BE}\\
 \end{array}
-\right]<a class="headerlink" href="#left-begin-array-2-2-1-1-end-array-right-left-begin-array-t-bd-t-be-end-array-right" title="Permalink to this headline">#</a></h1>
-<p>\left[
+\right]
+=
+\left[
 \begin{array}
-~780\
-1170\
+~780\\
+1170\\
 \end{array}
-\right]$$</p>
-<p>Where $T$ is the tension in the respective cord and $R$ is the reaction force in a respective direction. Then you just have six equations:</p>
-<p>$\sum F_{x} = 0 = T_{BE}/3+T_{BD}/3-195+R_{x}$</p>
-<p>$\sum F_{y} = 0 = (-\frac{2}{3})T_{BE}-\frac{2}{3}T_{BD}-390+R_{y}$</p>
-<p>$\sum F_{z} = 0 = (-\frac{2}{3})T_{BE}+\frac{2}{3}T_{BD}+130+R_{z}$</p>
-<p>$\sum M_{x} = 0 = 780+2T_{BE}-2T_{BD}$</p>
-<p>$\sum M_{z} = 0 = 1170-T_{BE}-T_{BD}$</p>
+\right]\end{split}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(T\)</span> is the tension in the respective cord and <span class="math notranslate nohighlight">\(R\)</span> is the reaction force in a respective direction. Then you just have six equations:</p>
+<p><span class="math notranslate nohighlight">\(\sum F_{x} = 0 = T_{BE}/3+T_{BD}/3-195+R_{x}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\sum F_{y} = 0 = (-\frac{2}{3})T_{BE}-\frac{2}{3}T_{BD}-390+R_{y}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\sum F_{z} = 0 = (-\frac{2}{3})T_{BE}+\frac{2}{3}T_{BD}+130+R_{z}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\sum M_{x} = 0 = 780+2T_{BE}-2T_{BD}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\sum M_{z} = 0 = 1170-T_{BE}-T_{BD}\)</span></p>
 <p>You now have five unknowns with five equations, and can solve for:</p>
-<p>$\ T_{BD} = 780N$</p>
-<p>$\ T_{BE} = 390N$</p>
-<p>$\ R_{x} = -195N$</p>
-<p>$\ R_{y} = 1170N$</p>
-<p>$\ R_{z} = 130N$</p>
+<p><span class="math notranslate nohighlight">\(\ T_{BD} = 780N\)</span></p>
+<p><span class="math notranslate nohighlight">\(\ T_{BE} = 390N\)</span></p>
+<p><span class="math notranslate nohighlight">\(\ R_{x} = -195N\)</span></p>
+<p><span class="math notranslate nohighlight">\(\ R_{y} = 1170N\)</span></p>
+<p><span class="math notranslate nohighlight">\(\ R_{z} = 130N\)</span></p>
+</section>
+</section>
 <section id="wrapping-up">
 <h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this headline">#</a></h2>
 <p>You have learned how to use arrays to represent points, forces, and moments in three dimensional space. Each entry in an array can be used to represent a physical property broken into directional components. These can then be easily manipulated with NumPy functions.</p>

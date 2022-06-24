@@ -41,6 +41,8 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -585,7 +587,7 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="determining-moore-s-law-with-real-data-in-numpy">
+  <section class="tex2jax_ignore mathjax_ignore" id="determining-moore-s-law-with-real-data-in-numpy">
 <h1>Determining Moore’s Law with real data in NumPy<a class="headerlink" href="#determining-moore-s-law-with-real-data-in-numpy" title="Permalink to this headline">#</a></h1>
 <p><img alt="Scatter plot of MOS transistor count per microprocessor every two years as a demonstration of Moore's Law." src="../_images/01-mooreslaw-tutorial-intro.png" /></p>
 <p><em>The number of transistors reported per a given chip plotted on a log scale in the y axis with the date of introduction on the linear scale x-axis. The blue data points are from a <a class="reference external" href="https://en.wikipedia.org/wiki/Transistor_count#Microprocessors">transistor count table</a>. The red line is an ordinary least squares prediction and the orange line is Moore’s law.</em></p>
@@ -639,7 +641,7 @@ the 53 years following his prediction. You will determine the best-fit constants
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.log.html"><code class="docutils literal notranslate"><span class="pre">np.log</span></code></a>: this function takes the natural log of all elements in a NumPy array</p></li>
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.exp.html"><code class="docutils literal notranslate"><span class="pre">np.exp</span></code></a>: this function takes the exponential of all elements in a NumPy array</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/ast.html?highlight=lambda#ast.Lambda"><code class="docutils literal notranslate"><span class="pre">lambda</span></code></a>: this is a minimal function definition for creating a function model</p></li>
-<li><p><a class="reference external" href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.semilogy.html"><code class="docutils literal notranslate"><span class="pre">plt.semilogy</span></code></a>: this function will plot x-y data onto a figure with a linear x-axis and $\log_{10}$ y-axis
+<li><p><a class="reference external" href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.semilogy.html"><code class="docutils literal notranslate"><span class="pre">plt.semilogy</span></code></a>: this function will plot x-y data onto a figure with a linear x-axis and <span class="math notranslate nohighlight">\(\log_{10}\)</span> y-axis
 <a class="reference external" href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.plot.html"><code class="docutils literal notranslate"><span class="pre">plt.plot</span></code></a>: this function will plot x-y data on linear axes</p></li>
 <li><p><a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html"><code class="docutils literal notranslate"><span class="pre">sm.OLS</span></code></a>: find fitting parameters and standard errors using the statsmodels ordinary least squares model</p></li>
 <li><p>slicing arrays: view parts of the data loaded into the workspace, slice the arrays e.g. <code class="docutils literal notranslate"><span class="pre">x[:10]</span></code> for the first 10 values in the array, <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
@@ -654,23 +656,23 @@ the 53 years following his prediction. You will determine the best-fit constants
 <h2>Building Moore’s law as an exponential function<a class="headerlink" href="#building-moore-s-law-as-an-exponential-function" title="Permalink to this headline">#</a></h2>
 <p>Your empirical model assumes that the number of transistors per
 semiconductor follows an exponential growth,</p>
-<p>$\log(\text{transistor_count})= f(\text{year}) = A\cdot \text{year}+B,$</p>
-<p>where $A$ and $B$ are fitting constants. You use semiconductor
+<p><span class="math notranslate nohighlight">\(\log(\text{transistor_count})= f(\text{year}) = A\cdot \text{year}+B,\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are fitting constants. You use semiconductor
 manufacturers’ data to find the fitting constants.</p>
 <p>You determine these constants for Moore’s law by specifying the
 rate for added transistors, 2, and giving an initial number of transistors for a given year.</p>
 <p>You state Moore’s law in an exponential form as follows,</p>
-<p>$\text{transistor_count}= e^{A_M\cdot \text{year} +B_M}.$</p>
-<p>Where $A_M$ and $B_M$ are constants that double the number of transistors every two years and start at 2250 transistors in 1971,</p>
+<p><span class="math notranslate nohighlight">\(\text{transistor_count}= e^{A_M\cdot \text{year} +B_M}.\)</span></p>
+<p>Where <span class="math notranslate nohighlight">\(A_M\)</span> and <span class="math notranslate nohighlight">\(B_M\)</span> are constants that double the number of transistors every two years and start at 2250 transistors in 1971,</p>
 <ol class="arabic simple">
-<li><p>$\dfrac{\text{transistor_count}(\text{year} +2)}{\text{transistor_count}(\text{year})} = 2 = \dfrac{e^{B_M}e^{A_M \text{year} + 2A_M}}{e^{B_M}e^{A_M \text{year}}} = e^{2A_M} \rightarrow A_M = \frac{\log(2)}{2}$</p></li>
-<li><p>$\log(2250) = \frac{\log(2)}{2}\cdot 1971 + B_M \rightarrow B_M = \log(2250)-\frac{\log(2)}{2}\cdot 1971$</p></li>
+<li><p><span class="math notranslate nohighlight">\(\dfrac{\text{transistor_count}(\text{year} +2)}{\text{transistor_count}(\text{year})} = 2 = \dfrac{e^{B_M}e^{A_M \text{year} + 2A_M}}{e^{B_M}e^{A_M \text{year}}} = e^{2A_M} \rightarrow A_M = \frac{\log(2)}{2}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\log(2250) = \frac{\log(2)}{2}\cdot 1971 + B_M \rightarrow B_M = \log(2250)-\frac{\log(2)}{2}\cdot 1971\)</span></p></li>
 </ol>
 <p>so Moore’s law stated as an exponential function is</p>
-<p>$\log(\text{transistor_count})= A_M\cdot \text{year}+B_M,$</p>
+<p><span class="math notranslate nohighlight">\(\log(\text{transistor_count})= A_M\cdot \text{year}+B_M,\)</span></p>
 <p>where</p>
-<p>$A_M=0.3466$</p>
-<p>$B_M=-675.4$</p>
+<p><span class="math notranslate nohighlight">\(A_M=0.3466\)</span></p>
+<p><span class="math notranslate nohighlight">\(B_M=-675.4\)</span></p>
 <p>Since the function represents Moore’s law, define it as a Python
 function using
 <a class="reference external" href="https://docs.python.org/3/library/ast.html?highlight=lambda#ast.Lambda"><code class="docutils literal notranslate"><span class="pre">lambda</span></code></a></p>
@@ -808,9 +810,9 @@ trans. cnt:	 [2250. 3500. 2500. 3000. 4100. 6000. 8000. 4528. 4000. 5000.]
 year. You have an <em>independent variable</em>, <code class="docutils literal notranslate"><span class="pre">year</span></code>, and a <em>dependent
 variable</em>, <code class="docutils literal notranslate"><span class="pre">transistor_count</span></code>. Transform the independent variable to
 log-scale,</p>
-<p>$y_i = \log($ <code class="docutils literal notranslate"><span class="pre">transistor_count[i]</span></code> $),$</p>
+<p><span class="math notranslate nohighlight">\(y_i = \log(\)</span> <code class="docutils literal notranslate"><span class="pre">transistor_count[i]</span></code> <span class="math notranslate nohighlight">\(),\)</span></p>
 <p>resulting in a linear equation,</p>
-<p>$y_i = A\cdot \text{year} +B$.</p>
+<p><span class="math notranslate nohighlight">\(y_i = A\cdot \text{year} +B\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">yi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">transistor_count</span><span class="p">)</span>
@@ -821,18 +823,18 @@ log-scale,</p>
 </section>
 <section id="calculating-the-historical-growth-curve-for-transistors">
 <h2>Calculating the historical growth curve for transistors<a class="headerlink" href="#calculating-the-historical-growth-curve-for-transistors" title="Permalink to this headline">#</a></h2>
-<p>Your model assume that <code class="docutils literal notranslate"><span class="pre">yi</span></code> is a function of <code class="docutils literal notranslate"><span class="pre">year</span></code>. Now, find the best-fit model that minimizes the difference between $y_i$ and $A\cdot \text{year} +B, $ as such</p>
-<p>$\min \sum|y_i - (A\cdot \text{year}_i + B)|^2.$</p>
+<p>Your model assume that <code class="docutils literal notranslate"><span class="pre">yi</span></code> is a function of <code class="docutils literal notranslate"><span class="pre">year</span></code>. Now, find the best-fit model that minimizes the difference between <span class="math notranslate nohighlight">\(y_i\)</span> and <span class="math notranslate nohighlight">\(A\cdot \text{year} +B, \)</span> as such</p>
+<p><span class="math notranslate nohighlight">\(\min \sum|y_i - (A\cdot \text{year}_i + B)|^2.\)</span></p>
 <p>This <a class="reference external" href="https://en.wikipedia.org/wiki/Ordinary_least_squares">sum of squares
 error</a> can be
 succinctly represented as arrays as such</p>
-<p>$\sum|\mathbf{y}-\mathbf{Z} [A,~B]^T|^2,$</p>
-<p>where $\mathbf{y}$ are the observations of the log of the number of
-transistors in a 1D array and $\mathbf{Z}=[\text{year}_i^1,~\text{year}_i^0]$ are the
-polynomial terms for $\text{year}_i$ in the first and second columns. By
-creating this set of regressors in the $\mathbf{Z}-$matrix you set
+<p><span class="math notranslate nohighlight">\(\sum|\mathbf{y}-\mathbf{Z} [A,~B]^T|^2,\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> are the observations of the log of the number of
+transistors in a 1D array and <span class="math notranslate nohighlight">\(\mathbf{Z}=[\text{year}_i^1,~\text{year}_i^0]\)</span> are the
+polynomial terms for <span class="math notranslate nohighlight">\(\text{year}_i\)</span> in the first and second columns. By
+creating this set of regressors in the <span class="math notranslate nohighlight">\(\mathbf{Z}-\)</span>matrix you set
 up an ordinary least squares statistical model. Some clever
-NumPy array features will build $\mathbf{Z}$</p>
+NumPy array features will build <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span></p>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">year[:,np.newaxis]</span></code> : takes the 1D array with shape <code class="docutils literal notranslate"><span class="pre">(179,)</span></code> and turns it into a 2D column vector with shape <code class="docutils literal notranslate"><span class="pre">(179,1)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">**[1,</span> <span class="pre">0]</span></code> : stacks two columns, in the first column is <code class="docutils literal notranslate"><span class="pre">year**1</span></code> and the second column is <code class="docutils literal notranslate"><span class="pre">year**0</span> <span class="pre">==</span> <span class="pre">1</span></code></p></li>
@@ -844,8 +846,8 @@ NumPy array features will build $\mathbf{Z}$</p>
 </div>
 </div>
 </div>
-<p>Now that you have the created a matrix of regressors, $\mathbf{Z},$ and
-the observations are in vector, $\mathbf{y},$ you can use these
+<p>Now that you have the created a matrix of regressors, <span class="math notranslate nohighlight">\(\mathbf{Z},\)</span> and
+the observations are in vector, <span class="math notranslate nohighlight">\(\mathbf{y},\)</span> you can use these
 variables to build the an ordinary least squares model with
 <a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html"><code class="docutils literal notranslate"><span class="pre">sm.OLS</span></code></a>.</p>
 <div class="cell docutils container">
@@ -855,7 +857,7 @@ variables to build the an ordinary least squares model with
 </div>
 </div>
 </div>
-<p>Now, you can view the fitting constants, $A$ and $B$, and their standard
+<p>Now, you can view the fitting constants, <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>, and their standard
 errors.  Run the
 <a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html"><code class="docutils literal notranslate"><span class="pre">fit</span></code></a> and print the
 <a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.summary.html"><code class="docutils literal notranslate"><span class="pre">summary</span></code></a> to view results as such,</p>
@@ -872,8 +874,8 @@ errors.  Run the
 Dep. Variable:                      y   R-squared:                       0.949
 Model:                            OLS   Adj. R-squared:                  0.949
 Method:                 Least Squares   F-statistic:                     3309.
-Date:                Wed, 01 Jun 2022   Prob (F-statistic):          1.75e-116
-Time:                        11:49:37   Log-Likelihood:                -273.43
+Date:                Fri, 24 Jun 2022   Prob (F-statistic):          1.75e-116
+Time:                        18:04:41   Log-Likelihood:                -273.43
 No. Observations:                 179   AIC:                             550.9
 Df Residuals:                     177   BIC:                             557.2
 Df Model:                           1                                         
@@ -899,7 +901,7 @@ strong multicollinearity or other numerical problems.
 </div>
 </div>
 <p>The <strong>OLS Regression Results</strong> summary gives a lot of information about
-the regressors, $\mathbf{Z},$ and observations, $\mathbf{y}.$ The most
+the regressors, <span class="math notranslate nohighlight">\(\mathbf{Z},\)</span> and observations, <span class="math notranslate nohighlight">\(\mathbf{y}.\)</span> The most
 important outputs for your current analysis are</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">=================================</span>
                  <span class="n">coef</span>    <span class="n">std</span> <span class="n">err</span>
@@ -909,13 +911,13 @@ important outputs for your current analysis are</p>
 <span class="o">=================================</span>
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">x1</span></code> is slope, $A=0.3416$, <code class="docutils literal notranslate"><span class="pre">const</span></code> is the intercept,
-$B=-666.364$, and <code class="docutils literal notranslate"><span class="pre">std</span> <span class="pre">error</span></code> gives the precision of constants
-$A=0.342\pm 0.006~\dfrac{\log(\text{transistors}/\text{chip})}{\text{years}}$ and $B=-666\pm
-12~\log(\text{transistors}/\text{chip}),$ where the units are in
-$\log(\text{transistors}/\text{chip})$. You created an exponential growth model.
+<p>where <code class="docutils literal notranslate"><span class="pre">x1</span></code> is slope, <span class="math notranslate nohighlight">\(A=0.3416\)</span>, <code class="docutils literal notranslate"><span class="pre">const</span></code> is the intercept,
+<span class="math notranslate nohighlight">\(B=-666.364\)</span>, and <code class="docutils literal notranslate"><span class="pre">std</span> <span class="pre">error</span></code> gives the precision of constants
+<span class="math notranslate nohighlight">\(A=0.342\pm 0.006~\dfrac{\log(\text{transistors}/\text{chip})}{\text{years}}\)</span> and <span class="math notranslate nohighlight">\(B=-666\pm
+12~\log(\text{transistors}/\text{chip}),\)</span> where the units are in
+<span class="math notranslate nohighlight">\(\log(\text{transistors}/\text{chip})\)</span>. You created an exponential growth model.
 To get the constants, save them to an array <code class="docutils literal notranslate"><span class="pre">AB</span></code> with
-<code class="docutils literal notranslate"><span class="pre">results.params</span></code> and assign $A$ and $B$ to <code class="docutils literal notranslate"><span class="pre">x1</span></code> and <code class="docutils literal notranslate"><span class="pre">constant</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">results.params</span></code> and assign <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> to <code class="docutils literal notranslate"><span class="pre">x1</span></code> and <code class="docutils literal notranslate"><span class="pre">constant</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">AB</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">params</span>
@@ -927,14 +929,14 @@ To get the constants, save them to an array <code class="docutils literal notran
 </div>
 <p>Did manufacturers double the transistor count every two years? You have
 the final formula,</p>
-<p>$\dfrac{\text{transistor_count}(\text{year} +2)}{\text{transistor_count}(\text{year})} = xFactor =
-\dfrac{e^{B}e^{A( \text{year} + 2)}}{e^{B}e^{A \text{year}}} = e^{2A}$</p>
-<p>where increase in number of transistors is $xFactor,$ number of years is
-2, and $A$ is the best fit slope on the semilog function. The error in
+<p><span class="math notranslate nohighlight">\(\dfrac{\text{transistor_count}(\text{year} +2)}{\text{transistor_count}(\text{year})} = xFactor =
+\dfrac{e^{B}e^{A( \text{year} + 2)}}{e^{B}e^{A \text{year}}} = e^{2A}\)</span></p>
+<p>where increase in number of transistors is <span class="math notranslate nohighlight">\(xFactor,\)</span> number of years is
+2, and <span class="math notranslate nohighlight">\(A\)</span> is the best fit slope on the semilog function. The error in
 your
-prediction, $\Delta(xFactor),$ comes from the precision of your constant
-$A,$ which you calculated as the standard error $\Delta A= 0.006$.</p>
-<p>$\Delta (xFactor) = \frac{\partial}{\partial A}(e^{2A})\Delta A = 2Ae^{2A}\Delta A$</p>
+prediction, <span class="math notranslate nohighlight">\(\Delta(xFactor),\)</span> comes from the precision of your constant
+<span class="math notranslate nohighlight">\(A,\)</span> which you calculated as the standard error <span class="math notranslate nohighlight">\(\Delta A= 0.006\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\Delta (xFactor) = \frac{\partial}{\partial A}(e^{2A})\Delta A = 2Ae^{2A}\Delta A\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rate of semiconductors added on a chip every 2 years:&quot;</span><span class="p">)</span>
@@ -954,7 +956,7 @@ $A,$ which you calculated as the standard error $\Delta A= 0.006$.</p>
 </div>
 </div>
 <p>Based upon your least-squares regression model, the number of
-semiconductors per chip increased by a factor of $1.98\pm 0.01$ every two
+semiconductors per chip increased by a factor of <span class="math notranslate nohighlight">\(1.98\pm 0.01\)</span> every two
 years. You have a model that predicts the number of semiconductors each
 year. Now compare your model to the actual manufacturing reports.  Plot
 the linear regression results and all of the transistor counts.</p>
@@ -962,14 +964,14 @@ the linear regression results and all of the transistor counts.</p>
 <a class="reference external" href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.semilogy.html"><code class="docutils literal notranslate"><span class="pre">plt.semilogy</span></code></a>
 to plot the number of transistors on a log-scale and the year on a
 linear scale. You have defined a three arrays to get to a final model</p>
-<p>$y_i = \log(\text{transistor_count}),$</p>
-<p>$y_i = A \cdot \text{year} + B,$</p>
+<p><span class="math notranslate nohighlight">\(y_i = \log(\text{transistor_count}),\)</span></p>
+<p><span class="math notranslate nohighlight">\(y_i = A \cdot \text{year} + B,\)</span></p>
 <p>and</p>
-<p>$\log(\text{transistor_count}) = A\cdot \text{year} + B,$</p>
+<p><span class="math notranslate nohighlight">\(\log(\text{transistor_count}) = A\cdot \text{year} + B,\)</span></p>
 <p>your variables, <code class="docutils literal notranslate"><span class="pre">transistor_count</span></code>, <code class="docutils literal notranslate"><span class="pre">year</span></code>, and <code class="docutils literal notranslate"><span class="pre">yi</span></code> all have the same
 dimensions, <code class="docutils literal notranslate"><span class="pre">(179,)</span></code>. NumPy arrays need the same dimensions to make a
 plot. The predicted number of transistors is now</p>
-<p>$\text{transistor_count}_{\text{predicted}} = e^Be^{A\cdot \text{year}}$.</p>
+<p><span class="math notranslate nohighlight">\(\text{transistor_count}_{\text{predicted}} = e^Be^{A\cdot \text{year}}\)</span>.</p>
 <p>In the next plot, use the
 <a class="reference external" href="https://matplotlib.org/3.1.1/gallery/style_sheets/fivethirtyeight.html"><code class="docutils literal notranslate"><span class="pre">fivethirtyeight</span></code></a>
 style sheet.
@@ -1018,7 +1020,7 @@ comparator,</p>
 <p><code class="docutils literal notranslate"><span class="pre">year</span> <span class="pre">==</span> <span class="pre">2017</span></code>.</p>
 <p>Then, make a prediction for 2017 with <code class="docutils literal notranslate"><span class="pre">Moores_law</span></code> defined above
 and plugging in your best fit constants into your function</p>
-<p>$\text{transistor_count} = e^{B}e^{A\cdot \text{year}}$.</p>
+<p><span class="math notranslate nohighlight">\(\text{transistor_count} = e^{B}e^{A\cdot \text{year}}\)</span>.</p>
 <p>A great way to compare these measurements is to compare your prediction
 and Moore’s prediction to the average transistor count and look at the
 range of reported values for that year. Use the
@@ -1026,7 +1028,7 @@ range of reported values for that year. Use the
 option,
 <a class="reference external" href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.artist.Artist.set_alpha.html"><code class="docutils literal notranslate"><span class="pre">alpha=0.2</span></code></a>,
 to increase the transparency of the data. The more opaque the points
-appear, the more reported values lie on that measurement. The green $+$
+appear, the more reported values lie on that measurement. The green <span class="math notranslate nohighlight">\(+\)</span>
 is the average reported transistor count for 2017. Plot your predictions
 for $\pm\frac{1}{2}~years.</p>
 <div class="cell docutils container">
@@ -1059,7 +1061,7 @@ for $\pm\frac{1}{2}~years.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19200000000.0 250000000.0 7050000000.0
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f74df07a970&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fef3ecd81c0&gt;
 </pre></div>
 </div>
 <img alt="../_images/44f5407151a09f030f7ddab6cebf7f1c03103cba5292ff74df966e7be666df7c.png" src="../_images/44f5407151a09f030f7ddab6cebf7f1c03103cba5292ff74df966e7be666df7c.png" />
@@ -1073,7 +1075,7 @@ approaching 2025, manufacturers are still producing semiconductors every 2 years
 nearly double the number of transistors.</p>
 <p>The linear regression model is much better at predicting the
 average than extreme values because it satisfies the condition to
-minimize $\sum |y_i - A\cdot \text{year}[i]+B|^2$.</p>
+minimize <span class="math notranslate nohighlight">\(\sum |y_i - A\cdot \text{year}[i]+B|^2\)</span>.</p>
 </section>
 <section id="sharing-your-results-as-zipped-arrays-and-a-csv">
 <h2>Sharing your results as zipped arrays and a csv<a class="headerlink" href="#sharing-your-results-as-zipped-arrays-and-a-csv" title="Permalink to this headline">#</a></h2>
@@ -1150,7 +1152,7 @@ regression_csts: linear regression constants A and B for log(transistor_count)=A
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-666.3264063536254
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-666.3264063536255
 </pre></div>
 </div>
 </div>
@@ -1295,9 +1297,9 @@ options to create the desired file format:</p>
 # transistor_count_predicted: linear regression model = exp(-666.33)*exp(0.34*year)
 # transistor_Moores_law: Moores law =exp(-675.38)*exp(0.35*year)
 # year:, transistor_count:, transistor_count_predicted:, transistor_Moores_law:
-1.971000000000000000e+03,2.250000000000000000e+03,1.130514785642334573e+03,2.249999999999916326e+03
-1.972000000000000000e+03,3.500000000000000000e+03,1.590908400344209895e+03,3.181980515339620069e+03
-1.973000000000000000e+03,2.500000000000000000e+03,2.238793840142230238e+03,4.500000000000097316e+03
+1.971000000000000000e+03,2.250000000000000000e+03,1.130514785642205879e+03,2.249999999999916326e+03
+1.972000000000000000e+03,3.500000000000000000e+03,1.590908400344028905e+03,3.181980515339620069e+03
+1.973000000000000000e+03,2.500000000000000000e+03,2.238793840141975579e+03,4.500000000000097316e+03
 </pre></div>
 </div>
 </div>
@@ -1311,7 +1313,7 @@ manufacturers to Moore’s law and created a linear regression model to
 find the average number of transistors added to each microprocessor
 every two years. Gordon Moore predicted the number of transistors would
 double every two years from 1965 through 1975, but the average growth
-has maintained a consistent increase of $\times 1.98 \pm 0.01$ every two
+has maintained a consistent increase of <span class="math notranslate nohighlight">\(\times 1.98 \pm 0.01\)</span> every two
 years from 1971 through 2019.  In 2015, Moore revised his prediction to
 say Moore’s law should hold until 2025.
 [<a class="reference external" href="https://spectrum.ieee.org/computing/hardware/gordon-moore-the-man-whose-name-means-progress">3</a>].
