@@ -13,7 +13,7 @@ dependencies:
   - pooch
   - ffmpeg  # For gym/atari
   # For building the site
-  - sphinx
+  - sphinx<5
   - myst-nb
   - sphinx-book-theme
   - sphinx-copybutton
