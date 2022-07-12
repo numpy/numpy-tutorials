@@ -82,7 +82,7 @@ Quiver plots will be used to demonstrate [three dimensional vectors](https://mat
 ```{code-cell}
 fig = plt.figure()
 
-d3 = fig.gca(projection="3d")
+d3 = fig.add_subplot(projection="3d")
 
 d3.set_xlim(-1, 1)
 d3.set_ylim(-1, 1)
@@ -113,7 +113,7 @@ You can plot it to see the result.
 ```{code-cell}
 fig = plt.figure()
 
-d3 = fig.gca(projection="3d")
+d3 = fig.add_subplot(projection="3d")
 
 d3.set_xlim(-1, 1)
 d3.set_ylim(-1, 1)
@@ -165,7 +165,7 @@ d3.set_xlim(-1, 1)
 d3.set_ylim(-1, 1)
 d3.set_zlim(-1, 1)
 
-d3 = fig.gca(projection="3d")
+d3 = fig.add_subplot(projection="3d")
 
 x, y, z = np.array([0, 0, 0])
 
