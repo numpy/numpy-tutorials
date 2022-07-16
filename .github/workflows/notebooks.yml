@@ -1,0 +1,42 @@
+name: Test notebooks
+
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      max-parallel: 12
+      matrix:
+        os: [Ubuntu-20.04, macOS-latest]
+        python-version: [3.8, 3.9, "3.10"]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install -r site/requirements.txt -r requirements.txt
+        python -m pip list
+
+    - name: Test with nbval
+      run: |
+        python -m pip install pytest nbval
+        find content/ -name "*.md" -exec jupytext --to notebook {} \;
+        # TODO: find better way to exclude notebooks from test
+        rm content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.ipynb
+        rm content/pairing.ipynb
+        rm content/tutorial-style-guide.ipynb
+        rm content/tutorial-nlp-from-scratch.ipynb
+        # Test notebook execution
+        pytest --nbval-lax --durations=10 content/
