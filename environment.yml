@@ -8,14 +8,8 @@ dependencies:
   - matplotlib
   - pandas 
   - statsmodels
-  - pip
-  - imageio
-  - pooch
-  - ffmpeg  # For gym/atari
   # For building the site
   - sphinx<5
   - myst-nb
   - sphinx-book-theme
   - sphinx-copybutton
-  - pip:
-    - gym[atari]==0.19
