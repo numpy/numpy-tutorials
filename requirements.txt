@@ -5,6 +5,5 @@ matplotlib
 pandas
 statsmodels
 imageio
-pooch==1.5.1
 # For supporting .md-based notebooks
 jupytext
