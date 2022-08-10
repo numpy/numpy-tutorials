@@ -8,6 +8,7 @@ dependencies:
   - matplotlib
   - pandas 
   - statsmodels
+  - imageio
   # For building the site
   - sphinx<5
   - myst-nb
