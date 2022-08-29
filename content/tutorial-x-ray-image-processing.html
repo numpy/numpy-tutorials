@@ -21,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -39,7 +39,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -704,6 +704,12 @@ ChestX-ray8 dataset.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_419/3371034397.py:6: DeprecationWarning: Starting with ImageIO v3 the behavior of this function will switch to that of iio.v3.imread. To keep the current behavior (and make this warning dissapear) use `import imageio.v2 as imageio` or call `imageio.v2.imread` directly.
+  xray_image = imageio.imread(os.path.join(DIR, &quot;00000011_001.png&quot;))
+</pre></div>
+</div>
+</div>
 </div>
 <p><strong>2.</strong> Check that its shape is 1024x1024 pixels and that the array is made up of
 8-bit integers:</p>
@@ -733,7 +739,7 @@ uint8
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/53115deed4456850f581f1bfc7be10d990dc953aecf2c7be9841589985e5c98d.png" src="../_images/53115deed4456850f581f1bfc7be10d990dc953aecf2c7be9841589985e5c98d.png" />
+<img alt="../_images/07637fdbcf78cdc2243d6d67f195d5f623f112fd9157d545f336790c222b8dc5.png" src="../_images/07637fdbcf78cdc2243d6d67f195d5f623f112fd9157d545f336790c222b8dc5.png" />
 </div>
 </div>
 </section>
@@ -753,6 +759,12 @@ array where the first dimension corresponds to image number:</p>
 <span class="n">combined_xray_images_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
     <span class="p">[</span><span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;00000011_00</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_imgs</span><span class="p">)]</span>
 <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_419/2905601773.py:5: DeprecationWarning: Starting with ImageIO v3 the behavior of this function will switch to that of iio.v3.imread. To keep the current behavior (and make this warning dissapear) use `import imageio.v2 as imageio` or call `imageio.v2.imread` directly.
+  [imageio.imread(os.path.join(DIR, f&quot;00000011_00{i}.png&quot;)) for i in range(num_imgs)]
 </pre></div>
 </div>
 </div>
@@ -785,7 +797,7 @@ to each other using Matplotlib:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bef9c9e36ca88191dce34266cced2e56e6f4a81e15568b298ecf4eb2b42c95f5.png" src="../_images/bef9c9e36ca88191dce34266cced2e56e6f4a81e15568b298ecf4eb2b42c95f5.png" />
+<img alt="../_images/4fe01297d5f26dfbca9a3f603b2f581452e41f688fe53a11330d9f8fe480b41c.png" src="../_images/4fe01297d5f26dfbca9a3f603b2f581452e41f688fe53a11330d9f8fe480b41c.png" />
 </div>
 </div>
 <p><strong>4.</strong> In addition, it can be helpful to show the progress as an animation.
@@ -851,7 +863,7 @@ Gaussian filter (you’ll use <code class="docutils literal notranslate"><span c
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/97b8798d7530b0abbad8069e465c316f2a536349701602c5a5d242ed4e28d5aa.png" src="../_images/97b8798d7530b0abbad8069e465c316f2a536349701602c5a5d242ed4e28d5aa.png" />
+<img alt="../_images/c1d29f35d48b212d7b03eb38ead9fdb09602f56f4ecb15c44adef05f2be2a5f7.png" src="../_images/c1d29f35d48b212d7b03eb38ead9fdb09602f56f4ecb15c44adef05f2be2a5f7.png" />
 </div>
 </div>
 </section>
@@ -889,7 +901,7 @@ example below):</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e6cbc6905cbf083aee9947968affc83404fef1a7f54aae902860ab5fc1ee367a.png" src="../_images/e6cbc6905cbf083aee9947968affc83404fef1a7f54aae902860ab5fc1ee367a.png" />
+<img alt="../_images/de7eff43306d617d804945b82cc70704c20600652527739ca1b56696742e265b.png" src="../_images/de7eff43306d617d804945b82cc70704c20600652527739ca1b56696742e265b.png" />
 </div>
 </div>
 </section>
@@ -966,7 +978,7 @@ emphasize the edges:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b46eb0e688c6c5de56bdde7e6a54ac7296b266e242fe4dbbf420449e2a0bc888.png" src="../_images/b46eb0e688c6c5de56bdde7e6a54ac7296b266e242fe4dbbf420449e2a0bc888.png" />
+<img alt="../_images/f7dad86213a57ae2a561e5172ee09d2e4c186746402ba341e6590d2fabecacc3.png" src="../_images/f7dad86213a57ae2a561e5172ee09d2e4c186746402ba341e6590d2fabecacc3.png" />
 </div>
 </div>
 </section>
@@ -1036,7 +1048,7 @@ the help of the Canny filter technique. The edges can be emphasized using the
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/489b39da5b7eb11de893e78fd9ed78e7a64e8f3c296fc605f934ce85069c6bf8.png" src="../_images/489b39da5b7eb11de893e78fd9ed78e7a64e8f3c296fc605f934ce85069c6bf8.png" />
+<img alt="../_images/f85426ded547a259b9618c4be08b91d48399ea7afadde02d919c56ae19ec6de3.png" src="../_images/f85426ded547a259b9618c4be08b91d48399ea7afadde02d919c56ae19ec6de3.png" />
 </div>
 </div>
 </section>
@@ -1089,7 +1101,7 @@ with <code class="docutils literal notranslate"><span class="pre">ndimage.histog
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/23a500d62afaecf180cc7e9b974083ad65cc1dc09c49dc4a1a3bc3a9604ec4e9.png" src="../_images/23a500d62afaecf180cc7e9b974083ad65cc1dc09c49dc4a1a3bc3a9604ec4e9.png" />
+<img alt="../_images/ac0306048d72b57f1ab2137b995b4dea0d01f008d619ebd4c55e8b386253b6b5.png" src="../_images/ac0306048d72b57f1ab2137b995b4dea0d01f008d619ebd4c55e8b386253b6b5.png" />
 </div>
 </div>
 <p>As the pixel intensity distribution suggests, there are many low (between around
@@ -1110,7 +1122,7 @@ a certain threshold:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6542eb3acd90b33e8c23b8dbd06a0853a349550fdf8a8f3a4028e0ed251cf75a.png" src="../_images/6542eb3acd90b33e8c23b8dbd06a0853a349550fdf8a8f3a4028e0ed251cf75a.png" />
+<img alt="../_images/8bdd4d4e520a9b67fb461c1f411a279abc6af6dcb8b143b732c3e1edab126e55.png" src="../_images/8bdd4d4e520a9b67fb461c1f411a279abc6af6dcb8b143b732c3e1edab126e55.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1126,7 +1138,7 @@ a certain threshold:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e93d54305139819b62688dcdad028113516ed7ec22ae318fa69eefc8c1b90789.png" src="../_images/e93d54305139819b62688dcdad028113516ed7ec22ae318fa69eefc8c1b90789.png" />
+<img alt="../_images/a428ed2c0881f7f6908d2515df0b9f4a25fbee10588d7a61313616ef9406d308.png" src="../_images/a428ed2c0881f7f6908d2515df0b9f4a25fbee10588d7a61313616ef9406d308.png" />
 </div>
 </div>
 </section>
@@ -1163,7 +1175,7 @@ so far:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a443ba5eb379e9e35db0568ba7642447eed50547d6a0a3ebffbccb3e715c9a07.png" src="../_images/a443ba5eb379e9e35db0568ba7642447eed50547d6a0a3ebffbccb3e715c9a07.png" />
+<img alt="../_images/9d10526e25fdfefb2d6dfe420d7d4e10ff404d760f40e9f4420da73663ef3634.png" src="../_images/9d10526e25fdfefb2d6dfe420d7d4e10ff404d760f40e9f4420da73663ef3634.png" />
 </div>
 </div>
 </section>

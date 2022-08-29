@@ -21,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -39,7 +39,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -663,6 +663,20 @@ download it.</p>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-images-idx3-ubyte.gz
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: t10k-images-idx3-ubyte.gz
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-labels-idx1-ubyte.gz
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: t10k-labels-idx1-ubyte.gz
+</pre></div>
+</div>
+</div>
 </div>
 <p><strong>3.</strong> Decompress the 4 files and create 4 <a class="reference external" href="https://numpy.org/doc/stable/reference/arrays.ndarray.html"><code class="docutils literal notranslate"><span class="pre">ndarrays</span></code></a>, saving them into a dictionary. Each original image is of size 28x28 and neural networks normally expect a 1D vector input; therefore, you also need to reshape the images by multiplying 28 by 28 (784).</p>
 <div class="cell docutils container">
@@ -738,7 +752,7 @@ The shape of test images: (10000, 784) and test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/66452e7166102e1f2a478572eec0ae2dade70c5c467de433e4760bba957857d0.png" src="../_images/66452e7166102e1f2a478572eec0ae2dade70c5c467de433e4760bba957857d0.png" />
+<img alt="../_images/5c27930b3d044e1722aa0079ea1dbdc9a65a559f4c1c85359d6fc4a4bf88b3ca.png" src="../_images/5c27930b3d044e1722aa0079ea1dbdc9a65a559f4c1c85359d6fc4a4bf88b3ca.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -755,7 +769,7 @@ The shape of test images: (10000, 784) and test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d6959b1a0a3d57d4b52c2f70fdb6ce2da7125ee908d82fb5a7641625bb035865.png" src="../_images/d6959b1a0a3d57d4b52c2f70fdb6ce2da7125ee908d82fb5a7641625bb035865.png" />
+<img alt="../_images/96f9ee13eeccfe82393a81405a626aec0c3659df2589f7f0221fb0a000015c64.png" src="../_images/96f9ee13eeccfe82393a81405a626aec0c3659df2589f7f0221fb0a000015c64.png" />
 </div>
 </div>
 <p><em>Above are five images taken from the MNIST training set. Various hand-drawn
@@ -1286,7 +1300,7 @@ its performance over the training epochs.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ae00bfcce4b76caf05869cffcb193091b2e22fda23b8f5ad70e28b17c7c6a0a6.png" src="../_images/ae00bfcce4b76caf05869cffcb193091b2e22fda23b8f5ad70e28b17c7c6a0a6.png" />
+<img alt="../_images/0562afc6f17c119752b1b8e57646732e646a67f3467440266209497da2856abf.png" src="../_images/0562afc6f17c119752b1b8e57646732e646a67f3467440266209497da2856abf.png" />
 </div>
 </div>
 <p><em>The training and testing error is shown above in the left and right

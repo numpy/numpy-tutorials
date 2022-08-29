@@ -21,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
@@ -39,7 +39,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -684,65 +684,31 @@ title="Print to PDF"
 <section id="set-up-pong">
 <h2>Set up Pong<a class="headerlink" href="#set-up-pong" title="Permalink to this headline">#</a></h2>
 <p><strong>1.</strong> First, you should install OpenAI Gym (using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gym[atari]</span></code> - this package is currently not available on conda), and import NumPy, Gym and the necessary modules:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">gym</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p>Gym can monitor and save the output using the <code class="docutils literal notranslate"><span class="pre">Monitor</span></code> wrapper:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gym</span> <span class="kn">import</span> <span class="n">wrappers</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gym</span> <span class="kn">import</span> <span class="n">wrappers</span>
 <span class="kn">from</span> <span class="nn">gym.wrappers</span> <span class="kn">import</span> <span class="n">Monitor</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p><strong>2.</strong> Instantiate a Gym environment for the game of Pong:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;Pong-v0&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s2">&quot;Pong-v0&quot;</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
 </div>
 <p><strong>3.</strong> Let’s review which actions are available in the <code class="docutils literal notranslate"><span class="pre">Pong-v0</span></code> environment:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Discrete(6)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">get_action_meanings</span><span class="p">())</span>
 </pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">get_action_meanings</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;NOOP&#39;, &#39;FIRE&#39;, &#39;RIGHT&#39;, &#39;LEFT&#39;, &#39;RIGHTFIRE&#39;, &#39;LEFTFIRE&#39;]
-</pre></div>
-</div>
-</div>
 </div>
 <p>There are 6 actions. However, <code class="docutils literal notranslate"><span class="pre">LEFTFIRE</span></code> is actually <code class="docutils literal notranslate"><span class="pre">LEFT</span></code>, <code class="docutils literal notranslate"><span class="pre">RIGHTFIRE</span></code> — <code class="docutils literal notranslate"><span class="pre">RIGHT</span></code>, and <code class="docutils literal notranslate"><span class="pre">NOOP</span></code> — <code class="docutils literal notranslate"><span class="pre">FIRE</span></code>.</p>
 <p>For simplicity, your policy network will have one output — a (log) probability for “moving up” (indexed at <code class="docutils literal notranslate"><span class="pre">2</span></code> or <code class="docutils literal notranslate"><span class="pre">RIGHT</span></code>). The other available action will be indexed at 3 (“move down” or <code class="docutils literal notranslate"><span class="pre">LEFT</span></code>).</p>
 <p><strong>4.</strong> Gym can save videos of the agent’s learning in an MP4 format — wrap <code class="docutils literal notranslate"><span class="pre">Monitor()</span></code> around the environment by running the following:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">Monitor</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s2">&quot;./video&quot;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">env</span> <span class="o">=</span> <span class="n">Monitor</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="s2">&quot;./video&quot;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
 </div>
 <p>While you can perform all kinds of RL experiments in a Jupyter notebook, rendering images or videos of a Gym environment to visualize how your agent plays the game of Pong after training can be rather challenging. If you want to set up video playback in a notebook, you can find the details in the Appendix at the end of this tutorial.</p>
 </section>
@@ -752,17 +718,8 @@ title="Print to PDF"
 <p>Your agent will use the frames from the Pong game — pixels from screen frames — as input-observations for the policy network. The game observation tells the agent about where the ball is before it is fed (with a forward pass) into the neural network (the policy). This is similar to DeepMind’s <a class="reference external" href="https://deepmind.com/research/open-source/dqn">DQN</a> method (which is further discussed in the Appendix).</p>
 <p>Pong screen frames are 210x160 pixels over 3 color dimensions (red, green and blue). The arrays are encoded with <code class="docutils literal notranslate"><span class="pre">uint8</span></code> (or 8-bit integers), and these observations are stored on a Gym Box instance.</p>
 <p><strong>1.</strong> Check the Pong’s observations:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">observation_space</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Box(0, 255, (210, 160, 3), uint8)
-</pre></div>
-</div>
-</div>
 </div>
 <p>In Gym, the agent’s actions and observations can be part of the <code class="docutils literal notranslate"><span class="pre">Box</span></code> (n-dimensional) or <code class="docutils literal notranslate"><span class="pre">Discrete</span></code> (fixed-range integers) classes.</p>
 <p><strong>2.</strong> You can view a random observation — one frame — by:</p>
@@ -774,9 +731,7 @@ title="Print to PDF"
 </pre></div>
 </div>
 <p>(You can refer to the OpenAI Gym core <a class="reference external" href="https://github.com/openai/gym/blob/master/gym/core.py">API</a> for more information about Gym’s core classes and methods.)</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="n">env</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
@@ -785,22 +740,9 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">random_frame</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(210, 160, 3)
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fb216462160&gt;
-</pre></div>
-</div>
-<img alt="../_images/77dbb1debda46fc9ae8179c00a3a369ed3e4335d3ee5abe1269a212c253ff927.png" src="../_images/77dbb1debda46fc9ae8179c00a3a369ed3e4335d3ee5abe1269a212c253ff927.png" />
-</div>
-</div>
 <p>To feed the observations into the policy (neural) network, you need to convert them into 1D grayscale vectors with 6,400 (80x80x1) floating point arrays. (During training, you will use NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ravel.html"><code class="docutils literal notranslate"><span class="pre">np.ravel()</span></code></a> function to flatten these arrays.)</p>
 <p><strong>3.</strong> Set up a helper function for frame (observation) preprocessing:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">frame_preprocessing</span><span class="p">(</span><span class="n">observation_frame</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">frame_preprocessing</span><span class="p">(</span><span class="n">observation_frame</span><span class="p">):</span>
     <span class="c1"># Crop the frame.</span>
     <span class="n">observation_frame</span> <span class="o">=</span> <span class="n">observation_frame</span><span class="p">[</span><span class="mi">35</span><span class="p">:</span><span class="mi">195</span><span class="p">]</span>
     <span class="c1"># Downsample the frame by a factor of 2.</span>
@@ -813,23 +755,11 @@ title="Print to PDF"
     <span class="k">return</span> <span class="n">observation_frame</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p><strong>4.</strong> Preprocess the random frame from earlier to test the function — the input for the policy network is an 80x80 1D image:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preprocessed_random_frame</span> <span class="o">=</span> <span class="n">frame_preprocessing</span><span class="p">(</span><span class="n">random_frame</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">preprocessed_random_frame</span> <span class="o">=</span> <span class="n">frame_preprocessing</span><span class="p">(</span><span class="n">random_frame</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">preprocessed_random_frame</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">preprocessed_random_frame</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(80, 80)
-</pre></div>
-</div>
-<img alt="../_images/a7c43b74c3b79238f13ebfee6b630ee344311daef43187912abe404779a64e76.png" src="../_images/a7c43b74c3b79238f13ebfee6b630ee344311daef43187912abe404779a64e76.png" />
-</div>
 </div>
 </section>
 <section id="create-the-policy-the-neural-network-and-the-forward-pass">
@@ -844,58 +774,36 @@ title="Print to PDF"
 <p><strong>1.</strong> Let’s instantiate certain parameters for the input, hidden, and output layers, and start setting up the network model.</p>
 <p>Start by creating a random number generator instance for the experiment
 (seeded for reproducibility):</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">12288743</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">12288743</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
 </div>
 <p>Then:</p>
 <ul class="simple">
 <li><p>Set the input (observation) dimensionality - your preprocessed screen frames:</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="mi">80</span> <span class="o">*</span> <span class="mi">80</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="mi">80</span> <span class="o">*</span> <span class="mi">80</span>
 </pre></div>
-</div>
-</div>
 </div>
 <ul class="simple">
 <li><p>Set the number of hidden layer neurons.</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="mi">200</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="mi">200</span>
 </pre></div>
-</div>
-</div>
 </div>
 <ul class="simple">
 <li><p>Instantiate your policy (neural) network model as an empty dictionary.</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="p">{}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="p">{}</span>
 </pre></div>
-</div>
-</div>
 </div>
 <p>In a neural network, <em>weights</em> are important adjustable parameters that the network fine-tunes by forward and backward propagating the data.</p>
 <p><strong>2.</strong> Using a technique called <a class="reference external" href="https://www.deeplearning.ai/ai-notes/initialization/#IV">Xavier initialization</a>, set up the network model’s initial weights with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.standard_normal.html"><code class="docutils literal notranslate"><span class="pre">Generator.standard_normal()</span></code></a> that returns random numbers over a standard Normal distribution, as well as <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html?highlight=numpy.sqrt#numpy.sqrt"><code class="docutils literal notranslate"><span class="pre">np.sqrt()</span></code></a>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;W1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">D</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;W1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">D</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
 <span class="n">model</span><span class="p">[</span><span class="s2">&quot;W2&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">H</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p><strong>3.</strong> Your policy network starts by randomly initializing the weights and feeds the input data (frames) forward from the input layer through a hidden layer to the output layers. This process is called the <em>forward pass</em> or <em>forward propagation</em>, and is outlined in the function <code class="docutils literal notranslate"><span class="pre">policy_forward()</span></code>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">policy_forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">policy_forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
     <span class="c1"># Matrix-multiply the weights by the input in the one and only hidden layer.</span>
     <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;W1&quot;</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span>
     <span class="c1"># Apply non-linearity with ReLU.</span>
@@ -910,30 +818,22 @@ title="Print to PDF"
     <span class="k">return</span> <span class="n">p</span><span class="p">,</span> <span class="n">h</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p>Note that there are two <em>activation functions</em> for determining non-linear relationships between inputs and outputs. These <a class="reference external" href="https://en.wikipedia.org/wiki/Activation_function">non-linear functions</a> are applied to the output of the layers:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">Rectified linear unit (ReLU)</a>: defined as <code class="docutils literal notranslate"><span class="pre">h[h&lt;0]</span> <span class="pre">=</span> <span class="pre">0</span></code> above. It returns 0 for negative inputs and the same value if it’s positive.</p></li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Sigmoid_function">Sigmoid</a>: defined below as <code class="docutils literal notranslate"><span class="pre">sigmoid()</span></code>. It “wraps” the last layer’s output and returns an action log probability in the (0, 1) range.</p></li>
 </ul>
 <p><strong>4.</strong> Define the sigmoid function separately with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.exp.html?highlight=numpy.exp#numpy.exp"><code class="docutils literal notranslate"><span class="pre">np.exp()</span></code></a> for computing exponentials:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="set-up-the-update-step-backpropagation">
 <h2>Set up the update step (backpropagation)<a class="headerlink" href="#set-up-the-update-step-backpropagation" title="Permalink to this headline">#</a></h2>
 <p>During learning in your deep RL algorithm, you use the action log probabilities (given an observation) and the discounted returns (for example, +1 or -1 in Pong) and perform the <em>backward pass</em> or <em>backpropagation</em> to update the parameters — the policy network’s weights.</p>
 <p><strong>1.</strong> Let’s define the backward pass function (<code class="docutils literal notranslate"><span class="pre">policy_backward()</span></code>) with the help of NumPy’s modules for array multiplication — <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html?highlight=numpy.dot#numpy.dot"><code class="docutils literal notranslate"><span class="pre">np.dot()</span></code></a> (matrix multiplication), <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.outer.html"><code class="docutils literal notranslate"><span class="pre">np.outer()</span></code></a> (outer product computation), and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ravel.html"><code class="docutils literal notranslate"><span class="pre">np.ravel()</span></code></a> (to flatten arrays into 1D arrays):</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">policy_backward</span><span class="p">(</span><span class="n">eph</span><span class="p">,</span> <span class="n">epdlogp</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">policy_backward</span><span class="p">(</span><span class="n">eph</span><span class="p">,</span> <span class="n">epdlogp</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
     <span class="n">dW2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">eph</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">epdlogp</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
     <span class="n">dh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">epdlogp</span><span class="p">,</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;W2&quot;</span><span class="p">])</span>
     <span class="n">dh</span><span class="p">[</span><span class="n">eph</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
@@ -942,13 +842,9 @@ title="Print to PDF"
     <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;W1&quot;</span><span class="p">:</span> <span class="n">dW1</span><span class="p">,</span> <span class="s2">&quot;W2&quot;</span><span class="p">:</span> <span class="n">dW2</span><span class="p">}</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p>Using the intermediate hidden “states” of the network (<code class="docutils literal notranslate"><span class="pre">eph</span></code>) and the gradients of action log probabilities (<code class="docutils literal notranslate"><span class="pre">epdlogp</span></code>) for an episode, the <code class="docutils literal notranslate"><span class="pre">policy_backward</span></code> function propagates the gradients back through the policy network and update the weights.</p>
 <p><strong>2.</strong> When applying backpropagation during agent training, you will need to save several variables for each episode. Let’s instantiate empty lists to store them:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All preprocessed observations for the episode.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># All preprocessed observations for the episode.</span>
 <span class="n">xs</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="c1"># All hidden &quot;states&quot; (from the network) for the episode.</span>
 <span class="n">hs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -959,46 +855,30 @@ title="Print to PDF"
 <span class="n">drs</span> <span class="o">=</span> <span class="p">[]</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p>You will reset these variables manually at the end of each episode during training after they are “full” and reshape with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.vstack.html"><code class="docutils literal notranslate"><span class="pre">np.vstack()</span></code></a>. This is demonstrated in the training stage towards the end of the tutorial.</p>
 <p><strong>3.</strong> Next, to perform a gradient ascent when optimizing the agent’s policy, it is common to use deep learning <em>optimizers</em> (you’re performing optimization with gradients). In this example, you’ll use <a class="reference external" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#RMSProp">RMSProp</a> — an adaptive optimization <a class="reference external" href="http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf">method</a>. Let’s set a discounting factor — a decay rate — for the optimizer:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">decay_rate</span> <span class="o">=</span> <span class="mf">0.99</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">decay_rate</span> <span class="o">=</span> <span class="mf">0.99</span>
 </pre></div>
-</div>
-</div>
 </div>
 <p><strong>4.</strong> You will also need to store the gradients (with the help of NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html"><code class="docutils literal notranslate"><span class="pre">np.zeros_like()</span></code></a>) for the optimization step during training:</p>
 <ul class="simple">
 <li><p>First, save the update buffers that add up gradients over a batch:</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grad_buffer</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">grad_buffer</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 </pre></div>
-</div>
-</div>
 </div>
 <ul class="simple">
 <li><p>Second, store the RMSProp memory for the optimizer for gradient ascent:</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rmsprop_cache</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rmsprop_cache</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 </pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="define-the-discounted-rewards-expected-return-function">
 <h2>Define the discounted rewards (expected return) function<a class="headerlink" href="#define-the-discounted-rewards-expected-return-function" title="Permalink to this headline">#</a></h2>
 <p>In this section, you will set up a function for computing discounted rewards (<code class="docutils literal notranslate"><span class="pre">discount_rewards()</span></code>) — the expected return from an observation — that uses a 1D array of rewards as inputs (with the help of NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html"><code class="docutils literal notranslate"><span class="pre">np.zeros_like()</span></code></a>) function.</p>
 <p>To provide more weight to shorter-term rewards over longer-term ones, you will use a <em>discount factor</em> (gamma) that is often a floating-point number between 0.9 and 0.99.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.99</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.99</span>
 
 
 <span class="k">def</span> <span class="nf">discount_rewards</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
@@ -1014,8 +894,6 @@ title="Print to PDF"
         <span class="n">discounted_r</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">running_add</span>
     <span class="k">return</span> <span class="n">discounted_r</span>
 </pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="train-the-agent-for-a-number-of-episodes">
@@ -1049,64 +927,38 @@ title="Print to PDF"
 <p><img alt="Diagram showing operations detailed in this tutorial" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels.png" /></p>
 <p>You can stop the training at any time or/and check saved MP4 videos of saved plays on your disk in the <code class="docutils literal notranslate"><span class="pre">/video</span></code> directory. You can set the maximum number of episodes that is more appropriate for your setup.</p>
 <p><strong>1.</strong> For demo purposes, let’s limit the number of episodes for training to 3. If you are using hardware acceleration (CPUs and GPUs), you can increase the number to 1,000 or beyond. For comparison, Andrej Karpathy’s original experiment took about 8,000 episodes.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">max_episodes</span> <span class="o">=</span> <span class="mi">3</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">max_episodes</span> <span class="o">=</span> <span class="mi">3</span>
 </pre></div>
-</div>
-</div>
 </div>
 <p><strong>2.</strong> Set the batch size and the learning rate values:</p>
 <ul class="simple">
 <li><p>The <em>batch size</em> dictates how often (in episodes) the model performs a parameter update. It is the number of times your agent can collect the state-action trajectories. At the end of the collection, you can perform the maximization of action-probability multiples.</p></li>
 <li><p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Learning_rate"><em>learning rate</em></a> helps limit the magnitude of weight updates to prevent them from overcorrecting.</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">3</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1e-4</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p><strong>3.</strong> Set the game rendering default variable for Gym’s <code class="docutils literal notranslate"><span class="pre">render</span></code> method (it is used to display the observation and is optional but can be useful during debugging):</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">render</span> <span class="o">=</span> <span class="kc">False</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">render</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
-</div>
-</div>
 </div>
 <p><strong>4.</strong> Set the agent’s initial (random) observation by calling <code class="docutils literal notranslate"><span class="pre">reset()</span></code>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">observation</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">observation</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 </pre></div>
-</div>
-</div>
 </div>
 <p><strong>5.</strong> Initialize the previous observation:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prev_x</span> <span class="o">=</span> <span class="kc">None</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prev_x</span> <span class="o">=</span> <span class="kc">None</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p><strong>6.</strong> Initialize the reward variables and the episode count:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">running_reward</span> <span class="o">=</span> <span class="kc">None</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">running_reward</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="n">reward_sum</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">episode_number</span> <span class="o">=</span> <span class="mi">0</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p><strong>7.</strong> To simulate motion between the frames, set the single input frame (<code class="docutils literal notranslate"><span class="pre">x</span></code>) for the policy network as the difference between the current and previous preprocessed frames:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">update_input</span><span class="p">(</span><span class="n">prev_x</span><span class="p">,</span> <span class="n">cur_x</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">update_input</span><span class="p">(</span><span class="n">prev_x</span><span class="p">,</span> <span class="n">cur_x</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">prev_x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">cur_x</span> <span class="o">-</span> <span class="n">prev_x</span>
     <span class="k">else</span><span class="p">:</span>
@@ -1114,12 +966,10 @@ title="Print to PDF"
     <span class="k">return</span> <span class="n">x</span>
 </pre></div>
 </div>
-</div>
-</div>
 <p><strong>8.</strong> Finally, start the training loop, using the functions you have predefined:</p>
-<div class="cell tag_output_scroll docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">episode_number</span> <span class="o">&lt;</span> <span class="n">max_episodes</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">:</span><span class="n">tags</span><span class="p">:</span> <span class="p">[</span><span class="n">output_scroll</span><span class="p">]</span>
+
+<span class="k">while</span> <span class="n">episode_number</span> <span class="o">&lt;</span> <span class="n">max_episodes</span><span class="p">:</span>
     <span class="c1"># (For rendering.)</span>
     <span class="k">if</span> <span class="n">render</span><span class="p">:</span>
         <span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
@@ -1243,125 +1093,12 @@ title="Print to PDF"
         <span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-Episode 0: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -21.0 Running mean: -21.0
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-Episode 1: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -21.0 Running mean: -21.0
-Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: 1.0... POSITIVE REWARD!
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-Episode 2: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resetting the Pong environment. Episode total reward: -20.0 Running mean: -20.99
-Episode 3: Game finished. Reward: -1.0...
-</pre></div>
-</div>
-</div>
-</div>
 <p>A few notes:</p>
 <ul class="simple">
 <li><p>If you have previously run an experiment and want to repeat it, your <code class="docutils literal notranslate"><span class="pre">Monitor</span></code> instance may still be running, which may throw an error the next time you try to traini the agent. Therefore, you should first shut down <code class="docutils literal notranslate"><span class="pre">Monitor</span></code> by calling <code class="docutils literal notranslate"><span class="pre">env.close()</span></code> by uncommenting and running the cell below:</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># env.close()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># env.close()</span>
 </pre></div>
-</div>
-</div>
 </div>
 <ul class="simple">
 <li><p>In Pong, if a player doesn’t hit the ball back, they receive a negative reward (-1) and the other player gets a +1 reward. The rewards that the agent receives by playing Pong have a significant variance. Therefore, it’s best practice to normalize them with the same mean (using <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.mean.html"><code class="docutils literal notranslate"><span class="pre">np.mean()</span></code></a>) and standard deviation (using NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.std.html?highlight=std"><code class="docutils literal notranslate"><span class="pre">np.std()</span></code></a>).</p></li>

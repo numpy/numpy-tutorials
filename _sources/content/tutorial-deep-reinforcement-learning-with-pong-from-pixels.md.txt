@@ -77,31 +77,31 @@ You will train your Pong agent through an "on-policy" method using policy gradie
 
 **1.** First, you should install OpenAI Gym (using `pip install gym[atari]` - this package is currently not available on conda), and import NumPy, Gym and the necessary modules:
 
-```{code-cell}
+```python
 import numpy as np
 import gym
 ```
 
 Gym can monitor and save the output using the `Monitor` wrapper:
 
-```{code-cell}
+```python
 from gym import wrappers
 from gym.wrappers import Monitor
 ```
 
 **2.** Instantiate a Gym environment for the game of Pong:
 
-```{code-cell}
+```python
 env = gym.make("Pong-v0")
 ```
 
 **3.** Let's review which actions are available in the `Pong-v0` environment:
 
-```{code-cell}
+```python
 print(env.action_space)
 ```
 
-```{code-cell}
+```python
 print(env.get_action_meanings())
 ```
 
@@ -111,7 +111,7 @@ For simplicity, your policy network will have one output — a (log) probability
 
 **4.** Gym can save videos of the agent's learning in an MP4 format — wrap `Monitor()` around the environment by running the following:
 
-```{code-cell}
+```python
 env = Monitor(env, "./video", force=True)
 ```
 
@@ -127,7 +127,7 @@ Pong screen frames are 210x160 pixels over 3 color dimensions (red, green and bl
 
 **1.** Check the Pong's observations:
 
-```{code-cell}
+```python
 print(env.observation_space)
 ```
 
@@ -143,7 +143,7 @@ In Gym, the agent's actions and observations can be part of the `Box` (n-dimensi
 
 (You can refer to the OpenAI Gym core [API](https://github.com/openai/gym/blob/master/gym/core.py) for more information about Gym's core classes and methods.)
 
-```{code-cell}
+```python
 import matplotlib.pyplot as plt
 
 env.seed(42)
@@ -157,7 +157,7 @@ To feed the observations into the policy (neural) network, you need to convert t
 
 **3.** Set up a helper function for frame (observation) preprocessing:
 
-```{code-cell}
+```python
 def frame_preprocessing(observation_frame):
     # Crop the frame.
     observation_frame = observation_frame[35:195]
@@ -173,7 +173,7 @@ def frame_preprocessing(observation_frame):
 
 **4.** Preprocess the random frame from earlier to test the function — the input for the policy network is an 80x80 1D image:
 
-```{code-cell}
+```python
 preprocessed_random_frame = frame_preprocessing(random_frame)
 plt.imshow(preprocessed_random_frame, cmap="gray")
 print(preprocessed_random_frame.shape)
@@ -193,7 +193,7 @@ Next, you will define the policy as a simple feedforward network that uses a gam
 Start by creating a random number generator instance for the experiment
 (seeded for reproducibility):
 
-```{code-cell}
+```python
 rng = np.random.default_rng(seed=12288743)
 ```
 
@@ -201,19 +201,19 @@ Then:
 
   - Set the input (observation) dimensionality - your preprocessed screen frames:
 
-```{code-cell}
+```python
 D = 80 * 80
 ```
 
   - Set the number of hidden layer neurons.
 
-```{code-cell}
+```python
 H = 200
 ```
 
   - Instantiate your policy (neural) network model as an empty dictionary.
 
-```{code-cell}
+```python
 model = {}
 ```
 
@@ -221,14 +221,14 @@ In a neural network, _weights_ are important adjustable parameters that the netw
 
 **2.** Using a technique called [Xavier initialization](https://www.deeplearning.ai/ai-notes/initialization/#IV), set up the network model's initial weights with NumPy's [`Generator.standard_normal()`](https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.standard_normal.html) that returns random numbers over a standard Normal distribution, as well as [`np.sqrt()`](https://numpy.org/doc/stable/reference/generated/numpy.sqrt.html?highlight=numpy.sqrt#numpy.sqrt):
 
-```{code-cell}
+```python
 model["W1"] = rng.standard_normal(size=(H, D)) / np.sqrt(D)
 model["W2"] = rng.standard_normal(size=H) / np.sqrt(H)
 ```
 
 **3.** Your policy network starts by randomly initializing the weights and feeds the input data (frames) forward from the input layer through a hidden layer to the output layers. This process is called the _forward pass_ or _forward propagation_, and is outlined in the function `policy_forward()`:
 
-```{code-cell}
+```python
 def policy_forward(x, model):
     # Matrix-multiply the weights by the input in the one and only hidden layer.
     h = np.dot(model["W1"], x)
@@ -251,7 +251,7 @@ Note that there are two _activation functions_ for determining non-linear relati
 
 **4.** Define the sigmoid function separately with NumPy's [`np.exp()`](https://numpy.org/doc/stable/reference/generated/numpy.exp.html?highlight=numpy.exp#numpy.exp) for computing exponentials:
 
-```{code-cell}
+```python
 def sigmoid(x):
     return 1.0 / (1.0 + np.exp(-x))
 ```
@@ -262,7 +262,7 @@ During learning in your deep RL algorithm, you use the action log probabilities 
 
 **1.** Let's define the backward pass function (`policy_backward()`) with the help of NumPy's modules for array multiplication — [`np.dot()`](https://numpy.org/doc/stable/reference/generated/numpy.dot.html?highlight=numpy.dot#numpy.dot) (matrix multiplication), [`np.outer()`](https://numpy.org/doc/stable/reference/generated/numpy.outer.html) (outer product computation), and [`np.ravel()`](https://numpy.org/doc/stable/reference/generated/numpy.ravel.html) (to flatten arrays into 1D arrays):
 
-```{code-cell}
+```python
 def policy_backward(eph, epdlogp, model):
     dW2 = np.dot(eph.T, epdlogp).ravel()
     dh = np.outer(epdlogp, model["W2"])
@@ -276,7 +276,7 @@ Using the intermediate hidden "states" of the network (`eph`) and the gradients 
 
 **2.** When applying backpropagation during agent training, you will need to save several variables for each episode. Let's instantiate empty lists to store them:
 
-```{code-cell}
+```python
 # All preprocessed observations for the episode.
 xs = []
 # All hidden "states" (from the network) for the episode.
@@ -292,7 +292,7 @@ You will reset these variables manually at the end of each episode during traini
 
 **3.** Next, to perform a gradient ascent when optimizing the agent's policy, it is common to use deep learning _optimizers_ (you're performing optimization with gradients). In this example, you'll use [RMSProp](https://en.wikipedia.org/wiki/Stochastic_gradient_descent#RMSProp) — an adaptive optimization [method](http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf). Let's set a discounting factor — a decay rate — for the optimizer:
 
-```{code-cell}
+```python
 decay_rate = 0.99
 ```
 
@@ -300,13 +300,13 @@ decay_rate = 0.99
 
 - First, save the update buffers that add up gradients over a batch:
 
-```{code-cell}
+```python
 grad_buffer = {k: np.zeros_like(v) for k, v in model.items()}
 ```
 
 - Second, store the RMSProp memory for the optimizer for gradient ascent:
 
-```{code-cell}
+```python
 rmsprop_cache = {k: np.zeros_like(v) for k, v in model.items()}
 ```
 
@@ -316,7 +316,7 @@ In this section, you will set up a function for computing discounted rewards (`d
 
 To provide more weight to shorter-term rewards over longer-term ones, you will use a _discount factor_ (gamma) that is often a floating-point number between 0.9 and 0.99.
 
-```{code-cell}
+```python
 gamma = 0.99
 
 
@@ -363,7 +363,7 @@ You can stop the training at any time or/and check saved MP4 videos of saved pla
 
 **1.** For demo purposes, let's limit the number of episodes for training to 3. If you are using hardware acceleration (CPUs and GPUs), you can increase the number to 1,000 or beyond. For comparison, Andrej Karpathy's original experiment took about 8,000 episodes.
 
-```{code-cell}
+```python
 max_episodes = 3
 ```
 
@@ -371,32 +371,32 @@ max_episodes = 3
 - The _batch size_ dictates how often (in episodes) the model performs a parameter update. It is the number of times your agent can collect the state-action trajectories. At the end of the collection, you can perform the maximization of action-probability multiples.
 - The [_learning rate_](https://en.wikipedia.org/wiki/Learning_rate) helps limit the magnitude of weight updates to prevent them from overcorrecting.
 
-```{code-cell}
+```python
 batch_size = 3
 learning_rate = 1e-4
 ```
 
 **3.** Set the game rendering default variable for Gym's `render` method (it is used to display the observation and is optional but can be useful during debugging):
 
-```{code-cell}
+```python
 render = False
 ```
 
 **4.** Set the agent's initial (random) observation by calling `reset()`:
 
-```{code-cell}
+```python
 observation = env.reset()
 ```
 
 **5.** Initialize the previous observation:
 
-```{code-cell}
+```python
 prev_x = None
 ```
 
 **6.** Initialize the reward variables and the episode count:
 
-```{code-cell}
+```python
 running_reward = None
 reward_sum = 0
 episode_number = 0
@@ -404,7 +404,7 @@ episode_number = 0
 
 **7.** To simulate motion between the frames, set the single input frame (`x`) for the policy network as the difference between the current and previous preprocessed frames:
 
-```{code-cell}
+```python
 def update_input(prev_x, cur_x, D):
     if prev_x is not None:
         x = cur_x - prev_x
@@ -415,7 +415,7 @@ def update_input(prev_x, cur_x, D):
 
 **8.** Finally, start the training loop, using the functions you have predefined:
 
-```{code-cell}
+```python
 :tags: [output_scroll]
 
 while episode_number < max_episodes:
@@ -546,7 +546,7 @@ A few notes:
 
 - If you have previously run an experiment and want to repeat it, your `Monitor` instance may still be running, which may throw an error the next time you try to traini the agent. Therefore, you should first shut down `Monitor` by calling `env.close()` by uncommenting and running the cell below:
 
-```{code-cell}
+```python
 # env.close()
 ```
 
