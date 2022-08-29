@@ -119,7 +119,7 @@ import imageio
 
 DIR = "tutorial-x-ray-image-processing"
 
-xray_image = imageio.imread(os.path.join(DIR, "00000011_001.png"))
+xray_image = imageio.v3.imread(os.path.join(DIR, "00000011_001.png"))
 ```
 
 **2.** Check that its shape is 1024x1024 pixels and that the array is made up of
@@ -157,7 +157,7 @@ import numpy as np
 num_imgs = 9
 
 combined_xray_images_1 = np.array(
-    [imageio.imread(os.path.join(DIR, f"00000011_00{i}.png")) for i in range(num_imgs)]
+    [imageio.v3.imread(os.path.join(DIR, f"00000011_00{i}.png")) for i in range(num_imgs)]
 )
 ```
 

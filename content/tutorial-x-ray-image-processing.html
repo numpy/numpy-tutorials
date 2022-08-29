@@ -700,13 +700,7 @@ ChestX-ray8 dataset.</p>
 
 <span class="n">DIR</span> <span class="o">=</span> <span class="s2">&quot;tutorial-x-ray-image-processing&quot;</span>
 
-<span class="n">xray_image</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s2">&quot;00000011_001.png&quot;</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_419/3371034397.py:6: DeprecationWarning: Starting with ImageIO v3 the behavior of this function will switch to that of iio.v3.imread. To keep the current behavior (and make this warning dissapear) use `import imageio.v2 as imageio` or call `imageio.v2.imread` directly.
-  xray_image = imageio.imread(os.path.join(DIR, &quot;00000011_001.png&quot;))
+<span class="n">xray_image</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">v3</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="s2">&quot;00000011_001.png&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -757,14 +751,8 @@ array where the first dimension corresponds to image number:</p>
 <span class="n">num_imgs</span> <span class="o">=</span> <span class="mi">9</span>
 
 <span class="n">combined_xray_images_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-    <span class="p">[</span><span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;00000011_00</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_imgs</span><span class="p">)]</span>
+    <span class="p">[</span><span class="n">imageio</span><span class="o">.</span><span class="n">v3</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">DIR</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;00000011_00</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_imgs</span><span class="p">)]</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_419/2905601773.py:5: DeprecationWarning: Starting with ImageIO v3 the behavior of this function will switch to that of iio.v3.imread. To keep the current behavior (and make this warning dissapear) use `import imageio.v2 as imageio` or call `imageio.v2.imread` directly.
-  [imageio.imread(os.path.join(DIR, f&quot;00000011_00{i}.png&quot;)) for i in range(num_imgs)]
 </pre></div>
 </div>
 </div>
