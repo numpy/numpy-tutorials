@@ -14,6 +14,14 @@ kernelspec:
 
 # Deep reinforcement learning with Pong from pixels
 
+```{caution}
+
+This article is not currently tested due to licensing/installation issues with
+the underlying `gym` and `atari-py` dependencies.
+Help improve this article by developing an example with reduced dependency
+footprint!
+```
+
 This tutorial demonstrates how to implement a deep reinforcement learning (RL) agent from scratch using a policy gradient method that learns to play the [Pong](https://gym.openai.com/envs/Pong-v0/) video game using screen pixels as inputs with NumPy. Your Pong agent will obtain experience on the go using an [artificial neural network](https://en.wikipedia.org/wiki/Artificial_neural_network) as its [policy](https://en.wikipedia.org/wiki/Reinforcement_learning).
 
 Pong is a 2D game from 1972 where two players use "rackets" to play a form of table tennis. Each player moves the racket up and down the screen and tries to hit a ball in their opponent's direction by touching it. The goal is to hit the ball such that it goes past the opponent's racket (they miss their shot). According to the rules, if a player reaches 21 points, they win. In Pong, the RL agent that learns to play against an opponent is displayed on the right.
