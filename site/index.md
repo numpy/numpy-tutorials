@@ -31,6 +31,22 @@ applications
 contributing
 ```
 
+### Non-executable articles
+
+```{admonition} Help improve the tutorials!
+
+Want to make a valuable contribution to the tutorials? Consider contributing to
+these existing articles to help make them fully executable and reproducible!
+```
+
+```{toctree}
+---
+maxdepth: 2
+---
+
+articles
+```
+
 ## Useful links and resources
 
 The following links may be useful:
