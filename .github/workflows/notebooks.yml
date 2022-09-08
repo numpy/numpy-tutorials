@@ -17,8 +17,15 @@ jobs:
       max-parallel: 12
       matrix:
         os: [Ubuntu-20.04, macOS-latest]
-        python-version: [3.8, 3.9, "3.10"]
-        toxenv: test
+        include:
+          - python-version: '3.8'
+            toxenv: py38-test-oldestdeps
+
+          - python-version: '3.9'
+            toxenv: py39-test
+
+          - python-version: '3.10'
+            toxenv: py310-test
 
     steps:
     - uses: actions/checkout@v2
