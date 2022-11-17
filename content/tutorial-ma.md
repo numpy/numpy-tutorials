@@ -268,10 +268,9 @@ Finally, we can use the [numpy.polyfit](https://numpy.org/devdocs/reference/gene
 
 ```{code-cell}
 t = np.arange(len(china_total))
-params = np.polyfit(t[~china_total.mask], valid, 3)
-cubic_fit = np.polyval(params, t)
+model = np.polynomial.Polynomial.fit(t[~china_total.mask], valid, 3)
 plt.plot(t, china_total)
-plt.plot(t, cubic_fit, "--")
+plt.plot(t, model(t), "--")
 ```
 
 This plot is not so readable since the lines seem to be over each other, so let's summarize in a more elaborate plot. We'll plot the real data when
@@ -279,10 +278,10 @@ available, and show the cubic fit for unavailable data, using this fit to comput
 
 ```{code-cell}
 plt.plot(t, china_total)
-plt.plot(t[china_total.mask], cubic_fit[china_total.mask], "--", color="orange")
-plt.plot(7, np.polyval(params, 7), "r*")
+plt.plot(t[china_total.mask], model(t)[china_total.mask], "--", color="orange")
+plt.plot(7, model(7), "r*")
 plt.xticks([0, 7, 13], dates[[0, 7, 13]])
-plt.yticks([0, np.polyval(params, 7), 10000, 17500])
+plt.yticks([0, model(7), 10000, 17500])
 plt.legend(["Mainland China", "Cubic estimate", "7 days after start"])
 plt.title(
     "COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China\n"
