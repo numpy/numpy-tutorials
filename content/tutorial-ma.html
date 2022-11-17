@@ -22,8 +22,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -35,12 +34,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -723,7 +717,7 @@ rows of this file, since they contain other data we are not interested in. Separ
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020&#39;)
 </pre></div>
 </div>
-<img alt="../_images/d369ad5320cb4962cef9516f49ce884e9f445050ce8fa4665974fdedd01001a3.png" src="../_images/d369ad5320cb4962cef9516f49ce884e9f445050ce8fa4665974fdedd01001a3.png" />
+<img alt="../_images/eccf13c5a41c409fc55c1b0ab5065a2f4c6e47938e9f41d0f0f6ed601d8d50c5.png" src="../_images/eccf13c5a41c409fc55c1b0ab5065a2f4c6e47938e9f41d0f0f6ed601d8d50c5.png" />
 </div>
 </div>
 <p>The graph has a strange shape from January 24th to February 1st. It would be interesting to know where this data comes from. If we look at the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array we extracted from the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file, we can see that we have two columns, where the first would contain regions and the second would contain the name of the country. However, only the first few rows contain data for the the first column (province names in China). Following that, we only have country names. So it would make sense to group all the data from China into a single row. For this, we’ll select from the <code class="docutils literal notranslate"><span class="pre">nbcases</span></code> array only the rows for which the second entry of the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array corresponds to China. Next, we’ll use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.sum.html#numpy.sum">numpy.sum</a> function to sum all the selected rows (<code class="docutils literal notranslate"><span class="pre">axis=0</span></code>). Note also that row 35 corresponds to the total counts for the whole country for each date. Since we want to calculate the sum ourselves from the provinces data, we have to remove that row first from both <code class="docutils literal notranslate"><span class="pre">locations</span></code> and <code class="docutils literal notranslate"><span class="pre">nbcases</span></code>:</p>
@@ -823,7 +817,7 @@ closely:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020&#39;)
 </pre></div>
 </div>
-<img alt="../_images/76a2f5cd66a0cec6a9bbfe5c4a5a42821b033fe8eb195bb8b64c1bfaba5ccafe.png" src="../_images/76a2f5cd66a0cec6a9bbfe5c4a5a42821b033fe8eb195bb8b64c1bfaba5ccafe.png" />
+<img alt="../_images/c79898e7686e62f88c9dfbd84092c38107150c6c955af731453c7b2f02209d52.png" src="../_images/c79898e7686e62f88c9dfbd84092c38107150c6c955af731453c7b2f02209d52.png" />
 </div>
 </div>
 <p>Now that our data has been masked, let’s try summing up all the cases in China:</p>
@@ -919,7 +913,7 @@ closely:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China&#39;)
 </pre></div>
 </div>
-<img alt="../_images/b4df2bf4f28a836882ee6c34296d7370a13cee7fe5e8c702c10a8a07d375ebb6.png" src="../_images/b4df2bf4f28a836882ee6c34296d7370a13cee7fe5e8c702c10a8a07d375ebb6.png" />
+<img alt="../_images/59311ba02177b07d8f21cbb3cd37363ad23735951c1156fb55f7efd0ba2b3d78.png" src="../_images/59311ba02177b07d8f21cbb3cd37363ad23735951c1156fb55f7efd0ba2b3d78.png" />
 </div>
 </div>
 <p>It’s clear that masked arrays are the right solution here. We cannot represent the missing data without mischaracterizing the evolution of the curve.</p>
@@ -986,10 +980,10 @@ closely:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f337a036610&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f285504bca0&gt;]
 </pre></div>
 </div>
-<img alt="../_images/973f59ea7bc184f85c7a4ac62c4a6f36740ce704095d72df1b160704eb8de3c1.png" src="../_images/973f59ea7bc184f85c7a4ac62c4a6f36740ce704095d72df1b160704eb8de3c1.png" />
+<img alt="../_images/ecff0783e3c60bbef1498744f6aaf671fe8948a2a95c2e431c4b6e41a581e2b6.png" src="../_images/ecff0783e3c60bbef1498744f6aaf671fe8948a2a95c2e431c4b6e41a581e2b6.png" />
 </div>
 </div>
 <p>This plot is not so readable since the lines seem to be over each other, so let’s summarize in a more elaborate plot. We’ll plot the real data when
@@ -1013,7 +1007,7 @@ available, and show the cubic fit for unavailable data, using this fit to comput
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China\nCubic estimate for 7 days after start&#39;)
 </pre></div>
 </div>
-<img alt="../_images/aae7a1920d5bf5395bb87139dcb56cba75c9f94e53bd4c75a6784110438f9082.png" src="../_images/aae7a1920d5bf5395bb87139dcb56cba75c9f94e53bd4c75a6784110438f9082.png" />
+<img alt="../_images/0425580f1effbd5bc325fb4a754c7bd05080637b389f2a447220f73caa421a1a.png" src="../_images/0425580f1effbd5bc325fb4a754c7bd05080637b389f2a447220f73caa421a1a.png" />
 </div>
 </div>
 </section>
