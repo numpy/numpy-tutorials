@@ -264,11 +264,13 @@ Now, if we want to create a very simple approximation for this data, we should t
 dates[~china_total.mask]
 ```
 
-Finally, we can use the [numpy.polyfit](https://numpy.org/devdocs/reference/generated/numpy.polyfit.html#numpy.polyfit) and [numpy.polyval](https://numpy.org/devdocs/reference/generated/numpy.polyval.html#numpy.polyval) functions to create a cubic polynomial that fits the data as best as possible:
+Finally, we can use the
+[fitting functionality of the numpy.polynomial](https://numpy.org/doc/stable/reference/generated/numpy.polynomial.polynomial.Polynomial.fit.html)
+package to create a cubic polynomial model that fits the data as best as possible:
 
 ```{code-cell}
 t = np.arange(len(china_total))
-model = np.polynomial.Polynomial.fit(t[~china_total.mask], valid, 3)
+model = np.polynomial.Polynomial.fit(t[~china_total.mask], valid, deg=3)
 plt.plot(t, china_total)
 plt.plot(t, model(t), "--")
 ```
