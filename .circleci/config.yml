@@ -70,7 +70,7 @@ jobs:
 
       - add_ssh_keys:
           fingerprints:
-            db:84:df:44:ad:77:d0:aa:2d:81:c9:73:30:9d:21:37
+            5c:54:62:37:75:7f:4d:14:f4:07:82:1c:50:0d:ee:9b
 
       - run:
           name: deploy to gh-pages
