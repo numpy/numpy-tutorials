@@ -68,7 +68,7 @@ will assign `x` to the integers from 0 to 9 using
 [`np.arange`](https://numpy.org/doc/stable/reference/generated/numpy.arange.html).
 
 ```{code-cell}
-x = np.arange(0, 10, 1)
+x = np.arange(10)
 y = x ** 2
 print(x)
 print(y)
