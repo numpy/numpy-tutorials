@@ -616,6 +616,12 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_390/2202046956.py:3: DeprecationWarning: scipy.misc.face has been deprecated in SciPy v1.10.0; and will be completely removed in SciPy v1.12.0. Dataset methods have moved into the scipy.datasets module. Use scipy.datasets.face instead.
+  img = misc.face()
+</pre></div>
+</div>
+</div>
 </div>
 <p><strong>Note</strong>: If you prefer, you can use your own image as you work through this tutorial. In order to transform your image into a NumPy array that can be manipulated, you can use the <code class="docutils literal notranslate"><span class="pre">imread</span></code> function from the <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.html#module-matplotlib.pyplot">matplotlib.pyplot</a> submodule. Alternatively, you can use the <a class="reference external" href="https://imageio.readthedocs.io/en/stable/userapi.html#imageio.imread">imageio.imread</a> function from the <code class="docutils literal notranslate"><span class="pre">imageio</span></code> library. Be aware that if you use your own image, you’ll likely need to adapt the steps below. For more information on how images are treated when converted to NumPy arrays, see <a class="reference external" href="https://scikit-image.org/docs/stable/user_guide/numpy_images.html">A crash course on NumPy for images</a> from the <code class="docutils literal notranslate"><span class="pre">scikit-image</span></code> documentation.</p>
 <p>Now, <code class="docutils literal notranslate"><span class="pre">img</span></code> is a NumPy array, as we can see when using the <code class="docutils literal notranslate"><span class="pre">type</span></code> function:</p>
@@ -868,7 +874,7 @@ compatible for multiplication. However, this is not true as <code class="docutil
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4049006864018454e-12
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4383100782204338e-12
 </pre></div>
 </div>
 </div>
@@ -1032,7 +1038,7 @@ for us.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-5.319529539082879e-15, 1.0000000000000049)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-4.870236158804886e-15, 1.0000000000000047)
 </pre></div>
 </div>
 </div>
@@ -1047,7 +1053,7 @@ for us.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/83379d5e0838afa96ec2135d3a696f486a5101e5ff0c4245c6a44174f976dff4.png" src="../_images/83379d5e0838afa96ec2135d3a696f486a5101e5ff0c4245c6a44174f976dff4.png" />
+<img alt="../_images/39081709dde8967fcbbe4b9d0c07d76fcc0ee6d02eb1202b8b7fa34b0dc88d70.png" src="../_images/39081709dde8967fcbbe4b9d0c07d76fcc0ee6d02eb1202b8b7fa34b0dc88d70.png" />
 </div>
 </div>
 <p>In fact, <code class="docutils literal notranslate"><span class="pre">imshow</span></code> peforms this clipping under-the-hood, so if you skip the first line in the previous code cell, you might see a warning message saying <code class="docutils literal notranslate"><span class="pre">&quot;Clipping</span> <span class="pre">input</span> <span class="pre">data</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">valid</span> <span class="pre">range</span> <span class="pre">for</span> <span class="pre">imshow</span> <span class="pre">with</span> <span class="pre">RGB</span> <span class="pre">data</span> <span class="pre">([0..1]</span> <span class="pre">for</span> <span class="pre">floats</span> <span class="pre">or</span> <span class="pre">[0..255]</span> <span class="pre">for</span> <span class="pre">integers).&quot;</span></code></p>
