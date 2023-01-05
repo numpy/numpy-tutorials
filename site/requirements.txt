@@ -1,4 +1,4 @@
-sphinx
+sphinx<5
 myst-nb
 sphinx-book-theme
 sphinx-copybutton
