@@ -38,12 +38,12 @@ jobs:
         run: |
           conda info
           conda list
-          make -C site/ SPHINXOPTS="-nWT --keep-going" html
+          make SPHINXOPTS="-nWT --keep-going" html
 
       - uses: actions/upload-artifact@v3
         with:
           name: sphinx-build-artifact
-          path: site/_build/html/reports
+          path: _build/html/reports
 
       - name: fail on build errors
         if: steps.build_step.outcome != 'success'

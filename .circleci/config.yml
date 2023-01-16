@@ -17,7 +17,7 @@ jobs:
             python3 -m venv venv
             source venv/bin/activate
             pip install --upgrade pip wheel setuptools
-            pip install -r site/requirements.txt -r requirements.txt
+            pip install -r requirements.txt
 
       - restore_cache:
           keys:
@@ -32,7 +32,7 @@ jobs:
             source venv/bin/activate
             # n = nitpicky (broken links), W = warnings as errors,
             # T = full tracebacks, keep-going = run to completion even with errors
-            make -C site/ SPHINXOPTS="-nWT --keep-going" html
+            make SPHINXOPTS="-nWT --keep-going" html
 
       - save_cache:
           key: cache-data
@@ -40,10 +40,10 @@ jobs:
             - _data
 
       - store_artifacts:
-          path: site/_build/html
+          path: _build/html
 
       - persist_to_workspace:
-          root: site/_build
+          root: _build
           paths: html
 
   deploy-docs:
@@ -54,7 +54,7 @@ jobs:
       - checkout
 
       - attach_workspace:
-          at: site/_build
+          at: _build
 
       - run:
           name: install deploy deps
@@ -75,7 +75,7 @@ jobs:
       - run:
           name: deploy to gh-pages
           command: |
-            ghp-import -n -f -p -m "[skip ci] docs build of $CIRCLE_SHA1" site/_build/html
+            ghp-import -n -f -p -m "[skip ci] docs build of $CIRCLE_SHA1" _build/html
 
 
 workflows:
