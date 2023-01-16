@@ -10,8 +10,6 @@ maxdepth: 1
 
 content/mooreslaw-tutorial
 content/tutorial-deep-learning-on-mnist
-content/tutorial-deep-reinforcement-learning-with-pong-from-pixels
-content/tutorial-nlp-from-scratch
 content/tutorial-x-ray-image-processing
 content/tutorial-static_equilibrium
 content/tutorial-plotting-fractals

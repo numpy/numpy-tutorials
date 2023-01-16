@@ -15,6 +15,12 @@ jupyter:
 
 # Sentiment Analysis on notable speeches of the last decade
 
+```{caution}
+
+This article is not currently tested. Help improve this tutorial by making it
+fully executable!
+```
+
 This tutorial demonstrates how to build a simple <a href = 'https://en.wikipedia.org/wiki/Long_short-term_memory'> Long Short Term memory network (LSTM) </a> from scratch in NumPy to perform sentiment analysis on a socially relevant and ethically acquired dataset.
 
 Your deep learning model (the LSTM) is a form of a Recurrent Neural Network and will learn to classify a piece of text as positive or negative from the IMDB reviews dataset. The dataset contains 50,000 movie reviews and corresponding labels. Based on the numeric representations of these reviews and their corresponding labels <a href = 'https://en.wikipedia.org/wiki/Supervised_learning'> (supervised learning) </a> the neural network will be trained to learn the sentiment using forward propagation and backpropagation through time since we are dealing with sequential data here. The output will be a vector containing the probabilities that the text samples are positive.

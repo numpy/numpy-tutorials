@@ -39,7 +39,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Sentiment Analysis on notable speeches of the last decade" href="tutorial-nlp-from-scratch.html" />
-    <link rel="prev" title="Deep learning on MNIST" href="tutorial-deep-learning-on-mnist.html" />
+    <link rel="prev" title="Articles" href="../articles.html" />
   <meta name="robots" content="noindex" />
   
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -94,7 +94,7 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../features.html">
    NumPy Features
@@ -122,16 +122,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../applications.html">
    NumPy Applications
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="mooreslaw-tutorial.html">
      Determining Moore’s Law with real data in NumPy
@@ -140,16 +140,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="tutorial-deep-learning-on-mnist.html">
      Deep learning on MNIST
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Deep reinforcement learning with Pong from pixels
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="tutorial-nlp-from-scratch.html">
-     Sentiment Analysis on notable speeches of the last decade
     </a>
    </li>
    <li class="toctree-l2">
@@ -192,6 +182,30 @@
    <li class="toctree-l2">
     <a class="reference internal" href="tutorial-style-guide.html">
      Learn to write a NumPy tutorial
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../articles.html">
+   Articles
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Deep reinforcement learning with Pong from pixels
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-nlp-from-scratch.html">
+     Sentiment Analysis on notable speeches of the last decade
     </a>
    </li>
   </ul>
@@ -615,6 +629,13 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="deep-reinforcement-learning-with-pong-from-pixels">
 <h1>Deep reinforcement learning with Pong from pixels<a class="headerlink" href="#deep-reinforcement-learning-with-pong-from-pixels" title="Permalink to this headline">#</a></h1>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>This article is not currently tested due to licensing/installation issues with
+the underlying <code class="docutils literal notranslate"><span class="pre">gym</span></code> and <code class="docutils literal notranslate"><span class="pre">atari-py</span></code> dependencies.
+Help improve this article by developing an example with reduced dependency
+footprint!</p>
+</div>
 <p>This tutorial demonstrates how to implement a deep reinforcement learning (RL) agent from scratch using a policy gradient method that learns to play the <a class="reference external" href="https://gym.openai.com/envs/Pong-v0/">Pong</a> video game using screen pixels as inputs with NumPy. Your Pong agent will obtain experience on the go using an <a class="reference external" href="https://en.wikipedia.org/wiki/Artificial_neural_network">artificial neural network</a> as its <a class="reference external" href="https://en.wikipedia.org/wiki/Reinforcement_learning">policy</a>.</p>
 <p>Pong is a 2D game from 1972 where two players use “rackets” to play a form of table tennis. Each player moves the racket up and down the screen and tries to hit a ball in their opponent’s direction by touching it. The goal is to hit the ball such that it goes past the opponent’s racket (they miss their shot). According to the rules, if a player reaches 21 points, they win. In Pong, the RL agent that learns to play against an opponent is displayed on the right.</p>
 <p><img alt="Diagram showing operations detailed in this tutorial" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels.png" /></p>
@@ -1209,11 +1230,11 @@ def show_any_video(mp4video=0):
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="tutorial-deep-learning-on-mnist.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../articles.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Deep learning on MNIST</p>
+            <p class="prev-next-title">Articles</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="tutorial-nlp-from-scratch.html" title="next page">

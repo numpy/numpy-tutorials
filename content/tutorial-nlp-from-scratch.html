@@ -40,7 +40,6 @@
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="X-ray image processing" href="tutorial-x-ray-image-processing.html" />
     <link rel="prev" title="Deep reinforcement learning with Pong from pixels" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html" />
   <meta name="robots" content="noindex" />
   
@@ -96,7 +95,7 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../features.html">
    NumPy Features
@@ -124,16 +123,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../applications.html">
    NumPy Applications
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="mooreslaw-tutorial.html">
      Determining Moore’s Law with real data in NumPy
@@ -142,16 +141,6 @@
    <li class="toctree-l2">
     <a class="reference internal" href="tutorial-deep-learning-on-mnist.html">
      Deep learning on MNIST
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">
-     Deep reinforcement learning with Pong from pixels
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Sentiment Analysis on notable speeches of the last decade
     </a>
    </li>
    <li class="toctree-l2">
@@ -194,6 +183,30 @@
    <li class="toctree-l2">
     <a class="reference internal" href="tutorial-style-guide.html">
      Learn to write a NumPy tutorial
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../articles.html">
+   Articles
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html">
+     Deep reinforcement learning with Pong from pixels
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Sentiment Analysis on notable speeches of the last decade
     </a>
    </li>
   </ul>
@@ -601,6 +614,11 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="sentiment-analysis-on-notable-speeches-of-the-last-decade">
 <h1>Sentiment Analysis on notable speeches of the last decade<a class="headerlink" href="#sentiment-analysis-on-notable-speeches-of-the-last-decade" title="Permalink to this headline">#</a></h1>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>This article is not currently tested. Help improve this tutorial by making it
+fully executable!</p>
+</div>
 <p>This tutorial demonstrates how to build a simple <a href = 'https://en.wikipedia.org/wiki/Long_short-term_memory'> Long Short Term memory network (LSTM) </a> from scratch in NumPy to perform sentiment analysis on a socially relevant and ethically acquired dataset.</p>
 <p>Your deep learning model (the LSTM) is a form of a Recurrent Neural Network and will learn to classify a piece of text as positive or negative from the IMDB reviews dataset. The dataset contains 50,000 movie reviews and corresponding labels. Based on the numeric representations of these reviews and their corresponding labels <a href = 'https://en.wikipedia.org/wiki/Supervised_learning'> (supervised learning) </a> the neural network will be trained to learn the sentiment using forward propagation and backpropagation through time since we are dealing with sequential data here. The output will be a vector containing the probabilities that the text samples are positive.</p>
 <p>Today, Deep Learning is getting adopted in everyday life and now it is more important to ensure that decisions that have been taken using AI are not reflecting discriminatory behavior towards a set of populations. It is important to take fairness into consideration while consuming the output from AI. Throughout the tutorial we’ll try to question all the steps in our pipeline from an ethics point of view.</p>
@@ -1619,13 +1637,6 @@ Define a function to calculate the loss using <a class="reference external" href
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Deep reinforcement learning with Pong from pixels</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="tutorial-x-ray-image-processing.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">X-ray image processing</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
