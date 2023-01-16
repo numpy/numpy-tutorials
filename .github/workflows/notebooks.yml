@@ -16,7 +16,7 @@ jobs:
     strategy:
       max-parallel: 12
       matrix:
-        os: [Ubuntu-20.04, macOS-latest]
+        os: [Ubuntu-latest, macOS-latest]
         include:
           - python-version: '3.8'
             toxenv: py38-test-oldestdeps
