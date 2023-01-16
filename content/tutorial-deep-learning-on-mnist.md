@@ -544,17 +544,13 @@ for j in range(epochs):
 
     # Summarize error and accuracy metrics at each epoch
     print(
-        "\n"
-        + "Epoch: "
-        + str(j)
-        + " Training set error:"
-        + str(training_loss / float(len(training_images)))[0:5]
-        + " Training set accuracy:"
-        + str(training_accurate_predictions / float(len(training_images)))
-        + " Test set error:"
-        + str(test_loss / float(len(test_images)))[0:5]
-        + " Test set accuracy:"
-        + str(test_accurate_predictions / float(len(test_images)))
+        (
+            f"Epoch: {j}\n"
+            f"  Training set error: {training_loss / len(training_images):.3f}\n"
+            f"  Training set accuracy: {training_accurate_predictions / len(training_images)}\n"
+            f"  Test set error: {test_loss / len(test_images):.3f}\n"
+            f"  Test set accuracy: {test_accurate_predictions / len(test_images)}"
+        )
     )
 ```
 
