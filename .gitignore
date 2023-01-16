@@ -99,3 +99,4 @@ content/video
 content/*ipynb
 content/tutorial-nlp-from-scratch/parameters.npy
 content/tutorial-nlp-from-scratch/*ipynb
+venv/*
