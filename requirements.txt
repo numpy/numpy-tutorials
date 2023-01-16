@@ -7,5 +7,3 @@ statsmodels
 imageio
 # For supporting .md-based notebooks
 jupytext
-# Temporary fix for lexer errors
-ipython!=8.7.0
