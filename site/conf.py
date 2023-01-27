@@ -12,9 +12,10 @@
 
 
 # -- Project information -----------------------------------------------------
+from datetime import date
 
 project = 'NumPy tutorials'
-copyright = '2020, the NumPy community'
+copyright = f'2020-{date.today().year}, the NumPy community'
 author = 'the NumPy community'
 
 
