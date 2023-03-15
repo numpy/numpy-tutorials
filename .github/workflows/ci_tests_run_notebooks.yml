@@ -30,8 +30,13 @@ jobs:
             os: ubuntu-latest
 
           - python-version: '3.10'
-            toxenv: py310-test-devdeps
-            name: with Python 3.10 with developer versioned dependencies
+            toxenv: py310-test
+            name: with Python 3.10
+            os: ubuntu-latest
+
+          - python-version: '3.11'
+            toxenv: py311-test-devdeps
+            name: with Python 3.11 and developer versioned dependencies
             os: ubuntu-latest
 
     steps:
