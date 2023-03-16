@@ -9,23 +9,30 @@ on:
     - main
   schedule:
     - cron: '0 5 * * 1'
+  workflow_dispatch:
 
 jobs:
-  build:
+  tests:
+    name: ${{ matrix.os }} ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
     strategy:
-      max-parallel: 12
       matrix:
-        os: [Ubuntu-latest, macOS-latest]
+        # Run all supported OS for one Python version, then add a few extra scenarios
+        os: [ubuntu-latest, macos-latest]
+        python-version: ['3.9']
+        toxenv: [py39-test]
+        name: ['with Python 3.9',]
+
         include:
           - python-version: '3.8'
             toxenv: py38-test-oldestdeps
-
-          - python-version: '3.9'
-            toxenv: py39-test
+            name: with Python 3.8 and oldest versioned dependencies
+            os: ubuntu-latest
 
           - python-version: '3.10'
             toxenv: py310-test-devdeps
+            name: with Python 3.10 with developer versioned dependencies
+            os: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
