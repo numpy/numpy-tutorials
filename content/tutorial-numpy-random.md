@@ -37,3 +37,13 @@ now, let's generate a 2D array with 2 rows and each row containing 4 random inte
 `x = random.rand(5)`
 
 `x = random.rand(3, 5)`
+
+**Generate Random Number From Array**
+
+`choice()` is used to get a random value from the array.
+
+`x=random.choice([3, 5, 6, 7, 8, 10])`
+
+we can also add a `size()` parameter.
+
+`x = random.choice([3, 5, 7, 9], size=(3, 5))`
