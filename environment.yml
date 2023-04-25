@@ -6,9 +6,10 @@ dependencies:
   - numpy
   - scipy
   - matplotlib
-  - pandas 
+  - pandas
   - statsmodels
-  - imageio
+  # Temporary version limit, see https://github.com/numpy/numpy-tutorials/issues/179
+  - imageio<2.28
   # For building the site
   - sphinx<5
   - myst-nb
