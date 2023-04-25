@@ -16,6 +16,7 @@ jobs:
     name: ${{ matrix.os }} ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         # Run all supported OS for one Python version, then add a few extra scenarios
         os: [ubuntu-latest, macos-latest, windows-latest]
