@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         # Run all supported OS for one Python version, then add a few extra scenarios
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
         python-version: ['3.9']
         toxenv: [py39-test]
         name: ['with Python 3.9',]
