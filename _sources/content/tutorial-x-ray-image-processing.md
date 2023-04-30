@@ -187,7 +187,7 @@ notebook:
 
 ```{code-cell} ipython3
 GIF_PATH = os.path.join(DIR, "xray_image.gif")
-imageio.mimwrite(GIF_PATH, combined_xray_images_1, format= ".gif", fps=1)
+imageio.mimwrite(GIF_PATH, combined_xray_images_1, format= ".gif", duration=1000)
 ```
 
 Which gives us:
