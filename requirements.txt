@@ -4,7 +4,6 @@ scipy
 matplotlib
 pandas
 statsmodels
-# temporary version limit, see https://github.com/numpy/numpy-tutorials/issues/179
-imageio<2.28
+imageio
 # For supporting .md-based notebooks
 jupytext
