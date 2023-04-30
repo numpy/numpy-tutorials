@@ -246,20 +246,10 @@ $\dfrac{\text{transistor_count}(\text{year} +2)}{\text{transistor_count}(\text{y
 \dfrac{e^{B}e^{A( \text{year} + 2)}}{e^{B}e^{A \text{year}}} = e^{2A}$
 
 where increase in number of transistors is $xFactor,$ number of years is
-2, and $A$ is the best fit slope on the semilog function. The error in
-your
-prediction, $\Delta(xFactor),$ comes from the precision of your constant
-$A,$ which you calculated as the standard error $\Delta A= 0.006$.
-
-$\Delta (xFactor) = \frac{\partial}{\partial A}(e^{2A})\Delta A = 2Ae^{2A}\Delta A$
+2, and $A$ is the best fit slope on the semilog function.
 
 ```{code-cell}
-print("Rate of semiconductors added on a chip every 2 years:")
-print(
-    "\tx{:.2f} +/- {:.2f} semiconductors per chip".format(
-        np.exp((A) * 2), 2 * A * np.exp(2 * A) * 0.006
-    )
-)
+print(f"Rate of semiconductors added on a chip every 2 years: {np.exp(2 * A):.2f}")
 ```
 
 Based upon your least-squares regression model, the number of
