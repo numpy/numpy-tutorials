@@ -10,7 +10,7 @@ dependencies:
   - statsmodels
   - imageio
   # For building the site
-  - sphinx<5
+  - sphinx
   - myst-nb
   - sphinx-book-theme
   - sphinx-copybutton
