@@ -212,32 +212,30 @@ where $\mathbf{y}$ are the observations of the log of the number of
 transistors in a 1D array and $\mathbf{Z}=[\text{year}_i^1,~\text{year}_i^0]$ are the
 polynomial terms for $\text{year}_i$ in the first and second columns. By
 creating this set of regressors in the $\mathbf{Z}-$matrix you set
-up an ordinary least squares statistical model. Some clever
-NumPy array features will build $\mathbf{Z}$
+up an ordinary least squares statistical model.
 
-1. `year[:,np.newaxis]` : takes the 1D array with shape `(179,)` and turns it into a 2D column vector with shape `(179,1)`
-2. `**[1, 0]` : stacks two columns, in the first column is `year**1` and the second column is `year**0 == 1`
-
-```{code-cell}
-Z = year[:, np.newaxis] ** [1, 0]
-```
-
-Now that you have the created a matrix of regressors, $\mathbf{Z},$ and
-the observations are in vector, $\mathbf{y},$ you can use these
-variables to build the an ordinary least squares model with
-[`sm.OLS`](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html).
+`Z` is a linear model with two parameters, i.e. a polynomial with degree `1`.
+Therefore we can represent the model with `numpy.polynomial.Polynomial` and
+use the fitting functionality to determine the model parameters:
 
 ```{code-cell}
 model = np.polynomial.Polynomial.fit(year, yi, deg=1)
 ```
 
-%% TODO: make mention of model.convert()
+By default, `Polynomial.fit` performs the fit in the domain determined by the
+independent variable (`year` in this case).
+The coefficients for the unscaled and unshifted model can be recovered with the
+`convert` method:
 
-Now, you can view the fitting constants, $A$ and $B$:
 
 ```{code-cell}
 model = model.convert()
-print(model)
+model
+```
+
+The individual parameters $A$ and $B$ are the coefficients of our linear model:
+
+```{code-cell}
 B, A = model
 ```
 
