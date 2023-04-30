@@ -8,8 +8,7 @@ dependencies:
   - matplotlib
   - pandas
   - statsmodels
-  # Temporary version limit, see https://github.com/numpy/numpy-tutorials/issues/179
-  - imageio<2.28
+  - imageio
   # For building the site
   - sphinx<5
   - myst-nb
