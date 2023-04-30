@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Deep learning on MNIST &#8212; NumPy Tutorials</title>
   
@@ -41,7 +41,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -54,7 +56,7 @@
   <meta name="robots" content="noindex" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
 
   </head>
   
@@ -464,14 +466,14 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="deep-learning-on-mnist">
-<h1>Deep learning on MNIST<a class="headerlink" href="#deep-learning-on-mnist" title="Permalink to this headline">#</a></h1>
+<h1>Deep learning on MNIST<a class="headerlink" href="#deep-learning-on-mnist" title="Permalink to this heading">#</a></h1>
 <p>This tutorial demonstrates how to build a simple <a class="reference external" href="https://en.wikipedia.org/wiki/Feedforward_neural_network">feedforward neural network</a> (with one hidden layer) and train it from scratch with NumPy to recognize handwritten digit images.</p>
 <p>Your deep learning model — one of the most basic artificial neural networks that resembles the original <a class="reference external" href="https://en.wikipedia.org/wiki/Multilayer_perceptron">multi-layer perceptron</a> — will learn to classify digits from 0 to 9 from the <a class="reference external" href="https://en.wikipedia.org/wiki/MNIST_database">MNIST</a> dataset. The dataset contains 60,000 training and 10,000 test images and corresponding labels. Each training and test image is of size 784 (or 28x28 pixels) — this will be your input for the neural network.</p>
 <p>Based on the image inputs and their labels (<a class="reference external" href="https://en.wikipedia.org/wiki/Supervised_learning">supervised learning</a>), your neural network will be trained to learn their features using forward propagation and backpropagation (<a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation#Reverse_accumulation">reverse-mode</a> differentiation). The final output of the network is a vector of 10 scores — one for each handwritten digit image. You will also evaluate how good your model is at classifying the images on the test set.</p>
 <p><img alt="Diagram showing operations detailed in this tutorial (The input imageis passed into a Hidden layer that creates a weighted sum of outputs.The weighted sum is passed to the Non-linearity, then regularization andinto the output layer. The output layer creates a prediction which canthen be compared to existing data. The errors are used to calculate theloss function and update weights in the hidden layer and outputlayer.)" src="../_images/tutorial-deep-learning-on-mnist.png" /></p>
 <p>This tutorial was adapted from the work by <a class="reference external" href="https://github.com/iamtrask/Grokking-Deep-Learning">Andrew Trask</a> (with the author’s permission).</p>
 <section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">#</a></h2>
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
 <p>The reader should have some knowledge of Python, NumPy array manipulation, and linear algebra. In addition, you should be familiar with main concepts of <a class="reference external" href="https://en.wikipedia.org/wiki/Deep_learning">deep learning</a>.</p>
 <p>To refresh the memory, you can take the <a class="reference external" href="https://docs.python.org/dev/tutorial/index.html">Python</a> and <a class="reference external" href="https://numpy.org/doc/stable/user/tutorial-svd.html">Linear algebra on n-dimensional arrays</a> tutorials.</p>
 <p>You are advised to read the <a class="reference external" href="http://www.cs.toronto.edu/~hinton/absps/NatureDeepReview.pdf">Deep learning</a> paper published in 2015 by Yann LeCun, Yoshua Bengio, and Geoffrey Hinton, who are regarded as some of the pioneers of the field. You should also consider reading Andrew Trask’s <a class="reference external" href="https://www.manning.com/books/grokking-deep-learning">Grokking Deep Learning</a>, which teaches deep learning with NumPy.</p>
@@ -488,7 +490,7 @@ document.write(`
 <p>This tutorial can be run locally in an isolated environment, such as <a class="reference external" href="https://virtualenv.pypa.io/en/stable/">Virtualenv</a> or <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">conda</a>. You can use <a class="reference external" href="https://jupyter.org/install">Jupyter Notebook or JupyterLab</a> to run each notebook cell. Don’t forget to <a class="reference external" href="https://numpy.org/doc/stable/user/absolute_beginners.html#installing-numpy">set up NumPy</a> and <a class="reference external" href="https://matplotlib.org/users/installing.html#installing-an-official-release">Matplotlib</a>.</p>
 </section>
 <section id="table-of-contents">
-<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">#</a></h2>
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Load the MNIST dataset</p></li>
 <li><p>Preprocess the dataset</p></li>
@@ -498,7 +500,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="load-the-mnist-dataset">
-<h2>1. Load the MNIST dataset<a class="headerlink" href="#load-the-mnist-dataset" title="Permalink to this headline">#</a></h2>
+<h2>1. Load the MNIST dataset<a class="headerlink" href="#load-the-mnist-dataset" title="Permalink to this heading">#</a></h2>
 <p>In this section, you will download the zipped MNIST dataset files originally stored in <a class="reference external" href="http://yann.lecun.com/exdb/mnist/">Yann LeCun’s website</a>. Then, you will transform them into 4 files of NumPy array type using built-in Python modules. Finally, you will split the arrays into training and test sets.</p>
 <p><strong>1.</strong> Define a variable to store the training/test image/label names of the MNIST dataset in a list:</p>
 <div class="cell docutils container">
@@ -659,7 +661,7 @@ Arabic numerals are shown, with exact values chosen randomly with each run of th
 </div>
 </section>
 <section id="preprocess-the-data">
-<h2>2. Preprocess the data<a class="headerlink" href="#preprocess-the-data" title="Permalink to this headline">#</a></h2>
+<h2>2. Preprocess the data<a class="headerlink" href="#preprocess-the-data" title="Permalink to this heading">#</a></h2>
 <p>Neural networks can work with inputs that are in a form of tensors (multidimensional arrays) of floating-point type. When preprocessing the data, you should consider the following processes: <a class="reference external" href="https://en.wikipedia.org/wiki/Vectorization_%28mathematics%29">vectorization</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Floating-point_arithmetic#Floating-point_numbers">conversion to a floating-point format</a>.</p>
 <p>Since the MNIST data is already vectorized and the arrays are of <code class="docutils literal notranslate"><span class="pre">dtype</span></code> <code class="docutils literal notranslate"><span class="pre">uint8</span></code>, your next challenge is to convert them to a floating-point format, such as <code class="docutils literal notranslate"><span class="pre">float64</span></code> (<a class="reference external" href="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">double-precision</a>):</p>
 <ul class="simple">
@@ -668,7 +670,7 @@ Arabic numerals are shown, with exact values chosen randomly with each run of th
 </ul>
 <p>In practice, you can use different types of floating-point precision depending on your goals and you can find more information about that in the <a class="reference external" href="https://blogs.nvidia.com/blog/2019/11/15/whats-the-difference-between-single-double-multi-and-mixed-precision-computing/">Nvidia</a> and <a class="reference external" href="https://cloud.google.com/blog/products/ai-machine-learning/bfloat16-the-secret-to-high-performance-on-cloud-tpus">Google Cloud</a> blog posts.</p>
 <section id="convert-the-image-data-to-the-floating-point-format">
-<h3>Convert the image data to the floating-point format<a class="headerlink" href="#convert-the-image-data-to-the-floating-point-format" title="Permalink to this headline">#</a></h3>
+<h3>Convert the image data to the floating-point format<a class="headerlink" href="#convert-the-image-data-to-the-floating-point-format" title="Permalink to this heading">#</a></h3>
 <p>The images data contain 8-bit integers encoded in the [0, 255] interval with color values between 0 and 255.</p>
 <p>You will normalize them into floating-point arrays in the [0, 1] interval by dividing them by 255.</p>
 <p><strong>1.</strong> Check that the vectorized image data has type <code class="docutils literal notranslate"><span class="pre">uint8</span></code>:</p>
@@ -729,7 +731,7 @@ The data type of test images: float64
 </div></blockquote>
 </section>
 <section id="convert-the-labels-to-floating-point-through-categorical-one-hot-encoding">
-<h3>Convert the labels to floating point through categorical/one-hot encoding<a class="headerlink" href="#convert-the-labels-to-floating-point-through-categorical-one-hot-encoding" title="Permalink to this headline">#</a></h3>
+<h3>Convert the labels to floating point through categorical/one-hot encoding<a class="headerlink" href="#convert-the-labels-to-floating-point-through-categorical-one-hot-encoding" title="Permalink to this heading">#</a></h3>
 <p>You will use one-hot encoding to embed each digit label as an all-zero vector with <code class="docutils literal notranslate"><span class="pre">np.zeros()</span></code> and place <code class="docutils literal notranslate"><span class="pre">1</span></code> for a label index. As a result, your label data will be arrays with <code class="docutils literal notranslate"><span class="pre">1.0</span></code> (or <code class="docutils literal notranslate"><span class="pre">1.</span></code>) in the position of each image label.</p>
 <p>Since there are 10 labels (from 0 to 9) in total, your arrays will look similar to this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
@@ -825,11 +827,11 @@ The data type of test labels: float64
 </section>
 </section>
 <section id="build-and-train-a-small-neural-network-from-scratch">
-<h2>3. Build and train a small neural network from scratch<a class="headerlink" href="#build-and-train-a-small-neural-network-from-scratch" title="Permalink to this headline">#</a></h2>
+<h2>3. Build and train a small neural network from scratch<a class="headerlink" href="#build-and-train-a-small-neural-network-from-scratch" title="Permalink to this heading">#</a></h2>
 <p>In this section you will familiarize yourself with some high-level concepts of the basic building blocks of a deep learning model. You can refer to the original <a class="reference external" href="http://www.cs.toronto.edu/~hinton/absps/NatureDeepReview.pdf">Deep learning</a> research publication for more information.</p>
 <p>Afterwards, you will construct the building blocks of a simple deep learning model in Python and NumPy and train it to learn to identify handwritten digits from the MNIST dataset with a certain level of accuracy.</p>
 <section id="neural-network-building-blocks-with-numpy">
-<h3>Neural network building blocks with NumPy<a class="headerlink" href="#neural-network-building-blocks-with-numpy" title="Permalink to this headline">#</a></h3>
+<h3>Neural network building blocks with NumPy<a class="headerlink" href="#neural-network-building-blocks-with-numpy" title="Permalink to this heading">#</a></h3>
 <ul>
 <li><p><em>Layers</em>: These building blocks work as data filters — they process data and learn representations from inputs to better predict the target outputs.</p>
 <p>You will use 1 hidden layer in your model to pass the inputs forward (<em>forward propagation</em>) and propagate the gradients/error derivatives of a loss function backward (<em>backpropagation</em>). These are input, hidden and output layers.</p>
@@ -854,7 +856,7 @@ The data type of test labels: float64
 </ul>
 </section>
 <section id="model-architecture-and-training-summary">
-<h3>Model architecture and training summary<a class="headerlink" href="#model-architecture-and-training-summary" title="Permalink to this headline">#</a></h3>
+<h3>Model architecture and training summary<a class="headerlink" href="#model-architecture-and-training-summary" title="Permalink to this heading">#</a></h3>
 <p>Here is a summary of the neural network model architecture and the training process:</p>
 <p><img alt="Diagram showing operations detailed in this tutorial (The input imageis passed into a Hidden layer that creates a weighted sum of outputs.The weighted sum is passed to the Non-linearity, then regularization andinto the output layer. The output layer creates a prediction which canthen be compared to existing data. The errors are used to calculate theloss function and update weights in the hidden layer and outputlayer.)" src="../_images/tutorial-deep-learning-on-mnist.png" /></p>
 <ul>
@@ -886,7 +888,7 @@ The data type of test labels: float64
 </div></blockquote>
 </section>
 <section id="compose-the-model-and-begin-training-and-testing-it">
-<h3>Compose the model and begin training and testing it<a class="headerlink" href="#compose-the-model-and-begin-training-and-testing-it" title="Permalink to this headline">#</a></h3>
+<h3>Compose the model and begin training and testing it<a class="headerlink" href="#compose-the-model-and-begin-training-and-testing-it" title="Permalink to this heading">#</a></h3>
 <p>Having covered the main deep learning concepts and the neural network architecture, let’s write the code.</p>
 <p><strong>1.</strong> We’ll start by creating a new random number generator, providing a seed
 for reproducibility:</p>
@@ -1247,7 +1249,7 @@ decreases and the accuracy increases.</em></p>
 </section>
 </section>
 <section id="next-steps">
-<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">#</a></h2>
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this heading">#</a></h2>
 <p>You have learned how to build and train a simple feed-forward neural network from scratch using just NumPy to classify handwritten MNIST digits.</p>
 <p>To further enhance and optimize your neural network model, you can consider one of a mixture of the following:</p>
 <ul class="simple">

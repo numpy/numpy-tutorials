@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Determining Static Equilibrium in NumPy &#8212; NumPy Tutorials</title>
   
@@ -41,7 +41,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -56,7 +58,7 @@
   <meta name="robots" content="noindex" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
 
   </head>
   
@@ -465,10 +467,10 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="determining-static-equilibrium-in-numpy">
-<h1>Determining Static Equilibrium in NumPy<a class="headerlink" href="#determining-static-equilibrium-in-numpy" title="Permalink to this headline">#</a></h1>
+<h1>Determining Static Equilibrium in NumPy<a class="headerlink" href="#determining-static-equilibrium-in-numpy" title="Permalink to this heading">#</a></h1>
 <p>When analyzing physical structures, it is crucial to understand the mechanics keeping them stable. Applied forces on a floor, a beam, or any other structure, create reaction forces and moments. These reactions are the structure resisting movement without breaking. In cases where structures do not move despite having forces applied to them, <a class="reference external" href="https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion#Newton's_second_law">Newton’s second law</a> states that both the acceleration and sum of forces in all directions in the system must be zero. You can represent and solve this concept with NumPy arrays.</p>
 <section id="what-you-ll-do">
-<h2>What you’ll do:<a class="headerlink" href="#what-you-ll-do" title="Permalink to this headline">#</a></h2>
+<h2>What you’ll do:<a class="headerlink" href="#what-you-ll-do" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>In this tutorial, you will use NumPy to create vectors and moments using NumPy arrays</p></li>
 <li><p>Solve problems involving cables and floors holding up structures</p></li>
@@ -477,7 +479,7 @@ document.write(`
 </ul>
 </section>
 <section id="what-you-ll-learn">
-<h2>What you’ll learn:<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this headline">#</a></h2>
+<h2>What you’ll learn:<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>How to represent points, vectors, and moments with NumPy.</p></li>
 <li><p>How to find the <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_(geometry)">normal of vectors</a></p></li>
@@ -485,7 +487,7 @@ document.write(`
 </ul>
 </section>
 <section id="what-you-ll-need">
-<h2>What you’ll need:<a class="headerlink" href="#what-you-ll-need" title="Permalink to this headline">#</a></h2>
+<h2>What you’ll need:<a class="headerlink" href="#what-you-ll-need" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>NumPy</p></li>
 <li><p><a class="reference external" href="https://matplotlib.org/">Matplotlib</a></p></li>
@@ -506,7 +508,7 @@ document.write(`
 </ul>
 </section>
 <section id="solving-equilibrium-with-newton-s-second-law">
-<h2>Solving equilibrium with Newton’s second law<a class="headerlink" href="#solving-equilibrium-with-newton-s-second-law" title="Permalink to this headline">#</a></h2>
+<h2>Solving equilibrium with Newton’s second law<a class="headerlink" href="#solving-equilibrium-with-newton-s-second-law" title="Permalink to this heading">#</a></h2>
 <p>Your model consists of a beam under a sum of forces and moments. You can start analyzing this system with Newton’s second law:</p>
 <div class="math notranslate nohighlight">
 \[\sum{\text{force}} = \text{mass} \times \text{acceleration}.\]</div>
@@ -657,7 +659,7 @@ Only if there is no force remaining is the system considered to be in equilibriu
 <p>The empty graph signifies that there are no outlying forces. This denotes a system in equilibrium.</p>
 </section>
 <section id="solving-equilibrium-as-a-sum-of-moments">
-<h2>Solving Equilibrium as a sum of moments<a class="headerlink" href="#solving-equilibrium-as-a-sum-of-moments" title="Permalink to this headline">#</a></h2>
+<h2>Solving Equilibrium as a sum of moments<a class="headerlink" href="#solving-equilibrium-as-a-sum-of-moments" title="Permalink to this heading">#</a></h2>
 <p>Next let’s move to a more complicated application.
 When forces are not all applied at the same point, moments are created.</p>
 <p>Similar to forces, these moments must all sum to zero, otherwise rotational acceleration will be experienced.  Similar to the sum of forces, this creates a linear equation for each of the three coordinate directions in space.</p>
@@ -687,7 +689,7 @@ Reaction moment = -10
 </div>
 </section>
 <section id="finding-values-with-physical-properties">
-<h2>Finding values with physical properties<a class="headerlink" href="#finding-values-with-physical-properties" title="Permalink to this headline">#</a></h2>
+<h2>Finding values with physical properties<a class="headerlink" href="#finding-values-with-physical-properties" title="Permalink to this heading">#</a></h2>
 <p>Let’s say that instead of a force acting perpendicularly to the beam, a force was applied to our pole through a wire that was also attached to the ground.
 Given the tension in this cord, all you need to solve this problem are the physical locations of these objects.</p>
 <p><img alt="Image representing the problem" src="../_images/static_eqbm-fig01.png" /></p>
@@ -779,7 +781,7 @@ Reaction moment = [0.         8.32050294 0.        ]
 </div>
 </div>
 <section id="another-example">
-<h3>Another Example<a class="headerlink" href="#another-example" title="Permalink to this headline">#</a></h3>
+<h3>Another Example<a class="headerlink" href="#another-example" title="Permalink to this heading">#</a></h3>
 <p>Let’s look at a slightly more complicated model.  In this example you will be observing a beam with two cables and an applied force.  This time you need to find both the tension in the cords and the reaction forces of the beam. <em>(Source: <a class="reference external" href="https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9780077687304.html">Vector Mechanics for Engineers: Statics</a>, Problem 4.106)</em></p>
 <p><img alt="image.png" src="../_images/problem4.png" /></p>
 <p>Define distance <em>a</em> as 3 meters</p>
@@ -878,14 +880,14 @@ T_{BE}\\
 </section>
 </section>
 <section id="wrapping-up">
-<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this headline">#</a></h2>
+<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this heading">#</a></h2>
 <p>You have learned how to use arrays to represent points, forces, and moments in three dimensional space. Each entry in an array can be used to represent a physical property broken into directional components. These can then be easily manipulated with NumPy functions.</p>
 <section id="additional-applications">
-<h3>Additional Applications<a class="headerlink" href="#additional-applications" title="Permalink to this headline">#</a></h3>
+<h3>Additional Applications<a class="headerlink" href="#additional-applications" title="Permalink to this heading">#</a></h3>
 <p>This same process can be applied to kinetic problems or in any number of dimensions. The examples done in this tutorial assumed three dimensional problems in static equilibrium. These methods can easily be used in more varied problems. More or less dimensions require larger or smaller arrays to represent. In systems experiencing acceleration, velocity and acceleration can be similarly be represented as vectors as well.</p>
 </section>
 <section id="references">
-<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h3>
+<h3>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9780077687304.html">Vector Mechanics for Engineers: Statics (Beer &amp; Johnston &amp; Mazurek)</a></p></li>
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/">NumPy Reference</a></p></li>

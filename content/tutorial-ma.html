@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Masked Arrays &#8212; NumPy Tutorials</title>
   
@@ -41,7 +41,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -54,7 +56,7 @@
   <meta name="robots" content="noindex" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
 
   </head>
   
@@ -463,13 +465,13 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="masked-arrays">
-<h1>Masked Arrays<a class="headerlink" href="#masked-arrays" title="Permalink to this headline">#</a></h1>
+<h1>Masked Arrays<a class="headerlink" href="#masked-arrays" title="Permalink to this heading">#</a></h1>
 <section id="what-you-ll-do">
-<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this headline">#</a></h2>
+<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this heading">#</a></h2>
 <p>Use the masked arrays module from NumPy to analyze COVID-19 data and deal with missing values.</p>
 </section>
 <section id="what-you-ll-learn">
-<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this headline">#</a></h2>
+<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>You’ll understand what are masked arrays and how they can be created</p></li>
 <li><p>You’ll see how to access and modify data for masked arrays</p></li>
@@ -477,7 +479,7 @@ document.write(`
 </ul>
 </section>
 <section id="what-you-ll-need">
-<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this headline">#</a></h2>
+<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Basic familiarity with Python. If you would like to refresh your memory, take a look at the <a class="reference external" href="https://docs.python.org/dev/tutorial/index.html">Python tutorial</a>.</p></li>
 <li><p>Basic familiarity with NumPy</p></li>
@@ -486,7 +488,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="what-are-masked-arrays">
-<h2>What are masked arrays?<a class="headerlink" href="#what-are-masked-arrays" title="Permalink to this headline">#</a></h2>
+<h2>What are masked arrays?<a class="headerlink" href="#what-are-masked-arrays" title="Permalink to this heading">#</a></h2>
 <p>Consider the following problem. You have a dataset with missing or invalid entries. If you’re doing any kind of processing on this data, and want to <em>skip</em> or flag these unwanted entries without just deleting them, you may have to use conditionals or filter your data somehow. The <a class="reference external" href="https://numpy.org/devdocs/reference/maskedarray.generic.html#module-numpy.ma">numpy.ma</a> module provides some of the same functionality of <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.ndarray.html#numpy.ndarray">NumPy ndarrays</a> with added structure to ensure invalid entries are not used in computation.</p>
 <p>From the <a class="reference external" href="https://numpy.org/devdocs/reference/maskedarray.generic.html#module-numpy.ma">Reference Guide</a>:</p>
 <blockquote>
@@ -500,7 +502,7 @@ document.write(`
 </ul>
 </section>
 <section id="when-can-they-be-useful">
-<h2>When can they be useful?<a class="headerlink" href="#when-can-they-be-useful" title="Permalink to this headline">#</a></h2>
+<h2>When can they be useful?<a class="headerlink" href="#when-can-they-be-useful" title="Permalink to this heading">#</a></h2>
 <p>There are a few situations where masked arrays can be more useful than just eliminating the invalid entries of an array:</p>
 <ul class="simple">
 <li><p>When you want to preserve the values you masked for later processing, without copying the array;</p></li>
@@ -511,7 +513,7 @@ document.write(`
 <p>Masked arrays are also a good idea since the <code class="docutils literal notranslate"><span class="pre">numpy.ma</span></code> module also comes with a specific implementation of most <a class="reference external" href="https://numpy.org/devdocs/glossary.html#term-ufunc">NumPy universal functions (ufuncs)</a>, which means that you can still apply fast vectorized functions and operations on masked data. The output is then a masked array. We’ll see some examples of how this works in practice below.</p>
 </section>
 <section id="using-masked-arrays-to-see-covid-19-data">
-<h2>Using masked arrays to see COVID-19 data<a class="headerlink" href="#using-masked-arrays-to-see-covid-19-data" title="Permalink to this headline">#</a></h2>
+<h2>Using masked arrays to see COVID-19 data<a class="headerlink" href="#using-masked-arrays-to-see-covid-19-data" title="Permalink to this heading">#</a></h2>
 <p>From <a class="reference external" href="https://www.kaggle.com/atilamadai/covid19">Kaggle</a> it is possible to download a dataset with initial data about the COVID-19 outbreak in the beginning of 2020. We are going to look at a small subset of this data, contained in the file <code class="docutils literal notranslate"><span class="pre">who_covid_19_sit_rep_time_series.csv</span></code>. <em>(Note that this file has been replaced with a version without missing data sometime in late 2020.)</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -573,7 +575,7 @@ rows of this file, since they contain other data we are not interested in. Separ
 <p>Included in the <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> function call, we have selected the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.dtype.html#numpy.dtype">numpy.dtype</a> for each subset of the data (either an integer - <code class="docutils literal notranslate"><span class="pre">numpy.int_</span></code> - or a string of characters - <code class="docutils literal notranslate"><span class="pre">numpy.unicode_</span></code>). We have also used the <code class="docutils literal notranslate"><span class="pre">encoding</span></code> argument to select <code class="docutils literal notranslate"><span class="pre">utf-8-sig</span></code> as the encoding for the file (read more about encoding in the <a class="reference external" href="https://docs.python.org/3/library/codecs.html#encodings-and-unicode">official Python documentation</a>. You can read more about the <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> function from the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt">Reference Documentation</a> or from the <a class="reference external" href="https://numpy.org/devdocs/user/basics.io.genfromtxt.html">Basic IO tutorial</a>.</p>
 </section>
 <section id="exploring-the-data">
-<h2>Exploring the data<a class="headerlink" href="#exploring-the-data" title="Permalink to this headline">#</a></h2>
+<h2>Exploring the data<a class="headerlink" href="#exploring-the-data" title="Permalink to this heading">#</a></h2>
 <p>First of all, we can plot the whole set of data we have and see what it looks like. In order to get a readable plot, we select only a few of the dates to show in our <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xticks.html#matplotlib.pyplot.xticks">x-axis ticks</a>. Note also that in our plot command, we use <code class="docutils literal notranslate"><span class="pre">nbcases.T</span></code> (the transpose of the <code class="docutils literal notranslate"><span class="pre">nbcases</span></code> array) since this means we will plot each row of the file as a separate line. We choose to plot a dashed line (using the <code class="docutils literal notranslate"><span class="pre">'--'</span></code> line style). See the <a class="reference external" href="https://matplotlib.org/">matplotlib</a> documentation for more info on this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -615,7 +617,7 @@ rows of this file, since they contain other data we are not interested in. Separ
 <p>Something’s wrong with this data - we are not supposed to have negative values in a cumulative data set. What’s going on?</p>
 </section>
 <section id="missing-data">
-<h2>Missing data<a class="headerlink" href="#missing-data" title="Permalink to this headline">#</a></h2>
+<h2>Missing data<a class="headerlink" href="#missing-data" title="Permalink to this heading">#</a></h2>
 <p>Looking at the data, here’s what we find: there is a period with <strong>missing data</strong>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -792,7 +794,7 @@ closely:</p>
 <p>It’s clear that masked arrays are the right solution here. We cannot represent the missing data without mischaracterizing the evolution of the curve.</p>
 </section>
 <section id="fitting-data">
-<h2>Fitting Data<a class="headerlink" href="#fitting-data" title="Permalink to this headline">#</a></h2>
+<h2>Fitting Data<a class="headerlink" href="#fitting-data" title="Permalink to this heading">#</a></h2>
 <p>One possibility we can think of is to interpolate the missing data to estimate the number of cases in late January. Observe that we can select the masked elements using the <code class="docutils literal notranslate"><span class="pre">.mask</span></code> attribute:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -854,7 +856,7 @@ package to create a cubic polynomial model that fits the data as best as possibl
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fa9029bd690&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fc17dbbd570&gt;]
 </pre></div>
 </div>
 <img alt="../_images/7bb5f74f01083f9cef8de19d4ca821b3542f52c0aef5966bbe500f6f26854902.png" src="../_images/7bb5f74f01083f9cef8de19d4ca821b3542f52c0aef5966bbe500f6f26854902.png" />
@@ -886,20 +888,20 @@ available, and show the cubic fit for unavailable data, using this fit to comput
 </div>
 </section>
 <section id="in-practice">
-<h2>In practice<a class="headerlink" href="#in-practice" title="Permalink to this headline">#</a></h2>
+<h2>In practice<a class="headerlink" href="#in-practice" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Adding <code class="docutils literal notranslate"><span class="pre">-1</span></code> to missing data is not a problem with <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code>; in this particular case, substituting the missing value with <code class="docutils literal notranslate"><span class="pre">0</span></code> might have been fine, but we’ll see later that this is far from a general solution. Also, it is possible to call the <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> function using the <code class="docutils literal notranslate"><span class="pre">usemask</span></code> parameter. If <code class="docutils literal notranslate"><span class="pre">usemask=True</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> automatically returns a masked array.</p></li>
 </ul>
 </section>
 <section id="further-reading">
-<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">#</a></h2>
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this heading">#</a></h2>
 <p>Topics not covered in this tutorial can be found in the documentation:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.ma.harden_mask.html#numpy.ma.harden_mask">Hardmasks</a> vs. <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.ma.soften_mask.html#numpy.ma.soften_mask">softmasks</a></p></li>
 <li><p><a class="reference external" href="https://numpy.org/devdocs/reference/maskedarray.generic.html#maskedarray-generic">The numpy.ma module</a></p></li>
 </ul>
 <section id="reference">
-<h3>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">#</a></h3>
+<h3>Reference<a class="headerlink" href="#reference" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Ensheng Dong, Hongru Du, Lauren Gardner, <em>An interactive web-based dashboard to track COVID-19 in real time</em>, The Lancet Infectious Diseases, Volume 20, Issue 5, 2020, Pages 533-534, ISSN 1473-3099, <a class="reference external" href="https://doi.org/10.1016/S1473-3099(20)30120-1">https://doi.org/10.1016/S1473-3099(20)30120-1</a>.</p></li>
 </ul>

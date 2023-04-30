@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>X-ray image processing &#8212; NumPy Tutorials</title>
   
@@ -41,7 +41,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -54,7 +56,7 @@
   <meta name="robots" content="noindex" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
 
   </head>
   
@@ -463,7 +465,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="x-ray-image-processing">
-<h1>X-ray image processing<a class="headerlink" href="#x-ray-image-processing" title="Permalink to this headline">#</a></h1>
+<h1>X-ray image processing<a class="headerlink" href="#x-ray-image-processing" title="Permalink to this heading">#</a></h1>
 <p>This tutorial demonstrates how to read and process X-ray images with NumPy,
 imageio, Matplotlib and SciPy. You will learn how to load medical images, focus
 on certain parts, and visually compare them using the
@@ -497,7 +499,7 @@ ChestX-ray8 contains gigabytes of data and you may find it challenging to
 download it in batches.</p>
 <p><img alt="A series of 9 x-ray images of the same region of a patient's chest is shown with different types of image processing filters applied to each image. Each x-ray shows different types of biological detail." src="../_images/tutorial-x-ray-image-processing.png" /></p>
 <section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">#</a></h2>
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
 <p>The reader should have some knowledge of Python, NumPy arrays, and Matplotlib.
 To refresh the memory, you can take the
 <a class="reference external" href="https://docs.python.org/dev/tutorial/index.html">Python</a> and Matplotlib
@@ -522,7 +524,7 @@ You can use <a class="reference external" href="https://jupyter.org/install">Jup
 each notebook cell.</p>
 </section>
 <section id="table-of-contents">
-<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">#</a></h2>
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Examine an X-ray with <code class="docutils literal notranslate"><span class="pre">imageio</span></code></p></li>
 <li><p>Combine images into a multi-dimensional array to demonstrate progression</p></li>
@@ -534,7 +536,7 @@ Canny filters</p></li>
 </section>
 <hr class="docutils" />
 <section id="examine-an-x-ray-with-imageio">
-<h2>Examine an X-ray with <code class="docutils literal notranslate"><span class="pre">imageio</span></code><a class="headerlink" href="#examine-an-x-ray-with-imageio" title="Permalink to this headline">#</a></h2>
+<h2>Examine an X-ray with <code class="docutils literal notranslate"><span class="pre">imageio</span></code><a class="headerlink" href="#examine-an-x-ray-with-imageio" title="Permalink to this heading">#</a></h2>
 <p>Let’s begin with a simple example using just one X-ray image from the
 ChestX-ray8 dataset.</p>
 <p>The file — <code class="docutils literal notranslate"><span class="pre">00000011_001.png</span></code> — has been downloaded for you and saved in the
@@ -585,7 +587,7 @@ uint8
 </div>
 </section>
 <section id="combine-images-into-a-multidimensional-array-to-demonstrate-progression">
-<h2>Combine images into a multidimensional array to demonstrate progression<a class="headerlink" href="#combine-images-into-a-multidimensional-array-to-demonstrate-progression" title="Permalink to this headline">#</a></h2>
+<h2>Combine images into a multidimensional array to demonstrate progression<a class="headerlink" href="#combine-images-into-a-multidimensional-array-to-demonstrate-progression" title="Permalink to this heading">#</a></h2>
 <p>In the next example, instead of 1 image you’ll use 9 X-ray 1024x1024-pixel
 images from the ChestX-ray8 dataset that have been downloaded and extracted
 from one of the dataset files. They are numbered from <code class="docutils literal notranslate"><span class="pre">...000.png</span></code> to
@@ -650,14 +652,14 @@ notebook:</p>
 <img alt="An animated gif repeatedly cycles through a series of 8 x-rays, showing the same viewpoint of the patient's chest at different points in time. The patient's bones and internal organs can be visually compared from frame to frame." src="../_images/xray_image.gif" /></p>
 </section>
 <section id="edge-detection-using-the-laplacian-gaussian-gaussian-gradient-sobel-and-canny-filters">
-<h2>Edge detection using the Laplacian-Gaussian, Gaussian gradient, Sobel, and Canny filters<a class="headerlink" href="#edge-detection-using-the-laplacian-gaussian-gaussian-gradient-sobel-and-canny-filters" title="Permalink to this headline">#</a></h2>
+<h2>Edge detection using the Laplacian-Gaussian, Gaussian gradient, Sobel, and Canny filters<a class="headerlink" href="#edge-detection-using-the-laplacian-gaussian-gaussian-gradient-sobel-and-canny-filters" title="Permalink to this heading">#</a></h2>
 <p>When processing biomedical data, it can be useful to emphasize the 2D
 <a class="reference external" href="https://en.wikipedia.org/wiki/Edge_detection">“edges”</a> to focus on particular
 features in an image. To do that, using
 <a class="reference external" href="https://en.wikipedia.org/wiki/Image_gradient">image gradients</a> can be
 particularly helpful when detecting the change of color pixel intensity.</p>
 <section id="the-laplace-filter-with-gaussian-second-derivatives">
-<h3>The Laplace filter with Gaussian second derivatives<a class="headerlink" href="#the-laplace-filter-with-gaussian-second-derivatives" title="Permalink to this headline">#</a></h3>
+<h3>The Laplace filter with Gaussian second derivatives<a class="headerlink" href="#the-laplace-filter-with-gaussian-second-derivatives" title="Permalink to this heading">#</a></h3>
 <p>Let’s start with an n-dimensional
 <a class="reference external" href="https://en.wikipedia.org/wiki/Laplace_distribution">Laplace</a> filter
 (“Laplacian-Gaussian”) that uses
@@ -703,7 +705,7 @@ Gaussian filter (you’ll use <code class="docutils literal notranslate"><span c
 </div>
 </section>
 <section id="the-gaussian-gradient-magnitude-method">
-<h3>The Gaussian gradient magnitude method<a class="headerlink" href="#the-gaussian-gradient-magnitude-method" title="Permalink to this headline">#</a></h3>
+<h3>The Gaussian gradient magnitude method<a class="headerlink" href="#the-gaussian-gradient-magnitude-method" title="Permalink to this heading">#</a></h3>
 <p>Another method for edge detection that can be useful is the
 <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_distribution">Gaussian</a> (gradient) filter.
 It computes the multidimensional gradient magnitude with Gaussian derivatives
@@ -741,7 +743,7 @@ example below):</p>
 </div>
 </section>
 <section id="the-sobel-feldman-operator-the-sobel-filter">
-<h3>The Sobel-Feldman operator (the Sobel filter)<a class="headerlink" href="#the-sobel-feldman-operator-the-sobel-filter" title="Permalink to this headline">#</a></h3>
+<h3>The Sobel-Feldman operator (the Sobel filter)<a class="headerlink" href="#the-sobel-feldman-operator-the-sobel-filter" title="Permalink to this heading">#</a></h3>
 <p>To find regions of high spatial frequency (the edges or the edge maps) along the
 horizontal and vertical axes of a 2D X-ray image, you can use the
 <a class="reference external" href="https://en.wikipedia.org/wiki/Sobel_operator">Sobel-Feldman operator (Sobel filter)</a>
@@ -818,7 +820,7 @@ emphasize the edges:</p>
 </div>
 </section>
 <section id="the-canny-filter">
-<h3>The Canny filter<a class="headerlink" href="#the-canny-filter" title="Permalink to this headline">#</a></h3>
+<h3>The Canny filter<a class="headerlink" href="#the-canny-filter" title="Permalink to this heading">#</a></h3>
 <p>You can also consider using another well-known filter for edge detection called
 the <a class="reference external" href="https://en.wikipedia.org/wiki/Canny_edge_detector">Canny filter</a>.</p>
 <p>First, you apply a <a class="reference external" href="https://en.wikipedia.org/wiki/Gaussian_filter">Gaussian</a>
@@ -889,7 +891,7 @@ the help of the Canny filter technique. The edges can be emphasized using the
 </section>
 </section>
 <section id="apply-masks-to-x-rays-with-np-where">
-<h2>Apply masks to X-rays with <code class="docutils literal notranslate"><span class="pre">np.where()</span></code><a class="headerlink" href="#apply-masks-to-x-rays-with-np-where" title="Permalink to this headline">#</a></h2>
+<h2>Apply masks to X-rays with <code class="docutils literal notranslate"><span class="pre">np.where()</span></code><a class="headerlink" href="#apply-masks-to-x-rays-with-np-where" title="Permalink to this heading">#</a></h2>
 <p>To screen out only certain pixels in X-ray images to help detect particular
 features, you can apply masks with NumPy’s
 <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.where.html"><code class="docutils literal notranslate"><span class="pre">np.where(condition:</span> <span class="pre">array_like</span> <span class="pre">(bool),</span> <span class="pre">x:</span> <span class="pre">array_like,</span> <span class="pre">y:</span> <span class="pre">ndarray)</span></code></a>
@@ -978,7 +980,7 @@ a certain threshold:</p>
 </div>
 </section>
 <section id="compare-the-results">
-<h2>Compare the results<a class="headerlink" href="#compare-the-results" title="Permalink to this headline">#</a></h2>
+<h2>Compare the results<a class="headerlink" href="#compare-the-results" title="Permalink to this heading">#</a></h2>
 <p>Let’s display some of the results of processed X-ray images you’ve worked with
 so far:</p>
 <div class="cell docutils container">
@@ -1015,7 +1017,7 @@ so far:</p>
 </div>
 </section>
 <section id="next-steps">
-<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">#</a></h2>
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this heading">#</a></h2>
 <p>If you want to use your own samples, you can use
 <a class="reference external" href="https://openi.nlm.nih.gov/detailedresult?img=CXR3666_IM-1824-1001&amp;query=chest%20infection&amp;it=xg&amp;req=4&amp;npos=32">this image</a>
 or search for various other ones on the <a class="reference external" href="https://openi.nlm.nih.gov"><em>Openi</em></a>

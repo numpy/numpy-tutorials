@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Pairing Jupyter notebooks and MyST-NB &#8212; NumPy Tutorials</title>
   
@@ -41,7 +41,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -54,7 +56,7 @@
   <meta name="robots" content="noindex" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
 
   </head>
   
@@ -455,14 +457,14 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="pairing-jupyter-notebooks-and-myst-nb">
-<h1>Pairing Jupyter notebooks and MyST-NB<a class="headerlink" href="#pairing-jupyter-notebooks-and-myst-nb" title="Permalink to this headline">#</a></h1>
+<h1>Pairing Jupyter notebooks and MyST-NB<a class="headerlink" href="#pairing-jupyter-notebooks-and-myst-nb" title="Permalink to this heading">#</a></h1>
 <section id="what-you-ll-do">
-<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this headline">#</a></h2>
+<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this heading">#</a></h2>
 <p>This guide will keep a Jupyter notebook synced <em>or paired</em> between
 <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">.md</span></code>.</p>
 </section>
 <section id="what-you-ll-learn">
-<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this headline">#</a></h2>
+<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>The difference between Jupyter’s json format and MyST-NB’s markdown
 format</p></li>
@@ -471,7 +473,7 @@ format</p></li>
 </ul>
 </section>
 <section id="what-you-ll-need">
-<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this headline">#</a></h2>
+<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://jupyter.org/">Jupyter</a></p></li>
 <li><p><a class="reference external" href="https://jupytext.readthedocs.io/en/latest/index.html">Jupytext</a></p></li>
@@ -479,7 +481,7 @@ format</p></li>
 </section>
 <hr class="docutils" />
 <section id="background">
-<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this heading">#</a></h2>
 <p>The <a class="reference external" href="https://github.com/numpy/numpy-tutorials">NumPy tutorials</a> are
 reviewed and executed as <a class="reference external" href="https://myst-nb.readthedocs.io/">MyST-NB</a>
 notebooks. Content is easier to review in this markdown format. You can
@@ -632,7 +634,7 @@ print(&#39;x = &#39;, x)
 <p>The MyST-NB <code class="docutils literal notranslate"><span class="pre">.md</span></code> is much shorter, but it does not save the output <code class="docutils literal notranslate"><span class="pre">4</span></code>.</p>
 </section>
 <section id="pair-your-notebook-files-ipynb-and-md">
-<h2>Pair your notebook files <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">.md</span></code><a class="headerlink" href="#pair-your-notebook-files-ipynb-and-md" title="Permalink to this headline">#</a></h2>
+<h2>Pair your notebook files <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> and <code class="docutils literal notranslate"><span class="pre">.md</span></code><a class="headerlink" href="#pair-your-notebook-files-ipynb-and-md" title="Permalink to this heading">#</a></h2>
 <p>When you submit a Jupyter notebook to NumPy tutorials, we (the reviewers) will convert
 it to a MyST-NB format. You can also submit the MyST-NB <code class="docutils literal notranslate"><span class="pre">.md</span></code> in your
 pull request.
@@ -677,7 +679,7 @@ The outputs of your code cells are only saved in the <code class="docutils liter
 </div></blockquote>
 </section>
 <section id="wrapping-up">
-<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this headline">#</a></h2>
+<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this heading">#</a></h2>
 <p>In this tutorial, you saw the json <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> and MyST-NB <code class="docutils literal notranslate"><span class="pre">.md</span></code> raw code
 to create Jupyter notebooks. You can use both formats to create
 tutorials. Now you can work in either a simple text editor like VIM

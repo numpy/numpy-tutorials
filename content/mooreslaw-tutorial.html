@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Determining Moore’s Law with real data in NumPy &#8212; NumPy Tutorials</title>
   
@@ -41,7 +41,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -56,7 +58,7 @@
   <meta name="robots" content="noindex" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
 
   </head>
   
@@ -464,11 +466,11 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="determining-moore-s-law-with-real-data-in-numpy">
-<h1>Determining Moore’s Law with real data in NumPy<a class="headerlink" href="#determining-moore-s-law-with-real-data-in-numpy" title="Permalink to this headline">#</a></h1>
+<h1>Determining Moore’s Law with real data in NumPy<a class="headerlink" href="#determining-moore-s-law-with-real-data-in-numpy" title="Permalink to this heading">#</a></h1>
 <p><img alt="Scatter plot of MOS transistor count per microprocessor every two years as a demonstration of Moore's Law." src="../_images/01-mooreslaw-tutorial-intro.png" /></p>
 <p><em>The number of transistors reported per a given chip plotted on a log scale in the y axis with the date of introduction on the linear scale x-axis. The blue data points are from a <a class="reference external" href="https://en.wikipedia.org/wiki/Transistor_count#Microprocessors">transistor count table</a>. The red line is an ordinary least squares prediction and the orange line is Moore’s law.</em></p>
 <section id="what-you-ll-do">
-<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this headline">#</a></h2>
+<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this heading">#</a></h2>
 <p>In 1965, engineer Gordon Moore
 <a class="reference external" href="https://en.wikipedia.org/wiki/Moore%27s_law">predicted</a> that
 transistors on a chip would double every two years in the coming decade
@@ -478,7 +480,7 @@ You’ll compare Moore’s prediction against actual transistor counts in
 the 53 years following his prediction. You will determine the best-fit constants to describe the exponential growth of transistors on semiconductors compared to Moore’s Law.</p>
 </section>
 <section id="skills-you-ll-learn">
-<h2>Skills you’ll learn<a class="headerlink" href="#skills-you-ll-learn" title="Permalink to this headline">#</a></h2>
+<h2>Skills you’ll learn<a class="headerlink" href="#skills-you-ll-learn" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Load data from a <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">*.csv</a> file</p></li>
 <li><p>Perform linear regression and predict exponential growth using ordinary least squares</p></li>
@@ -493,7 +495,7 @@ the 53 years following his prediction. You will determine the best-fit constants
 </ul>
 </section>
 <section id="what-you-ll-need">
-<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this headline">#</a></h2>
+<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this heading">#</a></h2>
 <p><strong>1.</strong> These packages:</p>
 <ul class="simple">
 <li><p>NumPy</p></li>
@@ -529,7 +531,7 @@ the 53 years following his prediction. You will determine the best-fit constants
 </section>
 <hr class="docutils" />
 <section id="building-moore-s-law-as-an-exponential-function">
-<h2>Building Moore’s law as an exponential function<a class="headerlink" href="#building-moore-s-law-as-an-exponential-function" title="Permalink to this headline">#</a></h2>
+<h2>Building Moore’s law as an exponential function<a class="headerlink" href="#building-moore-s-law-as-an-exponential-function" title="Permalink to this heading">#</a></h2>
 <p>Your empirical model assumes that the number of transistors per
 semiconductor follows an exponential growth,</p>
 <p><span class="math notranslate nohighlight">\(\log(\text{transistor_count})= f(\text{year}) = A\cdot \text{year}+B,\)</span></p>
@@ -582,7 +584,7 @@ This is x2.00 more transistors than 1971
 </div>
 </section>
 <section id="loading-historical-manufacturing-data-to-your-workspace">
-<h2>Loading historical manufacturing data to your workspace<a class="headerlink" href="#loading-historical-manufacturing-data-to-your-workspace" title="Permalink to this headline">#</a></h2>
+<h2>Loading historical manufacturing data to your workspace<a class="headerlink" href="#loading-historical-manufacturing-data-to-your-workspace" title="Permalink to this heading">#</a></h2>
 <p>Now, make a prediction based upon the historical data for
 semiconductors per chip. The <a class="reference external" href="https://en.wikipedia.org/wiki/Transistor_count#Microprocessors">Transistor Count
 [4]</a>
@@ -591,7 +593,7 @@ file into a NumPy array, its a good idea to inspect the structure of the
 file first. Then, locate the columns of interest and save them to a
 variable. Save two columns of the file to the array, <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
 <p>Here, print out the first 10 rows of <code class="docutils literal notranslate"><span class="pre">transistor_data.csv</span></code>. The columns are</p>
-<table class="colwidths-auto table">
+<table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Processor</p></th>
 <th class="head"><p>MOS transistor count</p></th>
@@ -698,7 +700,7 @@ log-scale,</p>
 </div>
 </section>
 <section id="calculating-the-historical-growth-curve-for-transistors">
-<h2>Calculating the historical growth curve for transistors<a class="headerlink" href="#calculating-the-historical-growth-curve-for-transistors" title="Permalink to this headline">#</a></h2>
+<h2>Calculating the historical growth curve for transistors<a class="headerlink" href="#calculating-the-historical-growth-curve-for-transistors" title="Permalink to this heading">#</a></h2>
 <p>Your model assume that <code class="docutils literal notranslate"><span class="pre">yi</span></code> is a function of <code class="docutils literal notranslate"><span class="pre">year</span></code>. Now, find the best-fit model that minimizes the difference between <span class="math notranslate nohighlight">\(y_i\)</span> and <span class="math notranslate nohighlight">\(A\cdot \text{year} +B, \)</span> as such</p>
 <p><span class="math notranslate nohighlight">\(\min \sum|y_i - (A\cdot \text{year}_i + B)|^2.\)</span></p>
 <p>This <a class="reference external" href="https://en.wikipedia.org/wiki/Ordinary_least_squares">sum of squares
@@ -751,7 +753,7 @@ Dep. Variable:                      y   R-squared:                       0.949
 Model:                            OLS   Adj. R-squared:                  0.949
 Method:                 Least Squares   F-statistic:                     3309.
 Date:                Sun, 30 Apr 2023   Prob (F-statistic):          1.75e-116
-Time:                        06:26:53   Log-Likelihood:                -273.43
+Time:                        18:35:27   Log-Likelihood:                -273.43
 No. Observations:                 179   AIC:                             550.9
 Df Residuals:                     177   BIC:                             557.2
 Df Model:                           1                                         
@@ -937,7 +939,7 @@ for $\pm\frac{1}{2}~years.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19200000000.0 250000000.0 7050000000.0
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7feb8b01f700&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f5db38e88b0&gt;
 </pre></div>
 </div>
 <img alt="../_images/397cfee4652c323437ff609ff34c7638ced66ba5e23cab7b83228681d94716a6.png" src="../_images/397cfee4652c323437ff609ff34c7638ced66ba5e23cab7b83228681d94716a6.png" />
@@ -954,7 +956,7 @@ average than extreme values because it satisfies the condition to
 minimize <span class="math notranslate nohighlight">\(\sum |y_i - A\cdot \text{year}[i]+B|^2\)</span>.</p>
 </section>
 <section id="sharing-your-results-as-zipped-arrays-and-a-csv">
-<h2>Sharing your results as zipped arrays and a csv<a class="headerlink" href="#sharing-your-results-as-zipped-arrays-and-a-csv" title="Permalink to this headline">#</a></h2>
+<h2>Sharing your results as zipped arrays and a csv<a class="headerlink" href="#sharing-your-results-as-zipped-arrays-and-a-csv" title="Permalink to this heading">#</a></h2>
 <p>The last step, is to share your findings. You created
 new arrays that represent a linear regression model and Gordon Moore’s
 prediction. You started this process by importing a csv file into a NumPy
@@ -964,7 +966,7 @@ array using <code class="docutils literal notranslate"><span class="pre">np.load
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html"><code class="docutils literal notranslate"><span class="pre">np.savetxt</span></code></a>: save a csv file with the original data and your predicted data</p></li>
 </ol>
 <section id="zipping-the-arrays-into-a-file">
-<h3>Zipping the arrays into a file<a class="headerlink" href="#zipping-the-arrays-into-a-file" title="Permalink to this headline">#</a></h3>
+<h3>Zipping the arrays into a file<a class="headerlink" href="#zipping-the-arrays-into-a-file" title="Permalink to this heading">#</a></h3>
 <p>Using <code class="docutils literal notranslate"><span class="pre">np.savez</span></code>, you can save thousands of arrays and give them names. The
 function <code class="docutils literal notranslate"><span class="pre">np.load</span></code> will load the arrays back into the workspace as a
 dictionary. You’ll save a five arrays so the next user will have the year,
@@ -1076,7 +1078,7 @@ text, and one array of double precision floating point numbers shape =
 another analysis.</p>
 </section>
 <section id="creating-your-own-comma-separated-value-file">
-<h3>Creating your own comma separated value file<a class="headerlink" href="#creating-your-own-comma-separated-value-file" title="Permalink to this headline">#</a></h3>
+<h3>Creating your own comma separated value file<a class="headerlink" href="#creating-your-own-comma-separated-value-file" title="Permalink to this heading">#</a></h3>
 <p>If you want to share data and view the results in a table, then you have to
 create a text file. Save the data using <code class="docutils literal notranslate"><span class="pre">np.savetxt</span></code>. This
 function is more limited than <code class="docutils literal notranslate"><span class="pre">np.savez</span></code>. Delimited files, like csv’s,
@@ -1183,7 +1185,7 @@ options to create the desired file format:</p>
 </section>
 </section>
 <section id="wrapping-up">
-<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this headline">#</a></h2>
+<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this heading">#</a></h2>
 <p>In conclusion, you have compared historical data for semiconductor
 manufacturers to Moore’s law and created a linear regression model to
 find the average number of transistors added to each microprocessor
@@ -1201,7 +1203,7 @@ analysis should give you a small insight into how incredible this growth
 has been over the last half-century.</p>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Moore%27s_law">“Moore’s Law.” Wikipedia article. Accessed Oct. 1, 2020.</a></p></li>
 <li><p><a class="reference external" href="https://newsroom.intel.com/wp-content/uploads/sites/11/2018/05/moores-law-electronics.pdf">Moore, Gordon E. (1965-04-19). “Cramming more components onto integrated circuits”. intel.com. Electronics Magazine. Retrieved April 1, 2020.</a></p></li>

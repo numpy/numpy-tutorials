@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html >
+<html lang="en" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>Deep reinforcement learning with Pong from pixels &#8212; NumPy Tutorials</title>
   
@@ -41,7 +41,9 @@
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
@@ -54,7 +56,7 @@
   <meta name="robots" content="noindex" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+  <meta name="docsearch:language" content="en"/>
 
   </head>
   
@@ -467,7 +469,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="deep-reinforcement-learning-with-pong-from-pixels">
-<h1>Deep reinforcement learning with Pong from pixels<a class="headerlink" href="#deep-reinforcement-learning-with-pong-from-pixels" title="Permalink to this headline">#</a></h1>
+<h1>Deep reinforcement learning with Pong from pixels<a class="headerlink" href="#deep-reinforcement-learning-with-pong-from-pixels" title="Permalink to this heading">#</a></h1>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
 <p>This article is not currently tested due to licensing/installation issues with
@@ -480,7 +482,7 @@ footprint!</p>
 <p><img alt="Diagram showing operations detailed in this tutorial" src="../_images/tutorial-deep-reinforcement-learning-with-pong-from-pixels.png" /></p>
 <p>This example is based on the <a class="reference external" href="https://gist.github.com/karpathy/a4166c7fe253700972fcbc77e4ea32c5">code</a> developed by <a class="reference external" href="https://karpathy.ai">Andrej Karpathy</a> for the <a class="reference external" href="https://sites.google.com/view/deep-rl-bootcamp/home">Deep RL Bootcamp</a> in 2017 at UC Berkeley. His <a class="reference external" href="http://karpathy.github.io/2016/05/31/rl/">blog post</a> from 2016 also provides more background on the mechanics and theory used in Pong RL.</p>
 <section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">#</a></h2>
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>OpenAI Gym</strong>: To help with the game environment, you will use <a class="reference external" href="https://gym.openai.com">Gym</a> — an open-source Python interface <a class="reference external" href="https://arxiv.org/abs/1606.01540">developed by OpenAI</a> that helps perform RL tasks while supporting many simulation environments.</p></li>
 <li><p><strong>Python and NumPy</strong>: The reader should have some knowledge of Python, NumPy array manipulation, and linear algebra.</p></li>
@@ -491,7 +493,7 @@ footprint!</p>
 <p>This tutorial can also be run locally in an isolated environment, such as <a class="reference external" href="https://virtualenv.pypa.io/en/stable/">Virtualenv</a> and <a class="reference external" href="https://docs.conda.io/">conda</a>.</p>
 </section>
 <section id="table-of-contents">
-<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">#</a></h2>
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>A note on RL and deep RL</p></li>
 <li><p>Deep RL glossary</p></li>
@@ -513,14 +515,14 @@ footprint!</p>
 </ol>
 <hr class="docutils" />
 <section id="a-note-on-rl-and-deep-rl">
-<h3>A note on RL and deep RL<a class="headerlink" href="#a-note-on-rl-and-deep-rl" title="Permalink to this headline">#</a></h3>
+<h3>A note on RL and deep RL<a class="headerlink" href="#a-note-on-rl-and-deep-rl" title="Permalink to this heading">#</a></h3>
 <p>In <a class="reference external" href="https://en.wikipedia.org/wiki/Reinforcement_learning"><em>RL</em></a>, your agent learns from trial and error by interacting with an environment using a so-called policy to gain experience. After taking one action, the agent receives information about its reward (which it may or may not get) and the next observation of the environment. It can then proceed to take another action. This happens over a number of episodes and/or until the task is deemed to be complete.</p>
 <p>The agent’s policy works by “mapping” the agent’s observations to its actions — that is, assigning a presentation of what the agent observes with required actions. The overall goal is usually to optimize the agent’s policy such that it maximizes the expected rewards from each observation.</p>
 <p>For detailed information about RL, there is an <a class="reference external" href="https://web.archive.org/web/20050806080008/http://www.cs.ualberta.ca/~sutton/book/the-book.html">introductory book</a> by Richard Sutton and Andrew Barton.</p>
 <p>Check out the Appendix at the end of the tutorial for more information.</p>
 </section>
 <section id="deep-rl-glossary">
-<h3>Deep RL glossary<a class="headerlink" href="#deep-rl-glossary" title="Permalink to this headline">#</a></h3>
+<h3>Deep RL glossary<a class="headerlink" href="#deep-rl-glossary" title="Permalink to this heading">#</a></h3>
 <p>Below is a concise glossary of deep RL terms you may find useful for the remaining part of the tutorial:</p>
 <ul class="simple">
 <li><p>In a finite-horizon world, such as a game of Pong, the learning agent can explore (and exploit) the <em>environment</em> over an <em>episode</em>. It usually takes many episodes for the agent to learn.</p></li>
@@ -536,7 +538,7 @@ footprint!</p>
 </section>
 </section>
 <section id="set-up-pong">
-<h2>Set up Pong<a class="headerlink" href="#set-up-pong" title="Permalink to this headline">#</a></h2>
+<h2>Set up Pong<a class="headerlink" href="#set-up-pong" title="Permalink to this heading">#</a></h2>
 <p><strong>1.</strong> First, you should install OpenAI Gym (using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gym[atari]</span></code> - this package is currently not available on conda), and import NumPy, Gym and the necessary modules:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">gym</span>
@@ -567,7 +569,7 @@ footprint!</p>
 <p>While you can perform all kinds of RL experiments in a Jupyter notebook, rendering images or videos of a Gym environment to visualize how your agent plays the game of Pong after training can be rather challenging. If you want to set up video playback in a notebook, you can find the details in the Appendix at the end of this tutorial.</p>
 </section>
 <section id="preprocess-frames-the-observation">
-<h2>Preprocess frames (the observation)<a class="headerlink" href="#preprocess-frames-the-observation" title="Permalink to this headline">#</a></h2>
+<h2>Preprocess frames (the observation)<a class="headerlink" href="#preprocess-frames-the-observation" title="Permalink to this heading">#</a></h2>
 <p>In this section you will set up a function to preprocess the input data (game observation) to make it digestible for the neural network, which can only work with inputs that are in a form of tensors (multidimensional arrays) of floating-point type.</p>
 <p>Your agent will use the frames from the Pong game — pixels from screen frames — as input-observations for the policy network. The game observation tells the agent about where the ball is before it is fed (with a forward pass) into the neural network (the policy). This is similar to DeepMind’s <a class="reference external" href="https://deepmind.com/research/open-source/dqn">DQN</a> method (which is further discussed in the Appendix).</p>
 <p>Pong screen frames are 210x160 pixels over 3 color dimensions (red, green and blue). The arrays are encoded with <code class="docutils literal notranslate"><span class="pre">uint8</span></code> (or 8-bit integers), and these observations are stored on a Gym Box instance.</p>
@@ -617,7 +619,7 @@ footprint!</p>
 </div>
 </section>
 <section id="create-the-policy-the-neural-network-and-the-forward-pass">
-<h2>Create the policy (the neural network) and the forward pass<a class="headerlink" href="#create-the-policy-the-neural-network-and-the-forward-pass" title="Permalink to this headline">#</a></h2>
+<h2>Create the policy (the neural network) and the forward pass<a class="headerlink" href="#create-the-policy-the-neural-network-and-the-forward-pass" title="Permalink to this heading">#</a></h2>
 <p>Next, you will define the policy as a simple feedforward network that uses a game observation as an input and outputs an action log probability:</p>
 <ul class="simple">
 <li><p>For the <em>input</em>, it will use the Pong video game frames — the preprocessed 1D vectors with 6,400 (80x80) floating point arrays.</p></li>
@@ -684,7 +686,7 @@ footprint!</p>
 </div>
 </section>
 <section id="set-up-the-update-step-backpropagation">
-<h2>Set up the update step (backpropagation)<a class="headerlink" href="#set-up-the-update-step-backpropagation" title="Permalink to this headline">#</a></h2>
+<h2>Set up the update step (backpropagation)<a class="headerlink" href="#set-up-the-update-step-backpropagation" title="Permalink to this heading">#</a></h2>
 <p>During learning in your deep RL algorithm, you use the action log probabilities (given an observation) and the discounted returns (for example, +1 or -1 in Pong) and perform the <em>backward pass</em> or <em>backpropagation</em> to update the parameters — the policy network’s weights.</p>
 <p><strong>1.</strong> Let’s define the backward pass function (<code class="docutils literal notranslate"><span class="pre">policy_backward()</span></code>) with the help of NumPy’s modules for array multiplication — <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html?highlight=numpy.dot#numpy.dot"><code class="docutils literal notranslate"><span class="pre">np.dot()</span></code></a> (matrix multiplication), <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.outer.html"><code class="docutils literal notranslate"><span class="pre">np.outer()</span></code></a> (outer product computation), and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ravel.html"><code class="docutils literal notranslate"><span class="pre">np.ravel()</span></code></a> (to flatten arrays into 1D arrays):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">policy_backward</span><span class="p">(</span><span class="n">eph</span><span class="p">,</span> <span class="n">epdlogp</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
@@ -729,7 +731,7 @@ footprint!</p>
 </div>
 </section>
 <section id="define-the-discounted-rewards-expected-return-function">
-<h2>Define the discounted rewards (expected return) function<a class="headerlink" href="#define-the-discounted-rewards-expected-return-function" title="Permalink to this headline">#</a></h2>
+<h2>Define the discounted rewards (expected return) function<a class="headerlink" href="#define-the-discounted-rewards-expected-return-function" title="Permalink to this heading">#</a></h2>
 <p>In this section, you will set up a function for computing discounted rewards (<code class="docutils literal notranslate"><span class="pre">discount_rewards()</span></code>) — the expected return from an observation — that uses a 1D array of rewards as inputs (with the help of NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.zeros_like.html"><code class="docutils literal notranslate"><span class="pre">np.zeros_like()</span></code></a>) function.</p>
 <p>To provide more weight to shorter-term rewards over longer-term ones, you will use a <em>discount factor</em> (gamma) that is often a floating-point number between 0.9 and 0.99.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.99</span>
@@ -751,7 +753,7 @@ footprint!</p>
 </div>
 </section>
 <section id="train-the-agent-for-a-number-of-episodes">
-<h2>Train the agent for a number of episodes<a class="headerlink" href="#train-the-agent-for-a-number-of-episodes" title="Permalink to this headline">#</a></h2>
+<h2>Train the agent for a number of episodes<a class="headerlink" href="#train-the-agent-for-a-number-of-episodes" title="Permalink to this heading">#</a></h2>
 <p>This section covers how to set up the training process during which your agent will be learning to play Pong using its policy.</p>
 <p>The pseudocode for the policy gradient method for Pong:</p>
 <ul class="simple">
@@ -960,7 +962,7 @@ footprint!</p>
 </ul>
 </section>
 <section id="next-steps">
-<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">#</a></h2>
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this heading">#</a></h2>
 <p>You may notice that training an RL agent takes a long time if you increase the number of episodes from 100 to 500 or 1,000+, depending on the hardware — CPUs and GPUs — you are using for this task.</p>
 <p>Policy gradient methods can learn a task if you give them a lot of time, and optimization in RL is a challenging problem. Training agents to learn to play Pong or any other task can be sample-inefficient and require a lot of episodes. You may also notice in your training output that even after hundreds of episodes, the rewards may have high variance.</p>
 <p>In addition, like in many deep learning-based algorithms, you should take into account a large amount of parameters that your policy has to learn. In Pong, this number adds up to 1 million or more with 200 nodes in the hidden layer of the network and the input dimension being of size 6,400 (80x80). Therefore, adding more CPUs and GPUs to assist with training can always be an option.</p>
@@ -976,9 +978,9 @@ footprint!</p>
 <p>Building a neural network from scratch with NumPy is a great way to learn more about NumPy and about deep learning. However, for real-world applications you should use specialized frameworks — such as <a class="reference external" href="https://pytorch.org/">PyTorch</a>, <a class="reference external" href="https://github.com/google/jax">JAX</a>, <a class="reference external" href="https://www.tensorflow.org/guide/tf_numpy">TensorFlow</a> or <a class="reference external" href="https://mxnet.apache.org">MXNet</a> — that provide NumPy-like APIs, have built-in <a class="reference external" href="https://en.wikipedia.org/wiki/Automatic_differentiation">automatic differentiation</a> and GPU support, and are designed for high-performance numerical computing and machine learning.</p>
 </section>
 <section id="appendix">
-<h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">#</a></h2>
+<h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this heading">#</a></h2>
 <section id="notes-on-rl-and-deep-rl">
-<h3>Notes on RL and deep RL<a class="headerlink" href="#notes-on-rl-and-deep-rl" title="Permalink to this headline">#</a></h3>
+<h3>Notes on RL and deep RL<a class="headerlink" href="#notes-on-rl-and-deep-rl" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>In <a class="reference external" href="https://en.wikipedia.org/wiki/Supervised_learning">supervised</a> deep learning for tasks, such as image recognition, language translation, or text classification, you’re more likely to use a lot of labeled data. However, in RL, agents typically don’t receive direct explicit feedback indicating correct or wrong actions — they rely on other signals, such as rewards.</p></li>
 <li><p><em>Deep RL</em> combines RL with <a class="reference external" href="http://www.cs.toronto.edu/~hinton/absps/NatureDeepReview.pdf">deep learning</a>. The field had its first major success in more complex environments, such as video games, in 2013 — a year after the <a class="reference external" href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf">AlexNet</a> breakthrough in computer vision. Volodymyr Mnih and colleagues at DeepMind published a research paper called <a class="reference external" href="https://arxiv.org/abs/1312.5602">Playing Atari with deep reinforcement learning</a> (and <a class="reference external" href="https://web.stanford.edu/class/psych209/Readings/MnihEtAlHassibis15NatureControlDeepRL.pdf">updated</a> in 2015) that showed that they were able to train an agent that could play several classic games from the Arcade Learning Environment at a human-level. Their RL algorithm — called a deep Q-network (DQN) — used <a class="reference external" href="https://en.wikipedia.org/wiki/Convolutional_neural_network">convolutional layers</a> in a neural network that approximated <a class="reference external" href="https://en.wikipedia.org/wiki/Q-learning">Q learning</a> and used <a class="reference external" href="https://web.stanford.edu/class/psych209/Readings/MnihEtAlHassibis15NatureControlDeepRL.pdf">experience replay</a>.</p></li>
@@ -990,7 +992,7 @@ footprint!</p>
 </ul>
 </section>
 <section id="how-to-set-up-video-playback-in-your-jupyter-notebook">
-<h3>How to set up video playback in your Jupyter notebook<a class="headerlink" href="#how-to-set-up-video-playback-in-your-jupyter-notebook" title="Permalink to this headline">#</a></h3>
+<h3>How to set up video playback in your Jupyter notebook<a class="headerlink" href="#how-to-set-up-video-playback-in-your-jupyter-notebook" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>If you’re using <a class="reference external" href="https://mybinder.org"><strong>Binder</strong></a> — a free Jupyter notebook-based tool — you can set up the Docker image and add <code class="docutils literal notranslate"><span class="pre">freeglut3-dev</span></code>, <code class="docutils literal notranslate"><span class="pre">xvfb</span></code>, and <code class="docutils literal notranslate"><span class="pre">x11-utils</span></code> to the <code class="docutils literal notranslate"><span class="pre">apt.txt</span></code> configuration file to install the initial dependencies. Then, to <code class="docutils literal notranslate"><span class="pre">binder/environment.yml</span></code> under <code class="docutils literal notranslate"><span class="pre">channels</span></code>, add <code class="docutils literal notranslate"><span class="pre">gym</span></code>, <code class="docutils literal notranslate"><span class="pre">pyvirtualdisplay</span></code> and anything else you may need, such as <code class="docutils literal notranslate"><span class="pre">python=3.7</span></code>, <code class="docutils literal notranslate"><span class="pre">pip</span></code>, and <code class="docutils literal notranslate"><span class="pre">jupyterlab</span></code>. Check the following <a class="reference external" href="https://towardsdatascience.com/rendering-openai-gym-envs-on-binder-and-google-colab-536f99391cc7">post</a> for more information.</p></li>
 <li><p>If you’re using <a class="reference external" href="https://colab.research.google.com/notebooks/intro.ipynb"><strong>Google Colaboratory</strong></a> (another free Jupyter notebook-based tool), you can enable video playback of the game environments installing and setting up <a class="reference external" href="https://en.wikipedia.org/wiki/Xvfb">X virtual frame buffer</a>/<a class="reference external" href="https://www.x.org/releases/X11R7.6/doc/man/man1/Xvfb.1.xhtml">Xvfb</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/X_Window_System">X11</a>, <a class="reference external" href="https://ffmpeg.org">FFmpeg</a>, <a class="reference external" href="https://github.com/ponty/PyVirtualDisplay">PyVirtualDisplay</a>, <a class="reference external" href="http://pyopengl.sourceforge.net">PyOpenGL</a>, and other dependencies, as described further below.</p></li>
