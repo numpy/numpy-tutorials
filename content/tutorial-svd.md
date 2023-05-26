@@ -379,6 +379,6 @@ terms of the norm of the difference. For more information, see *G. H. Golub and 
 
 -  [Python tutorial](https://docs.python.org/dev/tutorial/index.html)
 -  [NumPy Reference](https://numpy.org/devdocs/reference/index.html#reference)
--  [SciPy Tutorial](https://docs.scipy.org/doc/scipy/reference/tutorial/index.html)
+-  [SciPy Tutorial](https://docs.scipy.org/doc/scipy/tutorial/index.html)
 -  [SciPy Lecture Notes](https://scipy-lectures.org)
 -  [A matlab, R, IDL, NumPy/SciPy dictionary](http://mathesaurus.sf.net/)
