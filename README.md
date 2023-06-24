@@ -26,6 +26,7 @@ or navigate to any of the documents listed below and download it individually.
 9. [Tutorial: Plotting Fractals](content/tutorial-plotting-fractals.ipynb)
 10. [Tutorial: NumPy natural language processing from scratch with a focus on ethics](content/tutorial-nlp-from-scratch.md)
 11. [Tutorial: Analysing the impact of the lockdown on air quality in Delhi, India](content/tutorial-air-quality-analysis.md)
+12. [Tutorial: Stochastic Simulations](contant/tutorial-stochastic-simulations.ipynb)
 
 
 ## Contributing
