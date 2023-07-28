@@ -576,14 +576,14 @@ test_metrics = {
 }
 
 # Display the plots.
-fig, axes = plt.subplots(1, 2, figsize=(15, 5))
-for ax, metrics, ttl in zip(
+fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(15, 5))
+for ax, metrics, title in zip(
     axes, (training_metrics, test_metrics), ("Training set", "Test set")
 ):
     # Plot the metrics
     for metric, values in metrics.items():
         ax.plot(epoch_range, values, label=metric.capitalize())
-    ax.set_title(ttl)
+    ax.set_title(title)
     ax.set_xlabel("Epochs")
     ax.legend()
 plt.show()
