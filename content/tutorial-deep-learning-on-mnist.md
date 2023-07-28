@@ -564,23 +564,28 @@ After executing the cell above, you can visualize the training and test set erro
 epoch_range = np.arange(epochs) + 1  # Starting from 1
 
 # The training set metrics.
-y_training_error = np.asarray(store_training_loss) / len(training_images)
-y_training_accuracy = np.asarray(store_training_accurate_pred) / len(training_images)
+training_metrics = {
+    "accuracy": np.asarray(store_training_accurate_pred) / len(training_images),
+    "error": np.asarray(store_training_loss) / len(training_images),
+}
 
 # The test set metrics.
-y_test_error = np.asarray(store_test_loss) / len(test_images)
-y_test_accuracy = np.asarray(store_test_accurate_pred) / len(test_images)
+test_metrics = {
+    "accuracy": np.asarray(store_test_accurate_pred) / len(test_images),
+    "error": np.asarray(store_test_loss) / len(test_images),
+}
 
 # Display the plots.
-fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(15, 5))
-axes[0].set_title("Training set error, accuracy")
-axes[0].plot(epoch_range, y_training_accuracy, label="Training set accuracy")
-axes[0].plot(epoch_range, y_training_error, label="Training set error")
-axes[0].set_xlabel("Epochs")
-axes[1].set_title("Test set error, accuracy")
-axes[1].plot(epoch_range, y_test_accuracy, label="Test set accuracy")
-axes[1].plot(epoch_range, y_test_error, label="Test set error")
-axes[1].set_xlabel("Epochs")
+fig, axes = plt.subplots(1, 2, figsize=(15, 5))
+for ax, metrics, ttl in zip(
+    axes, (training_metrics, test_metrics), ("Training set", "Test set")
+):
+    # Plot the metrics
+    for metric, values in metrics.items():
+        ax.plot(epoch_range, values, label=metric.capitalize())
+    ax.set_title(ttl)
+    ax.set_xlabel("Epochs")
+    ax.legend()
 plt.show()
 ```
 
