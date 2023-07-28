@@ -579,7 +579,7 @@ y_test_error = [
 ]
 x_test_error = range(1, len(store_test_loss) + 1)
 y_test_accuracy = [
-    store_training_accurate_pred[i] / float(len(training_images))
+    store_test_accurate_pred[i] / float(len(test_images))
     for i in range(len(store_training_accurate_pred))
 ]
 x_test_accuracy = range(1, len(store_test_accurate_pred) + 1)
