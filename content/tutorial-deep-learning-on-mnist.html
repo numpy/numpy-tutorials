@@ -628,7 +628,7 @@ The shape of test images: (10000, 784) and test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6e96473e0d5890e8b54a3796e049afb704ba9c4b0fcf60945de18f4cf0454c8f.png" src="../_images/6e96473e0d5890e8b54a3796e049afb704ba9c4b0fcf60945de18f4cf0454c8f.png" />
+<img alt="../_images/bd961c1e61bf0dac65d12ab52828117a0b07f49a9085da3b9b672f1b865dd121.png" src="../_images/bd961c1e61bf0dac65d12ab52828117a0b07f49a9085da3b9b672f1b865dd121.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -645,7 +645,7 @@ The shape of test images: (10000, 784) and test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8484ad8185328c820925db98e28702162d6c6d279eb7cd636dfc9e2d94b68215.png" src="../_images/8484ad8185328c820925db98e28702162d6c6d279eb7cd636dfc9e2d94b68215.png" />
+<img alt="../_images/dc8b9bf2937789b2e7693be6a6acd31a3a893c01bedaf870e92ffde37547b5e7.png" src="../_images/dc8b9bf2937789b2e7693be6a6acd31a3a893c01bedaf870e92ffde37547b5e7.png" />
 </div>
 </div>
 <p><em>Above are five images taken from the MNIST training set. Various hand-drawn
@@ -1214,45 +1214,37 @@ its performance over the training epochs.</p>
 <p>After executing the cell above, you can visualize the training and test set errors and accuracy for an instance of this training process.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The training set metrics.</span>
-<span class="n">y_training_error</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">store_training_loss</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">training_images</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">store_training_loss</span><span class="p">))</span>
-<span class="p">]</span>
-<span class="n">x_training_error</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">store_training_loss</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">y_training_accuracy</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">store_training_accurate_pred</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">training_images</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">store_training_accurate_pred</span><span class="p">))</span>
-<span class="p">]</span>
-<span class="n">x_training_accuracy</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">store_training_accurate_pred</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">epoch_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">epochs</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># Starting from 1</span>
+
+<span class="c1"># The training set metrics.</span>
+<span class="n">training_metrics</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;accuracy&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">store_training_accurate_pred</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">training_images</span><span class="p">),</span>
+    <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">store_training_loss</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">training_images</span><span class="p">),</span>
+<span class="p">}</span>
 
 <span class="c1"># The test set metrics.</span>
-<span class="n">y_test_error</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">store_test_loss</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_images</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">store_test_loss</span><span class="p">))</span>
-<span class="p">]</span>
-<span class="n">x_test_error</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">store_test_loss</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">y_test_accuracy</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="n">store_training_accurate_pred</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">training_images</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">store_training_accurate_pred</span><span class="p">))</span>
-<span class="p">]</span>
-<span class="n">x_test_accuracy</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">store_test_accurate_pred</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">test_metrics</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;accuracy&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">store_test_accurate_pred</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_images</span><span class="p">),</span>
+    <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">store_test_loss</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_images</span><span class="p">),</span>
+<span class="p">}</span>
 
 <span class="c1"># Display the plots.</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Training set error, accuracy&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_training_accuracy</span><span class="p">,</span> <span class="n">y_training_accuracy</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training set accuracy&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_training_error</span><span class="p">,</span> <span class="n">y_training_error</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training set error&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Epochs&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Test set error, accuracy&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_test_accuracy</span><span class="p">,</span> <span class="n">y_test_accuracy</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Test set accuracy&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_test_error</span><span class="p">,</span> <span class="n">y_test_error</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Test set error&quot;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Epochs&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">metrics</span><span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+    <span class="n">axes</span><span class="p">,</span> <span class="p">(</span><span class="n">training_metrics</span><span class="p">,</span> <span class="n">test_metrics</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;Training set&quot;</span><span class="p">,</span> <span class="s2">&quot;Test set&quot;</span><span class="p">)</span>
+<span class="p">):</span>
+    <span class="c1"># Plot the metrics</span>
+    <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">epoch_range</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">metric</span><span class="o">.</span><span class="n">capitalize</span><span class="p">())</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Epochs&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a155f32ad6a3518292224002121b7167dd36f5c2c99a5ac7ac1d53357125a043.png" src="../_images/a155f32ad6a3518292224002121b7167dd36f5c2c99a5ac7ac1d53357125a043.png" />
+<img alt="../_images/5733df0cf995fe2da3ed7c61fc8b7e898947400a74d62cfeb7360a732a4322e9.png" src="../_images/5733df0cf995fe2da3ed7c61fc8b7e898947400a74d62cfeb7360a732a4322e9.png" />
 </div>
 </div>
 <p><em>The training and testing error is shown above in the left and right
