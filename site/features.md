@@ -10,4 +10,5 @@ maxdepth: 1
 content/tutorial-svd
 content/save-load-arrays
 content/tutorial-ma
+content/tutorial-stochastic-simulations
 ```
