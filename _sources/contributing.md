@@ -29,7 +29,7 @@ used in the main NumPy documentation has two reasons:
 
  * Jupyter notebooks are a common format for communicating scientific
    information.
- * Jupyter notebooks can be launched in [Binder](https://www.mybinder.org), so that users can interact
+ * Jupyter notebooks can be launched in [Binder](https://mybinder.org), so that users can interact
    with tutorials
  * rST may present a barrier for some people who might otherwise be very
    interested in contributing tutorial material.
