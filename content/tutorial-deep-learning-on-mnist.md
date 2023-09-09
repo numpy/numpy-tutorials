@@ -561,39 +561,31 @@ The training process may take many minutes, depending on a number of factors, su
 After executing the cell above, you can visualize the training and test set errors and accuracy for an instance of this training process.
 
 ```{code-cell}
+epoch_range = np.arange(epochs) + 1  # Starting from 1
+
 # The training set metrics.
-y_training_error = [
-    store_training_loss[i] / float(len(training_images))
-    for i in range(len(store_training_loss))
-]
-x_training_error = range(1, len(store_training_loss) + 1)
-y_training_accuracy = [
-    store_training_accurate_pred[i] / float(len(training_images))
-    for i in range(len(store_training_accurate_pred))
-]
-x_training_accuracy = range(1, len(store_training_accurate_pred) + 1)
+training_metrics = {
+    "accuracy": np.asarray(store_training_accurate_pred) / len(training_images),
+    "error": np.asarray(store_training_loss) / len(training_images),
+}
 
 # The test set metrics.
-y_test_error = [
-    store_test_loss[i] / float(len(test_images)) for i in range(len(store_test_loss))
-]
-x_test_error = range(1, len(store_test_loss) + 1)
-y_test_accuracy = [
-    store_training_accurate_pred[i] / float(len(training_images))
-    for i in range(len(store_training_accurate_pred))
-]
-x_test_accuracy = range(1, len(store_test_accurate_pred) + 1)
+test_metrics = {
+    "accuracy": np.asarray(store_test_accurate_pred) / len(test_images),
+    "error": np.asarray(store_test_loss) / len(test_images),
+}
 
 # Display the plots.
 fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(15, 5))
-axes[0].set_title("Training set error, accuracy")
-axes[0].plot(x_training_accuracy, y_training_accuracy, label="Training set accuracy")
-axes[0].plot(x_training_error, y_training_error, label="Training set error")
-axes[0].set_xlabel("Epochs")
-axes[1].set_title("Test set error, accuracy")
-axes[1].plot(x_test_accuracy, y_test_accuracy, label="Test set accuracy")
-axes[1].plot(x_test_error, y_test_error, label="Test set error")
-axes[1].set_xlabel("Epochs")
+for ax, metrics, title in zip(
+    axes, (training_metrics, test_metrics), ("Training set", "Test set")
+):
+    # Plot the metrics
+    for metric, values in metrics.items():
+        ax.plot(epoch_range, values, label=metric.capitalize())
+    ax.set_title(title)
+    ax.set_xlabel("Epochs")
+    ax.legend()
 plt.show()
 ```
 
