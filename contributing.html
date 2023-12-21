@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Contributing &#8212; NumPy Tutorials</title>
   
@@ -19,36 +18,34 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'contributing';</script>
-    <link rel="shortcut icon" href="_static/favicon.png"/>
+    <link rel="icon" href="_static/favicon.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Pairing Jupyter notebooks and MyST-NB" href="content/pairing.html" />
@@ -66,6 +63,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -119,9 +125,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="index.html">
+  
   
   
   
@@ -131,8 +139,8 @@
       
     
     
-    <img src="_static/numpylogo.svg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/numpylogo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/numpylogo.svg" class="logo__image only-light" alt="NumPy Tutorials - Home"/>
+    <script>document.write(`<img src="_static/numpylogo.svg" class="logo__image only-dark" alt="NumPy Tutorials - Home"/>`);</script>
   
   
 </a></div>
@@ -147,11 +155,22 @@
           
           
           
-          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
+          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="features.html">NumPy Features</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -351,20 +370,22 @@
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -413,7 +434,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="contributing">
-<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this heading">#</a></h1>
+<h1>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">#</a></h1>
 <p>We very much welcome contributions! If you have an idea or proposal for a new
 tutorial, please <a class="reference external" href="https://github.com/numpy/numpy-tutorials/issues">open an issue</a>
 with an outline.</p>
@@ -432,7 +453,7 @@ to produce static websites and can be opened as notebooks in Jupyter using
 cells. Jupyter only renders CommonMark.</p>
 </div></blockquote>
 <section id="why-jupyter-notebooks">
-<h2>Why Jupyter Notebooks?<a class="headerlink" href="#why-jupyter-notebooks" title="Permalink to this heading">#</a></h2>
+<h2>Why Jupyter Notebooks?<a class="headerlink" href="#why-jupyter-notebooks" title="Link to this heading">#</a></h2>
 <p>The choice of Jupyter Notebook in this repo instead of the usual format
 (<a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html">reStructuredText</a>)
 used in the main NumPy documentation has two reasons:</p>
@@ -445,22 +466,22 @@ with tutorials</p></li>
 interested in contributing tutorial material.</p></li>
 </ul>
 <section id="note">
-<h3>Note<a class="headerlink" href="#note" title="Permalink to this heading">#</a></h3>
+<h3>Note<a class="headerlink" href="#note" title="Link to this heading">#</a></h3>
 <p>You may notice our content is in markdown format (<code class="docutils literal notranslate"><span class="pre">.md</span></code> files). We review and
 host notebooks in the <a class="reference external" href="https://myst-nb.readthedocs.io/">MyST-NB</a> format. We
 accept both Jupyter notebooks (<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>) and MyST-NB notebooks (<code class="docutils literal notranslate"><span class="pre">.md</span></code>).
-If you want to sync your <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> to your <code class="docutils literal notranslate"><span class="pre">.md</span></code> file follow the <a class="reference internal" href="content/pairing.html"><span class="doc std std-doc">pairing
+If you want to sync your <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> to your <code class="docutils literal notranslate"><span class="pre">.md</span></code> file follow the <a class="reference internal" href="content/pairing.html"><span class="std std-doc">pairing
 tutorial</span></a>.</p>
 <div class="toctree-wrapper compound">
 </div>
 </section>
 </section>
 <section id="adding-your-own-tutorials">
-<h2>Adding your own tutorials<a class="headerlink" href="#adding-your-own-tutorials" title="Permalink to this heading">#</a></h2>
+<h2>Adding your own tutorials<a class="headerlink" href="#adding-your-own-tutorials" title="Link to this heading">#</a></h2>
 <p>If you have your own tutorial in the form of a Jupyter notebook (an <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>
 file) and you’d like to try add it out to the repository, follow the steps below.</p>
 <section id="create-an-issue">
-<h3>Create an issue<a class="headerlink" href="#create-an-issue" title="Permalink to this heading">#</a></h3>
+<h3>Create an issue<a class="headerlink" href="#create-an-issue" title="Link to this heading">#</a></h3>
 <p>Go to <a class="github reference external" href="https://github.com/numpy/numpy-tutorials/issues">numpy/numpy-tutorials#issues</a> and create a new issue
 with your proposal.
 Give as much detail as you can about what kind of content you would like to
@@ -468,7 +489,7 @@ write (tutorial, how-to) and what you plan to cover.
 We will try to respond as quickly as possible with comments, if applicable.</p>
 </section>
 <section id="check-out-our-suggested-template">
-<h3>Check out our suggested template<a class="headerlink" href="#check-out-our-suggested-template" title="Permalink to this heading">#</a></h3>
+<h3>Check out our suggested template<a class="headerlink" href="#check-out-our-suggested-template" title="Link to this heading">#</a></h3>
 <p>You can use this template to make your content consistent with our existing
 tutorials:</p>
 <div class="toctree-wrapper compound">
@@ -478,7 +499,7 @@ tutorials:</p>
 </div>
 </section>
 <section id="upload-your-content">
-<h3>Upload your content<a class="headerlink" href="#upload-your-content" title="Permalink to this heading">#</a></h3>
+<h3>Upload your content<a class="headerlink" href="#upload-your-content" title="Link to this heading">#</a></h3>
 <p>Remember to clear all outputs on your notebook before uploading it.</p>
 <ul>
 <details>
@@ -527,11 +548,10 @@ tutorials:</p>
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="content/tutorial-air-quality-analysis.html"
@@ -551,10 +571,7 @@ tutorials:</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -600,6 +617,7 @@ By the NumPy community
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2020-2023, the NumPy community.
@@ -626,8 +644,8 @@ By the NumPy community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

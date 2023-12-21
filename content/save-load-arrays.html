@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Saving and sharing your NumPy arrays &#8212; NumPy Tutorials</title>
   
@@ -19,36 +18,34 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/save-load-arrays';</script>
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Masked Arrays" href="tutorial-ma.html" />
@@ -66,6 +63,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -119,9 +125,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -131,8 +139,8 @@
       
     
     
-    <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="NumPy Tutorials - Home"/>
+    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="NumPy Tutorials - Home"/>`);</script>
   
   
 </a></div>
@@ -147,11 +155,22 @@
           
           
           
-          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
+          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../features.html">NumPy Features</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
@@ -399,20 +418,22 @@
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -465,15 +486,15 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="saving-and-sharing-your-numpy-arrays">
-<h1>Saving and sharing your NumPy arrays<a class="headerlink" href="#saving-and-sharing-your-numpy-arrays" title="Permalink to this heading">#</a></h1>
+<h1>Saving and sharing your NumPy arrays<a class="headerlink" href="#saving-and-sharing-your-numpy-arrays" title="Link to this heading">#</a></h1>
 <section id="what-you-ll-learn">
-<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Link to this heading">#</a></h2>
 <p>You’ll save your NumPy arrays as zipped files and human-readable
 comma-delimited files i.e. *.csv. You will also learn to load both of these
 file types back into NumPy workspaces.</p>
 </section>
 <section id="what-you-ll-do">
-<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Link to this heading">#</a></h2>
 <p>You’ll learn two ways of saving and reading files–as compressed and as
 text files–that will serve most of your storage needs in NumPy.</p>
 <ul class="simple">
@@ -486,7 +507,7 @@ text files–that will serve most of your storage needs in NumPy.</p>
 </ul>
 </section>
 <section id="what-you-ll-need">
-<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>NumPy</p></li>
 <li><p>read-write access to your working directory</p></li>
@@ -514,7 +535,7 @@ text files–that will serve most of your storage needs in NumPy.</p>
 </section>
 <hr class="docutils" />
 <section id="create-your-arrays">
-<h2>Create your arrays<a class="headerlink" href="#create-your-arrays" title="Permalink to this heading">#</a></h2>
+<h2>Create your arrays<a class="headerlink" href="#create-your-arrays" title="Link to this heading">#</a></h2>
 <p>Now that you have imported the NumPy library, you can make a couple of
 arrays; let’s start with two 1D arrays, <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>, where <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">x**2</span></code>.You
 will assign <code class="docutils literal notranslate"><span class="pre">x</span></code> to the integers from 0 to 9 using
@@ -537,7 +558,7 @@ will assign <code class="docutils literal notranslate"><span class="pre">x</span
 </div>
 </section>
 <section id="save-your-arrays-with-numpy-s-savez">
-<h2>Save your arrays with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savez.html?highlight=savez#numpy.savez"><code class="docutils literal notranslate"><span class="pre">savez</span></code></a><a class="headerlink" href="#save-your-arrays-with-numpy-s-savez" title="Permalink to this heading">#</a></h2>
+<h2>Save your arrays with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savez.html?highlight=savez#numpy.savez"><code class="docutils literal notranslate"><span class="pre">savez</span></code></a><a class="headerlink" href="#save-your-arrays-with-numpy-s-savez" title="Link to this heading">#</a></h2>
 <p>Now you have two arrays in your workspace,</p>
 <p><code class="docutils literal notranslate"><span class="pre">x:</span> <span class="pre">[0</span> <span class="pre">1</span> <span class="pre">2</span> <span class="pre">3</span> <span class="pre">4</span> <span class="pre">5</span> <span class="pre">6</span> <span class="pre">7</span> <span class="pre">8</span> <span class="pre">9]</span></code></p>
 <p><code class="docutils literal notranslate"><span class="pre">y:</span> <span class="pre">[</span> <span class="pre">0</span>&#160; <span class="pre">1</span>&#160; <span class="pre">4</span>&#160; <span class="pre">9</span> <span class="pre">16</span> <span class="pre">25</span> <span class="pre">36</span> <span class="pre">49</span> <span class="pre">64</span> <span class="pre">81]</span></code></p>
@@ -558,7 +579,7 @@ You will use two options to label the arrays in the file,</p>
 </div>
 </section>
 <section id="remove-the-saved-arrays-and-load-them-back-with-numpy-s-load">
-<h2>Remove the saved arrays and load them back with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.load.html#numpy.load"><code class="docutils literal notranslate"><span class="pre">load</span></code></a><a class="headerlink" href="#remove-the-saved-arrays-and-load-them-back-with-numpy-s-load" title="Permalink to this heading">#</a></h2>
+<h2>Remove the saved arrays and load them back with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.load.html#numpy.load"><code class="docutils literal notranslate"><span class="pre">load</span></code></a><a class="headerlink" href="#remove-the-saved-arrays-and-load-them-back-with-numpy-s-load" title="Link to this heading">#</a></h2>
 <p>In your current working directory, you should have a new file with the
 name <code class="docutils literal notranslate"><span class="pre">x_y-squared.npz</span></code>. This file is a zipped binary of the two arrays,
 <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>. Let’s clear the workspace and load the values back in. This
@@ -626,7 +647,7 @@ np         module     &lt;module &#39;numpy&#39; from &#39;/ho&lt;...&gt;kages/n
 </div>
 </section>
 <section id="reassign-the-npzfile-arrays-to-x-and-y">
-<h2>Reassign the NpzFile arrays to <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code><a class="headerlink" href="#reassign-the-npzfile-arrays-to-x-and-y" title="Permalink to this heading">#</a></h2>
+<h2>Reassign the NpzFile arrays to <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code><a class="headerlink" href="#reassign-the-npzfile-arrays-to-x-and-y" title="Link to this heading">#</a></h2>
 <p>You’ve now created the dictionary with an <code class="docutils literal notranslate"><span class="pre">NpzFile</span></code>-type. The
 included files are <code class="docutils literal notranslate"><span class="pre">x_axis</span></code> and <code class="docutils literal notranslate"><span class="pre">y_axis</span></code> that you defined in your
 <code class="docutils literal notranslate"><span class="pre">savez</span></code> command. You can reassign <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> to the <code class="docutils literal notranslate"><span class="pre">load_xy</span></code> files.</p>
@@ -648,11 +669,11 @@ included files are <code class="docutils literal notranslate"><span class="pre">
 </div>
 </section>
 <section id="success">
-<h2>Success<a class="headerlink" href="#success" title="Permalink to this heading">#</a></h2>
+<h2>Success<a class="headerlink" href="#success" title="Link to this heading">#</a></h2>
 <p>You have created, saved, deleted, and loaded the variables <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> using <code class="docutils literal notranslate"><span class="pre">savez</span></code> and <code class="docutils literal notranslate"><span class="pre">load</span></code>. Nice work.</p>
 </section>
 <section id="another-option-saving-to-human-readable-csv">
-<h2>Another option: saving to human-readable csv<a class="headerlink" href="#another-option-saving-to-human-readable-csv" title="Permalink to this heading">#</a></h2>
+<h2>Another option: saving to human-readable csv<a class="headerlink" href="#another-option-saving-to-human-readable-csv" title="Link to this heading">#</a></h2>
 <p>Let’s consider another scenario, you want to share <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> with
 other people or other programs. You may need human-readable text file
 that is easier to share. Next, you use the
@@ -662,7 +683,7 @@ The resulting csv is composed of ASCII characters. You can load the file
 back into NumPy or read it with other programs.</p>
 </section>
 <section id="rearrange-the-data-into-a-single-2d-array">
-<h2>Rearrange the data into a single 2D array<a class="headerlink" href="#rearrange-the-data-into-a-single-2d-array" title="Permalink to this heading">#</a></h2>
+<h2>Rearrange the data into a single 2D array<a class="headerlink" href="#rearrange-the-data-into-a-single-2d-array" title="Link to this heading">#</a></h2>
 <p>First, you have to create a single 2D array from your two 1D arrays. The
 csv-filetype is a spreadsheet-style dataset. The csv arranges numbers in
 rows–separated by new lines–and columns–separated by commas. If the
@@ -699,7 +720,7 @@ two NumPy functions to format the data:</p>
 </div>
 </section>
 <section id="save-the-data-to-csv-file-using-savetxt">
-<h2>Save the data to csv file using <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html#numpy.savetxt"><code class="docutils literal notranslate"><span class="pre">savetxt</span></code></a><a class="headerlink" href="#save-the-data-to-csv-file-using-savetxt" title="Permalink to this heading">#</a></h2>
+<h2>Save the data to csv file using <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html#numpy.savetxt"><code class="docutils literal notranslate"><span class="pre">savetxt</span></code></a><a class="headerlink" href="#save-the-data-to-csv-file-using-savetxt" title="Link to this heading">#</a></h2>
 <p>You use <code class="docutils literal notranslate"><span class="pre">savetxt</span></code> with a three options to make your file easier to read:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">X</span> <span class="pre">=</span> <span class="pre">array_out</span></code>: this option tells <code class="docutils literal notranslate"><span class="pre">savetxt</span></code> to save your 2D array, <code class="docutils literal notranslate"><span class="pre">array_out</span></code>, to the file <code class="docutils literal notranslate"><span class="pre">x_y-squared.csv</span></code></p></li>
@@ -729,7 +750,7 @@ two NumPy functions to format the data:</p>
 </div>
 </section>
 <section id="our-arrays-as-a-csv-file">
-<h2>Our arrays as a csv file<a class="headerlink" href="#our-arrays-as-a-csv-file" title="Permalink to this heading">#</a></h2>
+<h2>Our arrays as a csv file<a class="headerlink" href="#our-arrays-as-a-csv-file" title="Link to this heading">#</a></h2>
 <p>There are two features that you shoud notice here:</p>
 <ol class="arabic simple">
 <li><p>NumPy uses <code class="docutils literal notranslate"><span class="pre">#</span></code> to ignore headings when using <code class="docutils literal notranslate"><span class="pre">loadtxt</span></code>. If you’re using
@@ -785,12 +806,12 @@ preserve the type of ASCII numbers as <code class="docutils literal notranslate"
 </div>
 </section>
 <section id="success-but-remember-your-types">
-<h2>Success, but remember your types<a class="headerlink" href="#success-but-remember-your-types" title="Permalink to this heading">#</a></h2>
+<h2>Success, but remember your types<a class="headerlink" href="#success-but-remember-your-types" title="Link to this heading">#</a></h2>
 <p>When you saved the arrays to the csv file, you did not preserve the
 <code class="docutils literal notranslate"><span class="pre">int</span></code> type. When loading the arrays back into your workspace the default process will be to load the csv file as a 2D floating point array e.g. <code class="docutils literal notranslate"><span class="pre">load_xy.dtype</span> <span class="pre">==</span> <span class="pre">'float64'</span></code> and <code class="docutils literal notranslate"><span class="pre">load_xy.shape</span> <span class="pre">==</span> <span class="pre">(10,</span> <span class="pre">2)</span></code>.</p>
 </section>
 <section id="wrapping-up">
-<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this heading">#</a></h2>
+<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Link to this heading">#</a></h2>
 <p>In conclusion, you can create, save, and load arrays in NumPy. Saving arrays makes sharing your work and collaboration much easier. There are other ways Python can save data to files, such as <a class="reference external" href="https://docs.python.org/3/library/pickle.html">pickle</a>, but <code class="docutils literal notranslate"><span class="pre">savez</span></code> and <code class="docutils literal notranslate"><span class="pre">savetxt</span></code> will serve most of your storage needs for future NumPy work and sharing with other people, respectively.</p>
 <p><strong>Next steps</strong>: you can import data with missing values from <a class="reference external" href="https://numpy.org/devdocs/user/basics.io.genfromtxt.html">Importing with genfromtext</a> or learn more about general NumPy IO with <a class="reference external" href="https://numpy.org/devdocs/user/how-to-io.html">Reading and Writing Files</a>.</p>
 </section>
@@ -802,11 +823,10 @@ preserve the type of ASCII numbers as <code class="docutils literal notranslate"
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="tutorial-svd.html"
@@ -826,10 +846,7 @@ preserve the type of ASCII numbers as <code class="docutils literal notranslate"
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -879,6 +896,7 @@ By the NumPy community
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2020-2023, the NumPy community.
@@ -905,8 +923,8 @@ By the NumPy community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

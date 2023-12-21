@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Sentiment Analysis on notable speeches of the last decade &#8212; NumPy Tutorials</title>
   
@@ -19,38 +18,36 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/tutorial-nlp-from-scratch';</script>
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="Deep reinforcement learning with Pong from pixels" href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html" />
@@ -67,6 +64,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -120,9 +126,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -132,8 +140,8 @@
       
     
     
-    <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="NumPy Tutorials - Home"/>
+    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="NumPy Tutorials - Home"/>`);</script>
   
   
 </a></div>
@@ -148,11 +156,22 @@
           
           
           
-          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
+          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../features.html">NumPy Features</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -352,20 +371,22 @@
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -425,7 +446,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="sentiment-analysis-on-notable-speeches-of-the-last-decade">
-<h1>Sentiment Analysis on notable speeches of the last decade<a class="headerlink" href="#sentiment-analysis-on-notable-speeches-of-the-last-decade" title="Permalink to this heading">#</a></h1>
+<h1>Sentiment Analysis on notable speeches of the last decade<a class="headerlink" href="#sentiment-analysis-on-notable-speeches-of-the-last-decade" title="Link to this heading">#</a></h1>
 <div class="admonition caution">
 <p class="admonition-title">Caution</p>
 <p>This article is not currently tested. Help improve this tutorial by making it
@@ -435,7 +456,7 @@ fully executable!</p>
 <p>Your deep learning model (the LSTM) is a form of a Recurrent Neural Network and will learn to classify a piece of text as positive or negative from the IMDB reviews dataset. The dataset contains 50,000 movie reviews and corresponding labels. Based on the numeric representations of these reviews and their corresponding labels <a href = 'https://en.wikipedia.org/wiki/Supervised_learning'> (supervised learning) </a> the neural network will be trained to learn the sentiment using forward propagation and backpropagation through time since we are dealing with sequential data here. The output will be a vector containing the probabilities that the text samples are positive.</p>
 <p>Today, Deep Learning is getting adopted in everyday life and now it is more important to ensure that decisions that have been taken using AI are not reflecting discriminatory behavior towards a set of populations. It is important to take fairness into consideration while consuming the output from AI. Throughout the tutorial we’ll try to question all the steps in our pipeline from an ethics point of view.</p>
 <section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
 <p>You are expected to be familiar with the Python programming language and array manipulation with NumPy. In addition, some understanding of Linear Algebra and Calculus is recommended. You should also be familiar with how Neural Networks work. For reference, you can visit the <a class="reference external" href="https://docs.python.org/dev/tutorial/index.html">Python</a>, <a class="reference external" href="https://numpy.org/doc/stable/user/tutorial-svd.html">Linear algebra on n-dimensional arrays</a> and <a class="reference external" href="https://d2l.ai/chapter_appendix-mathematics-for-deep-learning/multivariable-calculus.html">Calculus</a> tutorials.</p>
 <p>To get a refresher on Deep Learning basics, You should consider reading <a class="reference external" href="https://d2l.ai/chapter_recurrent-neural-networks/index.html">the d2l.ai book</a>, which is an interactive deep learning book with multi-framework code, math, and discussions. You can also go through the <a class="reference external" href="https://numpy.org/numpy-tutorials/content/tutorial-deep-learning-on-mnist.html">Deep learning on MNIST from scratch tutorial</a> to understand how a basic neural network is implemented from scratch.</p>
 <p>In addition to NumPy, you will be utilizing the following Python standard modules for data loading and processing:</p>
@@ -447,7 +468,7 @@ fully executable!</p>
 <p>This tutorial can be run locally in an isolated environment, such as <a class="reference external" href="https://virtualenv.pypa.io/en/stable/">Virtualenv</a> or <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">conda</a>. You can use <a class="reference external" href="https://jupyter.org/install">Jupyter Notebook or JupyterLab</a> to run each notebook cell.</p>
 </section>
 <section id="table-of-contents">
-<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">#</a></h2>
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Data Collection</p></li>
 <li><p>Preprocess the datasets</p></li>
@@ -457,7 +478,7 @@ fully executable!</p>
 </ol>
 </section>
 <section id="data-collection">
-<h2>1. Data Collection<a class="headerlink" href="#data-collection" title="Permalink to this heading">#</a></h2>
+<h2>1. Data Collection<a class="headerlink" href="#data-collection" title="Link to this heading">#</a></h2>
 <p>Before you begin there are a few pointers you should always keep in mind before choosing the data you wish to train your model on:</p>
 <ul class="simple">
 <li><p><strong>Identifying Data Bias</strong> - Bias is an inherent component of the human thought process. Therefore data sourced from human activities reflects that bias. Some ways in which this bias tends to occur in Machine Learning datasets are:</p>
@@ -487,14 +508,14 @@ Data can also be severely imbalanced with limited information on protected group
 </div></blockquote>
 <p>In this section, you will be collecting two different datasets: the IMDb movie reviews dataset, and a collection of 10 speeches curated for this tutorial including activists from different countries around the world, different times, and different topics. The former would be used to train the deep learning model while the latter will be used to perform sentiment analysis on.</p>
 <section id="collecting-the-imdb-reviews-dataset">
-<h3>Collecting the IMDb reviews dataset<a class="headerlink" href="#collecting-the-imdb-reviews-dataset" title="Permalink to this heading">#</a></h3>
+<h3>Collecting the IMDb reviews dataset<a class="headerlink" href="#collecting-the-imdb-reviews-dataset" title="Link to this heading">#</a></h3>
 <p>IMDb Reviews Dataset is a large movie review dataset collected and prepared by Andrew L. Maas from the popular movie rating service, IMDb. The IMDb Reviews dataset is used for binary sentiment classification, whether a review is positive or negative. It contains 25,000 movie reviews for training and 25,000 for testing. All these 50,000 reviews are labeled data that may be used for supervised deep learning. For ease of reproducibility, we’ll be sourcing  the data from <a class="reference external" href="https://zenodo.org/record/4117827#.YVQZ_EZBy3Ihttps://zenodo.org/record/4117827#.YVQZ_EZBy3I">Zenodo</a>.</p>
 <blockquote>
 <div><p>The IMDb platform allows the usage of their public datasets for personal and non-commercial use. We did our best to ensure that these reviews do not contain any of the aforementioned sensitive topics pertaining to the reviewer.</p>
 </div></blockquote>
 </section>
 <section id="collecting-and-loading-the-speech-transcripts">
-<h3>Collecting and loading the speech transcripts<a class="headerlink" href="#collecting-and-loading-the-speech-transcripts" title="Permalink to this heading">#</a></h3>
+<h3>Collecting and loading the speech transcripts<a class="headerlink" href="#collecting-and-loading-the-speech-transcripts" title="Link to this heading">#</a></h3>
 <p>We have chosen speeches by activists around the globe talking about issues like climate change, feminism, lgbtqa+ rights and racism. These were sourced from newspapers, the official website of the United Nations and the archives of established universities as cited in the table below. A CSV file was created containing the transcribed speeches, their speaker and the source the speeches were obtained from.
 We made sure to include different demographics in our data and included a range of different topics, most of which focus on social and/or ethical issues.</p>
 <table class="table">
@@ -543,7 +564,7 @@ We made sure to include different demographics in our data and included a range 
 </section>
 </section>
 <section id="preprocess-the-datasets">
-<h2>2. Preprocess the datasets<a class="headerlink" href="#preprocess-the-datasets" title="Permalink to this heading">#</a></h2>
+<h2>2. Preprocess the datasets<a class="headerlink" href="#preprocess-the-datasets" title="Link to this heading">#</a></h2>
 <blockquote>
 <div><p>Preprocessing data is an extremely crucial step before building any Deep learning model, however in an attempt to keep the tutorial focused on building the model, we will not dive deep into the code for preprocessing. Given below is a brief overview of all the steps we undertake to clean our data and convert it to its numeric representation.</p>
 </div></blockquote>
@@ -871,17 +892,17 @@ We made sure to include different demographics in our data and included a range 
 </div>
 </section>
 <section id="build-the-deep-learning-model">
-<h2>3. Build the Deep Learning Model¶<a class="headerlink" href="#build-the-deep-learning-model" title="Permalink to this heading">#</a></h2>
+<h2>3. Build the Deep Learning Model¶<a class="headerlink" href="#build-the-deep-learning-model" title="Link to this heading">#</a></h2>
 <p>It is time to start implementing our LSTM! You will have to first familiarize yourself with some high-level concepts of the basic building blocks of a deep learning model. You can refer to the <a class="reference external" href="https://numpy.org/numpy-tutorials/content/tutorial-deep-learning-on-mnist.html">Deep learning on MNIST from scratch tutorial</a> for the same.</p>
 <p>You will then learn how a Recurrent Neural Network differs from a plain Neural Network and what makes it so suitable for processing sequential data. Afterwards, you will construct the building blocks of a simple deep learning model in Python and NumPy and train it to learn to classify the sentiment of a piece of text as positive or negative with a certain level of accuracy</p>
 <section id="introduction-to-a-long-short-term-memory-network">
-<h3>Introduction to a Long Short Term Memory Network<a class="headerlink" href="#introduction-to-a-long-short-term-memory-network" title="Permalink to this heading">#</a></h3>
+<h3>Introduction to a Long Short Term Memory Network<a class="headerlink" href="#introduction-to-a-long-short-term-memory-network" title="Link to this heading">#</a></h3>
 <p>In a <a class="reference external" href="https://en.wikipedia.org/wiki/Multilayer_perceptron">Multilayer perceptron</a> (MLP), the information only moves in one direction — from the input layer, through the hidden layers, to the output layer. The information moves straight through the network and never takes the previous nodes into account at a later stage. Because it only considers the current input, the features learned are not shared across different positions of the sequence. Moreover, it cannot process sequences with varying lengths.</p>
 <p>Unlike an MLP, the RNN was designed to work with sequence prediction problems.RNNs introduce state variables to store past information, together with the current inputs, to determine the current outputs. Since an RNN shares the learned features with all the data points in a sequence regardless of its length, it is capable of processing sequences with varying lengths.</p>
 <p>The problem with an RNN however, is that it cannot retain long-term memory because the influence of a given input on the hidden layer, and therefore on the network output, either decays or blows up exponentially as it cycles around the network’s recurrent connections. This shortcoming is referred to as the vanishing gradient problem. Long Short-Term Memory (LSTM) is an RNN architecture specifically designed to address the <a class="reference external" href="https://en.wikipedia.org/wiki/Vanishing_gradient_problem">vanishing gradient problem</a>.</p>
 </section>
 <section id="overview-of-the-model-architecture">
-<h3>Overview of the Model Architecture<a class="headerlink" href="#overview-of-the-model-architecture" title="Permalink to this heading">#</a></h3>
+<h3>Overview of the Model Architecture<a class="headerlink" href="#overview-of-the-model-architecture" title="Link to this heading">#</a></h3>
 <p><img alt="Overview of the model architecture, showing a series of animated boxes. There are five identical boxes labeled A and receiving as input one of the words in the phrase &quot;life's a box of chocolates&quot;. Each box is highlighted in turn, representing the memory blocks of the LSTM network as information passes through them, ultimately reaching a &quot;Positive&quot; output value." src="../_images/lstm.gif" /></p>
 <p>In the above gif, the rectangles labeled <span class="math notranslate nohighlight">\(A\)</span> are called <code class="docutils literal notranslate"><span class="pre">Cells</span></code> and they are the <strong>Memory Blocks</strong> of our LSTM network. They are responsible for choosing what to remember in a sequence and pass on that information to the next cell via two states called the <code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">state</span></code> <span class="math notranslate nohighlight">\(H_{t}\)</span> and the <code class="docutils literal notranslate"><span class="pre">cell</span> <span class="pre">state</span></code> <span class="math notranslate nohighlight">\(C_{t}\)</span> where <span class="math notranslate nohighlight">\(t\)</span> indicates the time-step. Each <code class="docutils literal notranslate"><span class="pre">Cell</span></code> has dedicated gates which are responsible for storing, writing or reading the information passed to an LSTM. You will now look closely at the architecture of the network by implementing each mechanism happening inside of it.</p>
 <p>Lets start with writing a function to randomly initialize the parameters which will be learned while our model trains</p>
@@ -920,7 +941,7 @@ We made sure to include different demographics in our data and included a range 
 </div>
 </section>
 <section id="forward-propagation">
-<h3>Forward Propagation<a class="headerlink" href="#forward-propagation" title="Permalink to this heading">#</a></h3>
+<h3>Forward Propagation<a class="headerlink" href="#forward-propagation" title="Link to this heading">#</a></h3>
 <p>Now that you have your initialized parameters, you can pass the input data in a forward direction through the network. Each layer accepts the input data, processes it and passes it to the successive layer. This process is called <code class="docutils literal notranslate"><span class="pre">Forward</span> <span class="pre">Propagation</span></code>. You will undertake the following mechanism to implement it:</p>
 <ul class="simple">
 <li><p>Loading the word embeddings of the input data</p></li>
@@ -967,7 +988,7 @@ We made sure to include different demographics in our data and included a range 
 <p><img alt="Diagram showing three sections of a memory block, labeled &quot;Forget gate&quot;, &quot;Input gate&quot; and &quot;Output gate&quot;. Each gate contains several subparts, representing the operations performed at that stage of the process." src="../_images/mem_block.png" /></p>
 </section>
 <section id="but-how-do-you-obtain-sentiment-from-the-lstm-s-output">
-<h3>But how do you obtain sentiment from the LSTM’s output?<a class="headerlink" href="#but-how-do-you-obtain-sentiment-from-the-lstm-s-output" title="Permalink to this heading">#</a></h3>
+<h3>But how do you obtain sentiment from the LSTM’s output?<a class="headerlink" href="#but-how-do-you-obtain-sentiment-from-the-lstm-s-output" title="Link to this heading">#</a></h3>
 <p>The hidden state you obtain from the output gate of the last memory block in a sequence is considered to be a representation of all the information contained in a sequence. To classify this information into various classes (2 in our case, positive and negative) we use a <strong>Fully Connected layer</strong> which firstly maps this information to a predefined output size (1 in our case). Then, an activation function such as the sigmoid converts this output to a value between 0 and 1. We’ll consider values greater than 0.5 to be indicative of a positive sentiment.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fp_fc_layer</span><span class="p">(</span><span class="n">last_hs</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
     <span class="n">z2</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;W2&#39;</span><span class="p">],</span> <span class="n">last_hs</span><span class="p">)</span>
@@ -1048,7 +1069,7 @@ We made sure to include different demographics in our data and included a range 
 </div>
 </section>
 <section id="backpropagation">
-<h3>Backpropagation<a class="headerlink" href="#backpropagation" title="Permalink to this heading">#</a></h3>
+<h3>Backpropagation<a class="headerlink" href="#backpropagation" title="Link to this heading">#</a></h3>
 <p>After each forward pass through the network, you will implement the <code class="docutils literal notranslate"><span class="pre">backpropagation</span> <span class="pre">through</span> <span class="pre">time</span></code> algorithm to accumulate gradients of each parameter over the time steps. Backpropagation through a LSTM is not as straightforward as through other common Deep Learning architectures, due to the special way its underlying layers interact. Nonetheless, the approach is largely the same; identifying dependencies and applying the chain rule.</p>
 <p>Lets start with defining a function to initialize gradients of each parameter as arrays made up of zeros with same dimensions as the corresponding parameter</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise the gradients</span>
@@ -1172,7 +1193,7 @@ We made sure to include different demographics in our data and included a range 
 </div>
 </section>
 <section id="updating-the-parameters">
-<h3>Updating the Parameters<a class="headerlink" href="#updating-the-parameters" title="Permalink to this heading">#</a></h3>
+<h3>Updating the Parameters<a class="headerlink" href="#updating-the-parameters" title="Link to this heading">#</a></h3>
 <p>We update the parameters through an optimization algorithm called <a class="reference external" href="https://optimization.cbe.cornell.edu/index.php?title=Adam">Adam</a> which is an extension to stochastic gradient descent that has recently seen broader adoption for deep learning applications in computer vision and natural language processing. Specifically, the algorithm calculates an exponential moving average of the gradient and the squared gradient, and the parameters <code class="docutils literal notranslate"><span class="pre">beta1</span></code> and <code class="docutils literal notranslate"><span class="pre">beta2</span></code> control the decay rates of these moving averages. Adam has shown increased convergence and robustness over other gradient descent algorithms and is often recommended as the default optimizer for training.</p>
 <p>Define a function to initialise the moving averages for each parameter</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialise the moving averages</span>
@@ -1209,7 +1230,7 @@ We made sure to include different demographics in our data and included a range 
 </div>
 </section>
 <section id="training-the-network">
-<h3>Training the Network<a class="headerlink" href="#training-the-network" title="Permalink to this heading">#</a></h3>
+<h3>Training the Network<a class="headerlink" href="#training-the-network" title="Link to this heading">#</a></h3>
 <p>You will start by initializing all the parameters and hyperparameters being used in your network</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hidden_dim</span> <span class="o">=</span> <span class="mi">64</span>
 <span class="n">input_dim</span> <span class="o">=</span> <span class="n">emb_matrix</span><span class="p">[</span><span class="s1">&#39;memory&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1335,7 +1356,7 @@ Define a function to calculate the loss using <a class="reference external" href
 </div>
 </section>
 <section id="sentiment-analysis-on-the-speech-data">
-<h3>Sentiment Analysis on the Speech Data<a class="headerlink" href="#sentiment-analysis-on-the-speech-data" title="Permalink to this heading">#</a></h3>
+<h3>Sentiment Analysis on the Speech Data<a class="headerlink" href="#sentiment-analysis-on-the-speech-data" title="Link to this heading">#</a></h3>
 <p>Once your model is trained, you can use the updated parameters to start making our predictions. You can break each speech into paragraphs of uniform size before passing them to the Deep Learning model and predicting the sentiment of each paragraph</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># To store predicted sentiments</span>
 <span class="n">predictions</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1404,7 +1425,7 @@ Define a function to calculate the loss using <a class="reference external" href
 </section>
 </section>
 <section id="looking-at-our-neural-network-from-an-ethical-perspective">
-<h2>Looking at our Neural Network from an ethical perspective<a class="headerlink" href="#looking-at-our-neural-network-from-an-ethical-perspective" title="Permalink to this heading">#</a></h2>
+<h2>Looking at our Neural Network from an ethical perspective<a class="headerlink" href="#looking-at-our-neural-network-from-an-ethical-perspective" title="Link to this heading">#</a></h2>
 <!-- #region -->
 <p>It’s crucial to understand that accurately identifying a text’s sentiment is not easy primarily because of the complex ways in which humans express sentiment, using irony, sarcasm, humor, or, in social media, abbreviation. Moreover neatly placing text into two categories: ‘positive’ and ‘negative’ can be problematic because it is being done without any context. Words or abbreviations can convey very different sentiments depending on age and location, none of which we took into account while building our model.</p>
 <p>Along with data, there are also growing concerns that data processing algorithms are influencing policy and daily lives in ways that are not transparent and introduce biases. Certain biases such as the <a class="reference external" href="https://bit.ly/2WtTKIe">Inductive Bias</a> are essential to help a Machine Learning model generalize better, for example the LSTM we built earlier is biased towards preserving contextual information over long sequences which makes it so suitable for processing sequential data. The problem arises when <a class="reference external" href="https://hbr.org/2019/10/what-do-we-do-about-the-biases-in-ai">societal biases</a> creep into algorithmic predictions. Optimizing Machine algorithms via methods like <a class="reference external" href="https://en.wikipedia.org/wiki/Hyperparameter_optimization">hyperparameter tuning</a> can then further amplify these biases by learning every bit of information in the data.</p>
@@ -1412,7 +1433,7 @@ Define a function to calculate the loss using <a class="reference external" href
 <!-- #endregion -->
 </section>
 <section id="next-steps">
-<h2>Next Steps<a class="headerlink" href="#next-steps" title="Permalink to this heading">#</a></h2>
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
 <p>You have learned how to build and train a simple Long Short Term Memory network from scratch using just NumPy to perform sentiment analysis.</p>
 <p>To further enhance and optimize your neural network model, you can consider one of a mixture of the following:</p>
 <ul class="simple">
@@ -1441,11 +1462,10 @@ Define a function to calculate the loss using <a class="reference external" href
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="tutorial-deep-reinforcement-learning-with-pong-from-pixels.html"
@@ -1456,10 +1476,7 @@ Define a function to calculate the loss using <a class="reference external" href
         <p class="prev-next-title">Deep reinforcement learning with Pong from pixels</p>
       </div>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1516,6 +1533,7 @@ By the NumPy community
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2020-2023, the NumPy community.
@@ -1542,8 +1560,8 @@ By the NumPy community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

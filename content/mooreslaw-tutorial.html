@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Determining Moore’s Law with real data in NumPy &#8212; NumPy Tutorials</title>
   
@@ -19,38 +18,36 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/mooreslaw-tutorial';</script>
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Deep learning on MNIST" href="tutorial-deep-learning-on-mnist.html" />
@@ -68,6 +65,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -121,9 +127,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -133,8 +141,8 @@
       
     
     
-    <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="NumPy Tutorials - Home"/>
+    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="NumPy Tutorials - Home"/>`);</script>
   
   
 </a></div>
@@ -149,11 +157,22 @@
           
           
           
-          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
+          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../features.html">NumPy Features</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -401,20 +420,22 @@
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -466,11 +487,11 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="determining-moore-s-law-with-real-data-in-numpy">
-<h1>Determining Moore’s Law with real data in NumPy<a class="headerlink" href="#determining-moore-s-law-with-real-data-in-numpy" title="Permalink to this heading">#</a></h1>
+<h1>Determining Moore’s Law with real data in NumPy<a class="headerlink" href="#determining-moore-s-law-with-real-data-in-numpy" title="Link to this heading">#</a></h1>
 <p><img alt="Scatter plot of MOS transistor count per microprocessor every two years as a demonstration of Moore's Law." src="../_images/01-mooreslaw-tutorial-intro.png" /></p>
 <p><em>The number of transistors reported per a given chip plotted on a log scale in the y axis with the date of introduction on the linear scale x-axis. The blue data points are from a <a class="reference external" href="https://en.wikipedia.org/wiki/Transistor_count#Microprocessors">transistor count table</a>. The red line is an ordinary least squares prediction and the orange line is Moore’s law.</em></p>
 <section id="what-you-ll-do">
-<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Link to this heading">#</a></h2>
 <p>In 1965, engineer Gordon Moore
 <a class="reference external" href="https://en.wikipedia.org/wiki/Moore%27s_law">predicted</a> that
 transistors on a chip would double every two years in the coming decade
@@ -480,7 +501,7 @@ You’ll compare Moore’s prediction against actual transistor counts in
 the 53 years following his prediction. You will determine the best-fit constants to describe the exponential growth of transistors on semiconductors compared to Moore’s Law.</p>
 </section>
 <section id="skills-you-ll-learn">
-<h2>Skills you’ll learn<a class="headerlink" href="#skills-you-ll-learn" title="Permalink to this heading">#</a></h2>
+<h2>Skills you’ll learn<a class="headerlink" href="#skills-you-ll-learn" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Load data from a <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">*.csv</a> file</p></li>
 <li><p>Perform linear regression and predict exponential growth using ordinary least squares</p></li>
@@ -495,25 +516,23 @@ the 53 years following his prediction. You will determine the best-fit constants
 </ul>
 </section>
 <section id="what-you-ll-need">
-<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Link to this heading">#</a></h2>
 <p><strong>1.</strong> These packages:</p>
 <ul class="simple">
 <li><p>NumPy</p></li>
 <li><p><a class="reference external" href="https://matplotlib.org/">Matplotlib</a></p></li>
-<li><p><a class="reference external" href="https://www.statsmodels.org">statsmodels</a> ordinary linear regression</p></li>
 </ul>
 <p>imported with the following commands</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p><strong>2.</strong> Since this is an exponential growth law you need a little background in doing math with <a class="reference external" href="https://en.wikipedia.org/wiki/Natural_logarithm">natural logs</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Exponential_function">exponentials</a>.</p>
-<p>You’ll use these NumPy, Matplotlib, and statsmodels functions:</p>
+<p>You’ll use these NumPy and Matplotlib functions:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html"><code class="docutils literal notranslate"><span class="pre">np.loadtxt</span></code></a>: this function loads text into a NumPy array</p></li>
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.log.html"><code class="docutils literal notranslate"><span class="pre">np.log</span></code></a>: this function takes the natural log of all elements in a NumPy array</p></li>
@@ -521,7 +540,6 @@ the 53 years following his prediction. You will determine the best-fit constants
 <li><p><a class="reference external" href="https://docs.python.org/3/library/ast.html?highlight=lambda#ast.Lambda"><code class="docutils literal notranslate"><span class="pre">lambda</span></code></a>: this is a minimal function definition for creating a function model</p></li>
 <li><p><a class="reference external" href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.semilogy.html"><code class="docutils literal notranslate"><span class="pre">plt.semilogy</span></code></a>: this function will plot x-y data onto a figure with a linear x-axis and <span class="math notranslate nohighlight">\(\log_{10}\)</span> y-axis
 <a class="reference external" href="https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.plot.html"><code class="docutils literal notranslate"><span class="pre">plt.plot</span></code></a>: this function will plot x-y data on linear axes</p></li>
-<li><p><a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html"><code class="docutils literal notranslate"><span class="pre">sm.OLS</span></code></a>: find fitting parameters and standard errors using the statsmodels ordinary least squares model</p></li>
 <li><p>slicing arrays: view parts of the data loaded into the workspace, slice the arrays e.g. <code class="docutils literal notranslate"><span class="pre">x[:10]</span></code> for the first 10 values in the array, <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
 <li><p>boolean array indexing: to view parts of the data that match a given condition use boolean operations to index an array</p></li>
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.block.html"><code class="docutils literal notranslate"><span class="pre">np.block</span></code></a>: to combine arrays into 2D arrays</p></li>
@@ -531,7 +549,7 @@ the 53 years following his prediction. You will determine the best-fit constants
 </section>
 <hr class="docutils" />
 <section id="building-moore-s-law-as-an-exponential-function">
-<h2>Building Moore’s law as an exponential function<a class="headerlink" href="#building-moore-s-law-as-an-exponential-function" title="Permalink to this heading">#</a></h2>
+<h2>Building Moore’s law as an exponential function<a class="headerlink" href="#building-moore-s-law-as-an-exponential-function" title="Link to this heading">#</a></h2>
 <p>Your empirical model assumes that the number of transistors per
 semiconductor follows an exponential growth,</p>
 <p><span class="math notranslate nohighlight">\(\log(\text{transistor_count})= f(\text{year}) = A\cdot \text{year}+B,\)</span></p>
@@ -584,7 +602,7 @@ This is x2.00 more transistors than 1971
 </div>
 </section>
 <section id="loading-historical-manufacturing-data-to-your-workspace">
-<h2>Loading historical manufacturing data to your workspace<a class="headerlink" href="#loading-historical-manufacturing-data-to-your-workspace" title="Permalink to this heading">#</a></h2>
+<h2>Loading historical manufacturing data to your workspace<a class="headerlink" href="#loading-historical-manufacturing-data-to-your-workspace" title="Link to this heading">#</a></h2>
 <p>Now, make a prediction based upon the historical data for
 semiconductors per chip. The <a class="reference external" href="https://en.wikipedia.org/wiki/Transistor_count#Microprocessors">Transistor Count
 [4]</a>
@@ -700,7 +718,7 @@ log-scale,</p>
 </div>
 </section>
 <section id="calculating-the-historical-growth-curve-for-transistors">
-<h2>Calculating the historical growth curve for transistors<a class="headerlink" href="#calculating-the-historical-growth-curve-for-transistors" title="Permalink to this heading">#</a></h2>
+<h2>Calculating the historical growth curve for transistors<a class="headerlink" href="#calculating-the-historical-growth-curve-for-transistors" title="Link to this heading">#</a></h2>
 <p>Your model assume that <code class="docutils literal notranslate"><span class="pre">yi</span></code> is a function of <code class="docutils literal notranslate"><span class="pre">year</span></code>. Now, find the best-fit model that minimizes the difference between <span class="math notranslate nohighlight">\(y_i\)</span> and <span class="math notranslate nohighlight">\(A\cdot \text{year} +B, \)</span> as such</p>
 <p><span class="math notranslate nohighlight">\(\min \sum|y_i - (A\cdot \text{year}_i + B)|^2.\)</span></p>
 <p>This <a class="reference external" href="https://en.wikipedia.org/wiki/Ordinary_least_squares">sum of squares
@@ -711,99 +729,37 @@ succinctly represented as arrays as such</p>
 transistors in a 1D array and <span class="math notranslate nohighlight">\(\mathbf{Z}=[\text{year}_i^1,~\text{year}_i^0]\)</span> are the
 polynomial terms for <span class="math notranslate nohighlight">\(\text{year}_i\)</span> in the first and second columns. By
 creating this set of regressors in the <span class="math notranslate nohighlight">\(\mathbf{Z}-\)</span>matrix you set
-up an ordinary least squares statistical model. Some clever
-NumPy array features will build <span class="math notranslate nohighlight">\(\mathbf{Z}\)</span></p>
-<ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">year[:,np.newaxis]</span></code> : takes the 1D array with shape <code class="docutils literal notranslate"><span class="pre">(179,)</span></code> and turns it into a 2D column vector with shape <code class="docutils literal notranslate"><span class="pre">(179,1)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">**[1,</span> <span class="pre">0]</span></code> : stacks two columns, in the first column is <code class="docutils literal notranslate"><span class="pre">year**1</span></code> and the second column is <code class="docutils literal notranslate"><span class="pre">year**0</span> <span class="pre">==</span> <span class="pre">1</span></code></p></li>
-</ol>
+up an ordinary least squares statistical model.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Z</span></code> is a linear model with two parameters, i.e. a polynomial with degree <code class="docutils literal notranslate"><span class="pre">1</span></code>.
+Therefore we can represent the model with <code class="docutils literal notranslate"><span class="pre">numpy.polynomial.Polynomial</span></code> and
+use the fitting functionality to determine the model parameters:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Z</span> <span class="o">=</span> <span class="n">year</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">**</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polynomial</span><span class="o">.</span><span class="n">Polynomial</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">yi</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now that you have the created a matrix of regressors, <span class="math notranslate nohighlight">\(\mathbf{Z},\)</span> and
-the observations are in vector, <span class="math notranslate nohighlight">\(\mathbf{y},\)</span> you can use these
-variables to build the an ordinary least squares model with
-<a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html"><code class="docutils literal notranslate"><span class="pre">sm.OLS</span></code></a>.</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">Polynomial.fit</span></code> performs the fit in the domain determined by the
+independent variable (<code class="docutils literal notranslate"><span class="pre">year</span></code> in this case).
+The coefficients for the unscaled and unshifted model can be recovered with the
+<code class="docutils literal notranslate"><span class="pre">convert</span></code> method:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">yi</span><span class="p">,</span> <span class="n">Z</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now, you can view the fitting constants, <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>, and their standard
-errors.  Run the
-<a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html"><code class="docutils literal notranslate"><span class="pre">fit</span></code></a> and print the
-<a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.summary.html"><code class="docutils literal notranslate"><span class="pre">summary</span></code></a> to view results as such,</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">convert</span><span class="p">()</span>
+<span class="n">model</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                      y   R-squared:                       0.949
-Model:                            OLS   Adj. R-squared:                  0.949
-Method:                 Least Squares   F-statistic:                     3309.
-Date:                Tue, 05 Sep 2023   Prob (F-statistic):          1.75e-116
-Time:                        19:07:19   Log-Likelihood:                -273.43
-No. Observations:                 179   AIC:                             550.9
-Df Residuals:                     177   BIC:                             557.2
-Df Model:                           1                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P&gt;|t|      [0.025      0.975]
-------------------------------------------------------------------------------
-x1             0.3416      0.006     57.521      0.000       0.330       0.353
-const       -666.3264     11.890    -56.042      0.000    -689.790    -642.862
-==============================================================================
-Omnibus:                      128.297   Durbin-Watson:                   1.600
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):             1184.322
-Skew:                          -2.637   Prob(JB):                    6.73e-258
-Kurtosis:                      14.444   Cond. No.                     2.84e+05
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-[2] The condition number is large, 2.84e+05. This might indicate that there are
-strong multicollinearity or other numerical problems.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
+<div class="output text_latex math notranslate nohighlight">
+\[x \mapsto \text{-666.32640635} + \text{0.34163208}\,x\]</div>
 </div>
 </div>
-</div>
-<p>The <strong>OLS Regression Results</strong> summary gives a lot of information about
-the regressors, <span class="math notranslate nohighlight">\(\mathbf{Z},\)</span> and observations, <span class="math notranslate nohighlight">\(\mathbf{y}.\)</span> The most
-important outputs for your current analysis are</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">=================================</span>
-                 <span class="n">coef</span>    <span class="n">std</span> <span class="n">err</span>
-<span class="o">---------------------------------</span>
-<span class="n">x1</span>             <span class="mf">0.3416</span>      <span class="mf">0.006</span>
-<span class="n">const</span>       <span class="o">-</span><span class="mf">666.3264</span>     <span class="mf">11.890</span>
-<span class="o">=================================</span>
-</pre></div>
-</div>
-<p>where <code class="docutils literal notranslate"><span class="pre">x1</span></code> is slope, <span class="math notranslate nohighlight">\(A=0.3416\)</span>, <code class="docutils literal notranslate"><span class="pre">const</span></code> is the intercept,
-<span class="math notranslate nohighlight">\(B=-666.364\)</span>, and <code class="docutils literal notranslate"><span class="pre">std</span> <span class="pre">error</span></code> gives the precision of constants
-<span class="math notranslate nohighlight">\(A=0.342\pm 0.006~\dfrac{\log(\text{transistors}/\text{chip})}{\text{years}}\)</span> and <span class="math notranslate nohighlight">\(B=-666\pm
-12~\log(\text{transistors}/\text{chip}),\)</span> where the units are in
-<span class="math notranslate nohighlight">\(\log(\text{transistors}/\text{chip})\)</span>. You created an exponential growth model.
-To get the constants, save them to an array <code class="docutils literal notranslate"><span class="pre">AB</span></code> with
-<code class="docutils literal notranslate"><span class="pre">results.params</span></code> and assign <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> to <code class="docutils literal notranslate"><span class="pre">x1</span></code> and <code class="docutils literal notranslate"><span class="pre">constant</span></code>.</p>
+<p>The individual parameters <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are the coefficients of our linear model:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">AB</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">params</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">AB</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">B</span> <span class="o">=</span> <span class="n">AB</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="n">model</span>
 </pre></div>
 </div>
 </div>
@@ -813,31 +769,21 @@ the final formula,</p>
 <p><span class="math notranslate nohighlight">\(\dfrac{\text{transistor_count}(\text{year} +2)}{\text{transistor_count}(\text{year})} = xFactor =
 \dfrac{e^{B}e^{A( \text{year} + 2)}}{e^{B}e^{A \text{year}}} = e^{2A}\)</span></p>
 <p>where increase in number of transistors is <span class="math notranslate nohighlight">\(xFactor,\)</span> number of years is
-2, and <span class="math notranslate nohighlight">\(A\)</span> is the best fit slope on the semilog function. The error in
-your
-prediction, <span class="math notranslate nohighlight">\(\Delta(xFactor),\)</span> comes from the precision of your constant
-<span class="math notranslate nohighlight">\(A,\)</span> which you calculated as the standard error <span class="math notranslate nohighlight">\(\Delta A= 0.006\)</span>.</p>
-<p><span class="math notranslate nohighlight">\(\Delta (xFactor) = \frac{\partial}{\partial A}(e^{2A})\Delta A = 2Ae^{2A}\Delta A\)</span></p>
+2, and <span class="math notranslate nohighlight">\(A\)</span> is the best fit slope on the semilog function.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rate of semiconductors added on a chip every 2 years:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span>
-    <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">x</span><span class="si">{:.2f}</span><span class="s2"> +/- </span><span class="si">{:.2f}</span><span class="s2"> semiconductors per chip&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">A</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.006</span>
-    <span class="p">)</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rate of semiconductors added on a chip every 2 years: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rate of semiconductors added on a chip every 2 years:
-	x1.98 +/- 0.01 semiconductors per chip
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rate of semiconductors added on a chip every 2 years: 1.98
 </pre></div>
 </div>
 </div>
 </div>
 <p>Based upon your least-squares regression model, the number of
-semiconductors per chip increased by a factor of <span class="math notranslate nohighlight">\(1.98\pm 0.01\)</span> every two
+semiconductors per chip increased by a factor of <span class="math notranslate nohighlight">\(1.98\)</span> every two
 years. You have a model that predicts the number of semiconductors each
 year. Now compare your model to the actual manufacturing reports.  Plot
 the linear regression results and all of the transistor counts.</p>
@@ -884,7 +830,7 @@ https://fivethirtyeight.com elements. Change the matplotlib style with
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;# of transistors\nper microprocessor&#39;)
 </pre></div>
 </div>
-<img alt="../_images/4c4e6cc4cd24ea65a2536122f27ff54860530cf561195fb4d0e05d8069a5f3bf.png" src="../_images/4c4e6cc4cd24ea65a2536122f27ff54860530cf561195fb4d0e05d8069a5f3bf.png" />
+<img alt="../_images/6a478dc7004c77b68fad438a7e82288ec83be2f026a8f259a6d3271aaa5c936d.png" src="../_images/6a478dc7004c77b68fad438a7e82288ec83be2f026a8f259a6d3271aaa5c936d.png" />
 </div>
 </div>
 <p><em>A scatter plot of MOS transistor count per microprocessor every two years with a red line for the ordinary least squares prediction and an orange line for Moore’s law.</em></p>
@@ -942,10 +888,10 @@ for $\pm\frac{1}{2}~years.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19200000000.0 250000000.0 7050000000.0
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd232b6aec0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f1bd932e410&gt;
 </pre></div>
 </div>
-<img alt="../_images/177a46931a6f3232fe174a194b437e14bf4525285f53c315b5ea6652b23dca65.png" src="../_images/177a46931a6f3232fe174a194b437e14bf4525285f53c315b5ea6652b23dca65.png" />
+<img alt="../_images/b9143a884ec8776a0b94987e50a2d4d51f1281c69d1627da25b80d029388ce22.png" src="../_images/b9143a884ec8776a0b94987e50a2d4d51f1281c69d1627da25b80d029388ce22.png" />
 </div>
 </div>
 <p>The result is that your model is close to the mean, but Gordon
@@ -959,7 +905,7 @@ average than extreme values because it satisfies the condition to
 minimize <span class="math notranslate nohighlight">\(\sum |y_i - A\cdot \text{year}[i]+B|^2\)</span>.</p>
 </section>
 <section id="sharing-your-results-as-zipped-arrays-and-a-csv">
-<h2>Sharing your results as zipped arrays and a csv<a class="headerlink" href="#sharing-your-results-as-zipped-arrays-and-a-csv" title="Permalink to this heading">#</a></h2>
+<h2>Sharing your results as zipped arrays and a csv<a class="headerlink" href="#sharing-your-results-as-zipped-arrays-and-a-csv" title="Link to this heading">#</a></h2>
 <p>The last step, is to share your findings. You created
 new arrays that represent a linear regression model and Gordon Moore’s
 prediction. You started this process by importing a csv file into a NumPy
@@ -969,7 +915,7 @@ array using <code class="docutils literal notranslate"><span class="pre">np.load
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.savetxt.html"><code class="docutils literal notranslate"><span class="pre">np.savetxt</span></code></a>: save a csv file with the original data and your predicted data</p></li>
 </ol>
 <section id="zipping-the-arrays-into-a-file">
-<h3>Zipping the arrays into a file<a class="headerlink" href="#zipping-the-arrays-into-a-file" title="Permalink to this heading">#</a></h3>
+<h3>Zipping the arrays into a file<a class="headerlink" href="#zipping-the-arrays-into-a-file" title="Link to this heading">#</a></h3>
 <p>Using <code class="docutils literal notranslate"><span class="pre">np.savez</span></code>, you can save thousands of arrays and give them names. The
 function <code class="docutils literal notranslate"><span class="pre">np.load</span></code> will load the arrays back into the workspace as a
 dictionary. You’ll save a five arrays so the next user will have the year,
@@ -1013,7 +959,7 @@ regression_csts: linear regression constants A and B for log(transistor_count)=A
     <span class="n">transistor_count</span><span class="o">=</span><span class="n">transistor_count</span><span class="p">,</span>
     <span class="n">transistor_count_predicted</span><span class="o">=</span><span class="n">transistor_count_predicted</span><span class="p">,</span>
     <span class="n">transistor_Moores_law</span><span class="o">=</span><span class="n">transistor_Moores_law</span><span class="p">,</span>
-    <span class="n">regression_csts</span><span class="o">=</span><span class="n">AB</span><span class="p">,</span>
+    <span class="n">regression_csts</span><span class="o">=</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">),</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -1033,7 +979,7 @@ regression_csts: linear regression constants A and B for log(transistor_count)=A
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-666.3264063536255
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-666.3264063536233
 </pre></div>
 </div>
 </div>
@@ -1081,7 +1027,7 @@ text, and one array of double precision floating point numbers shape =
 another analysis.</p>
 </section>
 <section id="creating-your-own-comma-separated-value-file">
-<h3>Creating your own comma separated value file<a class="headerlink" href="#creating-your-own-comma-separated-value-file" title="Permalink to this heading">#</a></h3>
+<h3>Creating your own comma separated value file<a class="headerlink" href="#creating-your-own-comma-separated-value-file" title="Link to this heading">#</a></h3>
 <p>If you want to share data and view the results in a table, then you have to
 create a text file. Save the data using <code class="docutils literal notranslate"><span class="pre">np.savetxt</span></code>. This
 function is more limited than <code class="docutils literal notranslate"><span class="pre">np.savez</span></code>. Delimited files, like csv’s,
@@ -1178,9 +1124,9 @@ options to create the desired file format:</p>
 # transistor_count_predicted: linear regression model = exp(-666.33)*exp(0.34*year)
 # transistor_Moores_law: Moores law =exp(-675.38)*exp(0.35*year)
 # year:, transistor_count:, transistor_count_predicted:, transistor_Moores_law:
-1.971000000000000000e+03,2.250000000000000000e+03,1.130514785642205879e+03,2.249999999999916326e+03
-1.972000000000000000e+03,3.500000000000000000e+03,1.590908400344028905e+03,3.181980515339620069e+03
-1.973000000000000000e+03,2.500000000000000000e+03,2.238793840141975579e+03,4.500000000000097316e+03
+1.971000000000000000e+03,2.250000000000000000e+03,1.130514785642591278e+03,2.249999999999916326e+03
+1.972000000000000000e+03,3.500000000000000000e+03,1.590908400344571419e+03,3.181980515339620069e+03
+1.973000000000000000e+03,2.500000000000000000e+03,2.238793840142739100e+03,4.500000000000097316e+03
 </pre></div>
 </div>
 </div>
@@ -1188,7 +1134,7 @@ options to create the desired file format:</p>
 </section>
 </section>
 <section id="wrapping-up">
-<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this heading">#</a></h2>
+<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Link to this heading">#</a></h2>
 <p>In conclusion, you have compared historical data for semiconductor
 manufacturers to Moore’s law and created a linear regression model to
 find the average number of transistors added to each microprocessor
@@ -1206,7 +1152,7 @@ analysis should give you a small insight into how incredible this growth
 has been over the last half-century.</p>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Moore%27s_law">“Moore’s Law.” Wikipedia article. Accessed Oct. 1, 2020.</a></p></li>
 <li><p><a class="reference external" href="https://newsroom.intel.com/wp-content/uploads/sites/11/2018/05/moores-law-electronics.pdf">Moore, Gordon E. (1965-04-19). “Cramming more components onto integrated circuits”. intel.com. Electronics Magazine. Retrieved April 1, 2020.</a></p></li>
@@ -1222,11 +1168,10 @@ has been over the last half-century.</p>
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="../applications.html"
@@ -1246,10 +1191,7 @@ has been over the last half-century.</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1298,6 +1240,7 @@ By the NumPy community
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2020-2023, the NumPy community.
@@ -1324,8 +1267,8 @@ By the NumPy community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

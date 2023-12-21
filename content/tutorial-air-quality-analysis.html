@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Analyzing the impact of the lockdown on air quality in Delhi, India &#8212; NumPy Tutorials</title>
   
@@ -19,38 +18,36 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/tutorial-air-quality-analysis';</script>
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Contributing" href="../contributing.html" />
@@ -68,6 +65,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -121,9 +127,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -133,8 +141,8 @@
       
     
     
-    <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="NumPy Tutorials - Home"/>
+    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="NumPy Tutorials - Home"/>`);</script>
   
   
 </a></div>
@@ -149,11 +157,22 @@
           
           
           
-          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
+          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../features.html">NumPy Features</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -401,20 +420,22 @@
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -473,14 +494,14 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="analyzing-the-impact-of-the-lockdown-on-air-quality-in-delhi-india">
-<h1>Analyzing the impact of the lockdown on air quality in Delhi, India<a class="headerlink" href="#analyzing-the-impact-of-the-lockdown-on-air-quality-in-delhi-india" title="Permalink to this heading">#</a></h1>
+<h1>Analyzing the impact of the lockdown on air quality in Delhi, India<a class="headerlink" href="#analyzing-the-impact-of-the-lockdown-on-air-quality-in-delhi-india" title="Link to this heading">#</a></h1>
 <p><img alt="A grid showing the India Gate in smog above and clear air below" src="../_images/11-delhi-aqi.jpg" /></p>
 <section id="what-you-ll-do">
-<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Link to this heading">#</a></h2>
 <p>Calculate Air Quality Indices (AQI) and perform paired Student’s t-test on them.</p>
 </section>
 <section id="what-you-ll-learn">
-<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>You’ll learn the concept of moving averages</p></li>
 <li><p>You’ll learn how to calculate Air Quality Index (AQI)</p></li>
@@ -489,7 +510,7 @@ document.write(`
 </ul>
 </section>
 <section id="what-you-ll-need">
-<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://scipy.org/install/">SciPy</a> installed in your environment</p></li>
 <li><p>Basic understanding of statistical terms like population, sample, mean, standard deviation etc.</p></li>
@@ -497,7 +518,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="the-problem-of-air-pollution">
-<h2>The problem of air pollution<a class="headerlink" href="#the-problem-of-air-pollution" title="Permalink to this heading">#</a></h2>
+<h2>The problem of air pollution<a class="headerlink" href="#the-problem-of-air-pollution" title="Link to this heading">#</a></h2>
 <p>Air pollution is one of the most prominent types of pollution we face that has an immediate effect on our daily lives. The
 COVID-19 pandemic resulted in lockdowns in different parts of the world; offering a rare opportunity to study the effect of
 human activity (or lack thereof) on air pollution. In this tutorial, we will study the air quality in Delhi, one of the
@@ -516,7 +537,7 @@ a <a class="reference external" href="https://en.wikipedia.org/wiki/Student%27s_
 </div>
 </section>
 <section id="building-the-dataset">
-<h2>Building the dataset<a class="headerlink" href="#building-the-dataset" title="Permalink to this heading">#</a></h2>
+<h2>Building the dataset<a class="headerlink" href="#building-the-dataset" title="Link to this heading">#</a></h2>
 <p>We will use a condensed version of the <a class="reference external" href="https://www.kaggle.com/rohanrao/air-quality-data-in-india">Air Quality Data in India</a> dataset. This dataset contains air quality data and AQI (Air Quality Index) at hourly and daily level of various stations across multiple cities in India. The condensed version available with this tutorial contains hourly pollutant measurements for Delhi
 from May 31, 2019 to June 30, 2020. It has measurements of the standard pollutants that are required for Air Quality Index calculation and a few other important ones:
 Particulate Matter (PM 2.5 and PM 10), nitrogen dioxide (NO2), ammonia (NH3), sulfur dioxide (SO2), carbon monoxide (CO), ozone (O3), oxides of nitrogen (NOx), nitric oxide (NO), benzene, toluene, and xylene.</p>
@@ -579,7 +600,7 @@ two sets will be processed slightly differently, as we’ll see later on.</p>
 <p>With this, we have successfully imported the data and checked that it is complete. Let’s move on to the AQI calculations!</p>
 </section>
 <section id="calculating-the-air-quality-index">
-<h2>Calculating the Air Quality Index<a class="headerlink" href="#calculating-the-air-quality-index" title="Permalink to this heading">#</a></h2>
+<h2>Calculating the Air Quality Index<a class="headerlink" href="#calculating-the-air-quality-index" title="Link to this heading">#</a></h2>
 <p>We will calculate the AQI using <a class="reference external" href="https://app.cpcbccr.com/ccr_docs/FINAL-REPORT_AQI_.pdf">the method</a> adopted by the <a class="reference external" href="https://www.cpcb.nic.in/national-air-quality-index">Central Pollution Control Board</a> of India.  To summarize the steps:</p>
 <ul>
 <li><p>Collect 24-hourly average concentration values for the standard pollutants; 8-hourly in case of CO and O3.</p></li>
@@ -619,7 +640,7 @@ two sets will be processed slightly differently, as we’ll see later on.</p>
 </div>
 </div>
 <section id="moving-averages">
-<h3>Moving averages<a class="headerlink" href="#moving-averages" title="Permalink to this heading">#</a></h3>
+<h3>Moving averages<a class="headerlink" href="#moving-averages" title="Link to this heading">#</a></h3>
 <p>For the first step, we have to compute <a class="reference external" href="https://en.wikipedia.org/wiki/Moving_average">moving averages</a> for <code class="docutils literal notranslate"><span class="pre">pollutants_A</span></code> over a window of 24 hours and <code class="docutils literal notranslate"><span class="pre">pollutants_B</span></code> over a
 window of 8 hours. We will write a simple function <code class="docutils literal notranslate"><span class="pre">moving_mean</span></code> using <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.cumsum.html">np.cumsum</a> and <a class="reference external" href="https://numpy.org/devdocs/user/basics.indexing.html#slicing-and-striding">sliced indexing</a> to achieve this.</p>
 <p>To make sure both the sets are of the same length, we will truncate the <code class="docutils literal notranslate"><span class="pre">pollutants_B_8hr_avg</span></code> according to the length of
@@ -648,7 +669,7 @@ window of 8 hours. We will write a simple function <code class="docutils literal
 </div>
 </section>
 <section id="sub-indices">
-<h3>Sub-indices<a class="headerlink" href="#sub-indices" title="Permalink to this heading">#</a></h3>
+<h3>Sub-indices<a class="headerlink" href="#sub-indices" title="Link to this heading">#</a></h3>
 <p>The subindices for each pollutant are calculated according to the linear relationship between the AQI and standard breakpoint ranges with the formula as above:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -733,7 +754,7 @@ Ip = \dfrac{\text{IHi – ILo}}{\text{BPHi – BPLo}}\cdot{\text{Cp – BPLo}} +
 </div>
 </section>
 <section id="air-quality-indices">
-<h3>Air quality indices<a class="headerlink" href="#air-quality-indices" title="Permalink to this heading">#</a></h3>
+<h3>Air quality indices<a class="headerlink" href="#air-quality-indices" title="Link to this heading">#</a></h3>
 <p>Using <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.maximum.html">np.max</a>, we find out the maximum sub-index for each period, which is our Air Quality Index!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -747,11 +768,11 @@ the data from 31st May, we truncated that during the moving averages step.</p>
 </section>
 </section>
 <section id="paired-student-s-t-test-on-the-aqis">
-<h2>Paired Student’s t-test on the AQIs<a class="headerlink" href="#paired-student-s-t-test-on-the-aqis" title="Permalink to this heading">#</a></h2>
+<h2>Paired Student’s t-test on the AQIs<a class="headerlink" href="#paired-student-s-t-test-on-the-aqis" title="Link to this heading">#</a></h2>
 <p>Hypothesis testing is a form of descriptive statistics used to help us make decisions with the data. From the calculated AQI data, we want to find out if there was a statistically significant difference in average AQI before and after the lockdown was imposed. We will use the left-tailed, <a class="reference external" href="https://en.wikipedia.org/wiki/Student%27s_t-test#Dependent_t-test_for_paired_samples">paired Student’s t-test</a> to compute two test statistics- the <a class="reference external" href="https://en.wikipedia.org/wiki/T-statistic"><code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">statistic</span></code></a> and the <a class="reference external" href="https://en.wikipedia.org/wiki/P-value"><code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">value</span></code></a>. We will then compare these with the corresponding critical values to make a decision.</p>
 <p><img alt="Normal distribution plot showing area of rejection in one-tailed test (left tailed)" src="../_images/11-one-tailed-test.svg" /></p>
 <section id="sampling">
-<h3>Sampling<a class="headerlink" href="#sampling" title="Permalink to this heading">#</a></h3>
+<h3>Sampling<a class="headerlink" href="#sampling" title="Link to this heading">#</a></h3>
 <p>We will now import the <code class="docutils literal notranslate"><span class="pre">datetime</span></code> column from our original dataset into a <a class="reference external" href="https://numpy.org/devdocs/reference/arrays.scalars.html"><em>datetime64</em> dtype</a> array. We will use this array to index the AQI array and obtain subsets of the dataset.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -793,13 +814,13 @@ the data from 31st May, we truncated that during the moving averages step.</p>
 </div>
 </section>
 <section id="defining-the-hypothesis">
-<h3>Defining the hypothesis<a class="headerlink" href="#defining-the-hypothesis" title="Permalink to this heading">#</a></h3>
+<h3>Defining the hypothesis<a class="headerlink" href="#defining-the-hypothesis" title="Link to this heading">#</a></h3>
 <p>Let us assume that there is no significant difference between the sample means before and after the lockdown. This will be the null hypothesis. The alternative hypothesis would be that there <em>is</em> a significant difference between the means and the AQI <em>improved</em>. Mathematically,</p>
 <p><span class="math notranslate nohighlight">\(H_{0}: \mu_\text{after-before} = 0\)</span> <br />
 <span class="math notranslate nohighlight">\(H_{a}: \mu_\text{after-before} &lt; 0\)</span></p>
 </section>
 <section id="calculating-the-test-statistics">
-<h3>Calculating the test statistics<a class="headerlink" href="#calculating-the-test-statistics" title="Permalink to this heading">#</a></h3>
+<h3>Calculating the test statistics<a class="headerlink" href="#calculating-the-test-statistics" title="Link to this heading">#</a></h3>
 <p>We will use the <code class="docutils literal notranslate"><span class="pre">t</span></code> statistic to evaluate our hypothesis and even calculate the <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">value</span></code> from it. The formula for the <code class="docutils literal notranslate"><span class="pre">t</span></code> statistic is:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -835,7 +856,7 @@ t = \frac{\mu_\text{after-before}}{\sqrt{\sigma^{2}/n}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The t value is -8.610983278555613 and the p value is 8.746752021667305e-10.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The t value is -5.870246616097662 and the p value is 1.1375700980137248e-06.
 </pre></div>
 </div>
 </div>
@@ -843,7 +864,7 @@ t = \frac{\mu_\text{after-before}}{\sqrt{\sigma^{2}/n}}
 </section>
 </section>
 <section id="what-do-the-t-and-p-values-mean">
-<h2>What do the <code class="docutils literal notranslate"><span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span></code> values mean?<a class="headerlink" href="#what-do-the-t-and-p-values-mean" title="Permalink to this heading">#</a></h2>
+<h2>What do the <code class="docutils literal notranslate"><span class="pre">t</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span></code> values mean?<a class="headerlink" href="#what-do-the-t-and-p-values-mean" title="Link to this heading">#</a></h2>
 <p>We will now compare the calculated test statistics with the critical test statistics. The critical <code class="docutils literal notranslate"><span class="pre">t</span></code> value is calculated by looking up the <a class="reference external" href="https://en.wikipedia.org/wiki/Student%27s_t-distribution#Table_of_selected_values">t-distribution table</a>.</p>
 <p><img alt="Table of selected t values at different confidence levels. T value for 29 dof at 95% confidence level is highlighted with a yellow square" src="../_images/11-t-table.png" /></p>
 <p>From the table above, the critical value is 1.699 for 29 <code class="docutils literal notranslate"><span class="pre">dof</span></code> at a confidence level of 95%. Since we are using the left tailed test, our critical value is -1.699. Clearly, the calculated <code class="docutils literal notranslate"><span class="pre">t</span></code> value is less than the critical value so we can safely reject the null hypothesis.</p>
@@ -852,7 +873,7 @@ t = \frac{\mu_\text{after-before}}{\sqrt{\sigma^{2}/n}}
 </section>
 <hr class="docutils" />
 <section id="in-practice">
-<h2>In practice…<a class="headerlink" href="#in-practice" title="Permalink to this heading">#</a></h2>
+<h2>In practice…<a class="headerlink" href="#in-practice" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>The <a class="reference external" href="https://pandas.pydata.org/">pandas</a> library is preferable to use for time-series data analysis.</p></li>
 <li><p>The SciPy stats module provides the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_rel.html">stats.ttest_rel</a> function which can be used to get the <code class="docutils literal notranslate"><span class="pre">t</span> <span class="pre">statistic</span></code> and <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">value</span></code>.</p></li>
@@ -860,7 +881,7 @@ t = \frac{\mu_\text{after-before}}{\sqrt{\sigma^{2}/n}}
 </ul>
 </section>
 <section id="further-reading">
-<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this heading">#</a></h2>
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>There are a host of statistical tests you can choose according to the characteristics of the given data. Read more about them at
 <a class="reference external" href="https://machinelearningmastery.com/statistical-data-distributions/">A Gentle Introduction to Statistical Data Distributions</a>.</p></li>
@@ -875,11 +896,10 @@ t = \frac{\mu_\text{after-before}}{\sqrt{\sigma^{2}/n}}
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="tutorial-plotting-fractals.html"
@@ -899,10 +919,7 @@ t = \frac{\mu_\text{after-before}}{\sqrt{\sigma^{2}/n}}
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -958,6 +975,7 @@ By the NumPy community
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2020-2023, the NumPy community.
@@ -984,8 +1002,8 @@ By the NumPy community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

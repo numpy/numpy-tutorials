@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Determining Static Equilibrium in NumPy &#8212; NumPy Tutorials</title>
   
@@ -19,38 +18,36 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/tutorial-static_equilibrium';</script>
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Plotting Fractals" href="tutorial-plotting-fractals.html" />
@@ -68,6 +65,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -121,9 +127,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -133,8 +141,8 @@
       
     
     
-    <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="NumPy Tutorials - Home"/>
+    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="NumPy Tutorials - Home"/>`);</script>
   
   
 </a></div>
@@ -149,11 +157,22 @@
           
           
           
-          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
+          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../features.html">NumPy Features</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -401,20 +420,22 @@
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -467,10 +488,10 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="determining-static-equilibrium-in-numpy">
-<h1>Determining Static Equilibrium in NumPy<a class="headerlink" href="#determining-static-equilibrium-in-numpy" title="Permalink to this heading">#</a></h1>
+<h1>Determining Static Equilibrium in NumPy<a class="headerlink" href="#determining-static-equilibrium-in-numpy" title="Link to this heading">#</a></h1>
 <p>When analyzing physical structures, it is crucial to understand the mechanics keeping them stable. Applied forces on a floor, a beam, or any other structure, create reaction forces and moments. These reactions are the structure resisting movement without breaking. In cases where structures do not move despite having forces applied to them, <a class="reference external" href="https://en.wikipedia.org/wiki/Newton%27s_laws_of_motion#Newton's_second_law">Newton’s second law</a> states that both the acceleration and sum of forces in all directions in the system must be zero. You can represent and solve this concept with NumPy arrays.</p>
 <section id="what-you-ll-do">
-<h2>What you’ll do:<a class="headerlink" href="#what-you-ll-do" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll do:<a class="headerlink" href="#what-you-ll-do" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>In this tutorial, you will use NumPy to create vectors and moments using NumPy arrays</p></li>
 <li><p>Solve problems involving cables and floors holding up structures</p></li>
@@ -479,7 +500,7 @@ document.write(`
 </ul>
 </section>
 <section id="what-you-ll-learn">
-<h2>What you’ll learn:<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll learn:<a class="headerlink" href="#what-you-ll-learn" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>How to represent points, vectors, and moments with NumPy.</p></li>
 <li><p>How to find the <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_(geometry)">normal of vectors</a></p></li>
@@ -487,7 +508,7 @@ document.write(`
 </ul>
 </section>
 <section id="what-you-ll-need">
-<h2>What you’ll need:<a class="headerlink" href="#what-you-ll-need" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll need:<a class="headerlink" href="#what-you-ll-need" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>NumPy</p></li>
 <li><p><a class="reference external" href="https://matplotlib.org/">Matplotlib</a></p></li>
@@ -508,7 +529,7 @@ document.write(`
 </ul>
 </section>
 <section id="solving-equilibrium-with-newton-s-second-law">
-<h2>Solving equilibrium with Newton’s second law<a class="headerlink" href="#solving-equilibrium-with-newton-s-second-law" title="Permalink to this heading">#</a></h2>
+<h2>Solving equilibrium with Newton’s second law<a class="headerlink" href="#solving-equilibrium-with-newton-s-second-law" title="Link to this heading">#</a></h2>
 <p>Your model consists of a beam under a sum of forces and moments. You can start analyzing this system with Newton’s second law:</p>
 <div class="math notranslate nohighlight">
 \[\sum{\text{force}} = \text{mass} \times \text{acceleration}.\]</div>
@@ -567,7 +588,7 @@ Quiver plots will be used to demonstrate <a class="reference external" href="htt
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4b7e0aac6a3b38c34397ce7ac75afb690e2b68fb184c3c535a4d36f262ec0d07.png" src="../_images/4b7e0aac6a3b38c34397ce7ac75afb690e2b68fb184c3c535a4d36f262ec0d07.png" />
+<img alt="../_images/a6390c4437b38373b928c4dadf749589c8ddc6ba189bab1729fbb5e1f080e7b9.png" src="../_images/a6390c4437b38373b928c4dadf749589c8ddc6ba189bab1729fbb5e1f080e7b9.png" />
 </div>
 </div>
 <p>There are two forces emanating from a single point. In order to simplify this problem, you can add them together to find the sum of forces. Note that both <code class="docutils literal notranslate"><span class="pre">forceA</span></code> and <code class="docutils literal notranslate"><span class="pre">forceB</span></code> are three-dimensional vectors, represented by NumPy as arrays with three components. Because NumPy is meant to simplify and optimize operations between vectors, you can easily compute the sum of these two vectors as follows:</p>
@@ -611,7 +632,7 @@ You can plot it to see the result.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/caea1f2c129e5fea57425f357704e9910d038f56bc688620d1b71a1dae38ce6c.png" src="../_images/caea1f2c129e5fea57425f357704e9910d038f56bc688620d1b71a1dae38ce6c.png" />
+<img alt="../_images/e3212faaf3623cd37f3c2dab1452bf188293edeec0b1669967261c2c896b68d2.png" src="../_images/e3212faaf3623cd37f3c2dab1452bf188293edeec0b1669967261c2c896b68d2.png" />
 </div>
 </div>
 <p>However, the goal is equilibrium.
@@ -653,13 +674,13 @@ Only if there is no force remaining is the system considered to be in equilibriu
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b996acda5728db6b7fa2dcf783b7c5eb94331c60dff615eab38cb9e18af3cb1b.png" src="../_images/b996acda5728db6b7fa2dcf783b7c5eb94331c60dff615eab38cb9e18af3cb1b.png" />
+<img alt="../_images/7fcffe5b2b52a6c7449604211407528ba87a11f261aa9b532227ae1867983301.png" src="../_images/7fcffe5b2b52a6c7449604211407528ba87a11f261aa9b532227ae1867983301.png" />
 </div>
 </div>
 <p>The empty graph signifies that there are no outlying forces. This denotes a system in equilibrium.</p>
 </section>
 <section id="solving-equilibrium-as-a-sum-of-moments">
-<h2>Solving Equilibrium as a sum of moments<a class="headerlink" href="#solving-equilibrium-as-a-sum-of-moments" title="Permalink to this heading">#</a></h2>
+<h2>Solving Equilibrium as a sum of moments<a class="headerlink" href="#solving-equilibrium-as-a-sum-of-moments" title="Link to this heading">#</a></h2>
 <p>Next let’s move to a more complicated application.
 When forces are not all applied at the same point, moments are created.</p>
 <p>Similar to forces, these moments must all sum to zero, otherwise rotational acceleration will be experienced.  Similar to the sum of forces, this creates a linear equation for each of the three coordinate directions in space.</p>
@@ -689,7 +710,7 @@ Reaction moment = -10
 </div>
 </section>
 <section id="finding-values-with-physical-properties">
-<h2>Finding values with physical properties<a class="headerlink" href="#finding-values-with-physical-properties" title="Permalink to this heading">#</a></h2>
+<h2>Finding values with physical properties<a class="headerlink" href="#finding-values-with-physical-properties" title="Link to this heading">#</a></h2>
 <p>Let’s say that instead of a force acting perpendicularly to the beam, a force was applied to our pole through a wire that was also attached to the ground.
 Given the tension in this cord, all you need to solve this problem are the physical locations of these objects.</p>
 <p><img alt="Image representing the problem" src="../_images/static_eqbm-fig01.png" /></p>
@@ -781,7 +802,7 @@ Reaction moment = [0.         8.32050294 0.        ]
 </div>
 </div>
 <section id="another-example">
-<h3>Another Example<a class="headerlink" href="#another-example" title="Permalink to this heading">#</a></h3>
+<h3>Another Example<a class="headerlink" href="#another-example" title="Link to this heading">#</a></h3>
 <p>Let’s look at a slightly more complicated model.  In this example you will be observing a beam with two cables and an applied force.  This time you need to find both the tension in the cords and the reaction forces of the beam. <em>(Source: <a class="reference external" href="https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9780077687304.html">Vector Mechanics for Engineers: Statics</a>, Problem 4.106)</em></p>
 <p><img alt="image.png" src="../_images/problem4.png" /></p>
 <p>Define distance <em>a</em> as 3 meters</p>
@@ -880,14 +901,14 @@ T_{BE}\\
 </section>
 </section>
 <section id="wrapping-up">
-<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Permalink to this heading">#</a></h2>
+<h2>Wrapping up<a class="headerlink" href="#wrapping-up" title="Link to this heading">#</a></h2>
 <p>You have learned how to use arrays to represent points, forces, and moments in three dimensional space. Each entry in an array can be used to represent a physical property broken into directional components. These can then be easily manipulated with NumPy functions.</p>
 <section id="additional-applications">
-<h3>Additional Applications<a class="headerlink" href="#additional-applications" title="Permalink to this heading">#</a></h3>
+<h3>Additional Applications<a class="headerlink" href="#additional-applications" title="Link to this heading">#</a></h3>
 <p>This same process can be applied to kinetic problems or in any number of dimensions. The examples done in this tutorial assumed three dimensional problems in static equilibrium. These methods can easily be used in more varied problems. More or less dimensions require larger or smaller arrays to represent. In systems experiencing acceleration, velocity and acceleration can be similarly be represented as vectors as well.</p>
 </section>
 <section id="references">
-<h3>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h3>
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9780077687304.html">Vector Mechanics for Engineers: Statics (Beer &amp; Johnston &amp; Mazurek)</a></p></li>
 <li><p><a class="reference external" href="https://numpy.org/doc/stable/reference/">NumPy Reference</a></p></li>
@@ -902,11 +923,10 @@ T_{BE}\\
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="tutorial-x-ray-image-processing.html"
@@ -926,10 +946,7 @@ T_{BE}\\
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -979,6 +996,7 @@ By the NumPy community
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2020-2023, the NumPy community.
@@ -1005,8 +1023,8 @@ By the NumPy community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

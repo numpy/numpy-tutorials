@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>X-ray image processing &#8212; NumPy Tutorials</title>
   
@@ -19,36 +18,34 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/tutorial-x-ray-image-processing';</script>
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Determining Static Equilibrium in NumPy" href="tutorial-static_equilibrium.html" />
@@ -66,6 +63,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -119,9 +125,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -131,8 +139,8 @@
       
     
     
-    <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="NumPy Tutorials - Home"/>
+    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="NumPy Tutorials - Home"/>`);</script>
   
   
 </a></div>
@@ -147,11 +155,22 @@
           
           
           
-          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
+          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../features.html">NumPy Features</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -399,20 +418,22 @@
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -465,7 +486,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="x-ray-image-processing">
-<h1>X-ray image processing<a class="headerlink" href="#x-ray-image-processing" title="Permalink to this heading">#</a></h1>
+<h1>X-ray image processing<a class="headerlink" href="#x-ray-image-processing" title="Link to this heading">#</a></h1>
 <p>This tutorial demonstrates how to read and process X-ray images with NumPy,
 imageio, Matplotlib and SciPy. You will learn how to load medical images, focus
 on certain parts, and visually compare them using the
@@ -499,7 +520,7 @@ ChestX-ray8 contains gigabytes of data and you may find it challenging to
 download it in batches.</p>
 <p><img alt="A series of 9 x-ray images of the same region of a patient's chest is shown with different types of image processing filters applied to each image. Each x-ray shows different types of biological detail." src="../_images/tutorial-x-ray-image-processing.png" /></p>
 <section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
 <p>The reader should have some knowledge of Python, NumPy arrays, and Matplotlib.
 To refresh the memory, you can take the
 <a class="reference external" href="https://docs.python.org/dev/tutorial/index.html">Python</a> and Matplotlib
@@ -524,7 +545,7 @@ You can use <a class="reference external" href="https://jupyter.org/install">Jup
 each notebook cell.</p>
 </section>
 <section id="table-of-contents">
-<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">#</a></h2>
+<h2>Table of contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Examine an X-ray with <code class="docutils literal notranslate"><span class="pre">imageio</span></code></p></li>
 <li><p>Combine images into a multi-dimensional array to demonstrate progression</p></li>
@@ -536,7 +557,7 @@ Canny filters</p></li>
 </section>
 <hr class="docutils" />
 <section id="examine-an-x-ray-with-imageio">
-<h2>Examine an X-ray with <code class="docutils literal notranslate"><span class="pre">imageio</span></code><a class="headerlink" href="#examine-an-x-ray-with-imageio" title="Permalink to this heading">#</a></h2>
+<h2>Examine an X-ray with <code class="docutils literal notranslate"><span class="pre">imageio</span></code><a class="headerlink" href="#examine-an-x-ray-with-imageio" title="Link to this heading">#</a></h2>
 <p>Let’s begin with a simple example using just one X-ray image from the
 ChestX-ray8 dataset.</p>
 <p>The file — <code class="docutils literal notranslate"><span class="pre">00000011_001.png</span></code> — has been downloaded for you and saved in the
@@ -582,12 +603,12 @@ uint8
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/49f9b44739a12942975db7e4814bbe08c2395daa52a3e67b6ec1a3e41e81c8eb.png" src="../_images/49f9b44739a12942975db7e4814bbe08c2395daa52a3e67b6ec1a3e41e81c8eb.png" />
+<img alt="../_images/8823375d747db0de213a6103b7b33d27ca2ac725bf6eab6b09f5b22a69ed406c.png" src="../_images/8823375d747db0de213a6103b7b33d27ca2ac725bf6eab6b09f5b22a69ed406c.png" />
 </div>
 </div>
 </section>
 <section id="combine-images-into-a-multidimensional-array-to-demonstrate-progression">
-<h2>Combine images into a multidimensional array to demonstrate progression<a class="headerlink" href="#combine-images-into-a-multidimensional-array-to-demonstrate-progression" title="Permalink to this heading">#</a></h2>
+<h2>Combine images into a multidimensional array to demonstrate progression<a class="headerlink" href="#combine-images-into-a-multidimensional-array-to-demonstrate-progression" title="Link to this heading">#</a></h2>
 <p>In the next example, instead of 1 image you’ll use 9 X-ray 1024x1024-pixel
 images from the ChestX-ray8 dataset that have been downloaded and extracted
 from one of the dataset files. They are numbered from <code class="docutils literal notranslate"><span class="pre">...000.png</span></code> to
@@ -634,7 +655,7 @@ to each other using Matplotlib:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/517a21c5fc6eeab2b397acfbad060755bd1f8ac9f523d57866e8cbbff7cd9787.png" src="../_images/517a21c5fc6eeab2b397acfbad060755bd1f8ac9f523d57866e8cbbff7cd9787.png" />
+<img alt="../_images/68b0dec3e74b8e1f78074af65ff2677edff488d44473a9610c40e51d24898563.png" src="../_images/68b0dec3e74b8e1f78074af65ff2677edff488d44473a9610c40e51d24898563.png" />
 </div>
 </div>
 <p><strong>4.</strong> In addition, it can be helpful to show the progress as an animation.
@@ -652,14 +673,14 @@ notebook:</p>
 <img alt="An animated gif repeatedly cycles through a series of 8 x-rays, showing the same viewpoint of the patient's chest at different points in time. The patient's bones and internal organs can be visually compared from frame to frame." src="../_images/xray_image.gif" /></p>
 </section>
 <section id="edge-detection-using-the-laplacian-gaussian-gaussian-gradient-sobel-and-canny-filters">
-<h2>Edge detection using the Laplacian-Gaussian, Gaussian gradient, Sobel, and Canny filters<a class="headerlink" href="#edge-detection-using-the-laplacian-gaussian-gaussian-gradient-sobel-and-canny-filters" title="Permalink to this heading">#</a></h2>
+<h2>Edge detection using the Laplacian-Gaussian, Gaussian gradient, Sobel, and Canny filters<a class="headerlink" href="#edge-detection-using-the-laplacian-gaussian-gaussian-gradient-sobel-and-canny-filters" title="Link to this heading">#</a></h2>
 <p>When processing biomedical data, it can be useful to emphasize the 2D
 <a class="reference external" href="https://en.wikipedia.org/wiki/Edge_detection">“edges”</a> to focus on particular
 features in an image. To do that, using
 <a class="reference external" href="https://en.wikipedia.org/wiki/Image_gradient">image gradients</a> can be
 particularly helpful when detecting the change of color pixel intensity.</p>
 <section id="the-laplace-filter-with-gaussian-second-derivatives">
-<h3>The Laplace filter with Gaussian second derivatives<a class="headerlink" href="#the-laplace-filter-with-gaussian-second-derivatives" title="Permalink to this heading">#</a></h3>
+<h3>The Laplace filter with Gaussian second derivatives<a class="headerlink" href="#the-laplace-filter-with-gaussian-second-derivatives" title="Link to this heading">#</a></h3>
 <p>Let’s start with an n-dimensional
 <a class="reference external" href="https://en.wikipedia.org/wiki/Laplace_distribution">Laplace</a> filter
 (“Laplacian-Gaussian”) that uses
@@ -700,12 +721,12 @@ Gaussian filter (you’ll use <code class="docutils literal notranslate"><span c
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/66409f97390ad4042749be25d91ca571224b16bda62abcbf40b3a7b77c4a9dee.png" src="../_images/66409f97390ad4042749be25d91ca571224b16bda62abcbf40b3a7b77c4a9dee.png" />
+<img alt="../_images/bd95089bfc08b32657c867ab41aba09e1874081ed0f713849ce2b85c3356e009.png" src="../_images/bd95089bfc08b32657c867ab41aba09e1874081ed0f713849ce2b85c3356e009.png" />
 </div>
 </div>
 </section>
 <section id="the-gaussian-gradient-magnitude-method">
-<h3>The Gaussian gradient magnitude method<a class="headerlink" href="#the-gaussian-gradient-magnitude-method" title="Permalink to this heading">#</a></h3>
+<h3>The Gaussian gradient magnitude method<a class="headerlink" href="#the-gaussian-gradient-magnitude-method" title="Link to this heading">#</a></h3>
 <p>Another method for edge detection that can be useful is the
 <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_distribution">Gaussian</a> (gradient) filter.
 It computes the multidimensional gradient magnitude with Gaussian derivatives
@@ -738,12 +759,12 @@ example below):</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3953afd95d33feb4bb88561e33b8b482e3da25bedfdbe9f4ecd5d210467560ed.png" src="../_images/3953afd95d33feb4bb88561e33b8b482e3da25bedfdbe9f4ecd5d210467560ed.png" />
+<img alt="../_images/975915cba39c6c45a7a1aefdfb47b82ab33f75f2ccc197684f7fbaf9d96bf382.png" src="../_images/975915cba39c6c45a7a1aefdfb47b82ab33f75f2ccc197684f7fbaf9d96bf382.png" />
 </div>
 </div>
 </section>
 <section id="the-sobel-feldman-operator-the-sobel-filter">
-<h3>The Sobel-Feldman operator (the Sobel filter)<a class="headerlink" href="#the-sobel-feldman-operator-the-sobel-filter" title="Permalink to this heading">#</a></h3>
+<h3>The Sobel-Feldman operator (the Sobel filter)<a class="headerlink" href="#the-sobel-feldman-operator-the-sobel-filter" title="Link to this heading">#</a></h3>
 <p>To find regions of high spatial frequency (the edges or the edge maps) along the
 horizontal and vertical axes of a 2D X-ray image, you can use the
 <a class="reference external" href="https://en.wikipedia.org/wiki/Sobel_operator">Sobel-Feldman operator (Sobel filter)</a>
@@ -815,12 +836,12 @@ emphasize the edges:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ee9ee41511367bd8ac2d89f45c29c8d9da1d24fa5cd80d2c18d24c50727f9c0e.png" src="../_images/ee9ee41511367bd8ac2d89f45c29c8d9da1d24fa5cd80d2c18d24c50727f9c0e.png" />
+<img alt="../_images/60943aa49a2b8fb72b2aaa7e2badee9422d24a7e80e54a8ef098b5be694bdaba.png" src="../_images/60943aa49a2b8fb72b2aaa7e2badee9422d24a7e80e54a8ef098b5be694bdaba.png" />
 </div>
 </div>
 </section>
 <section id="the-canny-filter">
-<h3>The Canny filter<a class="headerlink" href="#the-canny-filter" title="Permalink to this heading">#</a></h3>
+<h3>The Canny filter<a class="headerlink" href="#the-canny-filter" title="Link to this heading">#</a></h3>
 <p>You can also consider using another well-known filter for edge detection called
 the <a class="reference external" href="https://en.wikipedia.org/wiki/Canny_edge_detector">Canny filter</a>.</p>
 <p>First, you apply a <a class="reference external" href="https://en.wikipedia.org/wiki/Gaussian_filter">Gaussian</a>
@@ -885,13 +906,13 @@ the help of the Canny filter technique. The edges can be emphasized using the
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7b6683c9a7eeaa024c95c987a26920d6f5fcfc453d0f1c0ff1bc6272c56815d4.png" src="../_images/7b6683c9a7eeaa024c95c987a26920d6f5fcfc453d0f1c0ff1bc6272c56815d4.png" />
+<img alt="../_images/16aa720c547c2df3db628bda5e6892cbe3b383beff4f9662f849c73266f6f419.png" src="../_images/16aa720c547c2df3db628bda5e6892cbe3b383beff4f9662f849c73266f6f419.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="apply-masks-to-x-rays-with-np-where">
-<h2>Apply masks to X-rays with <code class="docutils literal notranslate"><span class="pre">np.where()</span></code><a class="headerlink" href="#apply-masks-to-x-rays-with-np-where" title="Permalink to this heading">#</a></h2>
+<h2>Apply masks to X-rays with <code class="docutils literal notranslate"><span class="pre">np.where()</span></code><a class="headerlink" href="#apply-masks-to-x-rays-with-np-where" title="Link to this heading">#</a></h2>
 <p>To screen out only certain pixels in X-ray images to help detect particular
 features, you can apply masks with NumPy’s
 <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.where.html"><code class="docutils literal notranslate"><span class="pre">np.where(condition:</span> <span class="pre">array_like</span> <span class="pre">(bool),</span> <span class="pre">x:</span> <span class="pre">array_like,</span> <span class="pre">y:</span> <span class="pre">ndarray)</span></code></a>
@@ -938,7 +959,7 @@ with <code class="docutils literal notranslate"><span class="pre">ndimage.histog
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9ff21db353882dcf991a950499cfe35e2ea13d1f50547f81e1e108fc812f170a.png" src="../_images/9ff21db353882dcf991a950499cfe35e2ea13d1f50547f81e1e108fc812f170a.png" />
+<img alt="../_images/4f458fe6c8214c2a5a6e9b5bb7941e68854dda5fbde3196d2e533bf3b4649f55.png" src="../_images/4f458fe6c8214c2a5a6e9b5bb7941e68854dda5fbde3196d2e533bf3b4649f55.png" />
 </div>
 </div>
 <p>As the pixel intensity distribution suggests, there are many low (between around
@@ -959,7 +980,7 @@ a certain threshold:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4aafda6799ecf875e1fff3c084eb7036cd32ea48e81a86a7aa53b941cb3662c8.png" src="../_images/4aafda6799ecf875e1fff3c084eb7036cd32ea48e81a86a7aa53b941cb3662c8.png" />
+<img alt="../_images/28fbefa54339c06d139ecc19469207fa11163ad2ea8e2abd975f37eeb516994e.png" src="../_images/28fbefa54339c06d139ecc19469207fa11163ad2ea8e2abd975f37eeb516994e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -975,12 +996,12 @@ a certain threshold:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/96b922a5e5c1503af7fa6c114868ad0de2e065d002e86205550c452c8408f137.png" src="../_images/96b922a5e5c1503af7fa6c114868ad0de2e065d002e86205550c452c8408f137.png" />
+<img alt="../_images/e640c76062bbbe8b32546c848a1d0e5ad82d1eb08662f7fb4470233ef4cd7866.png" src="../_images/e640c76062bbbe8b32546c848a1d0e5ad82d1eb08662f7fb4470233ef4cd7866.png" />
 </div>
 </div>
 </section>
 <section id="compare-the-results">
-<h2>Compare the results<a class="headerlink" href="#compare-the-results" title="Permalink to this heading">#</a></h2>
+<h2>Compare the results<a class="headerlink" href="#compare-the-results" title="Link to this heading">#</a></h2>
 <p>Let’s display some of the results of processed X-ray images you’ve worked with
 so far:</p>
 <div class="cell docutils container">
@@ -1012,14 +1033,14 @@ so far:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/947779fbd89bef29a745c7c76e437b27ad5d8845cc04059b0a2957ee25952337.png" src="../_images/947779fbd89bef29a745c7c76e437b27ad5d8845cc04059b0a2957ee25952337.png" />
+<img alt="../_images/5630dbabf3f0f47937223e61ee3a302923f59aa9de75b57ab05bcd5b0bd3b42f.png" src="../_images/5630dbabf3f0f47937223e61ee3a302923f59aa9de75b57ab05bcd5b0bd3b42f.png" />
 </div>
 </div>
 </section>
 <section id="next-steps">
-<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this heading">#</a></h2>
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
 <p>If you want to use your own samples, you can use
-<a class="reference external" href="https://openi.nlm.nih.gov/detailedresult?img=CXR3666_IM-1824-1001&amp;query=chest%20infection&amp;it=xg&amp;req=4&amp;npos=32">this image</a>
+<a class="reference external" href="https://openi.nlm.nih.gov/detailedresult?img=CXR3666_IM-1824-1001&amp;amp;query=chest%20infection&amp;amp;it=xg&amp;amp;req=4&amp;amp;npos=32">this image</a>
 or search for various other ones on the <a class="reference external" href="https://openi.nlm.nih.gov"><em>Openi</em></a>
 database. Openi contains many biomedical images and it can be especially helpful
 if you have low bandwidth and/or are restricted by the amount of data you can
@@ -1046,11 +1067,10 @@ simply edge detection, you may find the following material useful:</p>
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="tutorial-deep-learning-on-mnist.html"
@@ -1070,10 +1090,7 @@ simply edge detection, you may find the following material useful:</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1123,6 +1140,7 @@ By the NumPy community
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2020-2023, the NumPy community.
@@ -1149,8 +1167,8 @@ By the NumPy community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

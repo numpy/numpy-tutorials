@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Plotting Fractals &#8212; NumPy Tutorials</title>
   
@@ -19,38 +18,36 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/tutorial-plotting-fractals';</script>
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Analyzing the impact of the lockdown on air quality in Delhi, India" href="tutorial-air-quality-analysis.html" />
@@ -68,6 +65,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -121,9 +127,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -133,8 +141,8 @@
       
     
     
-    <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="NumPy Tutorials - Home"/>
+    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="NumPy Tutorials - Home"/>`);</script>
   
   
 </a></div>
@@ -149,11 +157,22 @@
           
           
           
-          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
+          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../features.html">NumPy Features</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -401,20 +420,22 @@
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -467,12 +488,12 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="plotting-fractals">
-<h1>Plotting Fractals<a class="headerlink" href="#plotting-fractals" title="Permalink to this heading">#</a></h1>
+<h1>Plotting Fractals<a class="headerlink" href="#plotting-fractals" title="Link to this heading">#</a></h1>
 <p><img alt="Fractal picture" src="../_images/fractal.png" /></p>
 <p>Fractals are beautiful, compelling mathematical forms that can be oftentimes created from a relatively simple set of instructions. In nature they can be found in various places, such as coastlines, seashells, and ferns, and even were used in creating certain types of antennas. The mathematical idea of fractals was known for quite some time, but they really began to be truly appreciated in the 1970’s as advancements in computer graphics and some accidental discoveries lead researchers like <a class="reference external" href="https://en.wikipedia.org/wiki/Benoit_Mandelbrot">Benoît Mandelbrot</a> to stumble upon the truly mystifying visualizations that fractals possess.</p>
 <p>Today we will learn how to plot these beautiful visualizations and will start to do a bit of exploring for ourselves as we gain familiarity of the mathematics behind fractals and will use the ever powerful NumPy universal functions to perform the necessary calculations efficiently.</p>
 <section id="what-you-ll-do">
-<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Write a function for plotting various Julia sets</p></li>
 <li><p>Create a visualization of the Mandelbrot set</p></li>
@@ -481,7 +502,7 @@ document.write(`
 </ul>
 </section>
 <section id="what-you-ll-learn">
-<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>A better intuition for how fractals work mathematically</p></li>
 <li><p>A basic understanding about NumPy universal functions and Boolean Indexing</p></li>
@@ -490,7 +511,7 @@ document.write(`
 </ul>
 </section>
 <section id="what-you-ll-need">
-<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://matplotlib.org/">Matplotlib</a></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">make_axis_locatable</span></code> function from mpl_toolkits API</p></li>
@@ -513,7 +534,7 @@ document.write(`
 </ul>
 </section>
 <section id="warmup">
-<h2>Warmup<a class="headerlink" href="#warmup" title="Permalink to this heading">#</a></h2>
+<h2>Warmup<a class="headerlink" href="#warmup" title="Link to this heading">#</a></h2>
 <p>To gain some intuition for what fractals are, we will begin with an example.</p>
 <p>Consider the following equation:</p>
 <p><span class="math notranslate nohighlight">\(f(z) = z^2 -1 \)</span></p>
@@ -585,7 +606,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/57a72aa6b3d32f927e28dda9a294988a595a1dae202046fa55ceddae36bce95d.png" src="../_images/57a72aa6b3d32f927e28dda9a294988a595a1dae202046fa55ceddae36bce95d.png" />
+<img alt="../_images/705534f098e8cbf4ff7d7fdcbec7deaf9ba5620bf4b19531adc3402e0ce30684.png" src="../_images/705534f098e8cbf4ff7d7fdcbec7deaf9ba5620bf4b19531adc3402e0ce30684.png" />
 </div>
 </div>
 <p>This gives us a rough idea of what one iteration of the function does. Certain areas (notably in the areas closest to <span class="math notranslate nohighlight">\((0,0i)\)</span>) remain rather small while other areas grow quite considerably. Note that we lose information about the output by taking the absolute value, but it is the only way for us to be able to make a plot.</p>
@@ -606,7 +627,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/390e265885ace8864c0b21db64fc7eba7b521cb3201215833d80882c4c97cfad.png" src="../_images/390e265885ace8864c0b21db64fc7eba7b521cb3201215833d80882c4c97cfad.png" />
+<img alt="../_images/b3752694e8890980ac230ef3f394e90bee6577dac2949c0f18ab5955b3b8c3d2.png" src="../_images/b3752694e8890980ac230ef3f394e90bee6577dac2949c0f18ab5955b3b8c3d2.png" />
 </div>
 </div>
 <p>Once again, we see that values around the origin remain small, and values with a larger absolute value (or modulus) “explode”.</p>
@@ -640,7 +661,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/db69b6b4a7c72ed6e4b2cb45ff8849afb090890b3ead7235bdc6126915e9355a.png" src="../_images/db69b6b4a7c72ed6e4b2cb45ff8849afb090890b3ead7235bdc6126915e9355a.png" />
+<img alt="../_images/01b862be97147ecb74aac3d44aa94fc66b188c36eeeaab0098e37eb9defd4d6b.png" src="../_images/01b862be97147ecb74aac3d44aa94fc66b188c36eeeaab0098e37eb9defd4d6b.png" />
 </div>
 </div>
 <p>To our surprise, the behaviour of the function did not come close to matching our hypothesis. This is a prime example of the chaotic behaviour fractals possess. In the first two plots, the value “exploded” on the last iteration, jumping way beyond the region that it was contained in previously. The third plot on the other hand remained bounded to a small region close to the origin, yielding completely different behaviour despite the tiny change in value.</p>
@@ -692,13 +713,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b4fa4725c4ee63d0a1d331579a90e2f74eab1332bc2d7ca8524b3ff38d5260b6.png" src="../_images/b4fa4725c4ee63d0a1d331579a90e2f74eab1332bc2d7ca8524b3ff38d5260b6.png" />
+<img alt="../_images/db03b7d3cb25820a6e89994d1b826c46782a378376e978c92bd84df2098d4d34.png" src="../_images/db03b7d3cb25820a6e89994d1b826c46782a378376e978c92bd84df2098d4d34.png" />
 </div>
 </div>
 <p>What this stunning visual conveys is the complexity of the function’s behaviour. The yellow region represents values that remain small, while the purple region represents the divergent values. The beautiful pattern that arises on the border of the converging and diverging values is even more fascinating when you realize that it is created from such a simple function.</p>
 </section>
 <section id="julia-set">
-<h2>Julia set<a class="headerlink" href="#julia-set" title="Permalink to this heading">#</a></h2>
+<h2>Julia set<a class="headerlink" href="#julia-set" title="Link to this heading">#</a></h2>
 <p>What we just explored was an example of a fractal visualization of a specific Julia Set.</p>
 <p>Consider the function <span class="math notranslate nohighlight">\(f(z) = z^2 + c\)</span> where <span class="math notranslate nohighlight">\(c\)</span> is a complex number. The <strong>filled-in Julia set</strong> of <span class="math notranslate nohighlight">\(c\)</span> is the set of all complex numbers <code class="docutils literal notranslate"><span class="pre">z</span></code> in which the function converges at <span class="math notranslate nohighlight">\(f(z)\)</span>. Likewise, the boundary of the filled-in Julia set is what we call the <strong>Julia set</strong>. In our above visualization, we can see that the yellow region represents an approximation of the filled-in Julia set for <span class="math notranslate nohighlight">\(c = -1\)</span> and the greenish-yellow border would contain the Julia set.</p>
 <p>To gain access to a wider range of “Julia fractals”, we can write a function that allows for different values of <span class="math notranslate nohighlight">\(c\)</span> to be passed in:</p>
@@ -762,7 +783,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f80f9c101e07869ac952f5efb7b41790ebbf2d793a0f0389d95933da1eff6939.png" src="../_images/f80f9c101e07869ac952f5efb7b41790ebbf2d793a0f0389d95933da1eff6939.png" />
+<img alt="../_images/836090ec01cae98fbdeebcd8d925040fd70f869b47f243dc8a8998991ef645e3.png" src="../_images/836090ec01cae98fbdeebcd8d925040fd70f869b47f243dc8a8998991ef645e3.png" />
 </div>
 </div>
 <p>We also can explore some different Julia sets by experimenting with different values of <span class="math notranslate nohighlight">\(c\)</span>. It can be surprising how much influence it has on the shape of the fractal.</p>
@@ -777,7 +798,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/037b40bc756718bd4c4df3c41507d1fada98736113cf5029b04f505d8bbcbeec.png" src="../_images/037b40bc756718bd4c4df3c41507d1fada98736113cf5029b04f505d8bbcbeec.png" />
+<img alt="../_images/ecc8f63959736e8e501850efa72b466610edaa1495fd9278ed7fe628611ad9b5.png" src="../_images/ecc8f63959736e8e501850efa72b466610edaa1495fd9278ed7fe628611ad9b5.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -790,12 +811,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/521088b8a58b6f512bac12e1ed749b21beb0a0243aa7b2fb0c4741685932b292.png" src="../_images/521088b8a58b6f512bac12e1ed749b21beb0a0243aa7b2fb0c4741685932b292.png" />
+<img alt="../_images/778534fef122dad472fa0602c01a2d8f21068c612bc82f309c5e054f0d315ce8.png" src="../_images/778534fef122dad472fa0602c01a2d8f21068c612bc82f309c5e054f0d315ce8.png" />
 </div>
 </div>
 </section>
 <section id="mandelbrot-set">
-<h2>Mandelbrot set<a class="headerlink" href="#mandelbrot-set" title="Permalink to this heading">#</a></h2>
+<h2>Mandelbrot set<a class="headerlink" href="#mandelbrot-set" title="Link to this heading">#</a></h2>
 <p>Closely related to the Julia set is the famous <strong>Mandelbrot set</strong>, which has a slightly different definition. Once again, we define <span class="math notranslate nohighlight">\(f(z) = z^2 + c\)</span> where <span class="math notranslate nohighlight">\(c\)</span> is a complex number, but this time our focus is on our choice of <span class="math notranslate nohighlight">\(c\)</span>. We say that <span class="math notranslate nohighlight">\(c\)</span> is an element of the Mandelbrot set if f converges at <span class="math notranslate nohighlight">\(z = 0\)</span>. An equivalent definition is to say that <span class="math notranslate nohighlight">\(c\)</span> is an element of the Mandelbrot set if <span class="math notranslate nohighlight">\(f(c)\)</span> can be iterated infinitely and not ‘explode’. We will tweak our Julia function slightly (and rename it appropriately) so that we can plot a visualization of the Mandelbrot set, which possesses an elegant fractal pattern.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -825,12 +846,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d683809a7aa82d57afc4ad3cec381f24af8606ae6069999ec03528f0694759de.png" src="../_images/d683809a7aa82d57afc4ad3cec381f24af8606ae6069999ec03528f0694759de.png" />
+<img alt="../_images/b102805f930c7f7e58287b7c1e37654d7d92d9ba1e2a5a481c7a8dc423aeff06.png" src="../_images/b102805f930c7f7e58287b7c1e37654d7d92d9ba1e2a5a481c7a8dc423aeff06.png" />
 </div>
 </div>
 </section>
 <section id="generalizing-the-julia-set">
-<h2>Generalizing the Julia set<a class="headerlink" href="#generalizing-the-julia-set" title="Permalink to this heading">#</a></h2>
+<h2>Generalizing the Julia set<a class="headerlink" href="#generalizing-the-julia-set" title="Link to this heading">#</a></h2>
 <p>We can generalize our Julia function even further by giving it a parameter for which universal function we would like to pass in. This would allow us to plot fractals of the form <span class="math notranslate nohighlight">\(f(z) = g(z) + c\)</span> where g is a universal function selected by us.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -868,12 +889,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9205ca665543813126f2b41eb4595a5c7692d4c834a61e8cc1ff2d06b173d18d.png" src="../_images/9205ca665543813126f2b41eb4595a5c7692d4c834a61e8cc1ff2d06b173d18d.png" />
+<img alt="../_images/774c0c53a1edfeb533e6940c2abf97431945fef9b1c9abb03b5e3f284205fc1b.png" src="../_images/774c0c53a1edfeb533e6940c2abf97431945fef9b1c9abb03b5e3f284205fc1b.png" />
 </div>
 </div>
 <p>Needless to say, there is a large amount of exploring that can be done by fiddling with the inputted function, value of <span class="math notranslate nohighlight">\(c\)</span>, number of iterations, radius and even the density of the mesh and choice of colours.</p>
 <section id="newton-fractals">
-<h3>Newton Fractals<a class="headerlink" href="#newton-fractals" title="Permalink to this heading">#</a></h3>
+<h3>Newton Fractals<a class="headerlink" href="#newton-fractals" title="Link to this heading">#</a></h3>
 <p>Newton fractals are a specific class of fractals, where iterations involve adding or subtracting the ratio of a function (often a polynomial) and its derivative to the input values. Mathematically, it can be expressed as:</p>
 <p><span class="math notranslate nohighlight">\(z := z - \frac{f(z)}{f'(z)}\)</span></p>
 <p>We will define a general version of the fractal which will allow for different variations to be plotted by passing in our functions of choice.</p>
@@ -932,7 +953,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/292fe5bd96a01eeaa4b825b4fd939434721398cd14a593a26f693119a2a244fb.png" src="../_images/292fe5bd96a01eeaa4b825b4fd939434721398cd14a593a26f693119a2a244fb.png" />
+<img alt="../_images/e95d8e0b76603cfc38e8bba510094439d52c6d81e239bece4af27179396bae73.png" src="../_images/e95d8e0b76603cfc38e8bba510094439d52c6d81e239bece4af27179396bae73.png" />
 </div>
 </div>
 <p>Beautiful! Let’s try another one:</p>
@@ -961,7 +982,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/911fb9776adaab07427c2f0cbbf8558964eb98a836f02638627fe1bee5ff71ed.png" src="../_images/911fb9776adaab07427c2f0cbbf8558964eb98a836f02638627fe1bee5ff71ed.png" />
+<img alt="../_images/5186de389b3cf9b40b8ca3d8fbc40177c497c814b9126fe3f5dc1eb59137e1ca.png" src="../_images/5186de389b3cf9b40b8ca3d8fbc40177c497c814b9126fe3f5dc1eb59137e1ca.png" />
 </div>
 </div>
 <p>Note that you sometimes have to play with the radius in order to get a neat looking fractal.</p>
@@ -997,14 +1018,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3e32da4c036763178b69abff48a34bb5230d0e30400f1c7b8315745180c83f2d.png" src="../_images/3e32da4c036763178b69abff48a34bb5230d0e30400f1c7b8315745180c83f2d.png" />
+<img alt="../_images/11cabb0876e7cc6532590b4bd8779b53d1df95b74d91b416fd6603cc37973d41.png" src="../_images/11cabb0876e7cc6532590b4bd8779b53d1df95b74d91b416fd6603cc37973d41.png" />
 </div>
 </div>
 <p>It is truly fascinating how distinct yet similar these fractals are with each other. This leads us to the final section.</p>
 </section>
 </section>
 <section id="creating-your-own-fractals">
-<h2>Creating your own fractals<a class="headerlink" href="#creating-your-own-fractals" title="Permalink to this heading">#</a></h2>
+<h2>Creating your own fractals<a class="headerlink" href="#creating-your-own-fractals" title="Link to this heading">#</a></h2>
 <p>What makes fractals more exciting is how much there is to explore once you become familiar with the basics. Now we will wrap up our tutorial by exploring some of the different ways one can experiment in creating unique fractals. I encourage you to try some things out on your own (if you have not done so already).</p>
 <p>One of the first places to experiment would be with the function for the generalized Julia set, where we can try passing in different functions as parameters.</p>
 <p>Let’s start by choosing</p>
@@ -1027,7 +1048,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f01bbf01da33080c14d21fd18a2ffb6d5ef28713b58b837b0d517ff90f35dc35.png" src="../_images/f01bbf01da33080c14d21fd18a2ffb6d5ef28713b58b837b0d517ff90f35dc35.png" />
+<img alt="../_images/e2ae569cfd4e37f798054e6bc1f127e0e3ff87446d2addbc9479cc41441ee2f8.png" src="../_images/e2ae569cfd4e37f798054e6bc1f127e0e3ff87446d2addbc9479cc41441ee2f8.png" />
 </div>
 </div>
 <p>What happens if we compose our defined function inside of a sine function?</p>
@@ -1051,7 +1072,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7e511518ec9400fc2884a79e77df596e511c1fb53e88add19b75e2226e729ed5.png" src="../_images/7e511518ec9400fc2884a79e77df596e511c1fb53e88add19b75e2226e729ed5.png" />
+<img alt="../_images/c51aaba88e36977c7ebeae4f60004548d8ef306ac04c4e3f686a6175ea443054.png" src="../_images/c51aaba88e36977c7ebeae4f60004548d8ef306ac04c4e3f686a6175ea443054.png" />
 </div>
 </div>
 <p>Next, let’s create a function that applies both f and g to the inputs each iteration and adds the result together:</p>
@@ -1074,7 +1095,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/668e395c41236eb0559da428dbe6d1ec134a32653bdbac5640c9a38e5db9c669.png" src="../_images/668e395c41236eb0559da428dbe6d1ec134a32653bdbac5640c9a38e5db9c669.png" />
+<img alt="../_images/f90aa7d6002157ad6628a39b9789da77792a263fdf83371fdc62cc7b8b542f13.png" src="../_images/f90aa7d6002157ad6628a39b9789da77792a263fdf83371fdc62cc7b8b542f13.png" />
 </div>
 </div>
 <p>You can even create beautiful fractals through your own errors. Here is one that got created accidently by making a mistake in computing the derivative of a Newton fractal:</p>
@@ -1096,13 +1117,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e9292c85b3d823c5188e38c52d56602be26c6e7c2efd227e168c2a382886d0fb.png" src="../_images/e9292c85b3d823c5188e38c52d56602be26c6e7c2efd227e168c2a382886d0fb.png" />
+<img alt="../_images/e69ae25fe13c8730524eec5fffa28748bf093f337d81e76539f8be8ce276c489.png" src="../_images/e69ae25fe13c8730524eec5fffa28748bf093f337d81e76539f8be8ce276c489.png" />
 </div>
 </div>
 <p>Needless to say, there are a nearly endless supply of interesting fractal creations that can be made just by playing around with various combinations of NumPy universal functions and by tinkering with the parameters.</p>
 </section>
 <section id="in-conclusion">
-<h2>In conclusion<a class="headerlink" href="#in-conclusion" title="Permalink to this heading">#</a></h2>
+<h2>In conclusion<a class="headerlink" href="#in-conclusion" title="Link to this heading">#</a></h2>
 <p>We learned a lot about generating fractals today. We saw how complicated fractals requiring many iterations could be computed efficiently using universal functions. We also took advantage of boolean indexing, which allowed for less computations to be made without having to individually verify each value. Finally, we learned a lot about fractals themselves. As a recap:</p>
 <ul class="simple">
 <li><p>Fractal images are created by iterating a function over a set of values, and keeping tally of how long it takes for each value to pass a certain threshold</p></li>
@@ -1115,14 +1136,14 @@ document.write(`
 </ul>
 </section>
 <section id="on-your-own">
-<h2>On your own<a class="headerlink" href="#on-your-own" title="Permalink to this heading">#</a></h2>
+<h2>On your own<a class="headerlink" href="#on-your-own" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Play around with the parameters of the generalized Julia set function, try playing with the constant value, number of iterations, function choice, radius, and colour choice.</p></li>
 <li><p>Visit the “List of fractals by Hausdorff dimension” Wikipedia page (linked in the Further reading section) and try writing a function for a fractal not mentioned in this tutorial.</p></li>
 </ul>
 </section>
 <section id="further-reading">
-<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this heading">#</a></h2>
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Fractal">More information on the theory behind fractals</a></p></li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Julia_set">Further reading on Julia sets</a></p></li>
@@ -1139,11 +1160,10 @@ document.write(`
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="tutorial-static_equilibrium.html"
@@ -1163,10 +1183,7 @@ document.write(`
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1216,6 +1233,7 @@ By the NumPy community
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2020-2023, the NumPy community.
@@ -1242,8 +1260,8 @@ By the NumPy community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Masked Arrays &#8212; NumPy Tutorials</title>
   
@@ -19,36 +18,34 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/tutorial-ma';</script>
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="NumPy Applications" href="../applications.html" />
@@ -66,6 +63,15 @@
   
   
   <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -119,9 +125,11 @@
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -131,8 +139,8 @@
       
     
     
-    <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="NumPy Tutorials - Home"/>
+    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="NumPy Tutorials - Home"/>`);</script>
   
   
 </a></div>
@@ -147,11 +155,22 @@
           
           
           
-          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
-            <label class="sr-only">GitHub</label></a>
+          <a href="https://github.com/numpy/numpy-tutorials/" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
         </li>
 </ul></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../features.html">NumPy Features</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
@@ -399,20 +418,22 @@
 </button>
 
 
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script>
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
 </script>
@@ -465,13 +486,13 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="masked-arrays">
-<h1>Masked Arrays<a class="headerlink" href="#masked-arrays" title="Permalink to this heading">#</a></h1>
+<h1>Masked Arrays<a class="headerlink" href="#masked-arrays" title="Link to this heading">#</a></h1>
 <section id="what-you-ll-do">
-<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll do<a class="headerlink" href="#what-you-ll-do" title="Link to this heading">#</a></h2>
 <p>Use the masked arrays module from NumPy to analyze COVID-19 data and deal with missing values.</p>
 </section>
 <section id="what-you-ll-learn">
-<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll learn<a class="headerlink" href="#what-you-ll-learn" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>You’ll understand what are masked arrays and how they can be created</p></li>
 <li><p>You’ll see how to access and modify data for masked arrays</p></li>
@@ -479,7 +500,7 @@ document.write(`
 </ul>
 </section>
 <section id="what-you-ll-need">
-<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Permalink to this heading">#</a></h2>
+<h2>What you’ll need<a class="headerlink" href="#what-you-ll-need" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Basic familiarity with Python. If you would like to refresh your memory, take a look at the <a class="reference external" href="https://docs.python.org/dev/tutorial/index.html">Python tutorial</a>.</p></li>
 <li><p>Basic familiarity with NumPy</p></li>
@@ -488,7 +509,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="what-are-masked-arrays">
-<h2>What are masked arrays?<a class="headerlink" href="#what-are-masked-arrays" title="Permalink to this heading">#</a></h2>
+<h2>What are masked arrays?<a class="headerlink" href="#what-are-masked-arrays" title="Link to this heading">#</a></h2>
 <p>Consider the following problem. You have a dataset with missing or invalid entries. If you’re doing any kind of processing on this data, and want to <em>skip</em> or flag these unwanted entries without just deleting them, you may have to use conditionals or filter your data somehow. The <a class="reference external" href="https://numpy.org/devdocs/reference/maskedarray.generic.html#module-numpy.ma">numpy.ma</a> module provides some of the same functionality of <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.ndarray.html#numpy.ndarray">NumPy ndarrays</a> with added structure to ensure invalid entries are not used in computation.</p>
 <p>From the <a class="reference external" href="https://numpy.org/devdocs/reference/maskedarray.generic.html#module-numpy.ma">Reference Guide</a>:</p>
 <blockquote>
@@ -502,7 +523,7 @@ document.write(`
 </ul>
 </section>
 <section id="when-can-they-be-useful">
-<h2>When can they be useful?<a class="headerlink" href="#when-can-they-be-useful" title="Permalink to this heading">#</a></h2>
+<h2>When can they be useful?<a class="headerlink" href="#when-can-they-be-useful" title="Link to this heading">#</a></h2>
 <p>There are a few situations where masked arrays can be more useful than just eliminating the invalid entries of an array:</p>
 <ul class="simple">
 <li><p>When you want to preserve the values you masked for later processing, without copying the array;</p></li>
@@ -513,7 +534,7 @@ document.write(`
 <p>Masked arrays are also a good idea since the <code class="docutils literal notranslate"><span class="pre">numpy.ma</span></code> module also comes with a specific implementation of most <a class="reference external" href="https://numpy.org/devdocs/glossary.html#term-ufunc">NumPy universal functions (ufuncs)</a>, which means that you can still apply fast vectorized functions and operations on masked data. The output is then a masked array. We’ll see some examples of how this works in practice below.</p>
 </section>
 <section id="using-masked-arrays-to-see-covid-19-data">
-<h2>Using masked arrays to see COVID-19 data<a class="headerlink" href="#using-masked-arrays-to-see-covid-19-data" title="Permalink to this heading">#</a></h2>
+<h2>Using masked arrays to see COVID-19 data<a class="headerlink" href="#using-masked-arrays-to-see-covid-19-data" title="Link to this heading">#</a></h2>
 <p>From <a class="reference external" href="https://www.kaggle.com/atilamadai/covid19">Kaggle</a> it is possible to download a dataset with initial data about the COVID-19 outbreak in the beginning of 2020. We are going to look at a small subset of this data, contained in the file <code class="docutils literal notranslate"><span class="pre">who_covid_19_sit_rep_time_series.csv</span></code>. <em>(Note that this file has been replaced with a version without missing data sometime in late 2020.)</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -575,7 +596,7 @@ rows of this file, since they contain other data we are not interested in. Separ
 <p>Included in the <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> function call, we have selected the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.dtype.html#numpy.dtype">numpy.dtype</a> for each subset of the data (either an integer - <code class="docutils literal notranslate"><span class="pre">numpy.int_</span></code> - or a string of characters - <code class="docutils literal notranslate"><span class="pre">numpy.unicode_</span></code>). We have also used the <code class="docutils literal notranslate"><span class="pre">encoding</span></code> argument to select <code class="docutils literal notranslate"><span class="pre">utf-8-sig</span></code> as the encoding for the file (read more about encoding in the <a class="reference external" href="https://docs.python.org/3/library/codecs.html#encodings-and-unicode">official Python documentation</a>. You can read more about the <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> function from the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt">Reference Documentation</a> or from the <a class="reference external" href="https://numpy.org/devdocs/user/basics.io.genfromtxt.html">Basic IO tutorial</a>.</p>
 </section>
 <section id="exploring-the-data">
-<h2>Exploring the data<a class="headerlink" href="#exploring-the-data" title="Permalink to this heading">#</a></h2>
+<h2>Exploring the data<a class="headerlink" href="#exploring-the-data" title="Link to this heading">#</a></h2>
 <p>First of all, we can plot the whole set of data we have and see what it looks like. In order to get a readable plot, we select only a few of the dates to show in our <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xticks.html#matplotlib.pyplot.xticks">x-axis ticks</a>. Note also that in our plot command, we use <code class="docutils literal notranslate"><span class="pre">nbcases.T</span></code> (the transpose of the <code class="docutils literal notranslate"><span class="pre">nbcases</span></code> array) since this means we will plot each row of the file as a separate line. We choose to plot a dashed line (using the <code class="docutils literal notranslate"><span class="pre">'--'</span></code> line style). See the <a class="reference external" href="https://matplotlib.org/">matplotlib</a> documentation for more info on this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -592,7 +613,7 @@ rows of this file, since they contain other data we are not interested in. Separ
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020&#39;)
 </pre></div>
 </div>
-<img alt="../_images/4196cb508bc9c1e9177020de8280bcae523e9b7aca66f092e0c109164f656e6f.png" src="../_images/4196cb508bc9c1e9177020de8280bcae523e9b7aca66f092e0c109164f656e6f.png" />
+<img alt="../_images/838d1197eae9552592c6e045d31f4b0ffb7034643c6e4c6ef621e9e510bdd458.png" src="../_images/838d1197eae9552592c6e045d31f4b0ffb7034643c6e4c6ef621e9e510bdd458.png" />
 </div>
 </div>
 <p>The graph has a strange shape from January 24th to February 1st. It would be interesting to know where this data comes from. If we look at the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array we extracted from the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file, we can see that we have two columns, where the first would contain regions and the second would contain the name of the country. However, only the first few rows contain data for the the first column (province names in China). Following that, we only have country names. So it would make sense to group all the data from China into a single row. For this, we’ll select from the <code class="docutils literal notranslate"><span class="pre">nbcases</span></code> array only the rows for which the second entry of the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array corresponds to China. Next, we’ll use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.sum.html#numpy.sum">numpy.sum</a> function to sum all the selected rows (<code class="docutils literal notranslate"><span class="pre">axis=0</span></code>). Note also that row 35 corresponds to the total counts for the whole country for each date. Since we want to calculate the sum ourselves from the provinces data, we have to remove that row first from both <code class="docutils literal notranslate"><span class="pre">locations</span></code> and <code class="docutils literal notranslate"><span class="pre">nbcases</span></code>:</p>
@@ -617,7 +638,7 @@ rows of this file, since they contain other data we are not interested in. Separ
 <p>Something’s wrong with this data - we are not supposed to have negative values in a cumulative data set. What’s going on?</p>
 </section>
 <section id="missing-data">
-<h2>Missing data<a class="headerlink" href="#missing-data" title="Permalink to this heading">#</a></h2>
+<h2>Missing data<a class="headerlink" href="#missing-data" title="Link to this heading">#</a></h2>
 <p>Looking at the data, here’s what we find: there is a period with <strong>missing data</strong>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -692,7 +713,7 @@ closely:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020&#39;)
 </pre></div>
 </div>
-<img alt="../_images/6b6123339c4294c7d737bfe17b35de2d57cc77a83512cc08dc4cf2819a280454.png" src="../_images/6b6123339c4294c7d737bfe17b35de2d57cc77a83512cc08dc4cf2819a280454.png" />
+<img alt="../_images/07e95232d6b6da08858a13877e991abbbf492a6a9b4845f59712f8fcfe73d1ef.png" src="../_images/07e95232d6b6da08858a13877e991abbbf492a6a9b4845f59712f8fcfe73d1ef.png" />
 </div>
 </div>
 <p>Now that our data has been masked, let’s try summing up all the cases in China:</p>
@@ -788,13 +809,13 @@ closely:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China&#39;)
 </pre></div>
 </div>
-<img alt="../_images/50840150a3499989fb5efc6c59dbcfe1c095a97bece41da3cbd8c7ddd24d0d39.png" src="../_images/50840150a3499989fb5efc6c59dbcfe1c095a97bece41da3cbd8c7ddd24d0d39.png" />
+<img alt="../_images/192c96baaa72abed452b9c586231451989d5b334b4e4d293ae58632106efc314.png" src="../_images/192c96baaa72abed452b9c586231451989d5b334b4e4d293ae58632106efc314.png" />
 </div>
 </div>
 <p>It’s clear that masked arrays are the right solution here. We cannot represent the missing data without mischaracterizing the evolution of the curve.</p>
 </section>
 <section id="fitting-data">
-<h2>Fitting Data<a class="headerlink" href="#fitting-data" title="Permalink to this heading">#</a></h2>
+<h2>Fitting Data<a class="headerlink" href="#fitting-data" title="Link to this heading">#</a></h2>
 <p>One possibility we can think of is to interpolate the missing data to estimate the number of cases in late January. Observe that we can select the masked elements using the <code class="docutils literal notranslate"><span class="pre">.mask</span></code> attribute:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -856,10 +877,10 @@ package to create a cubic polynomial model that fits the data as best as possibl
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f766d913220&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f122e9ee140&gt;]
 </pre></div>
 </div>
-<img alt="../_images/7177c7f5f4e388d1686127cb1e73ed15f59b2482f84e4ed79679318c43c9c625.png" src="../_images/7177c7f5f4e388d1686127cb1e73ed15f59b2482f84e4ed79679318c43c9c625.png" />
+<img alt="../_images/601cd7b45c798341e4f24cb4bb12f9e069ce405b5af97d7a756fa023764ddc03.png" src="../_images/601cd7b45c798341e4f24cb4bb12f9e069ce405b5af97d7a756fa023764ddc03.png" />
 </div>
 </div>
 <p>This plot is not so readable since the lines seem to be over each other, so let’s summarize in a more elaborate plot. We’ll plot the real data when
@@ -883,25 +904,25 @@ available, and show the cubic fit for unavailable data, using this fit to comput
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China\nCubic estimate for 7 days after start&#39;)
 </pre></div>
 </div>
-<img alt="../_images/b2a148f0182b51a08de3c9eca5434f6cf7d7011ca11dab8b26daba4cb24cb5c6.png" src="../_images/b2a148f0182b51a08de3c9eca5434f6cf7d7011ca11dab8b26daba4cb24cb5c6.png" />
+<img alt="../_images/43c08270212c289399f1d957e5e2fbaeb0c4e8f2463a74434cb5763022a6e834.png" src="../_images/43c08270212c289399f1d957e5e2fbaeb0c4e8f2463a74434cb5763022a6e834.png" />
 </div>
 </div>
 </section>
 <section id="in-practice">
-<h2>In practice<a class="headerlink" href="#in-practice" title="Permalink to this heading">#</a></h2>
+<h2>In practice<a class="headerlink" href="#in-practice" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Adding <code class="docutils literal notranslate"><span class="pre">-1</span></code> to missing data is not a problem with <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code>; in this particular case, substituting the missing value with <code class="docutils literal notranslate"><span class="pre">0</span></code> might have been fine, but we’ll see later that this is far from a general solution. Also, it is possible to call the <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> function using the <code class="docutils literal notranslate"><span class="pre">usemask</span></code> parameter. If <code class="docutils literal notranslate"><span class="pre">usemask=True</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> automatically returns a masked array.</p></li>
 </ul>
 </section>
 <section id="further-reading">
-<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this heading">#</a></h2>
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
 <p>Topics not covered in this tutorial can be found in the documentation:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.ma.harden_mask.html#numpy.ma.harden_mask">Hardmasks</a> vs. <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.ma.soften_mask.html#numpy.ma.soften_mask">softmasks</a></p></li>
 <li><p><a class="reference external" href="https://numpy.org/devdocs/reference/maskedarray.generic.html#maskedarray-generic">The numpy.ma module</a></p></li>
 </ul>
 <section id="reference">
-<h3>Reference<a class="headerlink" href="#reference" title="Permalink to this heading">#</a></h3>
+<h3>Reference<a class="headerlink" href="#reference" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Ensheng Dong, Hongru Du, Lauren Gardner, <em>An interactive web-based dashboard to track COVID-19 in real time</em>, The Lancet Infectious Diseases, Volume 20, Issue 5, 2020, Pages 533-534, ISSN 1473-3099, <a class="reference external" href="https://doi.org/10.1016/S1473-3099(20)30120-1">https://doi.org/10.1016/S1473-3099(20)30120-1</a>.</p></li>
 </ul>
@@ -915,11 +936,10 @@ available, and show the cubic fit for unavailable data, using this fit to comput
 
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="save-load-arrays.html"
@@ -939,10 +959,7 @@ available, and show the cubic fit for unavailable data, using this fit to comput
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -992,6 +1009,7 @@ By the NumPy community
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2020-2023, the NumPy community.
@@ -1018,8 +1036,8 @@ By the NumPy community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>
