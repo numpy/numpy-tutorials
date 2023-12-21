@@ -92,7 +92,7 @@ rows of this file, since they contain other data we are not interested in. Separ
 # Read just the dates for columns 4-18 from the first row
 dates = np.genfromtxt(
     filename,
-    dtype=np.unicode_,
+    dtype=np.str_,
     delimiter=",",
     max_rows=1,
     usecols=range(4, 18),
@@ -102,7 +102,7 @@ dates = np.genfromtxt(
 # columns, skipping the first six rows
 locations = np.genfromtxt(
     filename,
-    dtype=np.unicode_,
+    dtype=np.str_,
     delimiter=",",
     skip_header=6,
     usecols=(0, 1),
@@ -119,7 +119,7 @@ nbcases = np.genfromtxt(
 )
 ```
 
-Included in the `numpy.genfromtxt` function call, we have selected the [numpy.dtype](https://numpy.org/devdocs/reference/generated/numpy.dtype.html#numpy.dtype) for each subset of the data (either an integer - `numpy.int_` - or a string of characters - `numpy.unicode_`). We have also used the `encoding` argument to select `utf-8-sig` as the encoding for the file (read more about encoding in the [official Python documentation](https://docs.python.org/3/library/codecs.html#encodings-and-unicode). You can read more about the `numpy.genfromtxt` function from the [Reference Documentation](https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt) or from the [Basic IO tutorial](https://numpy.org/devdocs/user/basics.io.genfromtxt.html).
+Included in the `numpy.genfromtxt` function call, we have selected the [numpy.dtype](https://numpy.org/devdocs/reference/generated/numpy.dtype.html#numpy.dtype) for each subset of the data (either an integer - `numpy.int_` - or a string of characters - `numpy.str_`). We have also used the `encoding` argument to select `utf-8-sig` as the encoding for the file (read more about encoding in the [official Python documentation](https://docs.python.org/3/library/codecs.html#encodings-and-unicode). You can read more about the `numpy.genfromtxt` function from the [Reference Documentation](https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt) or from the [Basic IO tutorial](https://numpy.org/devdocs/user/basics.io.genfromtxt.html).
 
 +++
 
