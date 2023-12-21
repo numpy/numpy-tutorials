@@ -7,7 +7,6 @@ dependencies:
   - scipy
   - matplotlib
   - pandas
-  - statsmodels
   - imageio
   # For building the site
   - sphinx

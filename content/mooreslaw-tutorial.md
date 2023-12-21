@@ -44,19 +44,17 @@ the 53 years following his prediction. You will determine the best-fit constants
 
 * NumPy
 * [Matplotlib](https://matplotlib.org/)
-* [statsmodels](https://www.statsmodels.org) ordinary linear regression
 
 imported with the following commands
 
 ```{code-cell}
 import matplotlib.pyplot as plt
 import numpy as np
-import statsmodels.api as sm
 ```
 
 **2.** Since this is an exponential growth law you need a little background in doing math with [natural logs](https://en.wikipedia.org/wiki/Natural_logarithm) and [exponentials](https://en.wikipedia.org/wiki/Exponential_function).
 
-You'll use these NumPy, Matplotlib, and statsmodels functions:
+You'll use these NumPy and Matplotlib functions:
 
 * [`np.loadtxt`](https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html): this function loads text into a NumPy array
 * [`np.log`](https://numpy.org/doc/stable/reference/generated/numpy.log.html): this function takes the natural log of all elements in a NumPy array
@@ -64,7 +62,6 @@ You'll use these NumPy, Matplotlib, and statsmodels functions:
 * [`lambda`](https://docs.python.org/3/library/ast.html?highlight=lambda#ast.Lambda): this is a minimal function definition for creating a function model
 * [`plt.semilogy`](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.semilogy.html): this function will plot x-y data onto a figure with a linear x-axis and $\log_{10}$ y-axis
 [`plt.plot`](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.plot.html): this function will plot x-y data on linear axes
-* [`sm.OLS`](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html): find fitting parameters and standard errors using the statsmodels ordinary least squares model
 * slicing arrays: view parts of the data loaded into the workspace, slice the arrays e.g. `x[:10]` for the first 10 values in the array, `x`
 * boolean array indexing: to view parts of the data that match a given condition use boolean operations to index an array
 * [`np.block`](https://numpy.org/doc/stable/reference/generated/numpy.block.html): to combine arrays into 2D arrays
@@ -215,59 +212,31 @@ where $\mathbf{y}$ are the observations of the log of the number of
 transistors in a 1D array and $\mathbf{Z}=[\text{year}_i^1,~\text{year}_i^0]$ are the
 polynomial terms for $\text{year}_i$ in the first and second columns. By
 creating this set of regressors in the $\mathbf{Z}-$matrix you set
-up an ordinary least squares statistical model. Some clever
-NumPy array features will build $\mathbf{Z}$
+up an ordinary least squares statistical model.
 
-1. `year[:,np.newaxis]` : takes the 1D array with shape `(179,)` and turns it into a 2D column vector with shape `(179,1)`
-2. `**[1, 0]` : stacks two columns, in the first column is `year**1` and the second column is `year**0 == 1`
-
-```{code-cell}
-Z = year[:, np.newaxis] ** [1, 0]
-```
-
-Now that you have the created a matrix of regressors, $\mathbf{Z},$ and
-the observations are in vector, $\mathbf{y},$ you can use these
-variables to build the an ordinary least squares model with
-[`sm.OLS`](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html).
+`Z` is a linear model with two parameters, i.e. a polynomial with degree `1`.
+Therefore we can represent the model with `numpy.polynomial.Polynomial` and
+use the fitting functionality to determine the model parameters:
 
 ```{code-cell}
-model = sm.OLS(yi, Z)
+model = np.polynomial.Polynomial.fit(year, yi, deg=1)
 ```
 
-Now, you can view the fitting constants, $A$ and $B$, and their standard
-errors.  Run the
-[`fit`](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.OLS.html) and print the
-[`summary`](https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.RegressionResults.summary.html) to view results as such,
+By default, `Polynomial.fit` performs the fit in the domain determined by the
+independent variable (`year` in this case).
+The coefficients for the unscaled and unshifted model can be recovered with the
+`convert` method:
+
 
 ```{code-cell}
-results = model.fit()
-print(results.summary())
+model = model.convert()
+model
 ```
 
-The __OLS Regression Results__ summary gives a lot of information about
-the regressors, $\mathbf{Z},$ and observations, $\mathbf{y}.$ The most
-important outputs for your current analysis are
-
-```
-=================================
-                 coef    std err
----------------------------------
-x1             0.3416      0.006
-const       -666.3264     11.890
-=================================
-```
-where `x1` is slope, $A=0.3416$, `const` is the intercept,
-$B=-666.364$, and `std error` gives the precision of constants
-$A=0.342\pm 0.006~\dfrac{\log(\text{transistors}/\text{chip})}{\text{years}}$ and $B=-666\pm
-12~\log(\text{transistors}/\text{chip}),$ where the units are in
-$\log(\text{transistors}/\text{chip})$. You created an exponential growth model.
-To get the constants, save them to an array `AB` with
-`results.params` and assign $A$ and $B$ to `x1` and `constant`.
+The individual parameters $A$ and $B$ are the coefficients of our linear model:
 
 ```{code-cell}
-AB = results.params
-A = AB[0]
-B = AB[1]
+B, A = model
 ```
 
 Did manufacturers double the transistor count every two years? You have
@@ -277,24 +246,14 @@ $\dfrac{\text{transistor_count}(\text{year} +2)}{\text{transistor_count}(\text{y
 \dfrac{e^{B}e^{A( \text{year} + 2)}}{e^{B}e^{A \text{year}}} = e^{2A}$
 
 where increase in number of transistors is $xFactor,$ number of years is
-2, and $A$ is the best fit slope on the semilog function. The error in
-your
-prediction, $\Delta(xFactor),$ comes from the precision of your constant
-$A,$ which you calculated as the standard error $\Delta A= 0.006$.
-
-$\Delta (xFactor) = \frac{\partial}{\partial A}(e^{2A})\Delta A = 2Ae^{2A}\Delta A$
+2, and $A$ is the best fit slope on the semilog function.
 
 ```{code-cell}
-print("Rate of semiconductors added on a chip every 2 years:")
-print(
-    "\tx{:.2f} +/- {:.2f} semiconductors per chip".format(
-        np.exp((A) * 2), 2 * A * np.exp(2 * A) * 0.006
-    )
-)
+print(f"Rate of semiconductors added on a chip every 2 years: {np.exp(2 * A):.2f}")
 ```
 
 Based upon your least-squares regression model, the number of
-semiconductors per chip increased by a factor of $1.98\pm 0.01$ every two
+semiconductors per chip increased by a factor of $1.98$ every two
 years. You have a model that predicts the number of semiconductors each
 year. Now compare your model to the actual manufacturing reports.  Plot
 the linear regression results and all of the transistor counts.
@@ -455,7 +414,7 @@ np.savez(
     transistor_count=transistor_count,
     transistor_count_predicted=transistor_count_predicted,
     transistor_Moores_law=transistor_Moores_law,
-    regression_csts=AB,
+    regression_csts=(A, B),
 )
 ```
 

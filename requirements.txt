@@ -3,7 +3,6 @@ numpy
 scipy
 matplotlib
 pandas
-statsmodels
 imageio
 # For supporting .md-based notebooks
 jupytext
