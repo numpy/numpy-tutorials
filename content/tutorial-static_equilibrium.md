@@ -245,10 +245,10 @@ forceCord = cordUnit * cordTension
 print("Force from the cord =", forceCord)
 ```
 
-In order to find the moment you need the cross product of the force vector and the radius.
+In order to find the moment you need the cross product of the distance and the force vector.
 
 ```{code-cell}
-momentCord = np.cross(forceCord, poleDirection)
+momentCord = np.cross(poleDirection, forceCord)
 print("Moment from the cord =", momentCord)
 ```
 
@@ -263,107 +263,105 @@ print("Reaction moment =", M)
 ```
 
 ### Another Example
-Let's look at a slightly more complicated model.  In this example you will be observing a beam with two cables and an applied force.  This time you need to find both the tension in the cords and the reaction forces of the beam. *(Source: [Vector Mechanics for Engineers: Statics](https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9780077687304.html), Problem 4.106)*
+Let's look at a slightly more complicated model.  In this example you will be observing a beam with two cables and an applied force.  This time you need to find both the tension in the cords and the reaction forces of the beam. *(Source: [Vector Mechanics for Engineers: Statics, 12th Edition](https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9781259977268.html), Problem 4.106. ISBN13: 9781259977268)*
 
 
 ![image.png](_static/problem4.png)
 
-Define distance *a* as 3 meters
+Define distance *a* as 3 meters. The ball joint at A can apply reaction forces, but no reation torques.
 
 
-As before, start by defining the location of each relevant point as an array.
+As before, start by defining the location of each relevant point as an array. For this problem vertical arrays are more convenient.
 
 ```{code-cell}
-A = np.array([0, 0, 0])
-B = np.array([0, 3, 0])
-C = np.array([0, 6, 0])
-D = np.array([1.5, 0, -3])
-E = np.array([1.5, 0, 3])
-F = np.array([-3, 0, 2])
+A = np.array([[0], [0], [0]])
+B = np.array([[0], [3], [0]])
+C = np.array([[0], [6], [0]])
+D = np.array([[1.5], [0], [-3]])
+E = np.array([[1.5], [0], [3]])
+F = np.array([[-3], [0], [2]])
 ```
 
 From these equations, you start by determining vector directions with unit vectors.
 
 ```{code-cell}
-AB = B - C
+AB = B - A
 AC = C - A
 BD = D - B
 BE = E - B
 CF = F - C
 
-UnitBD = BD / np.linalg.norm(BD)
-UnitBE = BE / np.linalg.norm(BE)
-UnitCF = CF / np.linalg.norm(CF)
+Unit_BD = BD / np.linalg.norm(BD)
+Unit_BE = BE / np.linalg.norm(BE)
+Unit_CF = CF / np.linalg.norm(CF)
 
-RadBD = np.cross(AB, UnitBD)
-RadBE = np.cross(AB, UnitBE)
-RadCF = np.cross(AC, UnitCF)
+Rad_BD = np.cross(AB, Unit_BD, axis=0)
+Rad_BE = np.cross(AB, Unit_BE, axis=0)
+Rad_CF = np.cross(AC, Unit_CF, axis=0)
 ```
 
 This lets you represent the tension (T) and reaction (R) forces acting on the system as
 
-$$\left[
-\begin{array}
+$\sum F_{x} = 0 = \frac{1}{3}T_{BD}+\frac{1}{3}T_{BE}-\frac{3}{7}T_{CF}+R_{x}$
+
+$\sum F_{y} = 0 = (-\frac{2}{3})T_{BD}-\frac{2}{3}T_{BE}-\frac{6}{7}T_{CF}+R_{y}$
+
+$\sum F_{z} = 0 = (-\frac{2}{3})T_{BD}+\frac{2}{3}T_{BE}+\frac{2}{7}T_{CF}+R_{z}$
+
+and the moments as
+
+$\sum M_{x} = 0 = (-2)T_{BD}+2T_{BE}+\frac{12}{7}T_{CF}$
+
+$\sum M_{y} = 0 = (0)T_{BD}-(0)T_{BE}+(0)T_{CF}$
+
+$\sum M_{z} = 0 = (-)T_{BD}-T_{BE}+\frac{18}{7}T_{CF}$
+
+Where $T$ is the tension in the respective cord and $R$ is the reaction force in a respective direction. $M_{y}$ contains no information and can be discarded. $T_{CF}$ is known to be 455N and can be moved to the opposite side of the equation. You now have five unknowns with five equations and can solve the linear system.
+
+$$\begin{bmatrix}
 ~1/3 & 1/3 & 1 & 0 & 0\\
 -2/3 & -2/3 & 0 & 1 & 0\\
 -2/3 & 2/3 & 0 & 0 & 1\\
-\end{array}
-\right]
-\left[
-\begin{array}
+-2 & 2 & 0 & 0 & 0\\
+-1 & -1 & 0 & 0 & 0
+\end{bmatrix}
+\begin{bmatrix}
 ~T_{BD}\\
 T_{BE}\\
 R_{x}\\
 R_{y}\\
 R_{z}\\
-\end{array}
-\right]
+\end{bmatrix}
 =
-\left[
-\begin{array}
+\begin{bmatrix}
 ~195\\
 390\\
 -130\\
-\end{array}
-\right]$$
+-780\\
+-1170
+\end{bmatrix}$$
 
-and the moments as
+```{code-cell}
+# sum forces
+unknown_Forces = np.hstack((Unit_BD, Unit_BE, np.eye(3)))
+# sum torques
+unknown_Torques = np.hstack((Rad_BD, Rad_BE, np.zeros((3,3))))
+# -1 due to being moved to the RHS
+T_CF = 455
+known_Forces = -1 * T_CF * Unit_CF
+known_Torques = -1 * T_CF * Rad_CF
 
-$$\left[
-\begin{array}
-~2 & -2\\
-1 & 1\\
-\end{array}
-\right]
-\left[
-\begin{array}
-~T_{BD}\\
-T_{BE}\\
-\end{array}
-\right]
-=
-\left[
-\begin{array}
-~780\\
-1170\\
-\end{array}
-\right]$$
+# remove M_y
+unknown_Torques = np.delete(unknown_Torques, 1, 0)
+known_Torques = np.delete(known_Torques, 1, 0)
 
-Where $T$ is the tension in the respective cord and $R$ is the reaction force in a respective direction. Then you just have six equations:
+# combine into a single system
+LHS = np.vstack((unknown_Forces, unknown_Torques))
+RHS = np.vstack((known_Forces, known_Torques))
 
-
-$\sum F_{x} = 0 = T_{BE}/3+T_{BD}/3-195+R_{x}$
-
-$\sum F_{y} = 0 = (-\frac{2}{3})T_{BE}-\frac{2}{3}T_{BD}-390+R_{y}$
-
-$\sum F_{z} = 0 = (-\frac{2}{3})T_{BE}+\frac{2}{3}T_{BD}+130+R_{z}$
-
-$\sum M_{x} = 0 = 780+2T_{BE}-2T_{BD}$
-
-$\sum M_{z} = 0 = 1170-T_{BE}-T_{BD}$
-
-
-You now have five unknowns with five equations, and can solve for:
+solution = np.linalg.solve(LHS, RHS)
+print(solution)
+```
 
 $\ T_{BD} = 780N$
 
