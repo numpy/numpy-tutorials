@@ -319,27 +319,27 @@ $\sum M_{z} = 0 = (-)T_{BD}-T_{BE}+\frac{18}{7}T_{CF}$
 
 Where $T$ is the tension in the respective cord and $R$ is the reaction force in a respective direction. $M_{y}$ contains no information and can be discarded. $T_{CF}$ is known to be 455N and can be moved to the opposite side of the equation. You now have five unknowns with five equations that can be represented by a linear system. Stacking the vectors solved above produces a matrix, a 2D array. With the matrix of coefficients for each of the unkown variables on the left hand side of the equation and all of the known values on the right hand side, we can use NumPy's linear solver to obtain the solution.
 
-$$\begin{bmatrix}
-~1/3 & 1/3 & 1 & 0 & 0\\
--2/3 & -2/3 & 0 & 1 & 0\\
--2/3 & 2/3 & 0 & 0 & 1\\
--2 & 2 & 0 & 0 & 0\\
--1 & -1 & 0 & 0 & 0\\
+$$  \begin{bmatrix}
+1/3 & 1/3 & 1 & 0 & 0 \\
+-2/3 & -2/3 & 0 & 1 & 0 \\
+-2/3 & 2/3 & 0 & 0 & 1 \\
+-2 & 2 & 0 & 0 & 0 \\
+-1 & -1 & 0 & 0 & 0 \\
 \end{bmatrix}
 \begin{bmatrix}
-~T_{BD}\\
-T_{BE}\\
-R_{x}\\
-R_{y}\\
-R_{z}\\
+T_{BD} \\
+T_{BE} \\
+R_{x} \\
+R_{y} \\
+R_{z} \\
 \end{bmatrix}
 =
 \begin{bmatrix}
-~195\\
-390\\
--130\\
--780\\
--1170\\
+195 \\
+390 \\
+-130 \\
+-780 \\
+-1170 \\
 \end{bmatrix}$$
 
 ```{code-cell}
