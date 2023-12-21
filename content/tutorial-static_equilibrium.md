@@ -39,8 +39,9 @@ import matplotlib.pyplot as plt
 
 In this tutorial you will use the following NumPy tools:
 
-* [`np.linalg.norm`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html) : this function determines the measure of vector magnitude
-* [`np.cross`](https://numpy.org/doc/stable/reference/generated/numpy.cross.html) : this function takes two matrices and produces the cross product
+* [`np.linalg.norm`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html) : This function determines the measure of vector magnitude
+* [`np.cross`](https://numpy.org/doc/stable/reference/generated/numpy.cross.html) : This function takes two matrices and produces the cross product
+* [`np.linalg.solve`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html) : This function produces the solution (x) to a linear system of equations in the form of A * x = B
 
 +++
 
@@ -316,7 +317,7 @@ $\sum M_{y} = 0 = (0)T_{BD}-(0)T_{BE}+(0)T_{CF}$
 
 $\sum M_{z} = 0 = (-)T_{BD}-T_{BE}+\frac{18}{7}T_{CF}$
 
-Where $T$ is the tension in the respective cord and $R$ is the reaction force in a respective direction. $M_{y}$ contains no information and can be discarded. $T_{CF}$ is known to be 455N and can be moved to the opposite side of the equation. You now have five unknowns with five equations and can solve the linear system.
+Where $T$ is the tension in the respective cord and $R$ is the reaction force in a respective direction. $M_{y}$ contains no information and can be discarded. $T_{CF}$ is known to be 455N and can be moved to the opposite side of the equation. You now have five unknowns with five equations that can be represented by a linear system. Stacking the vectors solved above produces a matrix, a 2D array. With the matrix of coefficients for each of the unkown variables on the left hand side of the equation and all of the known values on the right hand side, we can use NumPy's linear solver to obtain the solution.
 
 $$\begin{bmatrix}
 ~1/3 & 1/3 & 1 & 0 & 0\\
@@ -385,5 +386,5 @@ This same process can be applied to kinetic problems or in any number of dimensi
 
 ### References
 
-1. [Vector Mechanics for Engineers: Statics (Beer & Johnston & Mazurek)](https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9780077687304.html)
+1. [Vector Mechanics for Engineers: Statics (Beer & Johnston & Mazurek)](https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9781259977268.html)
 2. [NumPy Reference](https://numpy.org/doc/stable/reference/)
