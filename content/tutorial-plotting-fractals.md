@@ -301,14 +301,14 @@ For example, setting $c = \frac{\pi}{10}$ gives us a very elegant cloud shape, w
 
 ```{code-cell} ipython3
 output = julia(mesh, c=np.pi/10, num_iter=20)
-kwargs = {'title': 'f(z) = z^2 + \dfrac{\pi}{10}', 'cmap': 'plasma'}
+kwargs = {'title': r'f(z) = z^2 + \dfrac{\pi}{10}', 'cmap': 'plasma'}
 
 plot_fractal(output, **kwargs);
 ```
 
 ```{code-cell} ipython3
 output = julia(mesh, c=-0.75 + 0.4j, num_iter=20)
-kwargs = {'title': 'f(z) = z^2 - \dfrac{3}{4} + 0.4i', 'cmap': 'Greens_r'}
+kwargs = {'title': r'f(z) = z^2 - \dfrac{3}{4} + 0.4i', 'cmap': 'Greens_r'}
 
 plot_fractal(output, **kwargs);
 ```
@@ -419,7 +419,7 @@ p.deriv()
 
 ```{code-cell} ipython3
 output = newton_fractal(mesh, p, p.deriv(), num_iter=15, r=2)
-kwargs = {'title': 'f(z) = z - \dfrac{(z^8 + 15z^4 - 16)}{(8z^7 + 60z^3)}', 'cmap': 'copper'}
+kwargs = {'title': r'f(z) = z - \dfrac{(z^8 + 15z^4 - 16)}{(8z^7 + 60z^3)}', 'cmap': 'copper'}
 
 plot_fractal(output, **kwargs)
 ```
@@ -443,7 +443,7 @@ def d_tan(z):
 
 ```{code-cell} ipython3
 output = newton_fractal(mesh, f_tan, d_tan, num_iter=15, r=50)
-kwargs = {'title': 'f(z) = z - \dfrac{sin(z)cos(z)}{2}', 'cmap': 'binary'}
+kwargs = {'title': r'f(z) = z - \dfrac{sin(z)cos(z)}{2}', 'cmap': 'binary'}
 
 plot_fractal(output, **kwargs);
 ```
