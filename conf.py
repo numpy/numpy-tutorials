@@ -39,16 +39,18 @@ templates_path = ['_templates']
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build',
-                    'Thumbs.db',
-                    '.DS_Store',
-                    'notebooks',
-                    'content/tutorial-nlp-from-scratch/README.md',
-                    ]
+exclude_patterns = [
+    '_build',
+    'venv/*',
+    'README.md',
+    'Thumbs.db',
+    '.DS_Store',
+    'notebooks',
+    'tutorials/tutorial-nlp-from-scratch/README.md',
+]
 
 # MyST-NB configuration
 nb_execution_timeout = 900
-
 
 # -- Options for HTML output -------------------------------------------------
 

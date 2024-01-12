@@ -14,18 +14,18 @@ or navigate to any of the documents listed below and download it individually.
 
 ## Content
 
-0. [Learn to write a NumPy tutorial](content/tutorial-style-guide.md): our style guide for writing tutorials.
-1. [Tutorial: Linear algebra on n-dimensional arrays](content/tutorial-svd.md)
-2. [Tutorial: Determining Moore's Law with real data in NumPy](content/mooreslaw-tutorial.md)
-3. [Tutorial: Saving and sharing your NumPy arrays](content/save-load-arrays.md)
-4. [Tutorial: NumPy deep learning on MNIST from scratch](content/tutorial-deep-learning-on-mnist.md)
-5. [Tutorial: X-ray image processing](content/tutorial-x-ray-image-processing.md)
-6. [Tutorial: NumPy deep reinforcement learning with Pong from pixels](content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md)
-7. [Tutorial: Masked Arrays](content/tutorial-ma.md)
-8. [Tutorial: Static Equilibrium](content/tutorial-static_equilibrium.md)
-9. [Tutorial: Plotting Fractals](content/tutorial-plotting-fractals.ipynb)
-10. [Tutorial: NumPy natural language processing from scratch with a focus on ethics](content/tutorial-nlp-from-scratch.md)
-11. [Tutorial: Analysing the impact of the lockdown on air quality in Delhi, India](content/tutorial-air-quality-analysis.md)
+0. [Learn to write a NumPy tutorial](tutorials/tutorial-style-guide.md): our style guide for writing tutorials.
+1. [Tutorial: Linear algebra on n-dimensional arrays](tutorials/tutorial-svd.md)
+2. [Tutorial: Determining Moore's Law with real data in NumPy](tutorials/mooreslaw-tutorial.md)
+3. [Tutorial: Saving and sharing your NumPy arrays](tutorials/save-load-arrays.md)
+4. [Tutorial: NumPy deep learning on MNIST from scratch](tutorials/tutorial-deep-learning-on-mnist.md)
+5. [Tutorial: X-ray image processing](tutorials/tutorial-x-ray-image-processing.md)
+6. [Tutorial: NumPy deep reinforcement learning with Pong from pixels](tutorials/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md)
+7. [Tutorial: Masked Arrays](tutorials/tutorial-ma.md)
+8. [Tutorial: Static Equilibrium](tutorials/tutorial-static_equilibrium.md)
+9. [Tutorial: Plotting Fractals](tutorials/tutorial-plotting-fractals.ipynb)
+10. [Tutorial: NumPy natural language processing from scratch with a focus on ethics](tutorials/tutorial-nlp-from-scratch.md)
+11. [Tutorial: Analysing the impact of the lockdown on air quality in Delhi, India](tutorials/tutorial-air-quality-analysis.md)
 
 
 ## Contributing
@@ -69,7 +69,7 @@ You may notice our content is in markdown format (`.md` files). We review and
 host notebooks in the [MyST-NB](https://myst-nb.readthedocs.io/) format. We
 accept both Jupyter notebooks (`.ipynb`) and MyST-NB notebooks (`.md`). If you want
 to sync your `.ipynb` to your `.md` file follow the [pairing
-tutorial](content/pairing.md).
+tutorial](tutorials/pairing.md).
 
 ### Adding your own tutorials
 
@@ -87,7 +87,7 @@ applicable.
 
 #### Check out our suggested template
 
-You can use our [Tutorial Style Guide](content/tutorial-style-guide.md) to make
+You can use our [Tutorial Style Guide](tutorials/tutorial-style-guide.md) to make
 your content consistent with our existing tutorials.
 
 #### Upload your content
@@ -109,7 +109,7 @@ your content consistent with our existing tutorials.
 
 <details>
     <summary>
-        <b>Add your notebook to the <code>content/</code> directory.</b>
+        <b>Add your notebook to the <code>tutorials/</code> directory.</b>
     </summary>
     <img src="site/_static/03-upload.gif" width=80% height=80%>
 </details>

@@ -6,3 +6,8 @@ pandas
 imageio
 # For supporting .md-based notebooks
 jupytext
+# For building the website
+sphinx
+myst-nb
+sphinx-book-theme
+sphinx-copybutton

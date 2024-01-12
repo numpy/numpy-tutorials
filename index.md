@@ -2,16 +2,16 @@
 
 [![Binder](https://mybinder.org/badge_logo.svg)][launch_binder]
 
-[launch_binder]: https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=lab/tree/content
+[launch_binder]: https://mybinder.org/v2/gh/numpy/numpy-tutorials/main?urlpath=lab/tree/tutorials
 
 This set of tutorials and educational materials is being developed in the
 [numpy-tutorials](https://github.com/numpy/numpy-tutorials) repository, and is
 not a part of the NumPy source tree. The goal of this repository is to provide
 high-quality resources by the NumPy project, both for self-learning and for
 teaching classes with. If you're interested in adding your own content, check
-the [Contributing](contributing.md) section.
+the [Contributing](pages/contributing.md) section.
 
-To open a live version of the content, click the **launch Binder** button above.
+To open a live version of the tutorials, click the **launch Binder** button above.
 To open each of the `.md` files, right click and select "Open with -> Notebook".
 You can also launch individual tutorials on Binder by clicking on the rocket
 icon that appears in the upper-right corner of each tutorial. To download a
@@ -26,9 +26,9 @@ or use the download icon in the upper-right corner of each tutorial.
 maxdepth: 2
 ---
 
-features
-applications
-contributing
+pages/features
+pages/applications
+pages/contributing
 ```
 
 ### Non-executable articles
@@ -44,7 +44,7 @@ these existing articles to help make them fully executable and reproducible!
 maxdepth: 2
 ---
 
-articles
+pages/articles
 ```
 
 ## Useful links and resources
