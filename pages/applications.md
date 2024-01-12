@@ -8,10 +8,10 @@ engineering, and data analysis.
 maxdepth: 1
 ---
 
-../content/mooreslaw-tutorial
-../content/tutorial-deep-learning-on-mnist
-../content/tutorial-x-ray-image-processing
-../content/tutorial-static_equilibrium
-../content/tutorial-plotting-fractals
-../content/tutorial-air-quality-analysis
+../tutorials/mooreslaw-tutorial
+../tutorials/tutorial-deep-learning-on-mnist
+../tutorials/tutorial-x-ray-image-processing
+../tutorials/tutorial-static_equilibrium
+../tutorials/tutorial-plotting-fractals
+../tutorials/tutorial-air-quality-analysis
 ```

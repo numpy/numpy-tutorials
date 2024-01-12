@@ -93,10 +93,10 @@ Thumbs.db
 notebooks/*
 
 # Content generated during notebook execution
-content/mooreslaw_regression*
-content/tutorial-x-ray-image-processing/xray_image.gif
-content/video
-content/*ipynb
-content/tutorial-nlp-from-scratch/parameters.npy
-content/tutorial-nlp-from-scratch/*ipynb
+tutorials/mooreslaw_regression*
+tutorials/tutorial-x-ray-image-processing/xray_image.gif
+tutorials/video
+tutorials/*ipynb
+tutorials/tutorial-nlp-from-scratch/parameters.npy
+tutorials/tutorial-nlp-from-scratch/*ipynb
 venv/*

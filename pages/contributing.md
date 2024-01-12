@@ -42,12 +42,12 @@ You may notice our content is in markdown format (`.md` files). We review and
 host notebooks in the [MyST-NB](https://myst-nb.readthedocs.io/) format. We
 accept both Jupyter notebooks (`.ipynb`) and MyST-NB notebooks (`.md`).
 If you want to sync your `.ipynb` to your `.md` file follow the [pairing
-tutorial](../content/pairing.md).
+tutorial](../tutorials/pairing.md).
 
 ```{toctree}
 :hidden:
 
-../content/pairing
+../tutorials/pairing
 ```
 
 ## Adding your own tutorials
@@ -72,7 +72,7 @@ tutorials:
 ---
 maxdepth: 1
 ---
-../content/tutorial-style-guide
+../tutorials/tutorial-style-guide
 ```
 
 ### Upload your content
@@ -96,7 +96,7 @@ Remember to clear all outputs on your notebook before uploading it.
 
 <details>
     <summary>
-        <b>Add your notebook to the <code>content/</code> directory.</b>
+        <b>Add your notebook to the <code>tutorials/</code> directory.</b>
     </summary>
     <img src="_static/03-upload.gif" width=80% height=80%>
 </details>

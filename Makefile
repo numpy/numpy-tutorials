@@ -14,8 +14,8 @@ help:
 
 notebooks:
 	mkdir -p notebooks
-	jupytext -k python3 ../content/*.md --from myst --to notebook
-	mv ../content/*.ipynb notebooks
+	jupytext -k python3 tutorials/*.md --from myst --to notebook
+	mv tutorials/*.ipynb notebooks
 
 clean:
 	rm -rf _build
