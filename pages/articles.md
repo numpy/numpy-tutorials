@@ -8,6 +8,6 @@ these articles so that they become fully executable/reproducible!
 
 ```{toctree}
 
-content/tutorial-deep-reinforcement-learning-with-pong-from-pixels
-content/tutorial-nlp-from-scratch
+../content/tutorial-deep-reinforcement-learning-with-pong-from-pixels
+../content/tutorial-nlp-from-scratch
 ```
