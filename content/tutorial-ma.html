@@ -18,15 +18,15 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
@@ -34,9 +34,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
@@ -62,7 +62,7 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
   
   <div id="pst-scroll-pixel-helper"></div>
 
@@ -105,12 +105,18 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form></div>
   </div>
+
+  <header>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
+    <div class="bd-header navbar navbar-expand-lg bd-navbar">
+    </div>
   
+  </header>
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -483,7 +489,7 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="masked-arrays">
 <h1>Masked Arrays<a class="headerlink" href="#masked-arrays" title="Link to this heading">#</a></h1>
@@ -564,7 +570,7 @@ rows of this file, since they contain other data we are not interested in. Separ
 <span class="c1"># Read just the dates for columns 4-18 from the first row</span>
 <span class="n">dates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span>
     <span class="n">filename</span><span class="p">,</span>
-    <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unicode_</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">,</span>
     <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
     <span class="n">max_rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">usecols</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span>
@@ -574,7 +580,7 @@ rows of this file, since they contain other data we are not interested in. Separ
 <span class="c1"># columns, skipping the first six rows</span>
 <span class="n">locations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span>
     <span class="n">filename</span><span class="p">,</span>
-    <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unicode_</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">str_</span><span class="p">,</span>
     <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span>
     <span class="n">skip_header</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
     <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
@@ -593,7 +599,7 @@ rows of this file, since they contain other data we are not interested in. Separ
 </div>
 </div>
 </div>
-<p>Included in the <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> function call, we have selected the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.dtype.html#numpy.dtype">numpy.dtype</a> for each subset of the data (either an integer - <code class="docutils literal notranslate"><span class="pre">numpy.int_</span></code> - or a string of characters - <code class="docutils literal notranslate"><span class="pre">numpy.unicode_</span></code>). We have also used the <code class="docutils literal notranslate"><span class="pre">encoding</span></code> argument to select <code class="docutils literal notranslate"><span class="pre">utf-8-sig</span></code> as the encoding for the file (read more about encoding in the <a class="reference external" href="https://docs.python.org/3/library/codecs.html#encodings-and-unicode">official Python documentation</a>. You can read more about the <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> function from the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt">Reference Documentation</a> or from the <a class="reference external" href="https://numpy.org/devdocs/user/basics.io.genfromtxt.html">Basic IO tutorial</a>.</p>
+<p>Included in the <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> function call, we have selected the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.dtype.html#numpy.dtype">numpy.dtype</a> for each subset of the data (either an integer - <code class="docutils literal notranslate"><span class="pre">numpy.int_</span></code> - or a string of characters - <code class="docutils literal notranslate"><span class="pre">numpy.str_</span></code>). We have also used the <code class="docutils literal notranslate"><span class="pre">encoding</span></code> argument to select <code class="docutils literal notranslate"><span class="pre">utf-8-sig</span></code> as the encoding for the file (read more about encoding in the <a class="reference external" href="https://docs.python.org/3/library/codecs.html#encodings-and-unicode">official Python documentation</a>. You can read more about the <code class="docutils literal notranslate"><span class="pre">numpy.genfromtxt</span></code> function from the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.genfromtxt.html#numpy.genfromtxt">Reference Documentation</a> or from the <a class="reference external" href="https://numpy.org/devdocs/user/basics.io.genfromtxt.html">Basic IO tutorial</a>.</p>
 </section>
 <section id="exploring-the-data">
 <h2>Exploring the data<a class="headerlink" href="#exploring-the-data" title="Link to this heading">#</a></h2>
@@ -877,7 +883,7 @@ package to create a cubic polynomial model that fits the data as best as possibl
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f122e9ee140&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fd12dcdb610&gt;]
 </pre></div>
 </div>
 <img alt="../_images/601cd7b45c798341e4f24cb4bb12f9e069ce405b5af97d7a756fa023764ddc03.png" src="../_images/601cd7b45c798341e4f24cb4bb12f9e069ce405b5af97d7a756fa023764ddc03.png" />
@@ -968,6 +974,7 @@ available, and show the cubic fit for unavailable data, using this fit to comput
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
   <div class="sidebar-secondary-item">
   <div class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
@@ -1012,7 +1019,7 @@ By the NumPy community
 
   <p class="copyright">
     
-      © Copyright 2020-2023, the NumPy community.
+      © Copyright 2020-2024, the NumPy community.
       <br/>
     
   </p>
@@ -1036,8 +1043,8 @@ By the NumPy community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509"></script>
 
   <footer class="bd-footer">
   </footer>
