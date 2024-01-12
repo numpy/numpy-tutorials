@@ -7,7 +7,7 @@ imageio
 # For supporting .md-based notebooks
 jupytext
 # For building the website
-sphinx<5
+sphinx
 myst-nb
 sphinx-book-theme
 sphinx-copybutton
