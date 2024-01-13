@@ -334,7 +334,7 @@ def mandelbrot(mesh, num_iter=10, radius=2):
 
 ```{code-cell} ipython3
 output = mandelbrot(mesh, num_iter=50)
-kwargs = {'title': 'Mandelbrot \ set', 'cmap': 'hot'}
+kwargs = {'title': 'Mandelbrot \\ set', 'cmap': 'hot'}
 
 plot_fractal(output, **kwargs);
 ```
@@ -370,8 +370,6 @@ for deg, ax in enumerate(axes.ravel()):
     diverge_len = general_julia(mesh, f=power, num_iter=15)
     ax.imshow(diverge_len, extent=[-2, 2, -2, 2], cmap='binary')
     ax.set_title(f'$f(z) = z^{degree} -1$')
-
-fig.tight_layout();
 ```
 
 Needless to say, there is a large amount of exploring that can be done by fiddling with the inputted function, value of $c$, number of iterations, radius and even the density of the mesh and choice of colours.
@@ -475,7 +473,7 @@ We will denote this one 'Wacky fractal', as its equation would not be fun to try
 
 ```{code-cell} ipython3
 output = newton_fractal(small_mesh, sin_sum, d_sin_sum, num_iter=10, r=1)
-kwargs = {'title': 'Wacky \ fractal', 'figsize': (6, 6), 'extent': [-1, 1, -1, 1], 'cmap': 'terrain'}
+kwargs = {'title': 'Wacky \\ fractal', 'figsize': (6, 6), 'extent': [-1, 1, -1, 1], 'cmap': 'terrain'}
 
 plot_fractal(output, **kwargs)
 ```
@@ -550,7 +548,7 @@ def accident(z):
 
 ```{code-cell} ipython3
 output = general_julia(mesh, f=accident, num_iter=15, c=0, radius=np.pi)
-kwargs = {'title': 'Accidental \ fractal', 'cmap': 'Blues'}
+kwargs = {'title': 'Accidental \\ fractal', 'cmap': 'Blues'}
 
 plot_fractal(output, **kwargs);
 ```
