@@ -1,6 +1,7 @@
 # For the tutorials
 numpy
 scipy
+pooch  # for scipy.datasets
 matplotlib
 pandas
 imageio
