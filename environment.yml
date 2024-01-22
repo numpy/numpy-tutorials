@@ -5,6 +5,7 @@ dependencies:
   # For running the tutorials
   - numpy
   - scipy
+  - pooch
   - matplotlib
   - pandas
   - imageio
