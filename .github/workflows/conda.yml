@@ -1,4 +1,4 @@
-name: Build site
+name: Test building site with conda environment
 
 on:
   push:
@@ -7,6 +7,9 @@ on:
   pull_request:
     branches:
       - main
+  schedule:
+    - cron: '0 5 * * 1'
+  workflow_dispatch:
 
 jobs:
   test:
@@ -21,8 +24,8 @@ jobs:
         shell: bash -l {0}
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: conda-incubator/setup-miniconda@v2
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v3
         with:
           auto-update-conda: true
           activate-environment: numpy-tutorials
@@ -30,7 +33,7 @@ jobs:
           miniforge-variant: Mambaforge
           miniforge-version: latest
           use-mamba: true
-          python-version: "3.10"
+          python-version: "3.11"
           auto-activate-base: false
       - name: inspect and build
         id: build_step
