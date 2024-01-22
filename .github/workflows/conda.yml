@@ -1,4 +1,4 @@
-name: Build site with conda
+name: Test building site with conda environment
 
 on:
   push:
