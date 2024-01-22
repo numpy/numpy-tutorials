@@ -512,18 +512,21 @@ document.write(`
 </section>
 <section id="content">
 <h2>Content<a class="headerlink" href="#content" title="Link to this heading">#</a></h2>
-<p>In this tutorial, we will use a <a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_decomposition">matrix decomposition</a> from linear algebra, the Singular Value Decomposition, to generate a compressed approximation of an image. We’ll use the <code class="docutils literal notranslate"><span class="pre">face</span></code> image from the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/misc.html#module-scipy.misc">scipy.misc</a> module:</p>
+<p>In this tutorial, we will use a <a class="reference external" href="https://en.wikipedia.org/wiki/Matrix_decomposition">matrix decomposition</a> from linear algebra, the Singular Value Decomposition, to generate a compressed approximation of an image. We’ll use the <code class="docutils literal notranslate"><span class="pre">face</span></code> image from the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/datasets.html">scipy.datasets</a> module:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">misc</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: Rm try-except with scipy 1.10 is the minimum supported version</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">scipy.datasets</span> <span class="kn">import</span> <span class="n">face</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  <span class="c1"># Data was in scipy.misc prior to scipy v1.10</span>
+    <span class="kn">from</span> <span class="nn">scipy.misc</span> <span class="kn">import</span> <span class="n">face</span>
 
-<span class="n">img</span> <span class="o">=</span> <span class="n">misc</span><span class="o">.</span><span class="n">face</span><span class="p">()</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">face</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_432/2202046956.py:3: DeprecationWarning: scipy.misc.face has been deprecated in SciPy v1.10.0; and will be completely removed in SciPy v1.12.0. Dataset methods have moved into the scipy.datasets module. Use scipy.datasets.face instead.
-  img = misc.face()
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file &#39;face.dat&#39; from &#39;https://raw.githubusercontent.com/scipy/dataset-face/main/face.dat&#39; to &#39;/home/circleci/.cache/scipy-data&#39;.
 </pre></div>
 </div>
 </div>
@@ -613,7 +616,7 @@ document.write(`
 </div>
 </div>
 <p>From the output above, we can see that every value in <code class="docutils literal notranslate"><span class="pre">img[:,</span> <span class="pre">:,</span> <span class="pre">0]</span></code> is an integer value between 0 and 255, representing the level of red in each corresponding image pixel (keep in mind that this might be different if you
-use your own image instead of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.misc.face.html#scipy.misc.face">scipy.misc.face</a>).</p>
+use your own image instead of <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.datasets.face.html">scipy.datasets.face</a>).</p>
 <p>As expected, this is a 768x1024 matrix:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

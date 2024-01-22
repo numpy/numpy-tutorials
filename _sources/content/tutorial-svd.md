@@ -35,12 +35,16 @@ After this tutorial, you should be able to:
 
 ## Content
 
-In this tutorial, we will use a [matrix decomposition](https://en.wikipedia.org/wiki/Matrix_decomposition) from linear algebra, the Singular Value Decomposition, to generate a compressed approximation of an image. We'll use the `face` image from the [scipy.misc](https://docs.scipy.org/doc/scipy/reference/misc.html#module-scipy.misc) module:
+In this tutorial, we will use a [matrix decomposition](https://en.wikipedia.org/wiki/Matrix_decomposition) from linear algebra, the Singular Value Decomposition, to generate a compressed approximation of an image. We'll use the `face` image from the [scipy.datasets](https://docs.scipy.org/doc/scipy/reference/datasets.html) module:
 
 ```{code-cell}
-from scipy import misc
+# TODO: Rm try-except with scipy 1.10 is the minimum supported version
+try:
+    from scipy.datasets import face
+except ImportError:  # Data was in scipy.misc prior to scipy v1.10
+    from scipy.misc import face
 
-img = misc.face()
+img = face()
 ```
 
 **Note**: If you prefer, you can use your own image as you work through this tutorial. In order to transform your image into a NumPy array that can be manipulated, you can use the `imread` function from the [matplotlib.pyplot](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.html#module-matplotlib.pyplot) submodule. Alternatively, you can use the [imageio.imread](https://imageio.readthedocs.io/en/stable/userapi.html#imageio.imread) function from the `imageio` library. Be aware that if you use your own image, you'll likely need to adapt the steps below. For more information on how images are treated when converted to NumPy arrays, see [A crash course on NumPy for images](https://scikit-image.org/docs/stable/user_guide/numpy_images.html) from the `scikit-image` documentation.
@@ -91,7 +95,7 @@ img[:, :, 0]
 ```
 
 From the output above, we can see that every value in `img[:, :, 0]` is an integer value between 0 and 255, representing the level of red in each corresponding image pixel (keep in mind that this might be different if you
-use your own image instead of [scipy.misc.face](https://docs.scipy.org/doc/scipy/reference/generated/scipy.misc.face.html#scipy.misc.face)).
+use your own image instead of [scipy.datasets.face](https://docs.scipy.org/doc/scipy/reference/generated/scipy.datasets.face.html)).
 
 As expected, this is a 768x1024 matrix:
 

@@ -127,7 +127,7 @@ print(load_xy.files)
 ```
 
 ```{code-cell}
-whos
+%whos
 ```
 
 ## Reassign the NpzFile arrays to `x` and `y`
