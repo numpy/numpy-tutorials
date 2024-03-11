@@ -615,7 +615,7 @@ rows of this file, since they contain other data we are not interested in. Separ
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020&#39;)
 </pre></div>
 </div>
-<img alt="../_images/838d1197eae9552592c6e045d31f4b0ffb7034643c6e4c6ef621e9e510bdd458.png" src="../_images/838d1197eae9552592c6e045d31f4b0ffb7034643c6e4c6ef621e9e510bdd458.png" />
+<img alt="../_images/20fe53540422fbc1ad5507ed954165f8e94e27e8e2b7f1459aa64880e40d2a1b.png" src="../_images/20fe53540422fbc1ad5507ed954165f8e94e27e8e2b7f1459aa64880e40d2a1b.png" />
 </div>
 </div>
 <p>The graph has a strange shape from January 24th to February 1st. It would be interesting to know where this data comes from. If we look at the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array we extracted from the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file, we can see that we have two columns, where the first would contain regions and the second would contain the name of the country. However, only the first few rows contain data for the the first column (province names in China). Following that, we only have country names. So it would make sense to group all the data from China into a single row. For this, we’ll select from the <code class="docutils literal notranslate"><span class="pre">nbcases</span></code> array only the rows for which the second entry of the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array corresponds to China. Next, we’ll use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.sum.html#numpy.sum">numpy.sum</a> function to sum all the selected rows (<code class="docutils literal notranslate"><span class="pre">axis=0</span></code>). Note also that row 35 corresponds to the total counts for the whole country for each date. Since we want to calculate the sum ourselves from the provinces data, we have to remove that row first from both <code class="docutils literal notranslate"><span class="pre">locations</span></code> and <code class="docutils literal notranslate"><span class="pre">nbcases</span></code>:</p>
@@ -715,7 +715,7 @@ closely:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020&#39;)
 </pre></div>
 </div>
-<img alt="../_images/07e95232d6b6da08858a13877e991abbbf492a6a9b4845f59712f8fcfe73d1ef.png" src="../_images/07e95232d6b6da08858a13877e991abbbf492a6a9b4845f59712f8fcfe73d1ef.png" />
+<img alt="../_images/80ec8b4f7c2bbc7c0911404bda4e039db7b851dbe636f2529588dbf9dca5afb0.png" src="../_images/80ec8b4f7c2bbc7c0911404bda4e039db7b851dbe636f2529588dbf9dca5afb0.png" />
 </div>
 </div>
 <p>Now that our data has been masked, let’s try summing up all the cases in China:</p>
@@ -811,7 +811,7 @@ closely:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China&#39;)
 </pre></div>
 </div>
-<img alt="../_images/192c96baaa72abed452b9c586231451989d5b334b4e4d293ae58632106efc314.png" src="../_images/192c96baaa72abed452b9c586231451989d5b334b4e4d293ae58632106efc314.png" />
+<img alt="../_images/c49dff14e4a270d1efb32cc1ec64d03cd8149605e411938745172eece55effd6.png" src="../_images/c49dff14e4a270d1efb32cc1ec64d03cd8149605e411938745172eece55effd6.png" />
 </div>
 </div>
 <p>It’s clear that masked arrays are the right solution here. We cannot represent the missing data without mischaracterizing the evolution of the curve.</p>
@@ -879,10 +879,10 @@ package to create a cubic polynomial model that fits the data as best as possibl
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7faaac7f7a60&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f5de63c96f0&gt;]
 </pre></div>
 </div>
-<img alt="../_images/601cd7b45c798341e4f24cb4bb12f9e069ce405b5af97d7a756fa023764ddc03.png" src="../_images/601cd7b45c798341e4f24cb4bb12f9e069ce405b5af97d7a756fa023764ddc03.png" />
+<img alt="../_images/7b859464438ee1bc6a50b003743165e8cf499cc92c8a218ae7c3ab5a6ae9d6af.png" src="../_images/7b859464438ee1bc6a50b003743165e8cf499cc92c8a218ae7c3ab5a6ae9d6af.png" />
 </div>
 </div>
 <p>This plot is not so readable since the lines seem to be over each other, so let’s summarize in a more elaborate plot. We’ll plot the real data when
@@ -906,7 +906,7 @@ available, and show the cubic fit for unavailable data, using this fit to comput
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China\nCubic estimate for 7 days after start&#39;)
 </pre></div>
 </div>
-<img alt="../_images/43c08270212c289399f1d957e5e2fbaeb0c4e8f2463a74434cb5763022a6e834.png" src="../_images/43c08270212c289399f1d957e5e2fbaeb0c4e8f2463a74434cb5763022a6e834.png" />
+<img alt="../_images/615121c367e83e8952cb9b82b45ead01f710d82913813c98c977b08ec2392e68.png" src="../_images/615121c367e83e8952cb9b82b45ead01f710d82913813c98c977b08ec2392e68.png" />
 </div>
 </div>
 </section>
