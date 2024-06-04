@@ -16,7 +16,7 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: README
+root: site/index
 chapters:
   - title: Content
     sections:
@@ -46,7 +46,6 @@ chapters:
           - file: content/features/save-load-arrays
           - file: content/features/tutorial-ma
           - file: content/features/tutorial-svd
-  - title: Site
-    sections:
-      - file: site/contributing
-      - file: site/index
+  - title: Contributing
+    file: site/contributing
+
