@@ -1,0 +1,52 @@
+# Table of Contents
+#
+# Myst will respect:
+# 1. New pages
+#      - file: relative/path/to/page
+# 2. New sections without an associated page
+#      - title: Folder Title
+#        sections: ...
+# 3. New sections with an associated page
+#      - file: relative/path/to/page
+#        sections: ...
+#
+# Note: Titles defined on pages here are not recognized.
+#
+# This spec is based on the JupyterBook table of contents.
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: README
+chapters:
+  - title: Content
+    sections:
+      - file: content/pairing
+      - file: content/tutorial-style-guide
+      - title: Applications
+        sections:
+          - file: content/applications/index
+          - file: content/applications/mooreslaw-tutorial
+          - file: content/applications/tutorial-air-quality-analysis
+          - file: content/applications/tutorial-deep-learning-on-mnist
+          - file: content/applications/tutorial-plotting-fractals
+          - file: content/applications/tutorial-static_equilibrium
+          - file: content/applications/tutorial-x-ray-image-processing
+      - title: Articles
+        sections:
+          - file: content/articles/index
+          - file: >-
+              content/articles/tutorial-deep-reinforcement-learning-with-pong-from-pixels
+          - file: content/articles/tutorial-nlp-from-scratch
+          - title: Tutorial Nlp From Scratch
+            sections:
+              - file: content/articles/tutorial-nlp-from-scratch/README
+      - title: Features
+        sections:
+          - file: content/features/index
+          - file: content/features/save-load-arrays
+          - file: content/features/tutorial-ma
+          - file: content/features/tutorial-svd
+  - title: Site
+    sections:
+      - file: site/contributing
+      - file: site/index
