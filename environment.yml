@@ -14,4 +14,4 @@ dependencies:
   - nodejs>=20,<21
   - ipython
   - jupyter_server
-  - jupyterlab
+  - jupyterlab-myst
