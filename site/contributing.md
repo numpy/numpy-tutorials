@@ -44,12 +44,6 @@ accept both Jupyter notebooks (`.ipynb`) and MyST-NB notebooks (`.md`).
 If you want to sync your `.ipynb` to your `.md` file follow the [pairing
 tutorial](content/pairing.md).
 
-```{toctree}
-:hidden:
-
-content/pairing
-```
-
 ## Adding your own tutorials
 
 If you have your own tutorial in the form of a Jupyter notebook (an `.ipynb`
@@ -66,14 +60,7 @@ We will try to respond as quickly as possible with comments, if applicable.
 ### Check out our suggested template
 
 You can use this template to make your content consistent with our existing
-tutorials:
-
-```{toctree}
----
-maxdepth: 1
----
-content/tutorial-style-guide
-```
+tutorials: [](content/tutorial-style-guide)
 
 ### Upload your content
 
