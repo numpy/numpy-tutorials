@@ -10,7 +10,8 @@ dependencies:
   - pandas
   - imageio
   # For building the site
-  - sphinx
-  - myst-nb
-  - sphinx-book-theme
-  - sphinx-copybutton
+  - mystmd
+  - nodejs>=20,<21
+  - ipython
+  - jupyter_server
+  - jupyterlab
