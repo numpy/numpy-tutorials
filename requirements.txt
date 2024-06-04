@@ -7,3 +7,7 @@ pandas
 imageio
 # For supporting .md-based notebooks
 jupytext
+mystmd
+ipykernel
+jupyter_server
+jupyterlab-myst
