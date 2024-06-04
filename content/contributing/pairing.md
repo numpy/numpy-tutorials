@@ -210,13 +210,13 @@ or the command line:
 ```{admonition} **1. Classic Jupyter Jupytext pairing**
 :class: toggle
 
-![Animation showing pairing with Jupyter classic](_static/01-classic.gif)
+![Animation showing pairing with Jupyter classic](../_static/01-classic.gif)
 ```
 
 ```{admonition} **2. JupyterLab Jupytext pairing**
 :class: toggle
 
-![Animation showing pairing with JupyterLab](_static/02-jupyterlab.gif)
+![Animation showing pairing with JupyterLab](../_static/02-jupyterlab.gif)
 ```
 
 ````{admonition} **3. Command line Jupytext pairing**

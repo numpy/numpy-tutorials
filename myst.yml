@@ -2,20 +2,20 @@
 version: 1
 project:
   id: 55a37959-b92d-40f7-a63c-c1f217e8f002
-  # title:
+  title: "NumPy Tutorials"
   # description:
   keywords: []
   authors: []
-  github: https://github.com/melissawm/numpy-tutorials
+  github: https://github.com/numpy/numpy-tutorials
   # bibliography: []
 site:
   template: book-theme
-  # title:
-  # options:
-  #   favicon: favicon.ico
-  #   logo: site_logo.png
+  title: "NumPy Tutorials"
+  options:
+    #favicon: favicon.ico
+    logo: content/_static/numpylogo.svg
   nav: []
   actions:
-    - title: Learn More
-      url: https://mystmd.org/guide
+    - title: NumPy Documentation
+      url: https://numpy.org
   domains: []

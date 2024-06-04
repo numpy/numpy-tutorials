@@ -16,12 +16,10 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: site/index
+root: content/index
 chapters:
   - title: Content
     sections:
-      - file: content/pairing
-      - file: content/tutorial-style-guide
       - title: Applications
         sections:
           - file: content/applications/index
@@ -47,5 +45,8 @@ chapters:
           - file: content/features/tutorial-ma
           - file: content/features/tutorial-svd
   - title: Contributing
-    file: site/contributing
+    sections:
+      - file: content/contributing/index
+      - file: content/contributing/pairing
+      - file: content/contributing/tutorial-style-guide
 
