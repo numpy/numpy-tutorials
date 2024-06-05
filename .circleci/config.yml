@@ -39,14 +39,6 @@ jobs:
             # Run your myst build command
             myst build --html --execute
 
-      - run:
-          name: CircleCI Build meta
-          command: |
-            echo $CIRCLE_BUILD_URL
-            echo $CIRCLE_WORKFLOW_ID
-            echo $CIRCLE_WORKFLOW_JOB_ID
-            echo $CIRCLE_WORKFLOW_WORKSPACE_ID
-
       - save_cache:
           key: cache-data
           paths:
