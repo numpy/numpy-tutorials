@@ -30,6 +30,13 @@ jobs:
             # NOTE: blas multithreading behaves badly on circleci
             export OMP_NUM_THREADS=1
             source venv/bin/activate
+            # Construct the BASE_URL using the CIRCLE_WORKFLOW_JOB_ID
+            export BASE_URL="/output/job/${CIRCLE_WORKFLOW_JOB_ID}/artifacts/0/_build/html"
+
+            # Output the BASE_URL for debugging purposes
+            echo "BASE_URL is set to $BASE_URL"
+
+            # Run your myst build command
             myst build --html --execute
 
       - run:
