@@ -6,7 +6,7 @@ jobs:
   build-docs:
     working_directory: ~/repo
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/python:3.10-node
 
     steps:
       - checkout
@@ -17,7 +17,7 @@ jobs:
             python3 -m venv venv
             source venv/bin/activate
             pip install --upgrade pip wheel setuptools
-            pip install -r site/requirements.txt -r requirements.txt
+            pip install -r requirements.txt
 
       - restore_cache:
           keys:
@@ -30,9 +30,14 @@ jobs:
             # NOTE: blas multithreading behaves badly on circleci
             export OMP_NUM_THREADS=1
             source venv/bin/activate
-            # n = nitpicky (broken links), W = warnings as errors,
-            # T = full tracebacks, keep-going = run to completion even with errors
-            make -C site/ SPHINXOPTS="-nWT --keep-going" html
+            # Construct the BASE_URL using the CIRCLE_WORKFLOW_JOB_ID
+            export BASE_URL="/output/job/${CIRCLE_WORKFLOW_JOB_ID}/artifacts/0/_build/html"
+
+            # Output the BASE_URL for debugging purposes
+            echo "BASE_URL is set to $BASE_URL"
+
+            # Run your myst build command
+            myst build --html --execute
 
       - save_cache:
           key: cache-data
@@ -40,42 +45,43 @@ jobs:
             - _data
 
       - store_artifacts:
-          path: site/_build/html
+          path: _build/html
 
       - persist_to_workspace:
-          root: site/_build
+          root: _build
           paths: html
 
   deploy-docs:
     working_directory: ~/repo
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/python:3.10-node
     steps:
       - checkout
 
       - attach_workspace:
-          at: site/_build
+          at: _build
 
       - run:
           name: install deploy deps
           command : |
             python3 -m pip install --user ghp-import
 
-      - run:
-          name: configure git
-          command: |
-            git config --global user.name "ci-doc-deploy-bot"
-            git config --global user.email "ci-doc-deploy-bot@nomail"
-            git config --global push.default simple
-
-      - add_ssh_keys:
-          fingerprints:
-            5c:54:62:37:75:7f:4d:14:f4:07:82:1c:50:0d:ee:9b
-
-      - run:
-          name: deploy to gh-pages
-          command: |
-            ghp-import -n -f -p -m "[skip ci] docs build of $CIRCLE_SHA1" site/_build/html
+            # TODO!
+            #      - run:
+            #          name: configure git
+            #          command: |
+            #            git config --global user.name "ci-doc-deploy-bot"
+            #            git config --global user.email "ci-doc-deploy-bot@nomail"
+            #            git config --global push.default simple
+            #
+            #      - add_ssh_keys:
+            #          fingerprints:
+            #            5c:54:62:37:75:7f:4d:14:f4:07:82:1c:50:0d:ee:9b
+            #
+            #      - run:
+            #          name: deploy to gh-pages
+            #          command: |
+            #            ghp-import -n -f -p -m "[skip ci] docs build of $CIRCLE_SHA1" site/_build/html
 
 
 workflows:
