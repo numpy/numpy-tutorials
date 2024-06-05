@@ -441,7 +441,7 @@ emb_path = textproc.unzipper(glove, 'glove.6B.300d.txt')
 emb_matrix = textproc.loadGloveModel(emb_path)
 ```
 
-## 3. Build the Deep Learning Model¶
+## 3. Build the Deep Learning Model
  It is time to start implementing our LSTM! You will have to first familiarize yourself with some high-level concepts of the basic building blocks of a deep learning model. You can refer to the [Deep learning on MNIST from scratch tutorial](https://numpy.org/numpy-tutorials/content/tutorial-deep-learning-on-mnist.html) for the same. 
 
 You will then learn how a Recurrent Neural Network differs from a plain Neural Network and what makes it so suitable for processing sequential data. Afterwards, you will construct the building blocks of a simple deep learning model in Python and NumPy and train it to learn to classify the sentiment of a piece of text as positive or negative with a certain level of accuracy
