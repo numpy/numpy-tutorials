@@ -14,3 +14,5 @@ dependencies:
   - myst-nb
   - sphinx-book-theme
   - sphinx-copybutton
+  # to load the md files in binder
+  - jupytext
