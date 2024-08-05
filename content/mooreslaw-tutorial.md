@@ -183,7 +183,7 @@ print("trans. cnt:\t", transistor_count[:10])
 
 You are creating a function that predicts the transistor count given a
 year. You have an _independent variable_, `year`, and a _dependent
-variable_, `transistor_count`. Transform the independent variable to
+variable_, `transistor_count`. Transform the dependent variable to
 log-scale,
 
 $y_i = \log($ `transistor_count[i]` $),$
