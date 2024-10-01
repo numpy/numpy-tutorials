@@ -65,7 +65,7 @@ html_theme_options = {
     "repository_branch": "main",
     "use_repository_button": True,
     "use_issues_button": True,
-    "use_edit_page_button": True,
+    "use_edit_page_button": False,
     "path_to_docs": "site/",
     "launch_buttons": {
         "binderhub_url": "https://mybinder.org",
