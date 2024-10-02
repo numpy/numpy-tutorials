@@ -30,7 +30,6 @@ jobs:
           auto-update-conda: true
           activate-environment: numpy-tutorials
           environment-file: environment.yml
-          miniforge-variant: Mambaforge
           miniforge-version: latest
           use-mamba: true
           python-version: "3.11"
