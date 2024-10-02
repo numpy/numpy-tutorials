@@ -22,7 +22,7 @@ In 1965, engineer Gordon Moore
 [predicted](https://en.wikipedia.org/wiki/Moore%27s_law) that
 transistors on a chip would double every two years in the coming decade
 [[1](https://en.wikipedia.org/wiki/Moore%27s_law),
-[2](https://newsroom.intel.com/wp-content/uploads/sites/11/2018/05/moores-law-electronics.pdf)].
+[2](https://www.intel.com/content/www/us/en/newsroom/resources/moores-law.html)].
 You'll compare Moore's prediction against actual transistor counts in
 the 53 years following his prediction. You will determine the best-fit constants to describe the exponential growth of transistors on semiconductors compared to Moore's Law.
 
