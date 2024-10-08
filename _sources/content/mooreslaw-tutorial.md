@@ -21,8 +21,7 @@ _The number of transistors reported per a given chip plotted on a log scale in t
 In 1965, engineer Gordon Moore
 [predicted](https://en.wikipedia.org/wiki/Moore%27s_law) that
 transistors on a chip would double every two years in the coming decade
-[[1](https://en.wikipedia.org/wiki/Moore%27s_law),
-[2](https://newsroom.intel.com/wp-content/uploads/sites/11/2018/05/moores-law-electronics.pdf)].
+[[1](https://en.wikipedia.org/wiki/Moore%27s_law)].
 You'll compare Moore's prediction against actual transistor counts in
 the 53 years following his prediction. You will determine the best-fit constants to describe the exponential growth of transistors on semiconductors compared to Moore's Law.
 
@@ -130,7 +129,7 @@ print("This is x{:.2f} more transistors than 1971".format(ML_1973 / ML_1971))
 
 Now, make a prediction based upon the historical data for
 semiconductors per chip. The [Transistor Count
-\[4\]](https://en.wikipedia.org/wiki/Transistor_count#Microprocessors)
+\[3\]](https://en.wikipedia.org/wiki/Transistor_count#Microprocessors)
 each year is in the `transistor_data.csv` file. Before loading a \*.csv
 file into a NumPy array, its a good idea to inspect the structure of the
 file first. Then, locate the columns of interest and save them to a
@@ -520,7 +519,7 @@ double every two years from 1965 through 1975, but the average growth
 has maintained a consistent increase of $\times 1.98 \pm 0.01$ every two
 years from 1971 through 2019.  In 2015, Moore revised his prediction to
 say Moore's law should hold until 2025.
-[[3](https://spectrum.ieee.org/computing/hardware/gordon-moore-the-man-whose-name-means-progress)].
+[[2](https://spectrum.ieee.org/computing/hardware/gordon-moore-the-man-whose-name-means-progress)].
 You can share these results as a zipped NumPy array file,
 `mooreslaw_regression.npz`, or as another csv,
 `mooreslaw_regression.csv`.  The amazing progress in semiconductor
@@ -533,6 +532,5 @@ has been over the last half-century.
 ## References
 
 1. ["Moore's Law." Wikipedia article. Accessed Oct. 1, 2020.](https://en.wikipedia.org/wiki/Moore%27s_law)
-2. [Moore, Gordon E. (1965-04-19). "Cramming more components onto integrated circuits". intel.com. Electronics Magazine. Retrieved April 1, 2020.](https://newsroom.intel.com/wp-content/uploads/sites/11/2018/05/moores-law-electronics.pdf)
-3. [Courtland, Rachel. "Gordon Moore: The Man Whose Name Means Progress." IEEE Spectrum. 30 Mar. 2015.](https://spectrum.ieee.org/computing/hardware/gordon-moore-the-man-whose-name-means-progress).
-4. ["Transistor Count." Wikipedia article. Accessed Oct. 1, 2020.](https://en.wikipedia.org/wiki/Transistor_count#Microprocessors)
+2. [Courtland, Rachel. "Gordon Moore: The Man Whose Name Means Progress." IEEE Spectrum. 30 Mar. 2015.](https://spectrum.ieee.org/computing/hardware/gordon-moore-the-man-whose-name-means-progress).
+3. ["Transistor Count." Wikipedia article. Accessed Oct. 1, 2020.](https://en.wikipedia.org/wiki/Transistor_count#Microprocessors)

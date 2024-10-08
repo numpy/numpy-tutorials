@@ -483,8 +483,7 @@ document.write(`
 <p>In 1965, engineer Gordon Moore
 <a class="reference external" href="https://en.wikipedia.org/wiki/Moore%27s_law">predicted</a> that
 transistors on a chip would double every two years in the coming decade
-[<a class="reference external" href="https://en.wikipedia.org/wiki/Moore%27s_law">1</a>,
-<a class="reference external" href="https://newsroom.intel.com/wp-content/uploads/sites/11/2018/05/moores-law-electronics.pdf">2</a>].
+[<a class="reference external" href="https://en.wikipedia.org/wiki/Moore%27s_law">1</a>].
 You’ll compare Moore’s prediction against actual transistor counts in
 the 53 years following his prediction. You will determine the best-fit constants to describe the exponential growth of transistors on semiconductors compared to Moore’s Law.</p>
 </section>
@@ -593,7 +592,7 @@ This is x2.00 more transistors than 1971
 <h2>Loading historical manufacturing data to your workspace<a class="headerlink" href="#loading-historical-manufacturing-data-to-your-workspace" title="Link to this heading">#</a></h2>
 <p>Now, make a prediction based upon the historical data for
 semiconductors per chip. The <a class="reference external" href="https://en.wikipedia.org/wiki/Transistor_count#Microprocessors">Transistor Count
-[4]</a>
+[3]</a>
 each year is in the <code class="docutils literal notranslate"><span class="pre">transistor_data.csv</span></code> file. Before loading a *.csv
 file into a NumPy array, its a good idea to inspect the structure of the
 file first. Then, locate the columns of interest and save them to a
@@ -877,7 +876,7 @@ for $\pm\frac{1}{2}~years.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19200000000.0 250000000.0 7050000000.0
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa254e8ad40&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f6df812efb0&gt;
 </pre></div>
 </div>
 <img alt="../_images/de56d8475573db439c81b6991f8986a681fc818dc513671d95136628a18a7c70.png" src="../_images/de56d8475573db439c81b6991f8986a681fc818dc513671d95136628a18a7c70.png" />
@@ -1130,7 +1129,7 @@ double every two years from 1965 through 1975, but the average growth
 has maintained a consistent increase of <span class="math notranslate nohighlight">\(\times 1.98 \pm 0.01\)</span> every two
 years from 1971 through 2019.  In 2015, Moore revised his prediction to
 say Moore’s law should hold until 2025.
-[<a class="reference external" href="https://spectrum.ieee.org/computing/hardware/gordon-moore-the-man-whose-name-means-progress">3</a>].
+[<a class="reference external" href="https://spectrum.ieee.org/computing/hardware/gordon-moore-the-man-whose-name-means-progress">2</a>].
 You can share these results as a zipped NumPy array file,
 <code class="docutils literal notranslate"><span class="pre">mooreslaw_regression.npz</span></code>, or as another csv,
 <code class="docutils literal notranslate"><span class="pre">mooreslaw_regression.csv</span></code>.  The amazing progress in semiconductor
@@ -1142,7 +1141,6 @@ has been over the last half-century.</p>
 <h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Moore%27s_law">“Moore’s Law.” Wikipedia article. Accessed Oct. 1, 2020.</a></p></li>
-<li><p><a class="reference external" href="https://newsroom.intel.com/wp-content/uploads/sites/11/2018/05/moores-law-electronics.pdf">Moore, Gordon E. (1965-04-19). “Cramming more components onto integrated circuits”. intel.com. Electronics Magazine. Retrieved April 1, 2020.</a></p></li>
 <li><p><a class="reference external" href="https://spectrum.ieee.org/computing/hardware/gordon-moore-the-man-whose-name-means-progress">Courtland, Rachel. “Gordon Moore: The Man Whose Name Means Progress.” IEEE Spectrum. 30 Mar. 2015.</a>.</p></li>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Transistor_count#Microprocessors">“Transistor Count.” Wikipedia article. Accessed Oct. 1, 2020.</a></p></li>
 </ol>
