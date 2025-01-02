@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -36,10 +36,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
@@ -202,9 +202,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -582,7 +587,7 @@ rows of this file, since they contain other data we are not interested in. Separ
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020&#39;)
 </pre></div>
 </div>
-<img alt="../_images/a83e830f1a010365a0144fb88fd5483b72a2bccefade7999357e0947eecd5aa1.png" src="../_images/a83e830f1a010365a0144fb88fd5483b72a2bccefade7999357e0947eecd5aa1.png" />
+<img alt="../_images/3445cb16429bdc816237f8e5701162153d2082e2c3b6a10c71f1a828d5b97515.png" src="../_images/3445cb16429bdc816237f8e5701162153d2082e2c3b6a10c71f1a828d5b97515.png" />
 </div>
 </div>
 <p>The graph has a strange shape from January 24th to February 1st. It would be interesting to know where this data comes from. If we look at the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array we extracted from the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file, we can see that we have two columns, where the first would contain regions and the second would contain the name of the country. However, only the first few rows contain data for the the first column (province names in China). Following that, we only have country names. So it would make sense to group all the data from China into a single row. For this, we’ll select from the <code class="docutils literal notranslate"><span class="pre">nbcases</span></code> array only the rows for which the second entry of the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array corresponds to China. Next, we’ll use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.sum.html#numpy.sum">numpy.sum</a> function to sum all the selected rows (<code class="docutils literal notranslate"><span class="pre">axis=0</span></code>). Note also that row 35 corresponds to the total counts for the whole country for each date. Since we want to calculate the sum ourselves from the provinces data, we have to remove that row first from both <code class="docutils literal notranslate"><span class="pre">locations</span></code> and <code class="docutils literal notranslate"><span class="pre">nbcases</span></code>:</p>
@@ -622,7 +627,7 @@ rows of this file, since they contain other data we are not interested in. Separ
        ...,
        [   -1,    -1,    -1, ...,    -1,    -1,    -1],
        [   -1,    -1,    -1, ...,    -1,    -1,    -1],
-       [   -1,    -1,    -1, ...,    -1,    -1,    -1]])
+       [   -1,    -1,    -1, ...,    -1,    -1,    -1]], shape=(263, 14))
 </pre></div>
 </div>
 </div>
@@ -682,7 +687,7 @@ closely:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020&#39;)
 </pre></div>
 </div>
-<img alt="../_images/f2609b629c6b815807c6bc7b92bcc0190a205dae0c9ffd5dc5252d50472781d6.png" src="../_images/f2609b629c6b815807c6bc7b92bcc0190a205dae0c9ffd5dc5252d50472781d6.png" />
+<img alt="../_images/e6073ce0338c37686e3bc4b858e5d4621b9c2178b1048a7fc27ff98029e21a7c.png" src="../_images/e6073ce0338c37686e3bc4b858e5d4621b9c2178b1048a7fc27ff98029e21a7c.png" />
 </div>
 </div>
 <p>Now that our data has been masked, let’s try summing up all the cases in China:</p>
@@ -778,7 +783,7 @@ closely:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China&#39;)
 </pre></div>
 </div>
-<img alt="../_images/5b858093d8d776c70eb475cc9a03bb40c2f61aabeffae8e1e438704d91a33260.png" src="../_images/5b858093d8d776c70eb475cc9a03bb40c2f61aabeffae8e1e438704d91a33260.png" />
+<img alt="../_images/84b4da30a0953ad1779272aa5260a1be8d2a40052438ece3a556c4d7ae837bb1.png" src="../_images/84b4da30a0953ad1779272aa5260a1be8d2a40052438ece3a556c4d7ae837bb1.png" />
 </div>
 </div>
 <p>It’s clear that masked arrays are the right solution here. We cannot represent the missing data without mischaracterizing the evolution of the curve.</p>
@@ -846,10 +851,10 @@ package to create a cubic polynomial model that fits the data as best as possibl
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x77d35cec04c0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7ec3d867a080&gt;]
 </pre></div>
 </div>
-<img alt="../_images/43806a2f8cfa73415847d284ddc4f40ec84ab6d7d5d9d267a57c1cc825be2b90.png" src="../_images/43806a2f8cfa73415847d284ddc4f40ec84ab6d7d5d9d267a57c1cc825be2b90.png" />
+<img alt="../_images/01456d410444a1782eb595459235294b9429c0a074c5e4ae663f44582f3938c8.png" src="../_images/01456d410444a1782eb595459235294b9429c0a074c5e4ae663f44582f3938c8.png" />
 </div>
 </div>
 <p>This plot is not so readable since the lines seem to be over each other, so let’s summarize in a more elaborate plot. We’ll plot the real data when
@@ -873,7 +878,7 @@ available, and show the cubic fit for unavailable data, using this fit to comput
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China\nCubic estimate for 7 days after start&#39;)
 </pre></div>
 </div>
-<img alt="../_images/fcf08a62c941234d4f6819226dfe4a92554f0770bb6fa8bb3d22391042ecf980.png" src="../_images/fcf08a62c941234d4f6819226dfe4a92554f0770bb6fa8bb3d22391042ecf980.png" />
+<img alt="../_images/4c2b4d158d80df78d4bb60a5b5db7f472f76d9e63dab381b29c9b6eefd9a260c.png" src="../_images/4c2b4d158d80df78d4bb60a5b5db7f472f76d9e63dab381b29c9b6eefd9a260c.png" />
 </div>
 </div>
 </section>
@@ -983,7 +988,7 @@ By the NumPy community
 
   <p class="copyright">
     
-      © Copyright 2020-2024, the NumPy community.
+      © Copyright 2020-2025, the NumPy community.
       <br/>
     
   </p>
@@ -1007,8 +1012,8 @@ By the NumPy community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
