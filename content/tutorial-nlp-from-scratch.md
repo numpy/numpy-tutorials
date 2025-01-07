@@ -1054,6 +1054,6 @@ Nowadays, LSTMs have been replaced by the [Transformer](https://jalammar.github.
 Building a neural network from scratch with NumPy is a great way to learn more about NumPy and about deep learning. However, for real-world applications you should use specialized frameworks — such as PyTorch, JAX or TensorFlow — that provide NumPy-like APIs, have built-in automatic differentiation and GPU support, and are designed for high-performance numerical computing and machine learning.
 
 Finally, to know more about how ethics come into play when developing a machine learning model, you can refer to the following resources :
-- Data ethics resources by the Turing Institute. <https://www.turing.ac.uk/research/data-ethics>
+- [Data ethics resources](https://www.turing.ac.uk/research/data-ethics) by the Turing Institute
 - Considering how artificial intelligence shifts power, an [article](https://www.nature.com/articles/d41586-020-02003-2) and [talk](https://slideslive.com/38923453/the-values-of-machine-learning) by Pratyusha Kalluri
 - More ethics resources on [this blog post](https://www.fast.ai/2018/09/24/ai-ethics-resources/) by Rachel Thomas and the [Radical AI podcast](https://www.radicalai.org/)
