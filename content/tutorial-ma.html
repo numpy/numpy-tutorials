@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -512,8 +512,8 @@
 <p>From <a class="reference external" href="https://www.kaggle.com/atilamadai/covid19">Kaggle</a> it is possible to download a dataset with initial data about the COVID-19 outbreak in the beginning of 2020. We are going to look at a small subset of this data, contained in the file <code class="docutils literal notranslate"><span class="pre">who_covid_19_sit_rep_time_series.csv</span></code>. <em>(Note that this file has been replaced with a version without missing data sometime in late 2020.)</em></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="c1"># The os.getcwd() function returns the current folder; you can change</span>
 <span class="c1"># the filepath variable to point to the folder where you saved the .csv file</span>
@@ -574,7 +574,7 @@ rows of this file, since they contain other data we are not interested in. Separ
 <p>First of all, we can plot the whole set of data we have and see what it looks like. In order to get a readable plot, we select only a few of the dates to show in our <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xticks.html#matplotlib.pyplot.xticks">x-axis ticks</a>. Note also that in our plot command, we use <code class="docutils literal notranslate"><span class="pre">nbcases.T</span></code> (the transpose of the <code class="docutils literal notranslate"><span class="pre">nbcases</span></code> array) since this means we will plot each row of the file as a separate line. We choose to plot a dashed line (using the <code class="docutils literal notranslate"><span class="pre">'--'</span></code> line style). See the <a class="reference external" href="https://matplotlib.org/">matplotlib</a> documentation for more info on this.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">selected_dates</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">nbcases</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">)</span>
@@ -636,7 +636,7 @@ rows of this file, since they contain other data we are not interested in. Separ
 don’t want to compute missing data as <code class="docutils literal notranslate"><span class="pre">-1</span></code> - we just want to skip this value so it doesn’t interfere in our analysis. After importing the <code class="docutils literal notranslate"><span class="pre">numpy.ma</span></code> module, we’ll create a new array, this time masking the invalid values:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ma</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ma</span>
 
 <span class="n">nbcases_ma</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_values</span><span class="p">(</span><span class="n">nbcases</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
@@ -851,7 +851,7 @@ package to create a cubic polynomial model that fits the data as best as possibl
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7ec3d867a080&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x74d05d2825f0&gt;]
 </pre></div>
 </div>
 <img alt="../_images/01456d410444a1782eb595459235294b9429c0a074c5e4ae663f44582f3938c8.png" src="../_images/01456d410444a1782eb595459235294b9429c0a074c5e4ae663f44582f3938c8.png" />

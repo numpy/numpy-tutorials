@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -489,9 +489,9 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO: Rm try-except with scipy 1.10 is the minimum supported version</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">scipy.datasets</span> <span class="kn">import</span> <span class="n">face</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">face</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  <span class="c1"># Data was in scipy.misc prior to scipy v1.10</span>
-    <span class="kn">from</span> <span class="nn">scipy.misc</span> <span class="kn">import</span> <span class="n">face</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.misc</span><span class="w"> </span><span class="kn">import</span> <span class="n">face</span>
 
 <span class="n">img</span> <span class="o">=</span> <span class="n">face</span><span class="p">()</span>
 </pre></div>
@@ -520,7 +520,7 @@
 <p>We can see the image using the <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.imshow.html#matplotlib.pyplot.imshow">matplotlib.pyplot.imshow</a> function &amp; the special iPython command, <code class="docutils literal notranslate"><span class="pre">%matplotlib</span> <span class="pre">inline</span></code> to display plots inline:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
@@ -657,7 +657,7 @@ about maximum and minimum values for this array:</p>
 <p>To proceed, import the linear algebra submodule from NumPy:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">linalg</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">linalg</span>
 </pre></div>
 </div>
 </div>
@@ -734,7 +734,7 @@ compatible for multiplication. However, this is not true as <code class="docutil
 <p>results in a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. This happens because having a one-dimensional array for <code class="docutils literal notranslate"><span class="pre">s</span></code>, in this case, is much more economic in practice than building a diagonal matrix with the same data. To reconstruct the original matrix, we can rebuild the diagonal matrix <span class="math notranslate nohighlight">\(\Sigma\)</span> with the elements of <code class="docutils literal notranslate"><span class="pre">s</span></code> in its diagonal and with the appropriate dimensions for multiplying: in our case, <span class="math notranslate nohighlight">\(\Sigma\)</span> should be 768x1024 since <code class="docutils literal notranslate"><span class="pre">U</span></code> is 768x768 and <code class="docutils literal notranslate"><span class="pre">Vt</span></code> is 1024x1024. In order to add the singular values to the diagonal of <code class="docutils literal notranslate"><span class="pre">Sigma</span></code>, we will use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.fill_diagonal.html">fill_diagonal</a> function from NumPy:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">Sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">U</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Vt</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 <span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">Sigma</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>

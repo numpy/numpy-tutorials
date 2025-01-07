@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -545,32 +545,32 @@ We made sure to include different demographics in our data and included a range 
 </div></blockquote>
 <ol class="arabic simple">
 <li><p><strong>Text Denoising</strong> : Before converting your text into vectors, it is important to clean it and remove all unhelpful parts a.k.a the noise from your data by converting all characters to lowercase, removing html tags, brackets and stop words (words that don’t add much meaning to a sentence). Without this step the dataset is often a cluster of words that the computer doesn’t understand.</p></li>
-<li><p><strong>Converting words to vectors</strong> : A word embedding is a learned representation for text where words that have the same meaning have a similar representation. Individual words are represented as real-valued vectors in a predefined vector space. GloVe is an unsupervised algorithm developed by Stanford for generating word embeddings by generating global word-word co-occurence matrix from a corpus. You can download the zipped files containing the embeddings from https://nlp.stanford.edu/projects/glove/. Here you can choose any of the four options for different sizes or training datasets. We have chosen the least memory consuming embedding file.</p></li>
+<li><p><strong>Converting words to vectors</strong> : A word embedding is a learned representation for text where words that have the same meaning have a similar representation. Individual words are represented as real-valued vectors in a predefined vector space. GloVe is an unsupervised algorithm developed by Stanford for generating word embeddings by generating global word-word co-occurence matrix from a corpus. You can download the zipped files containing the embeddings from <a class="reference external" href="https://nlp.stanford.edu/projects/glove/">the GloVe official website</a>. Here you can choose any of the four options for different sizes or training datasets. We have chosen the least memory consuming embedding file.</p></li>
 </ol>
 <blockquote>
-<div><p>The GloVe word embeddings include sets that were trained on billions of tokens, some up to 840 billion tokens. These algorithms exhibit stereotypical biases, such as gender bias which can be traced back to the original training data. For example certain occupations seem to be more biased towards a particular gender, reinforcing problematic stereotypes. The nearest solution to this problem are some de-biasing algorithms as the one presented in https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1184/reports/6835575.pdf which one can use on embeddings of their choice to mitigate bias, if present.</p>
+<div><p>The GloVe word embeddings include sets that were trained on billions of tokens, some up to 840 billion tokens. These algorithms exhibit stereotypical biases, such as gender bias which can be traced back to the original training data. For example certain occupations seem to be more biased towards a particular gender, reinforcing problematic stereotypes. The nearest solution to this problem are some de-biasing algorithms as the one presented in <a class="reference external" href="https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1184/reports/6835575.pdf">this research article</a>, which one can use on embeddings of their choice to mitigate bias, if present.</p>
 </div></blockquote>
 <!-- #endregion -->
 <p>You’ll start with importing the necessary packages to build our Deep Learning network.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing the necessary packages</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pooch</span>
-<span class="kn">import</span> <span class="nn">string</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">zipfile</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pooch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">string</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="c1"># Creating the random instance</span>
 <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Next, you’ll define set of text preprocessing helper functions.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TextPreprocess</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TextPreprocess</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Text Preprocessing for a Natural Language Processing model.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">txt_to_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">txt_to_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to convert a txt file to pandas dataframe.</span>
 
 <span class="sd">        Parameters</span>
@@ -594,7 +594,7 @@ We made sure to include different demographics in our data and included a range 
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">df</span>
 
-    <span class="k">def</span> <span class="nf">unzipper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zipped</span><span class="p">,</span> <span class="n">to_extract</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">unzipper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zipped</span><span class="p">,</span> <span class="n">to_extract</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to extract a file from a zipped folder.</span>
 
 <span class="sd">        Parameters</span>
@@ -619,7 +619,7 @@ We made sure to include different demographics in our data and included a range 
         <span class="n">output_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">outdir</span><span class="p">,</span> <span class="n">to_extract</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">output_file</span>
 
-    <span class="k">def</span> <span class="nf">cleantext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">text_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cleantext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">text_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                   <span class="n">remove_stopwords</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_punc</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to clean text data.</span>
 
@@ -680,12 +680,12 @@ We made sure to include different demographics in our data and included a range 
                      <span class="s2">&quot;you&#39;re&quot;</span><span class="p">,</span> <span class="s2">&quot;you&#39;ve&quot;</span><span class="p">,</span>
                      <span class="s2">&quot;your&quot;</span><span class="p">,</span> <span class="s2">&quot;yours&quot;</span><span class="p">,</span> <span class="s2">&quot;yourself&quot;</span><span class="p">,</span> <span class="s2">&quot;yourselves&quot;</span><span class="p">]</span>
 
-        <span class="k">def</span> <span class="nf">remove_stopwords</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">remove_stopwords</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
             <span class="n">data</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">column</span><span class="si">}</span><span class="s1"> without stopwords&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
                 <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="n">stopwords</span><span class="p">)]))</span>
             <span class="k">return</span> <span class="n">data</span>
 
-        <span class="k">def</span> <span class="nf">remove_tags</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">remove_tags</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;&lt;*&gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">result</span>
 
@@ -703,7 +703,7 @@ We made sure to include different demographics in our data and included a range 
         <span class="k">return</span> <span class="n">X</span>
 
 
-    <span class="k">def</span> <span class="nf">sent_tokeniser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sent_tokeniser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to split text into sentences.</span>
 
 <span class="sd">        Parameters</span>
@@ -722,7 +722,7 @@ We made sure to include different demographics in our data and included a range 
         <span class="n">sentences_cleaned</span> <span class="o">=</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^\w\s]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">sentences_cleaned</span>
 
-    <span class="k">def</span> <span class="nf">word_tokeniser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">word_tokeniser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to split text into tokens.</span>
 
 <span class="sd">        Parameters</span>
@@ -741,7 +741,7 @@ We made sure to include different demographics in our data and included a range 
             <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">&#39;- </span><span class="se">\t\n</span><span class="s1">.,;!?</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="ow">and</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">x</span><span class="p">)]</span>
         <span class="k">return</span> <span class="n">words</span>
 
-    <span class="k">def</span> <span class="nf">loadGloveModel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">emb_path</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">loadGloveModel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">emb_path</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to read from the word embedding file.</span>
 
 <span class="sd">        Returns</span>
@@ -762,7 +762,7 @@ We made sure to include different demographics in our data and included a range 
         <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gloveModel</span><span class="p">),</span> <span class="s2">&quot; words loaded!&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">gloveModel</span>
 
-    <span class="k">def</span> <span class="nf">text_to_paras</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">para_len</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">text_to_paras</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">para_len</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Function to split text into paragraphs.</span>
 
 <span class="sd">        Parameters</span>
@@ -881,7 +881,7 @@ We made sure to include different demographics in our data and included a range 
 <p><img alt="Overview of the model architecture, showing a series of animated boxes. There are five identical boxes labeled A and receiving as input one of the words in the phrase &quot;life's a box of chocolates&quot;. Each box is highlighted in turn, representing the memory blocks of the LSTM network as information passes through them, ultimately reaching a &quot;Positive&quot; output value." src="../_images/lstm.gif" /></p>
 <p>In the above gif, the rectangles labeled <span class="math notranslate nohighlight">\(A\)</span> are called <code class="docutils literal notranslate"><span class="pre">Cells</span></code> and they are the <strong>Memory Blocks</strong> of our LSTM network. They are responsible for choosing what to remember in a sequence and pass on that information to the next cell via two states called the <code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">state</span></code> <span class="math notranslate nohighlight">\(H_{t}\)</span> and the <code class="docutils literal notranslate"><span class="pre">cell</span> <span class="pre">state</span></code> <span class="math notranslate nohighlight">\(C_{t}\)</span> where <span class="math notranslate nohighlight">\(t\)</span> indicates the time-step. Each <code class="docutils literal notranslate"><span class="pre">Cell</span></code> has dedicated gates which are responsible for storing, writing or reading the information passed to an LSTM. You will now look closely at the architecture of the network by implementing each mechanism happening inside of it.</p>
 <p>Lets start with writing a function to randomly initialize the parameters which will be learned while our model trains</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">initialise_params</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">initialise_params</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">):</span>
     <span class="c1"># forget gate</span>
     <span class="n">Wf</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span> <span class="o">+</span> <span class="n">input_dim</span><span class="p">))</span>
     <span class="n">bf</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
@@ -926,21 +926,21 @@ We made sure to include different demographics in our data and included a range 
 <li><p>Storing all the calculated values in a cache to utilize during backpropagation</p></li>
 </ul>
 <p><a class="reference external" href="https://d2l.ai/chapter_multilayer-perceptrons/mlp.html?highlight=sigmoid#sigmoid-function">Sigmoid</a> belongs to the family of non-linear activation functions. It helps the network to update or forget the data. If the sigmoid of a value results in 0, the information is considered forgotten. Similarly, the information stays if it is 1.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fmin</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
     <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">n</span> <span class="o">/</span> <span class="n">d</span>
 </pre></div>
 </div>
 <p>The <strong>Forget Gate</strong> takes the current word embedding and the previous hidden state concatenated together as input. and decides what parts of the old memory cell content need attention and which can be ignored.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fp_forget_gate</span><span class="p">(</span><span class="n">concat</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fp_forget_gate</span><span class="p">(</span><span class="n">concat</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
     <span class="n">ft</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;Wf&#39;</span><span class="p">],</span> <span class="n">concat</span><span class="p">)</span>
                  <span class="o">+</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;bf&#39;</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">ft</span>
 </pre></div>
 </div>
 <p>The <strong>Input Gate</strong> takes the current word embedding and the previous hidden state concatenated together as input. and governs how much of the new data we take into account via the <strong>Candidate Memory Gate</strong> which utilizes the <a class="reference external" href="https://d2l.ai/chapter_multilayer-perceptrons/mlp.html?highlight=tanh#tanh-function">Tanh</a> to regulate the values flowing through the network.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fp_input_gate</span><span class="p">(</span><span class="n">concat</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fp_input_gate</span><span class="p">(</span><span class="n">concat</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
     <span class="n">it</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;Wi&#39;</span><span class="p">],</span> <span class="n">concat</span><span class="p">)</span>
                  <span class="o">+</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;bi&#39;</span><span class="p">])</span>
     <span class="n">cmt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;Wcm&#39;</span><span class="p">],</span> <span class="n">concat</span><span class="p">)</span>
@@ -949,7 +949,7 @@ We made sure to include different demographics in our data and included a range 
 </pre></div>
 </div>
 <p>Finally we have the <strong>Output Gate</strong> which takes information from the current word embedding, previous hidden state and the cell state which has been updated with information from the forget and input gates to update the value of the hidden state.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fp_output_gate</span><span class="p">(</span><span class="n">concat</span><span class="p">,</span> <span class="n">next_cs</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fp_output_gate</span><span class="p">(</span><span class="n">concat</span><span class="p">,</span> <span class="n">next_cs</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
     <span class="n">ot</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;Wo&#39;</span><span class="p">],</span> <span class="n">concat</span><span class="p">)</span>
                  <span class="o">+</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;bo&#39;</span><span class="p">])</span>
     <span class="n">next_hs</span> <span class="o">=</span> <span class="n">ot</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">next_cs</span><span class="p">)</span>
@@ -965,7 +965,7 @@ We made sure to include different demographics in our data and included a range 
 <section id="but-how-do-you-obtain-sentiment-from-the-lstm-s-output">
 <h3>But how do you obtain sentiment from the LSTM’s output?<a class="headerlink" href="#but-how-do-you-obtain-sentiment-from-the-lstm-s-output" title="Link to this heading">#</a></h3>
 <p>The hidden state you obtain from the output gate of the last memory block in a sequence is considered to be a representation of all the information contained in a sequence. To classify this information into various classes (2 in our case, positive and negative) we use a <strong>Fully Connected layer</strong> which firstly maps this information to a predefined output size (1 in our case). Then, an activation function such as the sigmoid converts this output to a value between 0 and 1. We’ll consider values greater than 0.5 to be indicative of a positive sentiment.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fp_fc_layer</span><span class="p">(</span><span class="n">last_hs</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fp_fc_layer</span><span class="p">(</span><span class="n">last_hs</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
     <span class="n">z2</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;W2&#39;</span><span class="p">],</span> <span class="n">last_hs</span><span class="p">)</span>
           <span class="o">+</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;b2&#39;</span><span class="p">])</span>
     <span class="n">a2</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">z2</span><span class="p">)</span>
@@ -973,7 +973,7 @@ We made sure to include different demographics in our data and included a range 
 </pre></div>
 </div>
 <p>Now you will put all these functions together to summarize the <strong>Forward Propagation</strong> step in our model architecture:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">forward_prop</span><span class="p">(</span><span class="n">X_vec</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">forward_prop</span><span class="p">(</span><span class="n">X_vec</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">):</span>
 
     <span class="n">hidden_dim</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;Wf&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">time_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_vec</span><span class="p">)</span>
@@ -1048,7 +1048,7 @@ We made sure to include different demographics in our data and included a range 
 <p>After each forward pass through the network, you will implement the <code class="docutils literal notranslate"><span class="pre">backpropagation</span> <span class="pre">through</span> <span class="pre">time</span></code> algorithm to accumulate gradients of each parameter over the time steps. Backpropagation through a LSTM is not as straightforward as through other common Deep Learning architectures, due to the special way its underlying layers interact. Nonetheless, the approach is largely the same; identifying dependencies and applying the chain rule.</p>
 <p>Lets start with defining a function to initialize gradients of each parameter as arrays made up of zeros with same dimensions as the corresponding parameter</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise the gradients</span>
-<span class="k">def</span> <span class="nf">initialize_grads</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">initialize_grads</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
     <span class="n">grads</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
         <span class="n">grads</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;d</span><span class="si">{</span><span class="n">param</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">parameters</span><span class="p">[</span><span class="n">param</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
@@ -1057,7 +1057,7 @@ We made sure to include different demographics in our data and included a range 
 </div>
 <p>Now, for each gate and the fully connected layer, we define a function to calculate the gradient of the loss with respect to the input passed and the parameters used. To understand the mathematics behind how the derivatives were calculated we suggest you to follow this helpful <a class="reference external" href="https://christinakouridi.blog/2019/06/19/backpropagation-lstm/">blog</a> by Christina Kouridi.</p>
 <p>Define a function to calculate the gradients in the <strong>Forget Gate</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bp_forget_gate</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">dh_prev</span><span class="p">,</span> <span class="n">dc_prev</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bp_forget_gate</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">dh_prev</span><span class="p">,</span> <span class="n">dc_prev</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
     <span class="c1"># dft = dL/da2 * da2/dZ2 * dZ2/dh_prev * dh_prev/dc_prev * dc_prev/dft</span>
     <span class="n">dft</span> <span class="o">=</span> <span class="p">((</span><span class="n">dc_prev</span> <span class="o">*</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;prev_cs&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;ot&quot;</span><span class="p">]</span>
            <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;next_cs&quot;</span><span class="p">])))</span>
@@ -1072,7 +1072,7 @@ We made sure to include different demographics in our data and included a range 
 </pre></div>
 </div>
 <p>Define a function to calculate the gradients in the <strong>Input Gate</strong> and <strong>Candidate Memory Gate</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bp_input_gate</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">dh_prev</span><span class="p">,</span> <span class="n">dc_prev</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bp_input_gate</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">dh_prev</span><span class="p">,</span> <span class="n">dc_prev</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
     <span class="c1"># dit = dL/da2 * da2/dZ2 * dZ2/dh_prev * dh_prev/dc_prev * dc_prev/dit</span>
     <span class="n">dit</span> <span class="o">=</span> <span class="p">((</span><span class="n">dc_prev</span> <span class="o">*</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;cmt&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;ot&quot;</span><span class="p">]</span>
            <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;next_cs&quot;</span><span class="p">])))</span>
@@ -1097,7 +1097,7 @@ We made sure to include different demographics in our data and included a range 
 </pre></div>
 </div>
 <p>Define a function to calculate the gradients for the <strong>Output Gate</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bp_output_gate</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">dh_prev</span><span class="p">,</span> <span class="n">dc_prev</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bp_output_gate</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">dh_prev</span><span class="p">,</span> <span class="n">dc_prev</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
     <span class="c1"># dot = dL/da2 * da2/dZ2 * dZ2/dh_prev * dh_prev/dot</span>
     <span class="n">dot</span> <span class="o">=</span> <span class="p">(</span><span class="n">dh_prev</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">cache</span><span class="p">[</span><span class="s2">&quot;next_cs&quot;</span><span class="p">])</span>
            <span class="o">*</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;ot&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">cache</span><span class="p">[</span><span class="s2">&quot;ot&quot;</span><span class="p">]))</span>
@@ -1111,7 +1111,7 @@ We made sure to include different demographics in our data and included a range 
 </pre></div>
 </div>
 <p>Define a function to calculate the gradients for the <strong>Fully Connected Layer</strong>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bp_fc_layer</span> <span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">caches</span><span class="p">,</span> <span class="n">gradients</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bp_fc_layer</span> <span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">caches</span><span class="p">,</span> <span class="n">gradients</span><span class="p">):</span>
     <span class="c1"># dZ2 = dL/da2 * da2/dZ2</span>
     <span class="n">predicted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">caches</span><span class="p">[</span><span class="s1">&#39;fc_values&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;a2&#39;</span><span class="p">])</span>
     <span class="n">target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
@@ -1128,7 +1128,7 @@ We made sure to include different demographics in our data and included a range 
 </pre></div>
 </div>
 <p>Put all these functions together to summarize the <strong>Backpropagation</strong> step for our model:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">backprop</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">caches</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">time_steps</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">backprop</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">caches</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">time_steps</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
 
     <span class="c1"># Initialize gradients</span>
     <span class="n">gradients</span> <span class="o">=</span> <span class="n">initialize_grads</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
@@ -1172,7 +1172,7 @@ We made sure to include different demographics in our data and included a range 
 <p>We update the parameters through an optimization algorithm called <a class="reference external" href="https://optimization.cbe.cornell.edu/index.php?title=Adam">Adam</a> which is an extension to stochastic gradient descent that has recently seen broader adoption for deep learning applications in computer vision and natural language processing. Specifically, the algorithm calculates an exponential moving average of the gradient and the squared gradient, and the parameters <code class="docutils literal notranslate"><span class="pre">beta1</span></code> and <code class="docutils literal notranslate"><span class="pre">beta2</span></code> control the decay rates of these moving averages. Adam has shown increased convergence and robustness over other gradient descent algorithms and is often recommended as the default optimizer for training.</p>
 <p>Define a function to initialise the moving averages for each parameter</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialise the moving averages</span>
-<span class="k">def</span> <span class="nf">initialise_mav</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">initialise_mav</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
     <span class="n">v</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">s</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="c1"># Initialize dictionaries v, s</span>
@@ -1185,7 +1185,7 @@ We made sure to include different demographics in our data and included a range 
 </div>
 <p>Define a function to update the parameters</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update the parameters using Adam optimization</span>
-<span class="k">def</span> <span class="nf">update_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span>
                       <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">beta1</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">beta2</span><span class="o">=</span><span class="mf">0.999</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
         <span class="c1"># Moving average of the gradients</span>
@@ -1220,7 +1220,7 @@ We made sure to include different demographics in our data and included a range 
 </div>
 <p>To optimize your deep learning network, you need to calculate a loss based on how well the model is doing on the training data. Loss value implies how poorly or well a model behaves after each iteration of optimization. <br>
 Define a function to calculate the loss using <a class="reference external" href="http://d2l.ai/chapter_linear-networks/softmax-regression.html?highlight=negative%20log%20likelihood#log-likelihood">negative log likelihood</a></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">loss_f</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">loss_f</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
     <span class="c1"># define value of epsilon to prevent zero division error inside a log</span>
     <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-5</span>
     <span class="c1"># Implement formula for negative log likelihood</span>
@@ -1420,11 +1420,11 @@ Define a function to calculate the loss using <a class="reference external" href
 <li><p>Initialize weights using <a class="reference external" href="https://d2l.ai/chapter_multilayer-perceptrons/numerical-stability-and-init.html#xavier-initialization">Xavier Initialization</a> to prevent vanishing/exploding gradients instead of initializing them randomly.</p></li>
 <li><p>Replace LSTM with a <a class="reference external" href="https://en.wikipedia.org/wiki/Bidirectional_recurrent_neural_networks">Bidirectional LSTM</a> to use both left and right context for predicting sentiment.</p></li>
 </ul>
-<p>Nowadays, LSTMs have been replaced by the <a class="reference external" href="https://jalammar.github.io/illustrated-transformer/">Transformer</a>( which uses <a class="reference external" href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Attention</a> to tackle all the problems that plague an LSTM such as as lack of <a class="reference external" href="https://en.wikipedia.org/wiki/Transfer_learning">transfer learning</a>, lack of <a class="reference external" href="https://web.stanford.edu/~rezab/classes/cme323/S16/projects_reports/hedge_usmani.pdf">parallel training</a> and a long gradient chain for lengthy sequences</p>
+<p>Nowadays, LSTMs have been replaced by the <a class="reference external" href="https://jalammar.github.io/illustrated-transformer/">Transformer</a> which uses <a class="reference external" href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Attention</a> to tackle all the problems that plague an LSTM such as lack of <a class="reference external" href="https://en.wikipedia.org/wiki/Transfer_learning">transfer learning</a>, lack of <a class="reference external" href="https://web.stanford.edu/~rezab/classes/cme323/S16/projects_reports/hedge_usmani.pdf">parallel training</a>, and a long gradient chain for lengthy sequences.</p>
 <p>Building a neural network from scratch with NumPy is a great way to learn more about NumPy and about deep learning. However, for real-world applications you should use specialized frameworks — such as PyTorch, JAX or TensorFlow — that provide NumPy-like APIs, have built-in automatic differentiation and GPU support, and are designed for high-performance numerical computing and machine learning.</p>
 <p>Finally, to know more about how ethics come into play when developing a machine learning model, you can refer to the following resources :</p>
 <ul class="simple">
-<li><p>Data ethics resources by the Turing Institute. https://www.turing.ac.uk/research/data-ethics</p></li>
+<li><p><a class="reference external" href="https://www.turing.ac.uk/research/data-ethics">Data ethics resources</a> by the Turing Institute</p></li>
 <li><p>Considering how artificial intelligence shifts power, an <a class="reference external" href="https://www.nature.com/articles/d41586-020-02003-2">article</a> and <a class="reference external" href="https://slideslive.com/38923453/the-values-of-machine-learning">talk</a> by Pratyusha Kalluri</p></li>
 <li><p>More ethics resources on <a class="reference external" href="https://www.fast.ai/2018/09/24/ai-ethics-resources/">this blog post</a> by Rachel Thomas and the <a class="reference external" href="https://www.radicalai.org/">Radical AI podcast</a></p></li>
 </ul>

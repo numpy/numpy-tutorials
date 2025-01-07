@@ -30,7 +30,7 @@
   <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -535,13 +535,13 @@ footprint!</p>
 <section id="set-up-pong">
 <h2>Set up Pong<a class="headerlink" href="#set-up-pong" title="Link to this heading">#</a></h2>
 <p><strong>1.</strong> First, you should install OpenAI Gym (using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">gym[atari]</span></code> - this package is currently not available on conda), and import NumPy, Gym and the necessary modules:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">gym</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">gym</span>
 </pre></div>
 </div>
 <p>Gym can monitor and save the output using the <code class="docutils literal notranslate"><span class="pre">Monitor</span></code> wrapper:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gym</span> <span class="kn">import</span> <span class="n">wrappers</span>
-<span class="kn">from</span> <span class="nn">gym.wrappers</span> <span class="kn">import</span> <span class="n">Monitor</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">gym</span><span class="w"> </span><span class="kn">import</span> <span class="n">wrappers</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">gym.wrappers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Monitor</span>
 </pre></div>
 </div>
 <p><strong>2.</strong> Instantiate a Gym environment for the game of Pong:</p>
@@ -582,7 +582,7 @@ footprint!</p>
 </pre></div>
 </div>
 <p>(You can refer to the OpenAI Gym core <a class="reference external" href="https://github.com/openai/gym/blob/master/gym/core.py">API</a> for more information about Gym’s core classes and methods.)</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">env</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
@@ -593,7 +593,7 @@ footprint!</p>
 </div>
 <p>To feed the observations into the policy (neural) network, you need to convert them into 1D grayscale vectors with 6,400 (80x80x1) floating point arrays. (During training, you will use NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ravel.html"><code class="docutils literal notranslate"><span class="pre">np.ravel()</span></code></a> function to flatten these arrays.)</p>
 <p><strong>3.</strong> Set up a helper function for frame (observation) preprocessing:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">frame_preprocessing</span><span class="p">(</span><span class="n">observation_frame</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">frame_preprocessing</span><span class="p">(</span><span class="n">observation_frame</span><span class="p">):</span>
     <span class="c1"># Crop the frame.</span>
     <span class="n">observation_frame</span> <span class="o">=</span> <span class="n">observation_frame</span><span class="p">[</span><span class="mi">35</span><span class="p">:</span><span class="mi">195</span><span class="p">]</span>
     <span class="c1"># Downsample the frame by a factor of 2.</span>
@@ -654,7 +654,7 @@ footprint!</p>
 </pre></div>
 </div>
 <p><strong>3.</strong> Your policy network starts by randomly initializing the weights and feeds the input data (frames) forward from the input layer through a hidden layer to the output layers. This process is called the <em>forward pass</em> or <em>forward propagation</em>, and is outlined in the function <code class="docutils literal notranslate"><span class="pre">policy_forward()</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">policy_forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">policy_forward</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
     <span class="c1"># Matrix-multiply the weights by the input in the one and only hidden layer.</span>
     <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;W1&quot;</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span>
     <span class="c1"># Apply non-linearity with ReLU.</span>
@@ -675,7 +675,7 @@ footprint!</p>
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Sigmoid_function">Sigmoid</a>: defined below as <code class="docutils literal notranslate"><span class="pre">sigmoid()</span></code>. It “wraps” the last layer’s output and returns an action log probability in the (0, 1) range.</p></li>
 </ul>
 <p><strong>4.</strong> Define the sigmoid function separately with NumPy’s <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.exp.html?highlight=numpy.exp#numpy.exp"><code class="docutils literal notranslate"><span class="pre">np.exp()</span></code></a> for computing exponentials:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -684,7 +684,7 @@ footprint!</p>
 <h2>Set up the update step (backpropagation)<a class="headerlink" href="#set-up-the-update-step-backpropagation" title="Link to this heading">#</a></h2>
 <p>During learning in your deep RL algorithm, you use the action log probabilities (given an observation) and the discounted returns (for example, +1 or -1 in Pong) and perform the <em>backward pass</em> or <em>backpropagation</em> to update the parameters — the policy network’s weights.</p>
 <p><strong>1.</strong> Let’s define the backward pass function (<code class="docutils literal notranslate"><span class="pre">policy_backward()</span></code>) with the help of NumPy’s modules for array multiplication — <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dot.html?highlight=numpy.dot#numpy.dot"><code class="docutils literal notranslate"><span class="pre">np.dot()</span></code></a> (matrix multiplication), <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.outer.html"><code class="docutils literal notranslate"><span class="pre">np.outer()</span></code></a> (outer product computation), and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ravel.html"><code class="docutils literal notranslate"><span class="pre">np.ravel()</span></code></a> (to flatten arrays into 1D arrays):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">policy_backward</span><span class="p">(</span><span class="n">eph</span><span class="p">,</span> <span class="n">epdlogp</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">policy_backward</span><span class="p">(</span><span class="n">eph</span><span class="p">,</span> <span class="n">epdlogp</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
     <span class="n">dW2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">eph</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">epdlogp</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
     <span class="n">dh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">epdlogp</span><span class="p">,</span> <span class="n">model</span><span class="p">[</span><span class="s2">&quot;W2&quot;</span><span class="p">])</span>
     <span class="n">dh</span><span class="p">[</span><span class="n">eph</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
@@ -732,7 +732,7 @@ footprint!</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.99</span>
 
 
-<span class="k">def</span> <span class="nf">discount_rewards</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">discount_rewards</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">gamma</span><span class="p">):</span>
     <span class="n">discounted_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
     <span class="n">running_add</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="c1"># From the last reward to the first...</span>
@@ -809,7 +809,7 @@ footprint!</p>
 </pre></div>
 </div>
 <p><strong>7.</strong> To simulate motion between the frames, set the single input frame (<code class="docutils literal notranslate"><span class="pre">x</span></code>) for the policy network as the difference between the current and previous preprocessed frames:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">update_input</span><span class="p">(</span><span class="n">prev_x</span><span class="p">,</span> <span class="n">cur_x</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">update_input</span><span class="p">(</span><span class="n">prev_x</span><span class="p">,</span> <span class="n">cur_x</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">prev_x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">cur_x</span> <span class="o">-</span> <span class="n">prev_x</span>
     <span class="k">else</span><span class="p">:</span>
