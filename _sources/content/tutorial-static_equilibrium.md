@@ -263,7 +263,7 @@ print("Reaction moment =", M)
 ```
 
 ### Another Example
-Let's look at a slightly more complicated model.  In this example you will be observing a beam with two cables and an applied force.  This time you need to find both the tension in the cords and the reaction forces of the beam. *(Source: [Vector Mechanics for Engineers: Statics](https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9780077687304.html), Problem 4.106)*
+Let's look at a slightly more complicated model.  In this example you will be observing a beam with two cables and an applied force.  This time you need to find both the tension in the cords and the reaction forces of the beam. *(Source: [Vector Mechanics for Engineers: Statics and Dynamics](https://www.mheducation.com/highered/product/Vector-Mechanics-for-Engineers-Statics-and-Dynamics-Beer.html), Problem 4.106)*
 
 
 ![image.png](_static/problem4.png)
@@ -387,5 +387,5 @@ This same process can be applied to kinetic problems or in any number of dimensi
 
 ### References
 
-1. [Vector Mechanics for Engineers: Statics (Beer & Johnston & Mazurek)](https://www.mheducation.com/highered/product/vector-mechanics-engineers-statics-beer-johnston/M9780077687304.html)
+1. [Vector Mechanics for Engineers: Statics and Dynamics (Beer & Johnston & Mazurek & et al.)](https://www.mheducation.com/highered/product/Vector-Mechanics-for-Engineers-Statics-and-Dynamics-Beer.html)
 2. [NumPy Reference](https://numpy.org/doc/stable/reference/)
