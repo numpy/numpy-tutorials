@@ -470,7 +470,7 @@
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
 <p>The reader should have some knowledge of Python, NumPy array manipulation, and linear algebra. In addition, you should be familiar with main concepts of <a class="reference external" href="https://en.wikipedia.org/wiki/Deep_learning">deep learning</a>.</p>
-<p>To refresh the memory, you can take the <a class="reference external" href="https://docs.python.org/dev/tutorial/index.html">Python</a> and <a class="reference external" href="https://numpy.org/doc/stable/user/tutorial-svd.html">Linear algebra on n-dimensional arrays</a> tutorials.</p>
+<p>To refresh the memory, you can take the <a class="reference external" href="https://docs.python.org/dev/tutorial/index.html">Python</a> and <a class="reference external" href="https://numpy.org/numpy-tutorials/content/tutorial-svd.html">Linear algebra on n-dimensional arrays</a> tutorials.</p>
 <p>You are advised to read the <a class="reference external" href="http://www.cs.toronto.edu/~hinton/absps/NatureDeepReview.pdf">Deep learning</a> paper published in 2015 by Yann LeCun, Yoshua Bengio, and Geoffrey Hinton, who are regarded as some of the pioneers of the field. You should also consider reading Andrew Trask’s <a class="reference external" href="https://www.manning.com/books/grokking-deep-learning">Grokking Deep Learning</a>, which teaches deep learning with NumPy.</p>
 <p>In addition to NumPy, you will be utilizing the following Python standard modules for data loading and processing:</p>
 <ul>
@@ -531,18 +531,6 @@ download it.</p>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
                 <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-images-idx3-ubyte.gz
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: t10k-images-idx3-ubyte.gz
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-labels-idx1-ubyte.gz
-Downloading file: t10k-labels-idx1-ubyte.gz
 </pre></div>
 </div>
 </div>
