@@ -97,7 +97,7 @@ With this, we have successfully imported the data and checked that it is complet
 ## Calculating the Air Quality Index
 
 
-We will calculate the AQI using [the method](https://app.cpcbccr.com/ccr_docs/FINAL-REPORT_AQI_.pdf) adopted by the [Central Pollution Control Board](https://www.cpcb.nic.in/national-air-quality-index) of India.  To summarize the steps:
+We will calculate the AQI using [the method](https://app.cpcbccr.com/ccr_docs/FINAL-REPORT_AQI_.pdf) adopted by the [Central Pollution Control Board](https://www.cpcb.nic.in/national-air-quality-index/) of India.  To summarize the steps:
 
 - Collect 24-hourly average concentration values for the standard pollutants; 8-hourly in case of CO and O3.
 
