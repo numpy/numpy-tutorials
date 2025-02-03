@@ -22,7 +22,7 @@ Help improve this article by developing an example with reduced dependency
 footprint!
 ```
 
-This tutorial demonstrates how to implement a deep reinforcement learning (RL) agent from scratch using a policy gradient method that learns to play the [Pong](https://gym.openai.com/envs/Pong-v0/) video game using screen pixels as inputs with NumPy. Your Pong agent will obtain experience on the go using an [artificial neural network](https://en.wikipedia.org/wiki/Artificial_neural_network) as its [policy](https://en.wikipedia.org/wiki/Reinforcement_learning).
+This tutorial demonstrates how to implement a deep reinforcement learning (RL) agent from scratch using a policy gradient method that learns to play the [Pong](https://en.wikipedia.org/wiki/Pong) video game using screen pixels as inputs with NumPy. Your Pong agent will obtain experience on the go using an [artificial neural network](https://en.wikipedia.org/wiki/Artificial_neural_network) as its [policy](https://en.wikipedia.org/wiki/Reinforcement_learning).
 
 Pong is a 2D game from 1972 where two players use "rackets" to play a form of table tennis. Each player moves the racket up and down the screen and tries to hit a ball in their opponent's direction by touching it. The goal is to hit the ball such that it goes past the opponent's racket (they miss their shot). According to the rules, if a player reaches 21 points, they win. In Pong, the RL agent that learns to play against an opponent is displayed on the right.
 
@@ -32,7 +32,7 @@ This example is based on the [code](https://gist.github.com/karpathy/a4166c7fe25
 
 ## Prerequisites
 
-- **OpenAI Gym**: To help with the game environment, you will use [Gym](https://gym.openai.com) — an open-source Python interface [developed by OpenAI](https://arxiv.org/abs/1606.01540) that helps perform RL tasks while supporting many simulation environments.
+- **OpenAI Gym**: To help with the game environment, you will use [Gym](https://github.com/openai/gym) — an open-source Python interface [developed by OpenAI](https://arxiv.org/abs/1606.01540) that helps perform RL tasks while supporting many simulation environments.
 - **Python and NumPy**: The reader should have some knowledge of Python, NumPy array manipulation, and linear algebra.
 - **Deep learning and deep RL**: You should be familiar with main concepts of [deep learning](https://en.wikipedia.org/wiki/Deep_learning), which are explained in the [Deep learning](http://www.cs.toronto.edu/~hinton/absps/NatureDeepReview.pdf) paper published in 2015 by Yann LeCun, Yoshua Bengio, and Geoffrey Hinton, who are regarded as some of the pioneers of the field. The tutorial will try to guide you through the main concepts of deep RL and you will find various literature with links to original sources for your convenience.
 - **Jupyter notebook environments**: Because RL experiments can require high computing power, you can run the tutorial on the cloud for free using [Binder](https://mybinder.org) or [Google Colaboratory](https://colab.research.google.com/notebooks/intro.ipynb) (which offers free limited GPU and TPU acceleration).
