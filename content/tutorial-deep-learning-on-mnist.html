@@ -496,7 +496,7 @@
 <hr class="docutils" />
 <section id="load-the-mnist-dataset">
 <h2>1. Load the MNIST dataset<a class="headerlink" href="#load-the-mnist-dataset" title="Link to this heading">#</a></h2>
-<p>In this section, you will download the zipped MNIST dataset files originally stored in <a class="reference external" href="http://yann.lecun.com/exdb/mnist/">Yann LeCun’s website</a>. Then, you will transform them into 4 files of NumPy array type using built-in Python modules. Finally, you will split the arrays into training and test sets.</p>
+<p>In this section, you will download the zipped MNIST dataset files originally developed by Yann LeCun’s research team. (More details of the MNIST dataset are available on <a class="reference external" href="https://www.kaggle.com/datasets/hojjatk/mnist-dataset">Kaggle</a>.) Then, you will transform them into 4 files of NumPy array type using built-in Python modules. Finally, you will split the arrays into training and test sets.</p>
 <p><strong>1.</strong> Define a variable to store the training/test image/label names of the MNIST dataset in a list:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -531,6 +531,18 @@ download it.</p>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
                 <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-images-idx3-ubyte.gz
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: t10k-images-idx3-ubyte.gz
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-labels-idx1-ubyte.gz
+Downloading file: t10k-labels-idx1-ubyte.gz
 </pre></div>
 </div>
 </div>

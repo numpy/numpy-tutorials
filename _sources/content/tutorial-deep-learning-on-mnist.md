@@ -62,7 +62,7 @@ This tutorial can be run locally in an isolated environment, such as [Virtualenv
 
 ## 1. Load the MNIST dataset
 
-In this section, you will download the zipped MNIST dataset files originally stored in [Yann LeCun's website](http://yann.lecun.com/exdb/mnist/). Then, you will transform them into 4 files of NumPy array type using built-in Python modules. Finally, you will split the arrays into training and test sets.
+In this section, you will download the zipped MNIST dataset files originally developed by Yann LeCun's research team. (More details of the MNIST dataset are available on [Kaggle](https://www.kaggle.com/datasets/hojjatk/mnist-dataset).) Then, you will transform them into 4 files of NumPy array type using built-in Python modules. Finally, you will split the arrays into training and test sets.
 
 **1.** Define a variable to store the training/test image/label names of the MNIST dataset in a list:
 
