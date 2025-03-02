@@ -16,30 +16,27 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
@@ -57,7 +54,6 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
 
   </head>
   
@@ -74,8 +70,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -83,6 +90,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -90,8 +98,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -107,8 +115,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -138,7 +145,7 @@
     
     
     <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="NumPy Tutorials - Home"/>
-    <img src="../_static/numpylogo.svg" class="logo__image only-dark pst-js-only" alt="NumPy Tutorials - Home"/>
+    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="NumPy Tutorials - Home"/>`);</script>
   
   
 </a></div>
@@ -159,11 +166,15 @@
 </ul></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
@@ -202,14 +213,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -401,16 +407,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -587,7 +601,7 @@ rows of this file, since they contain other data we are not interested in. Separ
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020&#39;)
 </pre></div>
 </div>
-<img alt="../_images/3445cb16429bdc816237f8e5701162153d2082e2c3b6a10c71f1a828d5b97515.png" src="../_images/3445cb16429bdc816237f8e5701162153d2082e2c3b6a10c71f1a828d5b97515.png" />
+<img alt="../_images/4260d8c0ca069b9832f3e412f9edd5bb6a2c619a1c142c208f3429ad7303194f.png" src="../_images/4260d8c0ca069b9832f3e412f9edd5bb6a2c619a1c142c208f3429ad7303194f.png" />
 </div>
 </div>
 <p>The graph has a strange shape from January 24th to February 1st. It would be interesting to know where this data comes from. If we look at the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array we extracted from the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file, we can see that we have two columns, where the first would contain regions and the second would contain the name of the country. However, only the first few rows contain data for the the first column (province names in China). Following that, we only have country names. So it would make sense to group all the data from China into a single row. For this, we’ll select from the <code class="docutils literal notranslate"><span class="pre">nbcases</span></code> array only the rows for which the second entry of the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array corresponds to China. Next, we’ll use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.sum.html#numpy.sum">numpy.sum</a> function to sum all the selected rows (<code class="docutils literal notranslate"><span class="pre">axis=0</span></code>). Note also that row 35 corresponds to the total counts for the whole country for each date. Since we want to calculate the sum ourselves from the provinces data, we have to remove that row first from both <code class="docutils literal notranslate"><span class="pre">locations</span></code> and <code class="docutils literal notranslate"><span class="pre">nbcases</span></code>:</p>
@@ -687,7 +701,7 @@ closely:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020&#39;)
 </pre></div>
 </div>
-<img alt="../_images/e6073ce0338c37686e3bc4b858e5d4621b9c2178b1048a7fc27ff98029e21a7c.png" src="../_images/e6073ce0338c37686e3bc4b858e5d4621b9c2178b1048a7fc27ff98029e21a7c.png" />
+<img alt="../_images/06930a722361d21376cf47b95933002fa1aad50f5ce87fd3877e6280b2fc3872.png" src="../_images/06930a722361d21376cf47b95933002fa1aad50f5ce87fd3877e6280b2fc3872.png" />
 </div>
 </div>
 <p>Now that our data has been masked, let’s try summing up all the cases in China:</p>
@@ -783,7 +797,7 @@ closely:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China&#39;)
 </pre></div>
 </div>
-<img alt="../_images/84b4da30a0953ad1779272aa5260a1be8d2a40052438ece3a556c4d7ae837bb1.png" src="../_images/84b4da30a0953ad1779272aa5260a1be8d2a40052438ece3a556c4d7ae837bb1.png" />
+<img alt="../_images/7e2784fd167de700c4b95a649965e5b925ad76fb21308dd263fe1316167d4e3b.png" src="../_images/7e2784fd167de700c4b95a649965e5b925ad76fb21308dd263fe1316167d4e3b.png" />
 </div>
 </div>
 <p>It’s clear that masked arrays are the right solution here. We cannot represent the missing data without mischaracterizing the evolution of the curve.</p>
@@ -851,10 +865,10 @@ package to create a cubic polynomial model that fits the data as best as possibl
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f00892630d0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fb31f776f50&gt;]
 </pre></div>
 </div>
-<img alt="../_images/01456d410444a1782eb595459235294b9429c0a074c5e4ae663f44582f3938c8.png" src="../_images/01456d410444a1782eb595459235294b9429c0a074c5e4ae663f44582f3938c8.png" />
+<img alt="../_images/fe9f2473669b8df973886fe4a815ef82eadf8ef246242abf5a01be024a3669aa.png" src="../_images/fe9f2473669b8df973886fe4a815ef82eadf8ef246242abf5a01be024a3669aa.png" />
 </div>
 </div>
 <p>This plot is not so readable since the lines seem to be over each other, so let’s summarize in a more elaborate plot. We’ll plot the real data when
@@ -878,7 +892,7 @@ available, and show the cubic fit for unavailable data, using this fit to comput
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China\nCubic estimate for 7 days after start&#39;)
 </pre></div>
 </div>
-<img alt="../_images/4c2b4d158d80df78d4bb60a5b5db7f472f76d9e63dab381b29c9b6eefd9a260c.png" src="../_images/4c2b4d158d80df78d4bb60a5b5db7f472f76d9e63dab381b29c9b6eefd9a260c.png" />
+<img alt="../_images/95b8b813b2be1421d2fa0f1012e26d03b93c9f755906b04be9f786bad4e16117.png" src="../_images/95b8b813b2be1421d2fa0f1012e26d03b93c9f755906b04be9f786bad4e16117.png" />
 </div>
 </div>
 </section>
@@ -940,8 +954,7 @@ available, and show the cubic fit for unavailable data, using this fit to comput
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1012,8 +1025,8 @@ By the NumPy community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

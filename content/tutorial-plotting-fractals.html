@@ -16,30 +16,27 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
@@ -59,7 +56,6 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
 
   </head>
   
@@ -76,8 +72,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -85,6 +92,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search..."
          aria-label="Search..."
          autocomplete="off"
@@ -92,8 +100,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -109,8 +117,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -140,7 +147,7 @@
     
     
     <img src="../_static/numpylogo.svg" class="logo__image only-light" alt="NumPy Tutorials - Home"/>
-    <img src="../_static/numpylogo.svg" class="logo__image only-dark pst-js-only" alt="NumPy Tutorials - Home"/>
+    <script>document.write(`<img src="../_static/numpylogo.svg" class="logo__image only-dark" alt="NumPy Tutorials - Home"/>`);</script>
   
   
 </a></div>
@@ -161,11 +168,15 @@
 </ul></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
@@ -204,14 +215,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -403,16 +409,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -580,7 +594,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7827bbf96b20bea55465d66afbb318f5ecf5d00d6eaa18b5b11fbb2d7bdd7275.png" src="../_images/7827bbf96b20bea55465d66afbb318f5ecf5d00d6eaa18b5b11fbb2d7bdd7275.png" />
+<img alt="../_images/92e245b7fb0631b8c1bb99ab1b9106a6d65580dd552bed2fee014bfaa0c9b90b.png" src="../_images/92e245b7fb0631b8c1bb99ab1b9106a6d65580dd552bed2fee014bfaa0c9b90b.png" />
 </div>
 </div>
 <p>This gives us a rough idea of what one iteration of the function does. Certain areas (notably in the areas closest to <span class="math notranslate nohighlight">\((0,0i)\)</span>) remain rather small while other areas grow quite considerably. Note that we lose information about the output by taking the absolute value, but it is the only way for us to be able to make a plot.</p>
@@ -601,7 +615,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/021d279b1a8f0aea485283778fa0cf3c8f9e82992e9228aa6c710d163d8d203f.png" src="../_images/021d279b1a8f0aea485283778fa0cf3c8f9e82992e9228aa6c710d163d8d203f.png" />
+<img alt="../_images/10bfa793964b4939d8bd32f348fea349061d0444cdb5ad11b42d023afa95510d.png" src="../_images/10bfa793964b4939d8bd32f348fea349061d0444cdb5ad11b42d023afa95510d.png" />
 </div>
 </div>
 <p>Once again, we see that values around the origin remain small, and values with a larger absolute value (or modulus) “explode”.</p>
@@ -635,7 +649,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0d4a968f5e6f313df1d0e06c5f7b763c4a984c2c3f711d25f65abc3cf6fff613.png" src="../_images/0d4a968f5e6f313df1d0e06c5f7b763c4a984c2c3f711d25f65abc3cf6fff613.png" />
+<img alt="../_images/1e988574feb704f423fb6546206a6e0116b7bacc49e13a0b34a4644a9d48f2c4.png" src="../_images/1e988574feb704f423fb6546206a6e0116b7bacc49e13a0b34a4644a9d48f2c4.png" />
 </div>
 </div>
 <p>To our surprise, the behaviour of the function did not come close to matching our hypothesis. This is a prime example of the chaotic behaviour fractals possess. In the first two plots, the value “exploded” on the last iteration, jumping way beyond the region that it was contained in previously. The third plot on the other hand remained bounded to a small region close to the origin, yielding completely different behaviour despite the tiny change in value.</p>
@@ -687,7 +701,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/fd648a36446f60ee528079a4000e2d170a4a660e8857c57bbaf54d68ff6cac9e.png" src="../_images/fd648a36446f60ee528079a4000e2d170a4a660e8857c57bbaf54d68ff6cac9e.png" />
+<img alt="../_images/1985ab37c2d2110f9b3e3d2ab367a1182dcb38c4d7ba74c4bf3c7b34f0124648.png" src="../_images/1985ab37c2d2110f9b3e3d2ab367a1182dcb38c4d7ba74c4bf3c7b34f0124648.png" />
 </div>
 </div>
 <p>What this stunning visual conveys is the complexity of the function’s behaviour. The yellow region represents values that remain small, while the purple region represents the divergent values. The beautiful pattern that arises on the border of the converging and diverging values is even more fascinating when you realize that it is created from such a simple function.</p>
@@ -757,7 +771,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e95b868ac9db5e9fc625486c42fe358dc9920edd8bec44b9cac8ffe3c77b26fe.png" src="../_images/e95b868ac9db5e9fc625486c42fe358dc9920edd8bec44b9cac8ffe3c77b26fe.png" />
+<img alt="../_images/bb3abae2b95f4a184e3b54453d60942b4d7dd389d00464231deb0480f2ee7667.png" src="../_images/bb3abae2b95f4a184e3b54453d60942b4d7dd389d00464231deb0480f2ee7667.png" />
 </div>
 </div>
 <p>We also can explore some different Julia sets by experimenting with different values of <span class="math notranslate nohighlight">\(c\)</span>. It can be surprising how much influence it has on the shape of the fractal.</p>
@@ -772,7 +786,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9c83b03aa87cae082ca7b049fe73a9230ae982ae1b1d7ba95028b3b847ca18ce.png" src="../_images/9c83b03aa87cae082ca7b049fe73a9230ae982ae1b1d7ba95028b3b847ca18ce.png" />
+<img alt="../_images/e13f833d75df16d4ed598647e031a6bb22bae1cde43ef69b076a2fa0da244e72.png" src="../_images/e13f833d75df16d4ed598647e031a6bb22bae1cde43ef69b076a2fa0da244e72.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -785,7 +799,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0f0340818d217fa493a116ba250b6263c476e93113b5be1556a88a75f377c2fe.png" src="../_images/0f0340818d217fa493a116ba250b6263c476e93113b5be1556a88a75f377c2fe.png" />
+<img alt="../_images/f303f91b122ec2c2e1dbbdddef130e472e741ea90f93fcdfeb20083189b7c637.png" src="../_images/f303f91b122ec2c2e1dbbdddef130e472e741ea90f93fcdfeb20083189b7c637.png" />
 </div>
 </div>
 </section>
@@ -820,7 +834,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ee0dba36ddbc5e1f70a08cccc25f25133eab70038b04aa0464b7a57300c52be1.png" src="../_images/ee0dba36ddbc5e1f70a08cccc25f25133eab70038b04aa0464b7a57300c52be1.png" />
+<img alt="../_images/5b82b597f66a8218fee5c1ca7e7d7d99ecba9b2a549f3419c1901a65c48408e3.png" src="../_images/5b82b597f66a8218fee5c1ca7e7d7d99ecba9b2a549f3419c1901a65c48408e3.png" />
 </div>
 </div>
 </section>
@@ -861,7 +875,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0e01e406acc11d9d7402ae3e7c7c2fd8410fe4b238049eae62e01e2aa596245a.png" src="../_images/0e01e406acc11d9d7402ae3e7c7c2fd8410fe4b238049eae62e01e2aa596245a.png" />
+<img alt="../_images/9783ff4a1ba17ccfbea798e94462090de1e9530b63ae9ffab6a1a63dfa9f2d36.png" src="../_images/9783ff4a1ba17ccfbea798e94462090de1e9530b63ae9ffab6a1a63dfa9f2d36.png" />
 </div>
 </div>
 <p>Needless to say, there is a large amount of exploring that can be done by fiddling with the inputted function, value of <span class="math notranslate nohighlight">\(c\)</span>, number of iterations, radius and even the density of the mesh and choice of colours.</p>
@@ -925,7 +939,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/53b1e2defc6be9ce0bbbdd4b64420e8e3afddbdfded5e3dd8c4c91f0873ed32d.png" src="../_images/53b1e2defc6be9ce0bbbdd4b64420e8e3afddbdfded5e3dd8c4c91f0873ed32d.png" />
+<img alt="../_images/6d3cc8af070e225005626059c66ab70288f7afb6c6a31b3c9d80ef9a1cf231a1.png" src="../_images/6d3cc8af070e225005626059c66ab70288f7afb6c6a31b3c9d80ef9a1cf231a1.png" />
 </div>
 </div>
 <p>Beautiful! Let’s try another one:</p>
@@ -954,7 +968,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d6b9ef33ef00d7b9447520d72ba1ee31eca4ee5a52589c9aa197064051c8bbd2.png" src="../_images/d6b9ef33ef00d7b9447520d72ba1ee31eca4ee5a52589c9aa197064051c8bbd2.png" />
+<img alt="../_images/e55fe4cf039bba747d28687bbd8e84870cc68c39dde8783dd468d0493a872126.png" src="../_images/e55fe4cf039bba747d28687bbd8e84870cc68c39dde8783dd468d0493a872126.png" />
 </div>
 </div>
 <p>Note that you sometimes have to play with the radius in order to get a neat looking fractal.</p>
@@ -990,7 +1004,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7cce72b0bf4f3d52c40bf30d2304e93578160c0842382b1a43e08a9fb9f7bf49.png" src="../_images/7cce72b0bf4f3d52c40bf30d2304e93578160c0842382b1a43e08a9fb9f7bf49.png" />
+<img alt="../_images/b6b6af119cf94b4dc5c3cbfbf70a589e79ae9139f0dee69a5080fee41b078b37.png" src="../_images/b6b6af119cf94b4dc5c3cbfbf70a589e79ae9139f0dee69a5080fee41b078b37.png" />
 </div>
 </div>
 <p>It is truly fascinating how distinct yet similar these fractals are with each other. This leads us to the final section.</p>
@@ -1020,7 +1034,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9923beadb307320c38d35fc1cdeec2e15b959b7391d48a42fd49b5fc0d248dfd.png" src="../_images/9923beadb307320c38d35fc1cdeec2e15b959b7391d48a42fd49b5fc0d248dfd.png" />
+<img alt="../_images/5d2d765af10ad864e9ba9b73d2c83c69613fbd427754f7c3ea4ea73f324df2ec.png" src="../_images/5d2d765af10ad864e9ba9b73d2c83c69613fbd427754f7c3ea4ea73f324df2ec.png" />
 </div>
 </div>
 <p>What happens if we compose our defined function inside of a sine function?</p>
@@ -1044,7 +1058,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/28686ae2b392965fbf1a60ee5efdc1aee25d83050a087aba981d95a103f7d379.png" src="../_images/28686ae2b392965fbf1a60ee5efdc1aee25d83050a087aba981d95a103f7d379.png" />
+<img alt="../_images/60b9eb4486ee0b010e6537b3e1d8524cc6e24e37a62eb989bc538f6db2a0e29e.png" src="../_images/60b9eb4486ee0b010e6537b3e1d8524cc6e24e37a62eb989bc538f6db2a0e29e.png" />
 </div>
 </div>
 <p>Next, let’s create a function that applies both f and g to the inputs each iteration and adds the result together:</p>
@@ -1067,7 +1081,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/35178b7338363cd0e72f9bfcf4982b8c4195540bd7cc75a21c067c28f0fae397.png" src="../_images/35178b7338363cd0e72f9bfcf4982b8c4195540bd7cc75a21c067c28f0fae397.png" />
+<img alt="../_images/f2fd6629436adc7841b7e9ff1bf3480cc2cd391fcc64c47897b7114cacf18576.png" src="../_images/f2fd6629436adc7841b7e9ff1bf3480cc2cd391fcc64c47897b7114cacf18576.png" />
 </div>
 </div>
 <p>You can even create beautiful fractals through your own errors. Here is one that got created accidently by making a mistake in computing the derivative of a Newton fractal:</p>
@@ -1089,7 +1103,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/752ee95f989546aa3a30a3d665f7596a9ab73a7685af6a4b0436c08714825257.png" src="../_images/752ee95f989546aa3a30a3d665f7596a9ab73a7685af6a4b0436c08714825257.png" />
+<img alt="../_images/c73f025c41c3005dac1ef073c6ef0a228ffc0a598dcedc853ce1cbdaac5cd9a5.png" src="../_images/c73f025c41c3005dac1ef073c6ef0a228ffc0a598dcedc853ce1cbdaac5cd9a5.png" />
 </div>
 </div>
 <p>Needless to say, there are a nearly endless supply of interesting fractal creations that can be made just by playing around with various combinations of NumPy universal functions and by tinkering with the parameters.</p>
@@ -1162,8 +1176,7 @@
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1234,8 +1247,8 @@ By the NumPy community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
