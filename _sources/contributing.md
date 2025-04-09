@@ -42,7 +42,7 @@ You may notice our content is in markdown format (`.md` files). We review and
 host notebooks in the [MyST-NB](https://myst-nb.readthedocs.io/) format. We
 accept both Jupyter notebooks (`.ipynb`) and MyST-NB notebooks (`.md`).
 If you want to sync your `.ipynb` to your `.md` file follow the [pairing
-tutorial](content/pairing.md).
+tutorial](content/pairing).
 
 ```{toctree}
 :hidden:
