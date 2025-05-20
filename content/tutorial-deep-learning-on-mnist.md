@@ -99,7 +99,7 @@ import os
 data_dir = "../_data"
 os.makedirs(data_dir, exist_ok=True)
 
-base_url = "https://github.com/rossbar/numpy-tutorial-data-mirror/blob/main/"
+base_url = "https://ossci-datasets.s3.amazonaws.com/mnist/"
 
 for fname in data_sources.values():
     fpath = os.path.join(data_dir, fname)
