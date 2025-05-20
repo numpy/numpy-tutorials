@@ -534,7 +534,7 @@ download it.</p>
 <span class="n">data_dir</span> <span class="o">=</span> <span class="s2">&quot;../_data&quot;</span>
 <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">base_url</span> <span class="o">=</span> <span class="s2">&quot;https://github.com/rossbar/numpy-tutorial-data-mirror/blob/main/&quot;</span>
+<span class="n">base_url</span> <span class="o">=</span> <span class="s2">&quot;https://ossci-datasets.s3.amazonaws.com/mnist/&quot;</span>
 
 <span class="k">for</span> <span class="n">fname</span> <span class="ow">in</span> <span class="n">data_sources</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
     <span class="n">fpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">fname</span><span class="p">)</span>
@@ -545,6 +545,16 @@ download it.</p>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
                 <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: train-images-idx3-ubyte.gz
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file: t10k-images-idx3-ubyte.gz
+Downloading file: train-labels-idx1-ubyte.gz
+Downloading file: t10k-labels-idx1-ubyte.gz
 </pre></div>
 </div>
 </div>
@@ -623,7 +633,7 @@ The shape of test images: (10000, 784) and test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ebb64befff6fc53077b0e9568b0a439f819ed0711fe979ae498a9bd173d69213.png" src="../_images/ebb64befff6fc53077b0e9568b0a439f819ed0711fe979ae498a9bd173d69213.png" />
+<img alt="../_images/071bd48e2e3ce2abeb0755667d72d3cec770241f4a2bd70bb72d70c21b82636f.png" src="../_images/071bd48e2e3ce2abeb0755667d72d3cec770241f4a2bd70bb72d70c21b82636f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -640,7 +650,7 @@ The shape of test images: (10000, 784) and test labels: (10000,)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/782ed66c080814c7548976465607a0ca1c298f80034f48a12d2102042dbd5ee2.png" src="../_images/782ed66c080814c7548976465607a0ca1c298f80034f48a12d2102042dbd5ee2.png" />
+<img alt="../_images/d0603315d7e1c45ea5a950e649e71b09dd06d99eacb72e1f5648c94123bf7f69.png" src="../_images/d0603315d7e1c45ea5a950e649e71b09dd06d99eacb72e1f5648c94123bf7f69.png" />
 </div>
 </div>
 <p><em>Above are five images taken from the MNIST training set. Various hand-drawn
@@ -1239,7 +1249,7 @@ its performance over the training epochs.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9dea4415d2be98717657f938b4ff03f963e1830302b1d387501651fed7659cbe.png" src="../_images/9dea4415d2be98717657f938b4ff03f963e1830302b1d387501651fed7659cbe.png" />
+<img alt="../_images/b060cc83d1801440f628267deec09dc46b61311f9eb3867a32fa7acfa353d772.png" src="../_images/b060cc83d1801440f628267deec09dc46b61311f9eb3867a32fa7acfa353d772.png" />
 </div>
 </div>
 <p><em>The training and testing error is shown above in the left and right
