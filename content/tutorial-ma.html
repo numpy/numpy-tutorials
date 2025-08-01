@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -601,7 +601,7 @@ rows of this file, since they contain other data we are not interested in. Separ
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020&#39;)
 </pre></div>
 </div>
-<img alt="../_images/3531517917433d76fbd47c8ed5ae0af7b6c23ee19eef023f338cbec9c21220e4.png" src="../_images/3531517917433d76fbd47c8ed5ae0af7b6c23ee19eef023f338cbec9c21220e4.png" />
+<img alt="../_images/214620e916148b67740d7b2b1667b7784bdaa7f88612400214da1089752269c5.png" src="../_images/214620e916148b67740d7b2b1667b7784bdaa7f88612400214da1089752269c5.png" />
 </div>
 </div>
 <p>The graph has a strange shape from January 24th to February 1st. It would be interesting to know where this data comes from. If we look at the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array we extracted from the <code class="docutils literal notranslate"><span class="pre">.csv</span></code> file, we can see that we have two columns, where the first would contain regions and the second would contain the name of the country. However, only the first few rows contain data for the the first column (province names in China). Following that, we only have country names. So it would make sense to group all the data from China into a single row. For this, we’ll select from the <code class="docutils literal notranslate"><span class="pre">nbcases</span></code> array only the rows for which the second entry of the <code class="docutils literal notranslate"><span class="pre">locations</span></code> array corresponds to China. Next, we’ll use the <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.sum.html#numpy.sum">numpy.sum</a> function to sum all the selected rows (<code class="docutils literal notranslate"><span class="pre">axis=0</span></code>). Note also that row 35 corresponds to the total counts for the whole country for each date. Since we want to calculate the sum ourselves from the provinces data, we have to remove that row first from both <code class="docutils literal notranslate"><span class="pre">locations</span></code> and <code class="docutils literal notranslate"><span class="pre">nbcases</span></code>:</p>
@@ -701,7 +701,7 @@ closely:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020&#39;)
 </pre></div>
 </div>
-<img alt="../_images/5cc0b0800cef53540b93566bac8c7afde13a0c2879cd8de3e1e001d0dafa7fa7.png" src="../_images/5cc0b0800cef53540b93566bac8c7afde13a0c2879cd8de3e1e001d0dafa7fa7.png" />
+<img alt="../_images/4227e8e2979b5f52cc34c777c376bca51e105b353dbfeb0d53c4fe1e711e736c.png" src="../_images/4227e8e2979b5f52cc34c777c376bca51e105b353dbfeb0d53c4fe1e711e736c.png" />
 </div>
 </div>
 <p>Now that our data has been masked, let’s try summing up all the cases in China:</p>
@@ -797,7 +797,7 @@ closely:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China&#39;)
 </pre></div>
 </div>
-<img alt="../_images/287e5bcf99de50cc602d300da02c3a02dc9fcaff4fb94b7e03f5a83349a29d39.png" src="../_images/287e5bcf99de50cc602d300da02c3a02dc9fcaff4fb94b7e03f5a83349a29d39.png" />
+<img alt="../_images/38abbfe913fd24746d92ba2ed4be694b367ca50b3c4382a8a336fb32b9e33a29.png" src="../_images/38abbfe913fd24746d92ba2ed4be694b367ca50b3c4382a8a336fb32b9e33a29.png" />
 </div>
 </div>
 <p>It’s clear that masked arrays are the right solution here. We cannot represent the missing data without mischaracterizing the evolution of the curve.</p>
@@ -865,10 +865,10 @@ package to create a cubic polynomial model that fits the data as best as possibl
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f3800d9cfd0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f2b3ce96800&gt;]
 </pre></div>
 </div>
-<img alt="../_images/bc3e9bcb63e009f44803d1b86f73dc511337141b2ac0f3d3a615dc5980b2d9d6.png" src="../_images/bc3e9bcb63e009f44803d1b86f73dc511337141b2ac0f3d3a615dc5980b2d9d6.png" />
+<img alt="../_images/bf925650b7a1bfe652bd523c2c8ebcb705571cb284130f92e9aa0aea38fdff1c.png" src="../_images/bf925650b7a1bfe652bd523c2c8ebcb705571cb284130f92e9aa0aea38fdff1c.png" />
 </div>
 </div>
 <p>This plot is not so readable since the lines seem to be over each other, so let’s summarize in a more elaborate plot. We’ll plot the real data when
@@ -892,7 +892,7 @@ available, and show the cubic fit for unavailable data, using this fit to comput
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;COVID-19 cumulative cases from Jan 21 to Feb 3 2020 - Mainland China\nCubic estimate for 7 days after start&#39;)
 </pre></div>
 </div>
-<img alt="../_images/beabc1d846f28a413078f2afd7daab4e2449dec187b1315d07fefbbf26aac3d1.png" src="../_images/beabc1d846f28a413078f2afd7daab4e2449dec187b1315d07fefbbf26aac3d1.png" />
+<img alt="../_images/d148eefec6f31021d00914da6dbf213cf70689e9368ccd9e1a98c9ecb40777ed.png" src="../_images/d148eefec6f31021d00914da6dbf213cf70689e9368ccd9e1a98c9ecb40777ed.png" />
 </div>
 </div>
 </section>
