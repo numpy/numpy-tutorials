@@ -568,7 +568,7 @@ document.write(`
 </div>
 </div>
 </div>
-<p>The output is a <a class="reference external" href="https://docs.python.org/dev/tutorial/datastructures.html#tut-tuples">tuple</a> with three elements, which means that this is a three-dimensional array. In fact, since this is a color image, and we have used the <code class="docutils literal notranslate"><span class="pre">imread</span></code> function to read it, the data is organized in three 2D arrays, representing color channels (in this case, red, green and blue - RGB). You can see this by looking at the shape above: it indicates that we have an array of 3 matrices, each having shape 768x1024.</p>
+<p>The output is a <a class="reference external" href="https://docs.python.org/dev/tutorial/datastructures.html#tut-tuples">tuple</a> with three elements, which means that this is a three-dimensional array. Since this is a color image, and we have used the <code class="docutils literal notranslate"><span class="pre">imread</span></code> function to read it, the data is organized as a 768×1024 grid of pixels, where each pixel contains 3 values representing color channels (red, green and blue - RGB). You can see this by looking at the shape, where the leftmost number corresponds to the outermost axis (image height), the middle number to the next axis (image width) and the rightmost number to the innermost axis (the color channels).</p>
 <p>Furthermore, using the <code class="docutils literal notranslate"><span class="pre">ndim</span></code> property of this array, we can see that</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

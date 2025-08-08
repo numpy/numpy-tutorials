@@ -80,7 +80,7 @@ First, let's check for the shape of the data in our array. Since this image is t
 img.shape
 ```
 
-The output is a [tuple](https://docs.python.org/dev/tutorial/datastructures.html#tut-tuples) with three elements, which means that this is a three-dimensional array. In fact, since this is a color image, and we have used the `imread` function to read it, the data is organized in three 2D arrays, representing color channels (in this case, red, green and blue - RGB). You can see this by looking at the shape above: it indicates that we have an array of 3 matrices, each having shape 768x1024.
+The output is a [tuple](https://docs.python.org/dev/tutorial/datastructures.html#tut-tuples) with three elements, which means that this is a three-dimensional array. Since this is a color image, and we have used the `imread` function to read it, the data is organized as a 768×1024 grid of pixels, where each pixel contains 3 values representing color channels (red, green and blue - RGB). You can see this by looking at the shape, where the leftmost number corresponds to the outermost axis (image height), the middle number to the next axis (image width) and the rightmost number to the innermost axis (the color channels).
 
 Furthermore, using the `ndim` property of this array, we can see that
 
