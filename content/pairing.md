@@ -38,7 +38,7 @@ keep your `.ipynb` in sync with the content on NumPy tutorials. The
 NumPy tutorials use
 [Jupytext](https://jupytext.readthedocs.io/en/latest/index.html) to
 convert your `.ipynb` file to [MyST
-Markdown](https://github.com/mwouts/jupytext/blob/master/docs/formats.md#myst-markdown)
+Markdown](https://github.com/mwouts/jupytext/blob/main/docs/formats-markdown.md)
 format.
 
 Jupyter notebooks are stored on your disk in a
