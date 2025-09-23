@@ -6,7 +6,7 @@ jobs:
   build-docs:
     working_directory: ~/repo
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/python:3.13
 
     steps:
       - checkout
@@ -49,7 +49,7 @@ jobs:
   deploy-docs:
     working_directory: ~/repo
     docker:
-      - image: cimg/python:3.10
+      - image: cimg/python:3.13
     steps:
       - checkout
 
