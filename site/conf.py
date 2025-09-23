@@ -47,7 +47,7 @@ exclude_patterns = ['_build',
                     ]
 
 # MyST-NB configuration
-nb_execution_timeout = 900
+nb_execution_timeout = 60
 
 
 # -- Options for HTML output -------------------------------------------------
