@@ -25,7 +25,7 @@ jobs:
         name: ['with Python 3.13',]
 
         include:
-          - python-version: '3.9'
+          - python-version: '3.10'
             toxenv: py39-test-oldestdeps
             name: with Python 3.9 and oldest versioned dependencies
             os: ubuntu-latest
