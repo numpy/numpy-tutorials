@@ -26,8 +26,8 @@ jobs:
 
         include:
           - python-version: '3.10'
-            toxenv: py39-test-oldestdeps
-            name: with Python 3.9 and oldest versioned dependencies
+            toxenv: py310-test-oldestdeps
+            name: with Python 3.10 and oldest versioned dependencies
             os: ubuntu-latest
 
           - python-version: '3.11'
@@ -40,7 +40,7 @@ jobs:
             name: with Python 3.12 and latest or pre-release version of dependencies
             os: ubuntu-latest
 
-          - python-version: '3.14'
+          - python-version: '3.14-dev'
             toxenv: py314-test-devdeps
             name: with Python 3.14 and developer versioned dependencies
             os: ubuntu-latest
