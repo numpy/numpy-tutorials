@@ -652,7 +652,7 @@ def initialize_grads(parameters):
     return grads
 ```
 
-Now, for each gate and the fully connected layer, we define a function to calculate the gradient of the loss with respect to the input passed and the parameters used. To understand the mathematics behind how the derivatives were calculated we suggest you to follow this helpful [blog](https://christinakouridi.blog/2019/06/19/backpropagation-lstm/) by Christina Kouridi.
+Now, for each gate and the fully connected layer, we define a function to calculate the gradient of the loss with respect to the input passed and the parameters used. To understand the mathematics behind how the derivatives were calculated we suggest you to follow this helpful [blog](https://christinakouridi.github.io/posts/backprop-lstm/) by Christina Kouridi.
 
 
 Define a function to calculate the gradients in the **Forget Gate**:
