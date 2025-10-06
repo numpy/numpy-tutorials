@@ -1069,7 +1069,7 @@ We made sure to include different demographics in our data and included a range 
     <span class="k">return</span> <span class="n">grads</span>
 </pre></div>
 </div>
-<p>Now, for each gate and the fully connected layer, we define a function to calculate the gradient of the loss with respect to the input passed and the parameters used. To understand the mathematics behind how the derivatives were calculated we suggest you to follow this helpful <a class="reference external" href="https://christinakouridi.blog/2019/06/19/backpropagation-lstm/">blog</a> by Christina Kouridi.</p>
+<p>Now, for each gate and the fully connected layer, we define a function to calculate the gradient of the loss with respect to the input passed and the parameters used. To understand the mathematics behind how the derivatives were calculated we suggest you to follow this helpful <a class="reference external" href="https://christinakouridi.github.io/posts/backprop-lstm/">blog</a> by Christina Kouridi.</p>
 <p>Define a function to calculate the gradients in the <strong>Forget Gate</strong>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bp_forget_gate</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">concat</span><span class="p">,</span> <span class="n">dh_prev</span><span class="p">,</span> <span class="n">dc_prev</span><span class="p">,</span> <span class="n">cache</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
     <span class="c1"># dft = dL/da2 * da2/dZ2 * dZ2/dh_prev * dh_prev/dc_prev * dc_prev/dft</span>
