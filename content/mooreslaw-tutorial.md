@@ -282,7 +282,7 @@ In the next plot, use the
 [`fivethirtyeight`](https://matplotlib.org/3.1.1/gallery/style_sheets/fivethirtyeight.html)
 style sheet.
 The style sheet replicates
-[https://fivethirtyeight.com](https://fivethirtyeight.com) elements. Change the matplotlib style with
+<https://fivethirtyeight.com> elements. Change the matplotlib style with
 [`plt.style.use`](https://matplotlib.org/3.3.2/api/style_api.html#matplotlib.style.use).
 
 ```{code-cell}
