@@ -104,7 +104,7 @@ We made sure to include different demographics in our data and included a range 
 ## 2. Preprocess the datasets
 >Preprocessing data is an extremely crucial step before building any Deep learning model, however in an attempt to keep the tutorial focused on building the model, we will not dive deep into the code for preprocessing. Given below is a brief overview of all the steps we undertake to clean our data and convert it to its numeric representation. 
 
-1. **Text Denoising** : Before converting your text into vectors, it is important to clean it and remove all unhelpful parts a.k.a the noise from your data by converting all characters to lowercase, removing html tags, brackets and stop words (words that don't add much meaning to a sentence). Without this step the dataset is often a cluster of words that the computer doesn't understand. 
+1. **Text Denoising** : Before converting your text into vectors, it is important to clean it and remove all unhelpful parts a.k.a. the noise from your data by converting all characters to lowercase, removing html tags, brackets and stop words (words that don't add much meaning to a sentence). Without this step the dataset is often a cluster of words that the computer doesn't understand. 
 
 
 2. **Converting words to vectors** : A word embedding is a learned representation for text where words that have the same meaning have a similar representation. Individual words are represented as real-valued vectors in a predefined vector space. GloVe is an unsupervised algorithm developed by Stanford for generating word embeddings by generating global word-word co-occurence matrix from a corpus. You can download the zipped files containing the embeddings from [the GloVe official website](https://nlp.stanford.edu/projects/glove/). Here you can choose any of the four options for different sizes or training datasets. We have chosen the least memory consuming embedding file. 
@@ -390,7 +390,7 @@ imdb_train = data.fetch('imdb_train.txt')
 imdb_test = data.fetch('imdb_test.txt')
 ```
 
-Instantiate the` TextPreprocess` class to perform various operations on our datasets:
+Instantiate the `TextPreprocess` class to perform various operations on our datasets:
 
 ```python
 textproc = TextPreprocess()
@@ -421,7 +421,7 @@ y_test = test_df['sentiment'].to_numpy()[0:1000]
 ```
 
 The same process is applicable on the collected speeches:
-> Since we will be performing paragraph wise sentiment analysis on each speech further ahead in the tutorial, we'll need the punctuation marks to split the text into paragraphs, hence we refrain from removing their punctuation marks at this stage
+> Since we will be performing paragraph wise sentiment analysis on each speech further ahead in the tutorial, we'll need the punctuation marks to split the text into paragraphs, hence we refrain from removing their punctuation marks at this stage.
 
 ```python
 speech_data_path = 'tutorial-nlp-from-scratch/speeches.csv'
@@ -444,13 +444,13 @@ emb_matrix = textproc.loadGloveModel(emb_path)
 ## 3. Build the Deep Learning Model
  It is time to start implementing our LSTM! You will have to first familiarize yourself with some high-level concepts of the basic building blocks of a deep learning model. You can refer to the [Deep learning on MNIST from scratch tutorial](https://numpy.org/numpy-tutorials/content/tutorial-deep-learning-on-mnist.html) for the same. 
 
-You will then learn how a Recurrent Neural Network differs from a plain Neural Network and what makes it so suitable for processing sequential data. Afterwards, you will construct the building blocks of a simple deep learning model in Python and NumPy and train it to learn to classify the sentiment of a piece of text as positive or negative with a certain level of accuracy
+You will then learn how a Recurrent Neural Network differs from a plain Neural Network and what makes it so suitable for processing sequential data. Afterwards, you will construct the building blocks of a simple deep learning model in Python and NumPy and train it to learn to classify the sentiment of a piece of text as positive or negative with a certain level of accuracy.
 
 ### Introduction to a Long Short Term Memory Network
 
 In a [Multilayer perceptron](https://en.wikipedia.org/wiki/Multilayer_perceptron) (MLP), the information only moves in one direction — from the input layer, through the hidden layers, to the output layer. The information moves straight through the network and never takes the previous nodes into account at a later stage. Because it only considers the current input, the features learned are not shared across different positions of the sequence. Moreover, it cannot process sequences with varying lengths.
 
-Unlike an MLP, the RNN was designed to work with sequence prediction problems.RNNs introduce state variables to store past information, together with the current inputs, to determine the current outputs. Since an RNN shares the learned features with all the data points in a sequence regardless of its length, it is capable of processing sequences with varying lengths.  
+Unlike an MLP, the RNN was designed to work with sequence prediction problems. RNNs introduce state variables to store past information, together with the current inputs, to determine the current outputs. Since an RNN shares the learned features with all the data points in a sequence regardless of its length, it is capable of processing sequences with varying lengths.  
 
 The problem with an RNN however, is that it cannot retain long-term memory because the influence of a given input on the hidden layer, and therefore on the network output, either decays or blows up exponentially as it cycles around the network’s recurrent connections. This shortcoming is referred to as the vanishing gradient problem. Long Short-Term Memory (LSTM) is an RNN architecture specifically designed to address the [vanishing gradient problem](https://en.wikipedia.org/wiki/Vanishing_gradient_problem).
 
@@ -462,7 +462,7 @@ The problem with an RNN however, is that it cannot retain long-term memory becau
 In the above gif, the rectangles labeled $A$ are called `Cells` and they are the **Memory Blocks** of our LSTM network. They are responsible for choosing what to remember in a sequence and pass on that information to the next cell via two states called the `hidden state` $H_{t}$ and the `cell state` $C_{t}$ where $t$ indicates the time-step. Each `Cell` has dedicated gates which are responsible for storing, writing or reading the information passed to an LSTM. You will now look closely at the architecture of the network by implementing each mechanism happening inside of it.
 
 
-Lets start with writing a function to randomly initialize the parameters which will be learned while our model trains
+Lets start with writing a function to randomly initialize the parameters which will be learned while our model trains:
 
 ```python
 def initialise_params(hidden_dim, input_dim):
@@ -641,7 +641,7 @@ def forward_prop(X_vec, parameters, input_dim):
 After each forward pass through the network, you will implement the `backpropagation through time` algorithm to accumulate gradients of each parameter over the time steps. Backpropagation through a LSTM is not as straightforward as through other common Deep Learning architectures, due to the special way its underlying layers interact. Nonetheless, the approach is largely the same; identifying dependencies and applying the chain rule.
 
 
-Lets start with defining a function to initialize gradients of each parameter as arrays made up of zeros with same dimensions as the corresponding parameter
+Lets start with defining a function to initialize gradients of each parameter as arrays made up of zeros with same dimensions as the corresponding parameter.
 
 ```python
 # Initialise the gradients
@@ -777,10 +777,10 @@ def backprop(y, caches, hidden_dim, input_dim, time_steps, parameters):
 
 ### Updating the Parameters
 
-We update the parameters through an optimization algorithm called [Adam](https://optimization.cbe.cornell.edu/index.php?title=Adam) which is an extension to stochastic gradient descent that has recently seen broader adoption for deep learning applications in computer vision and natural language processing. Specifically, the algorithm calculates an exponential moving average of the gradient and the squared gradient, and the parameters `beta1` and `beta2` control the decay rates of these moving averages. Adam has shown increased convergence and robustness over other gradient descent algorithms and is often recommended as the default optimizer for training.
+We update the parameters through an optimization algorithm called [Adam](https://optimization.cbe.cornell.edu/index.php?title=Adam), which is an extension to stochastic gradient descent that has recently seen broader adoption for deep learning applications in computer vision and natural language processing. Specifically, the algorithm calculates an exponential moving average of the gradient and the squared gradient, and the parameters `beta1` and `beta2` control the decay rates of these moving averages. Adam has shown increased convergence and robustness over other gradient descent algorithms, and is often recommended as the default optimizer for training.
 
 
-Define a function to initialise the moving averages for each parameter
+Define a function to initialise the moving averages for each parameter:
 
 ```python
 # initialise the moving averages
@@ -795,7 +795,7 @@ def initialise_mav(hidden_dim, input_dim, params):
     return v, s
 ```
 
-Define a function to update the parameters
+Define a function to update the parameters:
 
 ```python
 # Update the parameters using Adam optimization
@@ -820,7 +820,7 @@ def update_parameters(parameters, gradients, v, s,
 ### Training the Network
 
 
-You will start by initializing all the parameters and hyperparameters being used in your network
+You will start by initializing all the parameters and hyperparameters being used in your network:
 
 ```python
 hidden_dim = 64
@@ -834,8 +834,10 @@ v, s = initialise_mav(hidden_dim,
                       parameters)
 ```
 
-To optimize your deep learning network, you need to calculate a loss based on how well the model is doing on the training data. Loss value implies how poorly or well a model behaves after each iteration of optimization. <br>
-Define a function to calculate the loss using [negative log likelihood](http://d2l.ai/chapter_linear-networks/softmax-regression.html?highlight=negative%20log%20likelihood#log-likelihood)
+To optimize your deep learning network, you need to calculate a loss based on how well the model is doing on the training data. Loss value implies how poorly or well a model behaves after each iteration of optimization.
+
+
+Define a function to calculate the loss using [negative log likelihood](http://d2l.ai/chapter_linear-networks/softmax-regression.html?highlight=negative%20log%20likelihood#log-likelihood):
 
 ```python
 def loss_f(A, Y):
@@ -849,7 +851,7 @@ def loss_f(A, Y):
 ```
 
 Set up the neural network's learning experiment with a training loop and start the training process. You will also evaluate the model's performance on the training dataset to see how well the model is *learning* and the testing dataset to see how well it is *generalizing*.
->Skip running this cell if you already have the trained parameters stored in a `npy` file
+>Skip running this cell if you already have the trained parameters stored in a `npy` file.
 
 ```python
 # To store training losses
@@ -952,7 +954,7 @@ plt.show()
 ### Sentiment Analysis on the Speech Data
 
 
-Once your model is trained, you can use the updated parameters to start making our predictions. You can break each speech into paragraphs of uniform size before passing them to the Deep Learning model and predicting the sentiment of each paragraph
+Once your model is trained, you can use the updated parameters to start making our predictions. You can break each speech into paragraphs of uniform size before passing them to the Deep Learning model and predicting the sentiment of each paragraph.
 
 ```python
 # To store predicted sentiments
@@ -1028,7 +1030,7 @@ In the plot above, you're shown what percentages of each speech are expected to 
 <!-- #region -->
 It's crucial to understand that accurately identifying a text's sentiment is not easy primarily because of the complex ways in which humans express sentiment, using irony, sarcasm, humor, or, in social media, abbreviation. Moreover neatly placing text into two categories: 'positive' and 'negative' can be problematic because it is being done without any context. Words or abbreviations can convey very different sentiments depending on age and location, none of which we took into account while building our model.
 
-Along with data, there are also growing concerns that data processing algorithms are influencing policy and daily lives in ways that are not transparent and introduce biases. Certain biases such as the [Inductive Bias](https://bit.ly/2WtTKIe) are essential to help a Machine Learning model generalize better, for example the LSTM we built earlier is biased towards preserving contextual information over long sequences which makes it so suitable for processing sequential data. The problem arises when [societal biases](https://hbr.org/2019/10/what-do-we-do-about-the-biases-in-ai) creep into algorithmic predictions. Optimizing Machine algorithms via methods like [hyperparameter tuning](https://en.wikipedia.org/wiki/Hyperparameter_optimization) can then further amplify these biases by learning every bit of information in the data. 
+Along with data, there are also growing concerns that data processing algorithms are influencing policy and daily lives in ways that are not transparent and introduce biases. Certain biases such as the [Inductive Bias](https://bit.ly/2WtTKIe) are essential to help a Machine Learning model generalize better, for example the LSTM we built earlier is biased towards preserving contextual information over long sequences which makes it so suitable for processing sequential data. The problem arises when [societal biases](https://hbr.org/2019/10/what-do-we-do-about-the-biases-in-ai) creep into algorithmic predictions. Optimizing Machine Learning algorithms via methods like [hyperparameter tuning](https://en.wikipedia.org/wiki/Hyperparameter_optimization) can then further amplify these biases by learning every bit of information in the data. 
 
 
 There are also cases where bias is only in the output and not the inputs (data, algorithm). For example, in sentiment analysis [accuracy tends to be higher on female-authored texts than on male-authored ones]( https://doi.org/10.3390/electronics9020374). End users of sentiment analysis should be aware that its small gender biases can affect the conclusions drawn from it and apply correction factors when necessary. Hence, it is important that demands for algorithmic accountability should include the ability to test the outputs of a system, including the ability to drill down into different user groups by gender, ethnicity and other characteristics, to identify, and hopefully suggest corrections for, system output biases.
@@ -1039,7 +1041,7 @@ There are also cases where bias is only in the output and not the inputs (data, 
 
 You have learned how to build and train a simple Long Short Term Memory network from scratch using just NumPy to perform sentiment analysis.
 
-To further enhance and optimize your neural network model, you can consider one of a mixture of the following:
+To further enhance and optimize your neural network model, you can consider one or a mixture of the following:
 
 - Alter the architecture by introducing multiple LSTM layers to make the network deeper.
 - Use a higher epoch size to train longer and add more regularization techniques, such as early stopping, to prevent overfitting.
@@ -1053,7 +1055,7 @@ Nowadays, LSTMs have been replaced by the [Transformer](https://jalammar.github.
 
 Building a neural network from scratch with NumPy is a great way to learn more about NumPy and about deep learning. However, for real-world applications you should use specialized frameworks — such as PyTorch, JAX or TensorFlow — that provide NumPy-like APIs, have built-in automatic differentiation and GPU support, and are designed for high-performance numerical computing and machine learning.
 
-Finally, to know more about how ethics come into play when developing a machine learning model, you can refer to the following resources :
+Finally, to know more about how ethics come into play when developing a machine learning model, you can refer to the following resources:
 - [Data ethics resources](https://www.turing.ac.uk/research/data-ethics) by the Turing Institute
 - Considering how artificial intelligence shifts power, an [article](https://www.nature.com/articles/d41586-020-02003-2) and [talk](https://slideslive.com/38923453/the-values-of-machine-learning) by Pratyusha Kalluri
 - More ethics resources on [this blog post](https://www.fast.ai/2018/09/24/ai-ethics-resources/) by Rachel Thomas and the [Radical AI podcast](https://www.radicalai.org/)
