@@ -106,7 +106,7 @@ $B_M=-675.4$
 
 Since the function represents Moore's law, define it as a Python
 function using
-[`lambda`](https://docs.python.org/3/library/ast.html?highlight=lambda#ast.Lambda)
+[`lambda`](https://docs.python.org/3/library/ast.html?highlight=lambda#ast.Lambda):
 
 ```{code-cell}
 A_M = np.log(2) / 2
@@ -156,7 +156,7 @@ The extra options below will put the data in the desired format:
 
 * `delimiter = ','`: specify delimeter as a comma ',' (this is the default behavior)
 * `usecols = [1,2]`: import the second and third columns from the csv
-* `skiprows = 1`: do not use the first row, because its a header row
+* `skiprows = 1`: do not use the first row, because it's a header row
 
 ```{code-cell}
 data = np.loadtxt("transistor_data.csv", delimiter=",", usecols=[1, 2], skiprows=1)
@@ -282,7 +282,7 @@ In the next plot, use the
 [`fivethirtyeight`](https://matplotlib.org/3.1.1/gallery/style_sheets/fivethirtyeight.html)
 style sheet.
 The style sheet replicates
-https://fivethirtyeight.com elements. Change the matplotlib style with
+[https://fivethirtyeight.com](https://fivethirtyeight.com) elements. Change the matplotlib style with
 [`plt.style.use`](https://matplotlib.org/3.3.2/api/style_api.html#matplotlib.style.use).
 
 ```{code-cell}
@@ -334,7 +334,7 @@ option,
 to increase the transparency of the data. The more opaque the points
 appear, the more reported values lie on that measurement. The green $+$
 is the average reported transistor count for 2017. Plot your predictions
-for $\pm\frac{1}{2}~years.
+for $\pm\frac{1}{2}$ years.
 
 ```{code-cell}
 transistor_count2017 = transistor_count[year == 2017]
@@ -386,7 +386,7 @@ array using `np.loadtxt`, to save your model use two approaches
 ### Zipping the arrays into a file
 Using `np.savez`, you can save thousands of arrays and give them names. The
 function `np.load` will load the arrays back into the workspace as a
-dictionary. You'll save a five arrays so the next user will have the year,
+dictionary. You'll save five arrays so the next user will have the year,
 transistor count, predicted transistor count,  Gordon Moore's
 predicted count, and fitting constants. Add one more variable that other users can use to
 understand the model, `notes`.
