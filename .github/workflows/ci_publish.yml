@@ -1,0 +1,46 @@
+name: Build and Publish HTML and deployed_notebooks
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 5 * * 1'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # `BASE_URL` determines, relative to the root of the domain, the URL that your site is served from.
+  # E.g., if your site lives at `https://mydomain.org/myproject`, set `BASE_URL=/myproject`.
+  # If, instead, your site lives at the root of the domain, at `https://mydomain.org`, set `BASE_URL=''`.
+  BASE_URL: /${{ github.event.repository.name }}
+
+jobs:
+
+  publish_html:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    name: Publish HTML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade tox
+
+      - name: Execute notebooks while building HTMLs
+        run: tox -e py312-buildhtml
+
+      - name: Publish
+        uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e  # v4.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_build/html/
+          commit_message: ${{ github.event.head_commit.message }}
