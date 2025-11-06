@@ -11,3 +11,5 @@ jobs:
            api-token: ${{ secrets.CIRCLE_TOKEN }}
            artifact-path: 0/site/_build/html/index.html
            circleci-jobs: build-docs
+           domain: circle.scientific-python.dev
+           job-title: "--> Rendering Preview <--"
