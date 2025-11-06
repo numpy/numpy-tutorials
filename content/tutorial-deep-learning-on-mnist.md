@@ -384,7 +384,7 @@ layer.)](_static/tutorial-deep-learning-on-mnist.png)
 
     In the beginning of model training, your network randomly initializes the weights and feeds the input data forward through the hidden and output layers. This process is the forward pass or forward propagation.
 
-    Then, the network propagates the "signal" from the loss function back through the hidden layer and adjusts the weights values with the help of the learning rate parameter (more on that later).
+    Then, the network propagates the "signal" from the loss function back through the hidden layer and adjusts the weights with the help of the learning rate parameter (more on that later).
 
 > **Note:** In more technical terms, you:
 >
