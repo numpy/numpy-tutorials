@@ -18,5 +18,5 @@ dependencies:
   - jupytext
   - pip
   - pip:
-    - jupyterbook>=2
+    - jupyter-book>=2
     - jupyterlab_myst
