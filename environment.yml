@@ -16,3 +16,7 @@ dependencies:
   - sphinx-copybutton
   # to load the md files in binder
   - jupytext
+  - pip
+  - pip:
+    - jupyterbook>=2
+    - jupyterlab_myst
