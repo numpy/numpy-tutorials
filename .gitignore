@@ -23,6 +23,7 @@ pmip
 tags
 cscope.out
 .ipynb_checkpoints
+.tox
 
 # Compiled source #
 ###################
