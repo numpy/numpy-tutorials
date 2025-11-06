@@ -558,7 +558,7 @@ rate for added transistors, 2, and giving an initial number of transistors for a
 <p><span class="math notranslate nohighlight">\(B_M=-675.4\)</span></p>
 <p>Since the function represents Moore’s law, define it as a Python
 function using
-<a class="reference external" href="https://docs.python.org/3/library/ast.html?highlight=lambda#ast.Lambda"><code class="docutils literal notranslate"><span class="pre">lambda</span></code></a></p>
+<a class="reference external" href="https://docs.python.org/3/library/ast.html?highlight=lambda#ast.Lambda"><code class="docutils literal notranslate"><span class="pre">lambda</span></code></a>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A_M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
@@ -656,7 +656,7 @@ The extra options below will put the data in the desired format:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">delimiter</span> <span class="pre">=</span> <span class="pre">','</span></code>: specify delimeter as a comma ‘,’ (this is the default behavior)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">usecols</span> <span class="pre">=</span> <span class="pre">[1,2]</span></code>: import the second and third columns from the csv</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">skiprows</span> <span class="pre">=</span> <span class="pre">1</span></code>: do not use the first row, because its a header row</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skiprows</span> <span class="pre">=</span> <span class="pre">1</span></code>: do not use the first row, because it’s a header row</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -791,7 +791,7 @@ plot. The predicted number of transistors is now</p>
 <a class="reference external" href="https://matplotlib.org/3.1.1/gallery/style_sheets/fivethirtyeight.html"><code class="docutils literal notranslate"><span class="pre">fivethirtyeight</span></code></a>
 style sheet.
 The style sheet replicates
-https://fivethirtyeight.com elements. Change the matplotlib style with
+<a class="reference external" href="https://fivethirtyeight.com">https://fivethirtyeight.com</a> elements. Change the matplotlib style with
 <a class="reference external" href="https://matplotlib.org/3.3.2/api/style_api.html#matplotlib.style.use"><code class="docutils literal notranslate"><span class="pre">plt.style.use</span></code></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -845,7 +845,7 @@ option,
 to increase the transparency of the data. The more opaque the points
 appear, the more reported values lie on that measurement. The green <span class="math notranslate nohighlight">\(+\)</span>
 is the average reported transistor count for 2017. Plot your predictions
-for $\pm\frac{1}{2}~years.</p>
+for <span class="math notranslate nohighlight">\(\pm\frac{1}{2}\)</span> years.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transistor_count2017</span> <span class="o">=</span> <span class="n">transistor_count</span><span class="p">[</span><span class="n">year</span> <span class="o">==</span> <span class="mi">2017</span><span class="p">]</span>
@@ -876,7 +876,7 @@ for $\pm\frac{1}{2}~years.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19200000000.0 250000000.0 7050000000.0
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f0673dc5090&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f80e9190e10&gt;
 </pre></div>
 </div>
 <img alt="../_images/f0ce3d16bcb10fce82f848fcae22ed677ca974af889a9994c4c31e7db07f33de.png" src="../_images/f0ce3d16bcb10fce82f848fcae22ed677ca974af889a9994c4c31e7db07f33de.png" />
@@ -906,7 +906,7 @@ array using <code class="docutils literal notranslate"><span class="pre">np.load
 <h3>Zipping the arrays into a file<a class="headerlink" href="#zipping-the-arrays-into-a-file" title="Link to this heading">#</a></h3>
 <p>Using <code class="docutils literal notranslate"><span class="pre">np.savez</span></code>, you can save thousands of arrays and give them names. The
 function <code class="docutils literal notranslate"><span class="pre">np.load</span></code> will load the arrays back into the workspace as a
-dictionary. You’ll save a five arrays so the next user will have the year,
+dictionary. You’ll save five arrays so the next user will have the year,
 transistor count, predicted transistor count,  Gordon Moore’s
 predicted count, and fitting constants. Add one more variable that other users can use to
 understand the model, <code class="docutils literal notranslate"><span class="pre">notes</span></code>.</p>

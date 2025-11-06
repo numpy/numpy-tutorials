@@ -558,7 +558,7 @@ We made sure to include different demographics in our data and included a range 
 <div><p>Preprocessing data is an extremely crucial step before building any Deep learning model, however in an attempt to keep the tutorial focused on building the model, we will not dive deep into the code for preprocessing. Given below is a brief overview of all the steps we undertake to clean our data and convert it to its numeric representation.</p>
 </div></blockquote>
 <ol class="arabic simple">
-<li><p><strong>Text Denoising</strong> : Before converting your text into vectors, it is important to clean it and remove all unhelpful parts a.k.a the noise from your data by converting all characters to lowercase, removing html tags, brackets and stop words (words that don’t add much meaning to a sentence). Without this step the dataset is often a cluster of words that the computer doesn’t understand.</p></li>
+<li><p><strong>Text Denoising</strong> : Before converting your text into vectors, it is important to clean it and remove all unhelpful parts a.k.a. the noise from your data by converting all characters to lowercase, removing html tags, brackets and stop words (words that don’t add much meaning to a sentence). Without this step the dataset is often a cluster of words that the computer doesn’t understand.</p></li>
 <li><p><strong>Converting words to vectors</strong> : A word embedding is a learned representation for text where words that have the same meaning have a similar representation. Individual words are represented as real-valued vectors in a predefined vector space. GloVe is an unsupervised algorithm developed by Stanford for generating word embeddings by generating global word-word co-occurence matrix from a corpus. You can download the zipped files containing the embeddings from <a class="reference external" href="https://nlp.stanford.edu/projects/glove/">the GloVe official website</a>. Here you can choose any of the four options for different sizes or training datasets. We have chosen the least memory consuming embedding file.</p></li>
 </ol>
 <blockquote>
@@ -836,7 +836,7 @@ We made sure to include different demographics in our data and included a range 
 <span class="n">imdb_test</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s1">&#39;imdb_test.txt&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Instantiate the<code class="docutils literal notranslate"> <span class="pre">TextPreprocess</span></code> class to perform various operations on our datasets:</p>
+<p>Instantiate the <code class="docutils literal notranslate"><span class="pre">TextPreprocess</span></code> class to perform various operations on our datasets:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">textproc</span> <span class="o">=</span> <span class="n">TextPreprocess</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -862,7 +862,7 @@ We made sure to include different demographics in our data and included a range 
 </div>
 <p>The same process is applicable on the collected speeches:</p>
 <blockquote>
-<div><p>Since we will be performing paragraph wise sentiment analysis on each speech further ahead in the tutorial, we’ll need the punctuation marks to split the text into paragraphs, hence we refrain from removing their punctuation marks at this stage</p>
+<div><p>Since we will be performing paragraph wise sentiment analysis on each speech further ahead in the tutorial, we’ll need the punctuation marks to split the text into paragraphs, hence we refrain from removing their punctuation marks at this stage.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">speech_data_path</span> <span class="o">=</span> <span class="s1">&#39;tutorial-nlp-from-scratch/speeches.csv&#39;</span>
 <span class="n">speech_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">speech_data_path</span><span class="p">)</span>
@@ -883,18 +883,18 @@ We made sure to include different demographics in our data and included a range 
 <section id="build-the-deep-learning-model">
 <h2>3. Build the Deep Learning Model<a class="headerlink" href="#build-the-deep-learning-model" title="Link to this heading">#</a></h2>
 <p>It is time to start implementing our LSTM! You will have to first familiarize yourself with some high-level concepts of the basic building blocks of a deep learning model. You can refer to the <a class="reference external" href="https://numpy.org/numpy-tutorials/content/tutorial-deep-learning-on-mnist.html">Deep learning on MNIST from scratch tutorial</a> for the same.</p>
-<p>You will then learn how a Recurrent Neural Network differs from a plain Neural Network and what makes it so suitable for processing sequential data. Afterwards, you will construct the building blocks of a simple deep learning model in Python and NumPy and train it to learn to classify the sentiment of a piece of text as positive or negative with a certain level of accuracy</p>
+<p>You will then learn how a Recurrent Neural Network differs from a plain Neural Network and what makes it so suitable for processing sequential data. Afterwards, you will construct the building blocks of a simple deep learning model in Python and NumPy and train it to learn to classify the sentiment of a piece of text as positive or negative with a certain level of accuracy.</p>
 <section id="introduction-to-a-long-short-term-memory-network">
 <h3>Introduction to a Long Short Term Memory Network<a class="headerlink" href="#introduction-to-a-long-short-term-memory-network" title="Link to this heading">#</a></h3>
 <p>In a <a class="reference external" href="https://en.wikipedia.org/wiki/Multilayer_perceptron">Multilayer perceptron</a> (MLP), the information only moves in one direction — from the input layer, through the hidden layers, to the output layer. The information moves straight through the network and never takes the previous nodes into account at a later stage. Because it only considers the current input, the features learned are not shared across different positions of the sequence. Moreover, it cannot process sequences with varying lengths.</p>
-<p>Unlike an MLP, the RNN was designed to work with sequence prediction problems.RNNs introduce state variables to store past information, together with the current inputs, to determine the current outputs. Since an RNN shares the learned features with all the data points in a sequence regardless of its length, it is capable of processing sequences with varying lengths.</p>
+<p>Unlike an MLP, the RNN was designed to work with sequence prediction problems. RNNs introduce state variables to store past information, together with the current inputs, to determine the current outputs. Since an RNN shares the learned features with all the data points in a sequence regardless of its length, it is capable of processing sequences with varying lengths.</p>
 <p>The problem with an RNN however, is that it cannot retain long-term memory because the influence of a given input on the hidden layer, and therefore on the network output, either decays or blows up exponentially as it cycles around the network’s recurrent connections. This shortcoming is referred to as the vanishing gradient problem. Long Short-Term Memory (LSTM) is an RNN architecture specifically designed to address the <a class="reference external" href="https://en.wikipedia.org/wiki/Vanishing_gradient_problem">vanishing gradient problem</a>.</p>
 </section>
 <section id="overview-of-the-model-architecture">
 <h3>Overview of the Model Architecture<a class="headerlink" href="#overview-of-the-model-architecture" title="Link to this heading">#</a></h3>
 <p><img alt="Overview of the model architecture, showing a series of animated boxes. There are five identical boxes labeled A and receiving as input one of the words in the phrase &quot;life's a box of chocolates&quot;. Each box is highlighted in turn, representing the memory blocks of the LSTM network as information passes through them, ultimately reaching a &quot;Positive&quot; output value." src="../_images/lstm.gif" /></p>
 <p>In the above gif, the rectangles labeled <span class="math notranslate nohighlight">\(A\)</span> are called <code class="docutils literal notranslate"><span class="pre">Cells</span></code> and they are the <strong>Memory Blocks</strong> of our LSTM network. They are responsible for choosing what to remember in a sequence and pass on that information to the next cell via two states called the <code class="docutils literal notranslate"><span class="pre">hidden</span> <span class="pre">state</span></code> <span class="math notranslate nohighlight">\(H_{t}\)</span> and the <code class="docutils literal notranslate"><span class="pre">cell</span> <span class="pre">state</span></code> <span class="math notranslate nohighlight">\(C_{t}\)</span> where <span class="math notranslate nohighlight">\(t\)</span> indicates the time-step. Each <code class="docutils literal notranslate"><span class="pre">Cell</span></code> has dedicated gates which are responsible for storing, writing or reading the information passed to an LSTM. You will now look closely at the architecture of the network by implementing each mechanism happening inside of it.</p>
-<p>Lets start with writing a function to randomly initialize the parameters which will be learned while our model trains</p>
+<p>Lets start with writing a function to randomly initialize the parameters which will be learned while our model trains:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">initialise_params</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">):</span>
     <span class="c1"># forget gate</span>
     <span class="n">Wf</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span> <span class="o">+</span> <span class="n">input_dim</span><span class="p">))</span>
@@ -1060,7 +1060,7 @@ We made sure to include different demographics in our data and included a range 
 <section id="backpropagation">
 <h3>Backpropagation<a class="headerlink" href="#backpropagation" title="Link to this heading">#</a></h3>
 <p>After each forward pass through the network, you will implement the <code class="docutils literal notranslate"><span class="pre">backpropagation</span> <span class="pre">through</span> <span class="pre">time</span></code> algorithm to accumulate gradients of each parameter over the time steps. Backpropagation through a LSTM is not as straightforward as through other common Deep Learning architectures, due to the special way its underlying layers interact. Nonetheless, the approach is largely the same; identifying dependencies and applying the chain rule.</p>
-<p>Lets start with defining a function to initialize gradients of each parameter as arrays made up of zeros with same dimensions as the corresponding parameter</p>
+<p>Lets start with defining a function to initialize gradients of each parameter as arrays made up of zeros with same dimensions as the corresponding parameter.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise the gradients</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">initialize_grads</span><span class="p">(</span><span class="n">parameters</span><span class="p">):</span>
     <span class="n">grads</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1183,8 +1183,8 @@ We made sure to include different demographics in our data and included a range 
 </section>
 <section id="updating-the-parameters">
 <h3>Updating the Parameters<a class="headerlink" href="#updating-the-parameters" title="Link to this heading">#</a></h3>
-<p>We update the parameters through an optimization algorithm called <a class="reference external" href="https://optimization.cbe.cornell.edu/index.php?title=Adam">Adam</a> which is an extension to stochastic gradient descent that has recently seen broader adoption for deep learning applications in computer vision and natural language processing. Specifically, the algorithm calculates an exponential moving average of the gradient and the squared gradient, and the parameters <code class="docutils literal notranslate"><span class="pre">beta1</span></code> and <code class="docutils literal notranslate"><span class="pre">beta2</span></code> control the decay rates of these moving averages. Adam has shown increased convergence and robustness over other gradient descent algorithms and is often recommended as the default optimizer for training.</p>
-<p>Define a function to initialise the moving averages for each parameter</p>
+<p>We update the parameters through an optimization algorithm called <a class="reference external" href="https://optimization.cbe.cornell.edu/index.php?title=Adam">Adam</a>, which is an extension to stochastic gradient descent that has recently seen broader adoption for deep learning applications in computer vision and natural language processing. Specifically, the algorithm calculates an exponential moving average of the gradient and the squared gradient, and the parameters <code class="docutils literal notranslate"><span class="pre">beta1</span></code> and <code class="docutils literal notranslate"><span class="pre">beta2</span></code> control the decay rates of these moving averages. Adam has shown increased convergence and robustness over other gradient descent algorithms, and is often recommended as the default optimizer for training.</p>
+<p>Define a function to initialise the moving averages for each parameter:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># initialise the moving averages</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">initialise_mav</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
     <span class="n">v</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1197,7 +1197,7 @@ We made sure to include different demographics in our data and included a range 
     <span class="k">return</span> <span class="n">v</span><span class="p">,</span> <span class="n">s</span>
 </pre></div>
 </div>
-<p>Define a function to update the parameters</p>
+<p>Define a function to update the parameters:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update the parameters using Adam optimization</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">update_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">gradients</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span>
                       <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">beta1</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">beta2</span><span class="o">=</span><span class="mf">0.999</span><span class="p">):</span>
@@ -1220,7 +1220,7 @@ We made sure to include different demographics in our data and included a range 
 </section>
 <section id="training-the-network">
 <h3>Training the Network<a class="headerlink" href="#training-the-network" title="Link to this heading">#</a></h3>
-<p>You will start by initializing all the parameters and hyperparameters being used in your network</p>
+<p>You will start by initializing all the parameters and hyperparameters being used in your network:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hidden_dim</span> <span class="o">=</span> <span class="mi">64</span>
 <span class="n">input_dim</span> <span class="o">=</span> <span class="n">emb_matrix</span><span class="p">[</span><span class="s1">&#39;memory&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.001</span>
@@ -1232,8 +1232,8 @@ We made sure to include different demographics in our data and included a range 
                       <span class="n">parameters</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>To optimize your deep learning network, you need to calculate a loss based on how well the model is doing on the training data. Loss value implies how poorly or well a model behaves after each iteration of optimization. <br>
-Define a function to calculate the loss using <a class="reference external" href="http://d2l.ai/chapter_linear-networks/softmax-regression.html?highlight=negative%20log%20likelihood#log-likelihood">negative log likelihood</a></p>
+<p>To optimize your deep learning network, you need to calculate a loss based on how well the model is doing on the training data. Loss value implies how poorly or well a model behaves after each iteration of optimization.</p>
+<p>Define a function to calculate the loss using <a class="reference external" href="http://d2l.ai/chapter_linear-networks/softmax-regression.html?highlight=negative%20log%20likelihood#log-likelihood">negative log likelihood</a>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">loss_f</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">Y</span><span class="p">):</span>
     <span class="c1"># define value of epsilon to prevent zero division error inside a log</span>
     <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-5</span>
@@ -1246,7 +1246,7 @@ Define a function to calculate the loss using <a class="reference external" href
 </div>
 <p>Set up the neural network’s learning experiment with a training loop and start the training process. You will also evaluate the model’s performance on the training dataset to see how well the model is <em>learning</em> and the testing dataset to see how well it is <em>generalizing</em>.</p>
 <blockquote>
-<div><p>Skip running this cell if you already have the trained parameters stored in a <code class="docutils literal notranslate"><span class="pre">npy</span></code> file</p>
+<div><p>Skip running this cell if you already have the trained parameters stored in a <code class="docutils literal notranslate"><span class="pre">npy</span></code> file.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># To store training losses</span>
 <span class="n">training_losses</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1346,7 +1346,7 @@ Define a function to calculate the loss using <a class="reference external" href
 </section>
 <section id="sentiment-analysis-on-the-speech-data">
 <h3>Sentiment Analysis on the Speech Data<a class="headerlink" href="#sentiment-analysis-on-the-speech-data" title="Link to this heading">#</a></h3>
-<p>Once your model is trained, you can use the updated parameters to start making our predictions. You can break each speech into paragraphs of uniform size before passing them to the Deep Learning model and predicting the sentiment of each paragraph</p>
+<p>Once your model is trained, you can use the updated parameters to start making our predictions. You can break each speech into paragraphs of uniform size before passing them to the Deep Learning model and predicting the sentiment of each paragraph.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># To store predicted sentiments</span>
 <span class="n">predictions</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -1417,14 +1417,14 @@ Define a function to calculate the loss using <a class="reference external" href
 <h2>Looking at our Neural Network from an ethical perspective<a class="headerlink" href="#looking-at-our-neural-network-from-an-ethical-perspective" title="Link to this heading">#</a></h2>
 <!-- #region -->
 <p>It’s crucial to understand that accurately identifying a text’s sentiment is not easy primarily because of the complex ways in which humans express sentiment, using irony, sarcasm, humor, or, in social media, abbreviation. Moreover neatly placing text into two categories: ‘positive’ and ‘negative’ can be problematic because it is being done without any context. Words or abbreviations can convey very different sentiments depending on age and location, none of which we took into account while building our model.</p>
-<p>Along with data, there are also growing concerns that data processing algorithms are influencing policy and daily lives in ways that are not transparent and introduce biases. Certain biases such as the <a class="reference external" href="https://bit.ly/2WtTKIe">Inductive Bias</a> are essential to help a Machine Learning model generalize better, for example the LSTM we built earlier is biased towards preserving contextual information over long sequences which makes it so suitable for processing sequential data. The problem arises when <a class="reference external" href="https://hbr.org/2019/10/what-do-we-do-about-the-biases-in-ai">societal biases</a> creep into algorithmic predictions. Optimizing Machine algorithms via methods like <a class="reference external" href="https://en.wikipedia.org/wiki/Hyperparameter_optimization">hyperparameter tuning</a> can then further amplify these biases by learning every bit of information in the data.</p>
+<p>Along with data, there are also growing concerns that data processing algorithms are influencing policy and daily lives in ways that are not transparent and introduce biases. Certain biases such as the <a class="reference external" href="https://bit.ly/2WtTKIe">Inductive Bias</a> are essential to help a Machine Learning model generalize better, for example the LSTM we built earlier is biased towards preserving contextual information over long sequences which makes it so suitable for processing sequential data. The problem arises when <a class="reference external" href="https://hbr.org/2019/10/what-do-we-do-about-the-biases-in-ai">societal biases</a> creep into algorithmic predictions. Optimizing Machine Learning algorithms via methods like <a class="reference external" href="https://en.wikipedia.org/wiki/Hyperparameter_optimization">hyperparameter tuning</a> can then further amplify these biases by learning every bit of information in the data.</p>
 <p>There are also cases where bias is only in the output and not the inputs (data, algorithm). For example, in sentiment analysis <a class="reference external" href="https://doi.org/10.3390/electronics9020374">accuracy tends to be higher on female-authored texts than on male-authored ones</a>. End users of sentiment analysis should be aware that its small gender biases can affect the conclusions drawn from it and apply correction factors when necessary. Hence, it is important that demands for algorithmic accountability should include the ability to test the outputs of a system, including the ability to drill down into different user groups by gender, ethnicity and other characteristics, to identify, and hopefully suggest corrections for, system output biases.</p>
 <!-- #endregion -->
 </section>
 <section id="next-steps">
 <h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
 <p>You have learned how to build and train a simple Long Short Term Memory network from scratch using just NumPy to perform sentiment analysis.</p>
-<p>To further enhance and optimize your neural network model, you can consider one of a mixture of the following:</p>
+<p>To further enhance and optimize your neural network model, you can consider one or a mixture of the following:</p>
 <ul class="simple">
 <li><p>Alter the architecture by introducing multiple LSTM layers to make the network deeper.</p></li>
 <li><p>Use a higher epoch size to train longer and add more regularization techniques, such as early stopping, to prevent overfitting.</p></li>
@@ -1436,7 +1436,7 @@ Define a function to calculate the loss using <a class="reference external" href
 </ul>
 <p>Nowadays, LSTMs have been replaced by the <a class="reference external" href="https://jalammar.github.io/illustrated-transformer/">Transformer</a> which uses <a class="reference external" href="https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/">Attention</a> to tackle all the problems that plague an LSTM such as lack of <a class="reference external" href="https://en.wikipedia.org/wiki/Transfer_learning">transfer learning</a>, lack of <a class="reference external" href="https://web.stanford.edu/~rezab/classes/cme323/S16/projects_reports/hedge_usmani.pdf">parallel training</a>, and a long gradient chain for lengthy sequences.</p>
 <p>Building a neural network from scratch with NumPy is a great way to learn more about NumPy and about deep learning. However, for real-world applications you should use specialized frameworks — such as PyTorch, JAX or TensorFlow — that provide NumPy-like APIs, have built-in automatic differentiation and GPU support, and are designed for high-performance numerical computing and machine learning.</p>
-<p>Finally, to know more about how ethics come into play when developing a machine learning model, you can refer to the following resources :</p>
+<p>Finally, to know more about how ethics come into play when developing a machine learning model, you can refer to the following resources:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.turing.ac.uk/research/data-ethics">Data ethics resources</a> by the Turing Institute</p></li>
 <li><p>Considering how artificial intelligence shifts power, an <a class="reference external" href="https://www.nature.com/articles/d41586-020-02003-2">article</a> and <a class="reference external" href="https://slideslive.com/38923453/the-values-of-machine-learning">talk</a> by Pratyusha Kalluri</p></li>
