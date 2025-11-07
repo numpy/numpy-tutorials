@@ -41,7 +41,7 @@ jobs:
           conda info
           conda list
           export OMP_NUM_THREADS=1
-          python -m tox -e py313-buildhtml
+          jupyter-book build --execute --html -d
 
       - name: fail on build errors
         if: steps.build_step.outcome != 'success'
