@@ -1,3 +1,4 @@
+name: Run CircleCI artifacts redirector for rendered HTML
 on: [status]
 jobs:
    circleci_artifacts_redirector_job:
@@ -9,7 +10,7 @@ jobs:
          with:
            repo-token: ${{ secrets.GITHUB_TOKEN }}
            api-token: ${{ secrets.CIRCLE_TOKEN }}
-           artifact-path: 0/site/_build/html/index.html
+           artifact-path: 0/_build/html/index.html
            circleci-jobs: build-docs
            domain: circle.scientific-python.dev
            job-title: "--> Rendering Preview <--"
