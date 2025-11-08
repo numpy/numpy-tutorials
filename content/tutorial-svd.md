@@ -206,7 +206,11 @@ import numpy as np
 U, s, Vt = np.linalg.svd(img_gray)
 ```
 
-**Note** If you are using your own image, this command might take a while to run, depending on the size of your image and your hardware. Don't worry, this is normal! The SVD can be a pretty intensive computation.
+```{note}
+If you are using your own image, this command might take a while to run,
+depending on the size of your image and your hardware.
+Don't worry, this is normal! The SVD can be a pretty intensive computation.
+```
 
 +++
 
