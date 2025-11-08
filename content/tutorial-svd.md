@@ -390,7 +390,7 @@ approx_img.shape
 which is not the right shape for showing the image. Finally, reordering the axes back to our original shape of `(768, 1024, 3)`, we can see our approximation:
 
 ```{code-cell}
-plt.imshow(np.transpose(approx_img, (1, 2, 0)))
+plt.imshow(np.transpose(np.clip(approx_img, 0, 1), (1, 2, 0)))
 plt.show()
 ```
 
