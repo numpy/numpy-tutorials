@@ -142,12 +142,6 @@ It is possible to use methods from linear algebra to approximate an existing set
 
 +++
 
-To proceed, import the linear algebra submodule from NumPy:
-
-```{code-cell}
-from numpy import linalg
-```
-
 In order to extract information from a given matrix, we can use the SVD to obtain 3 arrays which can be multiplied to obtain the original matrix. From the theory of linear algebra, given a matrix $A$, the following product can be computed:
 
 $$U \Sigma V^T = A$$
@@ -183,7 +177,7 @@ plt.show()
 Now, applying the [linalg.svd](https://numpy.org/devdocs/reference/generated/numpy.linalg.svd.html#numpy.linalg.svd) function to this matrix, we obtain the following decomposition:
 
 ```{code-cell}
-U, s, Vt = linalg.svd(img_gray)
+U, s, Vt = np.linalg.svd(img_gray)
 ```
 
 **Note** If you are using your own image, this command might take a while to run, depending on the size of your image and your hardware. Don't worry, this is normal! The SVD can be a pretty intensive computation.
@@ -221,7 +215,7 @@ Now, we want to check if the reconstructed `U @ Sigma @ Vt` is close to the orig
 The [linalg](https://numpy.org/devdocs/reference/routines.linalg.html#module-numpy.linalg) module includes a `norm` function, which computes the norm of a vector or matrix represented in a NumPy array. For example, from the SVD explanation above, we would expect the norm of the difference between `img_gray` and the reconstructed SVD product to be small. As expected, you should see something like
 
 ```{code-cell}
-linalg.norm(img_gray - U @ Sigma @ Vt)
+np.linalg.norm(img_gray - U @ Sigma @ Vt)
 ```
 
 (The actual result of this operation might be different depending on your architecture and linear algebra setup. Regardless, you should see a small number.)
@@ -295,7 +289,7 @@ img_array_transposed.shape
 Now we are ready to apply the SVD:
 
 ```{code-cell}
-U, s, Vt = linalg.svd(img_array_transposed)
+U, s, Vt = np.linalg.svd(img_array_transposed)
 ```
 
 Finally, to obtain the full approximated image, we need to reassemble these matrices into the approximation. Now, note that
