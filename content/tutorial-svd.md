@@ -365,7 +365,12 @@ plt.imshow(np.transpose(reconstructed, (1, 2, 0)))
 plt.show()
 ```
 
-In fact, `imshow` peforms this clipping under-the-hood, so if you skip the first line in the previous code cell, you might see a warning message saying `"Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers)."`
+```{note}
+In fact, `imshow` peforms this clipping under-the-hood, so if you skip the first
+line in the previous code cell, you might see a warning message saying
+`"Clipping input data to the valid range for imshow with RGB data ([0..1] for
+floats or [0..255] for integers)."`
+```
 
 Now, to do the approximation, we must choose only the first `k` singular values for each color channel. This can be done using the following syntax:
 
