@@ -274,14 +274,10 @@ img_array.shape
 ```
 
 so we need to permutate the axis on this array to get a shape like `(3, 768, 1024)`. Fortunately, the [numpy.transpose](https://numpy.org/devdocs/reference/generated/numpy.transpose.html#numpy.transpose) function can do that for us:
-```
-np.transpose(x, axes=(i, j, k))
-```
-indicates that the axis will be reordered such that the final shape of the transposed array will be reordered according to the indices `(i, j, k)`.
-
-Let's see how this goes for our array:
 
 ```{code-cell}
+# The values in the tuple indicate the original dim, and the order the new axis
+# so axis 2 -> 0, 0 -> 1, and 1 -> 2
 img_array_transposed = np.transpose(img_array, (2, 0, 1))
 img_array_transposed.shape
 ```
