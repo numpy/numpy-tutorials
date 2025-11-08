@@ -115,7 +115,7 @@ You can check that the above works by doing some tests; for example, inquiring
 about maximum and minimum values for this array:
 
 ```{code-cell}
-img_array.max(), img_array.min()
+img_array.min(), img_array.max()
 ```
 
 or checking the type of data in the array:
