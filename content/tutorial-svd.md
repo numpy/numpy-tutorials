@@ -116,7 +116,13 @@ Since we are going to perform linear algebra operations on this data, it might b
 img_array = img / 255
 ```
 
-This operation, dividing an array by a scalar, works because of NumPy's [broadcasting rules](https://numpy.org/devdocs/user/theory.broadcasting.html#array-broadcasting-in-numpy). (Note that in real-world applications, it would be better to use, for example, the [img_as_float](https://scikit-image.org/docs/stable/api/skimage.html#skimage.img_as_float) utility function from `scikit-image`).
+This operation, dividing an array by a scalar, works because of NumPy's [broadcasting rules](https://numpy.org/devdocs/user/theory.broadcasting.html#array-broadcasting-in-numpy).
+
+```{tip}
+In real-world applications, it may be better to use, for example, the
+[img_as_float](https://scikit-image.org/docs/stable/api/skimage.html#skimage.img_as_float)
+utility function from `scikit-image`.
+```
 
 You can check that the above works by doing some tests; for example, inquiring
 about maximum and minimum values for this array:
