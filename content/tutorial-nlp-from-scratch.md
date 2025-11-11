@@ -49,7 +49,7 @@ This tutorial can be run locally in an isolated environment, such as [Virtualenv
 
 2. Preprocess the datasets
 
-3. Build and train a LSTM network from scratch
+3. Build and train an LSTM network from scratch
 
 4. Perform sentiment analysis on collected speeches
 
