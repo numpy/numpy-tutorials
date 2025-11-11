@@ -462,7 +462,7 @@ The problem with an RNN however, is that it cannot retain long-term memory becau
 In the above gif, the rectangles labeled $A$ are called `Cells` and they are the **Memory Blocks** of our LSTM network. They are responsible for choosing what to remember in a sequence and pass on that information to the next cell via two states called the `hidden state` $H_{t}$ and the `cell state` $C_{t}$ where $t$ indicates the time-step. Each `Cell` has dedicated gates which are responsible for storing, writing or reading the information passed to an LSTM. You will now look closely at the architecture of the network by implementing each mechanism happening inside of it.
 
 
-Lets start with writing a function to randomly initialize the parameters which will be learned while our model trains:
+Let's start with writing a function to randomly initialize the parameters which will be learned while our model trains:
 
 ```python
 def initialise_params(hidden_dim, input_dim):
@@ -641,7 +641,7 @@ def forward_prop(X_vec, parameters, input_dim):
 After each forward pass through the network, you will implement the `backpropagation through time` algorithm to accumulate gradients of each parameter over the time steps. Backpropagation through a LSTM is not as straightforward as through other common Deep Learning architectures, due to the special way its underlying layers interact. Nonetheless, the approach is largely the same; identifying dependencies and applying the chain rule.
 
 
-Lets start with defining a function to initialize gradients of each parameter as arrays made up of zeros with same dimensions as the corresponding parameter.
+Let's start with defining a function to initialize gradients of each parameter as arrays made up of zeros with same dimensions as the corresponding parameter.
 
 ```python
 # Initialise the gradients
