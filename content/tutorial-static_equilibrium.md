@@ -190,7 +190,7 @@ The pole does not move, so it must apply a reaction force.
 The pole also does not rotate, so it must also be creating a reaction moment.
 Solve for both the reaction force and moments.
 
-Lets say a 5N force is applied perpendicularly 2m above the base of the pole.
+Let's say a 5N force is applied perpendicularly 2m above the base of the pole.
 
 ```{code-cell}
 f = 5  # Force in newtons
