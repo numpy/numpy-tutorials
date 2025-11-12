@@ -38,11 +38,7 @@ After this tutorial, you should be able to:
 In this tutorial, we will use a [matrix decomposition](https://en.wikipedia.org/wiki/Matrix_decomposition) from linear algebra, the Singular Value Decomposition, to generate a compressed approximation of an image. We'll use the `face` image from the [scipy.datasets](https://docs.scipy.org/doc/scipy/reference/datasets.html) module:
 
 ```{code-cell}
-# TODO: Rm try-except with scipy 1.10 is the minimum supported version
-try:
-    from scipy.datasets import face
-except ImportError:  # Data was in scipy.misc prior to scipy v1.10
-    from scipy.misc import face
+from scipy.datasets import face
 
 img = face()
 ```
