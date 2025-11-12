@@ -177,6 +177,7 @@ plt.show()
 Now, applying the [linalg.svd](https://numpy.org/devdocs/reference/generated/numpy.linalg.svd.html#numpy.linalg.svd) function to this matrix, we obtain the following decomposition:
 
 ```{code-cell}
+import numpy as np
 U, s, Vt = np.linalg.svd(img_gray)
 ```
 
