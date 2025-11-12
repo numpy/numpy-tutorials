@@ -111,7 +111,7 @@ You can check that the above works by doing some tests; for example, inquiring
 about maximum and minimum values for this array:
 
 ```{code-cell}
-img_array.max(), img_array.min()
+img_array.min(), img_array.max()
 ```
 
 or checking the type of data in the array:
@@ -137,12 +137,6 @@ It is possible to use methods from linear algebra to approximate an existing set
 **Note**: We will use NumPy's linear algebra module, [numpy.linalg](https://numpy.org/devdocs/reference/routines.linalg.html#module-numpy.linalg), to perform the operations in this tutorial. Most of the linear algebra functions in this module can also be found in [scipy.linalg](https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg), and users are encouraged to use the [scipy](https://docs.scipy.org/doc/scipy/reference/index.html#module-scipy) module for real-world applications. However, some functions in the [scipy.linalg](https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg) module, such as the SVD function, only support 2D arrays. For more information on this, check the [scipy.linalg page](https://docs.scipy.org/doc/scipy/tutorial/linalg.html).
 
 +++
-
-To proceed, import the linear algebra submodule from NumPy:
-
-```{code-cell}
-from numpy import linalg
-```
 
 In order to extract information from a given matrix, we can use the SVD to obtain 3 arrays which can be multiplied to obtain the original matrix. From the theory of linear algebra, given a matrix $A$, the following product can be computed:
 
@@ -179,7 +173,8 @@ plt.show()
 Now, applying the [linalg.svd](https://numpy.org/devdocs/reference/generated/numpy.linalg.svd.html#numpy.linalg.svd) function to this matrix, we obtain the following decomposition:
 
 ```{code-cell}
-U, s, Vt = linalg.svd(img_gray)
+import numpy as np
+U, s, Vt = np.linalg.svd(img_gray)
 ```
 
 **Note** If you are using your own image, this command might take a while to run, depending on the size of your image and your hardware. Don't worry, this is normal! The SVD can be a pretty intensive computation.
@@ -202,8 +197,6 @@ s @ Vt
 results in a `ValueError`. This happens because having a one-dimensional array for `s`, in this case, is much more economic in practice than building a diagonal matrix with the same data. To reconstruct the original matrix, we can rebuild the diagonal matrix $\Sigma$ with the elements of `s` in its diagonal and with the appropriate dimensions for multiplying: in our case, $\Sigma$ should be 768x1024 since `U` is 768x768 and `Vt` is 1024x1024. In order to add the singular values to the diagonal of `Sigma`, we will use the [fill_diagonal](https://numpy.org/devdocs/reference/generated/numpy.fill_diagonal.html) function from NumPy:
 
 ```{code-cell}
-import numpy as np
-
 Sigma = np.zeros((U.shape[1], Vt.shape[0]))
 np.fill_diagonal(Sigma, s)
 ```
@@ -217,7 +210,7 @@ Now, we want to check if the reconstructed `U @ Sigma @ Vt` is close to the orig
 The [linalg](https://numpy.org/devdocs/reference/routines.linalg.html#module-numpy.linalg) module includes a `norm` function, which computes the norm of a vector or matrix represented in a NumPy array. For example, from the SVD explanation above, we would expect the norm of the difference between `img_gray` and the reconstructed SVD product to be small. As expected, you should see something like
 
 ```{code-cell}
-linalg.norm(img_gray - U @ Sigma @ Vt)
+np.linalg.norm(img_gray - U @ Sigma @ Vt)
 ```
 
 (The actual result of this operation might be different depending on your architecture and linear algebra setup. Regardless, you should see a small number.)
@@ -276,14 +269,10 @@ img_array.shape
 ```
 
 so we need to permutate the axis on this array to get a shape like `(3, 768, 1024)`. Fortunately, the [numpy.transpose](https://numpy.org/devdocs/reference/generated/numpy.transpose.html#numpy.transpose) function can do that for us:
-```
-np.transpose(x, axes=(i, j, k))
-```
-indicates that the axis will be reordered such that the final shape of the transposed array will be reordered according to the indices `(i, j, k)`.
-
-Let's see how this goes for our array:
 
 ```{code-cell}
+# The values in the tuple indicate the original dim, and the order the new axis
+# so axis 2 -> 0, 0 -> 1, and 1 -> 2
 img_array_transposed = np.transpose(img_array, (2, 0, 1))
 img_array_transposed.shape
 ```
@@ -291,7 +280,7 @@ img_array_transposed.shape
 Now we are ready to apply the SVD:
 
 ```{code-cell}
-U, s, Vt = linalg.svd(img_array_transposed)
+U, s, Vt = np.linalg.svd(img_array_transposed)
 ```
 
 Finally, to obtain the full approximated image, we need to reassemble these matrices into the approximation. Now, note that
