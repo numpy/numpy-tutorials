@@ -201,8 +201,6 @@ s @ Vt
 results in a `ValueError`. This happens because having a one-dimensional array for `s`, in this case, is much more economic in practice than building a diagonal matrix with the same data. To reconstruct the original matrix, we can rebuild the diagonal matrix $\Sigma$ with the elements of `s` in its diagonal and with the appropriate dimensions for multiplying: in our case, $\Sigma$ should be 768x1024 since `U` is 768x768 and `Vt` is 1024x1024. In order to add the singular values to the diagonal of `Sigma`, we will use the [fill_diagonal](https://numpy.org/devdocs/reference/generated/numpy.fill_diagonal.html) function from NumPy:
 
 ```{code-cell}
-import numpy as np
-
 Sigma = np.zeros((U.shape[1], Vt.shape[0]))
 np.fill_diagonal(Sigma, s)
 ```
