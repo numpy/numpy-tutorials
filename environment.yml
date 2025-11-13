@@ -10,9 +10,9 @@ dependencies:
   - pandas
   - imageio
   # For building the site
-  - sphinx
-  - myst-nb
-  - sphinx-book-theme
-  - sphinx-copybutton
-  # to load the md files in binder
+  - tox
   - jupytext
+  - pip
+  - pip:
+    - jupyter-book>=2
+    - jupyterlab_myst
