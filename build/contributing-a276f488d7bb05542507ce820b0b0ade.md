@@ -41,8 +41,8 @@ used in the main NumPy documentation has two reasons:
 You may notice our content is in markdown format (`.md` files). We review and
 host notebooks in the [MyST-NB](https://myst-nb.readthedocs.io/) format. We
 accept both Jupyter notebooks (`.ipynb`) and MyST-NB notebooks (`.md`).
-If you want to sync your `.ipynb` to your `.md` file follow the [pairing
-tutorial](content/pairing).
+If you want to author `MyST` notebooks in jupyterlab, check out the
+[jupyterlab_myst](https://mystmd.org/guide/quickstart-jupyter-lab-myst) extension!
 
 ## Adding your own tutorials
 
