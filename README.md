@@ -20,11 +20,10 @@ or navigate to any of the documents listed below and download it individually.
 3. [Tutorial: Saving and sharing your NumPy arrays](content/save-load-arrays.md)
 4. [Tutorial: NumPy deep learning on MNIST from scratch](content/tutorial-deep-learning-on-mnist.md)
 5. [Tutorial: X-ray image processing](content/tutorial-x-ray-image-processing.md)
-6. [Tutorial: NumPy deep reinforcement learning with Pong from pixels](content/tutorial-deep-reinforcement-learning-with-pong-from-pixels.md)
-7. [Tutorial: Masked Arrays](content/tutorial-ma.md)
-8. [Tutorial: Static Equilibrium](content/tutorial-static_equilibrium.md)
-9. [Tutorial: Plotting Fractals](content/tutorial-plotting-fractals.ipynb)
-11. [Tutorial: Analysing the impact of the lockdown on air quality in Delhi, India](content/tutorial-air-quality-analysis.md)
+6. [Tutorial: Masked Arrays](content/tutorial-ma.md)
+7. [Tutorial: Static Equilibrium](content/tutorial-static_equilibrium.md)
+8. [Tutorial: Plotting Fractals](content/tutorial-plotting-fractals.ipynb)
+9. [Tutorial: Analysing the impact of the lockdown on air quality in Delhi, India](content/tutorial-air-quality-analysis.md)
 
 
 ## Contributing
