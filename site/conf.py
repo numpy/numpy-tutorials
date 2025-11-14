@@ -43,7 +43,6 @@ exclude_patterns = ['_build',
                     'Thumbs.db',
                     '.DS_Store',
                     'notebooks',
-                    'content/tutorial-nlp-from-scratch/README.md',
                     ]
 
 # MyST-NB configuration
