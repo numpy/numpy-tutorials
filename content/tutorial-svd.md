@@ -43,7 +43,18 @@ from scipy.datasets import face
 img = face()
 ```
 
-**Note**: If you prefer, you can use your own image as you work through this tutorial. In order to transform your image into a NumPy array that can be manipulated, you can use the `imread` function from the [matplotlib.pyplot](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.html#module-matplotlib.pyplot) submodule. Alternatively, you can use the [imageio.imread](https://imageio.readthedocs.io/en/stable/_autosummary/imageio.v3.imread.html) function from the `imageio` library. Be aware that if you use your own image, you'll likely need to adapt the steps below. For more information on how images are treated when converted to NumPy arrays, see [A crash course on NumPy for images](https://scikit-image.org/docs/stable/user_guide/numpy_images.html) from the `scikit-image` documentation.
+```{note}
+If you prefer, you can use your own image as you work through this tutorial.
+In order to transform your image into a NumPy array that can be manipulated, you
+can use the `imread` function from the
+[matplotlib.pyplot](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.html#module-matplotlib.pyplot) submodule.
+Alternatively, you can use the
+[imageio.imread](https://imageio.readthedocs.io/en/stable/_autosummary/imageio.v3.imread.html)
+function from the `imageio` library.
+Be aware that if you use your own image, you'll likely need to adapt the steps below.
+For more information on how images are treated when converted to NumPy arrays,
+see [A crash course on NumPy for images](https://scikit-image.org/docs/stable/user_guide/numpy_images.html) from the `scikit-image` documentation.
+```
 
 +++
 
@@ -105,7 +116,13 @@ Since we are going to perform linear algebra operations on this data, it might b
 img_array = img / 255
 ```
 
-This operation, dividing an array by a scalar, works because of NumPy's [broadcasting rules](https://numpy.org/devdocs/user/theory.broadcasting.html#array-broadcasting-in-numpy). (Note that in real-world applications, it would be better to use, for example, the [img_as_float](https://scikit-image.org/docs/stable/api/skimage.html#skimage.img_as_float) utility function from `scikit-image`).
+This operation, dividing an array by a scalar, works because of NumPy's [broadcasting rules](https://numpy.org/devdocs/user/theory.broadcasting.html#array-broadcasting-in-numpy).
+
+```{tip}
+In real-world applications, it may be better to use, for example, the
+[img_as_float](https://scikit-image.org/docs/stable/api/skimage.html#skimage.img_as_float)
+utility function from `scikit-image`.
+```
 
 You can check that the above works by doing some tests; for example, inquiring
 about maximum and minimum values for this array:
@@ -134,7 +151,19 @@ It is possible to use methods from linear algebra to approximate an existing set
 
 +++
 
-**Note**: We will use NumPy's linear algebra module, [numpy.linalg](https://numpy.org/devdocs/reference/routines.linalg.html#module-numpy.linalg), to perform the operations in this tutorial. Most of the linear algebra functions in this module can also be found in [scipy.linalg](https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg), and users are encouraged to use the [scipy](https://docs.scipy.org/doc/scipy/reference/index.html#module-scipy) module for real-world applications. However, some functions in the [scipy.linalg](https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg) module, such as the SVD function, only support 2D arrays. For more information on this, check the [scipy.linalg page](https://docs.scipy.org/doc/scipy/tutorial/linalg.html).
+```{note}
+We will use NumPy's linear algebra module,
+[numpy.linalg](https://numpy.org/devdocs/reference/routines.linalg.html#module-numpy.linalg),
+to perform the operations in this tutorial.
+Most of the linear algebra functions in this module can also be found in
+[scipy.linalg](https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg),
+and users are encouraged to use the [scipy](https://docs.scipy.org/doc/scipy/reference/index.html#module-scipy)
+module for real-world applications.
+However, some functions in the
+[scipy.linalg](https://docs.scipy.org/doc/scipy/reference/linalg.html#module-scipy.linalg)
+module, such as the SVD function, only support 2D arrays.
+For more information on this, check the [scipy.linalg page](https://docs.scipy.org/doc/scipy/tutorial/linalg.html).
+```
 
 +++
 
@@ -177,7 +206,11 @@ import numpy as np
 U, s, Vt = np.linalg.svd(img_gray)
 ```
 
-**Note** If you are using your own image, this command might take a while to run, depending on the size of your image and your hardware. Don't worry, this is normal! The SVD can be a pretty intensive computation.
+```{note}
+If you are using your own image, this command might take a while to run,
+depending on the size of your image and your hardware.
+Don't worry, this is normal! The SVD can be a pretty intensive computation.
+```
 
 +++
 
@@ -188,9 +221,10 @@ U.shape, s.shape, Vt.shape
 ```
 
 Note that `s` has a particular shape: it has only one dimension. This means that some linear algebra functions that expect 2d arrays might not work. For example, from the theory, one might expect `s` and `Vt` to be
-compatible for multiplication. However, this is not true as `s` does not have a second axis. Executing
+compatible for multiplication. However, this is not true as `s` does not have a second axis:
 
-```python
+```{code-cell}
+:tags: [raises-exception]
 s @ Vt
 ```
 
@@ -331,7 +365,12 @@ plt.imshow(np.transpose(reconstructed, (1, 2, 0)))
 plt.show()
 ```
 
-In fact, `imshow` peforms this clipping under-the-hood, so if you skip the first line in the previous code cell, you might see a warning message saying `"Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers)."`
+```{note}
+In fact, `imshow` peforms this clipping under-the-hood, so if you skip the first
+line in the previous code cell, you might see a warning message saying
+`"Clipping input data to the valid range for imshow with RGB data ([0..1] for
+floats or [0..255] for integers)."`
+```
 
 Now, to do the approximation, we must choose only the first `k` singular values for each color channel. This can be done using the following syntax:
 
@@ -351,7 +390,7 @@ approx_img.shape
 which is not the right shape for showing the image. Finally, reordering the axes back to our original shape of `(768, 1024, 3)`, we can see our approximation:
 
 ```{code-cell}
-plt.imshow(np.transpose(approx_img, (1, 2, 0)))
+plt.imshow(np.transpose(np.clip(approx_img, 0, 1), (1, 2, 0)))
 plt.show()
 ```
 
