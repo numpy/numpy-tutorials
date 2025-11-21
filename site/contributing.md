@@ -12,30 +12,6 @@ Images and real-life data make text more engaging and powerful, but be sure what
 you use is appropriately licensed and available. Here again, even a rough idea
 for artwork can be polished by others.
 
-## Why Jupyter Notebooks?
-
-The choice of Jupyter Notebook in this repo instead of the usual format
-([reStructuredText][rst])
-used in the main NumPy documentation has two reasons:
-
-
- * Jupyter notebooks are a common format for communicating scientific
-   information.
- * Jupyter notebooks can be launched in [Binder](https://mybinder.org), so that users can interact
-   with tutorials
- * rST may present a barrier for some people who might otherwise be very
-   interested in contributing tutorial material.
-
-[rst]: https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html
-
-### Note
-
-You may notice our content is in markdown format (`.md` files). We review and
-host notebooks in the [MyST-NB](https://myst-nb.readthedocs.io/) format. We
-accept both Jupyter notebooks (`.ipynb`) and MyST-NB notebooks (`.md`).
-If you want to author `MyST` notebooks in jupyterlab, check out the
-[jupyterlab_myst](https://mystmd.org/guide/quickstart-jupyter-lab-myst) extension!
-
 ## Adding your own tutorials
 
 If you have your own tutorial in the form of a Jupyter notebook (an `.ipynb`
