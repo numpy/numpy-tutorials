@@ -40,35 +40,40 @@ Images and real-life data make text more engaging and powerful, but be sure what
 you use is appropriately licensed and available. Here again, even a rough idea
 for artwork can be polished by others.
 
-The NumPy tutorials are a curated collection of
-[MyST-NB](https://myst-nb.readthedocs.io/) notebooks. These notebooks are used
-to produce static websites and can be opened as notebooks in Jupyter using
-[Jupytext](https://jupytext.readthedocs.io).
+### Building the website
 
-> __Note:__ You should use [CommonMark](https://commonmark.org) markdown
-> cells. Jupyter only renders CommonMark.
+```{note}
+The NumPy tutorials are powered by [`jupyter-book`][jb-docs] and the
+[`MyST` document engine][mystmd].
+See the linked documentation for further details.
+```
 
-### Why Jupyter Notebooks?
+[jb-docs]: https://jupyterbook.org/stable/
+[mystmd]:
 
-The choice of Jupyter Notebook in this repo instead of the usual format
-([reStructuredText, through Sphinx](https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html))
-used in the main NumPy documentation has two reasons:
+#### Quickstart
 
- * Jupyter notebooks are a common format for communicating scientific
-   information.
- * Jupyter notebooks can be launched in [Binder](https://www.mybinder.org), so that users can interact
-   with tutorials
- * rST may present a barrier for some people who might otherwise be very
-   interested in contributing tutorial material.
+Set up a development environment with the dependencies listed in
+`requirements.txt` and `site/requirements.txt`.
+For example, using the built-in [`venv`][venv] module:
 
-#### Note
+```bash
+python -m venv np-tutorials
+source np-tutorials/bin/activate
+python -m pip install -r requirements.txt -r site/requirements.txt
+```
 
-You may notice our content is in markdown format (`.md` files). We review and
-host notebooks in the [MyST-NB](https://myst-nb.readthedocs.io/) format. We
-accept both Jupyter notebooks (`.ipynb`) and MyST-NB notebooks (`.md`).
-If you want to author `MyST` notebooks in jupyterlab, check out the
-[jupyterlab_myst](https://mystmd.org/guide/quickstart-jupyter-lab-myst) extension!
+[venv]: https://docs.python.org/3/library/venv.html
 
+The site can then be built with:
+
+```bash
+jupyter-book start --execute
+```
+
+This will execute all the notebooks and start a web server to view the rendered
+content locally.
+View the rendered site by opening the ``localhost:3000`` in your preferred browser.
 
 ### Adding your own tutorials
 
