@@ -12,6 +12,41 @@ Images and real-life data make text more engaging and powerful, but be sure what
 you use is appropriately licensed and available. Here again, even a rough idea
 for artwork can be polished by others.
 
+## Building the website
+
+```{note}
+The NumPy tutorials are powered by [`jupyter-book`][jb-docs] and the
+[`MyST` document engine][mystmd].
+See the linked documentation for further details.
+```
+
+[jb-docs]: https://jupyterbook.org/stable/
+[mystmd]:
+
+### Quickstart
+
+Set up a development environment with the dependencies listed in
+`requirements.txt` and `site/requirements.txt`.
+For example, using the built-in [`venv`][venv] module:
+
+```bash
+python -m venv np-tutorials
+source np-tutorials/bin/activate
+python -m pip install -r requirements.txt -r site/requirements.txt
+```
+
+[venv]: https://docs.python.org/3/library/venv.html
+
+The site can then be built with:
+
+```bash
+jupyter-book start --execute
+```
+
+This will execute all the notebooks and start a web server to view the rendered
+content locally.
+View the rendered site by opening the ``localhost:3000`` in your preferred browser.
+
 ## Adding your own tutorials
 
 If you have your own tutorial in the form of a Jupyter notebook (an `.ipynb`
