@@ -15,7 +15,7 @@ jobs:
 
       - run:
           name: Build documentation
-          no_output_timeout: 60m
+          no_output_timeout: 5m
           environment:
             # Ensure this is same as store_artifacts path below
             DOCS_PATH: _build/html
