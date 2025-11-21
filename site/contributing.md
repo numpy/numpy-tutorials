@@ -12,14 +12,6 @@ Images and real-life data make text more engaging and powerful, but be sure what
 you use is appropriately licensed and available. Here again, even a rough idea
 for artwork can be polished by others.
 
-The NumPy tutorials are a curated collection of
-[MyST-NB](https://myst-nb.readthedocs.io/) notebooks. These notebooks are used
-to produce static websites and can be opened as notebooks in Jupyter using
-[Jupytext](https://jupytext.readthedocs.io).
-
-> __Note:__ You should use [CommonMark](https://commonmark.org) markdown
-> cells. Jupyter only renders CommonMark.
-
 ## Why Jupyter Notebooks?
 
 The choice of Jupyter Notebook in this repo instead of the usual format
