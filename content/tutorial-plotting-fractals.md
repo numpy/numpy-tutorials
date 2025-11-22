@@ -219,8 +219,7 @@ mesh = x + (1j * y)
 
 output = divergence_rate(mesh)
 
-fig = plt.figure(figsize=(5, 5))
-ax = plt.axes()
+fig, ax = plt.subplots(figsize=(5, 5))
 
 ax.set_title('$f(z) = z^2 -1$')
 ax.set_xlabel('Real axis')
@@ -273,8 +272,7 @@ We will also write a function that we will use to create our fractal plots:
 ```{code-cell} ipython3
 def plot_fractal(fractal, title='Fractal', figsize=(6, 6), cmap='rainbow', extent=[-2, 2, -2, 2]):
 
-    plt.figure(figsize=figsize)
-    ax = plt.axes()
+    fig, ax = plt.subplots(figsize=figsize)
 
     ax.set_title(f'${title}$')
     ax.set_xlabel('Real axis')
