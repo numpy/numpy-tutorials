@@ -1,0 +1,1 @@
+import{b as i}from"/numpy-tutorials/build/_shared/chunk-ZHBLEF4E.js";var o=i(({flowchart:t})=>{let r=t?.subGraphTitleMargin?.top??0,a=t?.subGraphTitleMargin?.bottom??0,e=r+a;return{subGraphTitleTopMargin:r,subGraphTitleBottomMargin:a,subGraphTitleTotalMargin:e}},"getSubGraphTitleMargins");export{o as a};
