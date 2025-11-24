@@ -1,4 +1,5 @@
 ---
+short_title: Style Guide
 jupytext:
   text_representation:
     extension: .md

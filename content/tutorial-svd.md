@@ -1,4 +1,5 @@
 ---
+short_title: Linear Algebra on n-D arrays
 jupytext:
   text_representation:
     extension: .md
