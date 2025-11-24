@@ -523,6 +523,6 @@ simply edge detection, you may find the following material useful:
 - [Object detection with Raspberry Pi and Python](https://makersportal.com/blog/2019/4/23/image-processing-with-raspberry-pi-and-python-part-ii-spatial-statistics-and-correlations) (Maker Portal)
 - [X-ray data preparation and segmentation](https://www.kaggle.com/eduardomineo/u-net-lung-segmentation-montgomery-shenzhen) with deep learning (a Kaggle-hosted Jupyter notebook)
 - [Image filtering](https://www.cs.cornell.edu/courses/cs6670/2011sp/lectures/lec02_filter.pdf) (lecture slides, CS6670: Computer Vision, Cornell University)
-- [Edge detection in Python](https://medium.com/data-science/edge-detection-in-python-a3c263a13e03) and NumPy (Medium)
+- [Edge detection in Python](https://scikit-image.org/docs/0.25.x/auto_examples/edges/plot_edge_filter.html)
 - [Edge detection](https://datacarpentry.github.io/image-processing/edge-detection.html) with Scikit-Image (Data Carpentry)
 - [Image gradients and gradient filtering](https://www.cs.cmu.edu/~16385/s17/Slides/4.0_Image_Gradients_and_Gradient_Filtering.pdf) (lecture slides, 16-385 Computer Vision, Carnegie Mellon University)
