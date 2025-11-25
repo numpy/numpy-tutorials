@@ -19,14 +19,6 @@ local copy of the `.ipynb` files, you can either
 [clone this repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
 or use the download icon in the upper-right corner of each tutorial.
 
-### Non-executable articles
-
-```{admonition} Help improve the tutorials!
-
-Want to make a valuable contribution to the tutorials? Consider contributing to
-these existing articles to help make them fully executable and reproducible!
-```
-
 ## Useful links and resources
 
 The following links may be useful:
