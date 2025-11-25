@@ -60,8 +60,8 @@ You'll use these NumPy and Matplotlib functions:
 * [`np.log`](https://numpy.org/doc/stable/reference/generated/numpy.log.html): this function takes the natural log of all elements in a NumPy array
 * [`np.exp`](https://numpy.org/doc/stable/reference/generated/numpy.exp.html): this function takes the exponential of all elements in a NumPy array
 * [`lambda`](https://docs.python.org/3/library/ast.html?highlight=lambda#ast.Lambda): this is a minimal function definition for creating a function model
-* [`plt.semilogy`](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.semilogy.html): this function will plot x-y data onto a figure with a linear x-axis and $\log_{10}$ y-axis
-[`plt.plot`](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.plot.html): this function will plot x-y data on linear axes
+* [`plt.semilogy`](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.semilogy.html): this function will plot x-y data onto a figure with a linear x-axis and $\log_{10}$ y-axis
+[`plt.plot`](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html): this function will plot x-y data on linear axes
 * slicing arrays: view parts of the data loaded into the workspace, slice the arrays e.g. `x[:10]` for the first 10 values in the array, `x`
 * boolean array indexing: to view parts of the data that match a given condition use boolean operations to index an array
 * [`np.block`](https://numpy.org/doc/stable/reference/generated/numpy.block.html): to combine arrays into 2D arrays
@@ -259,7 +259,7 @@ year. Now compare your model to the actual manufacturing reports.  Plot
 the linear regression results and all of the transistor counts.
 
 Here, use
-[`plt.semilogy`](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.semilogy.html)
+[`plt.semilogy`](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.semilogy.html)
 to plot the number of transistors on a log-scale and the year on a
 linear scale. You have defined a three arrays to get to a final model
 
@@ -280,11 +280,11 @@ $\text{transistor_count}_{\text{predicted}} = e^Be^{A\cdot \text{year}}$.
 +++
 
 In the next plot, use the
-[`fivethirtyeight`](https://matplotlib.org/3.1.1/gallery/style_sheets/fivethirtyeight.html)
+[`fivethirtyeight`](https://matplotlib.org/gallery/style_sheets/fivethirtyeight.html)
 style sheet.
 The style sheet replicates
 <https://fivethirtyeight.com> elements. Change the matplotlib style with
-[`plt.style.use`](https://matplotlib.org/3.3.2/api/style_api.html#matplotlib.style.use).
+[`plt.style.use`](https://matplotlib.org/api/style_api.html#matplotlib.style.use).
 
 ```{code-cell}
 transistor_count_predicted = np.exp(B) * np.exp(A * year)
@@ -329,9 +329,9 @@ $\text{transistor_count} = e^{B}e^{A\cdot \text{year}}$.
 A great way to compare these measurements is to compare your prediction
 and Moore's prediction to the average transistor count and look at the
 range of reported values for that year. Use the
-[`plt.plot`](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.plot.html)
+[`plt.plot`](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html)
 option,
-[`alpha=0.2`](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.artist.Artist.set_alpha.html),
+[`alpha=0.2`](https://matplotlib.org/api/_as_gen/matplotlib.artist.Artist.set_alpha.html),
 to increase the transparency of the data. The more opaque the points
 appear, the more reported values lie on that measurement. The green $+$
 is the average reported transistor count for 2017. Plot your predictions

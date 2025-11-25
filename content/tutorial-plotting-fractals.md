@@ -110,7 +110,7 @@ mesh = x + (1j * y)  # Make mesh of complex plane
 Now we will apply our function to each value contained in the mesh. Since we used a universal function in our design, this means that we can pass in the entire mesh all at once. This is extremely convenient for two reasons: It reduces the amount of code needed to be written and greatly increases the efficiency (as universal functions make use of system level C programming in their computations).
 
 
-Here we plot the absolute value (or modulus) of each element in the mesh after one “iteration” of the function using a [**3D scatterplot**](https://matplotlib.org/2.0.2/mpl_toolkits/mplot3d/tutorial.html#scatter-plots):
+Here we plot the absolute value (or modulus) of each element in the mesh after one “iteration” of the function using a [**3D scatterplot**](https://matplotlib.org/stable/users/explain/toolkits/mplot3d.html#scatter-plots):
 
 ```{code-cell} ipython3
 output = np.abs(f(mesh))  # Take the absolute value of the output (for plotting)
