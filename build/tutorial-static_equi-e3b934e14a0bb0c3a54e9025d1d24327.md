@@ -78,7 +78,7 @@ This defines `forceA` as being a vector with magnitude of 1 in the $x$ direction
 
 It may be helpful to visualize these forces in order to better understand how they interact with each other.
 Matplotlib is a library with visualization tools that can be utilized for this purpose.
-Quiver plots will be used to demonstrate [three dimensional vectors](https://matplotlib.org/3.3.4/gallery/mplot3d/quiver3d.html), but the library can also be used for [two dimensional demonstrations](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.quiver.html).
+Quiver plots will be used to demonstrate [three dimensional vectors](https://matplotlib.org/gallery/mplot3d/quiver3d.html), but the library can also be used for [two dimensional demonstrations](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.quiver.html).
 
 ```{code-cell}
 fig = plt.figure()
