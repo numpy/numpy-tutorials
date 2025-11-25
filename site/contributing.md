@@ -21,7 +21,7 @@ See the linked documentation for further details.
 ```
 
 [jb-docs]: https://jupyterbook.org/stable/
-[mystmd]:
+[mystmd]: https://mystmd.org/
 
 ### Quickstart
 
