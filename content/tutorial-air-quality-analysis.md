@@ -1,4 +1,5 @@
 ---
+short_title: Analyzing Air Quality
 jupytext:
   formats: ipynb,md:myst
   text_representation:

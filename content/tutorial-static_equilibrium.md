@@ -1,4 +1,5 @@
 ---
+short_title: Static Equilibrium
 jupytext:
   text_representation:
     extension: .md
