@@ -45,7 +45,7 @@ jupyter-book start --execute
 
 This will execute all the notebooks and start a web server to view the rendered
 content locally.
-View the rendered site by opening the ``localhost:3000`` in your preferred browser.
+View the rendered site by opening the ``localhost:30xy`` in your preferred browser (the exact port number will be printed in your terminal).
 
 ## Adding your own tutorials
 
