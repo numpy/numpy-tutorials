@@ -1,4 +1,5 @@
 ---
+short_title: Moore's Law
 jupytext:
   text_representation:
     extension: .md

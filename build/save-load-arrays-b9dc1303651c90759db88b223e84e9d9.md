@@ -1,4 +1,5 @@
 ---
+short_title: Sharing Array Data
 jupytext:
   text_representation:
     extension: .md
