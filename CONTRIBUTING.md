@@ -26,13 +26,13 @@ See the linked documentation for further details.
 ### Quickstart
 
 Set up a development environment with the dependencies listed in
-`requirements.txt` and `site/requirements.txt`.
+`requirements.txt`.
 For example, using the built-in [`venv`][venv] module:
 
 ```bash
 python -m venv np-tutorials
 source np-tutorials/bin/activate
-python -m pip install -r requirements.txt -r site/requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 [venv]: https://docs.python.org/3/library/venv.html
