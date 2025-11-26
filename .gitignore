@@ -91,9 +91,6 @@ Thumbs.db
 
 # Things specific to this project #
 ###################################
-site/_build/*
-site/notebooks/*
-
 # Content generated during notebook execution
 content/mooreslaw_regression*
 content/tutorial-x-ray-image-processing/xray_image.gif
