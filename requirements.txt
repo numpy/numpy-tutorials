@@ -5,5 +5,6 @@ pooch  # for scipy.datasets
 matplotlib
 pandas
 imageio
-# For supporting .md-based notebooks
+# For supporting .md-based notebooks and building the site
 jupytext
+jupyter-book>=2
