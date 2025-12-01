@@ -6,7 +6,7 @@ project:
   authors: Numpy Community
   github: https://github.com/numpy/numpy-tutorials
   toc:
-    - file: site/index.md
+    - file: content/index.md
 
     - title: Applications
       children:
@@ -23,7 +23,7 @@ project:
         - file: content/save-load-arrays.md
         - file: content/tutorial-ma.md
     - title: Contributing
-      file: site/contributing.md
+      file: content/contributing.md
       children:
         - file: content/tutorial-style-guide.md
 
@@ -31,5 +31,5 @@ project:
 site:
   template: book-theme
   options:
-    favicon: site/_static/favicon.png
-    logo: site/_static/numpylogo.svg
+    favicon: _static/favicon.png
+    logo: _static/numpylogo.svg
