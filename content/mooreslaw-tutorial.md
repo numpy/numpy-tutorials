@@ -289,20 +289,23 @@ The style sheet replicates
 ```{code-cell}
 transistor_count_predicted = np.exp(B) * np.exp(A * year)
 transistor_Moores_law = Moores_law(year)
+
 plt.style.use("fivethirtyeight")
-plt.semilogy(year, transistor_count, "s", label="MOS transistor count")
-plt.semilogy(year, transistor_count_predicted, label="linear regression")
+
+fig, ax = plt.subplots()
+ax.semilogy(year, transistor_count, "s", label="MOS transistor count")
+ax.semilogy(year, transistor_count_predicted, label="linear regression")
 
 
-plt.plot(year, transistor_Moores_law, label="Moore's Law")
-plt.title(
+ax.plot(year, transistor_Moores_law, label="Moore's Law")
+ax.set_title(
     "MOS transistor count per microprocessor\n"
     + "every two years \n"
     + "Transistor count was x{:.2f} higher".format(np.exp(A * 2))
 )
-plt.xlabel("year introduced")
-plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
-plt.ylabel("# of transistors\nper microprocessor")
+ax.set_xlabel("year introduced")
+ax.set_ylabel("# of transistors\nper microprocessor")
+ax.legend(loc="center left", bbox_to_anchor=(1, 0.5))
 ```
 
 _A scatter plot of MOS transistor count per microprocessor every two years with a red line for the ordinary least squares prediction and an orange line for Moore's law._
@@ -346,19 +349,20 @@ y = np.linspace(2016.5, 2017.5)
 your_model2017 = np.exp(B) * np.exp(A * y)
 Moore_Model2017 = Moores_law(y)
 
-plt.plot(
+fig, ax = plt.subplots()
+ax.plot(
     2017 * np.ones(np.sum(year == 2017)),
     transistor_count2017,
     "ro",
     label="2017",
     alpha=0.2,
 )
-plt.plot(2017, transistor_count2017.mean(), "g+", markersize=20, mew=6)
+ax.plot(2017, transistor_count2017.mean(), "g+", markersize=20, mew=6)
 
-plt.plot(y, your_model2017, label="Your prediction")
-plt.plot(y, Moore_Model2017, label="Moores law")
-plt.ylabel("# of transistors\nper microprocessor")
-plt.legend()
+ax.plot(y, your_model2017, label="Your prediction")
+ax.plot(y, Moore_Model2017, label="Moores law")
+ax.set_ylabel("# of transistors\nper microprocessor")
+ax.legend()
 ```
 
 The result is that your model is close to the mean, but Gordon
