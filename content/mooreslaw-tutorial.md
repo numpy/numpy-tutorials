@@ -14,7 +14,7 @@ kernelspec:
 
 # Determining Moore's Law with real data in NumPy
 
-![](#mooreslaw-mainfig)
+![](#img:mooreslaw-mainfig)
 
 ## What you'll do
 
@@ -286,7 +286,7 @@ The style sheet replicates
 [`plt.style.use`](https://matplotlib.org/api/style_api.html#matplotlib.style.use).
 
 ```{code-cell}
-:label: mooreslaw-mainfig
+:label: img:mooreslaw-mainfig
 :caption: A scatter plot of MOS transistor count per microprocessor every two years with a red line for the ordinary least squares prediction and an orange line for Moore's law.
 
 transistor_count_predicted = np.exp(B) * np.exp(A * year)
