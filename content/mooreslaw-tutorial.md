@@ -287,7 +287,6 @@ The style sheet replicates
 
 ```{code-cell}
 :label: img:mooreslaw-mainfig
-:caption: A scatter plot of MOS transistor count per microprocessor every two years with a red line for the ordinary least squares prediction and an orange line for Moore's law.
 
 transistor_count_predicted = np.exp(B) * np.exp(A * year)
 transistor_Moores_law = Moores_law(year)
