@@ -1,1 +1,0 @@
-import{W as s}from"/numpy-tutorials/build/_shared/chunk-TRJHAMCF.js";import{b as n,j as e}from"/numpy-tutorials/build/_shared/chunk-ZHBLEF4E.js";var a=n(t=>{let{securityLevel:c}=s(),o=e("body");if(c==="sandbox"){let m=e(`#i${t}`).node()?.contentDocument??document;o=e(m.body)}return o.select(`#${t}`)},"selectSvgElement");export{a};

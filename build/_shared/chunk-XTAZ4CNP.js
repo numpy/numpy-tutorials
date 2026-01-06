@@ -1,1 +1,0 @@
-import{b as i}from"/numpy-tutorials/build/_shared/chunk-ZHBLEF4E.js";function t(c,e){c.accDescr&&e.setAccDescription?.(c.accDescr),c.accTitle&&e.setAccTitle?.(c.accTitle),c.title&&e.setDiagramTitle?.(c.title)}i(t,"populateCommonDb");export{t as a};

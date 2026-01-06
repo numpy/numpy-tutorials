@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="http://localhost:3000/sitemap_style.xsl" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>http://localhost:3000</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/mooreslaw-tutorial</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/tutorial-deep-learning-on-mnist</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/tutorial-x-ray-image-processing</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/tutorial-static-equilibrium</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/tutorial-plotting-fractals</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/tutorial-air-quality-analysis</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/tutorial-svd</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/save-load-arrays</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/tutorial-ma</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/contributing</loc>
+  </url>
+  <url>
+    <loc>http://localhost:3000/tutorial-style-guide</loc>
+  </url>
+</urlset>
