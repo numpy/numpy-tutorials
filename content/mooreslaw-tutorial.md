@@ -77,7 +77,7 @@ You'll use these NumPy and Matplotlib functions:
 Your empirical model assumes that the number of transistors per
 semiconductor follows an exponential growth,
 
-$\log(\text{transistor_count})= f(\text{year}) = A\cdot \text{year}+B,$
+$\log(\text{transistor\_count})= f(\text{year}) = A\cdot \text{year}+B$,
 
 where $A$ and $B$ are fitting constants. You use semiconductor
 manufacturers' data to find the fitting constants.
@@ -87,17 +87,17 @@ rate for added transistors, 2, and giving an initial number of transistors for a
 
 You state Moore's law in an exponential form as follows,
 
-$\text{transistor_count}= e^{A_M\cdot \text{year} +B_M}.$
+$\text{transistor\_count}= e^{A_M\cdot \text{year} +B_M}.$
 
 Where $A_M$ and $B_M$ are constants that double the number of transistors every two years and start at 2250 transistors in 1971,
 
-1. $\dfrac{\text{transistor_count}(\text{year} +2)}{\text{transistor_count}(\text{year})} = 2 = \dfrac{e^{B_M}e^{A_M \text{year} + 2A_M}}{e^{B_M}e^{A_M \text{year}}} = e^{2A_M} \rightarrow A_M = \frac{\log(2)}{2}$
+1. $\dfrac{\text{transistor\_count}(\text{year} +2)}{\text{transistor\_count}(\text{year})} = 2 = \dfrac{e^{B_M}e^{A_M \text{year} + 2A_M}}{e^{B_M}e^{A_M \text{year}}} = e^{2A_M} \rightarrow A_M = \frac{\log(2)}{2}$
 
 2. $\log(2250) = \frac{\log(2)}{2}\cdot 1971 + B_M \rightarrow B_M = \log(2250)-\frac{\log(2)}{2}\cdot 1971$
 
 so Moore's law stated as an exponential function is
 
-$\log(\text{transistor_count})= A_M\cdot \text{year}+B_M,$
+$\log(\text{transistor\_count})= A_M\cdot \text{year}+B_M,$
 
 where
 
@@ -242,7 +242,7 @@ B, A = model
 Did manufacturers double the transistor count every two years? You have
 the final formula,
 
-$\dfrac{\text{transistor_count}(\text{year} +2)}{\text{transistor_count}(\text{year})} = xFactor =
+$\dfrac{\text{transistor\_count}(\text{year} +2)}{\text{transistor\_count}(\text{year})} = xFactor =
 \dfrac{e^{B}e^{A( \text{year} + 2)}}{e^{B}e^{A \text{year}}} = e^{2A}$
 
 where increase in number of transistors is $xFactor,$ number of years is
@@ -263,19 +263,19 @@ Here, use
 to plot the number of transistors on a log-scale and the year on a
 linear scale. You have defined a three arrays to get to a final model
 
-$y_i = \log(\text{transistor_count}),$
+$y_i = \log(\text{transistor\_count}),$
 
 $y_i = A \cdot \text{year} + B,$
 
 and
 
-$\log(\text{transistor_count}) = A\cdot \text{year} + B,$
+$\log(\text{transistor\_count}) = A\cdot \text{year} + B,$
 
 your variables, `transistor_count`, `year`, and `yi` all have the same
 dimensions, `(179,)`. NumPy arrays need the same dimensions to make a
 plot. The predicted number of transistors is now
 
-$\text{transistor_count}_{\text{predicted}} = e^Be^{A\cdot \text{year}}$.
+$\text{transistor\_count}_{\text{predicted}} = e^Be^{A\cdot \text{year}}$.
 
 +++
 
@@ -324,7 +324,7 @@ comparator,
 Then, make a prediction for 2017 with `Moores_law` defined above
 and plugging in your best fit constants into your function
 
-$\text{transistor_count} = e^{B}e^{A\cdot \text{year}}$.
+$\text{transistor\_count} = e^{B}e^{A\cdot \text{year}}$.
 
 A great way to compare these measurements is to compare your prediction
 and Moore's prediction to the average transistor count and look at the
