@@ -65,51 +65,7 @@ We will try to respond as quickly as possible with comments, if applicable.
 You can use this template to make your content consistent with our existing
 tutorials.
 
-### Upload your content
-
-Remember to clear all outputs on your notebook before uploading it.
-
-<ul>
-<details>
-    <summary>
-        <b>Fork this repository</b> (if you haven't before).
-    </summary>
-    <img src="_static/01-fork.gif" width=80% height=80%>
-</details>
-
-<details>
-    <summary>
-        <b>In your own fork, create a new branch for your content.</b>
-    </summary>
-    <img src="_static/02-create_new_branch.gif" width=80% height=80%>
-</details>
-
-<details>
-    <summary>
-        <b>Add your notebook to the <code>content/</code> directory.</b>
-    </summary>
-    <img src="_static/03-upload.gif" width=80% height=80%>
-</details>
-
-<b>Update the <code>environment.yml</code> file with the dependencies for your tutorial</b>
-(only if you add new dependencies).
-
-<details>
-    <summary>
-        <b>Update this <code>README.md</code> to include your new entry.</b>
-    </summary>
-    <img src="_static/04-add_to_readme.gif" width=80% height=80%>
-</details>
-
-<details>
-    <summary>
-        <b>Create a <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">pull request.</a> Make sure the "Allow edits and access to secrets by maintainers" option is selected so we can properly review your submission.</b>
-    </summary>
-    <img src="_static/05-create_PR.gif" width=80% height=80%>
-</details>
-
-🎉 <b>Wait for review!</b>
-</ul>
+### Open a pull request
 
 For more information about GitHub and its workflow, you can see
 [this document][collab].
