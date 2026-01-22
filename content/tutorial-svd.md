@@ -74,8 +74,8 @@ import matplotlib.pyplot as plt
 ```
 
 ```{code-cell}
-plt.imshow(img)
-plt.show()
+fig, ax = plt.subplots()
+ax.imshow(img)
 ```
 
 ### Shape, axis and array properties
@@ -196,8 +196,8 @@ To see if this makes sense in our image, we should use a colormap from `matplotl
 In our case, we are approximating the grayscale portion of the image, so we will use the colormap `gray`:
 
 ```{code-cell}
-plt.imshow(img_gray, cmap="gray")
-plt.show()
+fig, ax = plt.subplots()
+ax.imshow(img_gray, cmap="gray")
 ```
 
 Now, applying the [linalg.svd](https://numpy.org/devdocs/reference/generated/numpy.linalg.svd.html#numpy.linalg.svd) function to this matrix, we obtain the following decomposition:
@@ -259,8 +259,8 @@ np.allclose(img_gray, U @ Sigma @ Vt)
 To see if an approximation is reasonable, we can check the values in `s`:
 
 ```{code-cell}
-plt.plot(s)
-plt.show()
+fig, ax = plt.subplots()
+ax.plot(s)
 ```
 
 In the graph, we can see that although we have 768 singular values in `s`, most of those (after the 150th entry or so) are pretty small. So it might make sense to use only the information related to the first (say, 50) *singular values* to build a more economical approximation to our image.
@@ -282,8 +282,8 @@ approx = U @ Sigma[:, :k] @ Vt[:k, :]
 Note that we had to use only the first `k` rows of `Vt`, since all other rows would be multiplied by the zeros corresponding to the singular values we eliminated from this approximation.
 
 ```{code-cell}
-plt.imshow(approx, cmap="gray")
-plt.show()
+fig, ax = plt.subplots()
+ax.imshow(approx, cmap="gray")
 ```
 
 Now, you can go ahead and repeat this experiment with other values of `k`, and each of your experiments should give you a slightly better (or worse) image depending on the value you choose.
@@ -362,8 +362,9 @@ Since `imshow` expects values in the range, we can use `clip` to excise the floa
 
 ```{code-cell}
 reconstructed = np.clip(reconstructed, 0, 1)
-plt.imshow(np.transpose(reconstructed, (1, 2, 0)))
-plt.show()
+
+fig, ax = plt.subplots()
+ax.imshow(np.transpose(reconstructed, (1, 2, 0)))
 ```
 
 ```{note}
@@ -391,8 +392,8 @@ approx_img.shape
 which is not the right shape for showing the image. Finally, reordering the axes back to our original shape of `(768, 1024, 3)`, we can see our approximation:
 
 ```{code-cell}
-plt.imshow(np.transpose(np.clip(approx_img, 0, 1), (1, 2, 0)))
-plt.show()
+fig, ax = plt.subplots()
+ax.imshow(np.transpose(np.clip(approx_img, 0, 1), (1, 2, 0)))
 ```
 
 Even though the image is not as sharp, using a small number of `k` singular values (compared to the original set of 768 values), we can recover many of the distinguishing features from this image.

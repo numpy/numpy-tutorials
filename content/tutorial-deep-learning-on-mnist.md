@@ -166,10 +166,10 @@ import matplotlib.pyplot as plt
 # Take the 60,000th image (indexed at 59,999) from the training set,
 # reshape from (784, ) to (28, 28) to have a valid shape for displaying purposes.
 mnist_image = x_train[59999, :].reshape(28, 28)
+
+fig, ax = plt.subplots()
 # Set the color mapping to grayscale to have a black background.
-plt.imshow(mnist_image, cmap="gray")
-# Display the image.
-plt.show()
+ax.imshow(mnist_image, cmap="gray")
 ```
 
 ```{code-cell}
@@ -586,7 +586,6 @@ for ax, metrics, title in zip(
     ax.set_title(title)
     ax.set_xlabel("Epochs")
     ax.legend()
-plt.show()
 ```
 
 _The training and testing error is shown above in the left and right
