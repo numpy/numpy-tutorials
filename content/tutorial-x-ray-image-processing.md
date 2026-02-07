@@ -517,7 +517,6 @@ download.
 To learn more about image processing in the context of biomedical image data or
 simply edge detection, you may find the following material useful:
 
-- [DICOM processing and segmentation in Python](https://www.raddq.com/dicom-processing-segmentation-visualization-in-python/) with Scikit-Image and pydicom (Radiology Data Quest)
 - [Image manipulation and processing using Numpy and Scipy](https://scipy-lectures.org/advanced/image_processing/index.html) (Scipy Lecture Notes)
 - [Intensity values](https://s3.amazonaws.com/assets.datacamp.com/production/course_7032/slides/chapter2.pdf) (presentation, DataCamp)
 - [Object detection with Raspberry Pi and Python](https://makersportal.com/blog/2019/4/23/image-processing-with-raspberry-pi-and-python-part-ii-spatial-statistics-and-correlations) (Maker Portal)
