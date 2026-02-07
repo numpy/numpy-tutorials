@@ -36,8 +36,8 @@ particularly important when images are estimated to account for
 medical data.
 
 You'll be working with radiology images from the
-[ChestX-ray8](https://www.nih.gov/news-events/news-releases/nih-clinical-center-provides-one-largest-publicly-available-chest-x-ray-datasets-scientific-community)
-dataset provided by the [National Institutes of Health (NIH)](http://nih.gov).
+[ChestX-ray8](https://arxiv.org/abs/1705.02315)
+dataset provided by the [National Institutes of Health (NIH)](https://nih.gov).
 ChestX-ray8 contains over 100,000 de-identified X-ray images in the PNG format
 from more than 30,000 patients. You can find ChestX-ray8's files on NIH's public
 Box [repository](https://nihcc.app.box.com/v/ChestXray-NIHCC) in the `/images`
