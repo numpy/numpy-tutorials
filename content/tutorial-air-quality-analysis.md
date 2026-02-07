@@ -366,7 +366,4 @@ Note that this does not mean we can accept the alternative hypothesis. It only t
 
 ## Further reading
 
-- There are a host of statistical tests you can choose according to the characteristics of the given data. Read more about them at
-[A Gentle Introduction to Statistical Data Distributions](https://machinelearningmastery.com/statistical-data-distributions/).
-
 - There are various versions of the [Student's t-test](https://en.wikipedia.org/wiki/Student%27s_t-test) that you can adopt according to your needs.
