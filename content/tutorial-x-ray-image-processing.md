@@ -24,8 +24,7 @@ on certain parts, and visually compare them using the
 [Canny](https://en.wikipedia.org/wiki/Canny_edge_detector) filters for edge
 detection.
 
-X-ray image analysis can be part of your data analysis and
-[machine learning workflow](https://www.sciencedirect.com/science/article/pii/S235291481930214X)
+X-ray image analysis can be part of your data analysis and machine learning workflow
 when, for example, you're building an algorithm that helps
 [detect pneumonia](https://www.kaggle.com/c/rsna-pneumonia-detection-challenge)
 as part of a [Kaggle](https://www.kaggle.com)
