@@ -69,7 +69,7 @@ The following packages are used in this tutorial:
 - [imageio](https://imageio.github.io) for reading and writing image data. The
 healthcare industry usually works with the
 [DICOM](https://en.wikipedia.org/wiki/DICOM) format for medical imaging and
-[imageio](https://imageio.readthedocs.io/en/stable/format_dicom.html) should be
+[imageio](https://imageio.readthedocs.io/en/stable/_autosummary/imageio.plugins.dicom.html) should be
 well-suited for reading that format. For simplicity, in this tutorial you'll be
 working with PNG files.
 - [Matplotlib](https://matplotlib.org/) for data visualization.
