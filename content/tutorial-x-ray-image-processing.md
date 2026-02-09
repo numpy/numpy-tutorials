@@ -24,8 +24,7 @@ on certain parts, and visually compare them using the
 [Canny](https://en.wikipedia.org/wiki/Canny_edge_detector) filters for edge
 detection.
 
-X-ray image analysis can be part of your data analysis and
-[machine learning workflow](https://www.sciencedirect.com/science/article/pii/S235291481930214X)
+X-ray image analysis can be part of your data analysis and machine learning workflow
 when, for example, you're building an algorithm that helps
 [detect pneumonia](https://www.kaggle.com/c/rsna-pneumonia-detection-challenge)
 as part of a [Kaggle](https://www.kaggle.com)
@@ -36,8 +35,8 @@ particularly important when images are estimated to account for
 medical data.
 
 You'll be working with radiology images from the
-[ChestX-ray8](https://www.nih.gov/news-events/news-releases/nih-clinical-center-provides-one-largest-publicly-available-chest-x-ray-datasets-scientific-community)
-dataset provided by the [National Institutes of Health (NIH)](http://nih.gov).
+[ChestX-ray8](https://arxiv.org/abs/1705.02315)
+dataset provided by the [National Institutes of Health (NIH)](https://nih.gov).
 ChestX-ray8 contains over 100,000 de-identified X-ray images in the PNG format
 from more than 30,000 patients. You can find ChestX-ray8's files on NIH's public
 Box [repository](https://nihcc.app.box.com/v/ChestXray-NIHCC) in the `/images`
@@ -69,7 +68,7 @@ The following packages are used in this tutorial:
 - [imageio](https://imageio.github.io) for reading and writing image data. The
 healthcare industry usually works with the
 [DICOM](https://en.wikipedia.org/wiki/DICOM) format for medical imaging and
-[imageio](https://imageio.readthedocs.io/en/stable/format_dicom.html) should be
+[imageio](https://imageio.readthedocs.io/en/stable/_autosummary/imageio.plugins.dicom.html) should be
 well-suited for reading that format. For simplicity, in this tutorial you'll be
 working with PNG files.
 - [Matplotlib](https://matplotlib.org/) for data visualization.
@@ -517,7 +516,6 @@ download.
 To learn more about image processing in the context of biomedical image data or
 simply edge detection, you may find the following material useful:
 
-- [DICOM processing and segmentation in Python](https://www.raddq.com/dicom-processing-segmentation-visualization-in-python/) with Scikit-Image and pydicom (Radiology Data Quest)
 - [Image manipulation and processing using Numpy and Scipy](https://scipy-lectures.org/advanced/image_processing/index.html) (Scipy Lecture Notes)
 - [Intensity values](https://s3.amazonaws.com/assets.datacamp.com/production/course_7032/slides/chapter2.pdf) (presentation, DataCamp)
 - [Object detection with Raspberry Pi and Python](https://makersportal.com/blog/2019/4/23/image-processing-with-raspberry-pi-and-python-part-ii-spatial-statistics-and-correlations) (Maker Portal)

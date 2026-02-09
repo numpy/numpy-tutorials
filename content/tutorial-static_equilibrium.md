@@ -304,14 +304,14 @@ RadCF = np.cross(AC, UnitCF)
 This lets you represent the tension (T) and reaction (R) forces acting on the system as
 
 $$\left[
-\begin{array}
+\begin{array}{ccccc}
 ~1/3 & 1/3 & 1 & 0 & 0\\
 -2/3 & -2/3 & 0 & 1 & 0\\
 -2/3 & 2/3 & 0 & 0 & 1\\
 \end{array}
 \right]
 \left[
-\begin{array}
+\begin{array}{c}
 ~T_{BD}\\
 T_{BE}\\
 R_{x}\\
@@ -321,7 +321,7 @@ R_{z}\\
 \right]
 =
 \left[
-\begin{array}
+\begin{array}{c}
 ~195\\
 390\\
 -130\\
@@ -331,20 +331,20 @@ R_{z}\\
 and the moments as
 
 $$\left[
-\begin{array}
+\begin{array}{cc}
 ~2 & -2\\
 1 & 1\\
 \end{array}
 \right]
 \left[
-\begin{array}
+\begin{array}{c}
 ~T_{BD}\\
 T_{BE}\\
 \end{array}
 \right]
 =
 \left[
-\begin{array}
+\begin{array}{c}
 ~780\\
 1170\\
 \end{array}
