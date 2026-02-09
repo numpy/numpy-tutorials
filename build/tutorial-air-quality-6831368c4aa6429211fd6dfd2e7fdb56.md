@@ -98,7 +98,7 @@ With this, we have successfully imported the data and checked that it is complet
 ## Calculating the Air Quality Index
 
 
-We will calculate the AQI using [the method](https://app.cpcbccr.com/ccr_docs/FINAL-REPORT_AQI_.pdf) adopted by the [Central Pollution Control Board](https://www.cpcb.nic.in/national-air-quality-index/) of India.  To summarize the steps:
+We will calculate the AQI using the method adopted by the Central Pollution Control Board of India.  To summarize the steps:
 
 - Collect 24-hourly average concentration values for the standard pollutants; 8-hourly in case of CO and O3.
 
@@ -365,8 +365,5 @@ Note that this does not mean we can accept the alternative hypothesis. It only t
 - In real life, data are generally not normally distributed. There are tests for such non-normal data like the [Wilcoxon test](https://en.wikipedia.org/wiki/Wilcoxon_signed-rank_test).
 
 ## Further reading
-
-- There are a host of statistical tests you can choose according to the characteristics of the given data. Read more about them at
-[A Gentle Introduction to Statistical Data Distributions](https://machinelearningmastery.com/statistical-data-distributions/).
 
 - There are various versions of the [Student's t-test](https://en.wikipedia.org/wiki/Student%27s_t-test) that you can adopt according to your needs.
