@@ -134,9 +134,9 @@ print(xray_image.dtype)
 ```{code-cell}
 import matplotlib.pyplot as plt
 
-plt.imshow(xray_image, cmap="gray")
-plt.axis("off")
-plt.show()
+fig, ax = plt.subplots()
+ax.imshow(xray_image, cmap="gray")
+ax.set_axis_off()
 ```
 
 ## Combine images into a multidimensional array to demonstrate progression
@@ -239,7 +239,6 @@ axes[1].set_title("Laplacian-Gaussian (edges)")
 axes[1].imshow(xray_image_laplace_gaussian, cmap="gray")
 for i in axes:
     i.axis("off")
-plt.show()
 ```
 
 ### The Gaussian gradient magnitude method
@@ -272,7 +271,6 @@ axes[1].set_title("Gaussian gradient (edges)")
 axes[1].imshow(x_ray_image_gaussian_gradient, cmap="gray")
 for i in axes:
     i.axis("off")
-plt.show()
 ```
 
 ### The Sobel-Feldman operator (the Sobel filter)
@@ -337,7 +335,6 @@ axes[2].set_title("Sobel (edges) - CMRmap")
 axes[2].imshow(xray_image_sobel, cmap="CMRmap")
 for i in axes:
     i.axis("off")
-plt.show()
 ```
 
 ### The Canny filter
@@ -398,7 +395,6 @@ axes[3].set_title("Canny (edges) - terrain")
 axes[3].imshow(xray_image_canny, cmap="terrain")
 for i in axes:
     i.axis("off")
-plt.show()
 ```
 
 ## Apply masks to X-rays with `np.where()`
@@ -437,9 +433,9 @@ pixel_intensity_distribution = ndimage.histogram(
     xray_image, min=np.min(xray_image), max=np.max(xray_image), bins=256
 )
 
-plt.plot(pixel_intensity_distribution)
-plt.title("Pixel intensity distribution")
-plt.show()
+fig, ax = plt.subplots()
+ax.plot(pixel_intensity_distribution)
+ax.set_title("Pixel intensity distribution")
 ```
 
 As the pixel intensity distribution suggests, there are many low (between around
@@ -454,9 +450,9 @@ a certain threshold:
 # Return the original image if true, `0` otherwise
 xray_image_mask_noisy = np.where(xray_image > 150, xray_image, 0)
 
-plt.imshow(xray_image_mask_noisy, cmap="gray")
-plt.axis("off")
-plt.show()
+fig, ax = plt.subplots()
+ax.imshow(xray_image_mask_noisy, cmap="gray")
+ax.set_axis_off()
 ```
 
 ```{code-cell}
@@ -464,9 +460,9 @@ plt.show()
 # Return `1` if true, `0` otherwise
 xray_image_mask_less_noisy = np.where(xray_image > 150, 1, 0)
 
-plt.imshow(xray_image_mask_less_noisy, cmap="gray")
-plt.axis("off")
-plt.show()
+fig, ax = plt.subplots()
+ax.imshow(xray_image_mask_less_noisy, cmap="gray")
+ax.set_axis_off()
 ```
 
 ## Compare the results
@@ -499,7 +495,6 @@ axes[8].set_title("Mask (> 150, less noisy)")
 axes[8].imshow(xray_image_mask_less_noisy, cmap="gray")
 for i in axes:
     i.axis("off")
-plt.show()
 ```
 
 ## Next steps

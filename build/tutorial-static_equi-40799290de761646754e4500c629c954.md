@@ -97,8 +97,7 @@ d3.quiver(x, y, z, u, v, w, color="r", label="forceA")
 u, v, w = forceB
 d3.quiver(x, y, z, u, v, w, color="b", label="forceB")
 
-plt.legend()
-plt.show()
+d3.legend()
 ```
 
 There are two forces emanating from a single point. In order to simplify this problem, you can add them together to find the sum of forces. Note that both `forceA` and `forceB` are three-dimensional vectors, represented by NumPy as arrays with three components. Because NumPy is meant to simplify and optimize operations between vectors, you can easily compute the sum of these two vectors as follows:
@@ -129,8 +128,7 @@ d3.quiver(x, y, z, u, v, w, color="b", label="forceB")
 u, v, w = forceC
 d3.quiver(x, y, z, u, v, w, color="g", label="forceC")
 
-plt.legend()
-plt.show()
+d3.legend()
 ```
 
 However, the goal is equilibrium.
@@ -172,8 +170,6 @@ x, y, z = np.array([0, 0, 0])
 
 u, v, w = forceA + forceB + R  # add them all together for sum of forces
 d3.quiver(x, y, z, u, v, w)
-
-plt.show()
 ```
 
 The empty graph signifies that there are no outlying forces. This denotes a system in equilibrium.
