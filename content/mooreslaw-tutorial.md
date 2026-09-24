@@ -13,9 +13,8 @@ kernelspec:
 ---
 
 # Determining Moore's Law with real data in NumPy
-![Scatter plot of MOS transistor count per microprocessor every two years as a demonstration of Moore's Law.](_static/01-mooreslaw-tutorial-intro.png)
 
-_The number of transistors reported per a given chip plotted on a log scale in the y axis with the date of introduction on the linear scale x-axis. The blue data points are from a [transistor count table](https://en.wikipedia.org/wiki/Transistor_count#Microprocessors). The red line is an ordinary least squares prediction and the orange line is Moore's law._
+![](#img:mooreslaw-mainfig)
 
 ## What you'll do
 
@@ -287,6 +286,8 @@ The style sheet replicates
 [`plt.style.use`](https://matplotlib.org/api/style_api.html#matplotlib.style.use).
 
 ```{code-cell}
+:label: img:mooreslaw-mainfig
+
 transistor_count_predicted = np.exp(B) * np.exp(A * year)
 transistor_Moores_law = Moores_law(year)
 
@@ -307,8 +308,6 @@ ax.set_xlabel("year introduced")
 ax.set_ylabel("# of transistors\nper microprocessor")
 ax.legend(loc="center left", bbox_to_anchor=(1, 0.5))
 ```
-
-_A scatter plot of MOS transistor count per microprocessor every two years with a red line for the ordinary least squares prediction and an orange line for Moore's law._
 
 The linear regression captures the increase in the number of transistors
 per semiconductors each year.  In 2015, semiconductor manufacturers
