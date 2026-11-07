@@ -25,6 +25,10 @@ or navigate to any of the documents listed below and download it individually.
 8. [Tutorial: Plotting Fractals](content/tutorial-plotting-fractals.ipynb)
 9. [Tutorial: Analysing the impact of the lockdown on air quality in Delhi, India](content/tutorial-air-quality-analysis.md)
 
+## Migration guides
+
+- [NumPy for MATLAB users](content/numpy-for-matlab-users.md)
+
 ## Translations
 
 While we don't have the capacity to translate and maintain translated versions
