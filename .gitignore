@@ -97,3 +97,6 @@ content/tutorial-x-ray-image-processing/xray_image.gif
 content/video
 content/*ipynb
 content/x_y-squared*
+
+# Local Python virtual environments
+.venv/
