@@ -1,3 +1,16 @@
+---
+jupytext:
+  text_representation:
+    extension: .md
+    format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.11.1
+kernelspec:
+  display_name: Python 3
+  language: python
+  name: python3
+---
+
 # NumPy for MATLAB users
 
 ## Introduction
@@ -59,7 +72,7 @@ details, see the [documentation](https://numpy.org/doc/stable/reference/index.ht
 In the table below, it is assumed that you have executed the following
 commands in Python:
 
-```python
+```{code-cell} ipython3
 import numpy as np
 from scipy import io, integrate, linalg, signal
 from scipy.sparse.linalg import cg, eigs
@@ -751,7 +764,7 @@ in a particular file accessible.
 For example you might make a startup script that looks like this (Note:
 this is just an example, not a statement of "best practices"):
 
-```python
+```{code-cell} ipython3
 # Make all numpy available via shorter 'np' prefix
 import numpy as np
 #
@@ -769,7 +782,7 @@ H = hermitian
 
 To use the deprecated `matrix` and other `matlib` functions:
 
-```python
+```{code-cell} ipython3
 # Make all matlib functions accessible at the top level via M.func()
 import numpy.matlib as M
 # Make some matlib functions accessible directly at the top level via, e.g. rand(3,3)
