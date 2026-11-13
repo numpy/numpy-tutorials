@@ -22,6 +22,9 @@ project:
         - file: content/tutorial-svd.md
         - file: content/save-load-arrays.md
         - file: content/tutorial-ma.md
+    - title: Migration guides
+      children:
+        - file: content/numpy-for-matlab-users.md
     - title: Contributing
       file: content/contributing.md
       children:
